@@ -1022,11 +1022,11 @@ keyframes swiper-preloader-spin { 100%{
 		<div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:0},'slow')"><img src="../images/quick/quick_up.png"></a></div>
 
 		<div class="right_quick_close cboth "><img src="../images/quick/quick_open.gif" class="img_open_close"></div>
-		<div class="cboth sm_btn"><a href="index.jsp"><img src="../images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=myorder"><img src="../images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/basket.html"><img src="../images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html"><img src="../images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=mywishlist"><img src="../images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
+		<div class="cboth sm_btn"><a href="../index.jsp"><img src="../images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
+		<div class="cboth sm_btn"><a href="../cart/myorder.jsp"><img src="../images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
+		<div class="cboth sm_btn"><a href="../cart/cart.jsp"><img src="../images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
+		<div class="cboth sm_btn"><a href="../cart/mypage.jsp"><img src="../images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
+		<div class="cboth sm_btn"><a href="#"><img src="../images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
 		
                 <div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:$(document).height()},'slow');"><img src="../images/quick/quick_down.png"></a></div>
 	</div>
@@ -1043,21 +1043,21 @@ keyframes swiper-preloader-spin { 100%{
 	<!-- 퀵메뉴 커뮤니티 -->
 		<div class="cboth quick_comm_area">
 			<ul>
-				<li><a href="/board/board.html?code=nasign_board1">NOTICE</a></li>
-				<li><a href="/board/board.html?code=nasign_board8">REVIEW</a></li>
+				<li><a href="../index.jsp">HOME</a></li>
+				<li><a href="../product/index.jsp">CLOTHES</a></li>
 			</ul>
 			<ul>
-				<li><a href="/board/board.html?code=nasign_board2">STAFF</a></li>
-				<li><a href="/board/board.html?code=nasign_image4">EVENT</a></li>
+				<li><a href="../product/bags.jsp">BAGS</a></li>
+				<li><a href="../product/shoes.jsp">SHOES</a></li>
 			</ul>
 			<ul>
-				<li><a href="/board/board.html?code=nasign_image3">CELEB</a></li>
-				<li><a href="/board/board.html?code=nasign_image1">NEWS</a></li>
+				<li><a href="../board/blog.jsp">COMMUNITY</a></li>
+				<li><a href="#">HI_HELLO</a></li>
 			</ul>
-			<ul>
-				<li><a href="/board/board.html?code=nasign">Q&amp;A</a></li>
-				<li><a href="/shop/faq.html">FAQ</a></li>
-			</ul>
+<!-- 			<ul> -->
+<!-- 				<li><a href="#">Q&amp;A</a></li> -->
+<!-- 				<li><a href="#">FAQ</a></li> -->
+<!-- 			</ul> -->
 		</div>
 	
 	<!-- 퀵메뉴 고객센터 -->
