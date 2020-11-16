@@ -107,7 +107,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/test_img_01.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/test_img_01.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -115,8 +117,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Esprit Ruffle Shirt </a> <span class="stext-105 cl3"> $16.64
 							</span>
 						</div>
@@ -138,7 +140,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/test_img_02.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/test_img_02.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -146,8 +150,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Herschel supply </a> <span class="stext-105 cl3"> $35.31 </span>
 						</div>
 
@@ -168,7 +172,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/test_img_03.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/test_img_03.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -176,8 +182,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Only Check Trouser </a> <span class="stext-105 cl3"> $25.50 </span>
 						</div>
 
@@ -198,7 +204,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/test_img_04.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/test_img_04.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -206,8 +214,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Classic Trench Coat </a> <span class="stext-105 cl3"> $75.00
 							</span>
 						</div>
@@ -428,7 +436,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-01.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-01.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -436,8 +446,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Esprit Ruffle Shirt </a> <span class="stext-105 cl3"> $16.64
 							</span>
 						</div>
@@ -459,7 +469,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-02.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-02.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -467,8 +479,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Herschel supply </a> <span class="stext-105 cl3"> $35.31 </span>
 						</div>
 
@@ -489,7 +501,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-03.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-03.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -497,8 +511,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Only Check Trouser </a> <span class="stext-105 cl3"> $25.50 </span>
 						</div>
 
@@ -519,7 +533,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-04.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-04.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -527,8 +543,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Classic Trench Coat </a> <span class="stext-105 cl3"> $75.00
 							</span>
 						</div>
@@ -550,7 +566,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-05.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-05.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -558,8 +576,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Front Pocket Jumper </a> <span class="stext-105 cl3"> $34.75
 							</span>
 						</div>
@@ -581,7 +599,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-06.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-06.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -589,8 +609,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Vintage Inspired Classic </a> <span class="stext-105 cl3">
 								$93.20 </span>
 						</div>
@@ -612,7 +632,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-07.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-07.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -620,8 +642,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Shirt in Stretch Cotton </a> <span class="stext-105 cl3">
 								$52.66 </span>
 						</div>
@@ -643,7 +665,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-08.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-08.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -651,8 +675,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Pieces Metallic Printed </a> <span class="stext-105 cl3">
 								$18.96 </span>
 						</div>
@@ -674,7 +698,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-09.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-09.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -682,8 +708,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Converse All Star Hi Plimsolls </a> <span class="stext-105 cl3">
 								$75.00 </span>
 						</div>
@@ -705,7 +731,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-10.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-10.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -713,8 +741,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Femme T-Shirt In Stripe </a> <span class="stext-105 cl3">
 								$25.85 </span>
 						</div>
@@ -736,7 +764,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-11.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-11.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -744,8 +774,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Herschel supply </a> <span class="stext-105 cl3"> $63.16 </span>
 						</div>
 
@@ -766,7 +796,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-12.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-12.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -774,8 +806,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Herschel supply </a> <span class="stext-105 cl3"> $63.15 </span>
 						</div>
 
@@ -796,7 +828,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-13.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-13.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -804,8 +838,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								T-Shirt with Sleeve </a> <span class="stext-105 cl3"> $18.49
 							</span>
 						</div>
@@ -827,7 +861,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-14.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-14.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -835,8 +871,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Pretty Little Thing </a> <span class="stext-105 cl3"> $54.79
 							</span>
 						</div>
@@ -858,7 +894,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-15.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-15.jpg" alt="IMG-PRODUCT"></a> <a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -866,8 +904,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Mini Silver Mesh Watch </a> <span class="stext-105 cl3">
 								$86.85 </span>
 						</div>
@@ -889,7 +927,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-16.jpg" alt="IMG-PRODUCT"> <a
+					<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+						<img src="images/product-16.jpg" alt="IMG-PRODUCT"> </a><a
 							href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -897,8 +937,8 @@
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="product-detail.html"
-								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							<a href="product/product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								Square Neck Back </a> <span class="stext-105 cl3"> $29.64 </span>
 						</div>
 
