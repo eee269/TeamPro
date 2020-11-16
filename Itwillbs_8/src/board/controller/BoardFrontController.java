@@ -1,4 +1,4 @@
-package controller;
+package board.controller;
 
 import java.io.IOException;
 
@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import action.Action;
-import action.BoardListAction;
-import vo.ActionForward;
+import board.action.Action;
+import board.action.BoardListAction;
+import board.vo.ActionForward;
 
 @WebServlet("*.bo")
 public class BoardFrontController extends HttpServlet{

@@ -1,12 +1,12 @@
-package svc;
+package board.svc;
 
-import static db.JdbcUtil.*;
+import static board.db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.BoardDAO;
-import vo.BoardBean;
+import board.dao.BoardDAO;
+import board.vo.BoardBean;
 
 public class BoardListService {
 	

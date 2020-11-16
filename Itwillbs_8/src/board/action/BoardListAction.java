@@ -1,14 +1,15 @@
-package action;
+package board.action;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.BoardListService;
-import vo.ActionForward;
-import vo.BoardBean;
-import vo.PageInfo;
+import board.action.Action;
+import board.svc.BoardListService;
+import board.vo.ActionForward;
+import board.vo.BoardBean;
+import board.vo.PageInfo;
 
 public class BoardListAction implements Action {
 

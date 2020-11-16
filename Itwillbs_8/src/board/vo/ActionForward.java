@@ -1,4 +1,4 @@
-package vo;
+package board.vo;
 
 public class ActionForward {
 	private String path; // 포워딩 할 View 페이지 URL 저장

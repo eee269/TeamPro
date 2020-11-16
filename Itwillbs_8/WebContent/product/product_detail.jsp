@@ -88,6 +88,7 @@
 
 <!-- 끝 -->
 
+
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
 
@@ -332,74 +333,74 @@
 	
 	
 	
-// 	var mixopt = "";
-// 	function submix(id, val) {
-// 		alert(id + ", " + val);
-// 		if(mixopt == "") {
-// 			mixopt = val;
-// 		} else {
-// 			mixopt += " / " + val;
-// 			showlist(mixopt);
-// 			mixopt = null;  // 왜 null로 안바뀌지....?
-// 		}
-// 	}
+	var mixopt = "";
+	function submix(id, val) {
+		alert(id + ", " + val);
+		if(mixopt == "") {
+			mixopt = val;
+		} else {
+			mixopt += " / " + val;
+			showlist(mixopt);
+			mixopt = "";
+		}
+	}
 
-// 	function showlist(mixopt) {
-// 		alert(mixopt);
-// 		var resultcount = $('ul#show-option li').size();
-// 		var optioncontent
-// 				= '<li>' +
-// 				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + mixopt +
-// 				'</span>' +
-// 				'<div class="size-204 flex-w flex-m respon6-next">' +
-// 				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
-// 				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
-// 				'<i class="fs-16 zmdi zmdi-minus"></i>' +
-// 				'</span>' +
-// 				'<input class="mtext-104 cl3 txt-center num-product"' +
-// 				'type="number" name="num-product" value="1">' +
-// 				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
-// 				'<i class="fs-16 zmdi zmdi-plus"></i>' +
-// 				'</span>' +
-// 				'</div>' +
-// 				'</div>' +
-// 				'<div>' +
-// 				'<span style="cursor: pointer" id="optdel">' +
-// 				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
-// 				'</span>' +
-// 				'</div>' +
-// 				'</li>';
+	function showlist(mixopt) {
+		alert(mixopt);
+		var resultcount = $('ul#show-option li').size();
+		var optioncontent
+				= '<li>' +
+				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + mixopt +
+				'</span>' +
+				'<div class="size-204 flex-w flex-m respon6-next">' +
+				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
+				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
+				'<i class="fs-16 zmdi zmdi-minus"></i>' +
+				'</span>' +
+				'<input class="mtext-104 cl3 txt-center num-product"' +
+				'type="number" name="num-product" value="1">' +
+				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
+				'<i class="fs-16 zmdi zmdi-plus"></i>' +
+				'</span>' +
+				'</div>' +
+				'</div>' +
+				'<div>' +
+				'<span style="cursor: pointer" id="optdel">' +
+				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
+				'</span>' +
+				'</div>' +
+				'</li>';
 
-// 		$('ul#show-option li:last').append(optioncontent);
+		$('ul#show-option').append(optioncontent);
 
-// 		calculatePrice();
-// 	}
+		calculatePrice();
+	}
 
-// 	function calculatePrice() {
-// 		var totalprice = 0;
-// 		var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
+	function calculatePrice() {
+		var totalprice = 0;
+		var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
 
-// 		$('ul#show-option li').each(function() {
-// 			var itcnt = parseInt($(this).find('input').val());
+		$('ul#show-option li').each(function() {
+			var itcnt = parseInt($(this).find('input').val());
 
-// 			totalprice += itemprice * itcnt;
-// 		});
+			totalprice += itemprice * itcnt;
+		});
 
-// 		$('#total span').text(number_format(totalprice) + '원');
-// 	}
+		$('#total span').text(number_format(totalprice) + '원');
+	}
 
-// 	function number_format(input){
-// 		var input = String(input);
-// 		var reg = /(-?d+)(d{3})($|.d+)/;
-// 		if(reg.test(input)){
-// 			return input.replace(reg, function(str, p1,p2,p3){
-// 						return number_format(p1) + "," + p2 + "" + p3;
-// 					}
-// 			);
-// 		}else{
-// 			return input;
-// 		}
-// 	}
+	function number_format(input){
+		var input = String(input);
+		var reg = /(-?d+)(d{3})($|.d+)/;
+		if(reg.test(input)){
+			return input.replace(reg, function(str, p1,p2,p3){
+						return number_format(p1) + "," + p2 + "" + p3;
+					}
+			);
+		}else{
+			return input;
+		}
+	}
 
 
 
