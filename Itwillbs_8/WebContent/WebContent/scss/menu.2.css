@@ -1,0 +1,20 @@
+/* BASIC css start */
+/* aside */
+#aside { position:relative; overflow:hidden }
+#aside .aside-tit { padding:120px 0 30px; font-size:24px; color:#000; font-weight:bold; text-align:center; line-height:24px }
+/* lnb */
+#aside .lnb-wrap { padding:19px 0; border:none; background-color:#f4f4f4; overflow:hidden; *zoom:1 }
+#aside .lnb-wrap:after { display:block; clear:both; content:'' }
+#aside .lnb-wrap .lnb-bx { margin-left:-1px; padding-left:39px; float:left; width:30%; min-height:130px; border-left:1px solid #e2e2e2; overflow:hidden }
+#aside .lnb-wrap .lnb-bx .txt { margin-top:14px; padding-left:27px; height:18px; font-size:14px; font-weight:bold; line-height:18px; background:url(//image.makeshop.co.kr/makeshop/d3/basic_simple/common/sp_mypage_aside.gif) 0 0 no-repeat }
+#aside .lnb-wrap .lnb-bx .txt1 { background-position:0 0 }
+#aside .lnb-wrap .lnb-bx .txt2 { background-position:0 -18px }
+#aside .lnb-wrap .lnb-bx .txt3 { background-position:0 -36px }
+#aside .lnb-wrap .lnb { overflow:hidden }
+#aside .lnb-wrap .lnb ul { margin-left:-7px; padding-top:20px;  *zoom:1 }
+#aside .lnb-wrap .lnb ul:after { display:block; clear:both; content:'' }
+#aside .lnb-wrap .lnb ul li { padding:5px 0; float:left; white-space:nowrap }
+#aside .lnb-wrap .lnb ul li a { padding:0 7px; font-size:13px; color:#222; background:url(//image.makeshop.co.kr/makeshop/d3/basic_simple/common/bu_2x8.gif) 0 2px no-repeat }
+#aside .lnb-wrap .lnb ul .attandance a{ padding:0 7px; font-size:14px; color:#cc3346; background:url(//image.makeshop.co.kr/makeshop/d3/basic_simple/common/bu_2x8.gif) 0 2px no-repeat }
+
+/* BASIC css end */

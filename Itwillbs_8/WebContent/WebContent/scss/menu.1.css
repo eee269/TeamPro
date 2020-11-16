@@ -1,0 +1,33 @@
+/* BASIC css start */
+/* aside */
+#aside { width: 177px; margin-right: 20px; } 
+/* lnb */
+#aside .lnb-wrap h2 { font-size: 0; line-height: 0; }
+#aside h2.txt { padding-right: 15px; background: url(/images/d3/modern_simple/common/bull_h13_dw_arw.gif) no-repeat right 45%; }
+#aside h2.txt span { border-bottom: 1px solid #999999; color: #333333; display: block; font-size: 12px; font-weight: bold; line-height: 14px; padding-bottom: 3px; } 
+#aside .lnb { zoom: 1; padding-bottom: 25px; padding-left: 2px; }
+#aside .lnb:after{ content: ""; display: block; clear: both; }
+#aside .lnb li,
+#aside .lnb a { float: left; width: 100%; }
+#aside .lnb li { margin-top: 10px;  word-wrap:break-word;}
+#aside .lnb li.now a { font-weight: bold; }
+#aside .lnb a:hover { font-weight: bold; }
+#aside .lnb li a { color: #767676; }
+/* 투표하기 */
+#aside .research .txt-1 { margin-top: 10px; font-weight: bold; text-align: center; }
+#aside .research .list { margin-top: 10px; }
+#aside .research .list li { margin-top: 5px; }
+#aside .research .list li.li-center { text-align: center; }
+/* info */
+#aside .info { margin-bottom: 15px; background: url(/images/d3/modern_simple/aside_info_mdl.gif) repeat-y 0 0; }
+#aside .info .cnt,
+#aside .info .cnt a { color: #616161; }
+#aside .info .cnt { zoom: 1; padding: 0 13px 7px; text-align: center; color: #616161; background: url(/images/d3/modern_simple/aside_info_btm.gif) no-repeat 0 bottom; }
+#aside .info .cnt dd { padding: 10px 0; background: url(/images/d3/modern_simple/aside_info_dot.gif) repeat-x 0 0; }
+#aside .info .cnt dd.first { background-image: none; }
+#aside .info .cnt dd li { padding: 2px 0; }
+/* cs-center */
+#aside .info-cs .ph { font-size: 14px; font-weight: bold; }
+#aside .info-cs .qna { font-weight: bold; }
+#aside .info-cs .qna img { vertical-align: middle; }
+/* BASIC css end */

@@ -1,0 +1,69 @@
+/* BASIC css start */
+#mheader {position:absolute; z-index:1000; width:100%; width:1260px;  min-width:1260px; margin:0 auto; left:0%; right:0%; border-bottom:0px !important;}
+
+
+
+
+/* 메인 롤링이미지 */
+.main_img {width:100%; height:800px; clear:both; margin:0px; padding:0px; font-size:0px;}
+.swiper1 {width:100%; height:800px;}
+.swiper1 .swiper-slide a {display:block;height:800px; background-repeat:no-repeat;background-position:center center;}
+.swiper1.swiper-container-horizontal > .swiper-pagination-bullets { bottom:30px; left:0; }
+.swiper1 .swiper-pagination-bullet { width:6px; height:6px; border:2px solid #a5a5a5; border-radius:50%; background-color:transparent !important; display: inline-block; opacity:1; margin:0 5px !important;}
+.swiper1 .swiper-pagination-bullet-active { border:2px solid #000; background-color:transparent !important; }
+.swiper1 .swiper-button-prev {background-image: url(/design/nasign/0744hera/main_left.png); right:auto; left:-110px; width:48px; height:93px; background-size:48px 93px;}
+.swiper1 .swiper-button-next {background-image: url(/design/nasign/0744hera/main_right.png); right:-110px ; left:auto; width:48px; height:93px; background-size:48px 93px;}
+.swiper1 .inner {width:1260px; top:-50%; position:relative; z-index:2222; text-align:center; margin:0 auto;}
+/* 메인 롤링이미지 */
+
+
+/* 상품 타이틀 관련 */
+.main_pro_title_area {width:1260px;  margin:63px auto 40px; position:relative;}
+.main_pro_title_area .main_pro_title {text-align:center; font-size:20px; font-family:"Roboto Condensed"; font-weight:700; letter-spacing:5px; line-height:20px; color:#000;}
+
+
+
+
+/* 메인 탭상품 */
+.contentslider-tab { width:1260px;  margin:0 auto; text-align:center; padding-top:0px;}
+.contentslider-tab .sliderkit-nav { position:relative; width:1260px; height:40px; }
+.contentslider-tab .sliderkit-nav-clip{ position:absolute; top:0px; left:0px; text-align:center; width:1260px;}
+.contentslider-tab .sliderkit-nav-clip ul {display:inline-block;  text-align:center;}
+.contentslider-tab .sliderkit-nav-clip li  {padding:0px 35px; margin:0px;  height:40px; list-style:none; }
+.contentslider-tab .sliderkit-nav-clip li a{ cursor:pointer; height:40px; color:#888; display:block; line-height:40px; font-size:18px; border-top:2px solid #fff;}
+.contentslider-tab .sliderkit-nav-clip li.sliderkit-selected    {height:40px;  background-color:#fff; transition:all 0.2s;-webkit-transition:all 0.2s;-o-transition:all 0.2s;-moz-transition:all 0.2s;-ms-transition:all 0.2s;}
+.contentslider-tab .sliderkit-nav-clip li.sliderkit-selected a {color:#000; background-color:#fff; height:40px; line-height:40px; border-top:2px solid #222; font-weight:bold; 
+transition:all 0.2s; -webkit-transition:all 0.2s;-o-transition:all 0.2s;-moz-transition:all 0.2s;-ms-transition:all 0.2s;}
+.contentslider-tab .sliderkit-panels {width:1260px; padding-top:90px; min-height:500px;}
+.contentslider-tab .sliderkit-panel {width:1260px;padding:0; position:relative !important;}
+
+
+/* 2단 이벤트 배너 영역 */
+.event_ban_area {width:1260px; margin:0 auto; text-align:center; }
+
+
+/* 동영상 출력 영역 */
+.video_area {width:1260px; margin:0 auto; }
+
+/* 중앙롱배너 */
+.ban_long_area {width:100%; height:690px; background:#f2f2f2;}
+.ban_long {background:url(http://nasign.cafe24.com/mall/main/ban_long.jpg) top center;; height:690px; background-repeat:no-repeat;}
+
+/* 프로모션배너 */
+.pro_ban_area{ }
+.pro_ban {width:1260px; margin:0 auto;  height:200px;}
+
+/* 메인 인스타그램 관련 */
+.title_insta01 {font-size:16px; color:#2e2823; letter-spacing:1px; line-height:30px; height:30px; text-align:center; padding-top:100px; font-weight:400; }
+.title_insta01 img { line-height:30px; vertical-align:middle; position:relative; top:-1px; }
+.title_insta02 {font-size:11px; color:#999999; letter-spacing:1px; text-align:center; }
+
+
+.main_insta {width:1260px;margin:0 auto;text-align:center; padding:50px 0px 10px;}
+
+
+
+
+
+/* 메인 인스타그램 관련 */
+/* BASIC css end */
