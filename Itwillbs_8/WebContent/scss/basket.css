@@ -1,0 +1,51 @@
+/* BASIC css start */
+#cartWrap .wish-opt { color: ac5e85; }
+#cartWrap .tit-space { margin-top:100px }
+/* 회원 등급 표시 */
+
+/* 배송 메세지 */
+#cartWrap .delivery { margin-top:30px; font-size:12px; color:#2e2e2e; text-align: center }
+/* 주문 컨트롤 버튼 */
+#cartWrap .btn-order-ctrl { margin:40px 0 50px; text-align: center }
+#cartWrap .btn-order-ctrl a { width:178px; height:58px; font-size:16px; line-height:58px }
+
+#cartWrap .cart-ft2 { margin-top:20px; text-align: center; }
+#nhn_btn { display: inline; }
+#payco_order_btn { display: inline; }
+#kakaopay_order_btn { display:inline; vertical-align:top; }
+
+.tb-normal { font-weight:normal }
+
+#cartWrap .txt-spin { line-height:21px }
+
+.cart-free-wrap { text-align:center; }
+.cart-free-wrap .btn-list-open { position:relative; display:inline-block; width:250px; height:58px; line-height:58px; color:#000; font-size:14px; text-align:center; border:1px solid #000 }
+.cart-free-wrap .btn-list-open span { position:absolute; top:27px; right:30px; display:inline-block; width:12px; height:6px; background:url(//image.makeshop.co.kr/makeshop/d3/basic_simple/common/sp_cart_free.gif) 0 0 no-repeat }
+.cart-free-wrap .btn-list-open span.open { background-position:0 -6px }
+.cart-free-wrap p { padding:5px 0 20px; font-size:12px }
+.cart-free-wrap p span { font-weight:bold }
+.cart-free-wrap .btn-more { display:inline-block; width:94%; height:30px; line-height:30px; margin-top:10px; border:1px solid #383838; background:#fff; color:#383838; font-size: 1em; text-align:center; }
+.cart-free-wrap .btn-more span { display:inline-block; margin-left:5px; width:12px; height:6px; background:url(//image.makeshop.co.kr/makeshop/d3/basic_simple/common/sp_cart_free.gif) 0 -6px no-repeat; vertical-align:middle; }
+.cart-free-wrap .list-wrap { overflow-x:hidden; overflow-y:auto; height:450px; padding:15px 14px 30px; margin-top:20px; border:1px solid #b7b7b7; display: none; }
+.cart-free-wrap .list-wrap ul { display: table; table-layout: fixed; width:100%; margin: 0; padding: 0; *zoom:1 }
+.cart-free-wrap .list-wrap ul:after { clear: both; content: ""; display: block; }
+.cart-free-wrap .list-wrap ul li { word-wrap: break-word; word-break: keep-all; display: inline-block; vertical-align: top; width:24%; list-style: none; }
+.cart-free-wrap .list-wrap ul li dl { margin:15px 15px 10px; }
+.cart-free-wrap .list-wrap ul li dl dt { margin-bottom:13px; }
+.cart-free-wrap .list-wrap ul li dl dt img { width:100%; height:auto; border:0; }
+.cart-free-wrap .list-wrap ul li dl dd {}
+.cart-free-wrap .list-wrap ul li dl dd strong { color:#ac5e85; }
+.cart-free-wrap .list-wrap ul li dl dd a { display:inline-block; padding:5px 8px 3px; margin-top:8px; border:1px solid #999; color:#666; font-weight:bold; background:#fff; }
+
+/* 하이브리드 옵션 */
+.opt_dd img { vertical-align:top; }
+.opt_dd .basket-option-detail { display:inline-block; vertical-align:top; }
+.opt_dd .basket-option-detail .basket-option-dlist li { margin-bottom:7px; word-break:break-all; word-wrap:break-word; }
+.opt_dd .basket-option-detail .basket-option-dlist li img { width:23px; height:23px; margin-right:8px; vertical-align:middle; }
+
+/* IE7 Hack */
+.cart-free-wrap .list-wrap ul li { *float:left }
+
+
+.MS_tb_delivery { z-index:10 }
+/* BASIC css end */

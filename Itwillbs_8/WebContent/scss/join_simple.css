@@ -1,0 +1,80 @@
+/* BASIC css start */
+/* button */
+.cbtn{display:inline-block;font-size:11px;color:#000;min-width:98px;height:31px;line-height:32px;border:1px solid #000;text-align:center;-webkit-transition:all 0.3s ease;transition:all 0.3s ease;}
+.cbtn.form{}
+.cbtn.form.action{background-color:#000;color:#fff;}
+.cbtn.form:hover{background-color:#000;color:#fff;}
+.cbtn.form.action:hover{background-color:#fff;color:#000;}
+
+.btnArea{}
+.btnArea:after{content:"";display:block;clear:both;}
+.btnArea .left{float:left;width:50%;}
+.btnArea .right{float:right;width:50%;}
+.btnArea .center{text-align:center;}
+
+#join_test .page-body { width: 680px; margin: 50px auto 0;}
+#join_test .join-form { margin-bottom:12px; border-top:1px solid #dadada; border-left:1px solid #dadada; }
+#join_test .join-form li { position:relative; height:49px; line-height:49px; padding:0 23px; border-right:1px solid #dadada; border-bottom:1px solid #dadada; background:#fff; color:#000; }
+#join_test .join-form li label { font-size:14px; font-weight:bold; }
+#join_test .join-form li .txt-input { position:absolute; top:0; left:23px; width:300px; height: 49px; line-height:49px; padding:0; margin:0; font-size: 14px; font-weight: bold; color:#000; border: 0; opacity: 0; filter: alpha(opacity=0); }
+#join_test .join-form li .input-radio { width:14px; height:14px; margin:0; margin-top:-2px; padding:0; vertical-align:middle; }
+#join_test .join-form li .btn { display:block; position:absolute; top:6px; right:8px; width:83px; height:34px; line-height:36px; font-size:14px; font-weight:bold; color:#fff; text-align:center; }
+#join_test .join-form li.birth:after { clear:both; display:block; content:''; }
+#join_test .join-form li.birth { *z-index:2; line-height:51px; }
+#join_test .join-form li.birth .birth_txt { width:150px; margin-left:0px; font-size:13px; font-weight:bold; text-align:left; color: #ac5e85; padding-bottom: 5px; } 
+#join_test .join-form li.birth dl dd { position:relative; float:left; width:100px; margin-left:10px; font-size:14px; font-weight:bold; }
+#join_test .join-form li.birth dl dd:first-child { width:100px; margin-left:0; }
+#join_test .join-form li.birth dl.type2 ul li { margin:0; padding:0; border:0; }
+#join_test .join-form li.birth dl.type2 ul li .txt-input { left:0; width:90%; }
+#join_test .join-form li.gender {}
+#join_test .join-form li.gender label { margin-right:30px; }
+#join_test .join-msg li label { font-size:14px; font-weight:bold; }
+#join_test .join-msg li { height:18px; line-height:18px; padding-left:2px; color:#999; }
+#join_test .bottom-btn { padding:40px 0; text-align:center; }
+#join_test .bottom-btn a { display:block; height:58px; line-height:62px; margin:0 auto; font-weight:bold; color:#fff; font-size:24px; text-align:center; letter-spacing:-1px; }
+
+#sms_btn,
+.sms_num { position:absolute; top:0; left:323px }
+
+/* 약관 동의 */
+#join_test .tb-l { text-align: left; }
+#join_test .tb-c { text-align: center; }
+#join_test .pl-30 { padding-left: 15px; }
+#join_test .pl-6 { padding-left: 6px; }
+#join_test .pt-10 { padding-top:10px; }
+#join_test .pb-10 { padding-bottom:10px; }
+#join_test .ml-30 { margin-left:0px !important; }
+#join_test .p10 { padding:10px; }
+#join_test .input-cbox { width:12px; height:12px; padding:0; margin:0; margin-top:-3px; *margin-top:1px; vertical-align:middle; *vertical-align:top; }
+#join_test .new-btn-area { text-align: center; margin:20px 0 0; padding-bottom:30px; border-bottom:1px solid #ececec; }
+#join_test .new-btn-area a { display:block; width:234px; height:50px; line-height:50px; margin:0 auto; font-size:16px; font-weight:bold; color:#fff; background:#222; border:none; }
+#chkwrap { border:1px solid #dedede; }
+#chkwrap .all-chk { height:43px; line-height:45px; padding-left:20px; font-size:14px; font-weight:bold; color:#000; border-bottom:1px solid #dedede; }
+#chkwrap .all-chk .input-cbox { width:14px; height:14px; padding:0; margin:0; margin-top:-3px; *margin-top:0; vertical-align:middle; *vertical-align:top; }
+#chkwrap .cont ul:after { clear: both; content: ""; display: block; }
+#chkwrap .cont ul {  width: 500px; padding-left: 30px !important; padding-bottom:15px; }
+#chkwrap .cont ul li { float:left; width:220px !important; padding-left:0px; line-height:18px; letter-spacing:-1px; }
+#chkwrap .cont ul li.w240 { width:240px; padding-left:0; }
+#chkwrap .cont ul li a { display:inline-block; width:50px !important; height:16px; line-height:20px; *line-height:18px; font-weight:normal; font-size:11px; border:1px solid #dedede; background:#fafafa; text-align:center; }
+#chkwrap .cont strong { color:#000; }
+#chkwrap .cont label { font-weight:bold; }
+#chkwrap .cont .marketing { padding-left:30px; border-top:1px dashed #dadada; line-height:18px; position: repative; }
+#chkwrap .cont .marketing .mk-wrap { height:44px; line-height:46px; }
+
+h4.tit { margin-top: 50px; margin-bottom: 5px; padding-left:5px; font-size: 14px; font-weight: bold; }
+
+/* 이용 약관 */
+#join_test .privercy-contract textarea { width:97%; height:165px; }
+/* 개인정보 수집이용, 제3제공, 취급위탁 테이블 */
+#join_test .contract-tbl { width:100%; border-spacing:0; border-collapse:collapse; }
+#join_test .contract-tbl th,
+#join_test .contract-tbl td { border:1px solid #e0e0e0; text-align:center; }
+#join_test .contract-tbl th { background: #fcfcfc; }
+#join_test .contract-tbl th div { height:41px; line-height:43px; }
+#join_test .contract-tbl tbody th { font-weight:normal; }
+
+#join_test .btm-msg { padding-top:30px; line-height:18px; }
+
+.join-footer{text-align:center;padding-top:15px;}
+.join-footer .cbtn.form{width:288px;height:58px;line-height:58px;font-size:16px;margin:0 5px;}
+/* BASIC css end */

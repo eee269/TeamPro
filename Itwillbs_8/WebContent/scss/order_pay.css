@@ -1,0 +1,147 @@
+/* BASIC css start */
+#order h3 { position: relative; margin-top: 40px; padding-bottom:10px; font-size:18px; color: #202020; font-weight:bold; line-height:18px }
+#order h3 label { position: absolute; bottom: 0; right: 0; font-size: 12px; font-weight: normal; letter-spacing: 0; }
+#order .MS_input_txt { height:23px; line-height:25px; margin:0; padding:0 5px; }
+#order .container { border: 0; display: inline-block; position: relative; width: 180px; height: 25px; overflow: hidden; border: 1px solid #ddd; }
+#order .container select { position: absolute; top: -2px; left: -2px; background: #fff; }
+#order select { height: 25px; line-height: 25px; border: 1px solid #ddd; background: #fff; text-align: center; }
+#order .reserve-select select { width:180px; }
+#order input[type=text], 
+#order input[type=password] { width: 168px; height: 23px; line-height:25px; padding: 0 5px; border: 1px solid #ddd; }
+#order input[name=user_email] { width: 150px; }
+#order .w60 { width: 48px !important; }
+#order select.w60 { width: 60px !important; }
+#order .w100 { width: 100px !important; }
+#order .w120 { width: 120px !important; }
+#order .w240 { width: 240px !important; }
+#order .w280 { width: 280px !important; }
+#order .fc-red { color: #ac5e85; }
+#order .fc-gray { color: #888; }
+#order .mt-10 { margin-top: 10px; }
+#order .txt-l { text-align: left; IME-MODE: active; }
+#order .txt-c { text-align: center; }
+#order .label { display: inline-block; margin: 5px 0; }
+#order .btn-gray { display: inline-block; height: 21px; line-height: 23px; padding: 0 10px; border: 1px solid #cdcdcd; background: #efefef; color: #888; font-size: 11px; border-radius: 0px; }
+#order .btn-darkgray { display: inline-block; height: 23px; line-height: 25px; padding: 0 10px; border: 1px solid #222; background: #555; color: #fff; font-size: 11px; font-weight: bold; border-radius: 0px; }
+#order .btn-white { display: inline-block; height: 25px; line-height: 25px; padding: 0 10px; border: 1px solid #222; color: #000; font-weight: bold; letter-spacing: -1px; border-radius: 0px; }
+#order #paybutton { margin-top: 40px; text-align: center }
+#order #paybutton a { width:162px; height:48px; font-size:16px; line-height:48px }
+#order #paybutton img { margin: 0 5px; }
+#order .tbl-order { position: relative; border-top:1px solid #ccc; }
+#order .tbl-order .txt-l, 
+#order .tbl-order .txt-c { padding: 0 15px; }
+#order .tbl-order thead th { padding:15px 5px; font-size:13px; color:#101010; font-weight:normal; border-bottom:1px solid #dedede; background:#fafafa; }
+#order .tbl-order thead td { background:#fafafa }
+#order .tbl-order tbody th { border-bottom:1px solid #e9e9e9 }
+#order .tbl-order tbody th span { font-size: 12px; font-weight: normal; }
+#order .tbl-order tbody td { padding:10px 0; border-bottom:1px solid #e9e9e9 }
+#order .tbl-order tfoot th, 
+#order .tbl-order tfoot td { padding: 25px 0; background: #ececec; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc; }
+#order .tbl-order tfoot td .price { color: #000; font-size: 16px; letter-spacing: -1px; }
+#order .tbl-order tfoot td .price em { color: #ac5e85; font-family:tahoma; font-size: 26px; font-weight: normal; letter-spacing: -1px; }
+#order .tbl-order textarea { width: 500px; padding: 10px; border: 1px solid #ddd; }
+#order .tbl-order .date { margin: 10px 0 5px; }
+#order .tbl-order .terms { zoom: 1; color: #888; }
+#order .tbl-order .terms:after { content: ''; display: block; clear: both; }
+#order .tbl-order .terms li { float: left; position: relative; width: 230px; padding: 10px 20px; }
+#order .tbl-order .terms li > a { position: absolute; top: 8px; right: 20px; display: inline-block; height: 18px; line-height: 20px; padding: 0 5px; border: 1px solid #bdbdbd; border-bottom-color: #828282; background: #f4f4f4; color: #4d4d4d; border-radius: 0px; }
+#order .tbl-order .terms li.first { width: 200px; }
+#order .tbl-order .terms li.last { width: 90%; margin-top: 10px; padding-top: 20px; border-top: 1px dashed #ebebeb; }
+#order .tbl-order .pay-method li { margin: 10px 0; padding-left: 18px; }
+#order .tbl-order .pay-method li em { color: #ac5e85; }
+#order .tbl-order .pay-method li label { display: block; margin-bottom: 5px; margin-left: -18px; }
+#order .tbl-order .escrow { padding-top: 40px; color: #666; line-height: 1.5; text-align: center; }
+#order .lst-order { padding: 15px; border-bottom:1px solid #dedede; }
+#order .chk-label { display: inline-block; margin: 10px 0 0 15px; color: #222; }
+#order .tot-order { margin:10px 0; border-top:1px solid #ccc; border-bottom:1px solid #ccc; }
+#order .tot-order th, 
+#order .tot-order td { padding: 25px 0 25px 10px; border:0 none !important; text-align:left !important; background:#fafafa !important }
+#order .tot-order td { color: #777; }
+#order .tot-order td .price { color: #000; font-size: 16px; letter-spacing: -1px; }
+#order .tot-order td .price em { color: #ac5e85; font-size: 26px; font-weight:bold; letter-spacing: -1px; }
+#order .tot-order .reserve-msg {padding-top:5px; font-size:0.95em;}
+#order .bill { position: relative; padding: 10px 0 10px 110px; border-bottom: 1px solid #dedede; }
+#order .bill dt { position: absolute; top:10px; left: 10px; color: #222; font-weight: bold; letter-spacing: -1px; }
+#order .bill dd { margin-left:16px }
+#order .bill dd #cashbill_data { padding-top:5px }
+#order .tbl-pay { margin-top: 10px; border-top:1px solid #ccc }
+#order .tbl-pay th, 
+#order .tbl-pay td { padding: 10px 0; border-bottom: 1px solid #dedede; color: #444; background: #fafafa; }
+#order .tbl-pay .txt-l, 
+#order .tbl-pay .txt-c { padding: 0 15px; }
+#order .tbl-pay thead th { padding: 15px; background: #fafafa; border-bottom: 1px solid #dedede; font-size: 14px; }
+#order .tbl-pay thead td { padding: 25px 0 28px; font-size: 16px; text-align: center; }
+#order .tbl-pay thead td strong em { position: relative; top: 3px; font-family: tahoma; font-size: 26px; font-weight: normal; letter-spacing: -1px; }
+#order .tbl-pay thead td .base { z-index: 1; position: relative; }
+#order .tbl-pay thead td .base .plus, 
+#order .tbl-pay thead td .base .minus, 
+#order .tbl-pay thead td .base .equal { position: absolute; top: 9px; width: 23px; height: 23px; right:90%; }
+#order .tbl-pay thead td .down { position: relative; top: -3px; }
+#order .tbl-pay thead td .tooltip { display: none; z-index: 2; position: absolute; top: 42px; left: 50%; width: 170px; margin-left: -95px; padding: 10px; border: 1px solid #333; background: #f8f8f8; color: #666; font-size: 12px; }
+#order .tbl-pay thead td .tooltip p { position: relative; text-align: left; letter-spacing: -1px; line-height: 1.5; }
+#order .tbl-pay thead td .tooltip p span { position: absolute; top: 0; right: 0; color: #333; }
+#order .tbl-pay thead td .tooltip p.total { margin-top: 5px; padding-top: 5px; border-top: 1px solid #c3c3c3; color: #111; font-weight: bold; }
+#order .tbl-pay thead td .tooltip p.total span { top: 5px; }
+#order .tbl-pay tbody th { letter-spacing: -1px; }
+#order .tbl-pay .discount { position: relative; margin: 10px 0; padding-left: 140px; }
+#order .tbl-pay .discount dt { position: absolute; top: 50%; left: 15px; margin-top: -8px; font-weight: bold; letter-spacing: -1px; }
+#order .tbl-pay .discount .label { margin-top: 0; }
+#order .chk-cont-layer { display:none; position:absolute; top:0; left:50%; width:430px; padding:0; margin:0 0 0 -215px; background:#fff; border:1px solid #b8b8b8; z-index:999; }
+#order .chk-cont-layer .l-close { position:absolute; top:10px; right:10px; }
+#order .chk-cont-layer .l-tit { height:40px; line-height:42px; padding-left:15px; background:#a4a4a4; font-size:14px; color:#fff; font-weight:bold; }
+#order .chk-cont-layer .l-cont { overflow-x:hidden; overflow-y:auto; padding:15px; }
+#order .chk-cont-layer .l-cont .fc-blue { padding-bottom:5px; color:#0082f0; }
+#order .chk-cont-layer .l-cont textarea { width:99%; height:400px; border:0; font-size:11px; color:#777; }
+#order .chk-cont-layer .l-cont .l-tbl { width:100%; border-spacing:0; border-collapse:collapse; }
+#order .chk-cont-layer .l-cont .l-tbl th,
+#order .chk-cont-layer .l-cont .l-tbl td { border:1px solid #cbcbcb; text-align:center; font-size:11px; }
+#order .chk-cont-layer .l-cont .l-tbl th { color:#000; font-weight:bold; background:#ededed; }
+#order .chk-cont-layer .l-cont .l-tbl td { color:#777; }
+#order .chk-cont-layer .l-cont .l-tbl th div,
+#order .chk-cont-layer .l-cont .l-tbl td div { padding:10px 0 8px; }
+#order .escrow-info { margin-top: 10px; border-top: 1px solid #dedede; border-bottom: 1px solid #dedede; background: #fafafa; color: #666; }
+#order .escrow-info td { padding: 20px 0; }
+
+#order .cnt-box { margin-top: 10px;}
+#order .cnt-box-desc { margin-top:5px;} 
+
+#chkwrap { position:relative; }
+#chkwrap label { font-weight:bold; }
+#chkwrap .input-chk { width:12px; height:12px; padding:0; margin:0; margin-top:-3px; }
+#chkwrap .all-chk { height:30px; line-height:32px; }
+#chkwrap .cont { }
+#chkwrap .cont ul:after { clear: both; content: ""; display: block; }
+#chkwrap .cont ul li { float:left; width:50%; height:30px; line-height:32px; }
+#chkwrap .cont ul li a { display:inline-block; height:16px; padding:0 5px; line-height:18px; font-weight:normal; font-size:11px; border:1px solid #dedede; background:#fafafa; }
+#chkwrap .cont .chk-cont-layer { display:none; overflow:hidden; position:absolute; bottom:1px; left:0; width:430px; padding:0; margin:0; background:#fff; border:1px solid #b8b8b8; }
+#chkwrap .chk-cont-layer .l-close { position:absolute; top:10px; right:10px; }
+#chkwrap .chk-cont-layer .l-tit { height:40px; line-height:42px; padding-left: 15px; background:#a4a4a4; font-size:14px; color:#fff; font-weight:bold; }
+#chkwrap .chk-cont-layer .l-cont { overflow-x:hidden; overflow-y:auto; padding:15px; }
+#chkwrap .chk-cont-layer .l-cont .fc-blue { padding-bottom:5px; color:#0082f0; }
+#chkwrap .chk-cont-layer .l-cont textarea { width:99%; height:400px; border:0; font-size:11px; color:#777; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl { width:100%; border-spacing:0; border-collapse:collapse; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl th,
+#chkwrap .chk-cont-layer .l-cont .l-tbl td { border:1px solid #cbcbcb; text-align:center; font-size:11px; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl th { color:#000; font-weight:bold; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl td { color:#777; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl th div,
+#chkwrap .chk-cont-layer .l-cont .l-tbl td div { padding:5px 0 3px; }
+#chkwrap .chk-cont-layer .l-cont .l-tbl td .tb-left { padding-left:10px; text-align:left; }
+#chkwrap .marketing { clear:both; border-top:1px dashed #dadada; }
+#chkwrap .marketing .mk-wrap { height:30px; line-height:32px; }
+
+#order #okreserve, #order #okemoney { margin-top:-3px; border:none; background: #fafafa; font-weight: bold; width:50px; text-align:right; }
+
+
+/* 하이브리드 옵션 */
+.basket-option-detail { display:inline-block; vertical-align:top; }
+.basket-option-detail .basket-option-dlist li { margin-bottom:7px; word-break:break-all; word-wrap:break-word; }
+.basket-option-detail .basket-option-dlist li img { width:23px; height:23px; margin-right:8px; vertical-align:middle; }
+.basket-option-detail .basket-option-dlist li span { color:#ff6333; }
+
+#usereserve,
+#useemoney,
+#couponnum { _width:168px; }
+/* BASIC css end */
+
+#contentWrapper {margin-bottom:120px} /* 수정 - 추가 */

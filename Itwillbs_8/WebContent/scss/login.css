@@ -1,0 +1,43 @@
+/* BASIC css start */
+#loginWrap {} /* 수정 padding-top:100px */
+#loginWrap .mlog-sign { height:458px; border:1px solid #e9e9e9; border-top:none }
+#loginWrap .mlog-sign .mlog,
+#loginWrap .mlog-sign .sign { float:left }
+#loginWrap .mlog-sign h3 { padding-top:35px; font-size:18px; color:#363636; font-weight:bold; line-height:18px }
+/* member login */
+/* #loginWrap .mlog-sign .mlog { margin-top:44px; padding-left:120px; padding-right:120px;  position:relative; width:386px; height:370px; border-right:1px solid #e9e9e9 } */
+#loginWrap .mlog-sign .mlog { margin-top:44px; padding-left:120px; padding-right:120px;  position:relative; height:370px; border-right:1px solid #e9e9e9 }
+
+#loginWrap .mlog-sign .mlog p { padding-top:20px; font-size:11px; color:#adadad }
+#loginWrap .mlog-sign .frm-list { padding-top:18px; position:relative; width:386px }
+#loginWrap .mlog-sign .frm-list li { position:relative; width: 100%; margin-bottom:6px }
+#loginWrap .mlog-sign .frm-list li label { padding-left:11px; position:absolute; top:0; left:0; width:375px; height:50px; color:#adadad; line-height:50px; cursor:text }
+#loginWrap .mlog-sign .frm-list li input { padding-left:10px; width:374px; height:48px; line-height:48px; border:1px solid #ddd }
+
+#loginWrap .mlog-sign .btn-mlog { padding-top:10px; position:relative }
+#loginWrap .mlog-sign .btn-mlog a { width:384px; height:58px; font-size:16px; line-height:58px }
+#loginWrap .mlog-sign .se-log { position:relative; color:#666 !important }
+#loginWrap .mlog-sign .se-log label { font-size:11px }
+#loginWrap .mlog-sign .se-log label input { margin-top:-3px; *margin-top:-4px; vertical-align:middle }
+
+/* sign */
+#loginWrap .mlog-sign .sign { margin-top:44px; padding-left:120px; width:386px }
+#loginWrap .mlog-sign .sign dl { padding-top:22px }
+#loginWrap .mlog-sign .sign dl dt { font-size:11px; color:#adadad }
+#loginWrap .mlog-sign .sign dl dd { padding-top:15px }
+#loginWrap .mlog-sign .sign dl dd a { width:384px; height:58px; font-size:15px; line-height:58px }
+
+/* simpleLogin */
+#simpleLogin { text-align:center; margin-top:10px }
+#simpleLogin .sns-login { font-size:0 }
+#simpleLogin .sns-login a { display:inline-block; *display:inline; vertical-align:top;position:relative;width:360px;margin-left:10px; *margin-left:9px }
+#simpleLogin .sns-login a:first-child { margin-left:0 }
+
+
+/* simpleLogin */
+#simpleLogin { position: relative; }
+#simpleLogin .sns-login { margin-top: 30px; text-align: center; font-size: 0; line-height: 0; }
+#simpleLogin .sns-login p { margin-bottom: 30px; }
+#simpleLogin .sns-login a { display: inline-block; margin: 0 4px; }
+
+/* BASIC css end */
