@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>TeamProject</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  	
+	<!-- 
+	서블릿 주소 매핑을 위한 배포 서술자 설정
+	=> 최근에는 서블릿 클래스 파일 내에 직접 @WebServlet 어노테이션으로 매핑을 하지만
+	   과거에는 web.xml 내부에 서블릿 클래스 파일과 서블릿 주소를 매핑시켰음
+	--> 
+<!-- 	<servlet> -->
+<!-- 		 서블릿 클래스 파일 지정 -->
+<!-- 		<servlet-name>BoardFrontController</servlet-name> -->
+<!-- 		<servlet-class>controller.BoardFrontController</servlet-class> -->
+<!-- 	</servlet> -->
+	
+<!-- 	<servlet-mapping> -->
+<!-- 		 서블릿 클래스를 실현하기 위한 서블릿 주소 매핑 -->
+<!-- 		 servlet-name 태그 이름은 servlet 태그 내의 servlet-name 이름과 동일해야함 --> 
+<!-- 		<servlet-name>BoardFrontController</servlet-name> -->
+<!-- 		 url-pattern 태그에서 매핑할 주소 지정 --> 
+<!-- 		<url-pattern>*.bo</url-pattern> -->
+<!-- 	</servlet-mapping> -->
+</web-app>

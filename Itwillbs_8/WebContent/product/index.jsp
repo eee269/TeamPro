@@ -21,22 +21,22 @@
 
 
 <!-- 사이트 시작 -->
-	<div class="cate-wrap">
-		<div class="bcate">CLOTHES</div>
-		<div class="class-list">
-			<ul class="cboth">
-				<li><a
-					href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=001">TOP</a></li>
-				<li><a
-					href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=002">BOTTOM</a></li>
-				<li><a
-					href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=003">DRESS</a></li>
-				<li><a
-					href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=004">OUTER</a></li>
-			</ul>
-		</div>
-		<!-- .class-list -->
+<div class="cate-wrap">
+	<div class="bcate">CLOTHES</div>
+	<div class="class-list">
+		<ul class="cboth">
+			<li><a
+				href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=001">TOP</a></li>
+			<li><a
+				href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=002">BOTTOM</a></li>
+			<li><a
+				href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=003">DRESS</a></li>
+			<li><a
+				href="/shop/shopbrand.html?xcode=008&amp;type=N&amp;mcode=004">OUTER</a></li>
+		</ul>
 	</div>
+	<!-- .class-list -->
+</div>
 
 <!-- 사이트 끝 -->
 
@@ -47,16 +47,16 @@
 	<div class="item-cont">
 		<dl class="item-list">
 			<dt class="thumb">
-				<a
-					href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=bm19W1w%3D"><img
+				<a href="product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="http://oryany.co.kr/shopimages/nasign/0010010007552.jpg?1597366181"></a>
 
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a
-						href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=bm19W1w%3D">루키
+					<li class="prd-name"><a href="product_detail.jsp"
+						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">루키
 							크로스바디</a></li>
 					<li class="subname">O0FBCB43</li>
 					<li class="prd-price"><span class="price"> 219,000원 </span></li>
@@ -68,17 +68,17 @@
 		</dl>
 		<dl class="item-list">
 			<dt class="thumb">
-				<a
-					href="/shop/shopdetail.html?branduid=3360293&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Zm13UA%3D%3D"><img
+				<a href="product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="http://oryany.co.kr/shopimages/nasign/0010010006612.jpg?1592283836"></a>
 
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a
-						href="/shop/shopdetail.html?branduid=3360293&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Zm13UA%3D%3D">로스코
-							미니 크로스바디</a></li>
+					<li class="prd-name"><a href="product_detail.jsp"
+						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">로스코 미니
+							크로스바디</a></li>
 					<li class="subname">O0SBCB24</li>
 					<li class="prd-price"><strike>259,000원</strike> <span
 						class="price"> 233,100원 <span class="sale_count">(10%
@@ -90,15 +90,15 @@
 		</dl>
 		<dl class="item-list">
 			<dt class="thumb">
-				<a
-					href="/shop/shopdetail.html?branduid=3360276&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Zmp3Uw%3D%3D"><img
+				<a href="product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="http://oryany.co.kr/shopimages/nasign/0010010006502.jpg?1579659524"></a>
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a
-						href="/shop/shopdetail.html?branduid=3360276&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Zmp3Uw%3D%3D">벤틀리
+					<li class="prd-name"><a href="product_detail.jsp"
+						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">벤틀리
 							크로스바디</a></li>
 					<li class="subname">O9FBCB31</li>
 					<li class="prd-price"><strike>259,000원</strike> <span
@@ -111,16 +111,16 @@
 		</dl>
 		<dl class="item-list">
 			<dt class="thumb">
-				<a
-					href="/shop/shopdetail.html?branduid=2022&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Z2l3Ug%3D%3D"><img
+				<a href="product_detail.jsp"
+					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="http://oryany.co.kr/shopimages/nasign/0010010004192.jpg?1597366863"></a>
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a
-						href="/shop/shopdetail.html?branduid=2022&amp;xcode=006&amp;mcode=001&amp;scode=&amp;type=Y&amp;sort=manual&amp;cur_code=006&amp;GfDT=Z2l3Ug%3D%3D">로티
-							새들 크로스바디</a></li>
+					<li class="prd-name"><a href="product_detail.jsp"
+						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">로티 새들
+							크로스바디</a></li>
 					<li class="subname">O9SBCB81</li>
 					<li class="prd-price"><strike>189,000원</strike> <span
 						class="price"> 170,100원 <span class="sale_count">(10%
@@ -340,8 +340,10 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-01.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-01.jpg" alt="IMG-PRODUCT">
+						</a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -371,8 +373,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-02.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-02.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -401,8 +404,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-03.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-03.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -431,8 +435,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-04.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-04.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -462,8 +467,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-05.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-05.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -493,8 +499,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-06.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-06.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -524,8 +531,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-07.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-07.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -555,8 +563,10 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-08.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-08.jpg" alt="IMG-PRODUCT">
+						</a><a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -586,8 +596,10 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-09.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-09.jpg" alt="IMG-PRODUCT">
+						</a><a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -617,8 +629,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-10.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-10.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -648,8 +661,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-11.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-11.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -678,8 +692,10 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-12.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-12.jpg" alt="IMG-PRODUCT">
+						</a><a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -708,8 +724,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-13.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-13.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -739,8 +756,10 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-14.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-14.jpg" alt="IMG-PRODUCT">
+						</a><a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -770,8 +789,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-15.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-15.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -801,8 +821,9 @@
 				<!-- Block2 -->
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<img src="images/product-16.jpg" alt="IMG-PRODUCT"> <a
-							href="#"
+						<a href="product_detail.jsp"
+							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
+							src="images/product-16.jpg" alt="IMG-PRODUCT"></a> <a href="#"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>

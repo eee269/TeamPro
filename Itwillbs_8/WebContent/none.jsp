@@ -12,6 +12,7 @@
 <h3>준비중이라구요!!!!</h3>
 <br>
 <h3>Please, Wait!!!!!!!</h3>
-
+<br><br>
+<div></div>
 </body>
 </html>

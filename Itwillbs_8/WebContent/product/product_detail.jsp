@@ -327,78 +327,84 @@
 	// 	}
 	// }
 
-	var mixopt = "";
-	function submix(id, val) {
-		alert(id + ", " + val);
-		if(mixopt == "") {
-			mixopt = val;
-		} else {
-			mixopt += " / " + val;
-			showlist(mixopt);
-			mixopt = null;  // 왜 null로 안바뀌지....?
-		}
-	}
+	
+	
+	
+	
+	
+// 	var mixopt = "";
+// 	function submix(id, val) {
+// 		alert(id + ", " + val);
+// 		if(mixopt == "") {
+// 			mixopt = val;
+// 		} else {
+// 			mixopt += " / " + val;
+// 			showlist(mixopt);
+// 			mixopt = null;  // 왜 null로 안바뀌지....?
+// 		}
+// 	}
 
-	function showlist(mixopt) {
-		alert(mixopt);
-		var resultcount = $('ul#show-option li').size();
-		var optioncontent
-				= '<li>' +
-				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + mixopt +
-				'</span>' +
-				'<div class="size-204 flex-w flex-m respon6-next">' +
-				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
-				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
-				'<i class="fs-16 zmdi zmdi-minus"></i>' +
-				'</span>' +
-				'<input class="mtext-104 cl3 txt-center num-product"' +
-				'type="number" name="num-product" value="1">' +
-				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
-				'<i class="fs-16 zmdi zmdi-plus"></i>' +
-				'</span>' +
-				'</div>' +
-				'</div>' +
-				'<div>' +
-				'<span style="cursor: pointer" id="optdel">' +
-				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
-				'</span>' +
-				'</div>' +
-				'</li>';
+// 	function showlist(mixopt) {
+// 		alert(mixopt);
+// 		var resultcount = $('ul#show-option li').size();
+// 		var optioncontent
+// 				= '<li>' +
+// 				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + mixopt +
+// 				'</span>' +
+// 				'<div class="size-204 flex-w flex-m respon6-next">' +
+// 				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
+// 				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
+// 				'<i class="fs-16 zmdi zmdi-minus"></i>' +
+// 				'</span>' +
+// 				'<input class="mtext-104 cl3 txt-center num-product"' +
+// 				'type="number" name="num-product" value="1">' +
+// 				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
+// 				'<i class="fs-16 zmdi zmdi-plus"></i>' +
+// 				'</span>' +
+// 				'</div>' +
+// 				'</div>' +
+// 				'<div>' +
+// 				'<span style="cursor: pointer" id="optdel">' +
+// 				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
+// 				'</span>' +
+// 				'</div>' +
+// 				'</li>';
 
-		if(resultcount > 0) {
-			$('ul#show-option li:last').after(optioncontent);
-		} else {
-			$('ul#selected-result').html(optioncontent);
-		}
+// 		$('ul#show-option li:last').append(optioncontent);
 
-		calculatePrice();
-	}
+// 		calculatePrice();
+// 	}
 
-	function calculatePrice() {
-		var totalprice = 0;
-		var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
+// 	function calculatePrice() {
+// 		var totalprice = 0;
+// 		var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
 
-		$('ul#show-option li').each(function() {
-			var itcnt = parseInt($(this).find('input').val());
+// 		$('ul#show-option li').each(function() {
+// 			var itcnt = parseInt($(this).find('input').val());
 
-			totalprice += itemprice * itcnt;
-		});
+// 			totalprice += itemprice * itcnt;
+// 		});
 
-		$('#total span').text(number_format(totalprice) + '원');
-	}
+// 		$('#total span').text(number_format(totalprice) + '원');
+// 	}
 
-	function number_format(input){
-		var input = String(input);
-		var reg = /(-?d+)(d{3})($|.d+)/;
-		if(reg.test(input)){
-			return input.replace(reg, function(str, p1,p2,p3){
-						return number_format(p1) + "," + p2 + "" + p3;
-					}
-			);
-		}else{
-			return input;
-		}
-	}
+// 	function number_format(input){
+// 		var input = String(input);
+// 		var reg = /(-?d+)(d{3})($|.d+)/;
+// 		if(reg.test(input)){
+// 			return input.replace(reg, function(str, p1,p2,p3){
+// 						return number_format(p1) + "," + p2 + "" + p3;
+// 					}
+// 			);
+// 		}else{
+// 			return input;
+// 		}
+// 	}
+
+
+
+
+
 
 	// 옵션 관련 스크립트 끝
 
@@ -437,8 +443,6 @@
 	});
 	// 리뷰 작성 관련 스크립트 끝
 </script>
-<!-- 적용되는 js -->
-
 <%--<script type="text/javascript">--%>
 <%--	var goods_no = "1687134";--%>
 <%--	var goods_sub = "0";--%>
@@ -480,7 +484,6 @@
 
 <%--	});--%>
 <%--</script>--%>
-<!-- 적용되는 js 끝 -->
 
 
 <!-- Channel Plugin Scripts -->
@@ -662,19 +665,22 @@ ChannelIO('boot', settings);
 <%--									goods_options--%>
 <%--								</span>--%>
 
+								<%-- 수량 감소--%>
 <%--								<div class="size-204 flex-w flex-m respon6-next">--%>
 <%--									<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">--%>
 <%--										<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">--%>
 <%--											<i class="fs-16 zmdi zmdi-minus"></i>--%>
-<%--										</span>  &lt;%&ndash; 수량 감소 &ndash;%&gt;--%>
+<%--										</span>
 
+
+								<%-- 선택한 수량--%>
 <%--										<input class="mtext-104 cl3 txt-center num-product"--%>
 <%--											   type="number" name="num-product" value="1">--%>
-<%--										&lt;%&ndash; 선택한 수량 &ndash;%&gt;--%>
 
+								<%-- 수량 증가 --%>
 <%--										<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">--%>
 <%--											<i class="fs-16 zmdi zmdi-plus"></i>--%>
-<%--										</span>  &lt;%&ndash; 수량 증가 &ndash;%&gt;--%>
+<%--										</span> --%>
 <%--									</div>--%>
 
 <%--								</div>--%>
@@ -683,7 +689,7 @@ ChannelIO('boot', settings);
 <%--									</span>--%>
 <%--								</li>--%>
 
-<%--									&lt;%&ndash; 한 옵션이 들어가는 li 끝 &ndash;%&gt;--%>
+<%--								 한 옵션이 들어가는 li 끝 --%>
 							</ul>
 
 

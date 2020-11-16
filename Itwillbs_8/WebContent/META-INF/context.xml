@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+<!-- 
+DBCP(DataBase Connection Pool) 설정
+- 서버에 공유할 커넥션 풀을 위한 리소스 정의
+- Resource 태그 내에 커넥션 풀에 필요한 리소스들을 속성="값" 형태로 정의 
+  name="공유할 리소스 이름"
+  auth="인증 대상"
+  type="공유할 리소스 데이터 타입"
+  username="연결 DB 계정명"
+  password="해당 계정 패스워드"
+  driverClassName="드라이버 클래스 위치 및 클래스명"
+  	=> MySQL : com.mysql.jdbc.Driver
+  	   Oracle : oracle.jdbc.driver.OracleDriver
+  factory="DataSource 객체 생성 담당 클래스 지정"
+  url="데이터베이스 접속 URL 및 DB명 지정"
+  		=> MySQL : jdbc:mysql://접속주소:포트번호/DB명
+  		   Oracle : jdbc:oracle:thin:@접속주소:포트번호:DB명
+  maxActive="최대 동시 대여 가능한 커넥션 갯수"
+  maxIdle="최대 보유 가능한 유휴 커넥션 갯수"
+ -->
+	<Resource 
+		name="jdbc/MySQL"
+		auth="Container"
+		type="javax.sql.DataSource"
+		username="root"
+		password="1234"
+		driverClassName="com.mysql.jdbc.Driver"
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+		url="jdbc:mysql://localhost:3306/jsp_model2_1"
+		maxActive="500"
+		maxIdle="20"/>
+		
+	
+
+</Context>
