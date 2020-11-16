@@ -407,6 +407,31 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   opacity: 0; 
 }
 
+.sub-menu:after, .sub-menu:before { /* 추가 (서브메뉴 화살표시) */
+	bottom: 100%;
+	left: 12%;
+	border: solid transparent;
+	content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.sub-menu:after { /* 추가 (서브메뉴 화살표시) */
+	border-color: rgba(255, 255, 255, 0);
+	border-bottom-color: #fff;
+	border-width: 10px;
+	margin-left: -10px;
+}
+
+.sub-menu:before { /* 추가 (서브메뉴 화살표시) */
+	border-color: rgba(222, 222, 222, 0);
+	border-bottom-color: #dedede;
+	border-width: 11px;
+	margin-left: -11px;
+}
+
 .sub-menu li {
   position: relative;
   background-color: transparent;
