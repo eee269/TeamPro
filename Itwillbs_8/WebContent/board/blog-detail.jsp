@@ -1,193 +1,209 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
+<!-- QuickMenu -->
+<jsp:include page="../quickMenu.jsp" />
+
+<!-- Cart -->
+<jsp:include page="../sub_cart.jsp"/>
 
 	<!-- Cart -->
-	<jsp:include page="../sub_cart.jsp"/>
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
+					</div>
+
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
+
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-	<!-- Title page -->
-	<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('images/bg-02.jpg');">
-		<h2 class="ltext-105 cl0 txt-center">
-			Blog
-		</h2>
-	</section>	
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04">
+				Blog
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
+
+			<span class="stext-109 cl4">
+				8 Inspiring Ways to Wear Dresses in the Winter
+			</span>
+		</div>
+	</div>
 
 
 	<!-- Content page -->
-	<section class="bg0 p-t-62 p-b-60">
+	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="board_detail.jsp" class="hov-img0 how-pos5-parent">
-								<img src="images/blog-04.jpg" alt="IMG-BLOG">
+						<!--  -->
+						<div class="wrap-pic-w how-pos5-parent">
+							<img src="images/blog-04.jpg" alt="IMG-BLOG">
 
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										22
-									</span>
+							<div class="flex-col-c-m size-123 bg9 how-pos5">
+								<span class="ltext-107 cl2 txt-center">
+									22
+								</span>
 
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
-
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="board_detail.jsp" class="ltext-108 cl2 hov-cl1 trans-04">
-										8 Inspiring Ways to Wear Dresses in the Winter
-									</a>
-								</h4>
-
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="board_detail.jsp" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
+								<span class="stext-109 cl3 txt-center">
+									Jan 2018
+								</span>
 							</div>
 						</div>
 
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="board_detail.jsp" class="hov-img0 how-pos5-parent">
-								<img src="images/blog-05.jpg" alt="IMG-BLOG">
+						<div class="p-t-32">
+							<span class="flex-w flex-m stext-111 cl2 p-b-19">
+								<span>
+									<span class="cl4">By</span> Admin  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										18
-									</span>
+								<span>
+									22 Jan, 2018
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
-								</div>
-							</a>
+								<span>
+									StreetStyle, Fashion, Couple  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
 
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="board_detail.jsp" class="ltext-108 cl2 hov-cl1 trans-04">
-										The Great Big List of Menâs Gifts for the Holidays 
-									</a>
-								</h4>
+								<span>
+									8 Comments
+								</span>
+							</span>
 
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
+							<h4 class="ltext-109 cl2 p-b-28">
+								8 Inspiring Ways to Wear Dresses in the Winter
+							</h4>
 
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
+							<p class="stext-117 cl6 p-b-26">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
+							</p>
 
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
+							<p class="stext-117 cl6 p-b-26">
+								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+							</p>
+						</div>
 
-										<span>
-											8 Comments
-										</span>
-									</span>
+						<div class="flex-w flex-t p-t-16">
+							<span class="size-216 stext-116 cl8 p-t-4">
+								Tags
+							</span>
 
-									<a href="board_detail.jsp" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
+							<div class="flex-w size-217">
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Streetstyle
+								</a>
 
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Crafts
+								</a>
 							</div>
 						</div>
 
-						<!-- item blog -->
-						<div class="p-b-63">
-							<a href="board_detail.jsp" class="hov-img0 how-pos5-parent">
-								<img src="images/blog-06.jpg" alt="IMG-BLOG">
+						<!--  -->
+						<div class="p-t-40">
+							<h5 class="mtext-113 cl2 p-b-12">
+								Leave a Comment
+							</h5>
 
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center">
-										16
-									</span>
+							<p class="stext-107 cl6 p-b-40">
+								Your email address will not be published. Required fields are marked *
+							</p>
 
-									<span class="stext-109 cl3 txt-center">
-										Jan 2018
-									</span>
+							<form>
+								<div class="bor19 m-b-20">
+									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
 								</div>
-							</a>
 
-							<div class="p-t-32">
-								<h4 class="p-b-15">
-									<a href="board_detail.jsp" class="ltext-108 cl2 hov-cl1 trans-04">
-										5 Winter-to-Spring Fashion Trends to Try Now
-									</a>
-								</h4>
+							
 
-								<p class="stext-117 cl6">
-									Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce eget dictum tortor. Donec dictum vitae sapien eu varius
-								</p>
-
-								<div class="flex-w flex-sb-m p-t-18">
-									<span class="flex-w flex-m stext-111 cl2 p-r-30 m-tb-10">
-										<span>
-											<span class="cl4">By</span> Admin  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											StreetStyle, Fashion, Couple  
-											<span class="cl12 m-l-4 m-r-6">|</span>
-										</span>
-
-										<span>
-											8 Comments
-										</span>
-									</span>
-
-									<a href="board_detail.jsp" class="stext-101 cl2 hov-cl1 trans-04 m-tb-10">
-										Continue Reading
-
-										<i class="fa fa-long-arrow-right m-l-9"></i>
-									</a>
-								</div>
-							</div>
-						</div>
-
-						<!-- Pagination -->
-						<div class="flex-l-m flex-w w-full p-t-10 m-lr--7">
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-								1
-							</a>
-
-							<a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-								2
-							</a>
+								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+									Post Comment
+								</button>
+							</form>
 						</div>
 					</div>
 				</div>
