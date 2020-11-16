@@ -1,4 +1,7 @@
-<jsp:include page="../header.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    <jsp:include page="../header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
@@ -110,7 +113,7 @@
 		</div>
 	</div>
 
-
+	
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">

@@ -302,26 +302,33 @@ body .container_member .content .signup-cont {
     				        <div class="signup-cont cont">
                 <form action="#" method="post" enctype="multipart/form-data">
 						                    <input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
-						                    <label for="text">ID</label>
+						                    <label for="text">ID</label>  <br>
+
 						                    <input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your Password">
-                						    <label for="password">Password</label>
+                						    <label for="password">Password</label>  <br>
+                						    
                   							<input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
-						                    <label for="email">e-mail</label>
-						                    <input type="text" name="name" id="name" class="inpt" required="required" placeholder="Your name">
-						                    <label for="name">Name</label>
-						                    <input type="text" name="img" id="img" class="inpt" required="required" placeholder="Select Profile Image">
-						                    <label for="img">Image</label>
-						                    <input type="text" name="phone" id="phone" class="inpt" required="required" placeholder="Your PhoneNumber">
-						                    <label for="phone">Phone Number</label>
+						                    <label for="email">e-mail</label>  <br>
 						                    
-							                <div class="term" style="padding-top: 100px;">
+						                    <input type="text" name="name" id="name" class="inpt" required="required" placeholder="Your name">
+						                    <label for="name">Name</label>  <br>
+						                    
+						                    <input type="text" name="img" id="img" class="inpt" required="required" placeholder="Select Profile Image">
+						                    <label for="img">Image</label>  <br>
+						                    
+						                    <input type="text" name="phone" id="phone" class="inpt" required="required" placeholder="Your PhoneNumber">
+						                    <label for="phone">Phone Number</label>  <br>
+						                    
+							                <div class="term" style="padding-top: 30px;">
 							                <iframe width="100%" src="term.jsp" >
 							       				
 							                </iframe>
 							                </div>
-							                
+							                <br>
 							                <input type="checkbox" id="term" class="checkbox" required="required">
+							              
 							                <label for="term">위 약관에 동의합니다.</label>
+							                  <br>
 						                    <input type="submit" value="Sign up" class="submit">
 						   
         					        </form>
