@@ -2698,6 +2698,7 @@ input.num-product::-webkit-inner-spin-button {
 
 .bor2 {
   border-radius: 20px;
+  float:right;
 }
 
 .bor3 {
@@ -2764,7 +2765,9 @@ input.num-product::-webkit-inner-spin-button {
 .bor17 {
   border: 1px solid #e6e6e6;
   border-radius: 25px;
+  width: 300px;
 }
+
 
 /*---------------------------------------------*/
 .bor18 {
