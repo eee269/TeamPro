@@ -1085,9 +1085,9 @@ keyframes swiper-preloader-spin { 100%{
 	<div class="quick_sns cboth">
 	<!-- 퀵메뉴 sns -->
 		<ul>
-			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="images/quick/quick_insta.gif"></a></li>
-			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="images/quick/quick_kakaoch.gif"></a></li>
-			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="images/quick/quick_facebook.gif"></a></li>
+			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="../images/quick/quick_insta.gif"></a></li>
+			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="../images/quick/quick_kakaoch.gif"></a></li>
+			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="../images/quick/quick_facebook.gif"></a></li>
 		</ul>
 	</div>
 </div>
