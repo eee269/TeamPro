@@ -1,4 +1,4 @@
-package dao;
+package board.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vo.BoardBean;
+import board.vo.BoardBean;
 
-import static db.JdbcUtil.*;
+import static board.db.JdbcUtil.*;
 
 public class BoardDAO {
 	// --------------싱글톤 패턴 활용---------------

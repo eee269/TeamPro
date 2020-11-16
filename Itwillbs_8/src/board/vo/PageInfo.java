@@ -1,4 +1,4 @@
-package vo;
+package board.vo;
 
 // 페이징 처리를 위한 정보를 저장하는 클래스
 public class PageInfo {
