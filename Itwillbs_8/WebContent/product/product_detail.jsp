@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp" />
-<!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -130,263 +128,167 @@
 	// });
 
 
-	// 옵션 관련 스크립트
-	// $(document).ready(function() {
-	// 	$('#select-opt select#opt1').change(function() {
-	// 		// if(!$(this).hasClass('nomore-option')) {
-	// 			var val = $(this).value;
-	// 			var opt1 = $(this).attr('id');
-	// 			var sel1 = $('select[id^=' + opt1 + ']').index($(this));
-	//
-	// 			// var id = opt1[0] + '-' + opt1[1].substr(0, 1);
-	// 			// var val = $(this).val();
-	// 			// var idx = $('select[id^=' + id + ']').index($(this));
-	//
-	// 			if(val == '') {
-	// 				var $el = $('select[id^=' + opt1 + ']:gt(' + sel1 + ')');
-	//
-	// 				$el.val('');
-	// 				$el.attr('disabled', true);
-	// 			} else {
-	// 				var $el = $('select[id^=' + opt1 + ']:gt(' + sel1 + ')');
-	//
-	// 				$el.val('');
-	// 				$el.attr('disabled', true);
-	//
-	// 				$el.each(function() {
-	// 					if($(this).is(':disabled')) {
-	// 						$(this).attr('disabled', false);
-	// 						return false;
-	// 					}
-	// 				});
-	// 			}
-	// 		// }
-	// 	});
-	//
-	// 	$('#select-opt select#opt1').change(function() {
-	// 		if($(this).hasClass('js-select2')) {
-	// 			// var str = $(this).attr('id').split("-");
-	// 			// var id = str[0] + '-' + str[1].substr(0, 1);
-	// 			var opt2 = $(this).attr('id');
-	// 			optionDisplay(opt2);
-	// 		}
-	// 	});
-	//
-	// 	// 상품개수증가
-	// 	$('div#itemcnt').on('click', '#optplus', function() {
-	// 		var $cntinput = $(this).find('input');
-	// 		var count = parseInt($cntinput.val());
-	// 		count++;
-	//
-	// 		$cntinput.val(count);
-	//
-	// 		calculatePrice();
-	// 	});
-	//
-	// 	// 상품개수감소
-	// 	$('div#itemcnt').on('click', '#optminus', function() {
-	// 		var $cntinput = $(this).find('input');
-	// 		var count = parseInt($cntinput.val());
-	// 		count--;
-	//
-	// 		if(count < 1) {
-	// 			alert('상품개수는 1이상 입력해 주십시오.');
-	// 			count = 1;
-	// 		}
-	//
-	// 		$cntinput.val(count);
-	//
-	// 		calculatePrice();
-	// 	});
-	//
-	// 	// 선택옵션삭제
-	// 	$('a').on('click', '#optdel', function() {
-	// 		$(this).parent('ul#show-option li').remove();
-	//
-	// 		var resultcount = $('ul#show-option li').size();
-	// 		if(resultcount < 1) {
-	// 			$('ul#show-option').css('display', 'none');
-	// 			$('#total').css('display', 'none');
-	// 		}
-	//
-	// 		calculatePrice();
-	// 	});
-	// });
-	//
-	// function optionDisplay(id) {
-	// 	var option = "";
-	// 	var sep = "";
-	// 	var optionval = "";
-	// 	var optionid = "";
-	// 	var optionadd = false;
-	//
-	// 	if($('ul#show-option').css('display', 'hidden')) {
-	// 		$('ul#show-option').css('display', 'block');
-	// 		$('#total').css('display', 'block');
-	// 	}
-	//
-	// 	$('#select-opt select[id^=' + id + ']').each(function() {
-	// 		// var str = $(this).val().split('||');
-	// 		// optionval = str[0];
-	// 		// if(str[1] == undefined) {
-	// 		// 	optionprc = "0";
-	// 		// } else {
-	// 		// 	optionprc = str[1];
-	// 		// }
-	// 		optionid = $(this).attr('id');
-	//
-	// 		if(optionval == '') {
-	// 			optionadd = true;
-	// 			return false;
-	// 		}
-	//
-	// 		option += sep + '<span class="show-' + optionid + '">' + optionval + '</span>';
-	//
-	// 		sep = " / ";
-	// 	});
-	//
-	// 	// 선택된 옵션체크
-	// 	$('ul#show-option li span.show-value').each(function() {
-	// 		var oldoption = $(this).html();
-	//
-	// 		if(oldoption == option) {
-	// 			alert('이미 선택된 옵션입니다.');
-	// 			optionadd = true;
-	// 			return false;
-	// 		}
-	// 	});
-	//
-	// 	if(!optionadd) {
-	// 		var resultcount = $('ul#show-option li').size();
-	// 		var optioncontent
-	// 			= '<li>' +
-	// 				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + option +
-	// 				'</span>' +
-	// 				'<div class="size-204 flex-w flex-m respon6-next">' +
-	// 				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
-	// 				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
-	// 				'<i class="fs-16 zmdi zmdi-minus"></i>' +
-	// 				'</span>' +
-	// 				'<input class="mtext-104 cl3 txt-center num-product"' +
-	// 				'type="number" name="num-product" value="1">' +
-	// 				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
-	// 				'<i class="fs-16 zmdi zmdi-plus"></i>' +
-	// 				'</span>' +
-	// 				'</div>' +
-	// 				'</div>' +
-	// 				'<div>' +
-	// 				'<span style="cursor: pointer" id="optdel">' +
-	// 				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
-	// 				'</span>' +
-	// 				'</div>' +
-	// 				'</li>';
-	//
-	// 				// = '<li>' +
-	// 				// '<span class="show-value">' + option + '</span>' +
-	// 				// '<span class="option-price">' + optionprice + '</span>' +
-	// 				// '<span class="item-count"> ' +
-	// 				// '<input type="text" name="itemcount[]" value="1" />' +
-	// 				// '</span>' +
-	// 				// '<span class="add-item"> + </span>' +
-	// 				// '<span class="subtract-item"> - </span>' +
-	// 				// '<span class="option-delete"> 삭제</span>' +
-	// 				// '</li>';
-	//
-	//
-	// 		if(resultcount > 0) {
-	// 			$('ul#show-option li:last').after(optioncontent);
-	// 		} else {
-	// 			$('ul#selected-result').html(optioncontent);
-	// 		}
-	//
-	// 		calculatePrice();
-	// 	}
-	// }
-	//
-	// function calculatePrice() {
-	// 	var totalprice = 0;
-	// 	var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
-	//
-	// 	$('ul#show-option li').each(function() {
-	// 		var itcnt = parseInt($(this).find('input').val());
-	//
-	// 		totalprice += itemprice * itcnt;
-	// 	});
-	//
-	// 	$('#total span').text(number_format(totalprice) + '원');
-	// }
-	//
-	// function number_format(input){
-	// 	var input = String(input);
-	// 	var reg = /(-?d+)(d{3})($|.d+)/;
-	// 	if(reg.test(input)){
-	// 		return input.replace(reg, function(str, p1,p2,p3){
-	// 					return number_format(p1) + "," + p2 + "" + p3;
-	// 				}
-	// 		);
-	// 	}else{
-	// 		return input;
-	// 	}
-	// }
 
-	var mixopt = "";
-	function submix(id, val) {
-		alert(id + ", " + val);
-		if(mixopt == "") {
-			mixopt = val;
-		} else {
-			mixopt += " / " + val;
-			showlist(mixopt);
-			mixopt = null;  // 왜 null로 안바뀌지....?
+	$(document).ready(function() {
+		$('#container li select').change(function() {
+			if(!$(this).hasClass('nomore-option')) {
+				var val = $(this).val();
+				var str = $(this).attr('id').split('-');
+				var id = str[0] + '-' + str[1].substr(0, 1);
+
+				var val = $(this).val();
+				var idx = $('select[id^=' + id + ']').index($(this));
+
+				if(val == '') {
+					var $el = $('select[id^=' + id + ']:gt(' + idx + ')');
+
+					$el.val('');
+					$el.attr('disabled', true);
+				} else {
+					var $el = $('select[id^=' + id + ']:gt(' + idx + ')');
+
+					$el.val('');
+					$el.attr('disabled', true);
+
+					$el.each(function() {
+						if($(this).is(':disabled')) {
+							$(this).attr('disabled', false);
+							return false;
+						}
+					});
+				}
+			}
+		});
+
+		$('#container li select.nomore-option').change(function() {
+			if($(this).hasClass('nomore-option')) {
+				var str = $(this).attr('id').split("-");
+				var id = str[0] + '-' + str[1].substr(0, 1);
+				optionDisplay(id);
+			}
+		});
+
+		// 상품개수증가
+		$('span.add-item').live('click', function() {
+			var $cntinput = $(this).closest('li').find('input');
+			var count = parseInt($cntinput.val());
+			count++;
+
+			$cntinput.val(count);
+
+			calculatePrice();
+		});
+
+		// 상품개수감소
+		$('span.subtract-item').live('click', function() {
+			var $cntinput = $(this).closest('li').find('input');
+			var count = parseInt($cntinput.val());
+			count--;
+
+			if(count < 1) {
+				alert('상품개수는 1이상 입력해 주십시오.');
+				count = 1;
+			}
+
+			$cntinput.val(count);
+
+			calculatePrice();
+		});
+
+		// 선택옵션삭제
+		$('span.option-delete').live('click', function() {
+			$(this).closest('li').remove();
+
+			var resultcount = $('ul#selected-result li').size();
+			if(resultcount < 1) {
+				$('ul#selected-result').css('display', 'none');
+				$('#total-price').css('display', 'none');
+			}
+
+			calculatePrice();
+		});
+	});
+
+	function optionDisplay(id)
+	{
+		var option = "";
+		var sep = "";
+		var optionval = "";
+		var optionprc = "";
+		var optionprice = "";
+		var optionid = "";
+		var optionadd = false;
+
+		if($('ul#selected-result').is(':hidden')) {
+			$('ul#selected-result').css('display', 'block');
+			$('#total-price').css('display', 'block');
+		}
+
+		$('#container li select[id^=' + id + ']').each(function() {
+			var str = $(this).val().split('||');
+			optionval = str[0];
+			if(str[1] == undefined) {
+				optionprc = "0";
+			} else {
+				optionprc = str[1];
+			}
+			optionid = $(this).attr('id');
+
+			if(optionval == '') {
+				optionadd = true;
+				return false;
+			}
+
+			option += sep + '<span class="selected-' + optionid + '">' + optionval + '</span>';
+			optionprice += '<span class="price-value">' + optionprc + '</span>';
+
+			sep = "/";
+		});
+
+		// 선택된 옵션체크
+		$('ul#selected-result li span.selected-value').each(function() {
+			var oldoption = $(this).html();
+
+			if(oldoption == option) {
+				alert('이미 선택된 옵션입니다.');
+				optionadd = true;
+				return false;
+			}
+		});
+
+		if(!optionadd) {
+			var resultcount = $('ul#selected-result li').size();
+			var optioncontent = '<li><span class="selected-value">' + option + '</span><span class="option-price">' + optionprice + '</span><span class="item-count"> <input type="text" name="itemcount[]" value="1" /></span><span class="add-item"> + </span><span class="subtract-item"> - </span><span class="option-delete"> 삭제</span></li>';
+
+			if(resultcount > 0) {
+				$('ul#selected-result li:last').after(optioncontent);
+			} else {
+				$('ul#selected-result').html(optioncontent);
+			}
+
+			calculatePrice();
 		}
 	}
 
-	function showlist(mixopt) {
-		alert(mixopt);
-		var resultcount = $('ul#show-option li').size();
-		var optioncontent
-				= '<li>' +
-				'<span class="size-203 flex-c-m respon6 show-value" id="optcol" style="padding-right: 50px">' + mixopt +
-				'</span>' +
-				'<div class="size-204 flex-w flex-m respon6-next">' +
-				'<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">' +
-				'<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">' +
-				'<i class="fs-16 zmdi zmdi-minus"></i>' +
-				'</span>' +
-				'<input class="mtext-104 cl3 txt-center num-product"' +
-				'type="number" name="num-product" value="1">' +
-				'<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">' +
-				'<i class="fs-16 zmdi zmdi-plus"></i>' +
-				'</span>' +
-				'</div>' +
-				'</div>' +
-				'<div>' +
-				'<span style="cursor: pointer" id="optdel">' +
-				'<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>' +
-				'</span>' +
-				'</div>' +
-				'</li>';
-
-		if(resultcount > 0) {
-			$('ul#show-option li:last').after(optioncontent);
-		} else {
-			$('ul#selected-result').html(optioncontent);
-		}
-
-		calculatePrice();
-	}
-
-	function calculatePrice() {
+	function calculatePrice()
+	{
 		var totalprice = 0;
 		var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
 
-		$('ul#show-option li').each(function() {
+		$('ul#selected-result li').each(function() {
+			var $prcelmt = $(this).find('.price-value');
+			var optprc = 0;
 			var itcnt = parseInt($(this).find('input').val());
 
-			totalprice += itemprice * itcnt;
+			$prcelmt.each(function() {
+				var prc = parseInt($(this).text());
+				optprc += prc;
+			});
+
+			totalprice += (itemprice + optprc) * itcnt;
 		});
 
-		$('#total span').text(number_format(totalprice) + '원');
+		$('#total-price span').text(number_format(totalprice) + '원');
 	}
 
 	function number_format(input){
@@ -402,9 +304,9 @@
 		}
 	}
 
-	// 옵션 관련 스크립트 끝
 
-	// 리뷰 작성 관련 스크립트
+
+
 	$(function() {
 		$('#prw_form').submit(function() {
 			// var id = this.id.value;
@@ -437,7 +339,6 @@
 			});
 		});
 	});
-	// 리뷰 작성 관련 스크립트 끝
 </script>
 <!-- 적용되는 js -->
 
@@ -613,140 +514,134 @@ ChannelIO('boot', settings);
 					<h4 class="mtext-105 cl2 js-name-detail p-b-14">Lightweight
 						Jacket</h4>
 
-					<span class="mtext-106 cl2" id="item-price">80,000원</span>
+					<span class="mtext-106 cl2"> 80,000원 </span>
 
 					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
 						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
 						feugiat.</p>
 
 					<!-- 상품 옵션 -->
-					<div class="p-t-33" id="select-opt">
-						<div class="flex-w flex-r-m p-b-10">
-							<div class="size-203 flex-c-m respon6">Size</div>
+<%--					<div class="p-t-33">--%>
+<%--						<div class="flex-w flex-r-m p-b-10">--%>
+<%--							<div class="size-203 flex-c-m respon6">Size</div>--%>
 
-							<div class="size-204 respon6-next rs1-select2 bor8 bg0">
-									<select class="js-select2" id="opt1" name="time" onchange="submix(this.id, this.value)">
-										<option value="" selected>Choose an option</option>
-										<option value="s">Size S</option>
-										<option value="m">Size M</option>
-										<option value="l">Size L</option>
-										<option value="xl">Size XL</option>
-									</select>
-									<div class="dropDownSelect2"></div>
-							</div>
-						</div>
+<%--							<div class="size-204 respon6-next">--%>
+<%--								<div class="rs1-select2 bor8 bg0">--%>
+<%--									<select class="js-select2" id="opt1" name="time">--%>
+<%--										<option value="" selected>Choose an option</option>--%>
+<%--										<option value="s">Size S</option>--%>
+<%--										<option value="m">Size M</option>--%>
+<%--										<option value="l">Size L</option>--%>
+<%--										<option value="xl">Size XL</option>--%>
+<%--									</select>--%>
+<%--									<div class="dropDownSelect2"></div>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
 
-						<div class="flex-w flex-r-m p-b-10">
-							<div class="size-203 flex-c-m respon6">Color</div>
+<%--						<div class="flex-w flex-r-m p-b-10">--%>
+<%--							<div class="size-203 flex-c-m respon6">Color</div>--%>
 
-							<div class="size-204 respon6-next rs1-select2 bor8 bg0">
-									<select class="js-select2" id="opt2" name="time" onchange="submix(this.id, this.value)">
-										<option value="" selected>Choose an option</option>
-										<option value="red">Red</option>
-										<option value="blue">Blue</option>
-										<option value="white">White</option>
-										<option value="gray">Gray</option>
-									</select>
-									<div class="dropDownSelect2"></div>
-							</div>
-						</div>
+<%--							<div class="size-204 respon6-next">--%>
+<%--								<div class="rs1-select2 bor8 bg0">--%>
+<%--									<select class="js-select2" id="opt2" name="time">--%>
+<%--										<option value="" selected>Choose an option</option>--%>
+<%--										<option value="red">Red</option>--%>
+<%--										<option value="blue">Blue</option>--%>
+<%--										<option value="white">White</option>--%>
+<%--										<option value="gray">Gray</option>--%>
+<%--									</select>--%>
+<%--									<div class="dropDownSelect2"></div>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
 
 
-						<div class="flex-w flex-r-m p-b-10"
-							 style="text-align: right; width: 570px; padding: 10px 30px;">
+<%--						<div id="select-opt" class="flex-w flex-r-m p-b-10"--%>
+<%--							 style="text-align: right; width: 570px; padding: 10px 30px; display: none">--%>
 
-							<%-- 옵션 블럭 --%>
-							<ul id="show-option">
-<%--								&lt;%&ndash; 한 옵션이 들어가는 li &ndash;%&gt;--%>
-<%--								<li>--%>
-<%--								&lt;%&ndash; 선택한 옵션 조합 &ndash;%&gt;--%>
-<%--								<span class="size-203 flex-c-m respon6" id="optcol" style="padding-right: 50px">--%>
-<%--									goods_options--%>
-<%--								</span>--%>
+<%--							<div class="size-204 flex-w flex-m respon6-next">--%>
+<%--								<div class="opt_1_2" style="padding-right: 50px">--%>
+<%--									<span>goods_options</span>--%>
+<%--								</div>--%>
 
-<%--								<div class="size-204 flex-w flex-m respon6-next">--%>
-<%--									<div class="wrap-num-product flex-w m-r-20 m-tb-10" id="itemcnt">--%>
-<%--										<span class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" id="optminus">--%>
-<%--											<i class="fs-16 zmdi zmdi-minus"></i>--%>
-<%--										</span>  &lt;%&ndash; 수량 감소 &ndash;%&gt;--%>
-
-<%--										<input class="mtext-104 cl3 txt-center num-product"--%>
-<%--											   type="number" name="num-product" value="1">--%>
-<%--										&lt;%&ndash; 선택한 수량 &ndash;%&gt;--%>
-
-<%--										<span class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" id="optplus">--%>
-<%--											<i class="fs-16 zmdi zmdi-plus"></i>--%>
-<%--										</span>  &lt;%&ndash; 수량 증가 &ndash;%&gt;--%>
+<%--								<div class="wrap-num-product flex-w m-r-20 m-tb-10">--%>
+<%--									<div--%>
+<%--											class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">--%>
+<%--										<i class="fs-16 zmdi zmdi-minus"></i>--%>
 <%--									</div>--%>
 
+<%--									<input class="mtext-104 cl3 txt-center num-product"--%>
+<%--										   type="number" name="num-product" value="1">--%>
+
+<%--									<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">--%>
+<%--										<i class="fs-16 zmdi zmdi-plus"></i>--%>
+<%--									</div>--%>
 <%--								</div>--%>
-<%--									<span id="optdel" style="cursor:pointer;">--%>
-<%--										<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/>--%>
-<%--									</span>--%>
-<%--								</li>--%>
 
-<%--									&lt;%&ndash; 한 옵션이 들어가는 li 끝 &ndash;%&gt;--%>
-							</ul>
+<%--								<a href="">--%>
+<%--									<img src="https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png"/></a>--%>
+<%--							</div>--%>
 
 
 
-							<div class="size-204 flex-w flex-m respon6-next">
-								<div class="price" class="size-203 flex-c-m respon6" id="total">
-									<span></span>
+<%--							<div class="size-204 flex-w flex-m respon6-next">--%>
+<%--								<div class="price" style="padding-right: 50px">--%>
+<%--									<span id="amt_total_area2">모두 합한 가격 + 원</span>--%>
 
 <%--									<input type="hidden" name="buy_list_option_info" value="(19)Black^095">--%>
 <%--									<input type="hidden" name="buy_list_goods_price" value="99900">--%>
 <%--									<input type="hidden" name="buy_list_qty" value="1">--%>
-								</div>
-								<br>
-								<button
-										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-									Add to cart</button>
-							</div>
-						</div>
-					</div>
-
-
-<%--					<div id="container">--%>
-<%--						<span>상품가격 : </span><span>20,000원</span>--%>
-<%--						<ul>--%>
-<%--							<li>--%>
-<%--								<select id="option-1" class="more-option" name="option-1">--%>
-<%--									<option value="">색상선택</option>--%>
-<%--									<option value="blue">blue</option>--%>
-<%--									<option value="black">black</option>--%>
-<%--									<option value="pink">pink</option>--%>
-<%--								</select>--%>
-<%--							</li>--%>
-<%--							<li>--%>
-<%--								<select id="option-11" name="option-11" disabled="disabled">--%>
-<%--									<option value="">가로길이선택</option>--%>
-<%--									<option value="200cm">200cm</option>--%>
-<%--									<option value="300cm||+500">300cm(+500원)</option>--%>
-<%--									<option value="400cm||+1000">400cm(+1,000원)</option>--%>
-<%--								</select>--%>
-<%--							</li>--%>
-<%--							<li>--%>
-<%--								<select id="option-12" name="option-12" disabled="disabled">--%>
-<%--									<option value="">세로길이선택</option>--%>
-<%--									<option value="200cm">200cm</option>--%>
-<%--									<option value="300cm||+500">300cm(+500원)</option>--%>
-<%--									<option value="400cm||+1000">400cm(+1,000원)</option>--%>
-<%--								</select>--%>
-<%--							</li>--%>
-<%--&lt;%&ndash;							<li>&ndash;%&gt;--%>
-<%--&lt;%&ndash;								<select id="option-13" class="nomore-option" name="option-13" disabled="disabled">&ndash;%&gt;--%>
-<%--&lt;%&ndash;									<option value="">높이선택</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;									<option value="200cm">200cm</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;									<option value="300cm||+500">300cm(+500원)</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;									<option value="400cm||+1000">400cm(+1,000원)</option>&ndash;%&gt;--%>
-<%--&lt;%&ndash;								</select>&ndash;%&gt;--%>
-<%--&lt;%&ndash;							</li>&ndash;%&gt;--%>
-<%--						</ul>--%>
-<%--						<ul id="selected-result">--%>
-<%--						</ul>--%>
-<%--						<div id="total-price">총 금액 : <span></span></div>--%>
+<%--								</div>--%>
+<%--								<br>--%>
+<%--								<button--%>
+<%--										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">--%>
+<%--									Add to cart</button>--%>
+<%--							</div>--%>
+<%--						</div>--%>
 <%--					</div>--%>
+
+
+					<div id="container">
+						<span>상품가격 : </span><span id="item-price">20,000원</span>
+						<ul>
+							<li>
+								<select id="option-1" class="more-option" name="option-1">
+									<option value="">색상선택</option>
+									<option value="blue">blue</option>
+									<option value="black">black</option>
+									<option value="pink">pink</option>
+								</select>
+							</li>
+							<li>
+								<select id="option-11" name="option-11" disabled="disabled">
+									<option value="">가로길이선택</option>
+									<option value="200cm">200cm</option>
+									<option value="300cm||+500">300cm(+500원)</option>
+									<option value="400cm||+1000">400cm(+1,000원)</option>
+								</select>
+							</li>
+							<li>
+								<select id="option-12" name="option-12" disabled="disabled">
+									<option value="">세로길이선택</option>
+									<option value="200cm">200cm</option>
+									<option value="300cm||+500">300cm(+500원)</option>
+									<option value="400cm||+1000">400cm(+1,000원)</option>
+								</select>
+							</li>
+							<li>
+								<select id="option-13" class="nomore-option" name="option-13" disabled="disabled">
+									<option value="">높이선택</option>
+									<option value="200cm">200cm</option>
+									<option value="300cm||+500">300cm(+500원)</option>
+									<option value="400cm||+1000">400cm(+1,000원)</option>
+								</select>
+							</li>
+						</ul>
+						<ul id="selected-result">
+						</ul>
+						<div id="total-price">총 금액 : <span></span></div>
+					</div>
 
 
 
