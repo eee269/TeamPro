@@ -96,7 +96,7 @@
 		<link type="text/css" rel="stylesheet"
 			href="/shopimages/nasign/template/work/33865/menu.2.css?t=202005111439">
 		<div id="aside">
-			<h2 class="aside-tit">MY PAGE</h2>
+			<h2 class="aside-tit">MY ORDER</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>
