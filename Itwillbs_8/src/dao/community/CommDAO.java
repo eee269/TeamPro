@@ -1,4 +1,4 @@
-package dao;
+package dao.community;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,17 +6,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vo.BoardBean;
+import vo.CommBean;
 
 import static db.JdbcUtil.*;
 
-public class BoardDAO {
+public class CommDAO {
 	// --------------싱글톤 패턴 활용---------------
-	private BoardDAO() {}
+	private CommDAO() {}
 	
-	private static BoardDAO instance = new BoardDAO();
+	private static CommDAO instance = new CommDAO();
 
-	public static BoardDAO getInstance() {
+	public static CommDAO getInstance() {
 		return instance;
 	}
 	// --------------싱글톤 패턴 활용---------------
@@ -31,7 +31,7 @@ public class BoardDAO {
 	// --------------setConnection()---------------
 	// --------------insertArticle()---------------
 	// 글 등록 작업
-	public int insertArticle(BoardBean boardBean) {
+	public int insertArticle(CommBean commBean) {
 		System.out.println("BoardDAO - insertArticle()~");
 		int insertCount = 0;
 		
@@ -52,15 +52,15 @@ public class BoardDAO {
 			
 			sql = "INSERT INTO board VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 			ps.setInt(1, num);
-			ps.setString(2, boardBean.getBoard_name());
-			ps.setString(3, boardBean.getBoard_pass());
-			ps.setString(4, boardBean.getBoard_subject());
-			ps.setString(5, boardBean.getBoard_content());
-			ps.setString(6, boardBean.getBoard_file());
+			ps.setString(2, commBean.getBoard_name());
+			ps.setString(3, commBean.getBoard_pass());
+			ps.setString(4, commBean.getBoard_subject());
+			ps.setString(5, commBean.getBoard_content());
+			ps.setString(6, commBean.getBoard_file());
 			ps.setInt(7, num); // 참조글 번호(새 글이므로 자신이 참조글이 됨)
-			ps.setInt(8, boardBean.getBoard_re_lev());
-			ps.setInt(9, boardBean.getBoard_re_seq());
-			ps.setInt(10, boardBean.getBoard_readCount());
+			ps.setInt(8, commBean.getBoard_re_lev());
+			ps.setInt(9, commBean.getBoard_re_seq());
+			ps.setInt(10, commBean.getBoard_readCount());
 			insertCount = ps.executeUpdate();
 			
 		} catch (Exception e) {
@@ -105,8 +105,8 @@ public class BoardDAO {
 	// --------------selectListCount()---------------
 	// --------------selectArticleList()---------------
 	// 게시물 목록 조회
-	public ArrayList<BoardBean> selectArticleList(int page, int limit){
-		ArrayList<BoardBean> articleList = null;
+	public ArrayList<CommBean> selectArticleList(int page, int limit){
+		ArrayList<CommBean> articleList = null;
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -120,11 +120,11 @@ public class BoardDAO {
 			ps.setInt(2, limit);
 			rs = ps.executeQuery();
 			
-			articleList = new ArrayList<BoardBean>();
+			articleList = new ArrayList<CommBean>();
 			
 			while(rs.next()) {
 				// 1개 게시물 정보를 저장할 BoardBean 객체 생성 및 데이터 저장
-				BoardBean article = new BoardBean();
+				CommBean article = new CommBean();
 				
 				// 비밀번호는 제외
 				article.setBoard_num(rs.getInt(1));

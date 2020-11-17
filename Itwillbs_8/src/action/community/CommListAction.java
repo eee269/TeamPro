@@ -1,16 +1,17 @@
-package action;
+package action.community;
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import svc.BoardListService;
+import action.Action;
+import svc.community.CommListService;
 import vo.ActionForward;
-import vo.BoardBean;
+import vo.CommBean;
 import vo.PageInfo;
 
-public class BoardListAction implements Action {
+public class CommListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -32,12 +33,12 @@ public class BoardListAction implements Action {
 		
 		// BoardListService -> getListCount() -> 전체 게시물 수 가져오기
 		// getListCount()
-		BoardListService boardListService = new BoardListService();
-		int listCount = boardListService.getListCount();
+		CommListService commListService = new CommListService();
+		int listCount = commListService.getListCount();
 		
 		// 전체 게시물 수 가져오기
-		ArrayList<BoardBean> articleList = new ArrayList<BoardBean>();
-		articleList = boardListService.getArticleList(page, limit);
+		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
+		articleList = commListService.getArticleList(page, limit);
 		
 		// 페이지 계산 작업
 		// 1. 전체 페이지 계산

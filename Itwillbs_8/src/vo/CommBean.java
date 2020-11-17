@@ -3,7 +3,7 @@ package vo;
 import java.sql.Date;
 
 // 게시판 정보 저장할 변수 설정
-public class BoardBean {
+public class CommBean {
 	private int board_num;
 	private String board_name;
 	private String board_pass;

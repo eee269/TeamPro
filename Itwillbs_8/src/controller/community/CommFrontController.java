@@ -1,4 +1,4 @@
-package controller;
+package controller.community;
 
 import java.io.IOException;
 
@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.BoardListAction;
+import action.community.CommListAction;
 import vo.ActionForward;
 
 @WebServlet("*.bo")
-public class BoardFrontController extends HttpServlet{
+public class CommFrontController extends HttpServlet{
 	
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class BoardFrontController extends HttpServlet{
 		// if문을 사용하여 각 서블릿 주소 판별 및 각 요청 처리를 위한 작업 요청
 		if(command.equals("/BoradList.bo")) {
 			System.out.println("BoardList.bo 로 포워딩~");
-			action = new BoardListAction();
+			action = new CommListAction();
 			
 			try {
 				forward = action.execute(request, response);
