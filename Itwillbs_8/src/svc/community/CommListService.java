@@ -13,7 +13,7 @@ public class CommListService {
 	// -------------------getListCount()-------------------
 	// 전체 게시물 수 리턴하는 메서드
 	public int getListCount() throws Exception{
-		System.out.println("BoardListService - getListCount()");
+		System.out.println("CommListService - getListCount()");
 		int listCount = 0;
 		
 		// 1(공통).
@@ -38,7 +38,7 @@ public class CommListService {
 	// -------------------getArticleList()-------------------
 	// 게시물 목록 가져오기 작업 요청 수행
 	public ArrayList<CommBean> getArticleList(int page, int limit)throws Exception{
-		System.out.println("BoardListService - getArticleList()");
+		System.out.println("CommListService - getArticleList()");
 		ArrayList<CommBean> articleList = null;
 		
 		// 1(공통).

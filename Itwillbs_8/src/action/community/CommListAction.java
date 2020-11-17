@@ -18,7 +18,7 @@ public class CommListAction implements Action {
 		// BoardListService 클래스 통해 게시물 목록 조회 후
 		// /board/blog.jsp 페이지로 포워딩
 		//  request 객체 유지, 서블릿 주소 변경 없이 포워딩 -> Dispatcher
-		System.out.println("BoardListAction~");
+		System.out.println("CommListAction~");
 		
 		ActionForward forward = null;
 		
@@ -62,7 +62,7 @@ public class CommListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("articleList", articleList);
 		forward = new ActionForward();
-		forward.setPath("/board/blog.jsp");
+		forward.setPath("/community/comm_list.jsp");
 				
 				
 		return forward;

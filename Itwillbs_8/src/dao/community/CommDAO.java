@@ -32,7 +32,7 @@ public class CommDAO {
 	// --------------insertArticle()---------------
 	// 글 등록 작업
 	public int insertArticle(CommBean commBean) {
-		System.out.println("BoardDAO - insertArticle()~");
+		System.out.println("CommDAO - insertArticle()~");
 		int insertCount = 0;
 		
 		PreparedStatement ps = null;
@@ -41,7 +41,7 @@ public class CommDAO {
 		int num = 1; // 글 번호를 저장할 변수
 		
 		try {
-			String sql = "SELECT max(board_num) FROM board";
+			String sql = "SELECT max(num) FROM community";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
@@ -50,17 +50,15 @@ public class CommDAO {
 				num = rs.getInt(1) + 1;
 			}
 			
-			sql = "INSERT INTO board VALUES(?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO community VALUES(?,?,?,?,?,?,now(),?)";
 			ps.setInt(1, num);
-			ps.setString(2, commBean.getBoard_name());
-			ps.setString(3, commBean.getBoard_pass());
-			ps.setString(4, commBean.getBoard_subject());
-			ps.setString(5, commBean.getBoard_content());
-			ps.setString(6, commBean.getBoard_file());
-			ps.setInt(7, num); // 참조글 번호(새 글이므로 자신이 참조글이 됨)
-			ps.setInt(8, commBean.getBoard_re_lev());
-			ps.setInt(9, commBean.getBoard_re_seq());
-			ps.setInt(10, commBean.getBoard_readCount());
+			ps.setString(2, commBean.getUsername());
+			ps.setString(3, commBean.getPass());
+			ps.setString(4, commBean.getSubject());
+			ps.setString(5, commBean.getContent());
+			ps.setInt(6, commBean.getReadCount());
+			ps.setDate(7, commBean.getDate());
+			ps.setString(8, commBean.getImg());
 			insertCount = ps.executeUpdate();
 			
 		} catch (Exception e) {
@@ -77,7 +75,7 @@ public class CommDAO {
 	// --------------selectListCount()---------------
 	// 전체 게시물 수 조회
 	public int selectListCount() {
-		System.out.println("BoardDAO - selectListCount()~");
+		System.out.println("CommDAO - selectListCount()~");
 		
 		int listCount = 0;
 		
@@ -85,7 +83,7 @@ public class CommDAO {
 		ResultSet rs = null;
 				
 		try {
-			String sql = "SELECT count(board_num) FROM board";
+			String sql = "SELECT count(num) FROM community";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
@@ -114,7 +112,7 @@ public class CommDAO {
 		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
 		
 		try {
-			String sql = "SELECT * FROM board ORDER BY board_re_ref desc, board_re_seq limit ?,?";
+			String sql = "SELECT * FROM community ORDER BY board_re_ref desc, board_re_seq limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, limit);
@@ -127,16 +125,13 @@ public class CommDAO {
 				CommBean article = new CommBean();
 				
 				// 비밀번호는 제외
-				article.setBoard_num(rs.getInt(1));
-				article.setBoard_name(rs.getString(2));
-				article.setBoard_subject(rs.getString(4));
-				article.setBoard_content(rs.getString(5));
-				article.setBoard_file(rs.getString(6));
-				article.setBoard_re_ref(rs.getInt(7));
-				article.setBoard_re_lev(rs.getInt(8));
-				article.setBoard_re_seq(rs.getInt(9));
-				article.setBoard_readCount(rs.getInt(10));
-				article.setBoard_date(rs.getDate(11));
+				article.setNum(rs.getInt(1));
+				article.setUsername(rs.getString(2));
+				article.setSubject(rs.getString(4));
+				article.setContent(rs.getString(5));
+				article.setReadCount(rs.getInt(6));
+				article.setDate(rs.getDate(7));
+				article.setImg(rs.getString(8));
 				
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
