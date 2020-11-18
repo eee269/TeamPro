@@ -111,8 +111,12 @@
 								<a href="product/index.jsp">BAGS</a>
 								<ul class="sub-menu">
 									<li><a href="../product/bags.jsp">CROSS</a></li>
+									<li><a href="../product/bags.jsp">BUCKET</a></li>
+									<li><a href="../product/bags.jsp">SHOULDER</a></li>
 									<li><a href="../product/bags.jsp">TOTE</a></li>
+									<li><a href="../product/bags.jsp">CLUTCH</a></li>
 									<li><a href="../product/bags.jsp">SHOPPER</a></li>
+									<li><a href="../product/bags.jsp">BACKPACK</a></li>
 								</ul>
 							</li>
 							
@@ -123,6 +127,8 @@
 									<li><a href="../product/shoes.jsp">SNEAKERS</a></li>
 									<li><a href="../product/shoes.jsp">BOOTS</a></li>
 									<li><a href="../product/shoes.jsp">LOAFERS</a></li>
+								    <li><a href="../product/shoes.jsp">SANDALS</a></li>
+								    <li><a href="../product/shoes.jsp">SLIPPER</a></li>	
 								</ul>
 							</li>
 
