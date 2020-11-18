@@ -1,6 +1,6 @@
 package svc.member;
 
-import static member.db.JdbcUtil.*;
+import static db.JdbcUtil.*;
 
 public class ControlMemberService {
 
