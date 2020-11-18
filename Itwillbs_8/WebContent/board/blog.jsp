@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
@@ -95,7 +97,7 @@
 }
 
 
-/* 검색창 수정 */
+/* ê²ìì°½ ìì  */
 .bor17 {
 	right: 30%
 }
