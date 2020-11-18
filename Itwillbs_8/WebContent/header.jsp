@@ -163,7 +163,7 @@
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="../board/index.jsp">COMMUNITY</a>
+								<a href="../board/blog.jsp">COMMUNITY</a>
 							</li>
 
 <!-- 							<li> -->
@@ -273,7 +273,7 @@
 							</li>
 
 							<li>
-								<a href="../board/index.jsp">COMMUNITY</a>
+								<a href="../board/blog.jsp">COMMUNITY</a>
 							</li>
 			</ul>
 		</div>
