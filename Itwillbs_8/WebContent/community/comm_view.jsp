@@ -1,6 +1,10 @@
+<%@page import="vo.CommBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%
+	CommBean article = (CommBean)request.getAttribute("article");
+	String nowPage = request.getParameter("page");
+%>
     <jsp:include page="../header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />

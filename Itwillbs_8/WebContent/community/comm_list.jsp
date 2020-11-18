@@ -1,5 +1,17 @@
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.CommBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+%>
 <jsp:include page="../header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
@@ -118,60 +130,40 @@
    <div class="container">
       <div class="fixed-img-collist">
       <%
-         String orgsrc = "images/blog-0";
-         for(int i  = 1 ; i < 7 ; i++) {
-            String src = orgsrc+i+".jpg";
+         for(int i  = 0 ; i < articleList.size() ; i++) {
       %>
          <ul>
-            <li><a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
-                  <img src=<%=src %> alt="IMG-BLOG">
-
-                  <div class="flex-col-c-m size-123 bg9 how-pos5">
-                     <span class="ltext-107 cl2 txt-center"> 22 </span> <span
-                        class="stext-109 cl3 txt-center"> Jan 2018 </span>
+            <a href="CommDetail.co" class="hov-img0 how-pos5-parent">
+            <li>
+	           <img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG">
+	           <div class="flex-col-c-m size-123 bg9 how-pos5">
+                     <span class="ltext-107 cl2 txt-center"> </span>
+                     <span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getUsername() %> </span>
                   </div>
-            </a> <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                  8 Inspiring Ways to Wear Dresses in the Winter </a>
-               </h4>
-
-               <p class="stext-117 cl6">Class aptent taciti sociosqu ad litora
-                  torquent per conubia nostra, per inceptos himenaeos. Fusce eget
-                  dictum tortor. Donec dictum vitae sapien eu varius</p></li>
+                  <h4><%=articleList.get(i).getSubject() %></h4>
+               <p class="stext-117 cl6"><%=articleList.get(i).getContent() %></p>
+            </li>
+            </a>
          </ul>
-      <%
-      src=orgsrc;
-         }
-         %>
-      
-
-         <div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
-            <a href="#"
-               class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-               1 </a> <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-               2 </a>
-               <span id="SPACE_PAGE" style="width: 115px;"></span>
-            
-         </div>
-      </div>
-   </div>
-
-   <div class="col-md-4 col-lg-3 p-b-80">
-      <div class="side-menu">
-
-         <div class="bor17 of-hidden pos-relative" >
-            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text"
-               name="search" placeholder="Search">
-
+      <%}%>
+<!--    	<div class="col-md-4 col-lg-3 p-b-80"> -->
+         <div class="bor17 of-hidden pos-relative float-r" >
+            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
             <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
                <i class="zmdi zmdi-search"></i>
             </button>
          </div>
-
-
+<!-- 	<div style="clear:both;"></div> -->
+	         <div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
+	            <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">1 </a>
+	              <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">2 </a><br>
+	               <span id="SPACE_PAGE" style="width: 115px;"></span>
+	               <a href="CommWriteForm.co">글쓰기</a>
+	         </div>
+   		</div>
       </div>
    </div>
    <!--       </div> -->
-   </div>
 </section>
 
 

@@ -1,6 +1,7 @@
 package vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 // 게시판 정보 저장할 변수 설정
 public class CommBean {
@@ -10,7 +11,7 @@ public class CommBean {
 	private String subject;
 	private String content;
 	private int readCount;
-	private Date date;
+	private Timestamp date;
 	private String img;
 	public int getNum() {
 		return num;
@@ -48,17 +49,17 @@ public class CommBean {
 	public void setReadCount(int readCount) {
 		this.readCount = readCount;
 	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
 	public String getImg() {
 		return img;
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public Timestamp getDate() {
+		return date;
+	}
+	public void setDate(Timestamp date) {
+		this.date = date;
 	}
 	
 }
