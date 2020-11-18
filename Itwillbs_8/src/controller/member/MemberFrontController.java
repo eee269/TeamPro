@@ -1,4 +1,4 @@
-package member.controller;
+package controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.action.Action;
-import member.action.ControlMemberAction;
-import member.vo.ActionForward;
+import action.Action;
+import action.member.ControlMemberAction;
+import vo.ActionForward;
 
 @WebServlet("*.mo")
 public class MemberFrontController extends HttpServlet {

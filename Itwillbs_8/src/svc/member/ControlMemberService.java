@@ -1,4 +1,4 @@
-package member.svc;
+package svc.member;
 
 import static member.db.JdbcUtil.*;
 

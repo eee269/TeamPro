@@ -1,10 +1,10 @@
-package member.action;
+package action.member;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.action.Action;
-import member.vo.ActionForward;
+import action.Action;
+import vo.ActionForward;
 
 public class ControlMemberAction implements Action {
 

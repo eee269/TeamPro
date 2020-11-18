@@ -30,8 +30,8 @@ public class CommFrontController extends HttpServlet{
 		ActionForward forward = null;
 		
 		// if문을 사용하여 각 서블릿 주소 판별 및 각 요청 처리를 위한 작업 요청
-		if(command.equals("/CommList.bo")) {
-			System.out.println("CommList.bo 로 포워딩~");
+		if(command.equals("/CommList.co")) {
+			System.out.println("CommList.co 로 포워딩~");
 			action = new CommListAction();
 			
 			try {
