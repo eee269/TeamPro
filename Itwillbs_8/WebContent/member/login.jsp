@@ -1,3 +1,34 @@
+Skip to content
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@SangBinKR 
+eee269
+/
+TeamPro
+1
+00
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+TeamPro/Itwillbs_8/WebContent/member/login.jsp
+@GoUNaa
+GoUNaa 20201116_고유나
+Latest commit 3b1ce00 yesterday
+ History
+ 2 contributors
+@GoUNaa@eee269
+365 lines (348 sloc)  11.5 KB
+  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
@@ -15,7 +46,6 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'Lato', sans-serif;
   background-color: #f8f8f8;
@@ -233,7 +263,6 @@ body .container_member .content .submit-wrap a:hover {
 body .container_member .content .signup-cont {
   display: none;
 }
-
 @keyframes slideIn {
   0% {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
@@ -274,7 +303,6 @@ body .container_member .content .signup-cont {
   font-weight: 700;
   text-decoration: none;
 }
-
 </style>
 <body>
 <section class="container_member">
@@ -363,3 +391,15 @@ $('.container .bg').mousemove(function(e){
 </script>
 </body>
 <jsp:include page="../footer.jsp" />
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

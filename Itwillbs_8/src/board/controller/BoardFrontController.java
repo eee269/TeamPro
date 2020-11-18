@@ -1,4 +1,8 @@
+<<<<<<< HEAD:Itwillbs_8/src/board/controller/BoardFrontController.java
 package board.controller;
+=======
+package controller.community;
+>>>>>>> origin/sb:Itwillbs_8/src/controller/community/CommFrontController.java
 
 import java.io.IOException;
 
@@ -9,12 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD:Itwillbs_8/src/board/controller/BoardFrontController.java
 import board.action.Action;
 import board.action.BoardListAction;
 import board.vo.ActionForward;
+=======
+import action.Action;
+import action.community.CommListAction;
+import vo.ActionForward;
+>>>>>>> origin/sb:Itwillbs_8/src/controller/community/CommFrontController.java
 
-@WebServlet("*.bo")
-public class BoardFrontController extends HttpServlet{
+@WebServlet("*.co")
+public class CommFrontController extends HttpServlet{
 	
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,9 +40,9 @@ public class BoardFrontController extends HttpServlet{
 		ActionForward forward = null;
 		
 		// if문을 사용하여 각 서블릿 주소 판별 및 각 요청 처리를 위한 작업 요청
-		if(command.equals("/BoradList.bo")) {
-			System.out.println("BoardList.bo 로 포워딩~");
-			action = new BoardListAction();
+		if(command.equals("/CommList.bo")) {
+			System.out.println("CommList.bo 로 포워딩~");
+			action = new CommListAction();
 			
 			try {
 				forward = action.execute(request, response);

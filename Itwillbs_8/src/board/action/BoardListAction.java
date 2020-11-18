@@ -1,24 +1,36 @@
+<<<<<<< HEAD:Itwillbs_8/src/board/action/BoardListAction.java
 package board.action;
+=======
+package action.community;
+>>>>>>> origin/sb:Itwillbs_8/src/action/community/CommListAction.java
 
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD:Itwillbs_8/src/board/action/BoardListAction.java
 import board.action.Action;
 import board.svc.BoardListService;
 import board.vo.ActionForward;
 import board.vo.BoardBean;
 import board.vo.PageInfo;
+=======
+import action.Action;
+import svc.community.CommListService;
+import vo.ActionForward;
+import vo.CommBean;
+import vo.PageInfo;
+>>>>>>> origin/sb:Itwillbs_8/src/action/community/CommListAction.java
 
-public class BoardListAction implements Action {
+public class CommListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// BoardListService 클래스 통해 게시물 목록 조회 후
 		// /board/blog.jsp 페이지로 포워딩
 		//  request 객체 유지, 서블릿 주소 변경 없이 포워딩 -> Dispatcher
-		System.out.println("BoardListAction~");
+		System.out.println("CommListAction~");
 		
 		ActionForward forward = null;
 		
@@ -33,12 +45,12 @@ public class BoardListAction implements Action {
 		
 		// BoardListService -> getListCount() -> 전체 게시물 수 가져오기
 		// getListCount()
-		BoardListService boardListService = new BoardListService();
-		int listCount = boardListService.getListCount();
+		CommListService commListService = new CommListService();
+		int listCount = commListService.getListCount();
 		
 		// 전체 게시물 수 가져오기
-		ArrayList<BoardBean> articleList = new ArrayList<BoardBean>();
-		articleList = boardListService.getArticleList(page, limit);
+		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
+		articleList = commListService.getArticleList(page, limit);
 		
 		// 페이지 계산 작업
 		// 1. 전체 페이지 계산
@@ -62,7 +74,7 @@ public class BoardListAction implements Action {
 		request.setAttribute("pageInfo", pageInfo);
 		request.setAttribute("articleList", articleList);
 		forward = new ActionForward();
-		forward.setPath("/board/blog.jsp");
+		forward.setPath("/community/comm_list.jsp");
 				
 				
 		return forward;
