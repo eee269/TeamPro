@@ -7,34 +7,34 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../images/icons/favicon.png"/>
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../fonts/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../fonts/linearicons-v1.0.0/icon-font.min.css">
+	<link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="../vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/MagnificPopup/magnific-popup.css">
+	<link rel="stylesheet" type="text/css" href="vendor/MagnificPopup/magnific-popup.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../vendor/perfect-scrollbar/perfect-scrollbar.css">
+	<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../css/util.css">
-	<link rel="stylesheet" type="text/css" href="../css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 <style>
 .arrow_box {
@@ -121,46 +121,46 @@
 <!-- 							</li> -->
 
 							<li>
-								<a href="../index.jsp">HOME</a>
+								<a href="../itwillbs_8/index.jsp">HOME</a>
 							</li>
 
 
 
-							
-							
+
 							<li>
-								<a href="../product/index.jsp">CLOTHES</a>
+								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
 								<ul class="sub-menu">						
-									<li><a href="../product/index.jsp">TOP</a></li>
-									<li><a href="../product/index.jsp">BOTTOM</a></li>
-									<li><a href="../product/index.jsp">DRESS</a></li>
-									<li><a href="../product/index.jsp">OUTER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
+									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
+									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=DRESS">DRESS</a></li>
+									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=OUTER">OUTER</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
+								<ul class="sub-menu">
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS">CROSS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER">SHOULDER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE">TOTE</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<a href="../product/bags.jsp">BAGS</a>
+								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
 								<ul class="sub-menu">
-									<li><a href="../product/bags.jsp">CROSS</a></li>
-									<li><a href="../product/bags.jsp">BUCKET</a></li>
-									<li><a href="../product/bags.jsp">SHOULDER</a></li>
-									<li><a href="../product/bags.jsp">TOTE</a></li>
-									<li><a href="../product/bags.jsp">CLUTCH</a></li>
-									<li><a href="../product/bags.jsp">SHOPPER</a></li>
-									<li><a href="../product/bags.jsp">BACKPACK</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
 								</ul>
-							</li>
+							</li>							
 							
-							<li>
-								<a href="../product/shoes.jsp">SHOES</a>
-								<ul class="sub-menu">
-									<li><a href="../product/shoes.jsp">SNEAKERS</a></li>
-									<li><a href="../product/shoes.jsp">BOOTS</a></li>
-									<li><a href="../product/shoes.jsp">LOAFERS</a></li>
-								    <li><a href="../product/shoes.jsp">SANDALS</a></li>
-								    <li><a href="../product/shoes.jsp">SLIPPER</a></li>	
-								</ul>
-							</li>
+
 
 							<li class="label1" data-label1="hot">
 								<a href="../board/blog.jsp">COMMUNITY</a>
