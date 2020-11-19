@@ -14,7 +14,7 @@
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/flatly/bootstrap.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
-<script src="../js/bootstrap4-rating-input.js"></script>
+<script src="js/bootstrap4-rating-input.js"></script>
 <style type="text/css">
 .rat {
 	margin: 150px auto;
@@ -110,12 +110,12 @@
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <link type="text/css" rel="stylesheet"
-	href="../scss/power_review_custom.4.css" />
+	href="scss/power_review_custom.4.css" />
 
 
 <script type="text/javascript">
