@@ -97,7 +97,6 @@
 	<div class="container">
 
 
-
 		<div class="main_pro_title_area cboth ">
 			<div class="main_pro_title cboth">NEW ARRIVALS</div>
 		</div>
