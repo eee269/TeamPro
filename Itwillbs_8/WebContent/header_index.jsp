@@ -98,9 +98,9 @@
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
 								<ul class="sub-menu">						
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
-									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=DRESS">DRESS</a></li>
-									<li><a href="ProductShop.po?type=Nxcode=CLOTHES&ncode=OUTER">OUTER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
 								</ul>
 							</li>
 							
