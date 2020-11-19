@@ -133,7 +133,7 @@
          for(int i  = 0 ; i < articleList.size() ; i++) {
       %>
          <ul>
-            <a href="CommDetail.co" class="hov-img0 how-pos5-parent">
+            <a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>" class="hov-img0 how-pos5-parent">
             <li>
 	           <img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG">
 	           <div class="flex-col-c-m size-123 bg9 how-pos5">

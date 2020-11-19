@@ -30,7 +30,7 @@ public class CommDetailAction implements Action {
 		// => request 객체를 유지하고, 서블릿 주소가 유지되어야 하므로
 		//    Dispatcher 방식으로 포워딩
 		forward = new ActionForward();
-		forward.setPath("/community/comm_view.jsp");
+		forward.setPath("/community/comm_detail.jsp");
 		
 		return forward;
 	}

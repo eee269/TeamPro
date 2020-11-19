@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 	<title>Product Detail</title>
 	<meta charset="UTF-8">
@@ -36,9 +36,8 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
-  <script src="community/jquery-3.5.1.js"></script>
-  <link href="community/summernote-lite.css" rel="stylesheet">
-  <script src="community/summernote-lite.js"></script>
+<link href="community/summernote-lite.css" rel="stylesheet" type="text/css">
+<!--   <script src="community/jquery-3.5.1.js"></script> -->
   <style>
 body .container_comm_write {
   position: relative;
@@ -358,11 +357,7 @@ input[type=text] {
 		    </article>
 	</section>
 	<!-- Content page -->
-	<script>
-    $(document).ready(function() {
-        $('#summernote').summernote();
-    });
-  		</script>
+
 		
 <%-- <jsp:include page="../footer.jsp"/> --%>
 
@@ -774,6 +769,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+	<script src="community/summernote-lite.js"></script>
+  <script src="community/summernote-ko-KR.js"></script>
+		<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  		</script>
 
 </body>
 </html>
