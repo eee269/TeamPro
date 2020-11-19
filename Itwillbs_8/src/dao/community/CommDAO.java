@@ -112,7 +112,7 @@ public class CommDAO {
 		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
 		
 		try {
-			String sql = "SELECT * FROM community ORDER BY board_re_ref desc, board_re_seq limit ?,?";
+			String sql = "SELECT * FROM community ORDER BY num desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, limit);

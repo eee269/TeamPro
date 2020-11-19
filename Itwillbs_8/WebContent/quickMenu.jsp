@@ -990,11 +990,11 @@ keyframes swiper-preloader-spin { 100%{
 		$('.img_open_close').click(function(){
 			var img = $('.img_open_close').attr('src')
 			
-			if(img == "../images/quick/quick_open.gif"){
-				$('.img_open_close').attr('src','../images/quick/quick_close.gif')
+			if(img == "images/quick/quick_open.gif"){
+				$('.img_open_close').attr('src','images/quick/quick_close.gif')
 				$('#right_bn_wrap').css('width','189px')	
 			} else{
-				$('.img_open_close').attr('src','../images/quick/quick_open.gif')
+				$('.img_open_close').attr('src','images/quick/quick_open.gif')
 				$('#right_bn_wrap').css('width','0px')
 			}
 			
@@ -1019,25 +1019,25 @@ keyframes swiper-preloader-spin { 100%{
 
 	<div class="sm_right_bn">
     <!-- 퀵메뉴 아이콘 -->
-		<div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:0},'slow')"><img src="../images/quick/quick_up.png"></a></div>
+		<div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:0},'slow')"><img src="images/quick/quick_up.png"></a></div>
 
-		<div class="right_quick_close cboth "><img src="../images/quick/quick_open.gif" class="img_open_close"></div>
-		<div class="cboth sm_btn"><a href="index.jsp"><img src="../images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=myorder"><img src="../images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/basket.html"><img src="../images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html"><img src="../images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=mywishlist"><img src="../images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
+		<div class="right_quick_close cboth "><img src="images/quick/quick_open.gif" class="img_open_close"></div>
+		<div class="cboth sm_btn"><a href="index.jsp"><img src="images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
+		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=myorder"><img src="images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
+		<div class="cboth sm_btn"><a href="/shop/basket.html"><img src="images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
+		<div class="cboth sm_btn"><a href="/shop/mypage.html"><img src="images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
+		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=mywishlist"><img src="images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
 		
-                <div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:$(document).height()},'slow');"><img src="../images/quick/quick_down.png"></a></div>
+                <div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:$(document).height()},'slow');"><img src="images/quick/quick_down.png"></a></div>
 	</div>
 
 	<!-- 상단배너이미지 슬라이드 -->
 	<div class="swiper-container">
 			<div class="cycle-slideshow" data-cycle-loader="wait">
-	    		<img src="../images/quick/quick_ban01.jpg">
-	    		<img src="../images/quick/quick_ban02.jpg">
-   				<img src="../images/quick/quick_ban03.jpg">
-    			<img src="../images/quick/quick_ban04.jpg">
+	    		<img src="images/quick/quick_ban01.jpg">
+	    		<img src="images/quick/quick_ban02.jpg">
+   				<img src="images/quick/quick_ban03.jpg">
+    			<img src="images/quick/quick_ban04.jpg">
 			</div>
 	</div>
 	<!-- 퀵메뉴 커뮤니티 -->
@@ -1085,9 +1085,9 @@ keyframes swiper-preloader-spin { 100%{
 	<div class="quick_sns cboth">
 	<!-- 퀵메뉴 sns -->
 		<ul>
-			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="../images/quick/quick_insta.gif"></a></li>
-			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="../images/quick/quick_kakaoch.gif"></a></li>
-			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="../images/quick/quick_facebook.gif"></a></li>
+			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="images/quick/quick_insta.gif"></a></li>
+			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="images/quick/quick_kakaoch.gif"></a></li>
+			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="images/quick/quick_facebook.gif"></a></li>
 		</ul>
 	</div>
 </div>

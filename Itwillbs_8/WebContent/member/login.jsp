@@ -1,34 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@SangBinKR 
-eee269
-/
-TeamPro
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-TeamPro/Itwillbs_8/WebContent/member/login.jsp
-@GoUNaa
-GoUNaa 20201116_고유나
-Latest commit 3b1ce00 yesterday
- History
- 2 contributors
-@GoUNaa@eee269
-365 lines (348 sloc)  11.5 KB
-  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
@@ -391,15 +360,3 @@ $('.container .bg').mousemove(function(e){
 </script>
 </body>
 <jsp:include page="../footer.jsp" />
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About

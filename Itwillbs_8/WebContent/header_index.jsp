@@ -56,7 +56,7 @@
 							로그인
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-15">
+						<a href="#" class="flex-c-m trans-04 p-lr-15 join">
 							회원가입
 						</a>
 						
@@ -67,7 +67,7 @@
 						<a href="cart/mypage.jsp" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
-						<a href="cart/myorder.jsp" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 					</div>

@@ -4,8 +4,8 @@
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
-
-
+<!-- QuickMenu -->
+<jsp:include page="../quickMenu.jsp" />
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -15,10 +15,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/order_pay.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/order_pay.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- 오더페이지 시작-->
 
@@ -67,7 +67,7 @@
 											<td>
 												<div class="tb-center">
 													<div class="thumb">
-														<img src="img/0010010007533.jpg" width="40">
+														<img src="cart/img/0010010007533.jpg" width="40">
 													</div>
 												</div>
 											</td>
@@ -90,7 +90,7 @@
 										<tr class="nbg">
 											<td colspan="5">
 												<div style="padding-left: 25px">
-													<img src="img/basket_option.gif"
+													<img src="cart/img/basket_option.gif"
 														alt="옵션" title="옵션"> 색상 : BLACK 1개
 												</div>
 											</td>
@@ -99,7 +99,7 @@
 											<td>
 												<div class="tb-center">
 													<div class="thumb">
-														<img src="img/0010010007533.jpg" width="40">
+														<img src="cart/img/0010010007533.jpg" width="40">
 													</div>
 												</div>
 											</td>
@@ -122,7 +122,7 @@
 										<tr class="nbg">
 											<td colspan="5">
 												<div style="padding-left: 25px">
-													<img src="img/basket_option.gif"
+													<img src="cart/img/basket_option.gif"
 														alt="옵션" title="옵션"> 색상 : BLACK 1개
 												</div>
 											</td>
@@ -348,7 +348,7 @@
 															class="op-total block-op-delivery-price" price="0">무료</span></em><span
 														id="block_op_delivery_unit" style="display: none;">원</span></strong>
 													<a class="plus"><img
-														src="img/bul_h23_plus.png"
+														src="cart/img/bul_h23_plus.png"
 														alt="plus"></a><a class="minus" style="display: none;"><img
 														src="/design/nasign/0744hera/cs/bul_h23_minus.png"
 														alt="minus"></a>
@@ -359,9 +359,9 @@
 													<strong><em class="fc-red"><span
 															class="op-total block-op-sale-price" price="-0">0</span></em>원</strong>
 													<a class="plus" style="display: none;"><img
-														src="img/bul_h23_plus.png"
+														src="cart/img/bul_h23_plus.png"
 														alt="plus"></a><a class="minus"><img
-														src="img/bul_h23_minus.png"
+														src="cart/img/bul_h23_minus.png"
 														alt="minus"></a>
 												</div>
 											</td>
@@ -370,16 +370,16 @@
 													<strong><em><span
 															class="op-total block-op-add-price" price="0">0</span></em>원</strong> <a
 														class="plus"><img
-														src="img/bul_h23_plus.png"
+														src="cart/img/bul_h23_plus.png"
 														alt="plus"></a><a class="minus" style="display: none;"><img
-														src="img/bul_h23_minus.png"
+														src="cart/img/bul_h23_minus.png"
 														alt="minus"></a>
 												</div>
 											</td>
 											<td>
 												<div class="base">
 													<a class="equal"><img
-														src="img/bul_h23_equal.png"
+														src="cart/img/bul_h23_equal.png"
 														alt="equal"></a> <strong><em class="fc-red"><span
 															class="block-op-sum-price" price="438000">438,000</span></em>원</strong>
 												</div>
@@ -450,7 +450,7 @@
 								</colgroup>
 								<tbody>
 									<tr>
-										<th><img src="img/ico_escrow_allthegate.gif"
+										<th><img src="cart/img/ico_escrow_allthegate.gif"
 											align="absmiddle" border="0"></th>
 										<td>고객님은 안전거래를 위해 현금으로결제하실 때 저희 쇼핑몰에 가입한 올더게이트의 구매안전서비스를
 											이용할 수 있습니다.</td>
