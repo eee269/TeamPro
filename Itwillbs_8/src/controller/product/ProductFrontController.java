@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.product.ProductSelectAction;
 import vo.ActionForward;
 
 
@@ -26,8 +27,13 @@ public class ProductFrontController extends HttpServlet {
 		
 		if(command.equals("/ProductShop.po")) {
 			System.out.println("왔나");
-			forward = new ActionForward();
-			forward.setPath("/product/shop.jsp");
+			action = new ProductSelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+			
+				e.printStackTrace();
+			}
 		}else if(command.equals("/ProductDetail.po")) {
 			System.out.println("디테일왔나!");
 			forward = new ActionForward();

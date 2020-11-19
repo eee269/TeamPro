@@ -10,7 +10,7 @@ public class ProductBean {
 	private String sub_img;//상품설명이미지
 	private int stock;//상품재고량
 	private int price;//상품가격
-	private int like;//상품 좋아요수 
+	private int likey;//상품 좋아요수 
 	
 	public String getBasicCode() {
 		return basicCode;
@@ -54,11 +54,17 @@ public class ProductBean {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public int getLike() {
-		return like;
+	public int getLikey() {
+		return likey;
 	}
-	public void setLike(int like) {
-		this.like = like;
+	public void setLikey(int likey) {
+		this.likey = likey;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 	

@@ -108,8 +108,8 @@
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
-					<a href="../index.jsp" class="logo">
-						<img src="../images/icons/logo-01.png" alt="IMG-LOGO">
+					<a href="index.jsp" class="logo">
+						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 
 					<!-- Menu desktop -->
@@ -121,7 +121,7 @@
 <!-- 							</li> -->
 
 							<li>
-								<a href="../itwillbs_8/index.jsp">HOME</a>
+								<a href="index.jsp">HOME</a>
 							</li>
 
 
@@ -140,12 +140,12 @@
 								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
 								<ul class="sub-menu">
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS">CROSS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER">SHOULDER</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE">TOTE</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
 								</ul>
 							</li>
 							
