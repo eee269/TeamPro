@@ -10,7 +10,7 @@ import vo.ProductBean;
 
 public class ProductSelectService {
 
-	public ArrayList<ProductBean> getProductListX(String xcode) {
+	public ArrayList<ProductBean> getProductListX(String xcode,int page, int limit) throws Exception{
 		
 		ArrayList<ProductBean> productList = null;
 		
@@ -18,14 +18,14 @@ public class ProductSelectService {
 		ProductDAO pd = ProductDAO.getInstance();
 		pd.setConnection(con);
 		
-		productList = pd.selectProductListX(xcode);
+		productList = pd.selectProductListX(xcode,page,limit);
 		
 		close(con);
 		
 		return productList;
 	}
 	
-	public ArrayList<ProductBean> getProductListN(String ncode) {
+	public ArrayList<ProductBean> getProductListN(String ncode,int page, int limit) throws Exception {
 		
 		ArrayList<ProductBean> productList = null;
 		
@@ -33,7 +33,7 @@ public class ProductSelectService {
 		ProductDAO pd = ProductDAO.getInstance();
 		pd.setConnection(con);
 		
-		productList = pd.selectProductListN(ncode);
+		productList = pd.selectProductListN(ncode,page,limit);
 		
 		close(con);
 		

@@ -26,7 +26,6 @@ public class ProductFrontController extends HttpServlet {
 		String command = request.getServletPath();
 		
 		if(command.equals("/ProductShop.po")) {
-			System.out.println("왔나");
 			action = new ProductSelectAction();
 			try {
 				forward = action.execute(request, response);
@@ -35,7 +34,6 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/ProductDetail.po")) {
-			System.out.println("디테일왔나!");
 			forward = new ActionForward();
 			forward.setPath("/product/product_detail.jsp");
 		}

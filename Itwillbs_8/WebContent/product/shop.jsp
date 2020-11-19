@@ -1,3 +1,4 @@
+<%@page import="vo.PageInfo"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -15,6 +16,14 @@
 	ArrayList<ProductBean> ncodeList = (ArrayList<ProductBean>)request.getAttribute("ncodeList");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
 	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
+	
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+	
 	
 	String small = null;
 	if(xcode.equals("CLOTHES")){
@@ -251,7 +260,7 @@
 						<div class="block2-txt-child1 flex-col-l ">
 							<a href="ProductDetail.po"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%> </a> <span class="stext-105 cl3"> $16.64
+								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a> <span class="stext-105 cl3"> $16.64
 							</span>
 						</div>
 
@@ -277,16 +286,51 @@
 <!-- 				class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04"> -->
 <!-- 				Load More </a> -->
 <!-- 		</div> -->
+<!-- 		<div class="paging"> -->
+
+<!-- 						 <a href="/shop/shopbrand.html?type=Y&xcode=009&sort=&page=1" class="first">&lt;&lt;</a> -->
+<!--                          <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=1" class="now">1</a> -->
+<!--                          <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=2">2</a> -->
+<!--                          <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=3">3</a> -->
+<!--                          <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=4">4</a> -->
+<!--                          <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=4"  class="last">&gt;&gt;</a> -->
+<!--         </div> -->
+		<%if(type.equals("X")){%>
+			
 		<div class="paging">
-						 <a href="/shop/shopbrand.html?type=Y&xcode=009&sort=&page=1" class="first">&lt;&lt;</a>
-                         <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=1" class="now">1</a>
-                         <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=2">2</a>
-                         <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=3">3</a>
-                         <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=4">4</a>
-                         <a href="/shop/shopbrand.html?type=Y&xcode=007&sort=&page=4"  class="last">&gt;&gt;</a>
-        </div>
+	
+		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=startPage%>" class="first">&lt;&lt;</a>
+		 <%for(int i = startPage; i <= endPage; i++) { 
+				if(i == nowPage) { %>
+				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=nowPage %>" class="now"><%=i %></a>
+				<%} else { %>
+				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=i%>"><%=i %></a>
+				<%} %>
+	 	<%} %>
+	 
+		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
+		</div>
+		<%} %>
+		
+		<%if(type.equals("N")){%>	
+		<div class="paging">
+	
+		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=startPage%>" class="first">&lt;&lt;</a>
+		 <%for(int i = startPage; i <= endPage; i++) { 
+				if(i == nowPage) { %>
+				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=nowPage %>" class="now"><%=i %></a>
+				<%} else { %>
+				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=i%>"><%=i %></a>
+				<%} %>
+	 	<%} %>
+	 
+		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
+		</div>
+		<%} %>
+		
 	</div>
 </div>
+
 
 
 <jsp:include page="../footer.jsp" />

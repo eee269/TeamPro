@@ -10,7 +10,7 @@ import vo.ProductBean;
 
 public class NcodeSelectService {
 
-	public ArrayList<ProductBean> getNcodeList(String xcode) {
+	public ArrayList<ProductBean> getNcodeList(String xcode) throws Exception{
 		
 		ArrayList<ProductBean> ncodeList = null;
 		
