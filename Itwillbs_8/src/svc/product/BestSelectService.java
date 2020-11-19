@@ -10,7 +10,7 @@ import vo.ProductBean;
 
 public class BestSelectService {
 
-	public ArrayList<ProductBean> getBestList(String xcode) {
+	public ArrayList<ProductBean> getBestList(String xcode) throws Exception {
 		
 		ArrayList<ProductBean> bestList = null;
 		

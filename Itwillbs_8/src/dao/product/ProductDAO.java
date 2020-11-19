@@ -37,6 +37,7 @@ public class ProductDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
+		
 		try {
 			String sql = "select DISTINCT ncode from product where xcode=?";
 			ps = con.prepareStatement(sql);
@@ -50,7 +51,7 @@ public class ProductDAO {
 				ncodeList.add(pb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectProductList()의 오류" +e.getMessage());
+			System.out.println("selectNcodeList()의 오류" +e.getMessage());
 			e.printStackTrace();
 		}finally{
 			close(ps);
@@ -99,17 +100,21 @@ public class ProductDAO {
 		return bestList;
 	}
 	
-	public ArrayList<ProductBean> selectProductListX(String xcode) {
+	public ArrayList<ProductBean> selectProductListX(String xcode,int page, int limit) {
 		
 		ArrayList<ProductBean> productListX = new ArrayList<ProductBean>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where xcode=?";
+			String sql = "select * from product where xcode=? limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, xcode);
+			ps.setInt(2, startRow);
+			ps.setInt(3, limit);
 			rs = ps.executeQuery();
+			
 			
 			while(rs.next()) {
 				ProductBean pb = new ProductBean();
@@ -126,27 +131,29 @@ public class ProductDAO {
 				productListX.add(pb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectBestList()의 오류" +e.getMessage());
+			System.out.println("selectProductListX()의 오류" +e.getMessage());
 			e.printStackTrace();
 		}finally{
 			close(ps);
 			close(rs);
 		}
-
 		
 		return productListX;
 	}
 	
-	public ArrayList<ProductBean> selectProductListN(String ncode) {
+	public ArrayList<ProductBean> selectProductListN(String ncode,int page, int limit) {
 		
 		ArrayList<ProductBean> productListN = new ArrayList<ProductBean>();
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where ncode=?";
+			String sql = "select * from product where ncode=? limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, ncode);
+			ps.setInt(2, startRow);
+			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -164,7 +171,7 @@ public class ProductDAO {
 				productListN.add(pb);
 			}
 		} catch (SQLException e) {
-			System.out.println("selectBestList()의 오류" +e.getMessage());
+			System.out.println("selectProductListN()의 오류" +e.getMessage());
 			e.printStackTrace();
 		}finally{
 			close(ps);
@@ -173,5 +180,61 @@ public class ProductDAO {
 
 		
 		return productListN;
+	}
+	
+	public int selectProductCountN(String ncode) {
+		
+		int productCount = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product where ncode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, ncode);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				productCount += 1;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectProductCount()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return productCount;
+	}
+	
+	public int selectProductCountX(String xcode) {
+		
+		int productCount = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product where xcode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, xcode);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				productCount += 1;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectProductCount()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return productCount;
 	}
 }
