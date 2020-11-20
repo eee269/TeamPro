@@ -317,7 +317,7 @@ body .container_member .content .signup-cont {
 						                    <label for="phone">Phone Number</label>  <br>
 						                    
 							                <div class="term" style="padding-top: 30px;">
-							                <iframe width="100%" src="term.jsp" >
+							                <iframe width="100%" src="member/term.jsp" >
 							       				
 							                </iframe>
 							                </div>
