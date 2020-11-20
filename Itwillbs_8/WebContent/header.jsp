@@ -81,23 +81,23 @@
 					</div>
 
 					<div class="right-top-bar flex-w h-full">
-						<a href="../member/login.jsp" class="flex-c-m trans-04 p-lr-15">
+						<a href="member/login.jsp" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-15">
+						<a href="#" class="flex-c-m trans-04 p-lr-15 join">
 							회원가입
 						</a>
 						
-						<a href="../cart/cart.jsp" class="flex-c-m trans-04 p-lr-15">
+						<a href="cart/cart.jsp" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
 						
-						<a href="../cart/mypage.jsp" class="flex-c-m trans-04 p-lr-15">
+						<a href="cart/mypage.jsp" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
 						
-						<a href="../cart/myorder.jsp" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 					</div>
@@ -117,7 +117,7 @@
 						<ul class="main-menu">
 							
 <!-- 							<li> -->
-<!-- 								<a href="../index.jsp">Home</a> -->
+<!-- 								<a href="index.jsp">Home</a> -->
 <!-- 							</li> -->
 
 							<li>
@@ -126,52 +126,52 @@
 
 
 
-
+							
+							
 							<li>
-								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
+								<a href="product/index.jsp">CLOTHES</a>
 								<ul class="sub-menu">						
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
-								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS">CROSS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER">SHOULDER</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE">TOTE</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
+									<li><a href="product/index.jsp">TOP</a></li>
+									<li><a href="product/index.jsp">BOTTOM</a></li>
+									<li><a href="product/index.jsp">DRESS</a></li>
+									<li><a href="product/index.jsp">OUTER</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
+								<a href="product/bags.jsp">BAGS</a>
 								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
+									<li><a href="product/bags.jsp">CROSS</a></li>
+									<li><a href="product/bags.jsp">BUCKET</a></li>
+									<li><a href="product/bags.jsp">SHOULDER</a></li>
+									<li><a href="product/bags.jsp">TOTE</a></li>
+									<li><a href="product/bags.jsp">CLUTCH</a></li>
+									<li><a href="product/bags.jsp">SHOPPER</a></li>
+									<li><a href="product/bags.jsp">BACKPACK</a></li>
 								</ul>
-							</li>							
+							</li>
 							
-
+							<li>
+								<a href="product/shoes.jsp">SHOES</a>
+								<ul class="sub-menu">
+									<li><a href="product/shoes.jsp">SNEAKERS</a></li>
+									<li><a href="product/shoes.jsp">BOOTS</a></li>
+									<li><a href="product/shoes.jsp">LOAFERS</a></li>
+								    <li><a href="product/shoes.jsp">SANDALS</a></li>
+								    <li><a href="product/shoes.jsp">SLIPPER</a></li>	
+								</ul>
+							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="../board/blog.jsp">COMMUNITY</a>
+								<a href="board/blog.jsp">COMMUNITY</a>
 							</li>
 
 <!-- 							<li> -->
-<!-- 								<a href="../about/index.jsp">About</a> -->
+<!-- 								<a href="about/index.jsp">About</a> -->
 <!-- 							</li> -->
 
 <!-- 							<li> -->
-<!-- 								<a href="../contact/index.jsp">Contact</a> -->
+<!-- 								<a href="contact/index.jsp">Contact</a> -->
 <!-- 							</li> -->
 						</ul>
 					</div>	
@@ -199,7 +199,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.html"><img src="../images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -255,25 +255,25 @@
 
 			<ul class="main-menu-m">
 							<li>
-								<a href="../product/index.jsp">SHOP</a>
+								<a href="product/index.jsp">SHOP</a>
 							</li>
 
 
 							<li>
-								<a href="../product/index.jsp">BAGS</a>
+								<a href="product/index.jsp">BAGS</a>
 							</li>
 							
 							
 							<li>
-								<a href="../product/index.jsp">CLOTHES</a>
+								<a href="product/index.jsp">CLOTHES</a>
 							</li>
 							
 							<li>
-								<a href="../product/index.jsp">SHOES</a>
+								<a href="product/index.jsp">SHOES</a>
 							</li>
 
 							<li>
-								<a href="../board/blog.jsp">COMMUNITY</a>
+								<a href="board/blog.jsp">COMMUNITY</a>
 							</li>
 			</ul>
 		</div>
@@ -282,7 +282,7 @@
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="../images/icons/icon-close2.png" alt="CLOSE">
+					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
 
 				<form class="wrap-search-header flex-w p-l-15">
