@@ -182,6 +182,46 @@ public class ProductDAO {
 		return productListN;
 	}
 	
+public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
+		
+		ArrayList<ProductBean> productDetailList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product where basicCode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, basicCode);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setType(rs.getString("type"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				
+				productDetailList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectProductDetailList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return productDetailList;
+	}
+	
+	
+	
 	public int selectProductCountN(String ncode) {
 		
 		int productCount = 0;
