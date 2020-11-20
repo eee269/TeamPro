@@ -1,5 +1,10 @@
+<%@page import="vo.CommBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	CommBean article = (CommBean)request.getAttribute("article");
+	String nowPage = request.getParameter("page");
+%>
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
@@ -77,15 +82,15 @@ input[type=text] {
 		        <div class="content">
 		        	<div class = "toolbar-container">
 			            <div class="signin-cont cont">
-			                <form action="CommWritePro.co" method="post" enctype="multipart/form-data">
+			                <form action="CommModifyPro.co" method="post" enctype="multipart/form-data">
 			                	<input type="hidden" id="name" name="username" value="호랑이">
 			                	<input type="hidden" id="pass" name="pass" value="123">
 			                	<input type="hidden" id="img" name="img" value="0.jpg">
-        						<input type="text" id="subject" name="subject" placeholder="제목란입니다"><br>
-								<textarea id ="summernote" name="content" ></textarea><br>
-								<input type="file" name="img" id="img" ><br>
-								<input type="submit" id="edit" class="btn btn-primary" value="완료">
-								<input type="reset" id="save" class="btn btn-primary" value="취소" >
+        						<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>"><br>
+								<textarea id ="summernote" name="content" ><%=article.getContent() %></textarea><br>
+								<input type="file" name="img" id="img" value=" <%=article.getImg() %>"><br>
+								<button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit 1</button>
+								<button id="save" class="btn btn-primary" onclick="save()" type="button">Save 2</button>
 							</form>
    				        </div>
 		        	</div>

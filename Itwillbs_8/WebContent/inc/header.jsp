@@ -35,7 +35,7 @@
 <!--===============================================================================================-->
 <!--===============================================================================================-->
 	<script src="community/summernote-ko-KR.js"></script>
-	<link rel="stylesheet" type="text/css" href="community/summernote-lite.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">

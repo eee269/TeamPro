@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.community.CommDeleteProAction;
 import action.community.CommDetailAction;
 import action.community.CommListAction;
 import action.community.CommModifyFormAction;
@@ -34,6 +35,7 @@ public class CommFrontController extends HttpServlet{
 		ActionForward forward = null;
 		
 		// if문을 사용하여 각 서블릿 주소 판별 및 각 요청 처리를 위한 작업 요청
+				// ---------------------------글 쓰기---------------------------
 				if(command.equals("/CommWriteForm.co")) {
 					/*
 					 * 글쓰기 페이지에 대한 요청은 비즈니스 로직 없이
@@ -62,6 +64,8 @@ public class CommFrontController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+				// ---------------------------글 쓰기---------------------------
+				// ---------------------------글 목록---------------------------
 				}else if(command.equals("/CommList.co")) {
 						System.out.println("CommList.co 로 포워딩!");
 						action = new CommListAction();
@@ -71,6 +75,8 @@ public class CommFrontController extends HttpServlet{
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+				// ---------------------------글 목록---------------------------
+				// ---------------------------글 상세---------------------------
 				}else if(command.equals("/CommDetail.co")) {
 					System.out.println("CommDetail.co로 포워딩!");
 					action = new CommDetailAction();
@@ -80,32 +86,44 @@ public class CommFrontController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}else if(command.equals("/CommDeleteForm.co")) {
-					System.out.println("CommDeleteForm.bo로 포워딩!");
-					forward = new ActionForward();
-					forward.setPath("/community/comm_delete.jsp");
-					
+				// ---------------------------글 상세---------------------------
+				// ---------------------------글 수정---------------------------
 				}else if(command.equals("/CommModifyForm.co")) {
-					System.out.println("CommModifyForm.bo로 포워딩!");
+					System.out.println("CommModifyForm.co로 포워딩!");
 					action = new CommModifyFormAction();
-					
 					try {
 						forward = action.execute(request, response);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
 				}else if(command.equals("/CommModifyPro.co")) {
 					System.out.println("CommModifyPro.bo로 포워딩!");
 					action = new CommModifyProAction();
-					
 					try {
 						forward = action.execute(request, response);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					
+				// ---------------------------글 수정---------------------------
+				// ---------------------------글 삭제---------------------------
+				}else if(command.equals("/CommDeleteForm.co")) {
+					System.out.println("CommDeleteForm.co로 포워딩!");
+					try {
+						forward = new ActionForward();
+						forward.setPath("/community/comm_delete.jsp");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if(command.equals("/CommDeletePro.co")) {
+					System.out.println("CommDeletePro.co로 포워딩!");
+					action = new CommDeleteProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
+				// ---------------------------글 삭제---------------------------
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			
