@@ -8,7 +8,7 @@
 <link href="../css/control_mem_order.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 <h1>Admin - </h1><h3> &nbsp;Member</h3>
 <table>
 <tr><th>행번호</th><th>id</th><th>email</th><th>비밀번호</th><th>이름</th><th>닉네임</th><th>핸드폰번호</th><th>가입일자</th><th>삭제</th></tr>
@@ -20,6 +20,6 @@ for(int i=0; i<10;i++){
 }
 %>
 </table>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>
 </body>
 </html>

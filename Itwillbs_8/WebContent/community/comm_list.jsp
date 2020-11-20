@@ -12,7 +12,7 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 %>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
@@ -166,6 +166,6 @@
 </section>
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

@@ -8,7 +8,7 @@
 <link href="../css/control_mem_order.css" rel="stylesheet">
 </head>
 <body>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 <h1>Admin - </h1><h3>&nbsp;Order</h3>
 <table>
 <tr><th>행번호</th><th>주문번호</th><th>주문날짜</th><th>주문자(id/email)</th><th>수신인</th><th>핸드폰번호</th><th>주소</th><th>상품명</th><th>색상</th><th>사이즈</th><th>결제수단</th><th>배송현황</th><th>주문취소/교환/환불</th></tr>
@@ -21,6 +21,6 @@ for(int i=0;i<10;i++){
 }
 %>
 </table>
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>
 </body>
 </html>

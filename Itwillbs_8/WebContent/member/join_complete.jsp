@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 
 <style>
 #header, #layerWrap, #contentWrap, #ftLink .link, #footer { width:1260px; }
@@ -156,4 +156,4 @@ body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Ro
 		</div>
 	</section>	
 
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>

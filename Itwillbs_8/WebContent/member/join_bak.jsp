@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 
 <style>
 </style>
@@ -943,4 +943,4 @@ h4.tit { margin-top: 50px; margin-bottom: 5px; padding-left:5px; font-size: 14px
 	</div>
 </section>
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 <!-- Cart -->
@@ -92,13 +92,9 @@ input[type=text] {
 		    </article>
 	</section>
 	<!-- Content page -->
-	<jsp:include page="../footer.jsp" />
-	<script src="community/summernote-lite.js"></script>
-	<script src="community/summernote-ko-KR.js"></script>
-	<script>
-	    $(document).ready(function() {
-	        $('#summernote').summernote();
-	    });
-	</script>
+	<jsp:include page="../inc/footer.jsp" />
+	<!-- WriteEditor -->
+	<jsp:include page="../inc/writeEditor.jsp"/>
+	<!-- WriteEditor -->
 </body>
 </html>

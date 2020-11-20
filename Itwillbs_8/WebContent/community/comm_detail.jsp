@@ -5,7 +5,7 @@
 	CommBean article = (CommBean)request.getAttribute("article");
 	String nowPage = request.getParameter("page");
 %>
-    <jsp:include page="../header.jsp"/>
+    <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
@@ -443,4 +443,4 @@
 	</section>	
 	
 		
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>
