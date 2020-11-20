@@ -96,8 +96,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -116,8 +114,6 @@
 			</span>
 		</div>
 	</div>
-
-	
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
@@ -125,7 +121,7 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<div class="wrap-pic-w how-pos5-parent">
-							<%= article.getImg()%>
+							<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>">
 							<div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
 									22
@@ -164,7 +160,6 @@
 								<%= article.getContent() %>
 							</p>
 						</div>
-
 						<div class="flex-w flex-t p-t-16">
 							<span class="size-216 stext-116 cl8 p-t-4">
 								Tags
