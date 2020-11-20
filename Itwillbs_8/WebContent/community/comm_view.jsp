@@ -8,91 +8,6 @@
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp"/>
 
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -113,12 +28,13 @@
 		</div>
 	</div>
 
-	
+
 	<!-- Content page -->
 	<section class="bg0 p-t-52 p-b-20">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
+				<div class="col-md-8 col-lg-9 p-b-80" style="margin: 0 auto;">
+    													
 					<div class="p-r-45 p-r-0-lg">
 						<!--  -->
 						<div class="wrap-pic-w how-pos5-parent">
@@ -169,257 +85,9 @@
 								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
 							</p>
 						</div>
-
-						<div class="flex-w flex-t p-t-16">
-							<span class="size-216 stext-116 cl8 p-t-4">
-								Tags
-							</span>
-
-							<div class="flex-w size-217">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
-						</div>
-
-						<!--  -->
-						<div class="p-t-40">
-							<h5 class="mtext-113 cl2 p-b-12">
-								Leave a Comment
-							</h5>
-
-							<p class="stext-107 cl6 p-b-40">
-								Your email address will not be published. Required fields are marked *
-							</p>
-
-							<form>
-								<div class="bor19 m-b-20">
-									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
-								</div>
-
-							
-
-								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-									Post Comment
-								</button>
-							</form>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 col-lg-3 p-b-80">
-					<div class="side-menu">
-						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-
-							<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
-						</div>
-
-						<div class="p-t-55">
-							<h4 class="mtext-112 cl2 p-b-33">
-								Categories
-							</h4>
-
-							<ul>
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="p-t-65">
-							<h4 class="mtext-112 cl2 p-b-33">
-								Featured Products
-							</h4>
-
-							<ul>
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-01.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-02.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-03.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$17.00
-										</span>
-									</div>
-								</li>
-							</ul>
-						</div>
-
-						<div class="p-t-55">
-							<h4 class="mtext-112 cl2 p-b-20">
-								Archive
-							</h4>
-
-							<ul>
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											July 2018
-										</span>
-
-										<span>
-											(9)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											June 2018
-										</span>
-
-										<span>
-											(39)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											May 2018
-										</span>
-
-										<span>
-											(29)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											April  2018
-										</span>
-
-										<span>
-											(35)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											March 2018
-										</span>
-
-										<span>
-											(22)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											February 2018
-										</span>
-
-										<span>
-											(32)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											January 2018
-										</span>
-
-										<span>
-											(21)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											December 2017
-										</span>
-
-										<span>
-											(26)
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-
-						<div class="p-t-50">
+								
+						
+							<div class="p-t-50">
 							<h4 class="mtext-112 cl2 p-b-27">
 								Tags
 							</h4>
@@ -446,10 +114,180 @@
 								</a>
 							</div>
 						</div>
+						<!--  -->
+						
+									
+						<!-- ----------------------------------------------------------------------------------------- -->
+						<div class="bor10 m-t-50 p-t-43 p-b-40" >
+				<!-- Tab01 -->
+				<div class="tab01">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" role="tablist">
+						
+
+						<li class="nav-item p-b-10">
+							<a class="nav-link" data-toggle="tab" href="#reviews" role="tab">Reviews (1)</a>
+						</li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content p-t-43">
+						<!-- - -->
+						<div class="tab-pane fade show active" id="description" role="tabpanel">
+							<div class="how-pos2 p-lr-15-md">
+								<p class="stext-102 cl6">
+									Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
+								</p>
+							</div>
+						</div>
+
+						<!-- - -->
+						<div class="tab-pane fade" id="information" role="tabpanel">
+							<div class="row">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+									<ul class="p-lr-28 p-lr-15-sm">
+										<li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Weight
+											</span>
+
+											<span class="stext-102 cl6 size-206">
+												0.79 kg
+											</span>
+										</li>
+
+										<li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Dimensions
+											</span>
+
+											<span class="stext-102 cl6 size-206">
+												110 x 33 x 100 cm
+											</span>
+										</li>
+
+										<li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Materials
+											</span>
+
+											<span class="stext-102 cl6 size-206">
+												60% cotton
+											</span>
+										</li>
+
+										<li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Color
+											</span>
+
+											<span class="stext-102 cl6 size-206">
+												Black, Blue, Grey, Green, Red, White
+											</span>
+										</li>
+
+										<li class="flex-w flex-t p-b-7">
+											<span class="stext-102 cl3 size-205">
+												Size
+											</span>
+
+											<span class="stext-102 cl6 size-206">
+												XL, L, M, S
+											</span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+
+						<!-- - -->
+						<div class="tab-pane fade" id="reviews" role="tabpanel">
+							<div class="row">
+								<div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
+									<div class="p-b-30 m-lr-15-sm">
+										<!-- Review -->
+										<div class="flex-w flex-t p-b-68">
+											<div class="wrap-pic-s size-109 bor0 of-hidden m-r-18 m-t-6">
+												<img src="images/avatar-01.jpg" alt="AVATAR">
+											</div>
+
+											<div class="size-207">
+												<div class="flex-w flex-sb-m p-b-17">
+													<span class="mtext-107 cl2 p-r-20">
+														Ariana Grande
+													</span>
+
+													<span class="fs-18 cl11">
+														<i class="zmdi zmdi-star"></i>
+														<i class="zmdi zmdi-star"></i>
+														<i class="zmdi zmdi-star"></i>
+														<i class="zmdi zmdi-star"></i>
+														<i class="zmdi zmdi-star-half"></i>
+													</span>
+												</div>
+
+												<p class="stext-102 cl6">
+													Quod autem in homine praestantissimum atque optimum est, id deseruit. Apud ceteros autem philosophos
+												</p>
+											</div>
+										</div>
+										
+										<!-- Add review -->
+										<form class="w-full"> 
+											
+
+											<div class="flex-w flex-m p-t-50 p-b-23">
+												<span class="stext-102 cl3 m-r-16">
+													Your Rating
+												</span>
+
+												<span class="wrap-rating fs-18 cl11 pointer">
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
+													<input class="dis-none" type="number" name="rating">
+												</span>
+											</div>
+
+											<div class="row p-b-25">
+												<div class="col-12 p-b-5">
+													<label class="stext-102 cl3" for="review">Your review</label>
+													<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+												</div>
+
+											
+											</div>
+
+											<button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+												Submit
+											</button>
+											</form>
+								</div>
+								</div>
+								</div>
+								</div>
+								
+						<!-- -------------------------------------------------------------------------------------------------- -->
+
+							
+		
+									
+						<!---------------------------------------------------------------------------------------------  -->
+								
+						</div>
+					</div>
+				</div>
+
+			
+
+						
 					</div>
 				</div>
 			</div>
 		</div>
+		
 	</section>	
 	
 		
