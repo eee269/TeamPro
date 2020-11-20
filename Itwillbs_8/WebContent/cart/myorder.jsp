@@ -1,5 +1,10 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="vo.OrderBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<OrderBean> order = (ArrayList<OrderBean>)request.getAttribute("order");
+%>
 
 <jsp:include page="../header.jsp" />
 <!-- QuickMenu -->
@@ -10,7 +15,6 @@
 <!-- Cart -->
 <div class="wrap-header-cart js-panel-cart">
 	<div class="s-full js-hide-cart"></div>
-
 	<div class="header-cart flex-col-l p-l-65 p-r-25">
 		<div class="header-cart-title flex-w flex-sb-m p-b-8">
 			<span class="mtext-103 cl2"> Your Cart </span>
@@ -83,10 +87,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/mp_order.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.2.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/mp_order.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.2.css" />
 <!-- 주문상세 시작 -->
 
 
@@ -94,7 +98,7 @@
 	<div id="contentWrap">
 
 		<link type="text/css" rel="stylesheet"
-			href="/shopimages/nasign/template/work/33865/menu.2.css?t=202005111439">
+			href="shopimages/nasign/template/work/33865/menu.2.css?t=202005111439">
 		<div id="aside">
 			<h2 class="aside-tit">MY ORDER</h2>
 			<div class="lnb-wrap">
@@ -103,11 +107,11 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a
-								href="/shop/mypage.html?mypage_type=myorder">주문내역</a></li>
-							<li><a href="/shop/mypage.html?mypage_type=mycoupon">쿠폰내역</a></li>
-							<li><a href="/shop/mypage.html?mypage_type=myreserve">적립금내역</a></li>
-							<li><a href="/shop/todaygoods.html">오늘본상품</a></li>
-							<li><a href="/shop/mypage.html?mypage_type=mywishlist">상품
+								href="shop/mypage.html?mypage_type=myorder">주문내역</a></li>
+							<li><a href="shop/mypage.html?mypage_type=mycoupon">쿠폰내역</a></li>
+							<li><a href="shop/mypage.html?mypage_type=myreserve">적립금내역</a></li>
+							<li><a href="shop/todaygoods.html">오늘본상품</a></li>
+							<li><a href="shop/mypage.html?mypage_type=mywishlist">상품
 									보관함</a></li>
 							<!-- <li class="attandance"><a href=""><strong>출석체크</strong></a></li>-->
 						</ul>
@@ -118,8 +122,8 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a
-								href="/shop/mypage.html?mypage_type=myarticle">내 게시글 보기</a></li>
-							<li><a href="/shop/mypage.html?mypage_type=myemail">E-mail
+								href="shop/mypage.html?mypage_type=myarticle">내 게시글 보기</a></li>
+							<li><a href="shop/mypage.html?mypage_type=myemail">E-mail
 									문의</a></li>
 						</ul>
 					</div>
@@ -128,7 +132,7 @@
 					<h2 class="txt txt3">CUSTOMER INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first"><a href="/shop/idinfo.html">회원정보변경</a></li>
+							<li class="first"><a href="shop/idinfo.html">회원정보변경</a></li>
 							<li><a href="javascript:userexit();">회원정보탈퇴신청</a></li>
 						</ul>
 					</div>
@@ -161,26 +165,39 @@
 							</colgroup>
 							<thead>
 								<tr>
-									<th scope="row"><div class="tb-center">번호</div></th>
-									<th scope="row"><div class="tb-center">주문일</div></th>
-									<th scope="row"><div class="tb-center">상품명</div></th>
-									<th scope="row"><div class="tb-center">결제금액</div></th>
-									<th scope="row"><div class="tb-center">주문상세</div></th>
+									<th scope="row"><div class="tb-center">주문코드</div></th>
+										<th scope="row"><div class="tb-center">주문자명</div></th>
+									<th scope="row"><div class="tb-center">전화번호</div></th>
+									<th scope="row"><div class="tb-center">배송지</div></th>
+									<th scope="row"><div class="tb-center">주문날짜</div></th>
+									<th scope="row"><div class="tb-center">결제방식</div></th>
+										<th scope="row"><div class="tb-center">아이디</div></th>
 									<th scope="row"><div class="tb-center">배송현황</div></th>
+									<th scope="row"><div class="tb-center">상세목록</div></th>
 								</tr>
 							</thead>
 							<tbody>
 <!-- 								<tr> -->
 <!-- 									<td colspan="6"><div class="tb-center">주문내역이 없습니다.</div></td> -->
 <!-- 								</tr> -->
-								<tr>
-									<td scope="row"><div class="tb-center">20201113</div></td>
-									<td scope="row"><div class="tb-center">2020.11.13</div></td>
-									<td scope="row"><div class="tb-center">상품명</div></td>
-									<td scope="row"><div class="tb-center">결제금액</div></td>
-									<td scope="row"><div class="tb-center">주문상세</div></td>
-									<td scope="row"><div class="tb-center">배송현황</div></td>
+<%
+	for(int i = 0 ; i < order.size() ; i++) {
+		%>
+					<tr>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getCode() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getName() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getPhone() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getAddress() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getDate() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getPayment() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getMember_id() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getStatus() %></div></td>
+									<td scope="row"><div class="tb-center"><a href="MyOrderDetail.or">상세목록조회</a></div></td>
 								</tr>
+										<%
+	}
+%>
+			
 							</tbody>
 						</table>
 					</div>

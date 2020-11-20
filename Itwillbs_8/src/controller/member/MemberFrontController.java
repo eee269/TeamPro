@@ -1,6 +1,8 @@
 package controller.member;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,9 +35,21 @@ public class MemberFrontController extends HttpServlet {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		} 
+		
+		if(forward != null) {
+			
+			if(forward.isRedirect()) {
+				response.sendRedirect(forward.getPath());
+			}else {
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
+				dispatcher.forward(request, response);
+			}
 		}
 		
 	}
+	
+	
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

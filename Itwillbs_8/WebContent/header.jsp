@@ -85,7 +85,7 @@
 							로그인
 						</a>
 
-						<a href="#" class="flex-c-m trans-04 p-lr-15">
+						<a href="#" class="flex-c-m trans-04 p-lr-15 join">
 							회원가입
 						</a>
 						
@@ -97,7 +97,11 @@
 							마이페이지
 						</a>
 						
+<<<<<<< HEAD
 						<a href="cart/myorder.jsp" class="flex-c-m trans-04 p-lr-15">
+=======
+						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
+>>>>>>> branch 'bh' of https://github.com/eee269/TeamPro.git
 							주문정보
 						</a>
 					</div>
@@ -129,12 +133,16 @@
 
 							<li>
 								<a href="product/index.jsp">CLOTHES</a>
+<<<<<<< HEAD
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
+=======
+>>>>>>> branch 'bh' of https://github.com/eee269/TeamPro.git
 								<ul class="sub-menu">						
 									<li><a href="product/index.jsp">TOP</a></li>
 									<li><a href="product/index.jsp">BOTTOM</a></li>
 									<li><a href="product/index.jsp">DRESS</a></li>
 									<li><a href="product/index.jsp">OUTER</a></li>
+<<<<<<< HEAD
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
@@ -151,12 +159,17 @@
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
+=======
+>>>>>>> branch 'bh' of https://github.com/eee269/TeamPro.git
 								</ul>
 							</li>
 							
 							<li>
 								<a href="product/bags.jsp">BAGS</a>
+<<<<<<< HEAD
 								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
+=======
+>>>>>>> branch 'bh' of https://github.com/eee269/TeamPro.git
 								<ul class="sub-menu">
 									<li><a href="product/bags.jsp">CROSS</a></li>
 									<li><a href="product/bags.jsp">BUCKET</a></li>
@@ -165,11 +178,14 @@
 									<li><a href="product/bags.jsp">CLUTCH</a></li>
 									<li><a href="product/bags.jsp">SHOPPER</a></li>
 									<li><a href="product/bags.jsp">BACKPACK</a></li>
+<<<<<<< HEAD
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
 								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
 								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
+=======
+>>>>>>> branch 'bh' of https://github.com/eee269/TeamPro.git
 								</ul>
 							</li>							
 							
