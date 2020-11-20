@@ -15,10 +15,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/basket.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/basket.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- Shoping Cart 시작-->
 
@@ -169,9 +169,9 @@
 
 
 			<div class="btn-order-ctrl">
-				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> <a
-					href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> <a
-					href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
+				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
+				<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
+				<a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
 			</div>
 
 

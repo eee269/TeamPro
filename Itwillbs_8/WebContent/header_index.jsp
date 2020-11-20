@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
@@ -87,7 +87,7 @@
 						<ul class="main-menu">
 							
 <!-- 							<li> -->
-<!-- 								<a href="../index.jsp">Home</a> -->
+<!-- 								<a href="index.jsp">Home</a> -->
 <!-- 							</li> -->
 
 							<li>
@@ -131,7 +131,46 @@
 							
 	
 							
+<<<<<<< HEAD
+							<li>
+								<a href="product/index.jsp">CLOTHES</a>
+								<ul class="sub-menu">						
+									<li><a href="product/index.jsp">TOP</a></li>
+									<li><a href="product/index.jsp">BOTTOM</a></li>
+									<li><a href="product/index.jsp">DRESS</a></li>
+									<li><a href="product/index.jsp">OUTER</a></li>
+								</ul>
+							</li>
+=======
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 							
+<<<<<<< HEAD
+							<li>
+								<a href="product/index.jsp">BAGS</a>
+								<ul class="sub-menu">
+									<li><a href="product/bags.jsp">CROSS</a></li>
+									<li><a href="product/bags.jsp">BUCKET</a></li>
+									<li><a href="product/bags.jsp">SHOULDER</a></li>
+									<li><a href="product/bags.jsp">TOTE</a></li>
+									<li><a href="product/bags.jsp">CLUTCH</a></li>
+									<li><a href="product/bags.jsp">SHOPPER</a></li>
+									<li><a href="product/bags.jsp">BACKPACK</a></li>
+								</ul>
+							</li>
+							
+							
+							<li>
+								<a href="product/index.jsp">SHOES</a>
+								<ul class="sub-menu">
+									<li><a href="product/shoes.jsp">SNEAKERS</a></li>
+									<li><a href="product/shoes.jsp">BOOTS</a></li>
+									<li><a href="product/shoes.jsp">LOAFERS</a></li>
+								    <li><a href="product/shoes.jsp">SANDALS</a></li>
+								    <li><a href="product/shoes.jsp">SLIPPER</a></li>	
+								</ul>
+							</li>
+=======
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 
 							<li class="label1" data-label1="hot">
 								<a href="board/blog.jsp">COMMUNITY</a>
