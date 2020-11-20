@@ -1,34 +1,4 @@
-Skip to content
-Search or jump to…
 
-Pull requests
-Issues
-Marketplace
-Explore
- 
-@SangBinKR 
-eee269
-/
-TeamPro
-1
-00
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-TeamPro/Itwillbs_8/WebContent/member/login.jsp
-@GoUNaa
-GoUNaa 20201116_고유나
-Latest commit 3b1ce00 yesterday
- History
- 2 contributors
-@GoUNaa@eee269
-365 lines (348 sloc)  11.5 KB
-  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
@@ -37,8 +7,9 @@ Latest commit 3b1ce00 yesterday
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp"/>
+<style type="text/css">
 
-<style rel="stylesheet">
+/* <style rel="stylesheet"> */
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 * {

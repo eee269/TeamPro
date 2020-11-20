@@ -453,7 +453,7 @@ ChannelIO('boot', settings);
 
 
 							<div class="size-204 flex-w flex-m respon6-next">
-								<div class="price" class="size-203 flex-c-m respon6" id="total">
+								<div class="price" class="size-203 flex-c-m respon6 " id="total">
 									<span></span>
 
 									<%--									<input type="hidden" name="buy_list_option_info" value="(19)Black^095">--%>

@@ -993,9 +993,11 @@ keyframes swiper-preloader-spin { 100%{
 			if(img == "../images/quick/quick_open.gif"){
 				$('.img_open_close').attr('src','../images/quick/quick_close.gif')
 				$('#right_bn_wrap').css('width','189px')	
+				$('#right_bn_wrap').css('transition','0.5s ease-in-out')
 			} else{
 				$('.img_open_close').attr('src','../images/quick/quick_open.gif')
 				$('#right_bn_wrap').css('width','0px')
+				$('#right_bn_wrap').css('transition','0.5s ease-in-out')
 			}
 			
 		});
@@ -1085,9 +1087,9 @@ keyframes swiper-preloader-spin { 100%{
 	<div class="quick_sns cboth">
 	<!-- 퀵메뉴 sns -->
 		<ul>
-			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="../images/quick/quick_insta.gif"></a></li>
-			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="../images/quick/quick_kakaoch.gif"></a></li>
-			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="../images/quick/quick_facebook.gif"></a></li>
+			<li><a href="https://www.instagram.com/oryanykorea/" target="_blank"><img src="images/quick/quick_insta.gif"></a></li>
+			<li><a href="https://pf.kakao.com/_Vxnxbel" target="_blank"><img src="images/quick/quick_kakaoch.gif"></a></li>
+			<li><a href="https://www.facebook.com/OryanyKorea" target="_blank"><img src="images/quick/quick_facebook.gif"></a></li>
 		</ul>
 	</div>
 </div>
