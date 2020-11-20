@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <jsp:include page="../header.jsp"/>
@@ -6,8 +7,9 @@
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp"/>
+<style type="text/css">
 
-<style rel="stylesheet">
+/* <style rel="stylesheet"> */
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 * {
@@ -360,3 +362,15 @@ $('.container .bg').mousemove(function(e){
 </script>
 </body>
 <jsp:include page="../footer.jsp" />
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About

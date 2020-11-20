@@ -993,9 +993,11 @@ keyframes swiper-preloader-spin { 100%{
 			if(img == "images/quick/quick_open.gif"){
 				$('.img_open_close').attr('src','images/quick/quick_close.gif')
 				$('#right_bn_wrap').css('width','189px')	
+				$('#right_bn_wrap').css('transition','0.5s ease-in-out')
 			} else{
 				$('.img_open_close').attr('src','images/quick/quick_open.gif')
 				$('#right_bn_wrap').css('width','0px')
+				$('#right_bn_wrap').css('transition','0.5s ease-in-out')
 			}
 			
 		});
