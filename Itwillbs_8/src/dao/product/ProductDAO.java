@@ -47,7 +47,7 @@ public class ProductDAO {
 			while(rs.next()) {
 				ProductBean pb = new ProductBean();
 				pb.setNcode(rs.getString("ncode"));
-				
+				pb.setXcode(xcode);
 				ncodeList.add(pb);
 			}
 		} catch (SQLException e) {
