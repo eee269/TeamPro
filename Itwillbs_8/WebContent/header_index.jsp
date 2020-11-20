@@ -131,7 +131,6 @@
 							
 	
 							
-<<<<<<< HEAD
 							<li>
 								<a href="product/index.jsp">CLOTHES</a>
 								<ul class="sub-menu">						
@@ -141,10 +140,6 @@
 									<li><a href="product/index.jsp">OUTER</a></li>
 								</ul>
 							</li>
-=======
->>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
-							
-<<<<<<< HEAD
 							<li>
 								<a href="product/index.jsp">BAGS</a>
 								<ul class="sub-menu">
@@ -169,8 +164,6 @@
 								    <li><a href="product/shoes.jsp">SLIPPER</a></li>	
 								</ul>
 							</li>
-=======
->>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 
 							<li class="label1" data-label1="hot">
 								<a href="board/blog.jsp">COMMUNITY</a>

@@ -118,16 +118,15 @@
 								<div class="tb-center">
 									<div class="opt-spin">
 										<input type="text" name="amount" value="1" class="txt-spin">
-										<span class="btns"> <a
-											href="javascript:count_change(0, 0)"><img class="btn-up"
-												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
-											<a href="javascript:count_change(1, 0)"><img
-												class="btn-dw"
-												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
+										<span class="btns"> <a href="javascript:count_change(0, 0)">
+										<img class="btn-up" src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif">
+										</a>
+										<a href="javascript:count_change(1, 0)">
+										<img class="btn-dw" src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif">
+										</a>
 										</span>
 									</div>
-									<a href="javascript:send_basket(0, 'upd')"
-										class="CSSbuttonWhite btn_option">EDIT</a>
+									<a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
 								</div>
 							</td>
 							<td><div class="tb-center">4,380</div></td>
