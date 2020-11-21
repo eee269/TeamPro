@@ -1,4 +1,4 @@
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 
 	<!-- Cart -->
 	<div class="wrap-header-cart js-panel-cart">
@@ -271,4 +271,4 @@
 	</form>
 		
 	
-<jsp:include page="../footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>

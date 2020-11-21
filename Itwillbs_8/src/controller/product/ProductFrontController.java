@@ -43,7 +43,8 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-
+		
+		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			//2.ActionForward 객체 내의 포워딩 방식에 따라 각각의 포워딩 수행
 			//=>Redirect 방식: isRedirect() == true,
@@ -64,6 +65,7 @@ public class ProductFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
+		// ------------공통적으로 수행할 포워딩 작업----------------
 	}
 
 

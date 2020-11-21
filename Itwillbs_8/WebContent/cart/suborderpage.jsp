@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-    <jsp:include page="../header.jsp" />
+    <jsp:include page="../inc/header.jsp" />
     <link type="text/css" rel="stylesheet" href="../css/suborderpage.css" />
     
     
@@ -721,5 +721,5 @@ OrdersItemSorter.init();
 </body>
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />
 
