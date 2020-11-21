@@ -110,12 +110,12 @@
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
 
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="/scss/common.css" />
+<link type="text/css" rel="stylesheet" href="/scss/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="/scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="/scss/menu.1.css" />
 <link type="text/css" rel="stylesheet"
-	href="scss/power_review_custom.4.css" />
+	href="/scss/power_review_custom.4.css" />
 
 
 <script type="text/javascript">
@@ -158,7 +158,7 @@
 		optcol.id = id;
 
 		$('ul#show-option').append(optcol);
-		var html = "<span class='size-203 flex-c-m respon6 show-value'>" + mixopt
+		var html = "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt
 			 + "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
 			 "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +
 			 "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
@@ -397,9 +397,12 @@ ChannelIO('boot', settings);
 
 			<div class="col-md-6 col-lg-5 p-b-30">
 				<div class="p-r-50 p-t-5 p-lr-0-lg">
-					<h4 class="mtext-105 cl2 js-name-detail p-b-14">Lightweight
+				<!-- 상품코드 -->
+				<input type="hidden" id="item-code" value="code,,">
+				<!-- 상품명 -->
+					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name">Lightweight
 						Jacket</h4>
-
+				<!-- 상품가격 -->
 					<span class="mtext-106 cl2" id="item-price">80,000원</span>
 
 					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
@@ -455,15 +458,13 @@ ChannelIO('boot', settings);
 							<div class="size-204 flex-w flex-m respon6-next">
 								<div class="price" class="size-203 flex-c-m respon6 " id="total">
 									<span></span>
-
-									<%--									<input type="hidden" name="buy_list_option_info" value="(19)Black^095">--%>
-									<%--									<input type="hidden" name="buy_list_goods_price" value="99900">--%>
-									<%--									<input type="hidden" name="buy_list_qty" value="1">--%>
 								</div>
 								<br>
-								<button
-									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-									Add to cart</button>
+								<input type="submit" value="Add to cart"
+								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+<!-- 								<button -->
+<!-- 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"> -->
+<!-- 									Add to cart</button> -->
 							</div>
 						</div>
 					</div>

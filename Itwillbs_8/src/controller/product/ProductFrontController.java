@@ -37,6 +37,11 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/product/product_detail.jsp");
 		}
+		
+		else if(command.equals("/ProductUpload.po")) {
+			forward = new ActionForward();
+			forward.setPath("/product/product_upload.jsp");
+		}
 
 		if(forward != null) {
 			//2.ActionForward 객체 내의 포워딩 방식에 따라 각각의 포워딩 수행
