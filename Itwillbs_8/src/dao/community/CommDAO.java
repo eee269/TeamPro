@@ -255,12 +255,11 @@ public class CommDAO {
 			PreparedStatement ps = null;
 			
 			try {
-				String sql = "UPDATE community SET username =?, subject=?, content=? WHERE num = ?";
+				String sql = "UPDATE community SET subject=?, content=? WHERE num = ?";
 				ps = con.prepareStatement(sql);
-				ps.setString(1, article.getUsername());
-				ps.setString(2, article.getSubject());
-				ps.setString(3, article.getContent());
-				ps.setInt(4, article.getNum());
+				ps.setString(1, article.getSubject());
+				ps.setString(2, article.getContent());
+				ps.setInt(3, article.getNum());
 				updateCount = ps.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -272,6 +271,26 @@ public class CommDAO {
 			return updateCount;
 		}
 		// -------------------------- updateArticle() --------------------------------
+		// -------------------------- isDeleteArticle() --------------------------------
+		// 글 삭제
+		public int isDeleteArticle(int num) {
+			int deleteCount = 0;
+			PreparedStatement ps = null;
+			
+			try {
+				String sql = "DELETE FROM community WHERE num = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
+				deleteCount = ps.executeUpdate();
+				
+			} catch (SQLException e) {
+				System.out.println("CommDAO - isDeleteArticle : "+e.getMessage());
+				e.printStackTrace();
+			}
+			
+			return deleteCount;
+		}
+		// -------------------------- isDeleteArticle() --------------------------------
 	
 	
 	

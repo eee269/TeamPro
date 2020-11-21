@@ -1,15 +1,13 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp"/>
-<style type="text/css">
 
-/* <style rel="stylesheet"> */
+<style rel="stylesheet">
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
 * {
@@ -319,7 +317,7 @@ body .container_member .content .signup-cont {
 						                    <label for="phone">Phone Number</label>  <br>
 						                    
 							                <div class="term" style="padding-top: 30px;">
-							                <iframe width="100%" src="term.jsp" >
+							                <iframe width="100%" src="member/term.jsp" >
 							       				
 							                </iframe>
 							                </div>
@@ -361,16 +359,4 @@ $('.container .bg').mousemove(function(e){
 });
 </script>
 </body>
-<jsp:include page="../footer.jsp" />
-© 2020 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
+<jsp:include page="../inc/footer.jsp" />

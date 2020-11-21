@@ -28,7 +28,7 @@ public class CommModifyFormAction implements Action {
 		
 		// => Dispatcher 방식
 		forward = new ActionForward();
-		forward.setPath("/comm/comm_modify.jsp");
+		forward.setPath("/community/comm_modify.jsp");
 		
 		return forward;
 	}
