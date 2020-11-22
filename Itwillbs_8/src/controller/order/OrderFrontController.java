@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.member.ControlMemberAction;
+import action.member.ControlMemberListAction;
 import action.order.OrderProAction;
 import vo.ActionForward;
 
@@ -42,7 +42,7 @@ public class OrderFrontController extends HttpServlet{
 		}else if(command.equals("/OrderList.or")) {
 			forward = new ActionForward();
 			
-			action = new ControlMemberAction();
+			action = new ControlMemberListAction();
 			try {
 				System.out.println("OrderListAction으로 포워딩");
 
