@@ -1,4 +1,4 @@
-package controller.community;
+package controller.order;
 
 import java.io.IOException;
 
@@ -17,8 +17,8 @@ import action.community.CommModifyProAction;
 import action.community.CommWriteProAction;
 import vo.ActionForward;
 
-@WebServlet("*.co")
-public class CommFrontController extends HttpServlet{
+@WebServlet("*.od")
+public class OrderFrontController extends HttpServlet{
 	
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

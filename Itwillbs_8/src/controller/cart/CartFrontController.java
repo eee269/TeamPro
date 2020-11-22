@@ -11,7 +11,7 @@ import action.Action;
 import vo.ActionForward;
 
 
-@WebServlet("*.po")
+@WebServlet("*.cr")
 public class CartFrontController extends HttpServlet {
 	
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

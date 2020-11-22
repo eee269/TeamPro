@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
+<jsp:include page="/quickMenu.jsp" />
 
 
 
@@ -19,19 +19,32 @@
 
 function ncode(val) {
 	if(val == "CLOTHES") {
+		// 소분류 radio 보여주기 / 감추기
 		$('div#clothncode').css('visibility', 'visible');
 		$('div#bagncode').css('visibility', 'hidden');
 		$('div#shoencode').css('visibility', 'hidden');
 		
+		// 보여지는 소분류 radio 필수항목 설정
+		$('input:radio[name=clothes]').attr('required', true);
+		$('input:radio[name=bags]').attr('required', false);
+		$('input:radio[name=shoes]').attr('required', false);
+		
+		// 항목별 사이즈 보여주기 / 감추기
 		$('div#clothsize').css('visibility', 'visible');
 		$('div#bagsize').css('visibility', 'hidden');
 		$('div#shoesize').css('visibility', 'hidden');
 		
+		// 체크된 항목 초기화
 		$('input[type=checkbox]').prop('checked',false);
 	} else if(val == "BAGS") {
 		$('div#clothncode').css('visibility', 'hidden');
 		$('div#bagncode').css('visibility', 'visible');
 		$('div#shoencode').css('visibility', 'hidden');
+		
+		// 보여지는 소분류 radio 필수항목 설정
+		$('input:radio[name=clothes]').attr('required', false);
+		$('input:radio[name=bags]').attr('required', true);
+		$('input:radio[name=shoes]').attr('required', false);
 		
 		$('div#clothsize').css('visibility', 'hidden');
 		$('div#bagsize').css('visibility', 'visible');
@@ -43,27 +56,49 @@ function ncode(val) {
 		$('div#bagncode').css('visibility', 'hidden');
 		$('div#shoencode').css('visibility', 'visible');
 		
+		// 보여지는 소분류 radio 필수항목 설정
+		$('input:radio[name=clothes]').attr('required', false);
+		$('input:radio[name=bags]').attr('required', false);
+		$('input:radio[name=shoes]').attr('required', true);
+		
 		$('div#clothsize').css('visibility', 'hidden');
 		$('div#bagsize').css('visibility', 'hidden');
 		$('div#shoesize').css('visibility', 'visible');
 		
 		$('input[type=checkbox]').prop('checked',false);
 	}
+	
 }
 
-function typeswift() {
-	var goods_color = [];
-	var goods_size = [];
-	$('input[name=goods_color]').each(function() {
-
-		for (var i = 0; i < arr.length; i++) {
-	    	  goods_color = this.value;
-	      }
-	 });
-
-	goods_size = $('input[name=goods_size]').val();
+function checkboxswift() {
+	var colorVal = "";
+	var sizeVal = "";
 	
-	alert(goods_color + ", " + goods_size);
+	if($('input:checkbox[name=goods_color]:checked').length == 0) {
+		alert("색상을 선택하세요????????????/");
+		history.back();
+		return false;
+	} else if($('input:checkbox[name=goods_size]:checked').length == 0){
+		alert("사이즈를 선택하세요???????????????");
+		history.back();
+		return false;
+	}
+	
+	if($('input:checkbox[name=goods_color]:checked').length == 0) {
+		$('input:checkbox[name=goods_color]').attr('required', true);
+	}
+
+	$('input:checkbox[name=goods_color]:checked').each(function() {
+		colorVal += $(this).val() + "/";
+	});
+	$('input:checkbox[name=goods_size]:checked').each(function() {
+		sizeVal += $(this).val() + "/";
+	});
+	
+	$('#color').val(colorVal);
+	$('#size').val(sizeVal);
+	
+	alert("color: " + colorVal + ", size: " + sizeVal);
 }
 
 </script>
@@ -72,7 +107,7 @@ function typeswift() {
 <body>
 	<h1 style="margin: 50px 100px">Product Upload</h1>
 
-	<form action="ControlProductUpload.mo" method="post" onsubmit="typeswift()">
+	<form action="ControlProductUpload.mo" method="post" onsubmit="checkboxswift()">
 		<table
 			style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
 			<tr>
@@ -81,24 +116,24 @@ function typeswift() {
 			</tr>
 			<tr>
 				<td><input type="file" name="mainfile" id="mfile1"
-					style="padding: 10px 25px;"></td>
+					style="padding: 10px 25px;" required="required"></td>
 				<td><b>상품이름</b></td>
 				<td><input type="text" id="goods_name"
-					style="border-bottom: 0.3px solid lightgray; width: 400px"></td>
+					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
 				<td><input type="file" name="mainfile" id="mfile2"
 					style="padding: 10px 25px;"></td>
 				<td><b>가 격</b></td>
 				<td><input type="text" id="goods_price"
-					style="border-bottom: 0.3px solid lightgray; width: 400px"></td>
+					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
 				<td><input type="file" name="mainfile" id="mfile3"
 					style="padding: 10px 25px;"></td>
 				<td><b>대분류</b></td>
 				<td>
-					<input type="radio" name="xcode" value="CLOTHES" style="width: 100px" onchange="ncode(this.value)"><span>Clothes</span>
+					<input type="radio" name="xcode" value="CLOTHES" style="width: 100px" onchange="ncode(this.value)" required="required"><span>Clothes</span>
 					<input type="radio" name="xcode" value="BAGS" style="width: 100px" onchange="ncode(this.value)"><span>Bags</span>
 					<input type="radio" name="xcode" value="SHOES" style="width: 100px" onchange="ncode(this.value)"><span>Shoes</span>
 				</td>
@@ -132,7 +167,7 @@ function typeswift() {
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="subfile" id="sfile1" style="padding: 10px 25px;"></td>
+				<td><input type="file" name="subfile" id="sfile1" style="padding: 10px 25px;" required="required"></td>
 				<td><b>색상</b></td>
 				<td>
 					<input type="checkbox" name="goods_color" value="BK" style="width: 100px"><span>Black</span>
@@ -174,9 +209,13 @@ function typeswift() {
 				<td><input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;"></td>
 			</tr>
 		</table>
-
+		
+		
+		<input type="hidden" id="color">
+		<input type="hidden" id="size">
 	</form>
 
 </body>
 </html>
-<jsp:include page="/footer.jsp" />
+<jsp:include page="/inc/footer.jsp" />
+

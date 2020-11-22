@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.member.ControlMemberAction;
+import action.member.ControlMemberListAction;
 import vo.ActionForward;
 
 @WebServlet("*.mo")
@@ -29,7 +29,7 @@ public class MemberFrontController extends HttpServlet {
 		} else if(command.equals("/ControlMember.mo")) {
 			forward = new ActionForward();
 			
-			action = new ControlMemberAction();
+			action = new ControlMemberListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch(Exception e) {
