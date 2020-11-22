@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.product.ProductDetailAction;
+import action.product.ProdReviewWriteAction;
 import action.product.ProductSelectAction;
 import vo.ActionForward;
 
@@ -43,11 +44,20 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
 		else if(command.equals("/ProductUpload.po")) {
 			forward = new ActionForward();
 			forward.setPath("/product/product_upload.jsp");
+		// --------------------상품 댓글 쓰기--------------------
+		} else if(command.equals("/ProdReviewWrite.po")) {
+			System.out.println("ProdReviewWriteAction 포워딩");
+			action = new ProdReviewWriteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		// --------------------상품 댓글 쓰기--------------------
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
