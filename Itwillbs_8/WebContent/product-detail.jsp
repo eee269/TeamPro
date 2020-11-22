@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 
 
-<jsp:include page="header.jsp" />
+<jsp:include page="inc/header.jsp" />
 
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
@@ -1414,4 +1414,4 @@ $('.tabs .tab').click(function(){
 </script>
 
 
-<jsp:include page="footer.jsp" />
+<jsp:include page="inc/footer.jsp" />

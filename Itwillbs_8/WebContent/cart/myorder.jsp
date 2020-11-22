@@ -6,7 +6,7 @@
 	ArrayList<OrderBean> order = (ArrayList<OrderBean>)request.getAttribute("order");
 %>
 
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 <!-- Cart -->
@@ -228,4 +228,4 @@
 <!-- 주문상세 끝 -->
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

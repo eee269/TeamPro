@@ -1,8 +1,8 @@
 package vo;
 
 public class ActionForward {
-	private String path; // 포워딩 할 View 페이지 URL 저장
-	private boolean redirect; // 포워딩 방식 저장
+	private String path;
+	private boolean redirect;
 	
 	public String getPath() {
 		return path;
@@ -16,7 +16,5 @@ public class ActionForward {
 	public void setRedirect(boolean redirect) {
 		this.redirect = redirect;
 	}
-	
-	
-	
+
 }

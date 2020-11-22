@@ -23,9 +23,9 @@ public class MemberFrontController extends HttpServlet {
 		Action action = null;
 		String command = request.getServletPath();
 		
-		if(command.equals("/MemberJoinForm.mo")) {
+		if(command.equals("/MemberLoginForm.mo")) {
 			forward = new ActionForward();
-			forward.setPath("/member/join_complete.jsp");
+			forward.setPath("/member/login.jsp");
 		} else if(command.equals("/ControlMember.mo")) {
 			forward = new ActionForward();
 			
@@ -37,6 +37,7 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} 
 		
+		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			
 			if(forward.isRedirect()) {
@@ -46,6 +47,7 @@ public class MemberFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
+		// ------------공통적으로 수행할 포워딩 작업----------------
 		
 	}
 	

@@ -10,6 +10,10 @@
  * Date: 2020-05-20T18:09Z
  * 
  */
+@charset "utf-8";
+.text {
+  content: '한글';
+}
 @font-face {
 	font-family: "summernote";
 	font-style: normal;
@@ -63,227 +67,227 @@
 }
 
 .note-icon-align::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-center::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-indent::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-justify::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-left::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-outdent::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-align-right::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrow-circle-down::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrow-circle-left::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrow-circle-right::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrow-circle-up::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrows-alt::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrows-h::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-arrows-v::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-bold::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-caret::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-chain-broken::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-circle::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-close::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-code::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-col-after::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-col-before::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-col-remove::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-eraser::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-float-left::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-float-none::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-float-right::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-font::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-frame::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-italic::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-link::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-magic::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-menu-check::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-minus::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-orderedlist::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-pencil::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-picture::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-question::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-redo::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-rollback::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-row-above::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-row-below::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-row-remove::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-special-character::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-square::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-strikethrough::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-subscript::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-summernote::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-superscript::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-table::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-text-height::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-trash::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-underline::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-undo::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-unorderedlist::before {
-	content: "tt"
+	content: ""
 }
 
 .note-icon-video::before {
-	content: "tt"
+	content: ""
 }
 
 .note-frame {
@@ -295,19 +299,18 @@
 }
 
 .note-toolbar {
-  height: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  background-color: transparent;
+	padding: 10px 5px;
+	border-bottom: 1px solid #e2e2e2;
+	color: #333;
+	background-color: #f5f5f5;
+	border-color: #ddd;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px
 }
 
 .note-btn-group {
 	position: relative;
-	display: inline;
+	display: inline-block;
 	margin-right: 8px
 }
 
@@ -342,7 +345,7 @@
 }
 
 .note-btn {
-	position: relative;
+	display: inline-block;
 	font-weight: 400;
 	margin-bottom: 0;
 	text-align: center;
@@ -363,8 +366,7 @@
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
-	user-select: none;
-	
+	user-select: none
 }
 
 .note-btn:focus, .note-btn.focus {

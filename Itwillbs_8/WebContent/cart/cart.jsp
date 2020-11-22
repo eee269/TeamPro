@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
@@ -15,10 +15,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/basket.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/basket.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- Shoping Cart 시작-->
 
@@ -118,16 +118,15 @@
 								<div class="tb-center">
 									<div class="opt-spin">
 										<input type="text" name="amount" value="1" class="txt-spin">
-										<span class="btns"> <a
-											href="javascript:count_change(0, 0)"><img class="btn-up"
-												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
-											<a href="javascript:count_change(1, 0)"><img
-												class="btn-dw"
-												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
+										<span class="btns"> <a href="javascript:count_change(0, 0)">
+										<img class="btn-up" src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif">
+										</a>
+										<a href="javascript:count_change(1, 0)">
+										<img class="btn-dw" src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif">
+										</a>
 										</span>
 									</div>
-									<a href="javascript:send_basket(0, 'upd')"
-										class="CSSbuttonWhite btn_option">EDIT</a>
+									<a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
 								</div>
 							</td>
 							<td><div class="tb-center">4,380</div></td>
@@ -169,9 +168,9 @@
 
 
 			<div class="btn-order-ctrl">
-				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> <a
-					href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> <a
-					href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
+				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
+				<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
+				<a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
 			</div>
 
 
@@ -184,4 +183,4 @@
 <!-- Shoping Cart 끝 -->
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

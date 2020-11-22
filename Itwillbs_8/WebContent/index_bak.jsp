@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/header_index.jsp"/>
+<jsp:include page="/inc/header_index.jsp"/>
 <style>
 .main_pro_title {
     text-align: center;
@@ -1035,4 +1035,4 @@
 	</section>
 
 
-<jsp:include page="/footer_index.jsp"/>
+<jsp:include page="/inc/footer_index.jsp"/>
