@@ -11,6 +11,7 @@ public class ProductBean {
 	private int stock;//상품재고량
 	private int price;//상품가격
 	private int likey;//상품 좋아요수 
+	private String name;// 상품 이름
 	
 	public String getBasicCode() {
 		return basicCode;
@@ -65,6 +66,12 @@ public class ProductBean {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

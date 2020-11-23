@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.ControlMemberListAction;
+import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
 @WebServlet("*.mo")
@@ -26,6 +27,15 @@ public class MemberFrontController extends HttpServlet {
 		if(command.equals("/MemberLoginForm.mo")) {
 			forward = new ActionForward();
 			forward.setPath("/member/login.jsp");
+		} else if(command.equals("/MemberLoginPro.mo")) {
+			forward = new ActionForward();
+			
+			action = new MemberLoginProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		} else if(command.equals("/ControlMember.mo")) {
 			forward = new ActionForward();
 			

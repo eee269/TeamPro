@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.ProductBean;
+import vo.ProductOptionBean;
 
 public class ProductDAO {
 	
@@ -276,5 +277,88 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 
 		
 		return productCount;
+	}
+
+	public int getBasicCode() {
+		int max = 0;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select max(code) from goods";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				max = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectProductCount()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+		
+		return max;
+	}
+
+	public int insertProduct(ProductBean productBean) {
+		int count = 0;
+		
+
+		PreparedStatement ps = null;
+		
+		try {
+			String sql = "insert into "
+					+ "goods(code, name, price, cnt, main_img, sub_img, cate1, cate2) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, productBean.getBasicCode());
+			ps.setString(2, productBean.getName());
+			ps.setInt(3, productBean.getPrice());
+			ps.setInt(4, productBean.getStock());
+			ps.setString(5, productBean.getMain_img());
+			ps.setString(6, productBean.getSub_img());
+			ps.setString(7, productBean.getXcode());
+			ps.setString(8, productBean.getNcode());
+			
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("InsertProduct()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+				
+		return count;
+	}
+
+	public int insertOption(ProductOptionBean optionBean) {
+		int count = 0;
+		
+		PreparedStatement ps = null;
+		
+		try {
+			String sql = "insert into "
+					+ "option(num, color, size, goods_code) "
+					+ "values(?, ?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, optionBean.getProductCode());
+			ps.setString(2, optionBean.getColor());
+			ps.setString(3, optionBean.getSize());
+			ps.setString(4, optionBean.getBasicCode());
+			
+			count = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("InsertOption()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+		}
+				
+		return count;
 	}
 }

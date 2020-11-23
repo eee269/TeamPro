@@ -13,6 +13,7 @@ import action.Action;
 import action.product.ProductDetailAction;
 import action.product.ProdReviewWriteAction;
 import action.product.ProductSelectAction;
+import action.product.ProductUploadPro;
 import vo.ActionForward;
 
 
@@ -44,11 +45,21 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// 상품 업로드
 		else if(command.equals("/ProductUpload.po")) {
 			forward = new ActionForward();
 			forward.setPath("/product/product_upload.jsp");
+		} else if(command.equals("/ProductUploadPro.po")) {
+			forward = new ActionForward();
+			action = new ProductUploadPro();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		// --------------------상품 댓글 쓰기--------------------
-		} else if(command.equals("/ProdReviewWrite.po")) {
+		else if(command.equals("/ProdReviewWrite.po")) {
 			System.out.println("ProdReviewWriteAction 포워딩");
 			action = new ProdReviewWriteAction();
 			try {

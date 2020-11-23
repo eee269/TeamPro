@@ -1,3 +1,4 @@
+<%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <jsp:include page="/inc/header.jsp" />
@@ -12,7 +13,11 @@
 <head>
 <meta charset="EUC-KR">
 <title>상품업로드</title>
+<%
+// 세션 판별
 
+
+%>
 <script type="text/javascript">
 
 // 1. 대분류 선택시 소분류 visibility
@@ -71,32 +76,30 @@ function ncode(val) {
 }
 
 function checkboxswift() {
-	var colorVal = "";
-	var sizeVal = "";
+	var colorLength = $('input:checkbox[name=goods_color]:checked').length;
+	var sizeLength = $('input:checkbox[name=goods_size]:checked').length;
 	
-	if($('input:checkbox[name=goods_color]:checked').length == 0) {
+	if(colorLength == 0) {
 		alert("색상을 선택하세요");
 		return ;
-	} else if($('input:checkbox[name=goods_size]:checked').length == 0){
+	} else if(sizeLength == 0){
 		alert("사이즈를 선택하세요");
 		return ;
 	}
 	
-	$('input:checkbox[name=goods_color]:checked').each(function() {
-		colorVal += $(this).val() + "/";
-	});
-	$('input:checkbox[name=goods_size]:checked').each(function() {
-		sizeVal += $(this).val() + "/";
-	});
+// 	$('input:checkbox[name=goods_color]:checked').each(function() {
+// 		colorVal += $(this).val() + "/";
+// 	});
+// 	$('input:checkbox[name=goods_size]:checked').each(function() {
+// 		sizeVal += $(this).val() + "/";
+// 	});
 	
-	$('#color').val(colorVal);
-	$('#size').val(sizeVal);
+	$('#colorLen').val(colorLength);
+	$('#sizeLen').val(sizeLength);
 	
-	alert("color: " + colorVal + ", size: " + sizeVal);
+// 	alert("color: " + colorVal + ", size: " + sizeVal);
 	
-	$('#productUpload').submit(function() {
-		location.href="ControlProductUpload.mo";
-	});
+	$('#productUpload').submit();
 }
 
 </script>
@@ -105,7 +108,8 @@ function checkboxswift() {
 <body>
 	<h1 style="margin: 50px 100px">Product Upload</h1>
 
-	<form id="productUpload" method="post" onsubmit="checkboxswift()">
+	<form id="productUpload" method="post" action="ProductUploadPro.po"
+	enctype="multipart/form-data" onsubmit="checkboxswift()">
 		<table
 			style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
 			<tr>
@@ -113,21 +117,21 @@ function checkboxswift() {
 				<th colspan="2">상품 세부사항</th>
 			</tr>
 			<tr>
-				<td><input type="file" name="mainfile" id="mfile1"
+				<td><input type="file" name="mfile1" id="mfile1"
 					style="padding: 10px 25px;" required="required"></td>
 				<td><b>상품이름</b></td>
-				<td><input type="text" id="goods_name"
+				<td><input type="text" id="goods_name" name="goods_name"
 					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
-				<td><input type="file" name="mainfile" id="mfile2"
+				<td><input type="file" name="mfile2" id="mfile2"
 					style="padding: 10px 25px;"></td>
 				<td><b>가 격</b></td>
-				<td><input type="text" id="goods_price"
+				<td><input type="text" id="goods_price" name="goods_price"
 					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
-				<td><input type="file" name="mainfile" id="mfile3"
+				<td><input type="file" name="mfile3" id="mfile3"
 					style="padding: 10px 25px;"></td>
 				<td><b>대분류</b></td>
 				<td>
@@ -165,7 +169,7 @@ function checkboxswift() {
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="subfile" id="sfile1" style="padding: 10px 25px;" required="required"></td>
+				<td><input type="file" name="sfile1" id="sfile1" style="padding: 10px 25px;" required="required"></td>
 				<td><b>색상</b></td>
 				<td>
 					<input type="checkbox" name="goods_color" value="BK" style="width: 100px"><span>Black</span>
@@ -177,7 +181,7 @@ function checkboxswift() {
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="subfile" id="sfile2"
+				<td><input type="file" name="sfile2" id="sfile2"
 					style="padding: 10px 25px;"></td>
 				<td><b>사이즈</b></td>
 				<td>
@@ -201,16 +205,20 @@ function checkboxswift() {
 				</td>
 			</tr>
 			<tr>
-				<td><input type="file" name="subfile" id="sfile3"
+				<td><input type="file" name="sfile3" id="sfile3"
 					style="padding: 10px 25px;"></td>
-				<td></td>
-				<td><input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;"></td>
+				<td>상품 수량</td>
+				<td><input type="text" name="goods_stock" id="goods_stock"
+				style="border-bottom: 0.3px solid lightgray; width: 400px"  required="required"></td>
 			</tr>
+			
 		</table>
+			<br>
+			<input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;">
 		
 		
-		<input type="hidden" id="color">
-		<input type="hidden" id="size">
+		<input type="hidden" id="colorLen" name="colorLen">
+		<input type="hidden" id="sizeLen" name="sizeLen">
 	</form>
 
 </body>
