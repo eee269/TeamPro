@@ -84,11 +84,6 @@
 						<a href="../member/login.jsp" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
-
-						<a href="#" class="flex-c-m trans-04 p-lr-15">
-							회원가입
-						</a>
-						
 						<a href="../cart/cart.jsp" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
@@ -294,3 +289,7 @@
 			</div>
 		</div>
 	</header>
+	
+	
+
+

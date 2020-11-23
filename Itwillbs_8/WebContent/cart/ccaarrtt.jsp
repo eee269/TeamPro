@@ -1,21 +1,5 @@
-<%@page import="vo.Cart"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
-	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
-	%>
-  <script src="js/bootstrap4-rating-input.js"></script>
-    <style type="text/css">
-      .rat { margin: 150px auto; font-size: 20px; }
-    </style>
-    <script type="text/javascript">
-        $(function () {
-            $('input').on('change', function () {
-//                 alert("Changed: " + $(this).val())
-            });
-        });
-    </script>	
 <jsp:include page="../header.jsp" />
 
 <!-- Cart -->
@@ -31,10 +15,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/basket.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="../scss/common.css" />
+<link type="text/css" rel="stylesheet" href="../scss/basket.css" />
+<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
 
 <!-- Shoping Cart 시작-->
 
@@ -51,7 +35,6 @@
 			<div class="table-cart table-fill-prd">
 				<table summary="번호, 사진, 제품명, 수량, 적립, 가격, 배송비, 취소">
 					<caption>장바구니 담긴 상품</caption>
-				
 					<colgroup>
 						<col width="75">
 						<col width="90">
@@ -63,12 +46,8 @@
 						<col width="95">
 						<col width="95">
 					</colgroup>
-					<thead>	
-				
+					<thead>
 						<tr>
-											<%
-					if(cartList != null) {
-				%>				
 							<th scope="col"><div class="tb-center">번호</div></th>
 							<th scope="col"><div class="tb-center">사진</div></th>
 							<th scope="col"><div class="tb-center">상품명</div></th>
@@ -81,15 +60,11 @@
 									<input type="checkbox" name="__allcheck"
 										onclick="all_basket_check(this);" class="MS_input_checkbox"
 										checked="">
-					
 								</div></th>
-				
 						</tr>
 					</thead>
-			
 					<tfoot>
 						<tr>
-									
 							<td colspan="8">
 								<div class="tb-right">
 									<span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
@@ -116,10 +91,8 @@
 					<tbody>
 						<tr class="nbg">
 							<!-- 2019.07.03 -->
-	<%
-				for(int i = 0; i < cartList.size(); i++) {
-				%>
-							<td><div class="tb-center"><%=cartList.get(0).getNum() %></div></td>
+
+							<td><div class="tb-center">1</div></td>
 							<td>
 								<div class="tb-center">
 									<div class="thumb">
@@ -132,16 +105,12 @@
 							<td>
 								<div class="tb-left">
 									<a
-										href=""	class="tb-bold"><%=cartList.get(0).getGoods_name() %></a> <a
+										href=""	class="tb-bold">로티 크로커 크로스바디</a> <a
 										href="javascript:modify_option('3360797', '1','');"
 										class="CSSbuttonWhite btn_option">EDIT</a>
 									<div id="3360797_1" class="tb-opt">
-										<span class="tb-dl"><span class="opt_dd">색상 :  
-										<%=cartList.get(0).getColor() %></span></span>
-									</div>
-									<div id="3360797_1" class="tb-opt">
-										<span class="tb-dl"><span class="opt_dd">사이즈 :  
-										<%=cartList.get(0).getSize() %></span></span>
+										<span class="tb-dl"><span class="opt_dd">색상 :
+												BLACK 1개</span></span>
 									</div>
 								</div>
 							</td>
@@ -149,7 +118,7 @@
 								<div class="tb-center">
 									<div class="opt-spin">
 										<input type="text" name="amount" value="1" class="txt-spin">
-										<span class="btns" > <a
+										<span class="btns"> <a
 											href="javascript:count_change(0, 0)"><img class="btn-up"
 												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
 											<a href="javascript:count_change(1, 0)"><img
@@ -163,7 +132,7 @@
 							</td>
 							<td><div class="tb-center">4,380</div></td>
 							<td><div class="tb-center tb-bold tb-price">
-									<span><%=cartList.get(0).getPrice() %></span>원
+									<span>219,000</span>원
 								</div></td>
 							<td><div class="tb-center tb-delivery">
 									<div class="MS_tb_delivery">
@@ -197,8 +166,8 @@
 				</table>
 			</div>
 			<!-- .table-fill-prd -->
-<%}%>
-<%}%>
+
+
 			<div class="btn-order-ctrl">
 				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> <a
 					href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> <a

@@ -214,7 +214,7 @@
 					<div class="btn-order-ctrl">
 						<a href="/html/mainm.html" class="CSSbuttonBlack">주문하기</a> <a
 							href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> <a
-							href="/html/mainm.html" class="CSSbuttonWhite">장바구니 비우기</a> <a
+							href="/html/mainm.html" class=" ">장바구니 비우기</a> <a
 							href="/html/mainm.html" class="CSSbuttonWhite">견적서 출력</a>
 					</div>
 
