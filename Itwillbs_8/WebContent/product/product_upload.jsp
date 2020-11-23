@@ -75,19 +75,13 @@ function checkboxswift() {
 	var sizeVal = "";
 	
 	if($('input:checkbox[name=goods_color]:checked').length == 0) {
-		alert("색상을 선택하세요????????????/");
-		history.back();
-		return false;
+		alert("색상을 선택하세요");
+		return ;
 	} else if($('input:checkbox[name=goods_size]:checked').length == 0){
-		alert("사이즈를 선택하세요???????????????");
-		history.back();
-		return false;
+		alert("사이즈를 선택하세요");
+		return ;
 	}
 	
-	if($('input:checkbox[name=goods_color]:checked').length == 0) {
-		$('input:checkbox[name=goods_color]').attr('required', true);
-	}
-
 	$('input:checkbox[name=goods_color]:checked').each(function() {
 		colorVal += $(this).val() + "/";
 	});
@@ -99,6 +93,10 @@ function checkboxswift() {
 	$('#size').val(sizeVal);
 	
 	alert("color: " + colorVal + ", size: " + sizeVal);
+	
+	$('#productUpload').submit(function() {
+		location.href="ControlProductUpload.mo";
+	});
 }
 
 </script>
@@ -107,7 +105,7 @@ function checkboxswift() {
 <body>
 	<h1 style="margin: 50px 100px">Product Upload</h1>
 
-	<form action="ControlProductUpload.mo" method="post" onsubmit="checkboxswift()">
+	<form id="productUpload" method="post" onsubmit="checkboxswift()">
 		<table
 			style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
 			<tr>
