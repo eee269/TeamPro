@@ -111,13 +111,8 @@
 								<a href="index.jsp">HOME</a>
 							</li>
 							<li>
-								<a href="product/index.jsp">CLOTHES</a>
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
 								<ul class="sub-menu">						
-									<li><a href="product/index.jsp">TOP</a></li>
-									<li><a href="product/index.jsp">BOTTOM</a></li>
-									<li><a href="product/index.jsp">DRESS</a></li>
-									<li><a href="product/index.jsp">OUTER</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
@@ -137,16 +132,8 @@
 								</ul>
 							</li>
 							<li>
-								<a href="product/bags.jsp">BAGS</a>
 								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
 								<ul class="sub-menu">
-									<li><a href="product/bags.jsp">CROSS</a></li>
-									<li><a href="product/bags.jsp">BUCKET</a></li>
-									<li><a href="product/bags.jsp">SHOULDER</a></li>
-									<li><a href="product/bags.jsp">TOTE</a></li>
-									<li><a href="product/bags.jsp">CLUTCH</a></li>
-									<li><a href="product/bags.jsp">SHOPPER</a></li>
-									<li><a href="product/bags.jsp">BACKPACK</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
@@ -154,16 +141,6 @@
 								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
 								</ul>
 							</li>							
-							<li>
-								<a href="product/shoes.jsp">SHOES</a>
-								<ul class="sub-menu">
-									<li><a href="product/shoes.jsp">SNEAKERS</a></li>
-									<li><a href="product/shoes.jsp">BOOTS</a></li>
-									<li><a href="product/shoes.jsp">LOAFERS</a></li>
-								    <li><a href="product/shoes.jsp">SANDALS</a></li>
-								    <li><a href="product/shoes.jsp">SLIPPER</a></li>	
-								</ul>
-							</li>
 							<li class="label1" data-label1="hot">
 								<a href="CommList.co">COMMUNITY</a>
 							</li>
