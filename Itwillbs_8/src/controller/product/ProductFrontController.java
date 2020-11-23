@@ -13,7 +13,7 @@ import action.Action;
 import action.product.ProductDetailAction;
 import action.product.ProdReviewWriteAction;
 import action.product.ProductSelectAction;
-import action.product.ProductUploadPro;
+import action.product.ProductUploadProAction;
 import vo.ActionForward;
 
 
@@ -51,7 +51,7 @@ public class ProductFrontController extends HttpServlet {
 			forward.setPath("/product/product_upload.jsp");
 		} else if(command.equals("/ProductUploadPro.po")) {
 			forward = new ActionForward();
-			action = new ProductUploadPro();
+			action = new ProductUploadProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch(Exception e) {

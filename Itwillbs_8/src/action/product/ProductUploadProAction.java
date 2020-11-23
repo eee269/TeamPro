@@ -15,7 +15,7 @@ import vo.ActionForward;
 import vo.ProductBean;
 import vo.ProductOptionBean;
 
-public class ProductUploadPro implements Action {
+public class ProductUploadProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
