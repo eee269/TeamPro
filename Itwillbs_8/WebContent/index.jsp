@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/header_index.jsp" />
+<jsp:include page="/inc/header_index.jsp" />
 <jsp:include page="/quickMenu_index.jsp" />
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/main.css" />
@@ -95,7 +95,6 @@
 <!-- 베스트 -->
 <section class="bg0 p-t-23">
 	<div class="container">
-
 
 
 		<div class="main_pro_title_area cboth ">
@@ -967,4 +966,4 @@
 </section>
 
 
-<jsp:include page="/footer_index.jsp" />
+<jsp:include page="/inc/footer_index.jsp" />

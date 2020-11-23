@@ -1,6 +1,18 @@
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.CommBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp"/>
+<%
+	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+%>
+<jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
@@ -109,72 +121,90 @@
 <!-- Title page -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92"
    style="background-image: url('images/bg-02.jpg');">
-   <h2 class="ltext-105 cl0 txt-center">Blog</h2>
+   <h2 class="ltext-105 cl0 txt-center">Community</h2>
 </section>
 
 
-<!-- Content page -->
+<!-- ---------------------------Content page--------------------------- -->
 <section class="bg0 p-t-62 p-b-60">
-   <div class="container">
-      <div class="fixed-img-collist">
-      <%
-         String orgsrc = "images/blog-0";
-         for(int i  = 1 ; i < 7 ; i++) {
-            String src = orgsrc+i+".jpg";
-      %>
-         <ul>
-            <li><a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
-                  <img src=<%=src %> alt="IMG-BLOG">
-
-                  <div class="flex-col-c-m size-123 bg9 how-pos5">
-                     <span class="ltext-107 cl2 txt-center"> 22 </span> <span
-                        class="stext-109 cl3 txt-center"> Jan 2018 </span>
-                  </div>
-            </a> <a href="blog-detail.html" class="ltext-108 cl2 hov-cl1 trans-04">
-                  8 Inspiring Ways to Wear Dresses in the Winter </a>
-               </h4>
-
-               <p class="stext-117 cl6">Class aptent taciti sociosqu ad litora
-                  torquent per conubia nostra, per inceptos himenaeos. Fusce eget
-                  dictum tortor. Donec dictum vitae sapien eu varius</p></li>
-         </ul>
-      <%
-      src=orgsrc;
-         }
-         %>
-      
-
-         <div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
-            <a href="#"
-               class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">
-               1 </a> <a href="#" class="flex-c-m how-pagination1 trans-04 m-all-7">
-               2 </a>
-               <span id="SPACE_PAGE" style="width: 115px;"></span>
-            
-         </div>
-      </div>
-   </div>
-
-   <div class="col-md-4 col-lg-3 p-b-80">
-      <div class="side-menu">
-
-         <div class="bor17 of-hidden pos-relative" >
-            <input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text"
-               name="search" placeholder="Search">
-
-            <button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-               <i class="zmdi zmdi-search"></i>
-            </button>
-         </div>
-
-
-      </div>
-   </div>
-   <!--       </div> -->
-   </div>
+	<div class="container">
+		<div class="fixed-img-collist">
+<!--       		<div class="row isotope-grid"> -->
+			<%
+			for(int i  = 0 ; i < articleList.size(); i++) {
+			%>
+<%--       		<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>"> --%>
+<!-- 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"> -->
+<%-- 					<%=articleList.get(i).getSubject() %> --%>
+<!-- 					<div class="block2"> -->
+<!-- 						<div class="block2-pic hov-img0"> -->
+<%-- 							<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="<%=articleList.get(i).getImg()%>"> --%>
+<!-- 						</div> -->
+<!-- 						<div class="block2-txt flex-w flex-t p-t-14"> -->
+<!-- 							<div class="block2-txt-child1 flex-col-l "> -->
+<%-- 									<%=articleList.get(i).getUsername() %> --%>
+<!-- 								<span class="stext-105 cl3"> -->
+<%-- 									<%=articleList.get(i).getDate() %> --%>
+<!-- 								</span> -->
+<!-- 							</div> -->
+<!-- 							<div class="block2-txt-child2 flex-r p-t-3"> -->
+<!-- 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"> -->
+<!-- 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"> -->
+<!-- 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</a> -->
+					<ul>
+						<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
+							<li class = "p-b-7">
+								<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG">
+								<div class="flex-col-c-m size-123 bg9 how-pos5">
+									<span class="ltext-107 cl2 txt-center"> </span>
+									<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getUsername() %> </span>
+								</div>
+								<h4><%=articleList.get(i).getSubject() %></h4>
+								<p class="stext-117 cl6"><%=articleList.get(i).getContent() %></p>
+							</li>
+						</a>
+				<%if(i % 4 == 0){ %>
+					</ul>
+				<%}
+			}%>
+<!-- 			</div> -->
+			<div class="bor17 of-hidden pos-relative float-r" >
+				<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+				<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+					<i class="zmdi zmdi-search"></i>
+				</button>
+			</div>
+			<div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
+				<a href="CommWriteForm.co">글쓰기</a> <br>
+				<%if(nowPage <= 1) {%>
+					<input type="button" value="이전">&nbsp;
+				<%}else {%>
+					<input type="button" value="이전" onclick="location.href='CommList.bo?page=<%=nowPage - 1 %>'">&nbsp;
+				<%} %>
+				<%for(int i = startPage; i <= endPage; i++) { 
+					if(i == nowPage) { %>
+						[<%=i %>]&nbsp;
+					<%}else { %>
+						<a href="CommList.bo?page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">[<%=i %>]</a>&nbsp;
+					<%} %>
+				<%} %>
+				<%if(nowPage >= maxPage) { %>
+					<input type="button" value="다음">
+				<%}else { %>
+					<input type="button" value="다음" onclick="location.href='CommList.bo?page=<%=nowPage + 1 %>'">
+				<%}%>
+				<span id="SPACE_PAGE" style="width: 115px;"></span>
+			</div>
+		</div>
+	</div>
 </section>
-
-
-<jsp:include page="../footer.jsp" />
+<!-- ---------------------------Content page--------------------------- -->
+<jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

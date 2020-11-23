@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 <style>
 .CSSbuttonBlack {
 	-webkit-font-smoothing: antialiased;
@@ -321,4 +321,4 @@ function pop_addplace() {
     window.open(url, "place", option);
 }
 </script>
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

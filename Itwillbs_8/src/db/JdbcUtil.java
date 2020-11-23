@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 // 모든 메서드는 인스턴스 생성 없이 접근 가능하도록 static 메서드로 정의
 public class JdbcUtil {
 	
+	
+	
 	// -------------------getConnection()-------------------
 	public static Connection getConnection() {
 		Connection con = null;

@@ -15,8 +15,6 @@ public class CommListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// BoardListService 클래스 통해 게시물 목록 조회 후
-		// /board/blog.jsp 페이지로 포워딩
 		//  request 객체 유지, 서블릿 주소 변경 없이 포워딩 -> Dispatcher
 		System.out.println("CommListAction~");
 		
@@ -31,7 +29,6 @@ public class CommListAction implements Action {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		// BoardListService -> getListCount() -> 전체 게시물 수 가져오기
 		// getListCount()
 		CommListService commListService = new CommListService();
 		int listCount = commListService.getListCount();

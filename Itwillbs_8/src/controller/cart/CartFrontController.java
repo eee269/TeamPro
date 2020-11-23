@@ -13,7 +13,12 @@ import action.Action;
 import action.cart.cartListAction;
 import vo.ActionForward;
 
+<<<<<<< HEAD
 @WebServlet("*.cart")
+=======
+
+@WebServlet("*.ca")
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 public class CartFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)

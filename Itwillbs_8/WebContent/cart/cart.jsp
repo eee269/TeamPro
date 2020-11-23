@@ -16,7 +16,7 @@
             });
         });
     </script>	
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
@@ -63,12 +63,8 @@
 						<col width="95">
 						<col width="95">
 					</colgroup>
-					<thead>	
-				
+					<thead>
 						<tr>
-											<%
-					if(cartList != null) {
-				%>				
 							<th scope="col"><div class="tb-center">번호</div></th>
 							<th scope="col"><div class="tb-center">사진</div></th>
 							<th scope="col"><div class="tb-center">상품명</div></th>
@@ -81,15 +77,11 @@
 									<input type="checkbox" name="__allcheck"
 										onclick="all_basket_check(this);" class="MS_input_checkbox"
 										checked="">
-					
 								</div></th>
-				
 						</tr>
 					</thead>
-			
 					<tfoot>
 						<tr>
-									
 							<td colspan="8">
 								<div class="tb-right">
 									<span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
@@ -157,8 +149,7 @@
 												src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
 										</span>
 									</div>
-									<a href="javascript:send_basket(0, 'upd')"
-										class="CSSbuttonWhite btn_option">EDIT</a>
+									<a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
 								</div>
 							</td>
 							<td><div class="tb-center">4,380</div></td>
@@ -200,9 +191,9 @@
 <%}%>
 <%}%>
 			<div class="btn-order-ctrl">
-				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> <a
-					href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> <a
-					href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
+				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
+				<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
+				<a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
 			</div>
 
 
@@ -215,4 +206,4 @@
 <!-- Shoping Cart 끝 -->
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />
