@@ -343,7 +343,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "option(num, color, size, goods_code) "
+					+ "option(productcode, color, size, goods_code) "
 					+ "values(?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, optionBean.getProductCode());
