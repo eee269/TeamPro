@@ -28,10 +28,12 @@ public class cartDeleteAction implements Action {
 			out.println("alert('삭제 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
+			
 		} else {
+			
 			forward = new ActionForward();
-			forward.setPath("/Cart.cart"+ request.getParameter("num"));
-			forward.setRedirect(false);
+			forward.setPath("Cart.cart");
+			forward.setRedirect(true);
 		}
 		
 		return forward;
