@@ -311,7 +311,7 @@ ChannelIO('boot', settings);
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> <a href="ProductShop.po?type=X&xcode=<%=productDetailList.get(0).getXcode()%>&ncode=<%=productDetailList.get(0).getNcode()%>" class="stext-109 cl8 hov-cl1 trans-04">
 			<%=productDetailList.get(0).getNcode() %><i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> Jacket </span>
+		</a> <span class="stext-109 cl4"> <%=productDetailList.get(0).getName() %> </span>
 	</div>
 </div>
 
@@ -354,13 +354,13 @@ ChannelIO('boot', settings);
 							</div>
 
 							<div class="item-slick3"
-								data-thumb="images/product-detail-03.jpg">
+								data-thumb="product/uploadImg/<%=productDetailList.get(0).getMain_img() %>">
 								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+									<img src="product/uploadImg/<%=productDetailList.get(0).getMain_img() %>" alt="IMG-PRODUCT">
 
 									<a
 										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-03.jpg"> <i
+										href="product/uploadImg/<%=productDetailList.get(0).getMain_img() %>"> <i
 										class="fa fa-expand"></i>
 									</a>
 								</div>
@@ -375,14 +375,11 @@ ChannelIO('boot', settings);
 				<!-- 상품코드 -->
 				<input type="hidden" id="item-code" value="code,,">
 				<!-- 상품명 -->
-					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name">Lightweight
-						Jacket</h4>
+					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
+						</h4>
 				<!-- 상품가격 -->
-					<span class="mtext-106 cl2" id="item-price">80,000원</span>
+					<span class="mtext-106 cl2" id="item-price"><%=productDetailList.get(0).getPrice() %>원</span>
 
-					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
-						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-						feugiat.</p>
 
 					<!-- 상품 옵션 -->
 					<div class="p-t-33" id="select-opt">
