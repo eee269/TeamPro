@@ -363,4 +363,4 @@ $('.container .bg').mousemove(function(e){
 });
 </script>
 </body>
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

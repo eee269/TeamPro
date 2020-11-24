@@ -30,55 +30,24 @@ public class CartDAO extends Exception {
 	}
 	
 	
-	public int selectListCount(int page, int limit) {
-		System.out.println("CartDAO - selectListCount()");
-		int listCount = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		
-		try {
-			String sql = "SELECT COUNT(*) FROM cart";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				listCount = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			System.out.println("selectListCount() 오류! " + e.getMessage());
 
-			e.printStackTrace();
-			
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		return listCount;
-	}
-	
-	
-	
-	
-	public ArrayList<Cart> selectList(int page , int limit) {
+	// 주문 조회
+	public ArrayList<Cart> selectList() {
 		System.out.println("CartDAO - selectList");
 		ArrayList<Cart> CartList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "SELECT * FROM cart";
+			String sql = "SELECT * FROM cart ";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 		    CartList = new ArrayList<Cart>();
 			 
 			while(rs.next()) {
-			
 				Cart cart = new Cart();
 			
 			cart.setNum(rs.getInt("num"));
@@ -107,9 +76,28 @@ public class CartDAO extends Exception {
 	 return CartList;
 	}
 	
-	
-	
-	
+
+	public int cartDelete(int num) {
+		System.out.println("CartDAO - cartDelete()");
+		int deleteCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM cart WHERE num = ?";
+		
+		try {
+			pstmt = con.prepareCall(sql);
+			pstmt.setInt(1, num);
+			deleteCount = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("CartDAO - cartDelete()" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return deleteCount;
+	}
 	
 	
 	

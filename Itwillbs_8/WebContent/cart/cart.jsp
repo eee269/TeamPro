@@ -3,19 +3,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%
+	
 	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+
+	
+	
+	
 	%>
   <script src="js/bootstrap4-rating-input.js"></script>
     <style type="text/css">
       .rat { margin: 150px auto; font-size: 20px; }
     </style>
-    <script type="text/javascript">
-        $(function () {
-            $('input').on('change', function () {
-//                 alert("Changed: " + $(this).val())
-            });
-        });
-    </script>	
+
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Cart -->
@@ -35,9 +34,9 @@
 <link type="text/css" rel="stylesheet" href="scss/basket.css" />
 <link type="text/css" rel="stylesheet" href="scss/header.1.css" />
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
-
-<!-- Shoping Cart 시작-->
-
+<input type="hidden" name="num" value="<%=cartList.get(0).getNum()%>">
+<!-- Shoping Cart 시작
+<input type="hidden" name="num" value="" />-->
 <div id="content">
 	<div id="cartWrap">
 		<dl class="loc-navi">
@@ -85,7 +84,7 @@
 							<td colspan="8">
 								<div class="tb-right">
 									<span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
-										class="MK_chg_none_groupsale_total_price_sell MK_change_price">219,000</span>원
+										class="MK_chg_none_groupsale_total_price_sell MK_change_price"></span>원
 									</span><span class="MK_total_vat">+ 부가세 <span
 										class="MK_chg_total_vat MK_change_price">0</span>원
 									</span><span class="MK_total_delivery">+ 배송비 <span
@@ -106,34 +105,39 @@
 						</tr>
 					</tfoot>
 					<tbody>
+					
+					<%
+						for(int i =0; i < cartList.size(); i++){
+					%>
 						<tr class="nbg">
 							<!-- 2019.07.03 -->
-	<%
-				for(int i = 0; i < cartList.size(); i++) {
-				%>
-							<td><div class="tb-center"><%=cartList.get(0).getNum() %></div></td>
+	
+	
+							<td><div class="tb-center"><%=cartList.get(i).getNum() %></div></td>
+							
+
 							<td>
 								<div class="tb-center">
 									<div class="thumb">
 										<a
 											href=""><img src="http://oryany.co.kr/shopimages/nasign/0010010007533.jpg?1597366090"
-											alt="상품 섬네일" title="상품 섬네일"></a>
+											alt="상품 섬네일" title="상품 섬네일" width="1"></a>
 									</div>
 								</div>
 							</td>
 							<td>
 								<div class="tb-left">
 									<a
-										href=""	class="tb-bold"><%=cartList.get(0).getGoods_name() %></a> <a
+										href=""	class="tb-bold"><%=cartList.get(i).getGoods_name() %></a> <a
 										href="javascript:modify_option('3360797', '1','');"
 										class="CSSbuttonWhite btn_option">EDIT</a>
 									<div id="3360797_1" class="tb-opt">
 										<span class="tb-dl"><span class="opt_dd">색상 :  
-										<%=cartList.get(0).getColor() %></span></span>
+										<%=cartList.get(i).getColor() %></span></span>
 									</div>
 									<div id="3360797_1" class="tb-opt">
 										<span class="tb-dl"><span class="opt_dd">사이즈 :  
-										<%=cartList.get(0).getSize() %></span></span>
+										<%=cartList.get(i).getSize() %></span></span>
 									</div>
 								</div>
 							</td>
@@ -171,10 +175,12 @@
 										href="javascript:go_wish('3360797','1','','NORMAL');"
 										class="CSSbuttonWhite btn_select">WISH LIST</a></span> <span
 										class="d-block"><a
-										href="javascript:send_basket(0, 'del')"
-										class="CSSbuttonWhite btn_select">DELETE</a></span>
+										onclick = "location.href='CartDelete.cart?num=<%=cartList.get(i).getNum()%>'">
+										
+										<class="CSSbuttonWhite btn_select">DELETE</a></span>
 								</div>
 							</td>
+
 							<td align="center"><input type="checkbox" name="basketchks"
 								id="basketchks" checked="checked"
 								class="MS_input_checkbox pr_NORMAL_3360797"
@@ -184,17 +190,19 @@
 								<input type="hidden" name="extra_item"
 								value="{&quot;extra_require_uid&quot;:null,&quot;extra_require&quot;:null,&quot;extra_main_brandname&quot;:&quot;&quot;}"></td>
 						</tr>
+						<%
+						}
+						%>
 					</tbody>
 				</table>
 			</div>
 			<!-- .table-fill-prd -->
-<%}%>
-<%}%>
-			<div class="btn-order-ctrl">
-				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
-				<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
-				<a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
-			</div>
+
+<!-- 			<div class="btn-order-ctrl"> -->
+<!-- 				<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>  -->
+<!-- 				<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> -->
+<!-- 				<a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a> -->
+<!-- 			</div> -->
 
 
 			<!-- .table-fill-prd -->

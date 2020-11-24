@@ -10,27 +10,12 @@ import vo.Cart;
 
 public class CartListService {
 	
-	public int getListCount() throws Exception {
-		System.out.println("CartListService - getListCount()");
-		int listCount = 0;
-		
-		Connection con = getConnection();
-		
-		CartDAO cartDAO = CartDAO.getInstance();
-		
-		cartDAO.setConnection(con);
 
-		close(con);
-		
-		return listCount;
-	}
 	
-	
-	
-	public ArrayList<Cart> getCartList(int page , int limit) throws Exception  {
+	public ArrayList<Cart> getCartList() throws Exception  {
 		System.out.println("CartListService - getCartList() ");
 		
-		ArrayList<Cart> CartList = null;
+		ArrayList<Cart> CartList = new ArrayList<Cart>();
 		
 		Connection con = getConnection();
 		
@@ -38,7 +23,7 @@ public class CartListService {
 		
 		cartDAO.setConnection(con);
 		
-		CartList = cartDAO.selectList(page, limit);
+		CartList = cartDAO.selectList();
 		
 		close(con);
 		

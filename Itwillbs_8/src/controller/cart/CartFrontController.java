@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
 import vo.ActionForward;
 
-<<<<<<< HEAD
-@WebServlet("*.cart")
-=======
 
-@WebServlet("*.ca")
->>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
+@WebServlet("*.cart")
 public class CartFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +32,7 @@ public class CartFrontController extends HttpServlet {
 		
 		
 		if(command.equals("/Cart.cart")) {
-			System.out.println("카트컨트롤러+CartList.po 로 포워딩");
+			System.out.println("컨트롤러 - Cart.cart 로 포워딩");
 			
 			action = new cartListAction();
 			
@@ -45,8 +42,23 @@ public class CartFrontController extends HttpServlet {
 			} catch (Exception e) {
 				System.out.println("List컨트롤러 에러" + e.getMessage());
 				e.printStackTrace();
+		
+			} finally {
+				
 			}
 			
+		} else if(command.equals("/CartDelete.cart")) {
+			System.out.println("컨트롤러 - CartDelete");
+			
+			action = new cartDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+				//forward.setPath("/Cart.cart");
+			} catch (Exception e) {
+				System.out.println("CartDelete" + e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		

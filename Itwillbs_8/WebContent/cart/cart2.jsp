@@ -237,4 +237,4 @@
 </form>
 
 
-<jsp:include page="../footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />
