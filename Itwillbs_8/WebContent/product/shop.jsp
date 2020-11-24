@@ -65,6 +65,7 @@
 
 
 <!-- 베스트Product 시작-->
+<div><a href="ProductUpload.po">상품등록페이지이동(임시)</a></div>
 <div class="item-wrap best-item">
 	<div class="sub_recommend_title">BEST PRODUCTS</div>
 	<div class="item-cont">
@@ -72,7 +73,7 @@
 		
 		<dl class="item-list">
 			<dt class="thumb">
-				<a href="product_detail.jsp"
+				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="http://oryany.co.kr/shopimages/nasign/0010010007552.jpg?1597366181"></a>
@@ -80,7 +81,7 @@
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a href="product_detail.jsp"
+					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">루키
 							크로스바디</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
@@ -133,7 +134,7 @@
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<a href="ProductDetail.po"
+						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
 							src="images/product-01.jpg" alt="IMG-PRODUCT">
 						</a> <a href="ProductDetail.po"

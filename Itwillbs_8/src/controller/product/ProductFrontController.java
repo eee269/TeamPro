@@ -50,7 +50,7 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/product/product_upload.jsp");
 		} else if(command.equals("/ProductUploadPro.po")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new ProductUploadProAction();
 			try {
 				forward = action.execute(request, response);

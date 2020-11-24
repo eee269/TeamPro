@@ -2,9 +2,9 @@ package vo;
 
 public class ProductOptionBean {
 	private String productCode;
+	private String basicCode;
 	private String color;
 	private String size;
-	private String basicCode;
 	
 	public String getProductCode() {
 		return productCode;
