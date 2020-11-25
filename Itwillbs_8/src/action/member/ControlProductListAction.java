@@ -7,16 +7,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import svc.member.ControlMemberListService;
+import svc.member.ControlProductListService;
 import vo.ActionForward;
-import vo.CommBean;
 import vo.MemberBean;
 import vo.PageInfo;
+import vo.ProductBean;
 
-public class ControlMemberListAction implements Action {
+public class ControlProductListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("ControlMemberAction!");
+		
 		ActionForward forward = null;
 
 		// 페이징 처리 위해 변수 선언
@@ -29,13 +30,13 @@ public class ControlMemberListAction implements Action {
 		}
 		
 		// getListCount()
-		ControlMemberListService controlMemberListService = new ControlMemberListService();
+		ControlProductListService controlProductListService = new ControlProductListService();
 		
-		int listCount = controlMemberListService.getListCount();
+		int listCount = controlProductListService.getListCount();
 		
 		// 전체 게시물 수 가져오기
-		ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
-		memberList = controlMemberListService.getMemberList(page, limit);
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		productList = controlProductListService.getProductList(page, limit);
 		
 		// 페이지 계산 작업
 		// 1. 전체 페이지 계산
@@ -57,9 +58,9 @@ public class ControlMemberListAction implements Action {
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 		
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("memberList", memberList);
+		request.setAttribute("productList", productList);
 		forward = new ActionForward();
-		forward.setPath("/member/control_member.jsp");
+		forward.setPath("/member/control_product.jsp");
 		return forward;
 	}
 
