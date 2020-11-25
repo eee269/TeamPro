@@ -1,7 +1,18 @@
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.ProdReviewBean"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<ProdReviewBean> reviewList = (ArrayList<ProdReviewBean>)request.getAttribute("reviewList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+%>
 <jsp:include page="../inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
@@ -305,15 +316,15 @@ ChannelIO('boot', settings);
 <!-- 끝 -->
 
 <!-- breadcrumb -->
-<div class="container">
-	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="main.go" class="stext-109 cl8 hov-cl1 trans-04">HOME
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="ProductShop.po?type=X&xcode=<%=productDetailList.get(0).getXcode()%>&ncode=<%=productDetailList.get(0).getNcode()%>" class="stext-109 cl8 hov-cl1 trans-04">
-			<%=productDetailList.get(0).getNcode() %><i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> Jacket </span>
-	</div>
-</div>
+<!-- <div class="container"> -->
+<!-- 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg"> -->
+<!-- 		<a href="main.go" class="stext-109 cl8 hov-cl1 trans-04">HOME -->
+<!-- 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> -->
+<%-- 		</a> <a href="ProductShop.po?type=X&xcode=<%=productDetailList.get(0).getXcode()%>&ncode=<%=productDetailList.get(0).getNcode()%>" class="stext-109 cl8 hov-cl1 trans-04"> --%>
+<%-- 			<%=productDetailList.get(0).getNcode() %><i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> --%>
+<!-- 		</a> <span class="stext-109 cl4"> Jacket </span> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 <!-- Product Detail -->
@@ -584,43 +595,32 @@ ChannelIO('boot', settings);
 					</ul>
 				</div>
 
-
+				<!-- ------------------------------상품리뷰---------------------------------------  -->
+				<!-- 상빈 -->
 				<div id="powerReview">
 					<div class="hd-t">
 						<h2>POWER REVIEW</h2>
 					</div>
 					<div id="writePowerReview">
 						<div class="PR15N01-write">
-							<form name="prw_form" id="prw_form" action="../none.jsp"
+							<form name="prw_form" id="prw_form" action="ProdReviewWrite.po"
 								method="post" autocomplete="off">
-
-								<p>
-									<strong>별점을 매겨주세요</strong>
-								</p>
+								<p><strong>별점을 매겨주세요</strong></p>
 								<!-- 별점 -->
 								<div class="rat">
-									<input type="number" name="rating" id="rating1"
-										class="rating text-warning" value="0" />
+									<input type="number" name="rating" id="rating1" class="rating text-warning" value="0" />
 								</div>
 								<!-- 별점 -->
 
 								<%-- 여기 input 들은 ${'변수'} 이런 형식으로 세션 아이디의 정보 받아오도록하기 / yj --%>
-
-								<input type="hidden" name="goods_num" value=""> <input
-									type="hidden" name="username" value=""> <input
-									type="hidden" name="goods_color" value=""> <input
-									type="hidden" name="goods_size" value=""> <input
-									type="hidden" name="id" value=""> <input type="hidden"
-									name="email" value=""> <input type="hidden" name="pass"
-									value="">
-
-
+								<input type="hidden" name="order_num" value=""> 
+								<input type="hidden" name="id" value=""> 
 								<textarea name="content" id="prw_content"
 									placeholder="리뷰 내용을 입력해주세요" required></textarea>
 								<div class="thumb-wrap"></div>
 								<input type="file" name="file" class="trick file-attach"
-									id="prw_file"> <input type="submit" value="리뷰 등록"
-									class="lnk-review"
+									id="prw_file"> 
+								<input type="submit" value="리뷰 등록" class="lnk-review"
 									style="text-align: right; padding: 20px 50px; cursor: pointer;">
 							</form>
 						</div>
@@ -628,8 +628,6 @@ ChannelIO('boot', settings);
 					<br>
 					<br>
 					<br>
-
-
 					<div class="PR15N01-info">
 						<dl class="score">
 							<dt>5.0</dt>
@@ -657,45 +655,19 @@ ChannelIO('boot', settings);
 						<div class="photo">
 							<ul>
 								<li><a
-									href="javascript:power_review_view_show('995481','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995505','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201108091851_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995514','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201107093303.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995525','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201106105421_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995549','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201104173917.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995579','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201029212715_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995625','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201024193837.jpeg"
-										alt=""></a></li>
-								<li><a
 									href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img
 										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg"
-										alt=""></a></li>
+										alt=""></a>
+								</li>
 							</ul>
 						</div>
 						<p class="like">
 							<strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
 						</p>
 					</div>
-
-
+					<%
+						for(int i=0; i<reviewList.size(); i++){
+					%>
 					<div class="tabs">
 						<ul>
 							<li class="tab signin active"><a href="#signin">포토리뷰()</a></li>
@@ -714,12 +686,12 @@ ChannelIO('boot', settings);
 								<li id="power_review_block995509" class="power-review-list-box">
 									<dl class="desc">
 										<dt class="first">작성자</dt>
-										<dd>nmoo*****</dd>
+										<dd><%=reviewList.get(i).getUsername() %></dd>
 										<dt>작성일</dt>
-										<dd>2020-11-07</dd>
+										<dd><%=reviewList.get(i).getDate() %></dd>
 										<dt>조회수</dt>
 										<dd>
-											<span id="power_review_showhits">7</span>
+											<span id="power_review_showhits">readCount</span>
 										</dd>
 									</dl>
 									<div class="hd-box">
@@ -738,86 +710,36 @@ ChannelIO('boot', settings);
 									</div>
 									<div class="content">
 										<p class="content_p">
-											<a href="javascript:power_review_more('995509', '00000');"
-												class="more-options">사이즈때문에 고민되서 문의하고 주문했는데 잘 맞네요 가죽도 좋고
-												디자인도 예쁘고 넘넘 맘에 드네요</a><a class="pr-close"
-												href="javascript:power_review_more_close('995509');">
+											<a href="javascript:power_review_more('995509', '00000');" class="more-options">
+												<%=reviewList.get(i).getContent() %>
+											</a>
+											<a class="pr-close" href="javascript:power_review_more_close('995509');">
 												... <span>닫기</span>
 											</a>
-
 										</p>
 										<div class="ctr"></div>
 									</div>
 									<div class="photo-list">
 										<ul>
-											<li><a
-												href="javascript:power_review_view_show('995509', '00000', '0', 'detail');"><span></span><img
-													src="//board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg"
-													alt=""></a>
-												<div class="attach-preview"></div></li>
+											<li>
+											<a href="javascript:power_review_view_show('995509', '00000', '0', 'detail');">
+												<span></span> 
+												<img src="//board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg" alt="">
+											</a>
+												<div class="attach-preview"></div>
+											</li>
 										</ul>
 									</div>
 									<div class="reply">
-										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> <a class="yes"
-											href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
-										<a class="no"
-											href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
+										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> 
+										<a class="yes" href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
+										<a class="no" href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
 									</div>
 								</li>
 							</ul>
 						</div>
-
-						<%-- 일반리뷰--%>
-						<div class="signup-cont cont">
-							<ul class="PR15N01-review-wrap">
-								<li id="power_review_block995509" class="power-review-list-box">
-									<dl class="desc">
-										<dt class="first">작성자</dt>
-										<dd>nmoo*****</dd>
-										<dt>작성일</dt>
-										<dd>2020-11-07</dd>
-										<dt>조회수</dt>
-										<dd>
-											<span id="power_review_showhits">7</span>
-										</dd>
-									</dl>
-									<div class="hd-box">
-										<div class="star-icon">
-											<span class="mini_rat"> <input type="number"
-												class="rating text-default" value="3" data-readonly />
-											</span> <span class="survey">별로임</span>
-										</div>
-									</div>
-									<div class="pr-options" style="display: none;">
-										<dl>
-											<dt class="emp">구매한 옵션</dt>
-											<dd class="emp">컬러 : BLACK, 사이즈 : S</dd>
-										</dl>
-									</div>
-									<div class="content">
-										<p class="content_p">
-											<a href="javascript:power_review_more('995509', '00000');"
-												class="more-options">일반리뷰 입니다!! 사이즈때문에 고민되서 문의하고 주문했는데 잘
-												맞네요 가죽도 좋고 디자인도 예쁘고 넘넘 맘에 드네요</a><a class="pr-close"
-												href="javascript:power_review_more_close('995509');">
-												... <span>닫기</span>
-											</a>
-
-										</p>
-										<div class="ctr"></div>
-									</div>
-									<div class="reply">
-										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> <a class="yes"
-											href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
-										<a class="no"
-											href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
-									</div>
-								</li>
-							</ul>
-						</div>
-
-
-
+						<%} %>
+						<!-- ------------------------------상품리뷰---------------------------------------  -->
 						<!-- .PR15N01-review-wrap -->
 						<div class="paging">
 							<a class="now" href="#none"><span>1</span></a> <a
@@ -1102,8 +1024,8 @@ ChannelIO('boot', settings);
 	</div>
 
 	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
-			class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span>
+		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> 
+<%-- 		<span class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span> --%>
 	</div>
 </section>
 
@@ -1120,18 +1042,18 @@ ChannelIO('boot', settings);
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	try {
-		fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
-			return true ;
-		}).catch(function(e) {
-			var carbonScript = document.createElement("script");
-			carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
-			carbonScript.id = "_carbonads_js";
-			document.getElementById("carbon-block").appendChild(carbonScript);
-		});
-	} catch (error) {
-		console.log(error);
-	}
+// 	try {
+// 		fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+// 			return true;
+// 		}).catch(function(e) {
+// 			var carbonScript = document.createElement("script");
+// 			carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+// 			carbonScript.id = "_carbonads_js";
+// 			document.getElementById("carbon-block").appendChild(carbonScript);
+// 		});
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
 	$('.tabs .tab').click(function(){
 		if ($(this).hasClass('signin')) {
 			$('.tabs .tab').removeClass('active');

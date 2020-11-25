@@ -1,4 +1,4 @@
-package controller.product;
+ package controller.product;
 
 import java.io.IOException;
 
@@ -40,7 +40,6 @@ public class ProductFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-			
 				e.printStackTrace();
 			}
 		}

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
@@ -179,4 +179,4 @@ function typeswift() {
 
 </body>
 </html>
-<jsp:include page="/footer.jsp" />
+<jsp:include page="../inc/footer.jsp" />

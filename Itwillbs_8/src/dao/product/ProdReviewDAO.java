@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import vo.ProdReviewBean;
 
@@ -18,6 +19,7 @@ public class ProdReviewDAO {
 		return instance;
 	}
 	// -------------------싱글톤-----------------------
+	
 	Connection con;
 	public void setConnetion(Connection con) {
 		this.con = con;
@@ -68,5 +70,66 @@ public class ProdReviewDAO {
 		return insertCount;
 	}
 	// -------------------insertReview()-----------------------
+	// -------------------selectListCount()-----------------------
+	public int selectListCount(String basicCode) {
+		int listCount = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT count(num) FROM product_review where product_code=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, basicCode);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - selectListCount"+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		return listCount;
+	}
+	// -------------------selectListCount()-----------------------
+	// -------------------selectReviewList()-----------------------
+	public ArrayList<ProdReviewBean> selectReviewList(int page, int limit, String basicCode) {
+		ArrayList<ProdReviewBean> reviewList =null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int startRow = (page-1) * limit;
+		
+		try {
+			String sql = "SELECT * FROM product_review WHERE product_code=? ORDER BY num desc limit ?,?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, basicCode);
+			ps.setInt(2, startRow);
+			ps.setInt(3, limit);
+			rs = ps.executeQuery();
+			
+			reviewList = new ArrayList<ProdReviewBean>();
+			
+			while(rs.next()) {
+				ProdReviewBean review = new ProdReviewBean();
+				review.setContent(rs.getString("contents"));
+				review.setDate(rs.getTimestamp("date"));
+				review.setUsername(rs.getNString("username"));
+				reviewList.add(review);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - selectReviewList"+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		return reviewList;
+	}
+	// -------------------selectReviewList()-----------------------
 	
 }

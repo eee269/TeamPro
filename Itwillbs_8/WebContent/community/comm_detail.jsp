@@ -156,10 +156,10 @@
 							<h4 class="ltext-109 cl2 p-b-28">
 								<%= article.getSubject() %>
 							</h4>
+						</div>
 							<p class="stext-117 cl6 p-b-26">
 								<%= article.getContent() %>
 							</p>
-						</div>
 						<div class="flex-w flex-t p-t-16">
 							<span class="size-216 stext-116 cl8 p-t-4">
 								Tags

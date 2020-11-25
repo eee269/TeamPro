@@ -83,14 +83,13 @@ input[type=text] {
 		        	<div class = "toolbar-container">
 			            <div class="signin-cont cont">
 			                <form action="CommModifyPro.co" method="post" enctype="multipart/form-data">
-			                	<input type="hidden" id="name" name="username" value="호랑이">
-			                	<input type="hidden" id="pass" name="pass" value="123">
-			                	<input type="hidden" id="img" name="img" value="0.jpg">
+			                	<input type="hidden" id="num" name="num" value="<%=article.getNum()%>">
+								<label>현재 파일 :<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>"></label><br>
+								<input type="file" name="img" id="img" value=" <%=article.getImg() %>"><br>
         						<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>"><br>
 								<textarea id ="summernote" name="content" ><%=article.getContent() %></textarea><br>
-								<input type="file" name="img" id="img" value=" <%=article.getImg() %>"><br>
-								<button id="edit" class="btn btn-primary" onclick="edit()" type="button">Edit 1</button>
-								<button id="save" class="btn btn-primary" onclick="save()" type="button">Save 2</button>
+								<input type="submit" class="btn btn-primary" value="수정">
+								<input type="button" class="btn btn-primary" value="뒤로" onclick="location.href='history.back()'">
 							</form>
    				        </div>
 		        	</div>

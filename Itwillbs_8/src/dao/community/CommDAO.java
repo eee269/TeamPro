@@ -153,7 +153,7 @@ public class CommDAO {
 		public CommBean selectArticle(int num) {
 			// 글번호(num) 에 해당하는 레코드를 SELECT 
 			// 조회 결과가 있을 경우 CommBean 객체에 저장한 뒤 리턴
-			CommBean article = new CommBean();
+			CommBean article = null;
 			
 			PreparedStatement ps = null;
 			ResultSet rs = null;
@@ -167,6 +167,7 @@ public class CommDAO {
 				
 				// 게시물이 존재할 경우 CommBean 객체를 생성하여 게시물 내용 저장
 				if(rs.next()) {
+					article = new CommBean();
 					article.setNum(rs.getInt("num"));
 					article.setUsername(rs.getString("username"));
 					article.setPass(rs.getString("pass"));
@@ -255,11 +256,12 @@ public class CommDAO {
 			PreparedStatement ps = null;
 			
 			try {
-				String sql = "UPDATE community SET subject=?, content=? WHERE num = ?";
+				String sql = "UPDATE community SET subject=?, content=?, img=? WHERE num = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, article.getSubject());
 				ps.setString(2, article.getContent());
-				ps.setInt(3, article.getNum());
+				ps.setString(3, article.getImg());
+				ps.setInt(4, article.getNum());
 				updateCount = ps.executeUpdate();
 				
 			} catch (SQLException e) {
