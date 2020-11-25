@@ -42,6 +42,15 @@ public class ControlProductListService {
 	public ArrayList<ProductOptionBean> getOptionList(String basicCode) {
 		ArrayList<ProductOptionBean> optionList = null;
 		
+		Connection con = getConnection();
+
+		ProductDAO productDAO = ProductDAO.getInstance();		
+		productDAO.setConnection(con);
+		optionList = productDAO.selectOptionList(basicCode);
+		
+		close(con);
+		
+		
 		return optionList;
 	}
 

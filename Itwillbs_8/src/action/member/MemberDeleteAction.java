@@ -9,7 +9,7 @@ import action.Action;
 import svc.member.DeleteMemberService;
 import vo.ActionForward;
 
-public class DeleteMemberAction implements Action {
+public class MemberDeleteAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {

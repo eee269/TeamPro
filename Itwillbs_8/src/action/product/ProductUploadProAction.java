@@ -133,7 +133,7 @@ public class ProductUploadProAction implements Action {
 		}
 		 if(isSuccessOption){
 				forward = new ActionForward();
-				forward.setPath("/ControlProductList.po");
+				forward.setPath("ControlProductList.po");
 				forward.setRedirect(true);
 			}
 		

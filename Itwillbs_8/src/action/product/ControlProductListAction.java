@@ -1,6 +1,7 @@
 package action.product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,6 @@ public class ControlProductListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
 		ActionForward forward = null;
 
 		ControlProductListService controlProductListService = new ControlProductListService();
@@ -26,17 +26,20 @@ public class ControlProductListAction implements Action {
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
 		productList = controlProductListService.getProductList();
 		
-		ArrayList<ArrayList<ProductOptionBean>> optionList = new ArrayList<ArrayList<ProductOptionBean>>();
+		HashMap<String, ArrayList<ProductOptionBean>> optionList = new HashMap<String, ArrayList<ProductOptionBean>>();
+//		ArrayList<ArrayList<ProductOptionBean>> optionList = new ArrayList<ArrayList<ProductOptionBean>>();
 		ArrayList<ProductOptionBean> subOptionList = null;
 		for(int i=0; i<productList.size(); i++) {
 			ProductBean product = new ProductBean();
 			product = productList.get(i);
+			
 			String basicCode = product.getBasicCode();
 			int optCount = controlProductListService.getOptionCount(basicCode);
+			System.out.println(optCount);
 			for(int j=0; j<optCount; j++) {
 				subOptionList = new ArrayList<ProductOptionBean>();
 				subOptionList = controlProductListService.getOptionList(basicCode);
-				optionList.add(subOptionList);
+				optionList.put(basicCode, subOptionList);
 			}
 		}
 		

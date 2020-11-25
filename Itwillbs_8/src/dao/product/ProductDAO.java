@@ -367,73 +367,75 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		return count;
 	}
 
-	public int getListCount() {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select count(*) from product";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			System.out.println("getListCount() 오류 "+e.getMessage());
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return count;
-	}
-
-	public ArrayList<ProductBean> selectProductList(int page, int limit) {
-		ArrayList<ProductBean> productList = null;
-		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
-		
-		try {
-			String sql = "SELECT * FROM product ORDER BY date desc limit ?,?";
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, limit);
-			rs = ps.executeQuery();
-			
-			productList = new ArrayList<ProductBean>();
-			
-			while(rs.next()) {
-				ProductBean productBean = new ProductBean();
-				
-				productBean.setBasicCode(rs.getString("basicCode"));
-				productBean.setXcode(rs.getString("xcode"));
-				productBean.setNcode(rs.getString("ncode"));
-				productBean.setMain_img(rs.getString("main_img"));
-				productBean.setSub_img(rs.getString("sub_img"));
-				productBean.setName(rs.getString("name"));
-//				productBean.setStock(rs.getInt("stock"));
-				productBean.setPrice(rs.getInt("price"));
-				productBean.setLikey(rs.getInt("likey"));
-				
-				productList.add(productBean);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("selectProductList() 오류 "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			close(ps);
-			close(rs);
-		}
-		
-		return productList;
-	}
+//	public int getListCount() {
+//		int count = 0;
+//		
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		try {
+//			String sql = "select count(*) from product";
+//			pstmt = con.prepareStatement(sql);
+//			rs = pstmt.executeQuery();
+//			
+//			if(rs.next()) {
+//				count = rs.getInt(1);
+//			}
+//		} catch (SQLException e) {
+//			System.out.println("getListCount() 오류 "+e.getMessage());
+//		} finally {
+//			close(pstmt);
+//			close(rs);
+//		}
+//		
+//		return count;
+//	}
+//
+//	public ArrayList<ProductBean> selectProductList(int page, int limit) {
+//		ArrayList<ProductBean> productList = null;
+//		
+//		PreparedStatement ps = null;
+//		ResultSet rs = null;
+//		
+//		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
+//		
+//		try {
+//			String sql = "SELECT * FROM product ORDER BY date desc limit ?,?";
+//			ps = con.prepareStatement(sql);
+//			ps.setInt(1, startRow);
+//			ps.setInt(2, limit);
+//			rs = ps.executeQuery();
+//			
+//			productList = new ArrayList<ProductBean>();
+//			
+//			while(rs.next()) {
+//				ProductBean productBean = new ProductBean();
+//				
+//				productBean.setBasicCode(rs.getString("basicCode"));
+//				productBean.setXcode(rs.getString("xcode"));
+//				productBean.setNcode(rs.getString("ncode"));
+//				productBean.setMain_img(rs.getString("main_img"));
+//				productBean.setSub_img(rs.getString("sub_img"));
+//				productBean.setName(rs.getString("name"));
+////				productBean.setStock(rs.getInt("stock"));
+//				productBean.setPrice(rs.getInt("price"));
+//				productBean.setLikey(rs.getInt("likey"));
+//				
+//				productList.add(productBean);
+//			}
+//			
+//		} catch (SQLException e) {
+//			System.out.println("selectProductList() 오류 "+e.getMessage());
+//			e.printStackTrace();
+//		} finally {
+//			close(ps);
+//			close(rs);
+//		}
+//		
+//		return productList;
+//	}
+	
+	
 	public ArrayList<ProductBean> selectProductList() {
 		ArrayList<ProductBean> productList = null;
 		
@@ -508,7 +510,6 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, basicCode);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				count = rs.getInt(1);
 			}
@@ -519,6 +520,60 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			close(rs);
 		}
 		
-		return 0;
+		return count;
+	}
+
+	public ArrayList<ProductOptionBean> selectOptionList(String basicCode) {
+		ArrayList<ProductOptionBean> optionList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		 
+		try {
+			String sql = "select * from opt where basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			rs = pstmt.executeQuery();
+			
+			optionList = new ArrayList<ProductOptionBean>();
+			while(rs.next()) {
+				ProductOptionBean option = new ProductOptionBean();
+				
+				option.setBasicCode(basicCode);
+				option.setProductCode(rs.getString("productCode"));
+				option.setColor(rs.getString("color"));
+				option.setSize(rs.getString("size"));
+				option.setStock(rs.getInt("stock"));
+				
+				optionList.add(option);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return optionList;
+	}
+
+	public int deleteOption(String productCode) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from opt where productCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, productCode);
+			
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return count;
 	}
 }

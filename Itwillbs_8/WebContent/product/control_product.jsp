@@ -1,3 +1,4 @@
+<%@page import="java.util.HashMap"%>
 <%@page import="vo.ProductOptionBean"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/control_mem_order.css" rel="stylesheet">
+<link href="/css/control_mem_order.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
@@ -34,17 +35,20 @@
 
 <%
 ArrayList<ProductBean> productList = (ArrayList)request.getAttribute("productList");
-ArrayList<ProductOptionBean> optionList = (ArrayList)request.getAttribute("optionList");
+HashMap<String, ArrayList<ProductOptionBean>> optionList = (HashMap)request.getAttribute("optionList");
+// ArrayList<ArrayList<ProductOptionBean>> optionList = (ArrayList)request.getAttribute("optionList");
 
 for(int i=0; i<productList.size();i++){
 	ProductBean product = new ProductBean();
 	product = productList.get(i);
+	String basicCode = product.getBasicCode();
 	
-	for(int j=0; j<optionList.size(); j++) {
+	ArrayList<ProductOptionBean> subOptionList = optionList.get(basicCode);
+	
+	for(int j=0; j<subOptionList.size(); j++) {
 		ProductOptionBean option = new ProductOptionBean();
-		option = optionList.get(j);
+		option = subOptionList.get(j);
 		
-		String basicCode = product.getBasicCode();
 		%>
 		
 		<tr>
@@ -62,7 +66,8 @@ for(int i=0; i<productList.size();i++){
 		<td><%=product.getLikey()%></td>
 		<td><%=product.getMain_img()%></td>
 		<td><%=product.getSub_img()%></td>
-		<td><input class="in_bu" type="button" value="삭제" onclick="location.href='/DeleteProduct.po?basicCode='+ <%=basicCode%>"></td></tr><%
+		<td><input class="in_bu" type="button" value="삭제" 
+		onclick="location.href='OptionDelete.po?productCode=<%=option.getProductCode()%>&basicCode=<%=basicCode%>'"></td></tr><%
 		}
 	}
 %>

@@ -28,7 +28,7 @@ for(int i=0; i<memberList.size();i++){
 
 <tr><td><%=i+1 %></td><td><%=id %></td><td><%=member.getEmail() %></td><td><%=member.getPass() %></td><td><%=member.getUsername() %></td>
 <td><%=member.getImg() %></td><td><%=member.getPhone() %></td><td><%=member.getDate() %></td>
-<td><input class="in_bu" type="button" value="삭제" onclick="location.href='/DeleteMember.mo?id='+ <%=id%>"></td></tr><%
+<td><input class="in_bu" type="button" value="삭제" onclick="location.href='MemberDelete.mo?id=<%=id%>'"></td></tr><%
 }
 %>
 </table>

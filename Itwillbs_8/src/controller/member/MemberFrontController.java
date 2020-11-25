@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.ControlMemberListAction;
-import action.member.DeleteMemberAction;
+import action.member.MemberDeleteAction;
 import action.member.MemberLoginProAction;
 import action.product.ControlProductListAction;
 import vo.ActionForward;
@@ -52,10 +52,10 @@ public class MemberFrontController extends HttpServlet {
 		} 
 		
 		// -------------회원 삭제(탈퇴)----------------
-		else if(command.equals("/DeleteMember.mo")) {
+		else if(command.equals("/MemberDelete.mo")) {
 			forward = new ActionForward();
 			
-			action = new DeleteMemberAction();
+			action = new MemberDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch(Exception e) {

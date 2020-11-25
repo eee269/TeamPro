@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ProductDetailAction;
 import action.product.ControlProductListAction;
+import action.product.OptionDeleteAction;
 import action.product.ProdReviewWriteAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
@@ -81,7 +82,18 @@ public class ProductFrontController extends HttpServlet {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		} 
+		}
+		// -------------옵션 삭제----------------
+		else if(command.equals("/OptionDelete.po")) {
+			forward = new ActionForward();
+										
+			action = new OptionDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
 		// --------------------상품 댓글 쓰기--------------------
 		else if(command.equals("/ProdReviewWrite.po")) {
 			System.out.println("ProdReviewWriteAction 포워딩");
