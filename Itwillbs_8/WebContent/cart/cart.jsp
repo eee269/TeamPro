@@ -9,6 +9,7 @@
    int sevice = 2500;
    int coin = 0;
    int cartNo = cartList.size();
+   
    %>
   <script src="js/bootstrap4-rating-input.js"></script>
     <style type="text/css">
@@ -30,7 +31,34 @@
 	        }
 	    })
 	});
-
+  
+	//상품개수증가
+  function cntPlus(id) {
+		var numid = id.replace("plus", "num")
+		
+		var cnt = Number($('#'+numid).val());
+		
+		cnt += 1;
+		
+		$('#'+numid).val(cnt);
+		
+		calculatePrice();
+	}
+	
+	// 상품개수감소
+	function cntMinus(id) {
+		var numid = id.replace("minus", "num");
+		
+		var cnt = Number($('#'+numid).val());
+		
+		if(cnt > 1) {
+			cnt -= 1;
+			$('#'+numid).val(cnt);
+		}
+		
+		
+		calculatePrice();
+	}
 
 		  </script>
 
@@ -104,7 +132,7 @@
                   for(int i = 0; i < cartList.size(); i++){
                      	 coin += cartList.get(i).getPrice();
                %>
-                  <tr class="nbg">
+                  <tr class="nbg" >
                      <!-- 2019.07.03 -->
    
                                  
@@ -128,7 +156,7 @@
                      <td>
                         <div class="tb-left">
                            <a
-                              href=""   class="tb-bold"><%=cartList.get(i).getGoods_name() %></a> <a
+                              href=""   class="tb-bold"><%=cartList.get(i).getProduct_name()%></a> <a
                               href="javascript:modify_option('3360797', '1','');"
                               class="CSSbuttonWhite btn_option">EDIT</a>
                            <div id="3360797_1" class="tb-opt">
@@ -164,7 +192,7 @@
                            <div class="MS_tb_delivery">
                               <div id="deliverycase0" class="MS_layer_delivery">
                               <%
-                             	if(coin > 30000){ %>
+                             	if(coin > 50000){ %>
                              	<dl>
                                     <dt>기본배송(무료)</dt>
                                  </dl>
@@ -231,16 +259,16 @@
                </tfoot>
             </table>
          </div>
-         <!-- .table-fill-prd -->
+<!--          .table-fill-prd -->
 
-<!--          <div class="btn-order-ctrl"> -->
-<!--             <a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>  -->
-<!--             <a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> -->
-<!--             <a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a> -->
-<!--          </div> -->
+         <div class="btn-order-ctrl">
+            <a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
+            <a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
+            <a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
+         </div>
 
 
-         <!-- .table-fill-prd -->
+<!--          .table-fill-prd -->
       </div>
       <!-- .page-body -->
    </div>
