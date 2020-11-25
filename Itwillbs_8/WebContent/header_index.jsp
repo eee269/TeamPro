@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 	<title>Home</title>
 	<meta charset="UTF-8">
@@ -37,7 +37,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+
 <body class="animsition">
+	
 	<!-- Header -->
 	<header>
 		<!-- Header desktop -->
@@ -48,80 +50,100 @@
 					<div class="left-top-bar">
 						Free shipping for standard order over $100
 					</div>
+
 					<div class="right-top-bar flex-w h-full">
-						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
+						<a href="member/login.jsp" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
-						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
+
+						<a href="cart/cart.jsp" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
-						<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">
+						
+						<a href="cart/mypage.jsp" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
-						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
+						<a href="cart/myorder.jsp" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 					</div>
 				</div>
 			</div>
+
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
+					
 					<!-- Logo desktop -->		
 					<a href="index.jsp" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
+
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
+							
+<!-- 							<li> -->
+<!-- 								<a href="../index.jsp">Home</a> -->
+<!-- 							</li> -->
+
 							<li>
 								<a href="index.jsp">HOME</a>
 							</li>
 
+
+	
+							
 							<li>
-								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
+								<a href="product/index.jsp">CLOTHES</a>
 								<ul class="sub-menu">						
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
+									<li><a href="../product/index.jsp">TOP</a></li>
+									<li><a href="../product/index.jsp">BOTTOM</a></li>
+									<li><a href="../product/index.jsp">DRESS</a></li>
+									<li><a href="../product/index.jsp">OUTER</a></li>
 								</ul>
 							</li>
 							
 							<li>
-								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
+								<a href="product/index.jsp">BAGS</a>
 								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS">CROSS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER">SHOULDER</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE">TOTE</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
+									<li><a href="../product/bags.jsp">CROSS</a></li>
+									<li><a href="../product/bags.jsp">BUCKET</a></li>
+									<li><a href="../product/bags.jsp">SHOULDER</a></li>
+									<li><a href="../product/bags.jsp">TOTE</a></li>
+									<li><a href="../product/bags.jsp">CLUTCH</a></li>
+									<li><a href="../product/bags.jsp">SHOPPER</a></li>
+									<li><a href="../product/bags.jsp">BACKPACK</a></li>
 								</ul>
 							</li>
+							
+							
 							<li>
-								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
+								<a href="product/index.jsp">SHOES</a>
 								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
+									<li><a href="../product/shoes.jsp">SNEAKERS</a></li>
+									<li><a href="../product/shoes.jsp">BOOTS</a></li>
+									<li><a href="../product/shoes.jsp">LOAFERS</a></li>
+								    <li><a href="../product/shoes.jsp">SANDALS</a></li>
+								    <li><a href="../product/shoes.jsp">SLIPPER</a></li>	
 								</ul>
 							</li>
+
 							<li class="label1" data-label1="hot">
-								<a href="CommList.co">COMMUNITY</a>
+								<a href="board/blog.jsp">COMMUNITY</a>
 							</li>
 						</ul>
 					</div>	
+
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
+
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</div>
+
 						<a href="#" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
@@ -129,11 +151,12 @@
 				</nav>
 			</div>	
 		</div>
+
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="index.html"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
@@ -150,6 +173,7 @@
 					<i class="zmdi zmdi-favorite-outline"></i>
 				</a>
 			</div>
+
 			<!-- Button show menu -->
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
 				<span class="hamburger-box">
@@ -157,6 +181,8 @@
 				</span>
 			</div>
 		</div>
+
+
 		<!-- Menu Mobile -->
 		<div class="menu-mobile">
 			<ul class="topbar-mobile">
@@ -179,30 +205,39 @@
 					</div>
 				</li>
 			</ul>
+
 			<ul class="main-menu-m">
-				<li>
-					<a href="product/index.jsp">SHOP</a>
-				</li>
-				<li>
-					<a href="product/index.jsp">BAGS</a>
-				</li>
-				<li>
-					<a href="product/index.jsp">CLOTHES</a>
-				</li>
-				<li>
-					<a href="product/index.jsp">SHOES</a>
-				</li>
-				<li>
-					<a href="board/blog.jsp">COMMUNITY</a>
-				</li>
+							<li>
+								<a href="product/index.jsp">SHOP</a>
+							</li>
+
+
+							<li>
+								<a href="product/index.jsp">BAGS</a>
+							</li>
+							
+							
+							<li>
+								<a href="product/index.jsp">CLOTHES</a>
+							</li>
+							
+							<li>
+								<a href="product/index.jsp">SHOES</a>
+							</li>
+
+							<li>
+								<a href="board/blog.jsp">COMMUNITY</a>
+							</li>
 			</ul>
 		</div>
+
 		<!-- Modal Search -->
 		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
 			<div class="container-search-header">
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
+
 				<form class="wrap-search-header flex-w p-l-15">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>

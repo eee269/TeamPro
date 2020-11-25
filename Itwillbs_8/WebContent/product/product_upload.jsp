@@ -74,7 +74,21 @@ function ncode(val) {
 	}
 	
 }
+$(function() {
+	$('input:checkbox[name=goods_color]').click(function() {
+		var color = this.value;
+		$('input:checkbox[name=goods_size]').click(function() {
+			var size = this.value;
+			$('div#goods_stock').append("<span>" + color + "/" + size + "</span>&nbsp;&nbsp;&nbsp;" + 
+					"<input type='text' name='" +  color + "/" + size + "' id='" +  color + "/" + size + "' "+
+						"style='border-bottom: 0.3px solid lightgray; width: 100px'  required='required'><br>");
+		});
+	});	
+})
 
+
+
+// checkbox 선택한 값 넘겨주기
 function checkboxswift() {
 	var colorLength = $('input:checkbox[name=goods_color]:checked').length;
 	var sizeLength = $('input:checkbox[name=goods_size]:checked').length;
@@ -87,17 +101,6 @@ function checkboxswift() {
 		return ;
 	}
 	
-// 	$('input:checkbox[name=goods_color]:checked').each(function() {
-// 		colorVal += $(this).val() + "/";
-// 	});
-// 	$('input:checkbox[name=goods_size]:checked').each(function() {
-// 		sizeVal += $(this).val() + "/";
-// 	});
-	
-	$('#colorLen').val(colorLength);
-	$('#sizeLen').val(sizeLength);
-	
-// 	alert("color: " + colorVal + ", size: " + sizeVal);
 	
 	$('#productUpload').submit();
 }
@@ -208,17 +211,19 @@ function checkboxswift() {
 				<td><input type="file" name="sfile3" id="sfile3"
 					style="padding: 10px 25px;"></td>
 				<td>상품 수량</td>
-				<td><input type="text" name="goods_stock" id="goods_stock"
-				style="border-bottom: 0.3px solid lightgray; width: 400px"  required="required"></td>
+				<td>
+				<div id="goods_stock">
+<!-- 				<span>color/size</span> -->
+<!-- 				<input type="text" name="" id="" -->
+<!-- 				style="border-bottom: 0.3px solid lightgray; width: 200px"  required="required"> -->
+				</div>
+				</td>
 			</tr>
 			
 		</table>
 			<br>
 			<input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;">
-		
-		
-		<input type="hidden" id="colorLen" name="colorLen">
-		<input type="hidden" id="sizeLen" name="sizeLen">
+			
 	</form>
 
 </body>

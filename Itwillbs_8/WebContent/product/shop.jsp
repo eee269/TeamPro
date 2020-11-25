@@ -44,8 +44,6 @@
 <div class="cboth sub_top_ban <%=small%>">
 	<div class="width1260 sub_top_text"><%=xcode%></div>
 </div>
-
-
 <!-- 대분류&소분류 -->
 <div class="cate-wrap">
 	<div class="bcate"><%if(type.equals("X")){%><%=xcode%><%}else if(type.equals("N")){%><%=ncode%><%} %></div>
@@ -65,6 +63,7 @@
 
 
 <!-- 베스트Product 시작-->
+<div><a href="ProductUpload.po">상품등록페이지이동(임시)</a></div>
 <div class="item-wrap best-item">
 	<div class="sub_recommend_title">BEST PRODUCTS</div>
 	<div class="item-cont">
@@ -72,19 +71,19 @@
 		
 		<dl class="item-list">
 			<dt class="thumb">
-				<a href="product_detail.jsp"
+				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
-					src="http://oryany.co.kr/shopimages/nasign/0010010007552.jpg?1597366181"></a>
+					src="product/uploadImg/<%=bestList.get(i).getMain_img()%>"></a>
 
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a href="product_detail.jsp"
-						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">루키
-							크로스바디</a></li>
+					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
+						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=bestList.get(i).getName() %>
+							</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
-					<li class="prd-price"><span class="price"> 219,000원 </span></li>
+					<li class="prd-price"><span class="price"> <%=bestList.get(i).getPrice()%>\ </span></li>
 					<li class="prd-ico"><span class="MK-product-icons"><img
 							src="http://oryany.co.kr/shopimages/nasign/prod_icons/3858?1596008790"
 							class="MK-product-icon-2"></span></li>
@@ -133,9 +132,9 @@
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<a href="ProductDetail.po"
+						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
-							src="images/product-01.jpg" alt="IMG-PRODUCT">
+							src="product/uploadImg/<%=productList.get(i).getMain_img() %>" alt="IMG-PRODUCT">
 						</a> <a href="ProductDetail.po"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -145,8 +144,8 @@
 						<div class="block2-txt-child1 flex-col-l ">
 							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a> <span class="stext-105 cl3"> $16.64
-							</span>
+								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a>
+								<span class="stext-105 cl3"> <%=productList.get(i).getPrice()%>원</span>
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">
@@ -200,6 +199,7 @@
 <!-- 페이징코드끝 -->		
 	</div>
 </div>
+
 
 
 
