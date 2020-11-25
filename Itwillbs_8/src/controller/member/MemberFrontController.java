@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.ControlMemberListAction;
+import action.member.DeleteMemberAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -36,7 +37,9 @@ public class MemberFrontController extends HttpServlet {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/ControlMember.mo")) {
+		}
+		// -------------전체 멤버 리스트 보기----------------
+		else if(command.equals("/ControlMemberList.mo")) {
 			forward = new ActionForward();
 			
 			action = new ControlMemberListAction();
@@ -46,6 +49,17 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} 
+		// -------------회원 삭제(탈퇴)----------------
+		else if(command.contains("/DeleteMember.mo")) {
+			forward = new ActionForward();
+			
+			action = new DeleteMemberAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {

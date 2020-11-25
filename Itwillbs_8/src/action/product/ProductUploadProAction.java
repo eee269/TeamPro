@@ -27,7 +27,6 @@ public class ProductUploadProAction implements Action {
 		String saveFolder = "/product/uploadImg";
 		
 		String realFolder = context.getRealPath(saveFolder);
-		System.out.println("실제업로드"+realFolder);
 		
 		int fileSize = 1024*1024*10;
 		
@@ -61,7 +60,6 @@ public class ProductUploadProAction implements Action {
 		String basicCode = String.format("%4d", productUploadService.getMaxBasicCode()).replace(' ', '0');
 		
 		
-		
 		ProductBean productBean = new ProductBean();
 		productBean.setBasicCode(basicCode);
 		productBean.setName(multi.getParameter("goods_name"));
@@ -69,20 +67,20 @@ public class ProductUploadProAction implements Action {
 		productBean.setStock(Integer.parseInt(multi.getParameter("goods_stock")));
 		productBean.setMain_img(mainImg);
 		productBean.setSub_img(subImg);
-	      String xcode = multi.getParameter("xcode");
-	      String ncode = "";
-	      
-	      productBean.setXcode(xcode);
-	      
-	      if(xcode.equals("CLOTHES")) {
-	         ncode = multi.getParameter("clothes");
-	      } else if(xcode.equals("BAGS")) {
-	         ncode = multi.getParameter("bag");
-	      } else if(xcode.equals("SHOES")) {
-	         ncode = multi.getParameter("shoes");
-	      } 
-	      productBean.setNcode(ncode);
 
+		String xcode = multi.getParameter("xcode");
+		String ncode = "";
+		
+		productBean.setXcode(xcode);
+		
+		if(xcode.equals("CLOTHES")) {
+			ncode = multi.getParameter("clothes");
+		} else if(xcode.equals("BAGS")) {
+			ncode = multi.getParameter("bag");
+		} else if(xcode.equals("SHOES")) {
+			ncode = multi.getParameter("shoes");
+		} 
+		productBean.setNcode(ncode);
 		
 		// 상품을 DB에 넣기
 		boolean isSuccessProduct = productUploadService.uploadProduct(productBean);
@@ -127,9 +125,8 @@ public class ProductUploadProAction implements Action {
 			}
 		}
 		 if(isSuccessOption){
-			 	System.out.println("왔니?");
 				forward = new ActionForward();
-				forward.setPath("../member/control_goods.jsp");
+				forward.setPath("/member/control_goods.jsp");
 				forward.setRedirect(true);
 			}
 		
