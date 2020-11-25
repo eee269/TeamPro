@@ -41,7 +41,7 @@ public class CartDAO extends Exception {
 		
 		
 		try {
-			String sql = "SELECT * FROM cart ";
+			String sql = "SELECT * FROM cart ORDER BY num DESC";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

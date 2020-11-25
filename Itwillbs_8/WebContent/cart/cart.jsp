@@ -79,35 +79,13 @@
 								</div></th>
 						</tr>
 					</thead>
-					<tfoot>
-						<tr>
-							<td colspan="8">
-								<div class="tb-right">
-									<span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
-										class="MK_chg_none_groupsale_total_price_sell MK_change_price"></span>원
-									</span><span class="MK_total_vat">+ 부가세 <span
-										class="MK_chg_total_vat MK_change_price">0</span>원
-									</span><span class="MK_total_delivery">+ 배송비 <span
-										class="MK_chg_total_delivery MK_change_price">0</span>원
-									</span><span class="MK_total_delivery_add">+ 추가배송비 <span
-										class="MK_chg_total_delivery_add MK_change_price">0</span>원
-									</span><span class="MK_group_sale_price">- 그룹할인 원</span><span
-										class="MK_total_package_price">- 세트상품할인 <span
-										class="MK_chg_total_package_price MK_change_price">0</span>원
-									</span>= <strong><span class="MK_total_price"><span
-											class="MK_chg_total_price MK_change_price">219,000</span>원</span></strong><br>
-									<span class="MK_total_reserve"> 적립금 <span
-										class="MK_chg_total_reserve MK_change_price">4,380</span>원
-									</span><span class="MK_group_sale_reserve"> (그룹적립금 원) </span><span
-										class="MK_total_point"> / 포인트 </span>
-								</div>
-							</td>
-						</tr>
-					</tfoot>
+					
 					<tbody>
 					
 					<%
-						for(int i =0; i < cartList.size(); i++){
+						int coin = 0;
+						for(int i = 0; i < cartList.size(); i++){
+							 coin += cartList.get(i).getPrice();
 					%>
 						<tr class="nbg">
 							<!-- 2019.07.03 -->
@@ -158,7 +136,7 @@
 							</td>
 							<td><div class="tb-center">4,380</div></td>
 							<td><div class="tb-center tb-bold tb-price">
-									<span><%=cartList.get(0).getPrice() %></span>원
+									<span><%=cartList.get(i).getPrice() %></span>원
 								</div></td>
 							<td><div class="tb-center tb-delivery">
 									<div class="MS_tb_delivery">
@@ -194,6 +172,31 @@
 						}
 						%>
 					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="8">
+								<div class="tb-right">
+									<span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
+										class="MK_chg_none_groupsale_total_price_sell MK_change_price"><%=coin %></span>원
+									</span><span class="MK_total_vat">+ 부가세 <span
+										class="MK_chg_total_vat MK_change_price">0</span>원
+									</span><span class="MK_total_delivery">+ 배송비 <span
+										class="MK_chg_total_delivery MK_change_price">  0  </span>원
+									</span><span class="MK_total_delivery_add">+ 추가배송비 <span
+										class="MK_chg_total_delivery_add MK_change_price">0</span>원
+									</span><span class="MK_group_sale_price">- 그룹할인 원</span><span
+										class="MK_total_package_price">- 세트상품할인 <span
+										class="MK_chg_total_package_price MK_change_price">0</span>원
+									</span>= <strong><span class="MK_total_price"><span
+											class="MK_chg_total_price MK_change_price">219,000</span>원</span></strong><br>
+									<span class="MK_total_reserve"> 적립금 <span
+										class="MK_chg_total_reserve MK_change_price">4,380</span>원
+									</span><span class="MK_group_sale_reserve"> (그룹적립금 원) </span><span
+										class="MK_total_point"> / 포인트 </span>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 			<!-- .table-fill-prd -->

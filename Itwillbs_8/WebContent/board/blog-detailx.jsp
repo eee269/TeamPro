@@ -378,7 +378,7 @@
 	</section>	
 	
 		
-<jsp:include page="/footer.jsp"/>
+<jsp:include page="../inc/footer.jsp"/>
 © 2020 GitHub, Inc.
 Terms
 Privacy
