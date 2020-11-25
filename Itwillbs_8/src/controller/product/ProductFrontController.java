@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.product.ProductDetailAction;
+import action.product.ControlProductListAction;
 import action.product.ProdReviewWriteAction;
+import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUploadProAction;
 import vo.ActionForward;
@@ -58,6 +60,28 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// -------------전체 상품 리스트 보기----------------
+		else if(command.equals("/ControlProductList.po")) {
+			forward = new ActionForward();
+							
+			action = new ControlProductListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		// -------------상품 삭제----------------
+		else if(command.equals("/ProductDelete.po")) {
+			forward = new ActionForward();
+									
+			action = new ProductDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		// --------------------상품 댓글 쓰기--------------------
 		else if(command.equals("/ProdReviewWrite.po")) {
 			System.out.println("ProdReviewWriteAction 포워딩");

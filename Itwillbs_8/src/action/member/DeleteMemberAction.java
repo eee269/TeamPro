@@ -1,5 +1,7 @@
 package action.member;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +20,21 @@ public class DeleteMemberAction implements Action {
 		
 		DeleteMemberService deleteMemberService = new DeleteMemberService();
 		
-		request.setAttribute("id", id);
+		boolean isDelete = deleteMemberService.deleteMember(id);
+		
+		if(!isDelete) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+
+			out.println("<script>");
+			out.println("alert('회원 삭제 실패!')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			forward = new ActionForward();
+			forward.setPath("ControlMemberList.mo");
+			forward.setRedirect(true);
+		}
 		
 		return forward;
 	}

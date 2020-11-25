@@ -26,7 +26,7 @@ for(int i=0; i<memberList.size();i++){
 	String id = member.getId();
 %>
 
-<tr><td><%=i %></td><td><%=id %></td><td><%=member.getEmail() %></td><td><%=member.getPass() %></td><td><%=member.getUsername() %></td>
+<tr><td><%=i+1 %></td><td><%=id %></td><td><%=member.getEmail() %></td><td><%=member.getPass() %></td><td><%=member.getUsername() %></td>
 <td><%=member.getImg() %></td><td><%=member.getPhone() %></td><td><%=member.getDate() %></td>
 <td><input class="in_bu" type="button" value="삭제" onclick="location.href='/DeleteMember.mo?id='+ <%=id%>"></td></tr><%
 }

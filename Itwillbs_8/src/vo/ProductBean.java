@@ -11,7 +11,7 @@ public class ProductBean {
 //	private String type;//상품 구분용
 	private String main_img;//메인이미지
 	private String sub_img;//상품설명이미지
-	private int stock;//상품재고량
+//	private int stock;//상품재고량
 	private int price;//상품가격
 	private int likey;//상품 좋아요수 
 	private Date date;//상품 넣을날짜
@@ -52,12 +52,12 @@ public class ProductBean {
 	public void setSub_img(String sub_img) {
 		this.sub_img = sub_img;
 	}
-	public int getStock() {
-		return stock;
-	}
-	public void setStock(int stock) {
-		this.stock = stock;
-	}
+//	public int getStock() {
+//		return stock;
+//	}
+//	public void setStock(int stock) {
+//		this.stock = stock;
+//	}
 	public int getPrice() {
 		return price;
 	}

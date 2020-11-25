@@ -5,6 +5,7 @@ public class ProductOptionBean {
 	private String basicCode;
 	private String color;
 	private String size;
+	private int stock;
 	
 	public String getProductCode() {
 		return productCode;
@@ -30,6 +31,14 @@ public class ProductOptionBean {
 	public void setBasicCode(String basicCode) {
 		this.basicCode = basicCode;
 	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+	
+	
 	
 	
 	

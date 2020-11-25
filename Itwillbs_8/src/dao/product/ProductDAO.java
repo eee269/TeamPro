@@ -84,7 +84,7 @@ public class ProductDAO {
 				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-				pb.setStock(rs.getInt("stock"));
+//				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
 				pb.setName(rs.getString("name"));
@@ -127,7 +127,7 @@ public class ProductDAO {
 				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-				pb.setStock(rs.getInt("stock"));
+//				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
 				pb.setName(rs.getString("name"));
@@ -168,7 +168,7 @@ public class ProductDAO {
 				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-				pb.setStock(rs.getInt("stock"));
+//				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
 				pb.setName(rs.getString("name"));
@@ -207,7 +207,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-				pb.setStock(rs.getInt("stock"));
+//				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
 				pb.setName(rs.getString("name"));
@@ -318,8 +318,8 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, stock, price) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
+					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, date) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, now())";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, productBean.getBasicCode());
 			ps.setString(2, productBean.getName());
@@ -327,8 +327,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			ps.setString(4, productBean.getNcode());
 			ps.setString(5, productBean.getMain_img());
 			ps.setString(6, productBean.getSub_img());
-			ps.setInt(7, productBean.getStock());
-			ps.setInt(8, productBean.getPrice());
+			ps.setInt(7, productBean.getPrice());
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -348,13 +347,14 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "opt(productcode, basicCode,color,size) "
-					+ "values(?, ?, ?, ?)";
+					+ "opt(productcode, basicCode,color,size, stock) "
+					+ "values(?, ?, ?, ?,?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, optionBean.getProductCode());
 			ps.setString(2, optionBean.getBasicCode());
 			ps.setString(3, optionBean.getColor());
 			ps.setString(4, optionBean.getSize());
+			ps.setInt(5, optionBean.getStock());
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -414,11 +414,10 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				productBean.setBasicCode(rs.getString("basicCode"));
 				productBean.setXcode(rs.getString("xcode"));
 				productBean.setNcode(rs.getString("ncode"));
-				productBean.setType(rs.getString("type"));
 				productBean.setMain_img(rs.getString("main_img"));
 				productBean.setSub_img(rs.getString("sub_img"));
 				productBean.setName(rs.getString("name"));
-				productBean.setStock(rs.getInt("stock"));
+//				productBean.setStock(rs.getInt("stock"));
 				productBean.setPrice(rs.getInt("price"));
 				productBean.setLikey(rs.getInt("likey"));
 				
@@ -434,5 +433,92 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		}
 		
 		return productList;
+	}
+	public ArrayList<ProductBean> selectProductList() {
+		ArrayList<ProductBean> productList = null;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+				
+		try {
+			String sql = "SELECT * FROM product ORDER BY date desc";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			productList = new ArrayList<ProductBean>();
+			
+			while(rs.next()) {
+				ProductBean productBean = new ProductBean();
+				
+				productBean.setBasicCode(rs.getString("basicCode"));
+				productBean.setXcode(rs.getString("xcode"));
+				productBean.setNcode(rs.getString("ncode"));
+				productBean.setMain_img(rs.getString("main_img"));
+				productBean.setSub_img(rs.getString("sub_img"));
+				productBean.setName(rs.getString("name"));
+//				productBean.setStock(rs.getInt("stock"));
+				productBean.setPrice(rs.getInt("price"));
+				productBean.setLikey(rs.getInt("likey"));
+				productBean.setDate(rs.getDate("date"));
+				
+				
+				productList.add(productBean);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectProductList() 오류 "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		return productList;
+	}
+
+	// 상품 삭제
+	public int deleteProduct(String basicCode) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from product where basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return count;
+	}
+
+	public int countOption(String basicCode) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select count(*) from opt where basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return 0;
 	}
 }
