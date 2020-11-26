@@ -65,6 +65,12 @@ public class CartFrontController extends HttpServlet {
 			System.out.println("컨트롤러 - CartAllDelete ");
 			
 			action = new cartAllDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("CartAllDelete" + e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		
