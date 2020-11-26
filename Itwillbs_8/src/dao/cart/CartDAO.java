@@ -108,11 +108,11 @@ public class CartDAO extends Exception {
 		
 		PreparedStatement pstmt = null;
 		
-		String sql = "DELETE FROM cart WHERE member_id = admin";
+		String sql = "DELETE FROM cart WHERE member_id = ?";
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setString(1, member_id);
 			AllCount = pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
