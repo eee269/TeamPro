@@ -20,6 +20,7 @@ public class OptionDeleteAction implements Action {
 		String basicCode = request.getParameter("basicCode");
 		OptionDeleteService optionDeleteService = new OptionDeleteService();
 		
+		System.out.println("OptionDeleteAction");
 		boolean isDelete = optionDeleteService.getDeleteOption(productCode);
 		
 		if(!isDelete) {

@@ -12,8 +12,8 @@ public class OptionDeleteService {
 		boolean isDelete = false;
 		
 		Connection con = getConnection();
-		
 		ProductDAO productDAO = ProductDAO.getInstance();
+		productDAO.setConnection(con);
 		int count = productDAO.deleteOption(productCode);
 
 		if(count > 0) {
@@ -33,9 +33,11 @@ public class OptionDeleteService {
 		
 		Connection con = getConnection();
 		ProductDAO productDAO = ProductDAO.getInstance();
+		productDAO.setConnection(con);
 		count = productDAO.countOption(basicCode);
 		
 		close(con);
+		
 		return count;
 	}
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.ControlMemberListAction;
+import action.order.ControlOrderListAction;
 import action.order.OrderProAction;
 import vo.ActionForward;
 
@@ -39,20 +40,21 @@ public class OrderFrontController extends HttpServlet{
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/OrderList.or")) {
+		}
+		
+		//-------------------------주문 관리 페이지--------------------------------
+		else if(command.equals("/ControlOrderList.or")) {
 			forward = new ActionForward();
 			
-			action = new ControlMemberListAction();
+			action = new ControlOrderListAction();
 			try {
-				System.out.println("OrderListAction으로 포워딩");
-
 				forward = action.execute(request, response);
 			} catch(Exception e) {
 				System.out.println("OrderListAction으로 포워딩 중 오류! - " +e.getMessage());
 
 				e.printStackTrace();
 			}
-		} 
+		}
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {

@@ -1,3 +1,7 @@
+<%@page import="vo.DetailOrderBean"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.OrderBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,19 +9,85 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/control_mem_order.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/control.css" />
+<script type="text/javascript">
+function changeStatus(code) {
+	
+}
+</script>
+
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>
-<h1>Admin - </h1><h3>&nbsp;Order</h3>
-<table>
-<tr><th>행번호</th><th>주문번호</th><th>주문날짜</th><th>주문자(id/email)</th><th>수신인</th><th>핸드폰번호</th><th>주소</th><th>상품명</th><th>색상</th><th>사이즈</th><th>결제수단</th><th>배송현황</th><th>주문취소/교환/환불</th></tr>
+<%
+ArrayList<OrderBean> mainorder = (ArrayList)request.getAttribute("mainorderList");
+HashMap<String, ArrayList<DetailOrderBean>> detailorder = (HashMap) request.getAttribute("detailorderList");
+%>
+<h1 style="margin: 50px 100px">Admin - Order</h1>
+<table style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
+<tr>
+<th>주문번호</th>
+<th>주문날짜</th>
+<th>주문자(id/email)</th>
+<th>수신인</th>
+<th>핸드폰번호</th>
+<th>주소</th>
+<th>상품명</th>
+<th>결제수단</th>
+<th>배송현황</th>
+<th>주문취소</th>
+</tr>
 
 <% 
-for(int i=0;i<10;i++){
+if(mainorder!=null) {
+
+for(int i=mainorder.size()-1; i>=0; i--) {
+	OrderBean mor = new OrderBean();
+	mor = mainorder.get(i);
+	String mainorder_code = mor.getCode();
+	
+	ArrayList<DetailOrderBean> subDetailorder = detailorder.get(mainorder_code);
+	int total = 0, cash = 0;
 %>
-<tr><td><%=i %></td><td>주문번호</td><td>주문날짜</td><td>주문자(id/email)</td><td>수신인</td><td>핸드폰번호</td><td>주소</td><td>상품명</td><td>색상</td><td>사이즈</td><td>결제수단</td><td><select><option>결제완료</option><option>상품준비중</option><option>배송중</option><option>배송완료</option></select></td><td><select><option>주문취소</option><option>교환</option><option>환불</option></select></td></tr>
+<tr>
+<td><%=mor.getCode() %></td>
+<td><%=mor.getDate() %></td>
+<td><%=mor.getMember_id() %></td>
+<td><%=mor.getName() %></td>
+<td><%=mor.getPhone() %></td>
+<td><%=mor.getAddress() %></td>
+<td>
 <%
+for(int j=0; j<detailorder.size(); j++) {
+	DetailOrderBean dor = new DetailOrderBean();
+	dor = subDetailorder.get(j);
+	total++;
+	cash += dor.getPrice();
+%>
+<span><%=dor.getName() %> (<%=dor.getColor() %> / <%=dor.getSize() %>): <%=dor.getCnt() %> 개  <%=dor.getPrice() %></span>
+<%
+}
+%>
+</td>
+<td>결제수단</td>
+<td>
+<select id="status" onfocus="<%=mor.getStatus()%>">
+	<option value="결제완료">결제완료</option>
+	<option value="상품준비중">상품준비중</option>
+	<option value="배송중">배송중</option>
+	<option value="배소완료">배송완료</option>
+</select>
+<input type="button" value="적용" onclick="changeStatus(<%=mainorder_code%>)"></td>
+<td>
+<!-- <select id=""> -->
+<!-- 	<option>주문취소</option><option>교환</option><option>환불</option> -->
+<!-- </select> -->
+<input type="button" value="주문취소" onclick="location.href='DeleteOrder.or?code=<%=mainorder_code%>'"></td>
+<td colspan="10"><span>총 <%=total %> 개 구매, <%=cash %> 원</span></td>
+</tr>
+<%
+}
+
 }
 %>
 </table>

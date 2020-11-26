@@ -35,7 +35,6 @@ public class ControlProductListAction implements Action {
 			
 			String basicCode = product.getBasicCode();
 			int optCount = controlProductListService.getOptionCount(basicCode);
-			System.out.println(optCount);
 			for(int j=0; j<optCount; j++) {
 				subOptionList = new ArrayList<ProductOptionBean>();
 				subOptionList = controlProductListService.getOptionList(basicCode);
