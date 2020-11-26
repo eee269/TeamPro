@@ -52,12 +52,13 @@ public class CartDAO extends Exception {
 			
 			cart.setNum(rs.getInt("num"));
 			cart.setCnt(rs.getInt("cnt"));
+			cart.setProduct_name(rs.getString("product_name"));
+			cart.setPrice(rs.getInt("price"));
 			cart.setColor(rs.getString("color"));
 			cart.setSize(rs.getString("size"));
 			cart.setMember_id(rs.getString("member_id"));
-			cart.setGoods_code(rs.getString("goods_code"));
-			cart.setPrice(rs.getInt("price"));
-			cart.setGoods_name(rs.getString("goods_name"));
+			cart.setProduct_basicCode(rs.getString("product_basicCode"));
+			cart.setOpt_productCode(rs.getString("opt_productCode"));
 			
 			CartList.add(cart);
 			
@@ -76,7 +77,7 @@ public class CartDAO extends Exception {
 	 return CartList;
 	}
 	
-
+	// 개별 삭제
 	public int cartDelete(int num) {
 		System.out.println("CartDAO - cartDelete()");
 		int deleteCount = 0;
@@ -99,7 +100,29 @@ public class CartDAO extends Exception {
 		return deleteCount;
 	}
 	
-	
+	// 전체 삭제
+	public int cartAllDelete(String member_id) {
+		System.out.println("CartDAO - cartAllDelete()");
+		
+		int AllCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM cart WHERE member_id = ?";
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			AllCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("CartDAO - cartAllDelete()");
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return AllCount;
+	}
 	
 	
 	

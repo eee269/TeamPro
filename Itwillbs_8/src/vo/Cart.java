@@ -6,15 +6,38 @@ public class Cart {
 
 	private int num;
 	private int cnt;
-	private String goods_name;
+	private String product_name;
 	private int price;
 	private String color;
 	private String size;
 	private String member_id;
-	private String goods_code;
+	private String product_basicCode;
+	private String opt_productCode;
+	
+	public String getProduct_name() {
+		return product_name;
+	}
 
-	
-	
+	public void setProduct_name(String product_name) {
+		this.product_name = product_name;
+	}
+
+	public String getProduct_basicCode() {
+		return product_basicCode;
+	}
+
+	public void setProduct_basicCode(String product_basicCode) {
+		this.product_basicCode = product_basicCode;
+	}
+
+	public String getOpt_productCode() {
+		return opt_productCode;
+	}
+
+	public void setOpt_productCode(String opt_productCode) {
+		this.opt_productCode = opt_productCode;
+	}
+
 	public int getNum() {
 		return num;
 	}
@@ -31,13 +54,6 @@ public class Cart {
 		this.cnt = cnt;
 	}
 
-	public String getGoods_name() {
-		return goods_name;
-	}
-
-	public void setGoods_name(String goods_name) {
-		this.goods_name = goods_name;
-	}
 
 	public int getPrice() {
 		return price;
@@ -71,12 +87,6 @@ public class Cart {
 		this.member_id = member_id;
 	}
 
-	public String getGoods_code() {
-		return goods_code;
-	}
-
-	public void setGoods_code(String goods_code) {
-		this.goods_code = goods_code;
-	}
+	
 
 }
