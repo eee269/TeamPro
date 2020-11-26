@@ -35,7 +35,7 @@ public class cartAllDeleteAction implements Action {
 			out.print("alert('장바구니를 비웁니다')");
 			out.print("</script>");
 			forward = new ActionForward();
-			forward.setPath("Cart.cart");
+			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 			
 		}
