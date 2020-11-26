@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.ControlMemberListAction;
-import action.member.ControlProductListAction;
-import action.member.DeleteMemberAction;
+import action.member.MemberDeleteAction;
 import action.member.MemberLoginProAction;
+import action.product.ControlProductListAction;
 import vo.ActionForward;
 
 @WebServlet("*.mo")
@@ -50,22 +50,12 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		} 
-		// -------------전체 상품 리스트 보기----------------
-			else if(command.equals("/ControlProductList.mo")) {
-				forward = new ActionForward();
-					
-				action = new ControlProductListAction();
-				try {
-					forward = action.execute(request, response);
-				} catch(Exception e) {
-					e.printStackTrace();
-				}
-			} 
+		
 		// -------------회원 삭제(탈퇴)----------------
-		else if(command.contains("/DeleteMember.mo")) {
+		else if(command.equals("/MemberDelete.mo")) {
 			forward = new ActionForward();
 			
-			action = new DeleteMemberAction();
+			action = new MemberDeleteAction();
 			try {
 				forward = action.execute(request, response);
 			} catch(Exception e) {

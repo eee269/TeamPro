@@ -11,23 +11,7 @@ import vo.MemberBean;
 
 public class ControlMemberListService {
 
-	public int getListCount() {
-		int count=0;
-		
-		Connection con = getConnection();
-		
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		
-		memberDAO.setConnection(con);
-		
-		count = memberDAO.getListCount();
-		
-		close(con);
-		
-		return count;
-	}
-
-	public ArrayList<MemberBean> getMemberList(int page, int limit) {
+	public ArrayList<MemberBean> getMemberList() {
 		ArrayList<MemberBean> memberList = null;
 		
 		Connection con = getConnection();
@@ -36,7 +20,7 @@ public class ControlMemberListService {
 		
 		memberDAO.setConnection(con);
 		
-		memberList = memberDAO.selectMemberList(page, limit);
+		memberList = memberDAO.selectMemberList();
 		
 		close(con);
 		

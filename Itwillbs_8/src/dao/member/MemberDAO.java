@@ -27,43 +27,16 @@ public class MemberDAO {
 		this.con = con;
 	}
 
-	public int getListCount() {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select count(*) from member";
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			System.out.println("setConnection() 오류 "+e.getMessage());
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return count;
-	}
 
-	public ArrayList<MemberBean> selectMemberList(int page, int limit) {
+	public ArrayList<MemberBean> selectMemberList() {
 		ArrayList<MemberBean> memberList = null;
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
-		
 		try {
-			String sql = "SELECT * FROM member ORDER BY date desc limit ?,?";
+			String sql = "SELECT * FROM member ORDER BY date desc";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, limit);
 			rs = ps.executeQuery();
 			
 			memberList = new ArrayList<MemberBean>();
@@ -92,7 +65,26 @@ public class MemberDAO {
 		
 		return memberList;
 	}
-	
+
+
+	public int deleteMember(String id) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from member where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return count;
+	}
 	
 
 }
