@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.cart.cartAllDeleteAction;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
 import vo.ActionForward;
 
 
-@WebServlet("*.cart")
+@WebServlet("*.ca")
 public class CartFrontController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
@@ -31,7 +32,7 @@ public class CartFrontController extends HttpServlet {
 		ActionForward forward = null;
 		
 		
-		if(command.equals("/Cart.cart")) {
+		if(command.equals("/Cart.ca")) {
 			System.out.println("컨트롤러 - Cart.cart 로 포워딩");
 			
 			action = new cartListAction();
@@ -47,7 +48,7 @@ public class CartFrontController extends HttpServlet {
 				
 			}
 			
-		} else if(command.equals("/CartDelete.cart")) {
+		} else if(command.equals("/CartDelete.ca")) {
 			System.out.println("컨트롤러 - CartDelete");
 			
 			action = new cartDeleteAction();
@@ -59,6 +60,11 @@ public class CartFrontController extends HttpServlet {
 				System.out.println("CartDelete" + e.getMessage());
 				e.printStackTrace();
 			}
+	
+		} else if(command.equals("/CartAllDelete.ca")) {
+			System.out.println("컨트롤러 - CartAllDelete ");
+			
+			action = new cartAllDeleteAction();
 		}
 		
 		
