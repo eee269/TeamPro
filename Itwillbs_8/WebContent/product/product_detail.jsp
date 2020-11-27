@@ -228,10 +228,9 @@
 			// var goods_size = this.goods_size.value;
 			var rating = $('#rating1').val();
 			var content=$('#prw_content').val();
-			var file=$('#prw_file').val();
+			var product_img=$('#prw_file').val();
 
 			<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
-
 			if(rating == 0) {
 				alert("별점을 입력하세요");
 				$('#rating1').focus();
@@ -455,17 +454,6 @@ ChannelIO('boot', settings);
 						</div>
 					</div>
 
-
-
-
-
-
-
-
-
-
-
-
 					<%-- 좋아요 + 각종 공유 / yj --%>
 					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 						<div class="flex-m bor9 p-r-10 m-r-11">
@@ -525,9 +513,6 @@ ChannelIO('boot', settings);
 						</div>
 					</form>
 
-
-
-
 					<div id="videotalk_area"></div>
 					<!-- [OPENEDITOR] -->
 					<table width="750" align="center" border="0" cellspacing="0"
@@ -567,20 +552,12 @@ ChannelIO('boot', settings);
 						</tbody>
 					</table>
 
-
-
-
-
 					&gt;
 					<!-- 몰티비 플레이어 노출 위치 -->
 					<div id="malltb_video_player"
 						style="margin-top: 10px; margin-bottom: 10px; text-align: center; display: none;"></div>
 
 				</div>
-
-
-
-
 
 				<a name="reviewboard"></a>
 				<div class="cboth pdt100"></div>
@@ -603,25 +580,20 @@ ChannelIO('boot', settings);
 					</div>
 					<div id="writePowerReview">
 						<div class="PR15N01-write">
-							<form name="prw_form" id="prw_form" action="ProdReviewWrite.po"
-								method="post" autocomplete="off">
+							<form name="prw_form" id="prw_form" action="ProdReviewWrite.po" method="post" autocomplete="off" enctype="multipart/form-data">
 								<p><strong>별점을 매겨주세요</strong></p>
 								<!-- 별점 -->
 								<div class="rat">
-									<input type="number" name="rating" id="rating1" class="rating text-warning" value="0" />
+									<input type="number" name="starScore" id="rating1" class="rating text-warning" value="0" />
 								</div>
 								<!-- 별점 -->
-
 								<%-- 여기 input 들은 ${'변수'} 이런 형식으로 세션 아이디의 정보 받아오도록하기 / yj --%>
-								<input type="hidden" name="order_num" value=""> 
-								<input type="hidden" name="id" value=""> 
-								<textarea name="content" id="prw_content"
-									placeholder="리뷰 내용을 입력해주세요" required></textarea>
+								<input type="hidden" name="product_basicCode" value="0001"> 
+								<input type="hidden" name="member_id" value="tiger"> 
+								<textarea name="content" id="prw_content" placeholder="리뷰 내용을 입력해주세요" required></textarea>
 								<div class="thumb-wrap"></div>
-								<input type="file" name="file" class="trick file-attach"
-									id="prw_file"> 
-								<input type="submit" value="리뷰 등록" class="lnk-review"
-									style="text-align: right; padding: 20px 50px; cursor: pointer;">
+								<input type="file" name="product_img" class="trick file-attach" id="prw_file"> 
+								<input type="submit" value="리뷰 등록" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
 							</form>
 						</div>
 					</div>
@@ -665,9 +637,6 @@ ChannelIO('boot', settings);
 							<strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
 						</p>
 					</div>
-					<%
-						for(int i=0; i<reviewList.size(); i++){
-					%>
 					<div class="tabs">
 						<ul>
 							<li class="tab signin active"><a href="#signin">포토리뷰()</a></li>
@@ -676,30 +645,34 @@ ChannelIO('boot', settings);
 							<!-- 일반리뷰(db연동값삽입) -->
 						</ul>
 					</div>
-
+					<%
+						for(int i=0; i<reviewList.size(); i++){
+					%>
 					<%-- 리뷰들 형식 반복해서 데이터 넣기 --%>
 					<div class="content">
-
-						<%-- 포토리뷰--%>
+						<%-- 리뷰--%>
+					<%if(reviewList.get(i).getProduct_img()!=null){ %>
 						<div class="signin-cont cont">
+					<%}else{ %>
+						<div class="signup-cont cont">
+					<%} %>
 							<ul class="PR15N01-review-wrap">
 								<li id="power_review_block995509" class="power-review-list-box">
 									<dl class="desc">
 										<dt class="first">작성자</dt>
-										<dd><%=reviewList.get(i).getUsername() %></dd>
+										<dd><%=reviewList.get(i).getMember_id() %></dd>
 										<dt>작성일</dt>
 										<dd><%=reviewList.get(i).getDate() %></dd>
 										<dt>조회수</dt>
-										<dd>
-											<span id="power_review_showhits">readCount</span>
-										</dd>
+										<dd><span id="power_review_showhits">readCount</span></dd>
 									</dl>
 									<div class="hd-box">
 										<div class="star-icon">
-											<span class="mini_rat"> <input type="number"
-												class="rating text-default" value="5" data-readonly />
+											<span class="mini_rat"> 
+												<input type="number" class="rating text-default" value="5" data-readonly />
+											</span>
 											<!-- value에 각각 리뷰의별점값넣어야됨 -->
-											</span> <span class="survey">아주만족</span>
+											 <span class="survey">아주만족</span>
 										</div>
 									</div>
 									<div class="pr-options" style="display: none;">
@@ -719,17 +692,19 @@ ChannelIO('boot', settings);
 										</p>
 										<div class="ctr"></div>
 									</div>
+									<%if(reviewList.get(i).getProduct_img()!=null){ %>
 									<div class="photo-list">
 										<ul>
 											<li>
 											<a href="javascript:power_review_view_show('995509', '00000', '0', 'detail');">
 												<span></span> 
-												<img src="//board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg" alt="">
+												<img src="product/reviewUploadImg/<%=reviewList.get(i).getProduct_img() %>" alt="<%=reviewList.get(i).getProduct_img() %>">
 											</a>
 												<div class="attach-preview"></div>
 											</li>
 										</ul>
 									</div>
+									<%} %>
 									<div class="reply">
 										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> 
 										<a class="yes" href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
@@ -738,7 +713,8 @@ ChannelIO('boot', settings);
 								</li>
 							</ul>
 						</div>
-						<%} %>
+						<%
+						} %>
 						<!-- ------------------------------상품리뷰---------------------------------------  -->
 						<!-- .PR15N01-review-wrap -->
 						<div class="paging">
@@ -785,8 +761,6 @@ ChannelIO('boot', settings);
 						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
 					</ul>
 				</div>
-
-
 				<a name="brandqna_list"></a>
 				<div class="tit-detail">
 
@@ -816,9 +790,7 @@ ChannelIO('boot', settings);
 							</tr>
 						</thead>
 						<tbody>
-
 							<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
-
 							<tr class="nbg">
 								<td><div class="tb-center">
 										<span class="reviewnum">13</span>
@@ -844,31 +816,20 @@ ChannelIO('boot', settings);
 						</tbody>
 					</table>
 
-
-
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">
-
-								<a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list"
-									class="now">1</a> <a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
-
-								<a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list"
-									class="last">&gt;&gt;</a>
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list" class="now">1</a> 
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list" class="last">&gt;&gt;</a>
 							</div>
 						</div>
 						<div class="btm_write">
-							<a
-								href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
+							<a href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
 						</div>
-
 					</div>
 				</div>
 				<!-- .qna-list -->
-
 
 				<div class="cboth pdt100"></div>
 				<div id="page04" class="cboth pdt100"></div>
@@ -930,9 +891,6 @@ ChannelIO('boot', settings);
 
 
 				<!-- e: 상품 일반정보(상품정보제공 고시) -->
-
-
-
 
 				<div class="cboth pdt100"></div>
 				<div id="page05" class="cboth pdt100"></div>

@@ -3,6 +3,7 @@ package svc.product;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import dao.member.MemberDAO;
 import dao.product.ProdReviewDAO;
 
 import static db.JdbcUtil.*;
@@ -39,7 +40,11 @@ public class ProdReviewListService {
 		
 		// 상품 리뷰 리턴
 		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode);
-				
+		// 멤버 정보 리턴
+		MemberDAO memberDAO = MemberDAO.getInstance();
+		memberDAO.setConnection(con);
+//		memberDAO.selectMemberList()
+		
 		close(con);
 		
 		return reviewList;

@@ -23,11 +23,11 @@ DBCP(DataBase Connection Pool) 설정
 		name="jdbc/MySQL"
 		auth="Container"
 		type="javax.sql.DataSource"
-		username="root"
-		password="l8426k"
+		username="chairman"
+		password="1234"
 		driverClassName="com.mysql.jdbc.Driver"
 		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-		url="jdbc:mysql://localhost:3306/teampro"
+		url="jdbc:mysql://192.168.1.26:3306/teampro"
 		maxActive="500"
 		maxIdle="20"/>
 <!-- 		url="jdbc:mysql://192.168.1.26:3306/teampro" 공유 url -->
