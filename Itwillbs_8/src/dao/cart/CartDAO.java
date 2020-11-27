@@ -100,32 +100,6 @@ public class CartDAO extends Exception {
 		return deleteCount;
 	}
 	
-	// 전체 삭제
-	public int cartAllDelete(String member_id , int num) {
-		System.out.println("CartDAO - cartAllDelete()");
-		
-		int AllCount = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = "DELETE FROM cart WHERE member_id = ?";
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_id);
-			AllCount = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			System.out.println("CartDAO - cartAllDelete()");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return AllCount;
-	}
-	
-	
 	
 	
 	
