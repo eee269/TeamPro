@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteAction;
 import action.member.MemberLoginProAction;
@@ -38,7 +39,19 @@ public class MemberFrontController extends HttpServlet {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/MemberJoinPro.mo")) {
+			action = new MemberJoinProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MemberJoincom.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/join_complete.jsp");
 		}
+		
+		
 		// -------------전체 멤버 리스트 보기----------------
 		else if(command.equals("/ControlMemberList.mo")) {
 			forward = new ActionForward();

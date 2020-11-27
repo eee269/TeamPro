@@ -1,6 +1,9 @@
 package vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+
+
 
 public class MemberBean {
 	private String id;
@@ -8,7 +11,7 @@ public class MemberBean {
 	private String email;
 	private String username;
 	private String img;
-	private Date date;
+	private Timestamp date;
 	private int phone;
 	
 	public MemberBean() {}
@@ -53,11 +56,10 @@ public class MemberBean {
 		this.img = img;
 	}
 
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
-
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
