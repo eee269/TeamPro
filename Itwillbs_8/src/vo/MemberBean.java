@@ -1,7 +1,8 @@
 package vo;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
+
 
 
 
@@ -59,6 +60,7 @@ public class MemberBean {
 	public Timestamp getDate() {
 		return date;
 	}
+
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}

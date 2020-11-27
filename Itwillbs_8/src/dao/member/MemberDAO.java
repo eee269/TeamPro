@@ -52,7 +52,7 @@ public class MemberDAO {
 				memberBean.setUsername(rs.getString("username"));
 				memberBean.setImg(rs.getString("img"));
 				memberBean.setPhone(rs.getInt("phone"));
-				memberBean.setDate(rs.getDate("date"));
+				memberBean.setDate(rs.getTimestamp("date"));
 //				memberBean.setDate(new Timestamp(System.currentTimeMillis()));
 				
 				memberList.add(memberBean);
