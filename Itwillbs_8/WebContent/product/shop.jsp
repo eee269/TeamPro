@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -23,6 +24,8 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	
+	DecimalFormat priceFormat = new DecimalFormat("###,###");
 	
 	
 	String small = null;
@@ -86,7 +89,7 @@
 						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=bestList.get(i).getName() %>
 							</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
-					<li class="prd-price"><span class="price"> <%=bestList.get(i).getPrice()%>\ </span></li>
+					<li class="prd-price"><span class="price"> <%=priceFormat.format(bestList.get(i).getPrice())%>\ </span></li>
 					<li class="prd-ico"><span class="MK-product-icons"><img
 							src="http://oryany.co.kr/shopimages/nasign/prod_icons/3858?1596008790"
 							class="MK-product-icon-2"></span></li>
@@ -139,7 +142,7 @@
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
 							src="product/uploadImg/<%=main[i]%>" alt="IMG-PRODUCT">
-						</a> <a href="ProductDetail.po"
+						</a> <a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -149,7 +152,7 @@
 							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a>
-								<span class="stext-105 cl3"> <%=productList.get(i).getPrice()%>원</span>
+								<span class="stext-105 cl3"> <%=priceFormat.format(productList.get(i).getPrice())%>원</span>
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">

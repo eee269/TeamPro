@@ -1,3 +1,7 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.ProductOptionBean"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ProdReviewBean"%>
 <%@page import="vo.ProductBean"%>
@@ -312,8 +316,17 @@ ChannelIO('boot', settings);
 <%
 	String basicCode = request.getParameter("basicCode"); 
     ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
+    ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
+    ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
+    
+
     String[] main = productDetailList.get(0).getMain_img().split("/");
     String[] sub = productDetailList.get(0).getSub_img().split("/");
+    
+    DecimalFormat priceFormat = new DecimalFormat("###,###");
+    
+	
+    
 %>
 <!-- 끝 -->
 
@@ -369,7 +382,7 @@ ChannelIO('boot', settings);
 					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
 						</h4>
 				<!-- 상품가격 -->
-					<span class="mtext-106 cl2" id="item-price"><%=productDetailList.get(0).getPrice() %></span>
+					<span class="mtext-106 cl2" id="item-price"><%=priceFormat.format(productDetailList.get(0).getPrice())%>원</span>
 
 <!-- 					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros -->
 <!-- 						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare -->
@@ -384,10 +397,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt1" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="s">Size S</option>
-									<option value="m">Size M</option>
-									<option value="l">Size L</option>
-									<option value="xl">Size XL</option>
+									<%for(int i=0; i<productSizeList.size(); i++){%>
+										<option value="<%=productSizeList.get(i).getSize()%>"><%=productSizeList.get(i).getSize() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>
@@ -400,10 +412,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt2" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="red">Red</option>
-									<option value="blue">Blue</option>
-									<option value="white">White</option>
-									<option value="gray">Gray</option>
+									<%for(int i=0; i<productColorList.size(); i++){%>
+										<option value="<%=productColorList.get(i).getColor()%>"><%=productColorList.get(i).getColor() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>

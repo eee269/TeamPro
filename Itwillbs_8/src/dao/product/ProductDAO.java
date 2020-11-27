@@ -508,4 +508,66 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		return count;
 	}
+	
+	public ArrayList<ProductOptionBean> selectColorList(String basicCode) {
+		ArrayList<ProductOptionBean> colorList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		 
+		try {
+			String sql = "select distinct color from opt where basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			rs = pstmt.executeQuery();
+			
+			colorList = new ArrayList<ProductOptionBean>();
+			while(rs.next()) {
+				ProductOptionBean option = new ProductOptionBean();
+				
+
+				option.setColor(rs.getString("color"));
+
+				colorList.add(option);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return colorList;
+	}
+	
+	public ArrayList<ProductOptionBean> selectSizeList(String basicCode) {
+		ArrayList<ProductOptionBean> sizeList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		 
+		try {
+			String sql = "select distinct size from opt where basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			rs = pstmt.executeQuery();
+			
+			sizeList = new ArrayList<ProductOptionBean>();
+			while(rs.next()) {
+				ProductOptionBean option = new ProductOptionBean();
+
+				option.setSize(rs.getString("size"));
+
+				
+				sizeList.add(option);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return sizeList;
+	}
 }
