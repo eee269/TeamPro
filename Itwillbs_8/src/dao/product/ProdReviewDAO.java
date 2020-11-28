@@ -36,7 +36,7 @@ public class ProdReviewDAO {
 		int num = 1;
 		
 		try {
-			String sql = "SELECT max(num) FROM goods_review";
+			String sql = "SELECT max(num) FROM product_review";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
@@ -45,7 +45,7 @@ public class ProdReviewDAO {
 				num = rs.getInt(1) + 1;
 			}
 			
-			sql = "INSERT INTO goods_review VALUES(?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product_review VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, num);
 			ps.setString(2, prodReviewBean.getSubject());
@@ -76,7 +76,7 @@ public class ProdReviewDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			String sql = "SELECT count(num) FROM product_review where product_code=?";
+			String sql = "SELECT count(num) FROM product_review where product_basicCode=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			rs = ps.executeQuery();
@@ -103,7 +103,7 @@ public class ProdReviewDAO {
 		int startRow = (page-1) * limit;
 		
 		try {
-			String sql = "SELECT * FROM product_review WHERE product_code=? ORDER BY num desc limit ?,?";
+			String sql = "SELECT * FROM product_review WHERE product_basicCode=? ORDER BY num desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);

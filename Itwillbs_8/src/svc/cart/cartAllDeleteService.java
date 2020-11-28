@@ -9,7 +9,7 @@ import static db.JdbcUtil.*;
 public class cartAllDeleteService {
 	
 	
-	public boolean isCartAllDelete(String member_id) {
+	public boolean isCartAllDelete(String member_id , int num) {
 		System.out.println("cartAllDeleteService - isCartAllDelete");
 		
 		boolean isAllDeleteSuccess = false;
@@ -19,7 +19,7 @@ public class cartAllDeleteService {
 		CartDAO cartDAO = CartDAO.getInstance();
 		
 		cartDAO.setConnection(con);
-		int AllCount = cartDAO.cartAllDelete(member_id);
+		int AllCount = cartDAO.cartAllDelete(member_id , num);
 				
 		
 		if(AllCount > 0) {

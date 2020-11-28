@@ -132,13 +132,13 @@
 								</ul>
 							</li>
 							<li>
-								<a href="product/shoes.jsp">SHOES</a>
+								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
 								<ul class="sub-menu">
-									<li><a href="product/shoes.jsp">SNEAKERS</a></li>
-									<li><a href="product/shoes.jsp">BOOTS</a></li>
-									<li><a href="product/shoes.jsp">LOAFERS</a></li>
-								    <li><a href="product/shoes.jsp">SANDALS</a></li>
-								    <li><a href="product/shoes.jsp">SLIPPER</a></li>	
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
 								</ul>
 							</li>
 							<li class="label1" data-label1="hot">

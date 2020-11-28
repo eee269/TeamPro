@@ -9,18 +9,31 @@
    int sevice = 2500;
    int coin = 0;
    int cartNo = cartList.size();
-   
+   int num = 0;
    %>
   <script src="js/bootstrap4-rating-input.js"></script>
     <style type="text/css">
       .rat { margin: 150px auto; font-size: 20px; }
+      
+      #emptyArea {
+		margin: auto;
+		width: 1024px;
+		text-align: center;
+	}
     </style>
   <script type="text/javascript" src=js/bootstrap4-rating-input.js></script> 
   <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
   <script type="text/javascript">
+//   $('input:checkbox[name=chk]').checked(function() {
+// 	var test =  $('input:checkbox[name=chk]').find("tr").find("cartList");
+// 	alert(test);
+//   });
+
+
+
   $(document).ready(function(){
-	    $("#allCheck").click(function(){
-	    	
+	  
+	  $("#allCheck").click(function(){
 	        if($("#allCheck").prop("checked")){
 	        	
 	            $("input[name=chk]").prop("checked",true);
@@ -30,37 +43,41 @@
 	            $("input[name=chk]").prop("checked",false);
 	        }
 	    })
+	    
+	    
+	  
+	    
 	});
   
-	//상품개수증가
-  function cntPlus(id) {
-		var numid = id.replace("plus", "num")
+// 	//상품개수증가
+//   function cntPlus(id) {
+// 		var numid = id.replace("plus", "num")
 		
-		var cnt = Number($('#'+numid).val());
+// 		var cnt = Number($('#'+numid).val());
 		
-		cnt += 1;
+// 		cnt += 1;
 		
-		$('#'+numid).val(cnt);
+// 		$('#'+numid).val(cnt);
 		
-		calculatePrice();
-	}
+// 		calculatePrice();
+// 	}
 	
-	// 상품개수감소
-	function cntMinus(id) {
-		var numid = id.replace("minus", "num");
+// 	// 상품개수감소
+// 	function cntMinus(id) {
+// 		var numid = id.replace("minus", "num");
 		
-		var cnt = Number($('#'+numid).val());
+// 		var cnt = Number($('#'+numid).val());
 		
-		if(cnt > 1) {
-			cnt -= 1;
-			$('#'+numid).val(cnt);
-		}
+// 		if(cnt > 1) {
+// 			cnt -= 1;
+// 			$('#'+numid).val(cnt);
+// 		}
 		
 		
-		calculatePrice();
-	}
+// 	}
 
 		  </script>
+
 
 <jsp:include page="../inc/header.jsp" />
 
@@ -81,9 +98,9 @@
 <link type="text/css" rel="stylesheet" href="scss/basket.css" />
 <link type="text/css" rel="stylesheet" href="scss/header.1.css" />
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
-<input type="hidden" name="num" value="<%=cartList.get(0).getNum()%>">
 <!-- Shoping Cart 시작
 <input type="hidden" name="num" value="" />-->
+
 <div id="content">
    <div id="cartWrap">
       <dl class="loc-navi">
@@ -127,9 +144,11 @@
                
                <tbody>
                
-               <%
-             	
+               <% 
                   for(int i = 0; i < cartList.size(); i++){
+                	  if(cartList.size() > 0){
+                		 %> <input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>"> <%
+                	  }
                      	 coin += cartList.get(i).getPrice();
                %>
                   <tr class="nbg" >
@@ -191,18 +210,10 @@
                      <td><div class="tb-center tb-delivery">
                            <div class="MS_tb_delivery">
                               <div id="deliverycase0" class="MS_layer_delivery">
-                              <%
-                             	if(coin > 50000){ %>
-                             	<dl>
-                                    <dt>기본배송(무료)</dt>
-                                 </dl>
-                             <%	} else {  %>
+                            
                             	 <dl>
-                                    <dt>기본배송(유료)</dt>
-                                 </dl>
-                             <%
-                             	}
-                              %>
+                                    <dt>기본배송</dt>
+                            	 </dl>
                                
                               </div>
                            </div>
@@ -212,14 +223,19 @@
                            <span class="d-block"><a
                               href="javascript:go_wish('3360797','1','','NORMAL');"
                               class="CSSbuttonWhite btn_select">WISH LIST</a></span> <span
-                              class="d-block"><a
-                              onclick = "location.href='CartDelete.cart?num=<%=cartList.get(i).getNum()%>'">
+                              class="d-block"><a onclick = "location.href='CartDelete.ca?num=<%=cartList.get(i).getNum()%>'">
+                              
                               
                               <class="CSSbuttonWhite btn_select">DELETE</a></span>
                         </div>
                      </td>
 
-                     <td align="center"><input type="checkbox" name="chk" >
+                     <td align="center"><input type="checkbox" name="chk" value="<%=cartList.get(i).getNum()%>">
+                     					<input type="hidden" name = "checkNum" value="<%=cartList.get(i).getNum()%>">
+                     	<%
+                     	num = cartList.get(i).getNum();
+                     	out.println(num);
+                     	%>
                        <input type="hidden"
                         name="basket_item"
                         value="{&quot;uid&quot;:&quot;3360797&quot;,&quot;cart_id&quot;:&quot;1&quot;,&quot;cart_type&quot;:&quot;NORMAL&quot;,&quot;pack_uid&quot;:&quot;&quot;,&quot;use_tax&quot;:&quot;N&quot;}">
@@ -228,8 +244,10 @@
                   </tr>
                   <%
                   cartNo--;
+             
                   }
                   %>
+                  
                </tbody>
                <tfoot>
                   <tr>
@@ -239,13 +257,19 @@
                               class="MK_chg_none_groupsale_total_price_sell MK_change_price"><%=coin%></span>원
                            </span><span class="MK_total_delivery">+ 배송비<span
                               class="MK_chg_total_delivery MK_change_price"><%
-                              if(coin > 30000){
-                            	 sevice = 0;
-                            	 %> <%=sevice%> <%
-                              } else {
-                            	 sevice = 2500;
-                            	%> <%=sevice%> <%
-                              }
+
+							if(cartList.size() == 0){
+								  sevice = 0;
+								  %> <%=sevice%> <%	
+							} else if(cartList.size() >= 1){
+   								 if(coin >= 30000){
+    					 		 sevice = 0;
+    						 	  %> <%=sevice%> <%
+     						} else {
+     							   sevice = 2500;
+    							   %> <%=sevice%> <%
+   						   }
+							}
                               %></span>원
                            </span> = <strong><span class="MK_total_price"><span
                                  class="MK_chg_total_price MK_change_price"><%=coin+sevice%></span>원</span></strong><br>
@@ -257,6 +281,7 @@
                      </td>
                   </tr>
                </tfoot>
+            
             </table>
          </div>
 <!--          .table-fill-prd -->
@@ -264,7 +289,7 @@
          <div class="btn-order-ctrl">
             <a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
             <a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
-            <a href="javascript:basket_clear();" class="CSSbuttonWhite">장바구니 비우기</a>
+            <a href="CartAllDelete.ca?num=<%=num %>" class="CSSbuttonWhite">장바구니 비우기</a>
          </div>
 
 

@@ -32,7 +32,7 @@ public class cartDeleteAction implements Action {
 		} else {
 			
 			forward = new ActionForward();
-			forward.setPath("Cart.cart");
+			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 		}
 		

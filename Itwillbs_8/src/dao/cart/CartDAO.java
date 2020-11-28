@@ -97,7 +97,7 @@ public class CartDAO extends Exception {
 	}
 
 	// 전체 삭제
-	public int cartAllDelete(String member_id) {
+	public int cartAllDelete(String member_id , int num) {
 		System.out.println("CartDAO - cartAllDelete()");
 
 		int AllCount = 0;
@@ -110,6 +110,7 @@ public class CartDAO extends Exception {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, member_id);
 			AllCount = pstmt.executeUpdate();
+			
 		} catch (SQLException e) {
 			System.out.println("CartDAO - cartAllDelete()");
 			e.printStackTrace();

@@ -18,9 +18,11 @@ public class cartAllDeleteAction implements Action {
 		
 		String member_id = request.getParameter("member_id");
 		
+		int num = Integer.parseInt(request.getParameter("num"));
+
 		cartAllDeleteService cartAllDeleteService = new cartAllDeleteService();
 		
-		boolean isAllDeleteSucess = cartAllDeleteService.isCartAllDelete(member_id);
+		boolean isAllDeleteSucess = cartAllDeleteService.isCartAllDelete(member_id , num);
 		
 		if(!isAllDeleteSucess) {
 			response.setContentType("text/html;charset=UTF-8");
@@ -34,8 +36,9 @@ public class cartAllDeleteAction implements Action {
 			out.print("<script>");
 			out.print("alert('장바구니를 비웁니다')");
 			out.print("</script>");
+			
 			forward = new ActionForward();
-			forward.setPath("Cart.cart");
+			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 			
 		}
