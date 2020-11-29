@@ -26,19 +26,6 @@ public class ControlProductListService {
 		return productList;
 	}
 
-	public int getOptionCount(String basicCode) {
-		int count = 0;
-		Connection con = getConnection();
-
-		ProductDAO productDAO = ProductDAO.getInstance();		
-		productDAO.setConnection(con);
-		count = productDAO.countOption(basicCode);
-		
-		close(con);
-		
-		return count;
-	}
-
 	public ArrayList<ProductOptionBean> getOptionList(String basicCode) {
 		ArrayList<ProductOptionBean> optionList = null;
 		

@@ -90,7 +90,7 @@ public class OrderDAO {
 	}
 
 	public ArrayList<OrderBean> getMainorder() {
-		ArrayList<OrderBean> mainorderList = new ArrayList<OrderBean>();
+		ArrayList<OrderBean> mainorderList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -99,6 +99,8 @@ public class OrderDAO {
 			String sql = "select * from mainorder";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
+			
+			mainorderList = new ArrayList<OrderBean>();
 			
 			while(rs.next()) {
 				OrderBean order = new OrderBean();
@@ -124,33 +126,8 @@ public class OrderDAO {
 		return mainorderList;
 	}
 
-	public int getDetailorderCount(String mainorder_code) {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select count(*) from detailorder where mainorder_code=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, mainorder_code);
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return count;
-	}
-
 	public ArrayList<DetailOrderBean> getDetailorderList(String mainorder_code) {
-		ArrayList<DetailOrderBean> detailorderList = new ArrayList<DetailOrderBean>();
+		ArrayList<DetailOrderBean> detailorderList = null;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -160,7 +137,8 @@ public class OrderDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mainorder_code);
 			rs = pstmt.executeQuery();
-			System.out.println(rs.next());
+			
+			detailorderList = new ArrayList<DetailOrderBean>();
 			while(rs.next()) {
 				DetailOrderBean order = new DetailOrderBean();
 				
@@ -185,6 +163,45 @@ public class OrderDAO {
 		}
 		
 		return detailorderList;
+	}
+
+	public int updateMainorder(String code, String status) {
+		int cnt = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "update mainorder set status=? where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, code);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return cnt;
+	}
+
+	public int deleteMainorder(String code) {
+		int cnt = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from mainorder where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return cnt;
 	}
 
 }
