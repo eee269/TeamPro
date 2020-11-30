@@ -36,6 +36,8 @@
 	}else if(xcode.equals("SHOES")){
 		small = "shoes";
 	}
+ 
+
 %>
 
 
@@ -131,6 +133,29 @@
 
 		</div>
 <!-- Search -->
+<!-- 정렬프론트 코드 -->
+						<div class="container">
+								<div class="cboth total-sort">
+									<dl class="total">
+									<%if(ncode==null){%>
+									<dd><%=ncodeList.size() %></dd>
+									<% }else{%>
+									<dd><%=productList.size() %></dd>
+									<% }%>PRODUCTS IN THIS CATEGORY</dl>
+									<dl class="sort">
+									<dt class="blind">검색결과 정렬</dt>
+									<dd>
+										<ul>
+											<li><a href="javascript:sendsort('regdate')">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('price2')">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('price')">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('brandname')">제품명순</a>&nbsp;&nbsp;</li>
+										</ul>
+									</dd>
+									</dl>
+								</div>
+						</div>
+<!-- 코드끝!! -->	
 <!-- 상품 -->
 		<div class="row isotope-grid">
 		<%for(int i=0; i<productList.size(); i++){
@@ -141,7 +166,7 @@
 					<div class="block2-pic hov-img0">
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
-							src="product/uploadImg/<%=main[i]%>" alt="IMG-PRODUCT">
+							src="product/uploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
 						</a> <a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
@@ -151,7 +176,7 @@
 						<div class="block2-txt-child1 flex-col-l ">
 							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a>
+								<%=productList.get(i).getName()%></a>
 								<span class="stext-105 cl3"> <%=priceFormat.format(productList.get(i).getPrice())%>원</span>
 						</div>
 
@@ -169,7 +194,7 @@
 			</div>
 		<% }%>
 		</div>
-<!-- 상품 -->
+<!-- 상품 -->							
 <!-- 페이징 코드 -->
 		<%if(type.equals("X")){%>
 			
