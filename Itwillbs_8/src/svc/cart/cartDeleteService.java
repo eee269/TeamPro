@@ -9,7 +9,7 @@ import dao.cart.CartDAO;
 
 public class cartDeleteService {
 
-	public boolean isCartDelete(int num) {
+	public boolean isCartDelete(String[] num) {
 		System.out.println("cartDeleteService - isCartDelete");
 		
 		boolean isDeleteSuccess = false;
@@ -20,9 +20,14 @@ public class cartDeleteService {
 		
 		cartDAO.setConnection(con);
 		
-		int deleteCount = cartDAO.cartDelete(num);
+		int deleteCount = 0;	
 		
-		if(deleteCount > 0) {
+		for(String i : num) {		
+		deleteCount += cartDAO.cartDelete(Integer.parseInt(i));
+		}
+		
+		
+		if(deleteCount == num.length) {
 			commit(con);
 			isDeleteSuccess = true;
 			

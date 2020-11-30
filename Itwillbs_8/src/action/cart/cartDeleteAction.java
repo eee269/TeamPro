@@ -16,9 +16,12 @@ public class cartDeleteAction implements Action {
 		System.out.println("cartDeleteAction");
 		ActionForward forward = null;
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		String[] num = request.getParameterValues("chk");
 		
 		cartDeleteService cartDeleteService = new cartDeleteService();
+
+		
+		
 		boolean isDeleteSucess = cartDeleteService.isCartDelete(num);
 		
 		if(!isDeleteSucess) {
