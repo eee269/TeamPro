@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.member.MemberLogoutAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteAction;
@@ -49,6 +50,14 @@ public class MemberFrontController extends HttpServlet {
 		} else if(command.equals("/MemberJoincom.mo")) {
 			forward = new ActionForward();
 			forward.setPath("/member/join_complete.jsp");
+		} else if(command.equals("/MemberLogout.mo")) {
+			action = new MemberLogoutAction();
+			System.out.println("로그아웃액션으로 이동");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
