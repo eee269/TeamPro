@@ -9,7 +9,7 @@ import dao.cart.CartDAO;
 
 public class cartDeleteService {
 
-	public boolean isCartDelete(String[] num) {
+	public boolean isCartDelete(String[] num) throws Exception{
 		System.out.println("cartDeleteService - isCartDelete");
 		
 		boolean isDeleteSuccess = false;

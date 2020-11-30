@@ -80,7 +80,6 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setType(rs.getString("type"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 				pb.setStock(rs.getInt("stock"));
@@ -122,7 +121,6 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setType(rs.getString("type"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 				pb.setStock(rs.getInt("stock"));
@@ -162,7 +160,6 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setType(rs.getString("type"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 				pb.setStock(rs.getInt("stock"));
@@ -200,7 +197,6 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setType(rs.getString("type"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 				pb.setStock(rs.getInt("stock"));

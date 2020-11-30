@@ -299,6 +299,9 @@
    <!-- #cartWrap -->
 </div>
 <!-- Shoping Cart 끝 -->
+<script>
 
 
+
+</script>
 <jsp:include page="../inc/footer.jsp" />
