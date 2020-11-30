@@ -25,28 +25,25 @@ public class ControlOrderListAction implements Action {
 		ArrayList<DetailOrderBean> detailorderSubList = new ArrayList<DetailOrderBean>();
 		
 		mainorderList = controlOrderListService.getMainorderList();
-		if(mainorderList != null) {
-			for(int i=0; i<mainorderList.size(); i++) {
-				OrderBean mainorder = new OrderBean();
-				mainorder = mainorderList.get(i);
+		for(int i=0; i<mainorderList.size(); i++) {
+			OrderBean mainorder = new OrderBean();
+			mainorder = mainorderList.get(i);
+			
+			String mainorder_code = mainorder.getCode();
+			int orderCnt = controlOrderListService.getDetailOrderCount(mainorder_code);
+			for(int j=0; j<orderCnt; j++) {
+				detailorderSubList = new ArrayList<DetailOrderBean>();
+				detailorderSubList = controlOrderListService.getDetailorderList(mainorder_code);
 				
-				String mainorder_code = mainorder.getCode();
-				int orderCnt = controlOrderListService.getDetailOrderCount(mainorder_code);
-				for(int j=0; j<orderCnt; j++) {
-					detailorderSubList = new ArrayList<DetailOrderBean>();
-					detailorderSubList = controlOrderListService.getDetailorderList(mainorder_code);
-					
-					detailorderList.put(mainorder_code, detailorderSubList);
-				}
+				detailorderList.put(mainorder_code, detailorderSubList);
 			}
-			
-			
-			
-			request.setAttribute("mainorderList", mainorderList);
-			request.setAttribute("detailorderList", detailorderList);
 		}
+			
+		request.setAttribute("mainorderList", mainorderList);
+		request.setAttribute("detailorderList", detailorderList);
+		
 		forward = new ActionForward();
-		forward.setPath("/cart/control_order.jsp");
+		forward.setPath("/order/control_order.jsp");
 		
 		return forward;
 	}

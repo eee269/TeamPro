@@ -90,7 +90,7 @@ public class OrderDAO {
 	}
 
 	public ArrayList<OrderBean> getMainorder() {
-		ArrayList<OrderBean> mainorderList = null;
+		ArrayList<OrderBean> mainorderList = new ArrayList<OrderBean>();
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -100,7 +100,7 @@ public class OrderDAO {
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				OrderBean order = new OrderBean();
 				
 				order.setCode(rs.getString("code"));
@@ -160,8 +160,8 @@ public class OrderDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, mainorder_code);
 			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
+			System.out.println(rs.next());
+			while(rs.next()) {
 				DetailOrderBean order = new DetailOrderBean();
 				
 				order.setNum(rs.getInt("num"));

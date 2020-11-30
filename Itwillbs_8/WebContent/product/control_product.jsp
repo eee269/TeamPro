@@ -34,16 +34,17 @@
 
 <%
 ArrayList<ProductBean> productList = (ArrayList)request.getAttribute("productList");
-HashMap<String, ArrayList<ProductOptionBean>> optionList = (HashMap)request.getAttribute("optionList");
-// ArrayList<ArrayList<ProductOptionBean>> optionList = (ArrayList)request.getAttribute("optionList");
-
+// HashMap<String, ArrayList<ProductOptionBean>> optionList = (HashMap)request.getAttribute("optionList");
+ArrayList<ArrayList<ProductOptionBean>> optionList = (ArrayList)request.getAttribute("optionList");
+ArrayList<ProductOptionBean> subOptionList = (ArrayList) request.getAttribute("subOptionList");
 for(int i=productList.size()-1 ; i >= 0;i--){
 	int total = 0;
 	ProductBean product = new ProductBean();
 	product = productList.get(i);
 	String basicCode = product.getBasicCode();
 	
-	ArrayList<ProductOptionBean> subOptionList = optionList.get(basicCode);
+	subOptionList = optionList.get(i);
+	
 	
 	for(int j=0; j<subOptionList.size(); j++) {
 		ProductOptionBean option = new ProductOptionBean();
