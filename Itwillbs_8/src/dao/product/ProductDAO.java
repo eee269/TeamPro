@@ -390,7 +390,6 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				productBean.setMain_img(rs.getString("main_img"));
 				productBean.setSub_img(rs.getString("sub_img"));
 				productBean.setName(rs.getString("name"));
-//				productBean.setStock(rs.getInt("stock"));
 				productBean.setPrice(rs.getInt("price"));
 				productBean.setLikey(rs.getInt("likey"));
 				productBean.setDate(rs.getDate("date"));
@@ -431,29 +430,6 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		return count;
 	}
 
-	public int countOption(String basicCode) {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select count(*) from opt where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				count = rs.getInt(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return count;
-	}
 
 	public ArrayList<ProductOptionBean> selectOptionList(String basicCode) {
 		ArrayList<ProductOptionBean> optionList = null;

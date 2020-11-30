@@ -13,31 +13,18 @@ import vo.OrderBean;
 public class ControlOrderListService {
 
 	public ArrayList<OrderBean> getMainorderList() {
-		ArrayList<OrderBean> mainorderList = new ArrayList<OrderBean>();
+		ArrayList<OrderBean> mainorderList = null;
 		
 		Connection con = getConnection();
 		
 		OrderDAO orderDAO = OrderDAO.getInstance();
 		orderDAO.setConnection(con);
+		mainorderList = new ArrayList<OrderBean>();
 		mainorderList = orderDAO.getMainorder();
 		
 		close(con);
 		
 		return mainorderList;
-	}
-
-	public int getDetailOrderCount(String mainorder_code) {
-		int count = 0;
-		
-		Connection con = getConnection();
-		
-		OrderDAO orderDAO = OrderDAO.getInstance();
-		orderDAO.setConnection(con);
-		count = orderDAO.getDetailorderCount(mainorder_code);
-		
-		close(con);
-		
-		return count;
 	}
 
 	public ArrayList<DetailOrderBean> getDetailorderList(String mainorder_code) {
@@ -50,9 +37,9 @@ public class ControlOrderListService {
 		
 		detailorderList = new ArrayList<DetailOrderBean>();
 		detailorderList = orderDAO.getDetailorderList(mainorder_code);
-		
+				
 		close(con);
-		
+			
 		return detailorderList;
 	}
 
