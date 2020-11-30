@@ -284,10 +284,10 @@ body .container_member .content .signup-cont {
 			        </div>
 			        <div class="content">
 				            <div class="signin-cont cont">
-					                <form action="#" method="post" enctype="multipart/form-data">
+					                <form action="MemberLoginPro.mo" method="post" enctype="multipart/form-data">
 											<input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
 						                    <label for="text">ID</label>
-						                    <input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your Password">
+						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
                 						    <label for="password">Password</label>
 						                    <input type="checkbox" id="remember" class="checkbox" checked>
 						                    <label for="remember">Remember me</label>
@@ -298,20 +298,20 @@ body .container_member .content .signup-cont {
         					        </form>
     				        </div>
     				        <div class="signup-cont cont">
-                <form action="#" method="post" enctype="multipart/form-data">
+                <form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data">
 						                    <input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
 						                    <label for="text">ID</label>  <br>
 
-						                    <input type="password" name="password" id="password" class="inpt" required="required" placeholder="Your Password">
+						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
                 						    <label for="password">Password</label>  <br>
                 						    
                   							<input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
 						                    <label for="email">e-mail</label>  <br>
 						                    
-						                    <input type="text" name="name" id="name" class="inpt" required="required" placeholder="Your name">
+						                    <input type="text" name="username" id="name" class="inpt" required="required" placeholder="Your name">
 						                    <label for="name">Name</label>  <br>
 						                    
-						                    <input type="text" name="img" id="img" class="inpt" required="required" placeholder="Select Profile Image">
+						                    <input type="file" name="img" id="img" class="inpt" required="required" placeholder="Select Profile Image">
 						                    <label for="img">Image</label>  <br>
 						                    
 						                    <input type="text" name="phone" id="phone" class="inpt" required="required" placeholder="Your PhoneNumber">

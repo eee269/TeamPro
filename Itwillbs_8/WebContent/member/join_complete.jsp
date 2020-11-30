@@ -140,7 +140,7 @@ body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Ro
 							
 							<div class="btnArea join-footer">
 								<div class="center">									
-									<a href="../index.jsp" class="cbtn form">메인화면</a>
+									<a href="index.jsp" class="cbtn form">메인화면</a>
 								</div>
 							</div>
 						</div>

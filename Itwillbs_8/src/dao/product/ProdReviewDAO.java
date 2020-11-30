@@ -45,18 +45,16 @@ public class ProdReviewDAO {
 				num = rs.getInt(1) + 1;
 			}
 			
-			sql = "INSERT INTO product_review VALUES(?,?,?,?,?,?,?,?,?,?,now())";
+			sql = "INSERT INTO product_review VALUES(?,?,?,?,?,?,?,now(),?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, num);
-			ps.setString(2, prodReviewBean.getSubject());
-			ps.setString(3, prodReviewBean.getContent());
-			ps.setInt(4, prodReviewBean.getStarScore());
-			ps.setInt(5, prodReviewBean.getRe_ref());
-			ps.setInt(6, prodReviewBean.getRe_lev());
-			ps.setInt(7, prodReviewBean.getRe_seq());
-			ps.setString(8, prodReviewBean.getGoodsCode());
-			ps.setString(9, prodReviewBean.getId());
-			ps.setString(10, prodReviewBean.getUsername());
+			ps.setString(2, prodReviewBean.getContent());
+			ps.setInt(3, prodReviewBean.getStarScore());
+			ps.setInt(4, num);
+			ps.setInt(5, prodReviewBean.getRe_lev());
+			ps.setString(6, prodReviewBean.getProduct_basicCode());
+			ps.setString(7, prodReviewBean.getMember_id());
+			ps.setString(8, prodReviewBean.getProduct_img());
 			
 			insertCount = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -99,6 +97,7 @@ public class ProdReviewDAO {
 		ArrayList<ProdReviewBean> reviewList =null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		ResultSet rs2 = null;
 		
 		int startRow = (page-1) * limit;
 		
@@ -114,9 +113,17 @@ public class ProdReviewDAO {
 			
 			while(rs.next()) {
 				ProdReviewBean review = new ProdReviewBean();
-				review.setContent(rs.getString("contents"));
+				review.setContent(rs.getString("content"));
 				review.setDate(rs.getTimestamp("date"));
-				review.setUsername(rs.getNString("username"));
+				review.setProduct_img(rs.getString("product_img"));
+				// id에 저장된 값 가져오기
+//				sql = "SELECT * FROM member WHERE id=?";
+//				ps = con.prepareStatement(sql);
+//				ps.setString(1,rs.getString("member_id"));
+//				rs2 = ps.executeQuery();
+//				while(rs2.next()) {
+//					review.setMember_id(rs2.getString("username"));
+//				}
 				reviewList.add(review);
 			}
 			

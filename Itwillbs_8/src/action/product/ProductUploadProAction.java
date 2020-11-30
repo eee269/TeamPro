@@ -25,7 +25,7 @@ public class ProductUploadProAction implements Action {
 		
 		ServletContext context = request.getServletContext();
 		
-		String saveFolder = "/product/uploadImg";
+		String saveFolder = "product/uploadImg";
 		
 		String realFolder = context.getRealPath(saveFolder);
 		

@@ -25,7 +25,7 @@ public class ProdReviewWriteAction implements Action{
 		
 		ServletContext context = request.getServletContext();
 		
-		String saveFolder = "/productUpload";
+		String saveFolder = "product/reviewUploadImg";
 		
 		String realFolder = context.getRealPath(saveFolder);
 		
@@ -41,13 +41,11 @@ public class ProdReviewWriteAction implements Action{
 		
 		// 전달할 데이터 저장
 		ProdReviewBean prodReviewBean = new ProdReviewBean();
-		prodReviewBean.setNum(Integer.parseInt(multi.getParameter("num")));
-		prodReviewBean.setSubject(multi.getParameter("subject"));
-		prodReviewBean.setContent(multi.getParameter("sontent"));
 		prodReviewBean.setStarScore(Integer.parseInt(multi.getParameter("starScore")));
-		prodReviewBean.setGoodsCode(multi.getParameter("goodsCode"));
-		prodReviewBean.setId(multi.getParameter("id"));
-		prodReviewBean.setUsername(multi.getParameter("username"));
+		prodReviewBean.setProduct_basicCode(multi.getParameter("product_basicCode"));
+		prodReviewBean.setMember_id(multi.getParameter("member_id"));
+		prodReviewBean.setProduct_img(multi.getOriginalFileName("product_img"));
+		prodReviewBean.setContent(multi.getParameter("content"));
 		
 		
 		ProdReviewWriteService prodReviewService = new ProdReviewWriteService();
@@ -64,8 +62,8 @@ public class ProdReviewWriteAction implements Action{
 		}else {
 			// 리뷰 등록 성공
 			forward = new ActionForward();
-			forward.setPath("ProductList.po?goodsCode="+multi.getParameter("goodsCode"));
-			// 상품 상세 페이지에서 리뷰 단다는 가정하에 dispatcher 방식으로 지정했음
+			forward.setPath("ProductDetail.po?basicCode="+multi.getParameter("product_basicCode"));
+			forward.setRedirect(true);
 		}
 		
 		return forward;

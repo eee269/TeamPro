@@ -20,6 +20,7 @@
 		width: 1024px;
 		text-align: center;
 	}
+	.CSSbuttonWhite:hover{color:#fff;}
     </style>
   <script type="text/javascript" src=js/bootstrap4-rating-input.js></script> 
   <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
@@ -34,19 +35,23 @@
   $(document).ready(function(){
 	  
 	  $("#allCheck").click(function(){
+		  // 전체 선택
 	        if($("#allCheck").prop("checked")){
-	        	
 	            $("input[name=chk]").prop("checked",true);
 	            
+	       // 전체 해제
 	        } else {
-	        	
 	            $("input[name=chk]").prop("checked",false);
 	        }
-	    })
-	    
-	    
+	    });
 	  
-	    
+	  // ---------------------------------------------------------
+
+
+	
+	  // ---------------------------------------------------------
+	  
+
 	});
   
 // 	//상품개수증가
@@ -109,6 +114,8 @@
             <a href="/">HOME</a> &gt; CART
          </dd>
       </dl>
+      
+      <form action="CartDelete.ca" method="post" name="cartForm" >
       <h2 class="tit-page">장바구니</h2>
       <div class="page-body">
          <div class="table-cart table-fill-prd">
@@ -137,10 +144,11 @@
                      <th scope="col"><div class="tb-center">배송비</div></th>
                      <th scope="col"><div class="tb-center">취소</div></th>
                      <th scope="col"><div class="tb-center">
-                           <input type="checkbox" id="allCheck" >
+                           <input type="checkbox" id="allCheck" class = "checkSelect">
                         </div></th>
                   </tr>
                </thead>
+               
                
                <tbody>
                
@@ -220,22 +228,13 @@
                         </div></td>
                      <td>
                         <div class="tb-center">
-                           <span class="d-block"><a
-                              href="javascript:go_wish('3360797','1','','NORMAL');"
-                              class="CSSbuttonWhite btn_select">WISH LIST</a></span> <span
-                              class="d-block"><a onclick = "location.href='CartDelete.ca?num=<%=cartList.get(i).getNum()%>'">
-                              
-                              
-                              <class="CSSbuttonWhite btn_select">DELETE</a></span>
+                       <span class="d-block"><a onclick = "location.href='CartDelete.ca?chk=<%=cartList.get(i).getNum()%>'"
+                              class="CSSbuttonWhite btn_select">DELETE</a></span>
                         </div>
                      </td>
 
-                     <td align="center"><input type="checkbox" name="chk" value="<%=cartList.get(i).getNum()%>">
+                     <td align="center"><input type="checkbox" name="chk" class = "checkSelect"  value="<%=cartList.get(i).getNum()%>">
                      					<input type="hidden" name = "checkNum" value="<%=cartList.get(i).getNum()%>">
-                     	<%
-                     	num = cartList.get(i).getNum();
-                     	out.println(num);
-                     	%>
                        <input type="hidden"
                         name="basket_item"
                         value="{&quot;uid&quot;:&quot;3360797&quot;,&quot;cart_id&quot;:&quot;1&quot;,&quot;cart_type&quot;:&quot;NORMAL&quot;,&quot;pack_uid&quot;:&quot;&quot;,&quot;use_tax&quot;:&quot;N&quot;}">
@@ -289,12 +288,12 @@
          <div class="btn-order-ctrl">
             <a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
             <a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
-            <a href="CartAllDelete.ca?num=<%=num %>" class="CSSbuttonWhite">장바구니 비우기</a>
+            <a class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
          </div>
-
-
+	
 <!--          .table-fill-prd -->
       </div>
+      </form>
       <!-- .page-body -->
    </div>
    <!-- #cartWrap -->
