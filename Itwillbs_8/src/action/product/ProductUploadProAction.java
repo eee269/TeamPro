@@ -10,6 +10,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
+import svc.product.ProductDeleteService;
 import svc.product.ProductUploadService;
 import vo.ActionForward;
 import vo.ProductBean;
@@ -24,7 +25,7 @@ public class ProductUploadProAction implements Action {
 		
 		ServletContext context = request.getServletContext();
 		
-		String saveFolder = "/product/uploadImg";
+		String saveFolder = "product/uploadImg";
 		
 		String realFolder = context.getRealPath(saveFolder);
 		
@@ -60,16 +61,26 @@ public class ProductUploadProAction implements Action {
 		String basicCode = String.format("%4d", productUploadService.getMaxBasicCode()).replace(' ', '0');
 		
 		
-		
 		ProductBean productBean = new ProductBean();
 		productBean.setBasicCode(basicCode);
 		productBean.setName(multi.getParameter("goods_name"));
 		productBean.setPrice(Integer.parseInt(multi.getParameter("goods_price")));
-		productBean.setStock(Integer.parseInt(multi.getParameter("goods_stock")));
 		productBean.setMain_img(mainImg);
 		productBean.setSub_img(subImg);
-		productBean.setXcode("xcode");
-		productBean.setNcode("ncode");
+
+		String xcode = multi.getParameter("xcode");
+		String ncode = "";
+		
+		productBean.setXcode(xcode);
+		
+		if(xcode.equals("CLOTHES")) {
+			ncode = multi.getParameter("clothes");
+		} else if(xcode.equals("BAGS")) {
+			ncode = multi.getParameter("bag");
+		} else if(xcode.equals("SHOES")) {
+			ncode = multi.getParameter("shoes");
+		} 
+		productBean.setNcode(ncode);
 		
 		// 상품을 DB에 넣기
 		boolean isSuccessProduct = productUploadService.uploadProduct(productBean);
@@ -93,6 +104,10 @@ public class ProductUploadProAction implements Action {
 					optionBean.setColor(color[i]);
 					optionBean.setSize(size[j]);
 					
+					String stock_name = color[i] + "/" + size[j];
+					int stock = Integer.parseInt(multi.getParameter(stock_name));
+					optionBean.setStock(stock);
+					
 					String productCode = basicCode + color[i] + size[j];
 					optionBean.setProductCode(productCode);
 					optionBean.setBasicCode(basicCode);
@@ -109,13 +124,16 @@ public class ProductUploadProAction implements Action {
 						out.println("alert('상품 등록 실패!')");
 						out.println("history.back()");
 						out.println("</script>");
+						
+						ProductDeleteService productDeleteService = new ProductDeleteService();
+						productDeleteService.deleteProduct(basicCode);
 					}
 				}
 			}
 		}
 		 if(isSuccessOption){
 				forward = new ActionForward();
-				forward.setPath("/member/control_goods.jsp");
+				forward.setPath("ControlProductList.po");
 				forward.setRedirect(true);
 			}
 		

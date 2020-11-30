@@ -140,7 +140,7 @@
 								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
 								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
 								</ul>
-							</li>							
+							</li>
 							<li class="label1" data-label1="hot">
 								<a href="CommList.co">COMMUNITY</a>
 							</li>

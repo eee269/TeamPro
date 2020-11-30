@@ -1,7 +1,22 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.ProductOptionBean"%>
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.ProdReviewBean"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	ArrayList<ProdReviewBean> reviewList = (ArrayList<ProdReviewBean>)request.getAttribute("reviewList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+%>
 <jsp:include page="../inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
@@ -217,10 +232,9 @@
 			// var goods_size = this.goods_size.value;
 			var rating = $('#rating1').val();
 			var content=$('#prw_content').val();
-			var file=$('#prw_file').val();
+			var product_img=$('#prw_file').val();
 
 			<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
-
 			if(rating == 0) {
 				alert("별점을 입력하세요");
 				$('#rating1').focus();
@@ -301,19 +315,30 @@ ChannelIO('boot', settings);
 <%
 	String basicCode = request.getParameter("basicCode"); 
     ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
+    ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
+    ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
+    
+
+    String[] main = productDetailList.get(0).getMain_img().split("/");
+    String[] sub = productDetailList.get(0).getSub_img().split("/");
+    
+    DecimalFormat priceFormat = new DecimalFormat("###,###");
+    
+	
+    
 %>
 <!-- 끝 -->
 
 <!-- breadcrumb -->
-<div class="container">
-	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="main.go" class="stext-109 cl8 hov-cl1 trans-04">HOME
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="ProductShop.po?type=X&xcode=<%=productDetailList.get(0).getXcode()%>&ncode=<%=productDetailList.get(0).getNcode()%>" class="stext-109 cl8 hov-cl1 trans-04">
-			<%=productDetailList.get(0).getNcode() %><i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> Jacket </span>
-	</div>
-</div>
+<!-- <div class="container"> -->
+<!-- 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg"> -->
+<!-- 		<a href="main.go" class="stext-109 cl8 hov-cl1 trans-04">HOME -->
+<!-- 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> -->
+<%-- 		</a> <a href="ProductShop.po?type=X&xcode=<%=productDetailList.get(0).getXcode()%>&ncode=<%=productDetailList.get(0).getNcode()%>" class="stext-109 cl8 hov-cl1 trans-04"> --%>
+<%-- 			<%=productDetailList.get(0).getNcode() %><i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> --%>
+<!-- 		</a> <span class="stext-109 cl4"> Jacket </span> -->
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 <!-- Product Detail -->
@@ -327,44 +352,22 @@ ChannelIO('boot', settings);
 						<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 						<div class="slick3 gallery-lb">
+						<%for(int i=0; i<main.length; i++){%>
+							
 							<div class="item-slick3"
-								data-thumb="images/product-detail-01.jpg">
+								data-thumb="product/uploadImg/<%=main[i] %>">
 								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+									<img src="product/uploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
 
 									<a
 										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-01.jpg"> <i
+										href="product/uploadImg/<%=main[i] %>"> <i
 										class="fa fa-expand"></i>
 									</a>
 								</div>
 							</div>
+						<%}%>
 
-							<div class="item-slick3"
-								data-thumb="images/product-detail-02.jpg">
-								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-									<a
-										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-02.jpg"> <i
-										class="fa fa-expand"></i>
-									</a>
-								</div>
-							</div>
-
-							<div class="item-slick3"
-								data-thumb="images/product-detail-03.jpg">
-								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-									<a
-										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-03.jpg"> <i
-										class="fa fa-expand"></i>
-									</a>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -375,14 +378,14 @@ ChannelIO('boot', settings);
 				<!-- 상품코드 -->
 				<input type="hidden" id="item-code" value="code,,">
 				<!-- 상품명 -->
-					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name">Lightweight
-						Jacket</h4>
+					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
+						</h4>
 				<!-- 상품가격 -->
-					<span class="mtext-106 cl2" id="item-price">80,000원</span>
+					<span class="mtext-106 cl2" id="item-price"><%=priceFormat.format(productDetailList.get(0).getPrice())%>원</span>
 
-					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
-						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-						feugiat.</p>
+<!-- 					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros -->
+<!-- 						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare -->
+<!-- 						feugiat.</p> -->
 
 					<!-- 상품 옵션 -->
 					<div class="p-t-33" id="select-opt">
@@ -393,10 +396,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt1" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="s">Size S</option>
-									<option value="m">Size M</option>
-									<option value="l">Size L</option>
-									<option value="xl">Size XL</option>
+									<%for(int i=0; i<productSizeList.size(); i++){%>
+										<option value="<%=productSizeList.get(i).getSize()%>"><%=productSizeList.get(i).getSize() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>
@@ -409,10 +411,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt2" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="red">Red</option>
-									<option value="blue">Blue</option>
-									<option value="white">White</option>
-									<option value="gray">Gray</option>
+									<%for(int i=0; i<productColorList.size(); i++){%>
+										<option value="<%=productColorList.get(i).getColor()%>"><%=productColorList.get(i).getColor() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>
@@ -443,17 +444,6 @@ ChannelIO('boot', settings);
 							</div>
 						</div>
 					</div>
-
-
-
-
-
-
-
-
-
-
-
 
 					<%-- 좋아요 + 각종 공유 / yj --%>
 					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
@@ -514,51 +504,20 @@ ChannelIO('boot', settings);
 						</div>
 					</form>
 
-
-
-
 					<div id="videotalk_area"></div>
 					<!-- [OPENEDITOR] -->
 					<table width="750" align="center" border="0" cellspacing="0"
 						cellpadding="0">
 						<tbody>
 							<tr>
-								<td align="center"><img
-									src="http://nasign.cafe24.com/products/17ss/star/O0FBCB43.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/products/17ss/txt/O0FBCB43.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_1.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_2.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_3.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_4.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_5.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_6.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_7.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_8.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_9.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_10.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_11.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/products/17ss/size/O0FBCB43.jpg?version=1"
-									imgborder="0"><br></td>
+								<td align="center">
+								<%for(int i=0; i<sub.length; i++){%>
+								<img src="product/uploadImg/<%=sub[i] %>" imgborder="0"><br> 
+								<% }%>
+								</td>
 							</tr>
 						</tbody>
 					</table>
-
-
-
-
 
 					&gt;
 					<!-- 몰티비 플레이어 노출 위치 -->
@@ -566,10 +525,6 @@ ChannelIO('boot', settings);
 						style="margin-top: 10px; margin-bottom: 10px; text-align: center; display: none;"></div>
 
 				</div>
-
-
-
-
 
 				<a name="reviewboard"></a>
 				<div class="cboth pdt100"></div>
@@ -584,52 +539,34 @@ ChannelIO('boot', settings);
 					</ul>
 				</div>
 
-
+				<!-- ------------------------------상품리뷰---------------------------------------  -->
+				<!-- 상빈 -->
 				<div id="powerReview">
 					<div class="hd-t">
 						<h2>POWER REVIEW</h2>
 					</div>
 					<div id="writePowerReview">
 						<div class="PR15N01-write">
-							<form name="prw_form" id="prw_form" action="../none.jsp"
-								method="post" autocomplete="off">
-
-								<p>
-									<strong>별점을 매겨주세요</strong>
-								</p>
+							<form name="prw_form" id="prw_form" action="ProdReviewWrite.po" method="post" autocomplete="off" enctype="multipart/form-data">
+								<p><strong>별점을 매겨주세요</strong></p>
 								<!-- 별점 -->
 								<div class="rat">
-									<input type="number" name="rating" id="rating1"
-										class="rating text-warning" value="0" />
+									<input type="number" name="starScore" id="rating1" class="rating text-warning" value="0" />
 								</div>
 								<!-- 별점 -->
-
 								<%-- 여기 input 들은 ${'변수'} 이런 형식으로 세션 아이디의 정보 받아오도록하기 / yj --%>
-
-								<input type="hidden" name="goods_num" value=""> <input
-									type="hidden" name="username" value=""> <input
-									type="hidden" name="goods_color" value=""> <input
-									type="hidden" name="goods_size" value=""> <input
-									type="hidden" name="id" value=""> <input type="hidden"
-									name="email" value=""> <input type="hidden" name="pass"
-									value="">
-
-
-								<textarea name="content" id="prw_content"
-									placeholder="리뷰 내용을 입력해주세요" required></textarea>
+								<input type="hidden" name="product_basicCode" value="0001"> 
+								<input type="hidden" name="member_id" value="tiger"> 
+								<textarea name="content" id="prw_content" placeholder="리뷰 내용을 입력해주세요" required></textarea>
 								<div class="thumb-wrap"></div>
-								<input type="file" name="file" class="trick file-attach"
-									id="prw_file"> <input type="submit" value="리뷰 등록"
-									class="lnk-review"
-									style="text-align: right; padding: 20px 50px; cursor: pointer;">
+								<input type="file" name="product_img" class="trick file-attach" id="prw_file"> 
+								<input type="submit" value="리뷰 등록" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
 							</form>
 						</div>
 					</div>
 					<br>
 					<br>
 					<br>
-
-
 					<div class="PR15N01-info">
 						<dl class="score">
 							<dt>5.0</dt>
@@ -657,45 +594,16 @@ ChannelIO('boot', settings);
 						<div class="photo">
 							<ul>
 								<li><a
-									href="javascript:power_review_view_show('995481','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995505','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201108091851_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995514','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201107093303.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995525','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201106105421_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995549','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201104173917.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995579','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201029212715_ro.jpeg"
-										alt=""></a></li>
-								<li><a
-									href="javascript:power_review_view_show('995625','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201024193837.jpeg"
-										alt=""></a></li>
-								<li><a
 									href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img
 										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg"
-										alt=""></a></li>
+										alt=""></a>
+								</li>
 							</ul>
 						</div>
 						<p class="like">
 							<strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
 						</p>
 					</div>
-
-
 					<div class="tabs">
 						<ul>
 							<li class="tab signin active"><a href="#signin">포토리뷰()</a></li>
@@ -704,30 +612,34 @@ ChannelIO('boot', settings);
 							<!-- 일반리뷰(db연동값삽입) -->
 						</ul>
 					</div>
-
+					<%
+						for(int i=0; i<reviewList.size(); i++){
+					%>
 					<%-- 리뷰들 형식 반복해서 데이터 넣기 --%>
 					<div class="content">
-
-						<%-- 포토리뷰--%>
+						<%-- 리뷰--%>
+					<%if(reviewList.get(i).getProduct_img()!=null){ %>
 						<div class="signin-cont cont">
+					<%}else{ %>
+						<div class="signup-cont cont">
+					<%} %>
 							<ul class="PR15N01-review-wrap">
 								<li id="power_review_block995509" class="power-review-list-box">
 									<dl class="desc">
 										<dt class="first">작성자</dt>
-										<dd>nmoo*****</dd>
+										<dd><%=reviewList.get(i).getMember_id() %></dd>
 										<dt>작성일</dt>
-										<dd>2020-11-07</dd>
+										<dd><%=reviewList.get(i).getDate() %></dd>
 										<dt>조회수</dt>
-										<dd>
-											<span id="power_review_showhits">7</span>
-										</dd>
+										<dd><span id="power_review_showhits">readCount</span></dd>
 									</dl>
 									<div class="hd-box">
 										<div class="star-icon">
-											<span class="mini_rat"> <input type="number"
-												class="rating text-default" value="5" data-readonly />
+											<span class="mini_rat"> 
+												<input type="number" class="rating text-default" value="5" data-readonly />
+											</span>
 											<!-- value에 각각 리뷰의별점값넣어야됨 -->
-											</span> <span class="survey">아주만족</span>
+											 <span class="survey">아주만족</span>
 										</div>
 									</div>
 									<div class="pr-options" style="display: none;">
@@ -738,86 +650,39 @@ ChannelIO('boot', settings);
 									</div>
 									<div class="content">
 										<p class="content_p">
-											<a href="javascript:power_review_more('995509', '00000');"
-												class="more-options">사이즈때문에 고민되서 문의하고 주문했는데 잘 맞네요 가죽도 좋고
-												디자인도 예쁘고 넘넘 맘에 드네요</a><a class="pr-close"
-												href="javascript:power_review_more_close('995509');">
+											<a href="javascript:power_review_more('995509', '00000');" class="more-options">
+												<%=reviewList.get(i).getContent() %>
+											</a>
+											<a class="pr-close" href="javascript:power_review_more_close('995509');">
 												... <span>닫기</span>
 											</a>
-
 										</p>
 										<div class="ctr"></div>
 									</div>
+									<%if(reviewList.get(i).getProduct_img()!=null){ %>
 									<div class="photo-list">
 										<ul>
-											<li><a
-												href="javascript:power_review_view_show('995509', '00000', '0', 'detail');"><span></span><img
-													src="//board.makeshop.co.kr/board/special328/nasign_board8/square::201110112457.jpeg"
-													alt=""></a>
-												<div class="attach-preview"></div></li>
+											<li>
+											<a href="javascript:power_review_view_show('995509', '00000', '0', 'detail');">
+												<span></span> 
+												<img src="product/reviewUploadImg/<%=reviewList.get(i).getProduct_img() %>" alt="<%=reviewList.get(i).getProduct_img() %>">
+											</a>
+												<div class="attach-preview"></div>
+											</li>
 										</ul>
 									</div>
+									<%} %>
 									<div class="reply">
-										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> <a class="yes"
-											href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
-										<a class="no"
-											href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
+										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> 
+										<a class="yes" href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
+										<a class="no" href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
 									</div>
 								</li>
 							</ul>
 						</div>
-
-						<%-- 일반리뷰--%>
-						<div class="signup-cont cont">
-							<ul class="PR15N01-review-wrap">
-								<li id="power_review_block995509" class="power-review-list-box">
-									<dl class="desc">
-										<dt class="first">작성자</dt>
-										<dd>nmoo*****</dd>
-										<dt>작성일</dt>
-										<dd>2020-11-07</dd>
-										<dt>조회수</dt>
-										<dd>
-											<span id="power_review_showhits">7</span>
-										</dd>
-									</dl>
-									<div class="hd-box">
-										<div class="star-icon">
-											<span class="mini_rat"> <input type="number"
-												class="rating text-default" value="3" data-readonly />
-											</span> <span class="survey">별로임</span>
-										</div>
-									</div>
-									<div class="pr-options" style="display: none;">
-										<dl>
-											<dt class="emp">구매한 옵션</dt>
-											<dd class="emp">컬러 : BLACK, 사이즈 : S</dd>
-										</dl>
-									</div>
-									<div class="content">
-										<p class="content_p">
-											<a href="javascript:power_review_more('995509', '00000');"
-												class="more-options">일반리뷰 입니다!! 사이즈때문에 고민되서 문의하고 주문했는데 잘
-												맞네요 가죽도 좋고 디자인도 예쁘고 넘넘 맘에 드네요</a><a class="pr-close"
-												href="javascript:power_review_more_close('995509');">
-												... <span>닫기</span>
-											</a>
-
-										</p>
-										<div class="ctr"></div>
-									</div>
-									<div class="reply">
-										<span class="pr-txt">이 리뷰가 도움이 되셨나요?</span> <a class="yes"
-											href="javascript:power_review_good('995509', 'N', 'shopdetail');"><span>0</span></a>
-										<a class="no"
-											href="javascript:power_review_bad('995509', 'N', 'shopdetail');"><span>0</span></a>
-									</div>
-								</li>
-							</ul>
-						</div>
-
-
-
+						<%
+						} %>
+						<!-- ------------------------------상품리뷰---------------------------------------  -->
 						<!-- .PR15N01-review-wrap -->
 						<div class="paging">
 							<a class="now" href="#none"><span>1</span></a> <a
@@ -863,8 +728,6 @@ ChannelIO('boot', settings);
 						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
 					</ul>
 				</div>
-
-
 				<a name="brandqna_list"></a>
 				<div class="tit-detail">
 
@@ -894,9 +757,7 @@ ChannelIO('boot', settings);
 							</tr>
 						</thead>
 						<tbody>
-
 							<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
-
 							<tr class="nbg">
 								<td><div class="tb-center">
 										<span class="reviewnum">13</span>
@@ -922,31 +783,20 @@ ChannelIO('boot', settings);
 						</tbody>
 					</table>
 
-
-
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">
-
-								<a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list"
-									class="now">1</a> <a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
-
-								<a
-									href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list"
-									class="last">&gt;&gt;</a>
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list" class="now">1</a> 
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
+								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list" class="last">&gt;&gt;</a>
 							</div>
 						</div>
 						<div class="btm_write">
-							<a
-								href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
+							<a href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
 						</div>
-
 					</div>
 				</div>
 				<!-- .qna-list -->
-
 
 				<div class="cboth pdt100"></div>
 				<div id="page04" class="cboth pdt100"></div>
@@ -1008,9 +858,6 @@ ChannelIO('boot', settings);
 
 
 				<!-- e: 상품 일반정보(상품정보제공 고시) -->
-
-
-
 
 				<div class="cboth pdt100"></div>
 				<div id="page05" class="cboth pdt100"></div>
@@ -1102,8 +949,8 @@ ChannelIO('boot', settings);
 	</div>
 
 	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> <span
-			class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span>
+		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> 
+<%-- 		<span class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span> --%>
 	</div>
 </section>
 
@@ -1120,18 +967,18 @@ ChannelIO('boot', settings);
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-	try {
-		fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
-			return true ;
-		}).catch(function(e) {
-			var carbonScript = document.createElement("script");
-			carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
-			carbonScript.id = "_carbonads_js";
-			document.getElementById("carbon-block").appendChild(carbonScript);
-		});
-	} catch (error) {
-		console.log(error);
-	}
+// 	try {
+// 		fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+// 			return true;
+// 		}).catch(function(e) {
+// 			var carbonScript = document.createElement("script");
+// 			carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+// 			carbonScript.id = "_carbonads_js";
+// 			document.getElementById("carbon-block").appendChild(carbonScript);
+// 		});
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
 	$('.tabs .tab').click(function(){
 		if ($(this).hasClass('signin')) {
 			$('.tabs .tab').removeClass('active');

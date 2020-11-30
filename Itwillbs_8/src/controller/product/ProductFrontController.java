@@ -1,4 +1,5 @@
 package controller.product;
+ 
 
 import java.io.IOException;
 
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.product.ProductDetailAction;
+import action.product.ControlProductListAction;
+import action.product.OptionDeleteAction;
 import action.product.ProdReviewWriteAction;
+import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUploadProAction;
 import vo.ActionForward;
@@ -41,7 +45,6 @@ public class ProductFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-			
 				e.printStackTrace();
 			}
 		}
@@ -50,7 +53,7 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/product/product_upload.jsp");
 		} else if(command.equals("/ProductUploadPro.po")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new ProductUploadProAction();
 			try {
 				forward = action.execute(request, response);
@@ -58,6 +61,39 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// -------------전체 상품 리스트 보기----------------
+		else if(command.equals("/ControlProductList.po")) {
+			forward = new ActionForward();
+							
+			action = new ControlProductListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		// -------------상품 삭제----------------
+		else if(command.equals("/ProductDelete.po")) {
+			forward = new ActionForward();
+									
+			action = new ProductDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// -------------옵션 삭제----------------
+		else if(command.equals("/OptionDelete.po")) {
+			forward = new ActionForward();
+										
+			action = new OptionDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}	
 		// --------------------상품 댓글 쓰기--------------------
 		else if(command.equals("/ProdReviewWrite.po")) {
 			System.out.println("ProdReviewWriteAction 포워딩");

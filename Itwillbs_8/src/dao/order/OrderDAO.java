@@ -1,14 +1,17 @@
 package dao.order;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.sun.xml.internal.ws.Closeable;
 
+import vo.DetailOrderBean;
 import vo.OrderBean;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import static db.JdbcUtil.*;
@@ -54,7 +57,7 @@ public class OrderDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "INSERT INTO teampro.order VALUES(?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setString(1, ob.getCode());
 			p.setString(2, ob.getName());
@@ -84,6 +87,121 @@ public class OrderDAO {
 		}
 		
 		return insertCount;
+	}
+
+	public ArrayList<OrderBean> getMainorder() {
+		ArrayList<OrderBean> mainorderList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from mainorder";
+			pstmt = con.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			mainorderList = new ArrayList<OrderBean>();
+			
+			while(rs.next()) {
+				OrderBean order = new OrderBean();
+				
+				order.setCode(rs.getString("code"));
+				order.setName(rs.getString("name"));
+				order.setPhone(rs.getString("phone"));
+				order.setAddress(rs.getString("address"));
+				order.setStatus(rs.getString("status"));
+				order.setPayment(rs.getString("payment"));
+				order.setMember_id(rs.getString("member_id"));
+				order.setDate(rs.getTimestamp("date"));
+				
+				mainorderList.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return mainorderList;
+	}
+
+	public ArrayList<DetailOrderBean> getDetailorderList(String mainorder_code) {
+		ArrayList<DetailOrderBean> detailorderList = null;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from detailorder where mainorder_code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, mainorder_code);
+			rs = pstmt.executeQuery();
+			
+			detailorderList = new ArrayList<DetailOrderBean>();
+			while(rs.next()) {
+				DetailOrderBean order = new DetailOrderBean();
+				
+				order.setNum(rs.getInt("num"));
+				order.setName(rs.getString("name"));
+				order.setMain_img(rs.getString("main_img"));
+				order.setPrice(rs.getInt("price"));
+				order.setCnt(rs.getInt("cnt"));
+				order.setColor(rs.getString("color"));
+				order.setSize(rs.getString("size"));
+				order.setMainorder_code(mainorder_code);
+				order.setOpt_productCode(rs.getString("opt_productCode"));
+				order.setDate(rs.getTimestamp("date"));
+				
+				detailorderList.add(order);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return detailorderList;
+	}
+
+	public int updateMainorder(String code, String status) {
+		int cnt = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "update mainorder set status=? where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, status);
+			pstmt.setString(2, code);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return cnt;
+	}
+
+	public int deleteMainorder(String code) {
+		int cnt = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "delete from mainorder where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			cnt = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return cnt;
 	}
 
 }

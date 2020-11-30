@@ -3,8 +3,12 @@ package action.community;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
 import svc.community.CommModifyProService;
@@ -22,7 +26,20 @@ public class CommModifyProAction implements Action {
 		
 		ActionForward forward = null;
 		
-		int num = Integer.parseInt(request.getParameter("num"));
+		ServletContext context = request.getServletContext();
+		String saveFolder = "/communityUpload";
+		String realFolder = context.getRealPath(saveFolder);
+		int fileSize = 1024 * 1024 * 10;
+		
+		MultipartRequest multi = new MultipartRequest(
+				request, // HttpServletRequest(request) 객체 
+				realFolder, // 실제 업로드 폴더 
+				fileSize, // 한 번에 업로드 가능한 1개 파일 최대 크기 
+				"UTF-8", // 파일명에 대한 인코딩 방식 
+				new DefaultFileRenamePolicy() // 파일명 중복 시 중복 처리 객체
+				);
+		
+		int num = Integer.parseInt(multi.getParameter("num"));
 		
 		// isArticleWriter() 메서드를 호출하여 적합한 사용자인지 판별
 		CommModifyProService boardModifyProService = new CommModifyProService();
@@ -37,11 +54,12 @@ public class CommModifyProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
+			
 			CommBean article = new CommBean();
 			article.setNum(num);
-			article.setSubject(request.getParameter("subject"));
-			article.setContent(request.getParameter("content"));
-			article.setImg(request.getParameter("img"));
+			article.setSubject(multi.getParameter("subject"));
+			article.setContent(multi.getParameter("content"));
+			article.setImg(multi.getOriginalFileName("img"));
 			// 글 수정 작업 요청
 			boolean isModifySuccess = boardModifyProService.modifyArticle(article);
 			
@@ -55,7 +73,7 @@ public class CommModifyProAction implements Action {
 				out.println("</script>");
 			}else {
 				forward = new ActionForward();
-				forward.setPath("CommDetail.co?num="+num+"&page="+request.getParameter("page"));
+				forward.setPath("CommDetail.co?num="+num+"&page="+multi.getParameter("page"));
 				forward.setRedirect(true);
 			}
 		}
