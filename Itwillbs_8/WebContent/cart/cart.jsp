@@ -10,6 +10,7 @@
    int coin = 0;
    int cartNo = cartList.size();
    int num = 0;
+   
    %>
   <script src="js/bootstrap4-rating-input.js"></script>
     <style type="text/css">
@@ -20,17 +21,10 @@
 		width: 1024px;
 		text-align: center;
 	}
-	.CSSbuttonWhite:hover{color:#fff;}
     </style>
   <script type="text/javascript" src=js/bootstrap4-rating-input.js></script> 
   <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
   <script type="text/javascript">
-//   $('input:checkbox[name=chk]').checked(function() {
-// 	var test =  $('input:checkbox[name=chk]').find("tr").find("cartList");
-// 	alert(test);
-//   });
-
-
 
   $(document).ready(function(){
 	  
@@ -38,7 +32,7 @@
 		  // 전체 선택
 	        if($("#allCheck").prop("checked")){
 	            $("input[name=chk]").prop("checked",true);
-	            
+					            	
 	       // 전체 해제
 	        } else {
 	            $("input[name=chk]").prop("checked",false);
@@ -46,41 +40,52 @@
 	    });
 	  
 	  // ---------------------------------------------------------
-
-
-	
+			
+	  
+	  
 	  // ---------------------------------------------------------
 	  
 
-	});
-  
-// 	//상품개수증가
-//   function cntPlus(id) {
-// 		var numid = id.replace("plus", "num")
-		
-// 		var cnt = Number($('#'+numid).val());
-		
-// 		cnt += 1;
-		
-// 		$('#'+numid).val(cnt);
-		
-// 		calculatePrice();
-// 	}
 	
-// 	// 상품개수감소
-// 	function cntMinus(id) {
-// 		var numid = id.replace("minus", "num");
+  
+	//상품개수증가
+  function cntUp(id) {
+		var numid = id.replace("up", "num");
 		
-// 		var cnt = Number($('#'+numid).val());
+		var cnt = Number($('#'+numid).val());
 		
-// 		if(cnt > 1) {
-// 			cnt -= 1;
-// 			$('#'+numid).val(cnt);
-// 		}
+		cnt += 1;
+		
+		$('#'+numid).val(cnt);
+		
+	};
+	
+	// 상품개수감소
+	function cntDown(id) {
+		var numid = id.replace("down", "num");
+		
+		var cnt = Number($('#'+numid).val());
+		
+		if(cnt > 1) {
+			cnt -= 1;
+			$('#'+numid).val(cnt);
+		}
 		
 		
-// 	}
+	};
+	  // ---------------------------------------------------------
 
+	  
+	  
+	  
+	  
+	  
+	  // ---------------------------------------------------------
+	  
+	  
+	  
+	  
+  });
 		  </script>
 
 
@@ -116,6 +121,7 @@
       </dl>
       
       <form action="CartDelete.ca" method="post" name="cartForm" >
+      
       <h2 class="tit-page">장바구니</h2>
       <div class="page-body">
          <div class="table-cart table-fill-prd">
@@ -183,9 +189,7 @@
                      <td>
                         <div class="tb-left">
                            <a
-                              href=""   class="tb-bold"><%=cartList.get(i).getProduct_name()%></a> <a
-                              href="javascript:modify_option('3360797', '1','');"
-                              class="CSSbuttonWhite btn_option">EDIT</a>
+                              href=""   class="tb-bold"><%=cartList.get(i).getProduct_name()%></a> 
                            <div id="3360797_1" class="tb-opt">
                               <span class="tb-dl"><span class="opt_dd">색상 :  
                               <%=cartList.get(i).getColor() %></span></span>
@@ -199,13 +203,12 @@
                      <td>
                         <div class="tb-center">
                            <div class="opt-spin">
-                              <input type="text" name="amount" value="1" class="txt-spin">
-                              <span class="btns" > <a
-                                 href="javascript:count_change(0, 0)"><img class="btn-up"
-                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
-                                 <a href="javascript:count_change(1, 0)"><img
+                              <input type="text" name="amount" value="1" class="txt-spin" id = "btn-num<%=i%>">
+                              <span class="btns" > <a href="javascript:cntUp(this.id)" id="btn-up<%=i %>"><img class="btn-up" 
+                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif" ></a>
+                                <a href="javascript:cntDown(this.id)" id="btn-down<%=i %>"><img
                                     class="btn-dw"
-                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
+                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"  ></a>
                               </span>
                            </div>
                            <a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
@@ -253,7 +256,12 @@
                      <td colspan="8">
                         <div class="tb-right">
                            <span class="MK_none_groupsale_total_price_sell"> 총 구매금액<span
-                              class="MK_chg_none_groupsale_total_price_sell MK_change_price"><%=coin%></span>원
+                              class="MK_chg_none_groupsale_total_price_sell MK_change_price">
+                              
+<!--                               if($("input:checkbox[name=chk]").is(":checked") == true) { -->
+                          
+                              
+                              <%=coin%></span>원
                            </span><span class="MK_total_delivery">+ 배송비<span
                               class="MK_chg_total_delivery MK_change_price"><%
 
@@ -299,6 +307,21 @@
    <!-- #cartWrap -->
 </div>
 <!-- Shoping Cart 끝 -->
+
+
+<!--  --------------------------------------------------------- -->
+
+ <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
+  <script type="text/javascript">
+$(document).ready(function(){
+
+	
+	
+});
+</Script>
+
+<!--  --------------------------------------------------------- -->
+
 
 
 <jsp:include page="../inc/footer.jsp" />
