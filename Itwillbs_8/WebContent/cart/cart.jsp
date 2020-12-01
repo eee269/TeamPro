@@ -25,7 +25,6 @@
   <script type="text/javascript" src=js/bootstrap4-rating-input.js></script> 
   <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
   <script type="text/javascript">
-
   $(document).ready(function(){
 	  
 	  $("#allCheck").click(function(){
@@ -38,22 +37,36 @@
 	            $("input[name=chk]").prop("checked",false);
 	        }
 	    });
-	  
-	  // ---------------------------------------------------------
-			
-	  
-	  
-	  // ---------------------------------------------------------
-	  
-
+ 
+		
 	
-  
-	//상품개수증가
+	  // ---------------------------------------------------------
+	
+	  
+	  // ---------------------------------------------------------
+	  
+  });  	  
+	  
+	  
+ 
+		  </script>
+
+<script type="text/javascript">
+
+// 	function cntUp(id) {
+// 	alert(id);
+// 		var s =	parseInt($('.txt-spin').val());
+// 	if(s < 50){
+// 		s++;
+// 		parseInt($('.txt-spin').val(s));
+// 	}
+// 	alert(s);
+
+	// 상품개수증가
   function cntUp(id) {
 		var numid = id.replace("up", "num");
-		
+		var result = parseInt(numid)+1
 		var cnt = Number($('#'+numid).val());
-		
 		cnt += 1;
 		
 		$('#'+numid).val(cnt);
@@ -65,28 +78,18 @@
 		var numid = id.replace("down", "num");
 		
 		var cnt = Number($('#'+numid).val());
-		
 		if(cnt > 1) {
 			cnt -= 1;
 			$('#'+numid).val(cnt);
 		}
-		
-		
-	};
-	  // ---------------------------------------------------------
+	}
+</script>
 
-	  
-	  
-	  
-	  
-	  
-	  // ---------------------------------------------------------
-	  
-	  
-	  
-	  
-  });
-		  </script>
+
+<Script>
+
+</Script>
+
 
 
 <jsp:include page="../inc/header.jsp" />
@@ -201,18 +204,22 @@
                         </div>
                      </td>
                      <td>
+                     
+                     
+                     <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
                         <div class="tb-center">
                            <div class="opt-spin">
-                              <input type="text" name="amount" value="1" class="txt-spin" id = "btn-num<%=i%>">
-                              <span class="btns" > <a href="javascript:cntUp(this.id)" id="btn-up<%=i %>"><img class="btn-up" 
-                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif" ></a>
-                                <a href="javascript:cntDown(this.id)" id="btn-down<%=i %>"><img
-                                    class="btn-dw"
-                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"  ></a>
+                                <input type="button" id="btn-down<%=i %>" class="btn-dw" onclick = "cntDown(this.id)" value="-" >
+                              <input type="text" name="amount" value="1" class="txt-spin" id ="btn-num<%=i%>">
+                              <span class="btns" > <input type="button" id="btn-up<%=i %>" class="btn-up" onclick="cntUp(this.id)" value="+">
                               </span>
                            </div>
                            <a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
                         </div>
+                     <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+                     
+                     
+                        
                      </td>
                      <td><div class="tb-center">4,380</div></td>
                      <td><div class="tb-center tb-bold tb-price">
