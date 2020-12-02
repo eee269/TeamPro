@@ -135,7 +135,7 @@
 			%>
 			<ul>
 				<li>
-					<a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
+					<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>" class="hov-img0 how-pos5-parent">
 						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG"/>
 						<div class="flex-col-c-m size-123 bg9 how-pos5">
 							<span class="ltext-107 cl2 txt-center"> 22 </span> 
