@@ -4,11 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import svc.member.MemberInfoService;
+import svc.member.MemberMypageService;
 import vo.ActionForward;
 import vo.MemberBean;
 
-public class MemberInfoAction implements Action {
+public class MemberMypageAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -16,8 +16,8 @@ public class MemberInfoAction implements Action {
 		
 		String member_id = request.getParameter("member_id");
 		
-		MemberInfoService memberInfoService = new MemberInfoService();
-		MemberBean member = memberInfoService.getMember(member_id);
+		MemberMypageService memberMypageService = new MemberMypageService();
+		MemberBean member = memberMypageService.getMember(member_id);
 		
 		request.setAttribute("member", member);
 		

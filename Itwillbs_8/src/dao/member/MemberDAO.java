@@ -163,7 +163,7 @@ public class MemberDAO {
 		
 	}
 
-
+	//---------------------------회원 정보 가져오기-------------------------------
 	public MemberBean selectMember(String member_id) {
 		MemberBean member = new MemberBean();
 		

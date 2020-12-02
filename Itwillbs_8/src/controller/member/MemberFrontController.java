@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.MemberLogoutAction;
+import action.member.MemberMypageAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteAction;
-import action.member.MemberInfoAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -74,9 +74,9 @@ public class MemberFrontController extends HttpServlet {
 		}
 
 		// -------------마이페이지 보기----------------
-		else if (command.equals("/MemberInfo.mo")) {
+		else if (command.equals("/MemberMypage.mo")) {
 			forward = new ActionForward();
-			action = new MemberInfoAction();
+			action = new MemberMypageAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -7,7 +7,7 @@ import vo.MemberBean;
 
 import static db.JdbcUtil.*;
 
-public class MemberInfoService {
+public class MemberMypageService {
 
 	public MemberBean getMember(String member_id) {
 		MemberBean member = new MemberBean();
