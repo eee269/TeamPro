@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vo.MemberBean;
 import vo.ProductBean;
 import vo.ProductOptionBean;
 
@@ -81,13 +80,11 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-//				pb.setStock(rs.getInt("stock"));
+				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
-				pb.setName(rs.getString("name"));
 								
 				bestList.add(pb);
 			}
@@ -124,13 +121,11 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-//				pb.setStock(rs.getInt("stock"));
+				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
-				pb.setName(rs.getString("name"));
 				
 				productListX.add(pb);
 			}
@@ -165,13 +160,11 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-//				pb.setStock(rs.getInt("stock"));
+				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
-				pb.setName(rs.getString("name"));
 				
 				productListN.add(pb);
 			}
@@ -204,13 +197,11 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
-//				pb.setStock(rs.getInt("stock"));
+				pb.setStock(rs.getInt("stock"));
 				pb.setPrice(rs.getInt("price"));
 				pb.setLikey(rs.getInt("likey"));
-				pb.setName(rs.getString("name"));
 				
 				productDetailList.add(pb);
 			}
@@ -291,7 +282,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "select max(basicCode) from product";
+			String sql = "select max(code) from goods";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
@@ -300,7 +291,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("getBasicCode의 오류" +e.getMessage());
+			System.out.println("selectProductCount()의 오류" +e.getMessage());
 			e.printStackTrace();
 		}finally{
 			close(ps);
@@ -318,16 +309,17 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, date) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, now())";
+					+ "goods(code, name, price, cnt, main_img, sub_img, cate1, cate2) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, productBean.getBasicCode());
 			ps.setString(2, productBean.getName());
-			ps.setString(3, productBean.getXcode());
-			ps.setString(4, productBean.getNcode());
+			ps.setInt(3, productBean.getPrice());
+			ps.setInt(4, productBean.getStock());
 			ps.setString(5, productBean.getMain_img());
 			ps.setString(6, productBean.getSub_img());
-			ps.setInt(7, productBean.getPrice());
+			ps.setString(7, productBean.getXcode());
+			ps.setString(8, productBean.getNcode());
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -347,14 +339,13 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "opt(productcode, basicCode,color,size, stock) "
-					+ "values(?, ?, ?, ?,?)";
+					+ "option(productcode, color, size, goods_code) "
+					+ "values(?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, optionBean.getProductCode());
-			ps.setString(2, optionBean.getBasicCode());
-			ps.setString(3, optionBean.getColor());
-			ps.setString(4, optionBean.getSize());
-			ps.setInt(5, optionBean.getStock());
+			ps.setString(2, optionBean.getColor());
+			ps.setString(3, optionBean.getSize());
+			ps.setString(4, optionBean.getBasicCode());
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -365,185 +356,5 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		}
 				
 		return count;
-	}
-	
-	
-	public ArrayList<ProductBean> selectProductList() {
-		ArrayList<ProductBean> productList = null;
-		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-				
-		try {
-			String sql = "SELECT * FROM product ORDER BY date desc";
-			ps = con.prepareStatement(sql);
-			rs = ps.executeQuery();
-			
-			productList = new ArrayList<ProductBean>();
-			
-			while(rs.next()) {
-				ProductBean productBean = new ProductBean();
-				
-				productBean.setBasicCode(rs.getString("basicCode"));
-				productBean.setXcode(rs.getString("xcode"));
-				productBean.setNcode(rs.getString("ncode"));
-				productBean.setMain_img(rs.getString("main_img"));
-				productBean.setSub_img(rs.getString("sub_img"));
-				productBean.setName(rs.getString("name"));
-				productBean.setPrice(rs.getInt("price"));
-				productBean.setLikey(rs.getInt("likey"));
-				productBean.setDate(rs.getDate("date"));
-				
-				
-				productList.add(productBean);
-			}
-			
-		} catch (SQLException e) {
-			System.out.println("selectProductList() 오류 "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			close(ps);
-			close(rs);
-		}
-		
-		return productList;
-	}
-
-	// 상품 삭제
-	public int deleteProduct(String basicCode) {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "delete from product where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			
-			count = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return count;
-	}
-
-
-	public ArrayList<ProductOptionBean> selectOptionList(String basicCode) {
-		ArrayList<ProductOptionBean> optionList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		 
-		try {
-			String sql = "select * from opt where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			rs = pstmt.executeQuery();
-			
-			optionList = new ArrayList<ProductOptionBean>();
-			while(rs.next()) {
-				ProductOptionBean option = new ProductOptionBean();
-				
-				option.setBasicCode(basicCode);
-				option.setProductCode(rs.getString("productCode"));
-				option.setColor(rs.getString("color"));
-				option.setSize(rs.getString("size"));
-				option.setStock(rs.getInt("stock"));
-				
-				optionList.add(option);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return optionList;
-	}
-
-	public int deleteOption(String productCode) {
-		int count = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		try {
-			String sql = "delete from opt where productCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, productCode);
-			
-			count = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return count;
-	}
-	
-	public ArrayList<ProductOptionBean> selectColorList(String basicCode) {
-		ArrayList<ProductOptionBean> colorList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		 
-		try {
-			String sql = "select distinct color from opt where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			rs = pstmt.executeQuery();
-			
-			colorList = new ArrayList<ProductOptionBean>();
-			while(rs.next()) {
-				ProductOptionBean option = new ProductOptionBean();
-				
-
-				option.setColor(rs.getString("color"));
-
-				colorList.add(option);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return colorList;
-	}
-	
-	public ArrayList<ProductOptionBean> selectSizeList(String basicCode) {
-		ArrayList<ProductOptionBean> sizeList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		 
-		try {
-			String sql = "select distinct size from opt where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			rs = pstmt.executeQuery();
-			
-			sizeList = new ArrayList<ProductOptionBean>();
-			while(rs.next()) {
-				ProductOptionBean option = new ProductOptionBean();
-
-				option.setSize(rs.getString("size"));
-
-				
-				sizeList.add(option);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return sizeList;
 	}
 }

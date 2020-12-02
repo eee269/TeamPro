@@ -17,12 +17,14 @@ public class cartListAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("cartListAction");
 		
+		String member_id = request.getParameter("member_id");
+		
 		ActionForward forward = null;
 		
 		CartListService cartListService = new CartListService();
 		
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
-		cartList = cartListService.getCartList();
+		cartList = cartListService.getCartList(member_id);
 		
 		request.setAttribute("cartList", cartList);
 		
