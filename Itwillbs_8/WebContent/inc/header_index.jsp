@@ -2,7 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-	String id=(String)session.getAttribute("id");
+	String member_id=(String)session.getAttribute("member_id");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -54,23 +54,28 @@
 					</div>
 					<div class="right-top-bar flex-w h-full">
 						<%
-					if(id == null){
+					if(member_id == null){
 					%>
 						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
-						<%} else{ %>
-							<a href="MemberLogout.mo?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
-						<%} %>
-						<a href="Cart.ca?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
-							장바구니
+						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
+							회원가입
 						</a>
-						<a href="MemberInfo.mo?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
+					<%}else{ %>
+						<a href="MemberInfo.mo?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
-						<a href="MyOrder.or?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
+						<a href="Cart.ca?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
+							장바구니
+						</a>
+						<a href="MyOrderList.or?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
+							로그아웃
+						</a>
+						<%} %>
 					</div>
 				</div>
 			</div>
@@ -143,7 +148,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="Main.go"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->

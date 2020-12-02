@@ -75,7 +75,7 @@ public class OrderDAO {
 		return insertCount;
 	}
 
-	public ArrayList<OrderBean> selectOrderList() {
+	public ArrayList<OrderBean> selectOrderList(String member_id) {
 		System.out.println("OrderDAO - selectOrderList()");
 		ArrayList<OrderBean> orderList = null;
 		
@@ -85,7 +85,7 @@ public class OrderDAO {
 		try {
 			String sql = "SELECT * FROM mainorder where member_id = ?";
 			p = con.prepareStatement(sql);
-			p.setString(1, "test");
+			p.setString(1, member_id);
 			rs = p.executeQuery();
 			
 			orderList = new ArrayList<OrderBean>();

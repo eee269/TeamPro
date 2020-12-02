@@ -104,7 +104,7 @@
 					<div class="lnb">
 						<ul>
 							<li class="first">
-							<a href="MyOrderList.or">주문내역</a></li>
+							<a href="MyOrderList.or?member_id=<%=member.getId()%>">주문내역</a></li>
 							<li><a href="#">상품 보관함</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
@@ -146,9 +146,13 @@
 							<div class="user-info">
 								<p>
 									<b><%=member.getUsername() %></b> [<span id="MK_user_id"><%=member.getId() %></span>]님
-									 <a href="회원정보수정" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
+									  &nbsp;&nbsp;&nbsp; <a href="회원정보수정" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
 								</p>
 								<div class="box">
+									<dl>
+										<dt>가입 일자</dt>
+										<dd><%=member.getDate() %></dd>
+									</dl>
 									<dl>
 										<dt>전 &nbsp;&nbsp;&nbsp; 화</dt>
 										<dd><%=member.getPhone() %></dd>
@@ -159,10 +163,10 @@
 											<span id="MK_user_email"><%=member.getEmail() %></span>
 										</dd>
 									</dl>
-									<dl>
-										<dt>주 &nbsp;&nbsp;&nbsp; 소</dt>
-										<dd>주소...어케해야대지.......1. 최근주소지 2. 목록이동 -> 주소지 목록 나열</dd>
-									</dl>
+<!-- 									<dl> -->
+<!-- 										<dt>주 &nbsp;&nbsp;&nbsp; 소</dt> -->
+<!-- 										<dd>주소...어케해야대지.......1. 최근주소지 2. 목록이동 -> 주소지 목록 나열</dd> -->
+<!-- 									</dl> -->
 								</div>
 							</div>
 						</div>
@@ -172,9 +176,9 @@
 								<span>총 주문 금액 계산한 값.. </span>원
 							</dd>
 							<dt>주문 건수</dt>
-							<dd style="width: 300px"><a href="MyOrderList.or"><span>총 주문 건수 계산한 값... </span>건</a></dd>
+							<dd style="width: 300px"><span>총 주문 건수 계산한 값... </span>건</dd>
 							<dt>게시글 수</dt>
-							<dd style="width: 300px"><a href="최근 등록 게시글"><span>총 게시글 수 계산한 값... </span>개</a></dd>
+							<dd style="width: 300px"><span>총 게시글 수 계산한 값... </span>개</dd>
 <!-- 							<dt>적 립 금</dt> -->
 <!-- 							<dd> -->
 <!-- 								<a href="/shop/mypage.html?mypage_type=myreserve"><strong>5,000</strong>원</a> -->
@@ -199,7 +203,7 @@
 					<!-- 최근 주문 정보 -->
 					<div class="hd">
 						<h3>최근 주문 정보</h3>
-						<a class="view fe" href="MyOrderList.or">+
+						<a class="view fe" href="MyOrderList.or?member_id=<%=member.getId()%>">+
 							MORE</a>
 					</div>
 					<div class="tbl">
