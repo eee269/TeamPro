@@ -13,11 +13,14 @@
 <script type="text/javascript">
 
 // Java 시간에 했던 HTML Object 참고해서 다시 짜기
-function changeStatus(code) {
-	var sel = $(this).prev();
-	var val = $(sel).value;
-	alert(sel);
-// 	location.href="UpdateOrderStatus.or?code="+code+"&status="+val;
+function changeStatus(code, id) {
+	var selectId = id.replace("bnt", "sel");
+	
+	var option = document.getElementById(selectId);
+	var val = option.options[option.selectedIndex].value;
+	
+// 	alert(selectId + val + code);
+	location.href="UpdateOrderStatus.or?code="+code+"&status="+val;
 }
 </script>
 
@@ -84,7 +87,7 @@ function changeStatus(code) {
 			<td>결제수단</td>
 			
 			
-			<td><select>
+			<td><select id="sta-sel<%=i%>">
 			<%
 				switch(mor.getStatus()) {
 				
@@ -123,8 +126,8 @@ function changeStatus(code) {
 			
 			%>
 					
-			</select> <input type="button" value="상태변경"
-				onclick="changeStatus('<%=mainorder_code%>')"></td>
+			</select> <input type="button" value="상태변경" id="sta-bnt<%=i%>"
+				onclick="changeStatus('<%=mainorder_code%>', this.id)"></td>
 			<td>
 				<!-- <select id=""> --> <!-- 	<option>주문취소</option><option>교환</option><option>환불</option> -->
 				<!-- </select> --> <input type="button" value="주문취소"

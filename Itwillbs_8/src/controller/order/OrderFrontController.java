@@ -19,6 +19,11 @@ import vo.ActionForward;
 
 @WebServlet("*.or")
 public class OrderFrontController extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
