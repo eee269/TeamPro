@@ -41,7 +41,28 @@
 		
 	
 	  // ---------------------------------------------------------
+<<<<<<< HEAD
+=======
+	  
+
+	});
+  
+  
+  
+	//상품개수증가
+  function cntUp(id) {
+		var numid = id.replace("up", "num")
+		
+		var cnt = Number($('#'+numid).val());
+		
+		cnt += 1;
+		
+		$('#'+numid).val(cnt);
+		
+	}
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 	
+<<<<<<< HEAD
 	  
 	  // ---------------------------------------------------------
 	  
@@ -49,6 +70,22 @@
 	  
 	  
  
+=======
+	// 상품개수감소
+	function cntDown(id) {
+		var numid = id.replace("down", "num");
+		
+		var cnt = Number($('#'+numid).val());
+		
+		if(cnt > 1) {
+			cnt -= 1;
+			$('#'+numid).val(cnt);
+		}
+		
+		
+	}
+
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 		  </script>
 
 <script type="text/javascript">
@@ -209,9 +246,19 @@
                      <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
                         <div class="tb-center">
                            <div class="opt-spin">
+<<<<<<< HEAD
                                 <input type="button" id="btn-down<%=i %>" class="btn-dw" onclick = "cntDown(this.id)" value="-" >
                               <input type="text" name="amount" value="1" class="txt-spin" id ="btn-num<%=i%>">
                               <span class="btns" > <input type="button" id="btn-up<%=i %>" class="btn-up" onclick="cntUp(this.id)" value="+">
+=======
+                              <input type="text" id="btn-num<%=i %>" name="amount" value="1" class="txt-spin">
+                              <span class="btns" > 
+                              <a href="javascript:cntUp(this.id)" id="btn-up<%=i %>"><img class="btn-up"
+                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
+                                 <a href="javascript:cntDown(this.id)" id="btn-down<%=i %>"><img
+                                    class="btn-dw"
+                                    src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
                               </span>
                            </div>
                            <a href="javascript:send_basket(0, 'upd')" class="CSSbuttonWhite btn_option">EDIT</a>
@@ -314,8 +361,10 @@
    <!-- #cartWrap -->
 </div>
 <!-- Shoping Cart 끝 -->
+<script>
 
 
+<<<<<<< HEAD
 <!--  --------------------------------------------------------- -->
 
  <script type="text/javascript" src=js/jquery-3.5.1.js></script> 
@@ -331,4 +380,8 @@ $(document).ready(function(){
 
 
 
+=======
+
+</script>
+>>>>>>> branch 'main' of https://github.com/eee269/TeamPro.git
 <jsp:include page="../inc/footer.jsp" />

@@ -197,14 +197,16 @@
 	// 상품개수감소
 	function cntMinus(id) {
 		var numid = id.replace("minus", "num");
+		// optminus1 에서 minus를 num으로 고쳐서 optnum1으로 고침, optnum1은 상품 갯수 id
 		
 		var cnt = Number($('#'+numid).val());
+		// optnum1에 있는 value 값을 받아와서 cnt에 저장
 		
 		if(cnt > 1) {
 			cnt -= 1;
 			$('#'+numid).val(cnt);
 		}
-		
+		// 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
 		
 		calculatePrice();
 	}

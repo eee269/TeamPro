@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+    String id = (String)request.getAttribute("id"); 
+    %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -83,14 +86,17 @@
 						Free shipping for standard order over $100
 					</div>
 					<div class="right-top-bar flex-w h-full">
+				<%if(id==null){ %>
 						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
-						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
-							장바구니
-						</a>
+					<%}else{ %>
 						<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
+						</a>
+						<%} %>
+						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
+							장바구니
 						</a>
 						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보

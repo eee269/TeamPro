@@ -12,13 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.member.ControlMemberListAction;
 import action.order.ControlOrderListAction;
+import action.order.CopyDataAction;
 import action.order.DeleteMainorderAction;
+import action.order.OrderListAction;
 import action.order.OrderProAction;
 import action.order.UpdateOrderStatusAction;
 import vo.ActionForward;
 
 @WebServlet("*.or")
 public class OrderFrontController extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -27,23 +34,58 @@ public class OrderFrontController extends HttpServlet {
 		Action action = null;
 		String command = request.getServletPath();
 
-		if (command.equals("/Order.or")) {
+		if(command.equals("/Order.or")) {
+			System.out.println("Order.or 포워딩");
 			forward = new ActionForward();
-			forward.setPath("/cart/order.jsp");
-		} else if (command.equals("/OrderPro.or")) {
+			forward.setPath("/order/order.jsp");
+		}else if(command.equals("/OrderPro.or")){
 			forward = new ActionForward();
 			action = new OrderProAction();
-
+			
 			try {
 				System.out.println("OrderProAction으로 포워딩");
 				forward = action.execute(request, response);
-
+				
 			} catch (Exception e) {
-				System.out.println("OrderProAction으로 포워딩 중 오류! - " + e.getMessage());
+				System.out.println("OrderProAction으로 포워딩 중 오류! - " +e.getMessage());
 				e.printStackTrace();
 			}
+			
+		}else if(command.equals("/MyOrderList.or")) {
+			forward = new ActionForward();
+			
+			action = new OrderListAction();
+			try {
+				System.out.println("MyOrderListAction으로 포워딩");
 
-		}
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				System.out.println("MyOrderListAction으로 포워딩 중 오류! - " +e.getMessage());
+
+				e.printStackTrace();
+			}
+		} else if(command.equals("/CopyData.or")) {
+			System.out.println("CopyData.or 포워딩");
+			forward = new ActionForward();
+			action = new CopyDataAction();
+			try {
+				System.out.println("CopyDataAction으로 포워딩");
+
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				System.out.println("CopyDataAction으로 포워딩 중 오류! - " +e.getMessage());
+
+				e.printStackTrace();
+			}
+		}else if(command.equals("/Payment.or")) {
+			System.out.println("Payment.or 포워딩");
+			forward = new ActionForward();
+			forward.setPath("/order/payment.jsp");
+		} else if(command.equals("/MyOrderDetail.or?member_id=")) {
+			System.out.println("MyOrderDetail.or 포워딩");
+			forward = new ActionForward();
+			forward.setPath("/order/orderDetail.jsp");
+		} 
 
 		// -------------------------주문 관리 페이지--------------------------------
 		else if (command.equals("/ControlOrderList.or")) {

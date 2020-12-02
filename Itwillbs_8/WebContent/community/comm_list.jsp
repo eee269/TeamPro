@@ -133,47 +133,48 @@
 			<%
 			for(int i  = 0 ; i < articleList.size(); i++) {
 			%>
-<%--       		<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>"> --%>
-<!-- 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"> -->
-<%-- 					<%=articleList.get(i).getSubject() %> --%>
-<!-- 					<div class="block2"> -->
-<!-- 						<div class="block2-pic hov-img0"> -->
-<%-- 							<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="<%=articleList.get(i).getImg()%>"> --%>
-<!-- 						</div> -->
-<!-- 						<div class="block2-txt flex-w flex-t p-t-14"> -->
-<!-- 							<div class="block2-txt-child1 flex-col-l "> -->
-<%-- 									<%=articleList.get(i).getUsername() %> --%>
-<!-- 								<span class="stext-105 cl3"> -->
-<%-- 									<%=articleList.get(i).getDate() %> --%>
-<!-- 								</span> -->
+			<ul>
+				<li>
+					<a href="blog-detail.jsp" class="hov-img0 how-pos5-parent">
+						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG"/>
+						<div class="flex-col-c-m size-123 bg9 how-pos5">
+							<span class="ltext-107 cl2 txt-center"> 22 </span> 
+							<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getDate() %></span>
+						</div>
+					</a>
+					<%=articleList.get(i).getSubject() %>
+				</li>
+			</ul>
+				
+<!-- 			<ul> -->
+<!-- 	      		<li> -->
+<%-- 	      			<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>"> --%>
+<!-- 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"> -->
+<%-- 						<%=articleList.get(i).getSubject() %> --%>
+<!-- 						<div class="block2"> -->
+<!-- 							<div class="block2-pic hov-img0"> -->
+<%-- 								<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="<%=articleList.get(i).getImg()%>"> --%>
 <!-- 							</div> -->
-<!-- 							<div class="block2-txt-child2 flex-r p-t-3"> -->
-<!-- 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"> -->
-<!-- 									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"> -->
-<!-- 									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"> -->
-<!-- 								</a> -->
+<!-- 							<div class="block2-txt flex-w flex-t p-t-14"> -->
+<!-- 								<div class="block2-txt-child1 flex-col-l "> -->
+<%-- 										<%=articleList.get(i).getUsername() %> --%>
+<!-- 									<span class="stext-105 cl3"> -->
+<%-- 										<%=articleList.get(i).getDate() %> --%>
+<!-- 									</span> -->
+<!-- 								</div> -->
+<!-- 								<div class="block2-txt-child2 flex-r p-t-3"> -->
+<!-- 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"> -->
+<!-- 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"> -->
+<!-- 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"> -->
+<!-- 									</a> -->
+<!-- 								</div> -->
 <!-- 							</div> -->
 <!-- 						</div> -->
 <!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</a> -->
-					<ul>
-						<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
-							<li class = "p-b-7">
-								<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG">
-								<div class="flex-col-c-m size-123 bg9 how-pos5">
-									<span class="ltext-107 cl2 txt-center"> </span>
-									<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getUsername() %> </span>
-								</div>
-								<h4><%=articleList.get(i).getSubject() %></h4>
-								<p class="stext-117 cl6"><%=articleList.get(i).getContent() %></p>
-							</li>
-						</a>
-				<%if(i % 4 == 0){ %>
-					</ul>
-				<%}
-			}%>
-<!-- 			</div> -->
+<!-- 				</a> -->
+<!-- 				</li> -->
+<!-- 			</ul> -->
+			<%}%>
 			<div class="bor17 of-hidden pos-relative float-r" >
 				<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
 				<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">

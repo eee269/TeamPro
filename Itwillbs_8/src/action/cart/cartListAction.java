@@ -24,7 +24,6 @@ public class cartListAction implements Action {
 		CartListService cartListService = new CartListService();
 		
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
-
 		cartList = cartListService.getCartList(member_id);
 		
 		request.setAttribute("cartList", cartList);

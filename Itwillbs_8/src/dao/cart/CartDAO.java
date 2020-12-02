@@ -43,7 +43,7 @@ public class CartDAO extends Exception {
 		try {
 			String sql = "SELECT * FROM cart WHERE member_id = ? ORDER BY num DESC";
 			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_id);
+			pstmt.setNString(1, member_id);
 			rs = pstmt.executeQuery();
 			
 		    CartList = new ArrayList<Cart>();
@@ -78,7 +78,7 @@ public class CartDAO extends Exception {
 	 return CartList;
 	}
 	
-	// 개별 삭제
+	// 삭제
 	public int cartDelete(int num) {
 		System.out.println("CartDAO - cartDelete()");
 		int deleteCount = 0;
