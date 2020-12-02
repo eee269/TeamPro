@@ -54,32 +54,33 @@
 
 	});
   
-// 	//상품개수증가
-//   function cntPlus(id) {
-// 		var numid = id.replace("plus", "num")
+  
+  
+	//상품개수증가
+  function cntUp(id) {
+		var numid = id.replace("up", "num")
 		
-// 		var cnt = Number($('#'+numid).val());
+		var cnt = Number($('#'+numid).val());
 		
-// 		cnt += 1;
+		cnt += 1;
 		
-// 		$('#'+numid).val(cnt);
+		$('#'+numid).val(cnt);
 		
-// 		calculatePrice();
-// 	}
+	}
 	
-// 	// 상품개수감소
-// 	function cntMinus(id) {
-// 		var numid = id.replace("minus", "num");
+	// 상품개수감소
+	function cntDown(id) {
+		var numid = id.replace("down", "num");
 		
-// 		var cnt = Number($('#'+numid).val());
+		var cnt = Number($('#'+numid).val());
 		
-// 		if(cnt > 1) {
-// 			cnt -= 1;
-// 			$('#'+numid).val(cnt);
-// 		}
+		if(cnt > 1) {
+			cnt -= 1;
+			$('#'+numid).val(cnt);
+		}
 		
 		
-// 	}
+	}
 
 		  </script>
 
@@ -199,11 +200,11 @@
                      <td>
                         <div class="tb-center">
                            <div class="opt-spin">
-                              <input type="text" name="amount" value="1" class="txt-spin">
-                              <span class="btns" > <a
-                                 href="javascript:count_change(0, 0)"><img class="btn-up"
+                              <input type="text" id="btn-num<%=i %>" name="amount" value="1" class="txt-spin">
+                              <span class="btns" > 
+                              <a href="javascript:cntUp(this.id)" id="btn-up<%=i %>"><img class="btn-up"
                                     src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_up.gif"></a>
-                                 <a href="javascript:count_change(1, 0)"><img
+                                 <a href="javascript:cntDown(this.id)" id="btn-down<%=i %>"><img
                                     class="btn-dw"
                                     src="http://oryany.co.kr/images/d3/modern_simple/btn/btn_h8_spin_dw.gif"></a>
                               </span>

@@ -24,6 +24,9 @@ public class ControlOrderListAction implements Action {
 		HashMap<String, ArrayList<DetailOrderBean>> detailorderList = new HashMap<String, ArrayList<DetailOrderBean>>();
 
 		mainorderList = controlOrderListService.getMainorderList();
+		
+		System.out.println("mainorderList.size()" + mainorderList.size());
+		
 		for (int i = 0; i < mainorderList.size(); i++) {
 			OrderBean mainorder = new OrderBean();
 			mainorder = mainorderList.get(i);
