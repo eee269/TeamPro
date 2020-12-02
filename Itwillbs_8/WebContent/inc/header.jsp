@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    String id = (String)request.getAttribute("id"); 
+    String id = (String)request.getAttribute("member_id"); 
     %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -91,14 +91,14 @@
 							로그인
 						</a>
 					<%}else{ %>
-						<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">
+						<a href="MemberInfo.mo?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
 						<%} %>
-						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
+						<a href="Cart.ca?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
-						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrder.or?member_id=<%=id %>" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 					</div>
@@ -107,7 +107,7 @@
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->		
-					<a href="index.jsp" class="logo">
+					<a href="Main.go" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 					<!-- Menu desktop -->

@@ -18,7 +18,7 @@ public class JdbcUtil {
 
 		try {
 			// JNDI 연결을 위한 설정
-			Context initCtx = new InitialContext();
+			InitialContext initCtx = new InitialContext();
 
 			Context envCtx = (Context) initCtx.lookup("java:comp/env");
 

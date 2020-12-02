@@ -20,7 +20,7 @@ public class MemberLogoutAction implements Action {
 		
 		forward = new ActionForward();
 		forward.setRedirect(true);
-		forward.setPath("index.jsp"); 
+		forward.setPath("Main.go"); 
 		
 		return forward;
 	}

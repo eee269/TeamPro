@@ -162,6 +162,35 @@ public class MemberDAO {
 		return isMember;
 		
 	}
+
+
+	public MemberBean selectMember(String member_id) {
+		MemberBean member = new MemberBean();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from member where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member.setId(member_id);
+				member.setPass(rs.getString("pass"));
+				member.setEmail(rs.getString("email"));
+				member.setUsername(rs.getString("username"));
+				member.setImg(rs.getString("img"));
+				member.setDate(rs.getTimestamp("date"));
+				member.setPhone(rs.getInt("phone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return member;
+	}
 	
 	
 	

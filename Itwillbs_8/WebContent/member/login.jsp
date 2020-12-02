@@ -284,7 +284,7 @@ body .container_member .content .signup-cont {
 			        </div>
 			        <div class="content">
 				            <div class="signin-cont cont">
-					                <form action="MemberLoginPro.mo" method="post" enctype="multipart/form-data">
+					                <form action="MemberLoginPro.mo" method="post">
 											<input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
 						                    <label for="text">ID</label>
 						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
