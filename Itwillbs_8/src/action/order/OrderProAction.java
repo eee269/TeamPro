@@ -16,19 +16,27 @@ public class OrderProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("OrderAction!");
+		System.out.println("OrderProAction!");
 		ActionForward forward = null;
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		OrderBean ob = new OrderBean();
-		OrderDAO orderDAO = OrderDAO.getInstance();
-		ob.setCode(orderDAO.createOrderCode());
-		ob.setName(request.getParameter("sender"));
-		ob.setPhone(request.getParameter("emergency11"));
-		ob.setAddress(request.getParameter("address1"));
+		ob.setCode(request.getParameter("imp_uid"));
+		ob.setName(request.getParameter("buyer_name"));
+		ob.setPhone(request.getParameter("buyer_tel"));
+		ob.setAddress(request.getParameter("buyer_addr"));
 		ob.setStatus("결제완료");
-		ob.setPayment("무통장");
+		ob.setPayment(request.getParameter("pay_method"));
 		ob.setMember_id("test");
 		ob.setDate(date);
+//		System.out.println(ob.getCode());
+//		System.out.println(ob.getName());
+//		System.out.println(ob.getPhone());
+//		System.out.println(ob.getAddress());
+//		System.out.println(ob.getStatus());
+//		System.out.println(ob.getPayment());
+//		System.out.println(ob.getMember_id());
+//		System.out.println(ob.getDate());
+
 		
 		OrderProService orderService = new OrderProService();
 		
@@ -46,7 +54,8 @@ public class OrderProAction implements Action {
 
 		} else {
 			forward = new ActionForward();
-			forward.setPath("/cart/myorder.jsp");
+			forward.setPath("MyOrderList.or");
+			forward.setRedirect(true);
 		}
 		
 		

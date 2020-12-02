@@ -20,6 +20,7 @@ public class OptionDeleteAction implements Action {
 		String basicCode = request.getParameter("basicCode");
 		OptionDeleteService optionDeleteService = new OptionDeleteService();
 		
+		System.out.println("OptionDeleteAction");
 		boolean isDelete = optionDeleteService.getDeleteOption(productCode);
 		
 		if(!isDelete) {
@@ -30,19 +31,7 @@ public class OptionDeleteAction implements Action {
 			out.println("alert('상품 옵션 삭제 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
-		} else {
-			int count = optionDeleteService.getOptionCount(basicCode);
-			
-			if(count <= 0) {
-				ProductDeleteService productDeleteService = new ProductDeleteService();
-				productDeleteService.deleteProduct(basicCode);
-			}
-			
-			forward = new ActionForward();
-			forward.setPath("ControlProductList.po");
-			forward.setRedirect(true);
-		}
-		
+		} 
 		return forward;
 	}
 

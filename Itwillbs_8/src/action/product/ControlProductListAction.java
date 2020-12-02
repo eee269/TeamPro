@@ -22,29 +22,26 @@ public class ControlProductListAction implements Action {
 		ActionForward forward = null;
 
 		ControlProductListService controlProductListService = new ControlProductListService();
-		
+
 		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
-		productList = controlProductListService.getProductList();
-		
 		HashMap<String, ArrayList<ProductOptionBean>> optionList = new HashMap<String, ArrayList<ProductOptionBean>>();
-//		ArrayList<ArrayList<ProductOptionBean>> optionList = new ArrayList<ArrayList<ProductOptionBean>>();
 		ArrayList<ProductOptionBean> subOptionList = null;
-		for(int i=0; i<productList.size(); i++) {
+
+		productList = controlProductListService.getProductList();
+		for (int i = 0; i < productList.size(); i++) {
 			ProductBean product = new ProductBean();
 			product = productList.get(i);
-			
+
 			String basicCode = product.getBasicCode();
-			int optCount = controlProductListService.getOptionCount(basicCode);
-			System.out.println(optCount);
-			for(int j=0; j<optCount; j++) {
-				subOptionList = new ArrayList<ProductOptionBean>();
-				subOptionList = controlProductListService.getOptionList(basicCode);
-				optionList.put(basicCode, subOptionList);
-			}
+
+			subOptionList = new ArrayList<ProductOptionBean>();
+			subOptionList = controlProductListService.getOptionList(basicCode);
+			optionList.put(basicCode, subOptionList);
 		}
-		
+
 		request.setAttribute("productList", productList);
 		request.setAttribute("optionList", optionList);
+		
 		forward = new ActionForward();
 		forward.setPath("/product/control_product.jsp");
 		return forward;

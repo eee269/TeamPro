@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="../css/control_mem_order.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="css/control.css" />
 </head>
 <body>
 <jsp:include page="../inc/header.jsp"/>

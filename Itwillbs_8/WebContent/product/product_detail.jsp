@@ -1,3 +1,7 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.ProductOptionBean"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ProdReviewBean"%>
 <%@page import="vo.ProductBean"%>
@@ -193,14 +197,16 @@
 	// 상품개수감소
 	function cntMinus(id) {
 		var numid = id.replace("minus", "num");
+		// optminus1 에서 minus를 num으로 고쳐서 optnum1으로 고침, optnum1은 상품 갯수 id
 		
 		var cnt = Number($('#'+numid).val());
+		// optnum1에 있는 value 값을 받아와서 cnt에 저장
 		
 		if(cnt > 1) {
 			cnt -= 1;
 			$('#'+numid).val(cnt);
 		}
-		
+		// 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
 		
 		calculatePrice();
 	}
@@ -311,6 +317,17 @@ ChannelIO('boot', settings);
 <%
 	String basicCode = request.getParameter("basicCode"); 
     ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
+    ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
+    ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
+    
+
+    String[] main = productDetailList.get(0).getMain_img().split("/");
+    String[] sub = productDetailList.get(0).getSub_img().split("/");
+    
+    DecimalFormat priceFormat = new DecimalFormat("###,###");
+    
+	
+    
 %>
 <!-- 끝 -->
 
@@ -337,44 +354,22 @@ ChannelIO('boot', settings);
 						<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 						<div class="slick3 gallery-lb">
+						<%for(int i=0; i<main.length; i++){%>
+							
 							<div class="item-slick3"
-								data-thumb="images/product-detail-01.jpg">
+								data-thumb="product/uploadImg/<%=main[i] %>">
 								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+									<img src="product/uploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
 
 									<a
 										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-01.jpg"> <i
+										href="product/uploadImg/<%=main[i] %>"> <i
 										class="fa fa-expand"></i>
 									</a>
 								</div>
 							</div>
+						<%}%>
 
-							<div class="item-slick3"
-								data-thumb="images/product-detail-02.jpg">
-								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-									<a
-										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-02.jpg"> <i
-										class="fa fa-expand"></i>
-									</a>
-								</div>
-							</div>
-
-							<div class="item-slick3"
-								data-thumb="images/product-detail-03.jpg">
-								<div class="wrap-pic-w pos-relative">
-									<img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-									<a
-										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-										href="images/product-detail-03.jpg"> <i
-										class="fa fa-expand"></i>
-									</a>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -385,14 +380,14 @@ ChannelIO('boot', settings);
 				<!-- 상품코드 -->
 				<input type="hidden" id="item-code" value="code,,">
 				<!-- 상품명 -->
-					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name">Lightweight
-						Jacket</h4>
+					<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
+						</h4>
 				<!-- 상품가격 -->
-					<span class="mtext-106 cl2" id="item-price">80,000원</span>
+					<span class="mtext-106 cl2" id="item-price"><%=priceFormat.format(productDetailList.get(0).getPrice())%>원</span>
 
-					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros
-						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-						feugiat.</p>
+<!-- 					<p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros -->
+<!-- 						pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare -->
+<!-- 						feugiat.</p> -->
 
 					<!-- 상품 옵션 -->
 					<div class="p-t-33" id="select-opt">
@@ -403,10 +398,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt1" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="s">Size S</option>
-									<option value="m">Size M</option>
-									<option value="l">Size L</option>
-									<option value="xl">Size XL</option>
+									<%for(int i=0; i<productSizeList.size(); i++){%>
+										<option value="<%=productSizeList.get(i).getSize()%>"><%=productSizeList.get(i).getSize() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>
@@ -419,10 +413,9 @@ ChannelIO('boot', settings);
 								<select class="js-select2" id="opt2" name="time"
 									onchange="submix(this.id, this.value)">
 									<option value="0" selected>Choose an option</option>
-									<option value="red">Red</option>
-									<option value="blue">Blue</option>
-									<option value="white">White</option>
-									<option value="gray">Gray</option>
+									<%for(int i=0; i<productColorList.size(); i++){%>
+										<option value="<%=productColorList.get(i).getColor()%>"><%=productColorList.get(i).getColor() %></option>
+									<% }%>
 								</select>
 								<div class="dropDownSelect2"></div>
 							</div>
@@ -519,35 +512,11 @@ ChannelIO('boot', settings);
 						cellpadding="0">
 						<tbody>
 							<tr>
-								<td align="center"><img
-									src="http://nasign.cafe24.com/products/17ss/star/O0FBCB43.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/products/17ss/txt/O0FBCB43.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_1.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_2.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_3.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_4.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_5.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_6.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_7.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_8.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_9.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_10.jpg?version=1"
-									imgborder="0"><br> <img style="margin-top: 50px;"
-									src="http://nasign.cafe24.com/mall/product/thumb/O0FBCB43009_11.jpg?version=1"
-									imgborder="0"><br> <img
-									src="http://nasign.cafe24.com/products/17ss/size/O0FBCB43.jpg?version=1"
-									imgborder="0"><br></td>
+								<td align="center">
+								<%for(int i=0; i<sub.length; i++){%>
+								<img src="product/uploadImg/<%=sub[i] %>" imgborder="0"><br> 
+								<% }%>
+								</td>
 							</tr>
 						</tbody>
 					</table>

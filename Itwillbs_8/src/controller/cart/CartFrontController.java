@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.cart.cartAllDeleteAction;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
 import vo.ActionForward;
@@ -61,11 +60,9 @@ public class CartFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 	
-		} else if(command.equals("/CartAllDelete.ca")) {
-			System.out.println("컨트롤러 - CartAllDelete ");
-			
-			action = new cartAllDeleteAction();
-		}
+		} 
+		
+		
 		
 		
 		// ------------------------------ 공통적으로 수행할 포워딩 -------------------

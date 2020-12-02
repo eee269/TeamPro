@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ArrayList<OrderBean> order = (ArrayList<OrderBean>)request.getAttribute("order");
+	ArrayList<OrderBean> order = (ArrayList<OrderBean>)request.getAttribute("orderList");
 %>
 
 <jsp:include page="../inc/header.jsp" />
@@ -11,7 +11,6 @@
 <jsp:include page="../quickMenu.jsp" />
 <!-- Cart -->
 <jsp:include page="../sub_cart.jsp" />
-
 <!-- Cart -->
 <div class="wrap-header-cart js-panel-cart">
 	<div class="s-full js-hide-cart"></div>

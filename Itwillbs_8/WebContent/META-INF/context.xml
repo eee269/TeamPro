@@ -27,12 +27,14 @@ DBCP(DataBase Connection Pool) 설정
 		password="teampro1"
 		driverClassName="com.mysql.jdbc.Driver"
 		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-		url="jdbc:mysql://3.35.82.26:3306/teampro"
+		url="jdbc:mysql://3.35.82.26:3306/teampro?useSSL=false" 
 		maxActive="500"
-		maxIdle="20"/>
-<!-- 		url="jdbc:mysql://192.168.1.26:3306/teampro" 공유 DB url -->
-<!-- 		url="jdbc:mysql://localhost:3306/teampro" 개인 DB url -->
+		maxIdle="20"
 		
+				/>
+<!-- 		username="team" 공유 계정 -->
+<!-- 		url="jdbc:mysql://3.35.82.26:3306/teampro" 공유 url -->
+<!-- 		    url="jdbc:mysql://localhost:3306/teampro" -->
 	
 
 </Context>

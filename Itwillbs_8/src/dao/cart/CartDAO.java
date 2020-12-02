@@ -32,7 +32,7 @@ public class CartDAO extends Exception {
 	
 
 	// 주문 조회
-	public ArrayList<Cart> selectList() {
+	public ArrayList<Cart> selectList(String member_id) {
 		System.out.println("CartDAO - selectList");
 		ArrayList<Cart> CartList = null;
 		
@@ -41,8 +41,9 @@ public class CartDAO extends Exception {
 		
 		
 		try {
-			String sql = "SELECT * FROM cart ORDER BY num DESC";
+			String sql = "SELECT * FROM cart WHERE member_id = ? ORDER BY num DESC";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setNString(1, member_id);
 			rs = pstmt.executeQuery();
 			
 		    CartList = new ArrayList<Cart>();
@@ -77,7 +78,7 @@ public class CartDAO extends Exception {
 	 return CartList;
 	}
 	
-	// 개별 삭제
+	// 삭제
 	public int cartDelete(int num) {
 		System.out.println("CartDAO - cartDelete()");
 		int deleteCount = 0;
@@ -99,31 +100,6 @@ public class CartDAO extends Exception {
 		
 		return deleteCount;
 	}
-	
-	// 전체 삭제
-	public int cartAllDelete(String member_id) {
-		System.out.println("CartDAO - cartAllDelete()");
-		
-		int AllCount = 0;
-		
-		PreparedStatement pstmt = null;
-		
-		String sql = "DELETE FROM cart WHERE member_id = ?";
-		
-		try {
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, member_id);
-			AllCount = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			System.out.println("CartDAO - cartAllDelete()");
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return AllCount;
-	}
-	
 	
 	
 	

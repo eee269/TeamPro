@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -24,6 +25,8 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
+	DecimalFormat priceFormat = new DecimalFormat("###,###");
+	
 	
 	String small = null;
 	if(xcode.equals("CLOTHES")){
@@ -33,6 +36,8 @@
 	}else if(xcode.equals("SHOES")){
 		small = "shoes";
 	}
+ 
+
 %>
 
 
@@ -67,14 +72,17 @@
 <div class="item-wrap best-item">
 	<div class="sub_recommend_title">BEST PRODUCTS</div>
 	<div class="item-cont">
-	<%for(int i=0; i<bestList.size(); i++){%>
+	<%for(int i=0; i<bestList.size(); i++){
+		String[] main = bestList.get(i).getMain_img().split("/");
+	
+	%>
 		
 		<dl class="item-list">
 			<dt class="thumb">
 				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
-					src="product/uploadImg/<%=bestList.get(i).getMain_img()%>"></a>
+					src="product/uploadImg/<%=main[0]%>"></a>
 
 			</dt>
 			<dd class="prd-info">
@@ -83,7 +91,7 @@
 						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=bestList.get(i).getName() %>
 							</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
-					<li class="prd-price"><span class="price"> <%=bestList.get(i).getPrice()%>\ </span></li>
+					<li class="prd-price"><span class="price"> <%=priceFormat.format(bestList.get(i).getPrice())%>\ </span></li>
 					<li class="prd-ico"><span class="MK-product-icons"><img
 							src="http://oryany.co.kr/shopimages/nasign/prod_icons/3858?1596008790"
 							class="MK-product-icon-2"></span></li>
@@ -125,17 +133,41 @@
 
 		</div>
 <!-- Search -->
+<!-- 정렬프론트 코드 -->
+						<div class="container">
+								<div class="cboth total-sort">
+									<dl class="total">
+									<%if(ncode==null){%>
+									<dd><%=ncodeList.size() %></dd>
+									<% }else{%>
+									<dd><%=productList.size() %></dd>
+									<% }%>PRODUCTS IN THIS CATEGORY</dl>
+									<dl class="sort">
+									<dt class="blind">검색결과 정렬</dt>
+									<dd>
+										<ul>
+											<li><a href="javascript:sendsort('regdate')">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('price2')">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('price')">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="javascript:sendsort('brandname')">제품명순</a>&nbsp;&nbsp;</li>
+										</ul>
+									</dd>
+									</dl>
+								</div>
+						</div>
+<!-- 코드끝!! -->	
 <!-- 상품 -->
 		<div class="row isotope-grid">
 		<%for(int i=0; i<productList.size(); i++){
+			String[] main = productList.get(i).getMain_img().split("/");
 			%>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 				<div class="block2">
 					<div class="block2-pic hov-img0">
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
-							src="product/uploadImg/<%=productList.get(i).getMain_img() %>" alt="IMG-PRODUCT">
-						</a> <a href="ProductDetail.po"
+							src="product/uploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
+						</a> <a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 							Quick View </a>
 					</div>
@@ -144,8 +176,8 @@
 						<div class="block2-txt-child1 flex-col-l ">
 							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<%=productList.get(i).getNcode() %>-<%=productList.get(i).getBasicCode()%>(<%=i%>) </a>
-								<span class="stext-105 cl3"> <%=productList.get(i).getPrice()%>원</span>
+								<%=productList.get(i).getName()%></a>
+								<span class="stext-105 cl3"> <%=priceFormat.format(productList.get(i).getPrice())%>원</span>
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">
@@ -162,7 +194,7 @@
 			</div>
 		<% }%>
 		</div>
-<!-- 상품 -->
+<!-- 상품 -->							
 <!-- 페이징 코드 -->
 		<%if(type.equals("X")){%>
 			
