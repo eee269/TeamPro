@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import com.sun.xml.internal.ws.Closeable;
 
 import vo.DetailOrderBean;
@@ -33,28 +36,11 @@ public class OrderDAO {
 		
 	}
 	
-	public String createOrderCode() {
-		String orderCode = null;
-		Date now = new Date();
-		
-		SimpleDateFormat format = new SimpleDateFormat("yyMMdd");
-		
-		String date = format.format(now);
-		
-		int index = 1;
-		
-		orderCode = date + index;
-		index++;
-		
-		return orderCode;
-	}
-
 	public int insertOrder(OrderBean ob) {
 		System.out.println("OrderDAO - insertOrder()!");
-		int insertCount = 0;
+		int insertCount = 1;
 		
 		PreparedStatement p = null;
-		ResultSet rs = null;
 		
 		try {
 			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?)";
@@ -78,15 +64,91 @@ public class OrderDAO {
 			System.out.println(ob.getMember_id());
 			
 			insertCount = p.executeUpdate();
+			System.out.println("insertCount : " +insertCount);
 		} catch (Exception e) {
 			System.out.println("OrderDAO insertOrder() 오류! - " +e.getMessage());
 			e.printStackTrace();
 		} finally {
 			close(p);
-			close(rs); 
 		}
 		
 		return insertCount;
+	}
+
+	public ArrayList<OrderBean> selectOrderList() {
+		System.out.println("OrderDAO - selectOrderList()");
+		ArrayList<OrderBean> orderList = null;
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "SELECT * FROM mainorder where member_id = ?";
+			p = con.prepareStatement(sql);
+			p.setString(1, "test");
+			rs = p.executeQuery();
+			
+			orderList = new ArrayList<OrderBean>();
+			
+			while(rs.next()) {
+				OrderBean order = new OrderBean();
+				
+				order.setCode(rs.getString(1));
+				order.setName(rs.getString(2));
+				order.setPhone(rs.getString(3));
+				order.setAddress(rs.getString(4));
+				order.setDate(rs.getTimestamp(5));
+				order.setStatus(rs.getString(6));
+				order.setPayment(rs.getString(7));
+				order.setMember_id(rs.getString(8));
+				
+				orderList.add(order);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("selectOrderList() 오류! - " +e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(p);
+			close(rs);
+		}
+		
+		return orderList;
+	}
+
+	public JSONArray getData(String member_id) {
+		System.out.println("OrderDAO - getData()");
+		JSONArray md = new JSONArray();
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		try {
+		String sql = "select * from member where id = ?";
+		p = con.prepareStatement(sql);
+		p.setString(1, member_id);
+		rs = p.executeQuery();
+		if(rs.next()){
+			JSONObject mb = new JSONObject();
+			mb.put("id",rs.getString("id"));
+			mb.put("name",rs.getString("pass"));
+			mb.put("email",rs.getString("email"));
+			
+			mb.put("phone_0",rs.getString("phone").substring(0, 3));
+			mb.put("phone_1",rs.getString("phone").substring(3, 7));
+			mb.put("phone_2",rs.getString("phone").substring(7));
+			
+			
+			
+			md.add(mb);
+
+			}
+		} catch (Exception e) {
+			System.out.println("getData() 오류! - " +e.getMessage());
+			e.printStackTrace();
+		}
+		return md;
 	}
 
 	public ArrayList<OrderBean> getMainorder() {
