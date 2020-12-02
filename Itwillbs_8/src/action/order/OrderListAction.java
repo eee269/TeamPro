@@ -17,11 +17,14 @@ public class OrderListAction implements Action {
 		System.out.println("MyOrderListAction!");
 		ActionForward forward = null;
 		
+		
+		String member_id = request.getParameter("member_id");
+		
 		OrderListService orderListService = new OrderListService();
 		
 		ArrayList<OrderBean> orderList = new ArrayList<OrderBean>();
 		
-		orderList = orderListService.getOrderList();
+		orderList = orderListService.getOrderList(member_id);
 		
 		request.setAttribute("orderList", orderList);
 		forward = new ActionForward();

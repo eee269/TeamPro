@@ -45,7 +45,7 @@ ActionForward forward=null;
 			
 			if(isMember) {
 				HttpSession session = request.getSession();
-				session.setAttribute("id", id);
+				session.setAttribute("member_id", id);
 								
 				forward = new ActionForward();
 				forward.setPath("Main.go"); 
