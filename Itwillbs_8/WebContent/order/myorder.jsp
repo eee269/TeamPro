@@ -80,9 +80,13 @@
 
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> Shoping Cart </span>
+		</a>
+		<a href="MemberInfo.mo" class="stext-109 cl8 hov-cl1 trans-04"> My Page
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> 
+		<span class="stext-109 cl4"> My Order </span>
 	</div>
 </div>
 
@@ -96,8 +100,6 @@
 <div id="contentWrapper">
 	<div id="contentWrap">
 
-		<link type="text/css" rel="stylesheet"
-			href="shopimages/nasign/template/work/33865/menu.2.css?t=202005111439">
 		<div id="aside">
 			<h2 class="aside-tit">MY ORDER</h2>
 			<div class="lnb-wrap">
@@ -105,25 +107,27 @@
 					<h2 class="txt txt1">SHOPPING INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first"><a
-								href="shop/mypage.html?mypage_type=myorder">주문내역</a></li>
-							<li><a href="shop/mypage.html?mypage_type=mycoupon">쿠폰내역</a></li>
-							<li><a href="shop/mypage.html?mypage_type=myreserve">적립금내역</a></li>
-							<li><a href="shop/todaygoods.html">오늘본상품</a></li>
-							<li><a href="shop/mypage.html?mypage_type=mywishlist">상품
-									보관함</a></li>
+							<li class="first">
+							<a href="MyOrderList.or">주문내역</a></li>
+<!-- 							<li><a href="/shop/mypage.html?mypage_type=mycoupon">쿠폰내역</a></li> -->
+<!-- 							<li><a href="/shop/mypage.html?mypage_type=myreserve">적립금내역</a></li> -->
+							
+<!-- 			이거 쓸건가..?				<li><a href="/shop/todaygoods.html">오늘본상품</a></li> -->
+							
+							<li><a href="#">상품 보관함</a></li>
+							<li><a href="#">내 상품 리뷰</a></li>
+							<li><a href="#">상품 QnA</a></li>
 							<!-- <li class="attandance"><a href=""><strong>출석체크</strong></a></li>-->
 						</ul>
 					</div>
 				</div>
 				<div class="lnb-bx">
-					<h2 class="txt txt2">SHOPPING QUESTION</h2>
+					<h2 class="txt txt2">COMMUNITY INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first"><a
-								href="shop/mypage.html?mypage_type=myarticle">내 게시글 보기</a></li>
-							<li><a href="shop/mypage.html?mypage_type=myemail">E-mail
-									문의</a></li>
+							<li class="first">
+							<a href="#">내 게시글 보기</a></li>
+							<li><a href="#">내 게시글 리뷰</a></li>
 						</ul>
 					</div>
 				</div>
@@ -131,8 +135,9 @@
 					<h2 class="txt txt3">CUSTOMER INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first"><a href="shop/idinfo.html">회원정보변경</a></li>
-							<li><a href="javascript:userexit();">회원정보탈퇴신청</a></li>
+							<li class="first">
+							<a href="#">회원정보변경</a></li>
+							<li><a href="#">회원탈퇴신청</a></li>
 						</ul>
 					</div>
 				</div>
