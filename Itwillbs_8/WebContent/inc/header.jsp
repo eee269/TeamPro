@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Product Detail</title>
+	<title>SHOP OOTD</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -94,13 +94,13 @@
 							회원가입
 						</a>
 					<%}else{ %>
-						<a href="MemberInfo.mo?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
+						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">
 							마이페이지
 						</a>
-						<a href="Cart.ca?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
+						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
-						<a href="MyOrderList.or?member_id=<%=member_id %>" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
@@ -121,7 +121,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.jsp">HOME</a>
+								<a href="Main.go">HOME</a>
 							</li>
 							<li>
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
@@ -164,9 +164,9 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<a href="Cart.ca" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="장바구니갯수">
 							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
+						</a>
 						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>

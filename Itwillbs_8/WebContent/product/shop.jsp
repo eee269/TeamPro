@@ -8,8 +8,6 @@
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 <%
 	String xcode=request.getParameter("xcode");
 	String ncode=request.getParameter("ncode");

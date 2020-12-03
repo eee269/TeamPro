@@ -34,22 +34,22 @@ public class ProductUploadProAction implements Action {
 		MultipartRequest multi = new MultipartRequest
 				(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
 		
-		String mainImg = multi.getOriginalFileName("mfile1");
+		String mainImg = multi.getFilesystemName("mfile1");
 		
-		if(multi.getOriginalFileName("mfile2") != null) {
-			mainImg += "/" + multi.getOriginalFileName("mfile2"); 
+		if(multi.getFilesystemName("mfile2") != null) {
+			mainImg += "/" + multi.getFilesystemName("mfile2"); 
 		}
-		if(multi.getOriginalFileName("mfile3") != null) {
-			mainImg += "/" + multi.getOriginalFileName("mfile3"); 
+		if(multi.getFilesystemName("mfile3") != null) {
+			mainImg += "/" + multi.getFilesystemName("mfile3"); 
 		}
 		
-		String subImg = multi.getOriginalFileName("sfile1");
+		String subImg = multi.getFilesystemName("sfile1");
 		
-		if(multi.getOriginalFileName("sfile2") != null) {
-			subImg += "/" + multi.getOriginalFileName("sfile2"); 
+		if(multi.getFilesystemName("sfile2") != null) {
+			subImg += "/" + multi.getFilesystemName("sfile2"); 
 		}
-		if(multi.getOriginalFileName("sfile3") != null) {
-			subImg += "/" + multi.getOriginalFileName("sfile3"); 
+		if(multi.getFilesystemName("sfile3") != null) {
+			subImg += "/" + multi.getFilesystemName("sfile3"); 
 		}
 		
 		ProductUploadService productUploadService = new ProductUploadService();
