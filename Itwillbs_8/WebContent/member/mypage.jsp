@@ -1,3 +1,7 @@
+<%@page import="vo.DetailOrderBean"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.OrderBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -5,76 +9,14 @@
 
 <%
 	MemberBean member = new MemberBean(); 
+	ArrayList<OrderBean> mainorderList = new ArrayList<OrderBean>();
+	HashMap<String, ArrayList<DetailOrderBean>> detailorderList = new HashMap<String, ArrayList<DetailOrderBean>>();
+	ArrayList<DetailOrderBean> detailorderSubList = new ArrayList<DetailOrderBean>();
+	
 	member = (MemberBean) request.getAttribute("member");
+	mainorderList = (ArrayList) request.getAttribute("mainorderList");
+	detailorderList = (HashMap) request.getAttribute("detailorderList");
 %>
-
-<!-- <!-- Cart --> 
-<!-- <div class="wrap-header-cart js-panel-cart"> -->
-<!-- 	<div class="s-full js-hide-cart"></div> -->
-
-<!-- 	<div class="header-cart flex-col-l p-l-65 p-r-25"> -->
-<!-- 		<div class="header-cart-title flex-w flex-sb-m p-b-8"> -->
-<!-- 			<span class="mtext-103 cl2"> Your Cart </span> -->
-
-<!-- 			<div -->
-<!-- 				class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart"> -->
-<!-- 				<i class="zmdi zmdi-close"></i> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-
-<!-- 		<div class="header-cart-content flex-w js-pscroll"> -->
-<!-- 			<ul class="header-cart-wrapitem w-full"> -->
-<!-- 				<li class="header-cart-item flex-w flex-t m-b-12"> -->
-<!-- 					<div class="header-cart-item-img"> -->
-<!-- 						<img src="http://oryany.co.kr/images/item-cart-01.jpg" alt="IMG"> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="header-cart-item-txt p-t-8"> -->
-<!-- 						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> -->
-<!-- 							White Shirt Pleat </a> <span class="header-cart-item-info"> 1 -->
-<!-- 							x $19.00 </span> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
-
-<!-- 				<li class="header-cart-item flex-w flex-t m-b-12"> -->
-<!-- 					<div class="header-cart-item-img"> -->
-<!-- 						<img src="http://oryany.co.kr/images/item-cart-02.jpg" alt="IMG"> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="header-cart-item-txt p-t-8"> -->
-<!-- 						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> -->
-<!-- 							Converse All Star </a> <span class="header-cart-item-info"> 1 -->
-<!-- 							x $39.00 </span> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
-
-<!-- 				<li class="header-cart-item flex-w flex-t m-b-12"> -->
-<!-- 					<div class="header-cart-item-img"> -->
-<!-- 						<img src="http://oryany.co.kr/images/item-cart-03.jpg" alt="IMG"> -->
-<!-- 					</div> -->
-
-<!-- 					<div class="header-cart-item-txt p-t-8"> -->
-<!-- 						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04"> -->
-<!-- 							Nixon Porter Leather </a> <span class="header-cart-item-info"> -->
-<!-- 							1 x $17.00 </span> -->
-<!-- 					</div> -->
-<!-- 				</li> -->
-<!-- 			</ul> -->
-
-<!-- 			<div class="w-full"> -->
-<!-- 				<div class="header-cart-total w-full p-tb-40">Total: $75.00</div> -->
-
-<!-- 				<div class="header-cart-buttons flex-w w-full"> -->
-<!-- 					<a href="shoping-cart.html" -->
-<!-- 						class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10"> -->
-<!-- 						View Cart </a> <a href="shoping-cart.html" -->
-<!-- 						class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10"> -->
-<!-- 						Check Out </a> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-<!-- 		</div> -->
-<!-- 	</div> -->
-<!-- </div> -->
 
 
 <!-- breadcrumb -->
@@ -104,7 +46,7 @@
 					<div class="lnb">
 						<ul>
 							<li class="first">
-							<a href="MyOrderList.or?member_id=<%=member.getId()%>">주문내역</a></li>
+							<a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="#">상품 보관함</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
@@ -203,7 +145,7 @@
 					<!-- 최근 주문 정보 -->
 					<div class="hd">
 						<h3>최근 주문 정보</h3>
-						<a class="view fe" href="MyOrderList.or?member_id=<%=member.getId()%>">+
+						<a class="view fe" href="MyOrderList.or">+
 							MORE</a>
 					</div>
 					<div class="tbl">
@@ -225,14 +167,28 @@
 							</thead>
 							
 <!-- 							for문 돌리기 -->
+<%
+detailorderSubList = detailorderList.get(mainorderList.get(mainorderList.size()-1).getCode());
+OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
+%>
 							<tbody>
 								<tr>
-									<td><div class="tb-center">2020.11.12</div></td>
-									<td><div class="tb-center"><a
-										href="/shop/shopdetail.html?branduid=3360797&amp;xcode=001&amp;mcode=&amp;scode=&amp;GfDT=bm55W1w%3D"
-										class="tb-bold">로티 크로커 크로스바디</a><br>색상 : BLACK 1개</div></td>
-									<td><div class="tb-center">219,000원</div></td>
-									<td><div class="tb-center">-</div></td>
+									<td><div class="tb-center"><%=orderBean.getDate() %></div></td>
+									<td><div class="tb-center">
+									<%
+									for(int i=0; i<detailorderSubList.size(); i++) {
+										DetailOrderBean detailOrderBean = detailorderSubList.get(i);
+									
+									%>
+										<a href="MyOrderList.or"
+											class="tb-bold"> <%=detailOrderBean.getName()%>
+											<br>색상 : <%=detailOrderBean.getColor() %> <%=detailOrderBean.getCnt() %>개
+										</a><br>
+									<% } %>
+									</div> </td>
+									<td><div class="tb-center"><%=orderBean.getTotal_price() %></div></td>
+									<td><div class="tb-center">
+									<a class="view fe" href="MyOrderList.or">+MORE</a></div></td>
 								</tr>
 							</tbody>
 <!-- 							<tbody> -->
@@ -267,8 +223,7 @@
 							</thead>
 							<tbody>
 								<tr>
-									<td colspan="3"><div class="tb-center">작성된 게시글이
-											없습니다.</div></td>
+									<td colspan="3"><div class="tb-center">작성된 게시글이 없습니다.</div></td>
 								</tr>
 							</tbody>
 						</table>

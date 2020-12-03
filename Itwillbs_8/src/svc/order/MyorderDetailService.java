@@ -1,30 +1,17 @@
-package svc.member;
+package svc.order;
+
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.member.MemberDAO;
 import dao.order.OrderDAO;
 import vo.DetailOrderBean;
-import vo.MemberBean;
 import vo.OrderBean;
 
-import static db.JdbcUtil.*;
+public class MyorderDetailService {
 
-public class MemberMypageService {
-
-	public MemberBean getMember(String member_id) {
-		MemberBean member = new MemberBean();
-		
-		Connection con = getConnection();
-		
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		memberDAO.setConnection(con);
-		member = memberDAO.selectMember(member_id);
-		
-		return member;
-	}
-	
 	public ArrayList<DetailOrderBean> getDetailorderList(String mainorder_code) {
 		ArrayList<DetailOrderBean> detailorderList = null;
 		
@@ -41,21 +28,19 @@ public class MemberMypageService {
 		return detailorderList;
 	}
 
-	public ArrayList<OrderBean> getMainorderList(String member_id) {
-		ArrayList<OrderBean> mainorderList = null;
+	public OrderBean selectMainorder(String mainorder_code) {
+		OrderBean mainorder = null;
 		
 		Connection con = getConnection();
 		
 		OrderDAO orderDAO = OrderDAO.getInstance();
 		orderDAO.setConnection(con);
-		mainorderList = new ArrayList<OrderBean>();
-		mainorderList = orderDAO.selectOrderList(member_id);
+		
+		mainorder = new OrderBean();
+		mainorder = orderDAO.selectMainorder(mainorder_code);
 		
 		close(con);
 		
-		return mainorderList;
+		return mainorder;
 	}
-	
-	
-
 }

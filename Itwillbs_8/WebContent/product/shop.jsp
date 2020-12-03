@@ -11,8 +11,6 @@
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 <%
 	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");

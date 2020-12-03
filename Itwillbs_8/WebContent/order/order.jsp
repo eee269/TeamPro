@@ -111,8 +111,6 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 </script>
 <jsp:include page="../inc/header.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 <!-- breadcrumb -->

@@ -16,9 +16,6 @@
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp"/>
-
 <style>
 .fixed-img-collist {
    padding: 0px 0px 40px;

@@ -91,8 +91,6 @@
 
 <!-- 끝 -->
 
-<!-- Cart -->
-<jsp:include page="/sub_cart.jsp" />
 
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />

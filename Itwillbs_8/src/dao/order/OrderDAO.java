@@ -101,6 +101,7 @@ public class OrderDAO {
 				order.setStatus(rs.getString(6));
 				order.setPayment(rs.getString(7));
 				order.setMember_id(rs.getString(8));
+				order.setTotal_price(rs.getInt("total_price"));
 				
 				orderList.add(order);
 			}
@@ -264,6 +265,37 @@ public class OrderDAO {
 		}
 		
 		return cnt;
+	}
+
+	//--------------------code에 해당하는 mainorder하나 들고오기------------------------
+	public OrderBean selectMainorder(String code) {
+		OrderBean mainorder = new OrderBean();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from mainorder where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				mainorder.setAddress(rs.getString("address"));
+				mainorder.setCode(code);
+				mainorder.setDate(rs.getTimestamp("date"));
+				mainorder.setMember_id(rs.getString("member_id"));
+				mainorder.setName(rs.getString("name"));
+				mainorder.setPayment(rs.getString("payment"));
+				mainorder.setPhone(rs.getString("phone"));
+				mainorder.setStatus(rs.getString("status"));
+				mainorder.setTotal_price(rs.getInt("total_price"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return mainorder;
 	}
 
 }
