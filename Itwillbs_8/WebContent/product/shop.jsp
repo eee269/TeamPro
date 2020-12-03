@@ -100,6 +100,28 @@
 				});
 			}
 		}
+	if(sort.equals("likey")){
+		
+		for(int i=0; i<productList.size(); i++){
+			
+			productList.sort(new Comparator<ProductBean>(){
+			
+				@Override
+				public int compare(ProductBean p1, ProductBean p2){
+					int like1 = p1.getLikey();
+					int like2 = p2.getLikey();
+					if(like1 == like2){
+						return 0;
+					}else if(like1>like2){
+						return 1;
+					}else{
+						return -1;
+					}
+				}
+			
+			});
+		}
+	}
 		
 		
 	}
@@ -222,10 +244,12 @@
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }else{%>
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
 											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }%>										
 										</ul>
 									</dd>
