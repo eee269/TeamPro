@@ -11,6 +11,9 @@
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
+<!-- Cart -->
+<%-- <jsp:include page="../sub_cart.jsp" /> --%>
+
 <%
 	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");
@@ -136,7 +139,45 @@
  
 
 %>
+<style>
+#loadMore {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+}
 
+#loadMore a {
+    background: #042a63;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    padding: 10px 30px;
+    transition: all 0.25s ease-out;
+    -webkit-font-smoothing: antialiased;
+}
+
+#loadMore a:hover {
+    background-color: #021737;
+}
+
+</style>
+<script type="text/javascript">
+$( document ).ready(function () {
+	  $(".moreBox").slice(0, 8).show();
+	    if ($(".blogBox:hidden").length != 0) {
+	      $("#loadMore").show();
+	    }   
+	    $("#loadMore").on('click', function (e) {
+	      e.preventDefault();
+	      $(".moreBox:hidden").slice(0, <%=productList.size()%>).slideDown();
+	      if ($(".morebox:hidden").length == 0) {
+	        $("#loadMore").fadeOut('slow');
+	      }
+	    });
+	  });
+
+</script>
 
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/shopbrand.css" />
@@ -232,7 +273,7 @@
 						<div class="container">
 								<div class="cboth total-sort">
 									<dl class="total">
-									<dd><%=productList.size() %></dd>
+									<dd><%=pageInfo.getListCount() %></dd>
 									PRODUCTS IN THIS CATEGORY</dl>
 									<dl class="sort">
 									<dt class="blind">검색결과 정렬</dt>
@@ -256,12 +297,12 @@
 						</div>
 <!-- 코드끝!! -->	
 <!-- 상품 -->
-		<div class="row isotope-grid">
+		<div class="row">
 		<%
 		for(int i=0; i<productList.size(); i++){
 			String[] main = productList.get(i).getMain_img().split("/");
 			%>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
 					<div class="block2-pic hov-img0">
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
@@ -291,42 +332,45 @@
 				</div>
 			</div>
 		<% }%>
+		<div id="loadMore" style="">
+         <a href="#">MORE</a>
+		</div>
 		</div>
 <!-- 상품 -->							
 <!-- 페이징 코드 -->
-		<%if(type.equals("X")){%>
+<%-- 		<%if(type.equals("X")){%> --%>
 			
-		<div class="paging">
+<!-- 		<div class="paging"> -->
 	
-		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=startPage%>" class="first">&lt;&lt;</a>
-		 <%for(int i = startPage; i <= endPage; i++) { 
-				if(i == nowPage) { %>
-				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=nowPage %>" class="now"><%=i %></a>
-				<%} else { %>
-				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=i%>"><%=i %></a>
-				<%} %>
-	 	<%} %>
+<%-- 		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=startPage%>" class="first">&lt;&lt;</a> --%>
+<%-- 		 <%for(int i = startPage; i <= endPage; i++) {  --%>
+<%-- 				if(i == nowPage) { %>  --%>
+<%-- 				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=nowPage %>" class="now"><%=i %></a> --%>
+<%-- 				<%} else { %> --%>
+<%-- 				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=i%>"><%=i %></a> --%>
+<%-- 				<%} %> --%>
+<%-- 	 	<%} %> --%>
 	 
-		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
-		</div>
-		<%} %>
+<%-- 		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	 --%>
+<!-- 		</div> -->
+<%-- 		<%} %> --%>
 		
-		<%if(type.equals("N")){%>	
-		<div class="paging">
+<%-- 		<%if(type.equals("N")){%>	 --%>
+<!-- 		<div class="paging"> -->
 	
-		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=startPage%>" class="first">&lt;&lt;</a>
-		 <%for(int i = startPage; i <= endPage; i++) { 
-				if(i == nowPage) { %>
-				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=nowPage %>" class="now"><%=i %></a>
-				<%} else { %>
-				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=i%>"><%=i %></a>
-				<%} %>
-	 	<%} %>
+<%-- 		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=startPage%>" class="first">&lt;&lt;</a> --%>
+<%-- 		 <%for(int i = startPage; i <= endPage; i++) {  --%>
+<%-- 			if(i == nowPage) { %>  --%>
+<%-- 				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=nowPage %>" class="now"><%=i %></a> --%>
+<%-- 				<%} else { %> --%>
+<%-- 				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=i%>"><%=i %></a> --%>
+<%-- 				<%} %> --%>
+<%-- 	 	<%} %> --%>
 	 
-		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
-		</div>
-		<%} %>
-<!-- 페이징코드끝 -->		
+<%-- 		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	 --%>
+<!-- 		</div> -->
+<%-- 		<%} %> --%>
+<!-- 페이징코드끝		 -->
 	</div>
 </div>
 
