@@ -14,6 +14,7 @@ public class UpdateOrderStatusService {
 		Connection con = getConnection();
 		
 		OrderDAO orderDAO = OrderDAO.getInstance();
+		orderDAO.setConnection(con);
 		int cnt = orderDAO.updateMainorder(code, status);
 		
 		if(cnt > 0) {
@@ -24,9 +25,7 @@ public class UpdateOrderStatusService {
 		}
 		
 		close(con);
-		
-		System.out.println("UpdateOrderStatusService - updateOrderStatus(), isUpdate:" + isUpdate);
-		
+				
 		return isUpdate;
 	}
 	

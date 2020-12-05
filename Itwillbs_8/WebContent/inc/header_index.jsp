@@ -1,7 +1,8 @@
+<%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-	String id=(String)session.getAttribute("id");
+	String member_id=(String)session.getAttribute("member_id");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -53,10 +54,13 @@
 					</div>
 					<div class="right-top-bar flex-w h-full">
 						<%
-					if(id == null){
+					if(member_id == null){
 					%>
 						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
 							로그인
+						</a>
+						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
+							회원가입
 						</a>
 						<%} else{ %>
 							<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>

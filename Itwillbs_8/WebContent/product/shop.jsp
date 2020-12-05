@@ -1,3 +1,6 @@
+<%@page import="java.util.Comparator"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.HashMap"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.ProductBean"%>
@@ -9,8 +12,10 @@
 <jsp:include page="../quickMenu.jsp" />
 
 <!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
+<%-- <jsp:include page="../sub_cart.jsp" /> --%>
+
 <%
+	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");
 	String ncode=request.getParameter("ncode");
 	String type=request.getParameter("type");
@@ -27,6 +32,101 @@
 	
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
 	
+	//상품 정렬 코드 
+	if(sort != null){
+		
+		if(sort.equals("new")){
+			
+			for(int i=0; i<productList.size(); i++){
+				
+				productList.sort(new Comparator<ProductBean>(){
+				
+					@Override
+					public int compare(ProductBean p1, ProductBean p2){
+						int new1 = Integer.parseInt(p1.getBasicCode());
+						int new2 = Integer.parseInt(p2.getBasicCode());
+						if(new1 == new2){
+							return 0;
+						}else if(new1<new2){
+							return 1;
+						}else{
+							return -1;
+						}
+					}
+				
+				});
+			}
+		}
+		if(sort.equals("hprice")){
+			
+			for(int i=0; i<productList.size(); i++){
+				
+				productList.sort(new Comparator<ProductBean>(){
+				
+					@Override
+					public int compare(ProductBean p1, ProductBean p2){
+						int price1 = p1.getPrice();
+						int price2 = p2.getPrice();
+						if(price1 == price2){
+							return 0;
+						}else if(price1<price2){
+							return 1;
+						}else{
+							return -1;
+						}
+					}
+				
+				});
+			}
+		}
+	if(sort.equals("lprice")){
+			
+			for(int i=0; i<productList.size(); i++){
+				
+				productList.sort(new Comparator<ProductBean>(){
+				
+					@Override
+					public int compare(ProductBean p1, ProductBean p2){
+						int price1 = p1.getPrice();
+						int price2 = p2.getPrice();
+						if(price1 == price2){
+							return 0;
+						}else if(price1>price2){
+							return 1;
+						}else{
+							return -1;
+						}
+					}
+				
+				});
+			}
+		}
+	if(sort.equals("likey")){
+		
+		for(int i=0; i<productList.size(); i++){
+			
+			productList.sort(new Comparator<ProductBean>(){
+			
+				@Override
+				public int compare(ProductBean p1, ProductBean p2){
+					int like1 = p1.getLikey();
+					int like2 = p2.getLikey();
+					if(like1 == like2){
+						return 0;
+					}else if(like1>like2){
+						return 1;
+					}else{
+						return -1;
+					}
+				}
+			
+			});
+		}
+	}
+		
+		
+	}
+	//상품정렬코드 끝!
 	
 	String small = null;
 	if(xcode.equals("CLOTHES")){
@@ -39,7 +139,49 @@
  
 
 %>
+<style>
+#loadMore {
+    padding-bottom: 30px;
+    padding-top: 30px;
+    text-align: center;
+    width: 100%;
+}
 
+#loadMore a {
+    background: #042a63;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    padding: 10px 30px;
+    transition: all 0.25s ease-out;
+    -webkit-font-smoothing: antialiased;
+}
+
+#loadMore a:hover {
+    background-color: #021737;
+}
+
+</style>
+<script type="text/javascript">
+$( document ).ready(function () {
+	  $(".moreBox").slice(0, 8).show();
+	    if ($(".blogBox:hidden").length != 0) {
+	      $("#loadMore").show();
+	    } 
+	    if ($(".blogBox:hidden").length == 0) {
+		      $("#loadMore").hide();
+		    } 
+	    
+	    $("#loadMore").on('click', function (e) {
+	      e.preventDefault();
+	      $(".moreBox:hidden").slice(0, <%=productList.size()%>).slideDown();
+	      if ($(".morebox:hidden").length == 0) {
+	        $("#loadMore").fadeOut('slow');
+	      }
+	    });
+	  });
+
+</script>
 
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/shopbrand.css" />
@@ -65,8 +207,6 @@
 </div>
 
 <!-- 끝 -->
-
-
 <!-- 베스트Product 시작-->
 <div><a href="ProductUpload.po">상품등록페이지이동(임시)</a></div>
 <div class="item-wrap best-item">
@@ -137,19 +277,23 @@
 						<div class="container">
 								<div class="cboth total-sort">
 									<dl class="total">
-									<%if(ncode==null){%>
-									<dd><%=ncodeList.size() %></dd>
-									<% }else{%>
-									<dd><%=productList.size() %></dd>
-									<% }%>PRODUCTS IN THIS CATEGORY</dl>
+									<dd><%=pageInfo.getListCount() %></dd>
+									PRODUCTS IN THIS CATEGORY</dl>
 									<dl class="sort">
 									<dt class="blind">검색결과 정렬</dt>
 									<dd>
 										<ul>
-											<li><a href="javascript:sendsort('regdate')">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="javascript:sendsort('price2')">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="javascript:sendsort('price')">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="javascript:sendsort('brandname')">제품명순</a>&nbsp;&nbsp;</li>
+										<%if(ncode !=null){%>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
+										<% }else{%>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
+										<% }%>										
 										</ul>
 									</dd>
 									</dl>
@@ -157,19 +301,18 @@
 						</div>
 <!-- 코드끝!! -->	
 <!-- 상품 -->
-		<div class="row isotope-grid">
-		<%for(int i=0; i<productList.size(); i++){
+		<div class="row">
+		<%
+		for(int i=0; i<productList.size(); i++){
 			String[] main = productList.get(i).getMain_img().split("/");
 			%>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
 					<div class="block2-pic hov-img0">
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
 							src="product/uploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
-						</a> <a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
-							class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-							Quick View </a>
+						</a> 
 					</div>
 
 					<div class="block2-txt flex-w flex-t p-t-14">
@@ -193,42 +336,45 @@
 				</div>
 			</div>
 		<% }%>
+		<div id="loadMore" style="">
+         <a href="#">MORE</a>
+		</div>
 		</div>
 <!-- 상품 -->							
 <!-- 페이징 코드 -->
-		<%if(type.equals("X")){%>
+<%-- 		<%if(type.equals("X")){%> --%>
 			
-		<div class="paging">
+<!-- 		<div class="paging"> -->
 	
-		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=startPage%>" class="first">&lt;&lt;</a>
-		 <%for(int i = startPage; i <= endPage; i++) { 
-				if(i == nowPage) { %>
-				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=nowPage %>" class="now"><%=i %></a>
-				<%} else { %>
-				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=i%>"><%=i %></a>
-				<%} %>
-	 	<%} %>
+<%-- 		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=startPage%>" class="first">&lt;&lt;</a> --%>
+<%-- 		 <%for(int i = startPage; i <= endPage; i++) {  --%>
+<%-- 				if(i == nowPage) { %>  --%>
+<%-- 				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=nowPage %>" class="now"><%=i %></a> --%>
+<%-- 				<%} else { %> --%>
+<%-- 				<a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=i%>"><%=i %></a> --%>
+<%-- 				<%} %> --%>
+<%-- 	 	<%} %> --%>
 	 
-		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
-		</div>
-		<%} %>
+<%-- 		 <a href="ProductShop.po?type=X&xcode=<%=xcode%>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	 --%>
+<!-- 		</div> -->
+<%-- 		<%} %> --%>
 		
-		<%if(type.equals("N")){%>	
-		<div class="paging">
+<%-- 		<%if(type.equals("N")){%>	 --%>
+<!-- 		<div class="paging"> -->
 	
-		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=startPage%>" class="first">&lt;&lt;</a>
-		 <%for(int i = startPage; i <= endPage; i++) { 
-				if(i == nowPage) { %>
-				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=nowPage %>" class="now"><%=i %></a>
-				<%} else { %>
-				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=i%>"><%=i %></a>
-				<%} %>
-	 	<%} %>
+<%-- 		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=startPage%>" class="first">&lt;&lt;</a> --%>
+<%-- 		 <%for(int i = startPage; i <= endPage; i++) {  --%>
+<%-- 			if(i == nowPage) { %>  --%>
+<%-- 				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=nowPage %>" class="now"><%=i %></a> --%>
+<%-- 				<%} else { %> --%>
+<%-- 				<a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=i%>"><%=i %></a> --%>
+<%-- 				<%} %> --%>
+<%-- 	 	<%} %> --%>
 	 
-		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	
-		</div>
-		<%} %>
-<!-- 페이징코드끝 -->		
+<%-- 		 <a href="ProductShop.po?type=N&xcode=<%=xcode%>&ncode=<%=ncode %>&page=<%=endPage%>"  class="last">&gt;&gt;</a>	 --%>
+<!-- 		</div> -->
+<%-- 		<%} %> --%>
+<!-- 페이징코드끝		 -->
 	</div>
 </div>
 

@@ -3,8 +3,6 @@
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp"/>
 <style>
 body .container_comm_write {
   position: relative;

@@ -5,8 +5,6 @@
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp"/>
 
 <style rel="stylesheet">
 @charset "UTF-8";
@@ -33,7 +31,7 @@ body .container_member .half {
   float: left;
   width: 100%;
   height: 100%;
-  padding: 58px 30em; 0;
+  padding:  58px 20%; 
 }
 body .container_member .half.bg {
   background-image: url("http://www.blueb.co.kr/SRC2/_image/v01.jpg");
@@ -284,7 +282,7 @@ body .container_member .content .signup-cont {
 			        </div>
 			        <div class="content">
 				            <div class="signin-cont cont">
-					                <form action="MemberLoginPro.mo" method="post" enctype="multipart/form-data">
+					                <form action="MemberLoginPro.mo" method="post">
 											<input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
 						                    <label for="text">ID</label>
 						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
@@ -299,22 +297,25 @@ body .container_member .content .signup-cont {
     				        </div>
     				        <div class="signup-cont cont">
                 <form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data">
-						                    <input type="text" name="id" id="id" class="inpt" required="required" placeholder="Your ID">
+						                    <input type="text" name="id" id="id" class="inpt" required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요">
 						                    <label for="text">ID</label>  <br>
 
-						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
+						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요">
                 						    <label for="password">Password</label>  <br>
                 						    
-                  							<input type="email" name="email" id="email" class="inpt" required="required" placeholder="Your email">
+                						    <input type="password" name="pass" id="password2" class="inpt" required="required" placeholder="비밀번호를 한번 더 입력하세요">
+                						    <label for="password">Password</label>  <br>
+                						    
+                  							<input type="email" name="email" id="email" class="inpt" required="required" placeholder="이메일을 입력하세요">
 						                    <label for="email">e-mail</label>  <br>
 						                    
-						                    <input type="text" name="username" id="name" class="inpt" required="required" placeholder="Your name">
-						                    <label for="name">Name</label>  <br>
+						                    <input type="text" name="username" id="name" class="inpt" required="required" placeholder="닉네임을 입력하세요">
+						                    <label for="name">Username</label>  <br>
 						                    
-						                    <input type="file" name="img" id="img" class="inpt" required="required" placeholder="Select Profile Image">
+						                    <input type="file" name="img" id="img" class="inpt" required="required" placeholder="프로필 사진을 첨부하세요">
 						                    <label for="img">Image</label>  <br>
 						                    
-						                    <input type="text" name="phone" id="phone" class="inpt" required="required" placeholder="Your PhoneNumber">
+						                    <input type="text" name="phone" id="phone" class="inpt" required="required" placeholder="숫자만 입력하세요">
 						                    <label for="phone">Phone Number</label>  <br>
 						                    
 							                <div class="term" style="padding-top: 30px;">

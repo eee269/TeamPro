@@ -51,7 +51,6 @@
 	
 	  // ---------------------------------------------------------
 	  
-
 	});
   
   
@@ -86,10 +85,6 @@
 
 
 <jsp:include page="../inc/header.jsp" />
-
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
-
 
 <!-- breadcrumb -->
 <div class="container">
@@ -153,7 +148,15 @@
                
                <tbody>
                
-               <% 
+               <%
+               if(cartList.isEmpty()) {
+            	   %>
+            	   <tr><td colspan="9" style="padding:50px 20px; text-align:center; font-size: 15px;">
+            	   		<span> 장바구니에 상품이 없습니다! </span>
+            	   </td></tr>
+            	   
+            	   <%
+               } else {
                   for(int i = 0; i < cartList.size(); i++){
                 	  if(cartList.size() > 0){
                 		 %> <input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>"> <%
@@ -246,6 +249,7 @@
                   cartNo--;
              
                   }
+               }
                   %>
                   
                </tbody>

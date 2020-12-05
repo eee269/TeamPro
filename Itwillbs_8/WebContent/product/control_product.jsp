@@ -14,6 +14,7 @@
 <body>
 	<jsp:include page="../inc/header.jsp" />
 	<h1 style="margin: 50px 100px">Admin - Product</h1>
+	<input type="button" value="상품 업로드" onclick="location.href='ProductUpload.po'">
 	<table
 		style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
 		<tr>

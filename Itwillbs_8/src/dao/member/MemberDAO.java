@@ -162,6 +162,58 @@ public class MemberDAO {
 		return isMember;
 		
 	}
+
+	//---------------------------회원 정보 가져오기-------------------------------
+	public MemberBean selectMember(String member_id) {
+		MemberBean member = new MemberBean();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from member where id = ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				member.setId(member_id);
+				member.setPass(rs.getString("pass"));
+				member.setEmail(rs.getString("email"));
+				member.setUsername(rs.getString("username"));
+				member.setImg(rs.getString("img"));
+				member.setDate(rs.getTimestamp("date"));
+				member.setPhone(rs.getInt("phone"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return member;
+	}
+
+// 회원의 닉네임 가져오기
+	public String getUsername(String member_id) {
+		String username = null;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select username from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				username = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return username;
+	}
 	
 	
 	

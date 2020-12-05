@@ -111,11 +111,11 @@ public class ProductDAO {
 		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where xcode=? limit ?,?";
+			String sql = "select * from product where xcode=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, xcode);
-			ps.setInt(2, startRow);
-			ps.setInt(3, limit);
+//			ps.setInt(2, startRow);
+//			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			
@@ -153,11 +153,11 @@ public class ProductDAO {
 		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where ncode=? limit ?,?";
+			String sql = "select * from product where ncode=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, ncode);
-			ps.setInt(2, startRow);
-			ps.setInt(3, limit);
+//			ps.setInt(2, startRow);
+//			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {

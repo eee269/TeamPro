@@ -16,6 +16,7 @@ import action.community.CommListAction;
 import action.community.CommModifyFormAction;
 import action.community.CommModifyProAction;
 import action.community.CommWriteProAction;
+import action.community.MycommListAction;
 import vo.ActionForward;
 
 @WebServlet("*.co")
@@ -76,6 +77,18 @@ public class CommFrontController extends HttpServlet{
 							e.printStackTrace();
 						}
 				// ---------------------------글 목록---------------------------
+				// ---------------------------내가 쓴 글 목록 ---------------------------
+				}else if(command.equals("/MycommList.co")) {
+					System.out.println("MycommList.co 로 포워딩!");
+					action = new MycommListAction();
+						
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				// ---------------------------내가 쓴 글 목록---------------------------		
+				
 				// ---------------------------글 상세---------------------------
 				}else if(command.equals("/CommDetail.co")) {
 					System.out.println("CommDetail.co로 포워딩!");

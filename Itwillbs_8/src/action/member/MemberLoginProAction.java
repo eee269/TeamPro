@@ -22,22 +22,9 @@ public class MemberLoginProAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 ActionForward forward=null;
 		
-//		String id = request.getParameter("id");
-//		String pass = request.getParameter("pass");
-		
-		ServletContext context = request.getServletContext();
-		String saveFolder = "member/memberUpload";
-		String realFolder = context.getRealPath(saveFolder);
-		int fileSize = 1024 * 1024 * 10;
-		
-		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
-		
-		String id = multi.getParameter("id");
-		String pass = multi.getParameter("pass");
-		
-		
-		
-		
+		String id = request.getParameter("id");
+		String pass = request.getParameter("pass");
+
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
 		
 		try {
@@ -45,11 +32,10 @@ ActionForward forward=null;
 			
 			if(isMember) {
 				HttpSession session = request.getSession();
-				session.setAttribute("id", id);
-				
+				session.setAttribute("member_id", id);
+								
 				forward = new ActionForward();
-				forward.setRedirect(true);
-				forward.setPath("index.jsp"); 
+				forward.setPath("Main.go"); 
 			}
 		} catch (LoginException e) { 
 			response.setContentType("text/html; charset=UTF-8");
