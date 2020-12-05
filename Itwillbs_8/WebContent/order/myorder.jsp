@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<OrderBean> order = (ArrayList<OrderBean>)request.getAttribute("orderList");
-	String member_id = request.getParameter("member_id");
+	String member_id = (String) session.getAttribute("member_id");
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -120,7 +120,7 @@ if(order.size() == 0) {
 		
 	</td></tr>
 	<%
-}
+} else {
 	for(int i = 0 ; i < order.size() ; i++) {
 		%>
 					<tr>
@@ -140,6 +140,7 @@ if(order.size() == 0) {
 								</tr>
 										<%
 	}
+}
 %>
 			
 							</tbody>

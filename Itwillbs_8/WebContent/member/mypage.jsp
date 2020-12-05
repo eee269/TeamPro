@@ -1,3 +1,4 @@
+<%@page import="vo.CommBean"%>
 <%@page import="vo.DetailOrderBean"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="vo.OrderBean"%>
@@ -9,13 +10,19 @@
 
 <%
 	MemberBean member = new MemberBean(); 
+
 	ArrayList<OrderBean> mainorderList = new ArrayList<OrderBean>();
 	HashMap<String, ArrayList<DetailOrderBean>> detailorderList = new HashMap<String, ArrayList<DetailOrderBean>>();
 	ArrayList<DetailOrderBean> detailorderSubList = new ArrayList<DetailOrderBean>();
+	ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 	
 	member = (MemberBean) request.getAttribute("member");
+	
 	mainorderList = (ArrayList) request.getAttribute("mainorderList");
 	detailorderList = (HashMap) request.getAttribute("detailorderList");
+	
+	articleList = (ArrayList) request.getAttribute("articleList");	
+	
 %>
 
 
@@ -45,8 +52,7 @@
 					<h2 class="txt txt1">SHOPPING INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="MyOrderList.or">주문내역</a></li>
+							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="#">상품 보관함</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
@@ -57,8 +63,7 @@
 					<h2 class="txt txt2">COMMUNITY INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="#">내 게시글 보기</a></li>
+							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
 							<li><a href="#">내 게시글 리뷰</a></li>
 						</ul>
 					</div>
@@ -67,8 +72,7 @@
 					<h2 class="txt txt3">CUSTOMER INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="#">회원정보변경</a></li>
+							<li class="first"><a href="#">회원정보변경</a></li>
 							<li><a href="#">회원탈퇴신청</a></li>
 						</ul>
 					</div>
@@ -84,7 +88,9 @@
 					<!-- 회원 정보 -->
 					<div class="info">
 						<div class="user">
-							<div class="user-img"></div>
+							<div class="user-img">
+								<img alt="profileImg" src="member/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
+							</div>
 							<div class="user-info">
 								<p>
 									<b><%=member.getUsername() %></b> [<span id="MK_user_id"><%=member.getId() %></span>]님
@@ -115,12 +121,18 @@
 						<dl class="order">
 							<dt>총 주문금액</dt>
 							<dd style="width: 300px">
-								<span>총 주문 금액 계산한 값.. </span>원
+							<%
+							int totalpr = 0;
+							for(OrderBean o: mainorderList) {
+								totalpr += o.getTotal_price();
+							}
+							%>
+								<span><%=totalpr %> </span>원
 							</dd>
 							<dt>주문 건수</dt>
-							<dd style="width: 300px"><span>총 주문 건수 계산한 값... </span>건</dd>
+							<dd style="width: 300px"><span><%=mainorderList.size() %> </span>건</dd>
 							<dt>게시글 수</dt>
-							<dd style="width: 300px"><span>총 게시글 수 계산한 값... </span>개</dd>
+							<dd style="width: 300px"><span><%=articleList.size() %> </span>개</dd>
 <!-- 							<dt>적 립 금</dt> -->
 <!-- 							<dd> -->
 <!-- 								<a href="/shop/mypage.html?mypage_type=myreserve"><strong>5,000</strong>원</a> -->
@@ -145,8 +157,7 @@
 					<!-- 최근 주문 정보 -->
 					<div class="hd">
 						<h3>최근 주문 정보</h3>
-						<a class="view fe" href="MyOrderList.or">+
-							MORE</a>
+						<a class="view fe" href="MyOrderList.or">+ MORE</a>
 					</div>
 					<div class="tbl">
 						<table summary="주문일자, 상품명, 결제금액, 주문상세">
@@ -166,13 +177,18 @@
 								</tr>
 							</thead>
 							
-<!-- 							for문 돌리기 -->
-<%
-detailorderSubList = detailorderList.get(mainorderList.get(mainorderList.size()-1).getCode());
-OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
-%>
 							<tbody>
 								<tr>
+								<%
+								if(mainorderList.size() == 0) {
+									%>
+									<td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
+            	   						<span> 최근 구매한 상품이 없습니다 </span></td>
+									<%
+								} else {
+									detailorderSubList = detailorderList.get(mainorderList.get(mainorderList.size()-1).getCode());
+									OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
+								%>
 									<td><div class="tb-center"><%=orderBean.getDate() %></div></td>
 									<td><div class="tb-center">
 									<%
@@ -188,7 +204,8 @@ OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
 									</div> </td>
 									<td><div class="tb-center"><%=orderBean.getTotal_price() %></div></td>
 									<td><div class="tb-center">
-									<a class="view fe" href="MyOrderList.or">+MORE</a></div></td>
+									<a class="view fe" href="MyOrderList.or">+ MORE</a></div></td>
+								<% } %>
 								</tr>
 							</tbody>
 <!-- 							<tbody> -->
@@ -203,8 +220,7 @@ OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
 					<!-- 최근 등록 게시글 -->
 					<div class="hd">
 						<h3>최근 등록 게시글</h3>
-						<a class="view fe" href="최근 게시글 목록">+
-							MORE</a>
+						<a class="view fe" href="MycommList.co">+ MORE</a>
 					</div>
 					<div class="tbl">
 						<table summary="등록일자, 제목, 게시판">
@@ -218,13 +234,29 @@ OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
 								<tr>
 									<th><div class="tb-center">DATE</div></th>
 									<th><div class="tb-center">SUBJECT</div></th>
-									<th><div class="tb-center">BOARD</div></th>
+									<th><div class="tb-center">READCOUNT</div></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td colspan="3"><div class="tb-center">작성된 게시글이 없습니다.</div></td>
+							<%
+							if(articleList.size() == 0) {
+								%>
+									<tr><td colspan="3" style="padding:50px 20px; text-align:center; font-size: 15px;">
+            	   						<span> 작성한 게시글이 없습니다 <br><br>
+            	   							<a href='CommList.co'>게시글을 작성해 보세요!</a></span></td></tr>							
+								<%
+							} else {
+								CommBean article = articleList.get(articleList.size()-1);
+								%>
+								<tr onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'" style="cursor: pointer;">
+								<td><div class="tb-center"><%=article.getDate() %></div></td>
+								<td><div class="tb-center"><%=article.getSubject() %></div></td>
+								<td><div class="tb-center"><%=article.getReadCount() %></div></td>
 								</tr>
+								<%
+									
+							}
+							%>
 							</tbody>
 						</table>
 					</div>
@@ -233,8 +265,7 @@ OrderBean orderBean = mainorderList.get(mainorderList.size()-1);
 					<!-- 관심 상품 정보 -->
 					<div class="hd">
 						<h3>관심 상품 정보</h3>
-						<a class="view fe" href="/shop/mypage.html?mypage_type=mywishlist">+
-							MORE</a>
+						<a class="view fe" href="/shop/mypage.html?mypage_type=mywishlist">+ MORE</a>
 					</div>
 					<div class="lst">
 						<div class="item-wrap">

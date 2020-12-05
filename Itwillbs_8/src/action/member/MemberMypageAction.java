@@ -12,6 +12,7 @@ import action.Action;
 import svc.member.MemberMypageService;
 import svc.order.ControlOrderListService;
 import vo.ActionForward;
+import vo.CommBean;
 import vo.DetailOrderBean;
 import vo.MemberBean;
 import vo.OrderBean;
@@ -54,9 +55,10 @@ public class MemberMypageAction implements Action {
 				detailorderList.put(mainorder_code, detailorderSubList);
 	
 			}
-	
 			
+			ArrayList<CommBean> articleList = memberMypageService.getArticleList(member.getUsername());
 			
+			request.setAttribute("articleList", articleList);
 			request.setAttribute("mainorderList", mainorderList);
 			request.setAttribute("detailorderList", detailorderList);
 			request.setAttribute("member", member);
