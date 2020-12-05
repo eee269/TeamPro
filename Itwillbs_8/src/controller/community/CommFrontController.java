@@ -137,6 +137,17 @@ public class CommFrontController extends HttpServlet{
 					}
 				}
 				// ---------------------------글 삭제---------------------------
+				// --------------------내 좋아요 모아보기--------------------
+				else if(command.equals("/CommBookmarkList.co")) {
+					System.out.println("CommBookmarkListAction 포워딩");
+//					action = new CommBookmarkListAction();
+//					try {
+//						forward = action.execute(request, response);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+					forward.setPath("/community/mybookmark.jsp");
+				}
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			

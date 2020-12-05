@@ -28,7 +28,7 @@ public class ProductFrontController extends HttpServlet {
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");
     	
-		ActionForward forward = null;
+		ActionForward forward = new ActionForward();
 		Action action = null;
 		String command = request.getServletPath();
 		
@@ -104,7 +104,17 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// --------------------상품 댓글 쓰기--------------------
+		// --------------------내 좋아요 모아보기--------------------
+		else if(command.equals("/ProductLikeList.po")) {
+			System.out.println("ProductLikeListAction 포워딩");
+//			action = new ProductLikeListAction();
+//			try {
+//				forward = action.execute(request, response);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+			forward.setPath("/product/mylike.jsp");
+		}
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {

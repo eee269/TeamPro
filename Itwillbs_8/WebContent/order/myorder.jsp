@@ -41,9 +41,8 @@
 					<h2 class="txt txt1">SHOPPING INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="MyOrderList.or">주문내역</a></li>
-							<li><a href="#">상품 보관함</a></li>
+							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
+							<li><a href="ProductLikeList.po">상품 보관함</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
 						</ul>
@@ -53,8 +52,8 @@
 					<h2 class="txt txt2">COMMUNITY INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="#">내 게시글 보기</a></li>
+							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
+							<li><a href="CommBookmarkList.co">내 북마크</a></li>
 							<li><a href="#">내 게시글 리뷰</a></li>
 						</ul>
 					</div>
@@ -63,9 +62,8 @@
 					<h2 class="txt txt3">CUSTOMER INFO</h2>
 					<div class="lnb">
 						<ul>
-							<li class="first">
-							<a href="#">회원정보변경</a></li>
-							<li><a href="#">회원탈퇴신청</a></li>
+							<li class="first"><a href="MemberModifyForm.mo">회원정보변경</a></li>
+							<li><a href="MemberDeleteForm.mo">회원탈퇴신청</a></li>
 						</ul>
 					</div>
 				</div>

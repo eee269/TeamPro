@@ -14,7 +14,7 @@ import action.member.MemberLogoutAction;
 import action.member.MemberMypageAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
-import action.member.MemberDeleteAction;
+import action.member.MemberDeleteProAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -85,10 +85,13 @@ public class MemberFrontController extends HttpServlet {
 		}
 
 		// -------------회원 삭제(탈퇴)----------------
-		else if (command.equals("/MemberDelete.mo")) {
+		else if (command.equals("/MemberDeleteForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/delete.jsp");
+		} else if (command.equals("/MemberDeletePro.mo")) {
 			forward = new ActionForward();
 
-			action = new MemberDeleteAction();
+			action = new MemberDeleteProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

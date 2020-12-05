@@ -70,15 +70,16 @@ public class MemberDAO {
 	}
 
 
-	public int deleteMember(String id) {
+	public int deleteMember(String id, String pass) {
 		int count = 0;
 		
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "delete from member where id=?";
+			String sql = "delete from member where id=? and pass=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, id);
+			pstmt.setString(2, pass);
 			count = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

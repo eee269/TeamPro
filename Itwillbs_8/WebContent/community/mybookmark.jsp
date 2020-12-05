@@ -1,9 +1,6 @@
-<%@page import="vo.CommBean"%>
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	ArrayList<CommBean> articleList = (ArrayList)request.getAttribute("articleList");
 	String member_id = (String) session.getAttribute("member_id");
 %>
 
@@ -20,7 +17,7 @@
 		<a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04"> My Page
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> 
-		<span class="stext-109 cl4"> My Community </span>
+		<span class="stext-109 cl4"> My Bookmark </span>
 	</div>
 </div>
 
@@ -35,7 +32,7 @@
 	<div id="contentWrap">
 
 		<div id="aside">
-			<h2 class="aside-tit">MY COMMUNITY</h2>
+			<h2 class="aside-tit">MY BOOKMARK</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>
@@ -75,66 +72,15 @@
 		<div id="content">
 			<div id="myOrder">
 				<div class="tit-page-2">
-					<h2>내가 쓴 게시글</h2>
+					<h2>북마크</h2>
 				</div>
 				<div class="page-body">
-					<!-- 글 리스트 -->
+					<!-- 주문 내역 리스트 -->
 					<div class="table-d2-list">
 						<table>
-							<colgroup>
-								<col width="100">
-								<col width="*">
-								<col width="200">
-								<col width="150">
-<!-- 								<col width="100"> -->
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="row"><div class="tb-center">번호</div></th>
-									<th scope="row"><div class="tb-center">제목</div></th>
-									<th scope="row"><div class="tb-center">작성 날짜</div></th>
-									<th scope="row"><div class="tb-center">조회수</div></th>
-<!-- 									<th scope="row"><div class="tb-center">댓글 수</div></th> -->
-								</tr>
-							</thead>
-							<tbody>
-<!-- 								<tr> -->
-<!-- 									<td colspan="6"><div class="tb-center">주문내역이 없습니다.</div></td> -->
-<!-- 								</tr> -->
-<%
-if(articleList.size() == 0) {
-	%>
-	<tr><td colspan="9" style="padding:50px 20px; text-align:center; font-size: 15px;">
-		<span>아직 작성한 게시글이 없습니다.</span>
-		
-	</td></tr>
-	<%
-} else {
-	for(int i = 0 ; i < articleList.size() ; i++) {
-		CommBean article = articleList.get(i);
-		%>
-					<tr onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'" style="cursor: pointer;">
-									<td scope="row"><div class="tb-center"><%=i+1%></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getSubject() %></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getDate() %></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getReadCount() %></div></td>
-									<!-- 댓글 수 -->
-<%-- 									<td scope="row"><div class="tb-center"><%=article.getNum() %></div></td> --%>
-									
-								</tr>
-										<%
-	}
-}
-%>
-			
-							</tbody>
+<!-- 				게시글 목록 가져오기, 기준: member_id, select true -->
 						</table>
 					</div>
-					<!-- //주문 내역 리스트 -->
-
-					<!-- 주문 내역 페이징 -->
-					<div class="paging"></div>
-					<!-- //주문 내역 페이징 -->
 <!-- 하단 여백 -->
 <div style="height: 150px"></div>
 

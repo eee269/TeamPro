@@ -50,7 +50,7 @@
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
 					<div class="left-top-bar">
-						Free shipping for standard order over $100
+						환영합니다! 이런거? 아니면 30,000 이상 무료배송!
 					</div>
 					<div class="right-top-bar flex-w h-full">
 						<%

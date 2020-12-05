@@ -20,7 +20,7 @@ public class MemberLoginProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-ActionForward forward=null;
+		ActionForward forward=null;
 		
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
