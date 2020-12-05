@@ -24,20 +24,7 @@ ActionForward forward=null;
 		
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
-//		
-//		ServletContext context = request.getServletContext();
-//		String saveFolder = "member/memberUpload";
-//		String realFolder = context.getRealPath(saveFolder);
-//		int fileSize = 1024 * 1024 * 10;
-//		
-//		MultipartRequest multi = new MultipartRequest(request, realFolder, fileSize, "UTF-8", new DefaultFileRenamePolicy());
-//		
-//		String id = multi.getParameter("id");
-//		String pass = multi.getParameter("pass");
-//		
-//		
-//		
-//		
+
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
 		
 		try {

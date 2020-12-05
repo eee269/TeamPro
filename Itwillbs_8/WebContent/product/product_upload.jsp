@@ -219,10 +219,12 @@ function checkboxswift() {
 				</div>
 				</td>
 			</tr>
-			
+			<tr>
+				<td colspan="3"><input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;"></td>
+			</tr>
 		</table>
 			<br>
-			<input type="submit" value="상품 등록" style="padding:10px 25px; text-align: right;">
+			
 			
 	</form>
 

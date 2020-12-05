@@ -10,11 +10,15 @@
 <!-- breadcrumb -->
 
 <%
-	OrderBean mainorder = (OrderBean) request.getAttribute("mainorder");
+OrderBean mainorder = (OrderBean) request.getAttribute("mainorder");
 ArrayList<DetailOrderBean> detailorderList = (ArrayList) request.getAttribute("detailorderList");
 String mainorder_code = request.getParameter("code");
-String member_id = mainorder.getMember_id();
+String member_id = (String) session.getAttribute("member_id");
+
+System.out.println("orderDetail.jsp - detailorderList.size(): " + detailorderList.size());
+
 %>
+
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home <i
@@ -46,15 +50,9 @@ String member_id = mainorder.getMember_id();
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
-							<!-- 							<li><a href="/shop/mypage.html?mypage_type=mycoupon">쿠폰내역</a></li> -->
-							<!-- 							<li><a href="/shop/mypage.html?mypage_type=myreserve">적립금내역</a></li> -->
-
-							<!-- 			이거 쓸건가..?				<li><a href="/shop/todaygoods.html">오늘본상품</a></li> -->
-
 							<li><a href="#">상품 보관함</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
-							<!-- <li class="attandance"><a href=""><strong>출석체크</strong></a></li>-->
 						</ul>
 					</div>
 				</div>

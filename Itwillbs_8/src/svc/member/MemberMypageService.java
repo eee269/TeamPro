@@ -3,8 +3,10 @@ package svc.member;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import dao.community.CommDAO;
 import dao.member.MemberDAO;
 import dao.order.OrderDAO;
+import vo.CommBean;
 import vo.DetailOrderBean;
 import vo.MemberBean;
 import vo.OrderBean;
@@ -54,6 +56,20 @@ public class MemberMypageService {
 		close(con);
 		
 		return mainorderList;
+	}
+
+	public ArrayList<CommBean> getArticleList(String username) {
+		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
+		
+		Connection con = getConnection();
+		
+		CommDAO commDAO = CommDAO.getInstance();
+		commDAO.setConnection(con);
+		articleList = commDAO.selectArticleList(username);
+		
+		close(con);
+		
+		return articleList;
 	}
 	
 	

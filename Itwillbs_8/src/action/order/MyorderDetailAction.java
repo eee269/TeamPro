@@ -1,5 +1,6 @@
 package action.order;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +24,23 @@ public class MyorderDetailAction implements Action {
 		OrderBean mainorder = service.selectMainorder(mainorder_code);
 		ArrayList<DetailOrderBean> detailorderList = service.getDetailorderList(mainorder_code);
 		
-		request.setAttribute("detailorderList", detailorderList);
-		request.setAttribute("mainorder", mainorder);
+		System.out.println("MyorderDetailAction- detailorderList.size(): " + detailorderList.size());
 		
-		forward = new ActionForward();
-		forward.setPath("/order/orderDetail.jsp");
+		if(detailorderList.size() == 0) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('잘못된 접근 방법입니다. 관리자에게 문의하세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+		} else {
+			request.setAttribute("detailorderList", detailorderList);
+			request.setAttribute("mainorder", mainorder);
+			
+			forward = new ActionForward();
+			forward.setPath("/order/orderDetail.jsp");
+		
+		}
 		
 		return forward;
 	}
