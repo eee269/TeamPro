@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    String id = (String)request.getAttribute("id"); 
+    String id = (String)session.getAttribute("id"); 
     %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -91,9 +91,8 @@
 							로그인
 						</a>
 					<%}else{ %>
-						<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">
-							마이페이지
-						</a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
+							<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
 						<%} %>
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니

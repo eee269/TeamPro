@@ -60,12 +60,10 @@
 						</a>
 						<%} else{ %>
 							<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
+							<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
 						<%} %>
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
-						</a>
-						<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">
-							마이페이지
 						</a>
 						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보

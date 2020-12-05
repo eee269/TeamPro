@@ -32,6 +32,7 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
 <script src="js/bootstrap4-rating-input.js"></script>
+
 <style type="text/css">
 .rat {
 	margin: 150px auto;
@@ -223,40 +224,47 @@
 	// 옵션 관련 스크립트 끝
 
 	// 리뷰 작성 관련 스크립트
-	$(function() {
-		$('#prw_form').submit(function() {
-			// var id = this.id.value;
-			// var email = this.email.value;
-			// var pass = this.pass.value;
-			// var username = this.username.value;
-			// var goods_num = this.goods_num.value;
-			// var goods_color = this.goods_color.value;
-			// var goods_size = this.goods_size.value;
-			var rating = $('#rating1').val();
-			var content=$('#prw_content').val();
-			var product_img=$('#prw_file').val();
+// 	$(function() {
+// 		$('#prw_form').submit(function() {
+// 			// var id = this.id.value;
+// 			// var email = this.email.value;
+// 			// var pass = this.pass.value;
+// 			// var username = this.username.value;
+// 			// var goods_num = this.goods_num.value;
+// 			// var goods_color = this.goods_color.value;
+// 			// var goods_size = this.goods_size.value;
+// 			var rating = $('#rating1').val();
+// 			var content=$('#prw_content').val();
+// 			var product_img=$('#prw_file').val();
 
-			<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
-			if(rating == 0) {
-				alert("별점을 입력하세요");
-				$('#rating1').focus();
-				return false;
-			}
-			$.ajax('../none.jsp', {
-				data: {
-					rating: $('#rating1').val(),
-					content: $('#prw_content').val(),
-					file: $('#prw_file').val()
-				},
-				success:function (rdata) {
-					$('div').append(rdata);
-				}
-			});
-		});
-	});
+<%-- 			<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%> --%>
+// 			if(rating == 0) {
+// 				alert("별점을 입력하세요");
+// 				$('#rating1').focus();
+// 				return false;
+// 			}
+// 			$.ajax('../none.jsp', {
+// 				data: {
+// 					rating: $('#rating1').val(),
+// 					content: $('#prw_content').val(),
+// 					file: $('#prw_file').val()
+// 				},
+// 				success:function (rdata) {
+// 					$('div').append(rdata);
+// 				}
+// 			});
+// 		});
+// 	});
 	// 리뷰 작성 관련 스크립트 끝
 </script>
+<!-- 상품 리뷰 목록 출력 -->
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('')
+	});
+</script>
 
+<!-- 상품 리뷰 목록 출력 -->
 <!-- Channel Plugin Scripts -->
 <!--
 <script>
@@ -562,7 +570,7 @@ ChannelIO('boot', settings);
 								<textarea name="content" id="prw_content" placeholder="리뷰 내용을 입력해주세요" required></textarea>
 								<div class="thumb-wrap"></div>
 								<input type="file" name="product_img" class="trick file-attach" id="prw_file"> 
-								<input type="submit" value="리뷰 등록" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
+								<input type="button" value="리뷰 등록" id="lnk-review" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
 							</form>
 						</div>
 					</div>
