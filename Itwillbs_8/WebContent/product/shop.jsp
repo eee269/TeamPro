@@ -15,6 +15,7 @@
 <%-- <jsp:include page="../sub_cart.jsp" /> --%>
 
 <%
+	String id= (String)session.getAttribute("member_id");
 	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");
 	String ncode=request.getParameter("ncode");
@@ -139,6 +140,7 @@
  
 
 %>
+<!-- more버튼 css -->
 <style>
 #loadMore {
     padding-bottom: 30px;
@@ -162,6 +164,8 @@
 }
 
 </style>
+<!-- 끝 -->
+<!-- more버튼 스크립트 -->
 <script type="text/javascript">
 $( document ).ready(function () {
 	  $(".moreBox").slice(0, 8).show();
@@ -182,6 +186,7 @@ $( document ).ready(function () {
 	  });
 
 </script>
+<!-- 끝 -->
 
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/shopbrand.css" />
@@ -305,6 +310,7 @@ $( document ).ready(function () {
 		<%
 		for(int i=0; i<productList.size(); i++){
 			String[] main = productList.get(i).getMain_img().split("/");
+			String likeCheck = id+"/"+productList.get(i).getBasicCode();
 			%>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
@@ -324,13 +330,21 @@ $( document ).ready(function () {
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">
-							<a href="#"
-								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+							<%if(id != null){ %>
+							<button 
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" value="<%=likeCheck%>">
 								<img class="icon-heart1 dis-block trans-04"
 								src="images/icons/icon-heart-01.png" alt="ICON"> <img
 								class="icon-heart2 dis-block trans-04 ab-t-l"
 								src="images/icons/icon-heart-02.png" alt="ICON">
+							</button>
+							<%}else{ %>
+							<a href="#"
+								class="not_member">
+								<img class="icon-heart1 dis-block trans-04"
+								src="images/icons/icon-heart-01.png" alt="ICON">
 							</a>
+							<%} %>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,6 @@
 package dao.product;
 
+
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
@@ -81,7 +82,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -124,7 +125,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -165,7 +166,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -204,7 +205,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -318,8 +319,8 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, date) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, now())";
+					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, likey, date) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?,now())";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, productBean.getBasicCode());
 			ps.setString(2, productBean.getName());
@@ -328,6 +329,8 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			ps.setString(5, productBean.getMain_img());
 			ps.setString(6, productBean.getSub_img());
 			ps.setInt(7, productBean.getPrice());
+			ps.setInt(8, productBean.getLikey());
+
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -392,7 +395,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				productBean.setName(rs.getString("name"));
 				productBean.setPrice(rs.getInt("price"));
 				productBean.setLikey(rs.getInt("likey"));
-				productBean.setDate(rs.getDate("date"));
+				productBean.setDate(rs.getTimestamp("date"));
 				
 				
 				productList.add(productBean);
@@ -547,4 +550,5 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		return sizeList;
 	}
+
 }
