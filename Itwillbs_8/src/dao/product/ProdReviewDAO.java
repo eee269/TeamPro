@@ -108,7 +108,6 @@ public class ProdReviewDAO {
 			ps.setInt(2, startRow);
 			ps.setInt(3, limit);
 			rs = ps.executeQuery();
-			
 			reviewList = new ArrayList<ProdReviewBean>();
 			
 			while(rs.next()) {
@@ -116,14 +115,9 @@ public class ProdReviewDAO {
 				review.setContent(rs.getString("content"));
 				review.setDate(rs.getTimestamp("date"));
 				review.setProduct_img(rs.getString("product_img"));
-				// id에 저장된 값 가져오기
-//				sql = "SELECT * FROM member WHERE id=?";
-//				ps = con.prepareStatement(sql);
-//				ps.setString(1,rs.getString("member_id"));
-//				rs2 = ps.executeQuery();
-//				while(rs2.next()) {
-//					review.setMember_id(rs2.getString("username"));
-//				}
+				review.setStarScore(rs.getInt("starScore"));
+				review.setMember_id(rs.getString("member_id"));
+				review.setNum(rs.getInt("num"));
 				reviewList.add(review);
 			}
 			
@@ -134,9 +128,26 @@ public class ProdReviewDAO {
 			close(ps);
 			close(rs);
 		}
-		
 		return reviewList;
 	}
 	// -------------------selectReviewList()-----------------------
+	// -------------------deleteReview()-----------------------
+	public int deleteReview(int num) {
+		int deleteCount = 0;
+		PreparedStatement ps = null;
+		try {
+			String sql ="DELETE FROM product_review WHERE num = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			deleteCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - deleteReview() : "+e.getMessage() );
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
+		return deleteCount;
+	}
+	// -------------------deleteReview()-----------------------
 	
 }

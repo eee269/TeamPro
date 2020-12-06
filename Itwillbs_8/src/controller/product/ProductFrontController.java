@@ -14,6 +14,8 @@ import action.Action;
 import action.product.ProductDetailAction;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProdReviewDeleteAction;
+import action.product.ProdReviewListAction;
 import action.product.ProdReviewWriteAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
@@ -94,9 +96,9 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}	
-		// --------------------상품 댓글 쓰기--------------------
+		// --------------------상품 리뷰 쓰기--------------------
 		else if(command.equals("/ProdReviewWrite.po")) {
-			System.out.println("ProdReviewWriteAction 포워딩");
+			System.out.println("ProdReviewWrite.po 포워딩");
 			action = new ProdReviewWriteAction();
 			try {
 				forward = action.execute(request, response);
@@ -104,7 +106,27 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// --------------------상품 댓글 쓰기--------------------
+		// --------------------리뷰 목록 호출--------------------
+		else if(command.equals("/ProdReviewList.po")) {
+			System.out.println("ProdReviewList.po 포워딩");
+			action = new ProdReviewListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProdReviewDelete.po")) {
+			System.out.println("ProdReviewDelete.po 포워딩");
+			action = new ProdReviewDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		// --------------------상품 리뷰 쓰기--------------------
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
