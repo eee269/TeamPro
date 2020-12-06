@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 <style>
 .btn-order-ctrl {
 	margin: 40px 0 50px;
