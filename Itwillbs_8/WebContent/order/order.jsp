@@ -1,3 +1,4 @@
+<%@page import="vo.Cart"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="db.JdbcUtil"%>
@@ -5,6 +6,15 @@
 <%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	   
+	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+
+	   int sevice = 2500;
+	   int coin = 0;
+	   int cartNo = cartList.size();
+		int num = Integer.parseInt(request.getParameter("chk"));
+	%>
 <script src="js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
 // 주문자 기본 정보를 가져오는 스크립트
@@ -153,95 +163,97 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 						<fieldset>
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
-							<div class="tbl-order">
-								<table>
-									<caption>주문리스트</caption>
-									<colgroup>
-										<col style="width: 50px">
-										<col style="width: 200px">
-										<col style="width: 80px">
-										<col style="width: 80px">
-										<col style="width: 50px">
-									</colgroup>
-									<thead>
-										<tr>
-											<th scope="col"></th>
-											<th scope="col">제품</th>
-											<th scope="col">수량</th>
-											<th scope="col">가격</th>
-											<th scope="col">적립</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr class="nbg">
-											<td>
-												<div class="tb-center">
-													<div class="thumb">
-														<img src="cart/img/0010010007533.jpg" width="40">
-													</div>
-												</div>
-											</td>
-											<td>
-												<div class="tb-left">
-													<a
-														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360797">로티
-														크로커 크로스바디 </a>
-												</div>
-											</td>
-											<td>
-												<div class="tb-center">1개</div>
-											</td>
-											<td>
-												<div class="tb-center tb-bold">219,000원</div>
-											</td>
-											<td>
-												<div class="tb-center">4,380</div>
-											</td>
-										</tr>
-										<tr class="nbg">
-											<td colspan="5">
-												<div style="padding-left: 25px">
-													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션">
-													색상 : BLACK 1개
-												</div>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<div class="tb-center">
-													<div class="thumb">
-														<img src="cart/img/0010010007533.jpg" width="40">
-													</div>
-												</div>
-											</td>
-											<td>
-												<div class="tb-left">
-													<a
-														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360799">루키
-														크로스바디 </a>
-												</div>
-											</td>
-											<td>
-												<div class="tb-center">1개</div>
-											</td>
-											<td>
-												<div class="tb-center tb-bold">219,000원</div>
-											</td>
-											<td>
-												<div class="tb-center">4,380</div>
-											</td>
-										</tr>
-										<tr class="nbg">
-											<td colspan="5">
-												<div style="padding-left: 25px">
-													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션">
-													색상 : BLACK 1개
-												</div>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+<%-- 							<%=cartNo %> --%>
+							<input type="hidden" name="num" id="num" value="<%=cartNo%>">
+<!-- 							<div class="tbl-order"> -->
+<!-- 								<table> -->
+<!-- 									<caption>주문리스트</caption> -->
+<!-- 									<colgroup> -->
+<!-- 										<col style="width: 50px"> -->
+<!-- 										<col style="width: 200px"> -->
+<!-- 										<col style="width: 80px"> -->
+<!-- 										<col style="width: 80px"> -->
+<!-- 										<col style="width: 50px"> -->
+<!-- 									</colgroup> -->
+<!-- 									<thead> -->
+<!-- 										<tr> -->
+<!-- 											<th scope="col"></th> -->
+<!-- 											<th scope="col">제품</th> -->
+<!-- 											<th scope="col">수량</th> -->
+<!-- 											<th scope="col">가격</th> -->
+<!-- 											<th scope="col">적립</th> -->
+<!-- 										</tr> -->
+<!-- 									</thead> -->
+<!-- 									<tbody> -->
+<!-- 										<tr class="nbg"> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center"> -->
+<!-- 													<div class="thumb"> -->
+<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-left"> -->
+<!-- 													<a -->
+<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360797">로티 -->
+<!-- 														크로커 크로스바디 </a> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center">1개</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center">4,380</div> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr class="nbg"> -->
+<!-- 											<td colspan="5"> -->
+<!-- 												<div style="padding-left: 25px"> -->
+<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
+<!-- 													색상 : BLACK 1개 -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center"> -->
+<!-- 													<div class="thumb"> -->
+<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-left"> -->
+<!-- 													<a -->
+<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360799">루키 -->
+<!-- 														크로스바디 </a> -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center">1개</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
+<!-- 											</td> -->
+<!-- 											<td> -->
+<!-- 												<div class="tb-center">4,380</div> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 										<tr class="nbg"> -->
+<!-- 											<td colspan="5"> -->
+<!-- 												<div style="padding-left: 25px"> -->
+<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
+<!-- 													색상 : BLACK 1개 -->
+<!-- 												</div> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
+<!-- 								</table> -->
+<!-- 							</div> -->
 
 							<h3>주문자정보</h3>
 							<div class="tbl-order">

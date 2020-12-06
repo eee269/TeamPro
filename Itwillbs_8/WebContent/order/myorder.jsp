@@ -34,7 +34,7 @@
 					<div class="header-cart-item-txt p-t-8">
 						<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 							White Shirt Pleat </a> <span class="header-cart-item-info"> 1
-							x $19.00 </span>
+							x $19.00 </span> 
 					</div>
 				</li>
 
@@ -191,7 +191,7 @@
 									<td scope="row"><div class="tb-center"><%=order.get(i).getPayment() %></div></td>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getMember_id() %></div></td>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getStatus() %></div></td>
-									<td scope="row"><div class="tb-center"><a href="MyOrderDetail.or">상세목록조회</a></div></td>
+									<td scope="row"><div class="tb-center"><a href="MyOrderDetail.or?code="<%=order.get(i).getCode() %>><input type="hidden" name="mainorder_code" value="<%=order.get(i).getCode() %>" >상세목록조회</a></div></td>
 								</tr>
 										<%
 	}
