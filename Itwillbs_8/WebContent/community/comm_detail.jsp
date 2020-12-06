@@ -64,6 +64,8 @@
 								<span>
 									댓글 갯수
 								</span>
+								<span class="bookmark_count"> 북마크 갯수
+								</span>
 							</span>
 
 							<h4 class="ltext-109 cl2 p-b-28">
@@ -93,6 +95,8 @@
 							value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
 						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 							value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+							value="북마크" id="bookmark">
 						<br>
 						<!-- -----------------------------Comment----------------------------- -->
 						<div class="p-t-40">
@@ -119,4 +123,37 @@
 			</div>
 		</div>
 	</section>	
+<script>
+$(function(){
+		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+		$("#bookmark").click(function(){
+			$.ajax({
+				url: "CommBook.co",
+                type: "POST",
+                data: {
+                    num: "<%=article.getNum()%>",
+                },
+                success: function () {
+			        bookmarkCount();
+                },
+			})
+		})
+		
+		// 게시글 추천수
+	    function bookmarkCount() {
+			$.ajax({
+				url: "CommBookCount.co",
+                type: "POST",
+                data: {
+                    num: "<%=article.getNum()%>"
+                },
+                success: function (count) {
+                	$(".bookmark_count").html(count);
+                },
+			})
+	    };
+	    bookmarkCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+})
+</script>
+	    
 <jsp:include page="../inc/footer.jsp"/>

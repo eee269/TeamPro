@@ -337,6 +337,92 @@ public class CommDAO {
 			return deleteCount;
 		}
 		// -------------------------- isDeleteArticle() --------------------------------
+		// -------------------------- checkBookmark() --------------------------------
+		public int checkBookmark(int num, String id) {
+			int checkCount = 0;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				String sql = "SELECT count(*) FROM bookmark WHERE member_id =? and community_num =?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setInt(2, num);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					checkCount = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("CommDAO - checkBookmark : "+e.getMessage());
+				e.printStackTrace();
+			} finally {
+				close(ps);
+				close(rs);
+			}
+			return checkCount;
+		}
+		// -------------------------- checkBookmark() --------------------------------
+		// -------------------------- updateBookmark() --------------------------------
+		public int updateBookmark(int num, String id) {
+			int updateCount = 0;
+			PreparedStatement ps = null;
+			try {
+				String sql = "INSERT INTO bookmark values(?,?)";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setInt(2, num);
+				updateCount = ps.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("CommDAO - updateBookmark : "+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				close(ps);
+			}
+			
+			return updateCount;
+		}
+		// -------------------------- updateBookmark() --------------------------------
+		// -------------------------- deleteBookmark() --------------------------------
+		public int deleteBookmark(int num, String id) {
+			int deleteCount = 0;
+			PreparedStatement ps = null;
+			try {
+				String sql = "DELETE FROM bookmark WHERE member_id =? and community_num =?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+				ps.setInt(2, num);
+				deleteCount = ps.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("CommDAO - deleteBookmark : "+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				close(ps);
+			}
+			return deleteCount;
+		}
+		// -------------------------- deleteBookmark() --------------------------------
+		// -------------------------- CountBook() --------------------------------
+		public int CountBook(int num) {
+			int count = 0;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				String sql ="SELECT count(*) FROM bookmark WHERE community_num=?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
+				rs = ps.executeQuery();
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}finally {
+				close(ps);
+				close(rs);
+			}
+			return count;
+		}
+		// -------------------------- CountBook() --------------------------------
 		
 	
 }
