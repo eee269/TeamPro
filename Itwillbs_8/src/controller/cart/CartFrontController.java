@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
+import action.cart.cartUpdateAction;
 import vo.ActionForward;
 
 
@@ -60,7 +61,18 @@ public class CartFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 	
-		} 
+		} else if(command.equals("/CartUpdate.ca")) {
+			System.out.println("컨트롤러 - CartUpdate");
+			
+			action = new cartUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("CartUpdate ->: " + e.getMessage());
+				e.printStackTrace();
+			}
+		}
 		
 		
 		

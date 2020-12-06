@@ -101,7 +101,29 @@ public class CartDAO extends Exception {
 		return deleteCount;
 	}
 	
-	
+	// 수량 업데이트
+	public int cartUpdate(int num , int cnt) {
+		System.out.println("CartDAO - cartUpdate");
+		
+		int updateCount = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE cart SET cnt = ? WHERE num = ?";
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, cnt);
+			pstmt.setInt(2, num);
+			updateCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("cartUpdate :" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return updateCount;
+	}
 	
 	
 	
