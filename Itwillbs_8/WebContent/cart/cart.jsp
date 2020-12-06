@@ -30,8 +30,6 @@
 // 	alert(test);
 //   });
 
-
-
   $(document).ready(function(){
 	  
 	  $("#allCheck").click(function(){
@@ -81,7 +79,36 @@
 		
 	}
 
-		  </script>
+
+// 체크박스 선택된 num 넘기기위한 스크립트
+$(document).ready(function(){
+$(".CSSbuttonBlack").click(function(){ 
+	
+	var rowData = new Array();
+	var tdArr = new Array();
+	var checkbox = $("input[name=chk]:checked");
+	
+	// 체크된 체크박스 값을 가져온다
+	checkbox.each(function(i) {
+
+		// checkbox.parent() : checkbox의 부모는 <td>이다.
+		// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+		var tr = checkbox.parent().parent().eq(i);
+		var td = tr.children().children().eq(0); 
+
+		// 체크된 row의 모든 값을 배열에 담는다.
+		rowData.push(tr.text());
+		tdArr.push(td.text());
+		$("#cartNum").attr("value",tdArr);
+		alert($("#cartNum").val());
+	});
+			document.cartForm.setAttribute("action","Order.or");
+			document.cartForm.submit();
+     });
+
+});
+//체크박스 선택된 num 넘기기위한 스크립트 끝
+</script>
 
 
 <jsp:include page="../inc/header.jsp" />
@@ -111,7 +138,10 @@
          </dd>
       </dl>
       
-      <form action="CartDelete.ca" method="post" name="cartForm" >
+      <div id="ex3_Result1"></div>
+       <div id="ex3_Result2"></div>
+       
+      <form action="CartDelete.ca" method="post" name="cartForm" id="cartForm">
       <h2 class="tit-page">장바구니</h2>
       <div class="page-body">
          <div class="table-cart table-fill-prd">
@@ -167,7 +197,7 @@
                      <!-- 2019.07.03 -->
    
                                  
-                     <td><div class="tb-center">
+                     <td class="cartNum"><div class="tb-center">
                   
                      <%=cartNo %>
                   
@@ -291,7 +321,9 @@
 <!--          .table-fill-prd -->
 
          <div class="btn-order-ctrl">
-            <a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a> 
+           
+            <a href="javascript:multi_order()" class="CSSbuttonBlack" >주문하기<input type="hidden" id="cartNum" name="cartNum"></a> 
+        
             <a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
             <a class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
          </div>

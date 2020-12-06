@@ -16,6 +16,7 @@ public class OrderProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+//		request.setAttribute("num", Integer.parseInt(request.getParameter("chk")));
 		System.out.println("OrderProAction!");
 		ActionForward forward = null;
 		Timestamp date = new Timestamp(System.currentTimeMillis());
@@ -28,14 +29,16 @@ public class OrderProAction implements Action {
 		ob.setPayment(request.getParameter("pay_method"));
 		ob.setMember_id("test");
 		ob.setDate(date);
-//		System.out.println(ob.getCode());
-//		System.out.println(ob.getName());
-//		System.out.println(ob.getPhone());
-//		System.out.println(ob.getAddress());
-//		System.out.println(ob.getStatus());
-//		System.out.println(ob.getPayment());
-//		System.out.println(ob.getMember_id());
-//		System.out.println(ob.getDate());
+		ob.setTotal_price(Integer.parseInt(request.getParameter("paid_amount")));
+		System.out.println("OrderPro에서 : "+ob.getCode());
+		System.out.println("OrderPro에서 : "+ob.getName());
+		System.out.println("OrderPro에서 : "+ob.getPhone());
+		System.out.println("OrderPro에서 : "+ob.getAddress());
+		System.out.println("OrderPro에서 : "+ob.getStatus());
+		System.out.println("OrderPro에서 : "+ob.getPayment());
+		System.out.println("OrderPro에서 : "+ob.getMember_id());
+		System.out.println("OrderPro에서 : "+ob.getDate());
+		System.out.println("OrderPro에서 : "+ob.getTotal_price());
 
 		
 		OrderProService orderService = new OrderProService();
@@ -54,8 +57,7 @@ public class OrderProAction implements Action {
 
 		} else {
 			forward = new ActionForward();
-			forward.setPath("MyOrderList.or");
-			forward.setRedirect(true);
+			forward.setPath("OrderDetail.or");
 		}
 		
 		

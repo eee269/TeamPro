@@ -68,6 +68,12 @@ public class OrderBean {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+	public int getTotal_price() {
+		return total_price;
+	}
+	public void setTotal_price(int total_price) {
+		this.total_price = total_price;
+	}
 	
 	
 

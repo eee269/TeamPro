@@ -13,6 +13,7 @@ String buyer_postcode = request.getParameter("postcode");
 String imp_uid = request.getParameter("imp_uid");
 String merchant_uid = request.getParameter("merchant_uid");
 String status = request.getParameter("status");
+int num = Integer.parseInt(request.getParameter("num"));
 %>
 <jsp:include page="../inc/header.jsp" />
 <script type="text/javascript"
@@ -42,7 +43,8 @@ $(function(){
 	    		type : 'POST',
 	    		dataType : 'json',
 	    		data : {
-	    			imp_uid : rsp.imp_uid
+	    			imp_uid : rsp.imp_uid,
+	    			amount : rsp.paid_amount
 	    		}
 	    	}).done(function(data){
 	    		if(everythings_fine) {
@@ -69,7 +71,9 @@ $(function(){
 	    $("#buyer_email").attr('value','<%=buyer_email%>');
 	    $("#buyer_postcode").attr('value','<%=buyer_postcode%>');
 	    $("#buyer_addr").attr('value','<%=buyer_addr%>');
-	    $("#status").attr('value','<%=status%>');
+	    $("#paid_amount").attr('value',rsp.paid_amount)
+	    alert($("#imp_uid").val());
+	    alert($("#paid_amount").val());
 		});
 	});
 	
@@ -85,7 +89,7 @@ $(function(){
 			type="hidden" value="" id="buyer_email" name="buyer_email"> <input
 			type="hidden" value="" id="buyer_postcode" name="buyer_postcode">
 		<input type="hidden" value="" id="buyer_addr" name="buyer_addr">
-			 <input	type="hidden" value="" id="status" name="status">
+		<input type="hidden" value="<%=num%>" name="num" id="num">
 		<input type="submit" value="내 주문 목록">
 	</form>
 <jsp:include page="../inc/footer.jsp" />
