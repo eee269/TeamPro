@@ -17,19 +17,7 @@
 // 	int endPage = pageInfo.getEndPage();
 // 	int listCount = pageInfo.getListCount();
 %>
-<!--productDetail 관련 -->
-<%
-	String basicCode = request.getParameter("basicCode"); 
-    ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
-    ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
-    ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
-    
-
-    String[] main = productDetailList.get(0).getMain_img().split("/");
-    String[] sub = productDetailList.get(0).getSub_img().split("/");
-    
-    DecimalFormat priceFormat = new DecimalFormat("###,###");
-%>
+<
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
@@ -240,7 +228,19 @@
 
 	// 옵션 관련 스크립트 끝
 </script>
+<!-- productDetail 관련  -->
+<%
+	String basicCode = request.getParameter("basicCode"); 
+    ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
+    ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
+    ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
+    
 
+    String[] main = productDetailList.get(0).getMain_img().split("/");
+    String[] sub = productDetailList.get(0).getSub_img().split("/");
+    
+    DecimalFormat priceFormat = new DecimalFormat("###,###");
+%>
 <!-- 끝 -->
 
 <!-- breadcrumb -->
