@@ -17,9 +17,7 @@ public class UpdateOrderStatusAction implements Action {
 		
 		String code = request.getParameter("code");
 		String status = request.getParameter("status");
-		
-		System.out.println("UpdateOrderStatusAction -  code:" + code + ", status" + status);
-		
+				
 		UpdateOrderStatusService updateService = new UpdateOrderStatusService();
 		boolean isUpdate = updateService.updateOrderStatus(code, status);
 		
@@ -34,6 +32,7 @@ public class UpdateOrderStatusAction implements Action {
 		} else {
 			forward = new ActionForward();
 			forward.setPath("ControlOrderList.or");
+			forward.setRedirect(true);
 		}
 		
 		return forward;

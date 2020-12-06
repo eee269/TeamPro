@@ -15,6 +15,7 @@ public class DeleteMainorderService {
 		Connection con = getConnection();
 		
 		OrderDAO orderDAO = OrderDAO.getInstance();
+		orderDAO.setConnection(con);
 		int cnt = orderDAO.deleteMainorder(code);
 		
 		if(cnt > 0) {

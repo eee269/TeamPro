@@ -2,7 +2,6 @@ package svc.order;
 
 import java.sql.Connection;
 
-import dao.cart.CartDAO;
 import dao.order.OrderDAO;
 import vo.OrderBean;
 
@@ -33,7 +32,7 @@ public class OrderProService {
 			return isInsertSuccess;
 		}
 
-		public static boolean insertDetailOrder(int num, String code) {
+		public boolean insertDetailOrder(int num, String code) {
 			System.out.println("OrderProService - InsertDetailOrder!");
 			boolean isInsertSuccess = false;
 			

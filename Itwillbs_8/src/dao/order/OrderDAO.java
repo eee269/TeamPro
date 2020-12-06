@@ -16,7 +16,7 @@ import vo.OrderBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import static db.JdbcUtil.*;
 
@@ -39,7 +39,7 @@ public class OrderDAO {
 	
 	public int insertOrder(OrderBean ob) {
 		System.out.println("OrderDAO - insertOrder()!");
-		int insertCount = 0;
+		int insertCount = 1;
 		
 		PreparedStatement p = null;
 		
@@ -57,6 +57,7 @@ public class OrderDAO {
 			p.setInt(9, ob.getTotal_price());
 			
 			insertCount = p.executeUpdate();
+			System.out.println("insertCount : " +insertCount);
 		} catch (Exception e) {
 			System.out.println("OrderDAO insertOrder() 오류! - " +e.getMessage());
 			e.printStackTrace();
@@ -67,7 +68,7 @@ public class OrderDAO {
 		return insertCount;
 	}
 
-	public ArrayList<OrderBean> selectOrderList() {
+	public ArrayList<OrderBean> selectOrderList(String member_id) {
 		System.out.println("OrderDAO - selectOrderList()");
 		ArrayList<OrderBean> orderList = null;
 		
@@ -77,7 +78,7 @@ public class OrderDAO {
 		try {
 			String sql = "SELECT * FROM mainorder where member_id = ?";
 			p = con.prepareStatement(sql);
-			p.setString(1, "test");
+			p.setString(1, member_id);
 			rs = p.executeQuery();
 			
 			orderList = new ArrayList<OrderBean>();
@@ -93,6 +94,7 @@ public class OrderDAO {
 				order.setStatus(rs.getString(6));
 				order.setPayment(rs.getString(7));
 				order.setMember_id(rs.getString(8));
+				order.setTotal_price(rs.getInt("total_price"));
 				
 				orderList.add(order);
 			}
@@ -258,63 +260,35 @@ public class OrderDAO {
 		return cnt;
 	}
 
-
-	public int insertDetailOrder(int num, String code) {
-		System.out.println("OrderDAO - insertDetailOrder()-1!");
-		int insertCount = 0;
+	//--------------------code에 해당하는 mainorder하나 들고오기------------------------
+	public OrderBean selectMainorder(String code) {
+		OrderBean mainorder = new OrderBean();
 		
-		PreparedStatement p = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
 		try {
-			String sql = "select * from cart where num = ?";
+			String sql = "select * from mainorder where code=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, code);
+			rs = pstmt.executeQuery();
 			
-			p = con.prepareStatement(sql);
-			p.setInt(1, num);
-			rs = p.executeQuery();
-			 
 			if(rs.next()) {
-				System.out.println("OrderDAO - insertDetailOrder()-2!");
-
-				int num1 =  rs.getInt(1);
-				String name = rs.getString(3);
-				int price =  rs.getInt(4);
-				int cnt =  rs.getInt(2);
-				String color = rs.getString(5);
-				String size = rs.getString(6);
-				String opt_productCode = rs.getString(9);
-				sql = "select * from mainorder where code = ?";
-				p = con.prepareStatement(sql);
-				p.setNString(1, code);
-				rs = p.executeQuery();
-				
-				if(rs.next()) {
-					System.out.println("OrderDAO - insertDetailOrder()-3!");
-
-					sql = "insert into detailorder values(?,?,?,?,?,?,?,?,?,?)";
-					p = con.prepareStatement(sql);
-					p.setInt(1, num1);
-					p.setNString(2, name);
-					p.setString(3, "null");
-					p.setInt(4, price);
-					p.setInt(5, cnt);
-					p.setTimestamp(6, rs.getTimestamp(5));
-					p.setString(7, color);
-					p.setString(8, size);
-					p.setString(9, code);
-					p.setString(10, opt_productCode);
-					insertCount = p.executeUpdate();
-				}
-				
+				mainorder.setAddress(rs.getString("address"));
+				mainorder.setCode(code);
+				mainorder.setDate(rs.getTimestamp("date"));
+				mainorder.setMember_id(rs.getString("member_id"));
+				mainorder.setName(rs.getString("name"));
+				mainorder.setPayment(rs.getString("payment"));
+				mainorder.setPhone(rs.getString("phone"));
+				mainorder.setStatus(rs.getString("status"));
+				mainorder.setTotal_price(rs.getInt("total_price"));
 			}
-		} catch (Exception e) {
-			System.out.println("OrderDAO insertOrder() 오류! - " +e.getMessage());
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			close(rs);
-			close(p);
 		}
 		
-		return insertCount;
+		return mainorder;
 	}
 
 	public ArrayList<Cart> selectCart(int num) {
@@ -358,6 +332,73 @@ public class OrderDAO {
 		}
 		
 		return cartList;
+	}
+
+	public int insertDetailOrder(int num, String code) {
+		System.out.println("OrderDAO - insertDetailOrder()-1!");
+		int insertCount = 0;
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		int num1= 1;
+		try {
+			String sql = "select max(num) from detailorder";
+			p = con.prepareStatement(sql);
+			rs = p.executeQuery();
+			
+			if(rs.next()) {
+				num1 =  rs.getInt(1)+1;
+			}
+			sql = "select * from cart where num = ?";
+			
+			p = con.prepareStatement(sql);
+			p.setInt(1, num);
+			rs = p.executeQuery();
+			 
+			if(rs.next()) {
+				System.out.println("OrderDAO - insertDetailOrder()-2!");
+
+				String name = rs.getString(3);
+				int price =  rs.getInt(4);
+				int cnt =  rs.getInt(2);
+				String color = rs.getString(5);
+				String size = rs.getString(6);
+				String opt_productCode = rs.getString(9);
+				sql = "select * from mainorder where code = ?";
+				p = con.prepareStatement(sql);
+				p.setNString(1, code);
+				rs = p.executeQuery();
+				
+				if(rs.next()) {
+					System.out.println("OrderDAO - insertDetailOrder()-3!");
+
+					sql = "insert into detailorder values(?,?,?,?,?,?,?,?,?,?)";
+					p = con.prepareStatement(sql);
+					p.setInt(1, num1);
+					p.setNString(2, name);
+					p.setString(3, "null");
+					p.setInt(4, price);
+					p.setInt(5, cnt);
+					p.setTimestamp(6, rs.getTimestamp(5));
+					p.setString(7, color);
+					p.setString(8, size);
+					p.setString(9, code);
+					p.setString(10, opt_productCode);
+					
+					insertCount = p.executeUpdate();
+				}
+				
+			}
+		} catch (Exception e) {
+			System.out.println("OrderDAO insertDetailOrder() 오류! - " +e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(p);
+		}
+		
+		return insertCount;
 	}
 
 }

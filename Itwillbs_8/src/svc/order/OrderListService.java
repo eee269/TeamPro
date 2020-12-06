@@ -10,7 +10,7 @@ import static db.JdbcUtil.*;
 
 public class OrderListService {
 
-	public ArrayList<OrderBean> getOrderList() {
+	public ArrayList<OrderBean> getOrderList(String member_id) {
 		System.out.println("OrderListService - getOrderList()!");
 		ArrayList<OrderBean> orderList = null;
 		
@@ -20,7 +20,7 @@ public class OrderListService {
 		
 		orderDAO.setConnection(con);
 		
-		orderList = orderDAO.selectOrderList();
+		orderList = orderDAO.selectOrderList(member_id);
 		
 		close(con);
 		

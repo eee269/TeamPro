@@ -113,9 +113,6 @@ $(".CSSbuttonBlack").click(function(){
 
 <jsp:include page="../inc/header.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
-
 
 <!-- breadcrumb -->
 <div class="container">

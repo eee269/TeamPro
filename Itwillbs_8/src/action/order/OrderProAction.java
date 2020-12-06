@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import dao.order.OrderDAO;
@@ -16,8 +17,9 @@ public class OrderProAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		request.setAttribute("num", Integer.parseInt(request.getParameter("chk")));
 		System.out.println("OrderProAction!");
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		OrderBean ob = new OrderBean();
@@ -27,18 +29,18 @@ public class OrderProAction implements Action {
 		ob.setAddress(request.getParameter("buyer_addr"));
 		ob.setStatus("결제완료");
 		ob.setPayment(request.getParameter("pay_method"));
-		ob.setMember_id("test");
+		ob.setMember_id(member_id);
 		ob.setDate(date);
 		ob.setTotal_price(Integer.parseInt(request.getParameter("paid_amount")));
-		System.out.println("OrderPro에서 : "+ob.getCode());
-		System.out.println("OrderPro에서 : "+ob.getName());
-		System.out.println("OrderPro에서 : "+ob.getPhone());
-		System.out.println("OrderPro에서 : "+ob.getAddress());
-		System.out.println("OrderPro에서 : "+ob.getStatus());
-		System.out.println("OrderPro에서 : "+ob.getPayment());
-		System.out.println("OrderPro에서 : "+ob.getMember_id());
-		System.out.println("OrderPro에서 : "+ob.getDate());
-		System.out.println("OrderPro에서 : "+ob.getTotal_price());
+
+//		System.out.println(ob.getCode());
+//		System.out.println(ob.getName());
+//		System.out.println(ob.getPhone());
+//		System.out.println(ob.getAddress());
+//		System.out.println(ob.getStatus());
+//		System.out.println(ob.getPayment());
+//		System.out.println(ob.getMember_id());
+//		System.out.println(ob.getDate());
 
 		
 		OrderProService orderService = new OrderProService();
