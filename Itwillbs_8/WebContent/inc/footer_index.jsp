@@ -308,18 +308,36 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script>
 	//좋아요 관련 스크립트입니다!!
 		$('.js-addwish-b2, .js-addwish-detail, .not_member').on('click', function(e){
-			e.preventDefault();
+// 			e.preventDefault();
 		});
 
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			var info = $(this).val().split('/');
 			$(this).on('click', function(){
-
 
 				$(this).toggleClass('js-addedwish-b2 js-addedwish-b1');
 				if($(this).hasClass('js-addedwish-b2')){
+					$.ajax('ProductLike.po',{
+						data:{
+							id:info[0],
+							basicCode:info[1]
+						},
+						success:function(rdata){
+							$('table').append('<tr><td>'+rdata+'</td></tr>');
+						}
+					  });
 					swal(nameProduct, "상품이 좋아요에 추가됬습니다!", "success");
 				}else{
+					$.ajax('ProductUnLike.po',{
+						data:{
+							id:info[0],
+							basicCode:info[1]
+						},
+						success:function(rdata){
+							$('table').append('<tr><td>'+rdata+'</td></tr>');
+						}
+					  });
 					swal(nameProduct, "상품이 좋아요에서 삭제됬습니다!", "success");
 				}
 			});

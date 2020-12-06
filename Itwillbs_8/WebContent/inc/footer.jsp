@@ -327,9 +327,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							$('table').append('<tr><td>'+rdata+'</td></tr>');
 						}
 					  });
-					alert($(this).val());
 					swal(nameProduct, "상품이 좋아요에 추가됬습니다!", "success");
 				}else{
+					$.ajax('ProductUnLike.po',{
+						data:{
+							id:info[0],
+							basicCode:info[1]
+						},
+						success:function(rdata){
+							$('table').append('<tr><td>'+rdata+'</td></tr>');
+						}
+					  });
 					swal(nameProduct, "상품이 좋아요에서 삭제됬습니다!", "success");
 				}
 			});
