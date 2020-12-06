@@ -61,9 +61,6 @@ int sum = 0;
 
 <jsp:include page="../inc/header.jsp" />
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
-
 
 <!-- breadcrumb -->
 <div class="container">

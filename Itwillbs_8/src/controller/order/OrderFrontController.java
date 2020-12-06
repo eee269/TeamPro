@@ -14,16 +14,21 @@ import action.member.ControlMemberListAction;
 import action.order.ControlOrderListAction;
 import action.order.CopyDataAction;
 import action.order.DeleteMainorderAction;
+import action.order.MyorderDetailAction;
 import action.order.OrderAction;
 import action.order.OrderDetailProAction;
 import action.order.OrderListAction;
 import action.order.OrderProAction;
 import action.order.UpdateOrderStatusAction;
-
 import vo.ActionForward;
 
 @WebServlet("*.or")
 public class OrderFrontController extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
@@ -35,7 +40,6 @@ public class OrderFrontController extends HttpServlet {
 		if(command.equals("/Order.or")) {
 			System.out.println("Order.or 포워딩");
 			forward = new ActionForward();
-//			forward.setPath("/order/order.jsp");
 			action = new OrderAction();
 			
 			try {
@@ -101,9 +105,24 @@ public class OrderFrontController extends HttpServlet {
 				System.out.println("OrderDetailPro로 포워딩 중 오류! - "+e.getMessage());
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MyOrderDetail.or")) {
-			System.out.println("MyOrderDetailPro");
 		}
+		// -------------------------주문 상세 페이지--------------------------------
+		else if(command.equals("/MyorderDetail.or")) {
+			System.out.println("MyOrderDetailPro");
+			forward = new ActionForward();
+			
+			action = new MyorderDetailAction();
+			try {
+				System.out.println("MyOrderListAction으로 포워딩");
+
+				forward = action.execute(request, response);
+			} catch(Exception e) {
+				System.out.println("MyOrderListAction으로 포워딩 중 오류! - " +e.getMessage());
+
+				e.printStackTrace();
+			}
+			
+		} 
 
 		// -------------------------주문 관리 페이지--------------------------------
 		else if (command.equals("/ControlOrderList.or")) {
@@ -131,7 +150,7 @@ public class OrderFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// -------------------------주문 상태 변경--------------------------------
+		// -------------------------주문 취소--------------------------------
 		else if (command.equals("/DeleteMainorder.or")) {
 			forward = new ActionForward();
 

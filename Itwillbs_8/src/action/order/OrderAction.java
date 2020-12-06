@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import svc.order.OrderService;
@@ -15,6 +16,8 @@ public class OrderAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("OrderAction!");
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
 		int num = Integer.parseInt(request.getParameter("chk"));
 		

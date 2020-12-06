@@ -6,7 +6,7 @@
 <%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%
+		<%
 	   
 	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 
@@ -161,8 +161,8 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 						<fieldset>
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
-<%-- 							<%=cartNo %> --%>
-							<input type="hidden" name="num" id="num" value="<%=cartNo%>">
+						<input type="hidden" name="num" id="num" value="<%=cartNo%>">
+							
 <!-- 							<div class="tbl-order"> -->
 <!-- 								<table> -->
 <!-- 									<caption>주문리스트</caption> -->

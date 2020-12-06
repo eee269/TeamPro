@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<title>Product Detail</title>
+	<title>SHOP OOTD</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -90,30 +90,38 @@
 						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
 							로그인
 						</a>
+						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
+							회원가입
+						</a>
 					<%}else{ %>
-						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
-							<a href="ControlMember.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
-						<%} %>
+						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">
+							마이페이지
+						</a>
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
-						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
+							로그아웃
+						</a>
+						<%} %>
+						
 					</div>
 				</div>
 			</div>
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->		
-					<a href="index.jsp" class="logo">
+					<a href="Main.go" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.jsp">HOME</a>
+								<a href="Main.go">HOME</a>
 							</li>
 							<li>
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
@@ -156,9 +164,9 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
+						<a href="Cart.ca" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="장바구니갯수">
 							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
+						</a>
 						<a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
 							<i class="zmdi zmdi-favorite-outline"></i>
 						</a>
@@ -170,7 +178,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="Main.go"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
