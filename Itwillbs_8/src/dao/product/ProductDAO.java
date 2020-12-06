@@ -1,5 +1,6 @@
 package dao.product;
 
+
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
@@ -81,7 +82,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -111,11 +112,11 @@ public class ProductDAO {
 		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where xcode=? limit ?,?";
+			String sql = "select * from product where xcode=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, xcode);
-			ps.setInt(2, startRow);
-			ps.setInt(3, limit);
+//			ps.setInt(2, startRow);
+//			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			
@@ -124,7 +125,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -153,11 +154,11 @@ public class ProductDAO {
 		int startRow = (page - 1) * limit;
 		
 		try {
-			String sql = "select * from product where ncode=? limit ?,?";
+			String sql = "select * from product where ncode=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, ncode);
-			ps.setInt(2, startRow);
-			ps.setInt(3, limit);
+//			ps.setInt(2, startRow);
+//			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
@@ -165,7 +166,7 @@ public class ProductDAO {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -204,7 +205,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				pb.setBasicCode(rs.getString("basicCode"));
 				pb.setXcode(rs.getString("xcode"));
 				pb.setNcode(rs.getString("ncode"));
-				pb.setDate(rs.getDate("date"));
+				pb.setDate(rs.getTimestamp("date"));
 				pb.setMain_img(rs.getString("main_img"));
 				pb.setSub_img(rs.getString("sub_img"));
 //				pb.setStock(rs.getInt("stock"));
@@ -318,8 +319,8 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		try {
 			String sql = "insert into "
-					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, date) "
-					+ "values(?, ?, ?, ?, ?, ?, ?, now())";
+					+ "product(basicCode, name, xcode, ncode, main_img, sub_img, price, likey, date) "
+					+ "values(?, ?, ?, ?, ?, ?, ?, ?,now())";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, productBean.getBasicCode());
 			ps.setString(2, productBean.getName());
@@ -328,6 +329,8 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			ps.setString(5, productBean.getMain_img());
 			ps.setString(6, productBean.getSub_img());
 			ps.setInt(7, productBean.getPrice());
+			ps.setInt(8, productBean.getLikey());
+
 			
 			count = ps.executeUpdate();
 		} catch (SQLException e) {
@@ -392,7 +395,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 				productBean.setName(rs.getString("name"));
 				productBean.setPrice(rs.getInt("price"));
 				productBean.setLikey(rs.getInt("likey"));
-				productBean.setDate(rs.getDate("date"));
+				productBean.setDate(rs.getTimestamp("date"));
 				
 				
 				productList.add(productBean);
@@ -432,6 +435,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 
 
 	public ArrayList<ProductOptionBean> selectOptionList(String basicCode) {
+	
 		ArrayList<ProductOptionBean> optionList = null;
 		
 		PreparedStatement pstmt = null;
@@ -545,5 +549,153 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		}
 		
 		return sizeList;
+	}
+	public boolean isLike(String id,String basicCode) {
+		boolean isLike = false;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_like where member_id=? and product_basicCode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, basicCode);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				isLike = true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+
+		}
+		System.out.println("맞나요?"+isLike);
+		
+		return isLike;
+	}
+	public int isInsert(String id,String basicCode) {
+		int isInsert = 0;
+		int num =0;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select MAX(num) from product_like";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				num = rs.getInt("MAX(num)")+1;
+			}
+			
+			
+			sql = "insert into product_like(num,selected,member_id,product_basicCode) values(?,?,?,?)";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			ps.setInt(2, 35);
+			ps.setString(3, id);
+			ps.setString(4, basicCode);
+			isInsert = ps.executeUpdate();
+			System.out.println(num+" "+0+" "+" "+id+" "+basicCode);
+
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+
+		}
+		System.out.println("됬나요?"+isInsert);
+		
+		return isInsert;
+	}
+	public int isDelete(String id,String basicCode) {
+		int isDelete = 0;
+		int num =0;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			String sql = "delete from product_like where member_id=? and product_basicCode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setString(2, basicCode);
+			isDelete = ps.executeUpdate();
+//			System.out.println(num+" "+0+" "+" "+id+" "+basicCode);
+
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+
+		}
+		System.out.println("삭제됬나요?"+isDelete);
+		
+		return isDelete;
+	}
+	public int isLikey(String basicCode) {
+		int isLikey = 0;
+		
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+		
+			
+			String sql = "update product set likey= likey+1 where basicCode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, basicCode);
+			isLikey = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+
+		}
+		System.out.println("막?"+isLikey);
+		
+		return isLikey;
+	}
+
+	public int isUnLikey(String basicCode) {
+		int isUnLikey = 0;
+		
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			String sql = "update product set likey= likey-1 where basicCode=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, basicCode);
+			isUnLikey = ps.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+
+		}
+		System.out.println("막?"+isUnLikey);
+		
+		return isUnLikey;
 	}
 }

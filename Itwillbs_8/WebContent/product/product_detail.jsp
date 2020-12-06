@@ -17,9 +17,9 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 %>
-<jsp:include page="../inc/header.jsp" />
+<jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
+<jsp:include page="/quickMenu.jsp" />
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -91,13 +91,11 @@
 
 <!-- 끝 -->
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 
-<link type="text/css" rel="stylesheet" href="/scss/common.css" />
-<link type="text/css" rel="stylesheet" href="/scss/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="/scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="/scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <link type="text/css" rel="stylesheet"
 	href="/scss/power_review_custom.4.css" />
 
@@ -197,14 +195,16 @@
 	// 상품개수감소
 	function cntMinus(id) {
 		var numid = id.replace("minus", "num");
+		// optminus1 에서 minus를 num으로 고쳐서 optnum1으로 고침, optnum1은 상품 갯수 id
 		
 		var cnt = Number($('#'+numid).val());
+		// optnum1에 있는 value 값을 받아와서 cnt에 저장
 		
 		if(cnt > 1) {
 			cnt -= 1;
 			$('#'+numid).val(cnt);
 		}
-		
+		// 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
 		
 		calculatePrice();
 	}

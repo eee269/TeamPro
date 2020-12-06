@@ -9,14 +9,14 @@ import dao.member.MemberDAO;
 
 public class DeleteMemberService {
 
-	public boolean deleteMember(String id) {
+	public boolean deleteMember(String id, String pass) {
 boolean isDelete = false;
 		
 		Connection con = getConnection();
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
 		
-		int count = memberDAO.deleteMember(id);
+		int count = memberDAO.deleteMember(id, pass);
 		
 		if(count > 0) {
 			commit(con);

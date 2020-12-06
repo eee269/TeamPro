@@ -18,6 +18,7 @@ public class NcodeSelectService {
 		ProductDAO pd = ProductDAO.getInstance();
 		pd.setConnection(con);
 		
+		ncodeList = new ArrayList<ProductBean>();
 		ncodeList = pd.selectNcodeList(xcode);
 		
 		close(con);

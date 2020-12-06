@@ -3,14 +3,11 @@
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp"/>
 <style>
 body .container_comm_write {
   position: relative;
-  overflow: hidden;
-  width: 700px;
-  height: 1000px;
+  overflow: auto;
+  width: 800px;
   margin: 80px auto 0;
   background-color: #ffffff;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -28,6 +25,9 @@ body .container_comm_write {
   color: #263238;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+.summernoter{
+	resize: none;
 }
 /* #header-v4 { */
 /* color: #424242; */
@@ -51,8 +51,11 @@ input[type=text] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border: 1px;
+  border: 1px solid;
   border-radius: 4px;
+}
+.wrap-menu-desktop{
+	z-index: 2;
 }
 </style>
 	<!-- breadcrumb -->
@@ -80,10 +83,10 @@ input[type=text] {
 			                <form action="CommWritePro.co" method="post" enctype="multipart/form-data">
 			                	<input type="hidden" id="name" name="username" value="호랑이">
 			                	<input type="hidden" id="pass" name="pass" value="123">
-			                	<input type="hidden" id="img" name="img" value="0.jpg">
-								<input type="file" name="img" id="img" ><br>
-        						<input type="text" id="subject" name="subject" placeholder="제목란입니다"><br>
-								<textarea id ="summernote" name="content" ></textarea><br>
+								<input type="file" name="img" id="img" onchange="setThumbnail(event);"><br>
+								<div id="image_container" style="width=100%; height=200px;"></div>
+        						<input type="text" id="subject" name="subject" placeholder="제목"><br>
+								<textarea id ="summernote" name="content"></textarea><br>
 								<input type="submit" id="edit" class="btn btn-primary" value="완료">
 								<input type="reset" id="save" class="btn btn-primary" value="취소" >
 							</form>
@@ -97,5 +100,22 @@ input[type=text] {
 	<!-- WriteEditor -->
 	<jsp:include page="../inc/writeEditor.jsp"/>
 	<!-- WriteEditor -->
+<script>
+	function setThumbnail(event) {
+			document.getElementById("file").select();
+			document.selection.clear();
+	};
+	function setThumbnail(event) {
+		var reader = new FileReader();
+		reader.onload = function(event) {
+			var img = document.createElement("img");
+			img.setAttribute("src", event.target.result);
+			document.querySelector("div#image_container").appendChild(img);
+			
+		};
+		reader.readAsDataURL(event.target.files[0]);
+	}
+</script>
+
 </body>
 </html>

@@ -1024,11 +1024,11 @@ keyframes swiper-preloader-spin { 100%{
 		<div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:0},'slow')"><img src="images/quick/quick_up.png"></a></div>
 
 		<div class="right_quick_close cboth "><img src="images/quick/quick_open.gif" class="img_open_close"></div>
-		<div class="cboth sm_btn"><a href="index.jsp"><img src="images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=myorder"><img src="images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/basket.html"><img src="images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html"><img src="images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
-		<div class="cboth sm_btn"><a href="/shop/mypage.html?mypage_type=mywishlist"><img src="images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
+		<div class="cboth sm_btn"><a href="Main.go"><img src="images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
+		<div class="cboth sm_btn"><a href="MyOrderList.or"><img src="images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
+		<div class="cboth sm_btn"><a href="Cart.ca"><img src="images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
+		<div class="cboth sm_btn"><a href="MemberMypage.mo"><img src="images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
+		<div class="cboth sm_btn"><a href="#"><img src="images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
 		
                 <div class="cboth"><a href="#none" onclick="$('html,body').animate({scrollTop:$(document).height()},'slow');"><img src="images/quick/quick_down.png"></a></div>
 	</div>

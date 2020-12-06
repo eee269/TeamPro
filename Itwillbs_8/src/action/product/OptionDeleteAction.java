@@ -31,7 +31,11 @@ public class OptionDeleteAction implements Action {
 			out.println("alert('상품 옵션 삭제 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
-		} 
+		} else {
+			forward = new ActionForward();
+			forward.setPath("ControlProductList.po");
+			forward.setRedirect(true);
+		}
 		return forward;
 	}
 
