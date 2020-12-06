@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -22,7 +23,8 @@ public class ProdReviewWriteAction implements Action{
 		System.out.println("ProdReviewWriteAction");
 		
 		ActionForward forward = null;
-		
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("member_id");
 		ServletContext context = request.getServletContext();
 		
 		String saveFolder = "product/reviewUploadImg";
@@ -42,11 +44,10 @@ public class ProdReviewWriteAction implements Action{
 		// 전달할 데이터 저장
 		ProdReviewBean prodReviewBean = new ProdReviewBean();
 		prodReviewBean.setStarScore(Integer.parseInt(multi.getParameter("starScore")));
-		prodReviewBean.setProduct_basicCode(multi.getParameter("product_basicCode"));
-		prodReviewBean.setMember_id(multi.getParameter("member_id"));
-		prodReviewBean.setProduct_img(multi.getOriginalFileName("product_img"));
+		prodReviewBean.setProduct_basicCode(multi.getParameter("basicCode"));
+		prodReviewBean.setMember_id(id);
+		prodReviewBean.setProduct_img(multi.getOriginalFileName("prw_file"));
 		prodReviewBean.setContent(multi.getParameter("content"));
-		
 		
 		ProdReviewWriteService prodReviewService = new ProdReviewWriteService();
 		
@@ -66,7 +67,7 @@ public class ProdReviewWriteAction implements Action{
 			forward.setRedirect(true);
 		}
 		
-		return forward;
+		return null;
 	}
 	
 }

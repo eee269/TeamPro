@@ -12,13 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.product.ProductDetailAction;
-import action.product.ProductLikeAction;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProdReviewDeleteAction;
+import action.product.ProdReviewListAction;
 import action.product.ProdReviewWriteAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
-import action.product.ProductUnLikeAction;
 import action.product.ProductUploadProAction;
 import vo.ActionForward;
 
@@ -30,7 +30,7 @@ public class ProductFrontController extends HttpServlet {
     protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	request.setCharacterEncoding("UTF-8");
     	
-		ActionForward forward = new ActionForward();
+		ActionForward forward = null;
 		Action action = null;
 		String command = request.getServletPath();
 		
@@ -44,20 +44,6 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/ProductDetail.po")) {
 			action = new ProductDetailAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if(command.equals("/ProductLike.po")) {
-			action = new ProductLikeAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if(command.equals("/ProductUnLike.po")) {
-			action = new ProductUnLikeAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -110,9 +96,9 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}	
-		// --------------------상품 댓글 쓰기--------------------
+		// --------------------상품 리뷰 쓰기--------------------
 		else if(command.equals("/ProdReviewWrite.po")) {
-			System.out.println("ProdReviewWriteAction 포워딩");
+			System.out.println("ProdReviewWrite.po 포워딩");
 			action = new ProdReviewWriteAction();
 			try {
 				forward = action.execute(request, response);
@@ -120,17 +106,27 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// --------------------내 좋아요 모아보기--------------------
-		else if(command.equals("/ProductLikeList.po")) {
-			System.out.println("ProductLikeListAction 포워딩");
-//			action = new ProductLikeListAction();
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-			forward.setPath("/product/mylike.jsp");
+		// --------------------리뷰 목록 호출--------------------
+		else if(command.equals("/ProdReviewList.po")) {
+			System.out.println("ProdReviewList.po 포워딩");
+			action = new ProdReviewListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		else if(command.equals("/ProdReviewDelete.po")) {
+			System.out.println("ProdReviewDelete.po 포워딩");
+			action = new ProdReviewDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	
+		// --------------------상품 리뷰 쓰기--------------------
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
