@@ -18,6 +18,7 @@ import action.community.CommListAction;
 import action.community.CommModifyFormAction;
 import action.community.CommModifyProAction;
 import action.community.CommWriteProAction;
+import action.community.MybookmarkListAction;
 import action.community.MycommListAction;
 import vo.ActionForward;
 
@@ -156,6 +157,16 @@ public class CommFrontController extends HttpServlet{
 						e.printStackTrace();
 					}
 				}
+				// ---------------------------내 북마크 보기---------------------------
+	else if(command.equals("/mybookmarkList.co")) {
+		System.out.println("mybookmarkList.co 로 포워딩");
+		action = new MybookmarkListAction();
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			

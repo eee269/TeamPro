@@ -424,5 +424,64 @@ public class CommDAO {
 		}
 		// -------------------------- CountBook() --------------------------------
 		
+		// -------------------------- 마이페이지 > 내 북마크 > 북마크 리스트 --------------------------------
+		public ArrayList<Integer> selectMybookmarkList(String member_id) {
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "select community_num from bookmark where member_id=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, member_id);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					list.add(rs.getInt(1));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		// -------------------------- 마이페이지 > 내 북마크 > 북마크된 게시글 리스트 --------------------------------
+		public ArrayList<CommBean> selectArticleList(ArrayList<Integer> mybookList) {
+			ArrayList<CommBean> list = new ArrayList<CommBean>();
+			
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			try {
+				for(int num: mybookList) {
+					String sql = "SELECT * FROM community WHERE num = ?";
+					ps = con.prepareStatement(sql);
+					ps.setInt(1, num);
+					rs = ps.executeQuery();
+					
+					// 게시물이 존재할 경우 CommBean 객체를 생성하여 게시물 내용 저장
+					if(rs.next()) {
+						CommBean article = new CommBean();
+						
+						article.setNum(rs.getInt("num"));
+						article.setUsername(rs.getString("username"));
+						article.setPass(rs.getString("pass"));
+						article.setSubject(rs.getString("subject"));
+						article.setContent(rs.getString("content"));
+						article.setDate(rs.getTimestamp("date"));
+						article.setImg(rs.getString("img"));
+						article.setReadCount(rs.getInt("readcount"));
+						
+						list.add(article);
+					}
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
+			return list;
+		}
+		
 	
 }
