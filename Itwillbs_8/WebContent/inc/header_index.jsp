@@ -78,14 +78,14 @@
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->		
-					<a href="index.jsp" class="logo">
+					<a href="Main.go" class="logo">
 						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
 					</a>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
 							<li>
-								<a href="index.jsp">HOME</a>
+								<a href="Main.go">HOME</a>
 							</li>
 
 							<li>
@@ -144,7 +144,7 @@
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
 			<div class="logo-mobile">
-				<a href="index.jsp"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+				<a href="Main.go"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
 			</div>
 
 			<!-- Icon header -->
