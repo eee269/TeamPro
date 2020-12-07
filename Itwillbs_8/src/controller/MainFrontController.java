@@ -25,7 +25,7 @@ public class MainFrontController extends HttpServlet {
 		ActionForward forward = null;
 		String command = request.getServletPath();
 		
-		if(command.equals("/main.go")) {
+		if(command.equals("/Main.go")) {
 			forward = new ActionForward();
 			forward.setPath("/index.jsp");
 		}

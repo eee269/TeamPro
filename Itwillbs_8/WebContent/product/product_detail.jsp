@@ -17,9 +17,9 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 %>
-<jsp:include page="../inc/header.jsp" />
+<jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
+<jsp:include page="/quickMenu.jsp" />
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -91,13 +91,11 @@
 
 <!-- 끝 -->
 
-<!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 
-<link type="text/css" rel="stylesheet" href="/scss/common.css" />
-<link type="text/css" rel="stylesheet" href="/scss/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="/scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="/scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <link type="text/css" rel="stylesheet"
 	href="/scss/power_review_custom.4.css" />
 

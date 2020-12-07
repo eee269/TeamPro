@@ -148,6 +148,50 @@ public class CommDAO {
 		return articleList;
 	}
 	// --------------selectArticleList()---------------
+	// --------------selectArticleList(username)---------------
+		// 회원별 게시물 목록 조회
+		public ArrayList<CommBean> selectArticleList(String username){
+			ArrayList<CommBean> articleList = null;
+			
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "SELECT * FROM community where username=? order by date desc";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, username);
+				rs = ps.executeQuery();
+				
+				articleList = new ArrayList<CommBean>();
+				
+				while(rs.next()) {
+					// 1개 게시물 정보를 저장할 CommBean 객체 생성 및 데이터 저장
+					CommBean article = new CommBean();
+					
+					// 비밀번호는 제외
+					article.setNum(rs.getInt(1));
+					article.setUsername(rs.getString(2));
+					article.setSubject(rs.getString(4));
+					article.setContent(rs.getString(5));
+					article.setReadCount(rs.getInt(6));
+					article.setDate(rs.getTimestamp(7));
+					article.setImg(rs.getString(8));
+					
+					// 1개 게시물을 전체 게시물 저장 객체에 추가
+					articleList.add(article);
+					
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("selectArticleList() 오류 "+e.getMessage());
+				e.printStackTrace();
+			} finally {
+				close(ps);
+				close(rs);
+			}
+			return articleList;
+		}
+		// --------------selectArticleList(username)---------------
 	// -------------------------- selectArticle() --------------------------------
 		// 게시물 상세 내용 조회
 		public CommBean selectArticle(int num) {
@@ -180,7 +224,7 @@ public class CommDAO {
 				}
 				
 			} catch (Exception e) {
-				System.out.println("CommDAO - selectArticle() 오류 : "+e.getMessage());
+				System.out.println("CommDAO - selectArticle(num) 오류 : "+e.getMessage());
 				e.printStackTrace();
 			} finally {
 				close(ps);
@@ -293,9 +337,6 @@ public class CommDAO {
 			return deleteCount;
 		}
 		// -------------------------- isDeleteArticle() --------------------------------
-	
-	
-	
-	
+		
 	
 }

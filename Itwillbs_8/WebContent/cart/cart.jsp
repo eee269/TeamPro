@@ -5,13 +5,11 @@
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 
-int sevice = 2500;
+
 int coin = 0;
 int cartNo = cartList.size();
 int num = 0;
-int total = 0;
 int cntSet = 0;
-int sum = 0;
 %>
 <script src="js/bootstrap4-rating-input.js"></script>
 <style type="text/css">
@@ -62,7 +60,6 @@ int sum = 0;
 <jsp:include page="../inc/header.jsp" />
 
 <!-- Cart -->
-<jsp:include page="../sub_cart.jsp" />
 
 
 <!-- breadcrumb -->
@@ -132,8 +129,8 @@ int sum = 0;
 								for (int i = 0; i < cartList.size(); i++) {
 								if (cartList.size() > 0) {
 							%>
-							<input type="hidden" name="num"
-								value="<%=cartList.get(i).getNum()%>">
+							<input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>">
+								
 							<%
 								}
 							coin += cartList.get(i).getPrice();
@@ -172,7 +169,7 @@ int sum = 0;
 									</div>
 								</td>
 								<td>
-									<!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+									<!-- ------------------------------------수량 업다운 --------------------------------------------------------------------------------- -->
 									<div class="tb-center">
 										<div class="opt-spin">
 							
@@ -245,33 +242,11 @@ int sum = 0;
 							<tr>
 								<td colspan="8">
 									<div class="tb-right">
-										<span class="MK_none_groupsale_total_price_sell"> 총
-											구매금액<span
-											class="MK_chg_none_groupsale_total_price_sell MK_change_price">
-
-												<!--                               if($("input:checkbox[name=chk]").is(":checked") == true) { -->
-
-
-												</span>원
+										<span class="MK_none_groupsale_total_price_sell"> 
+										총구매금액<span class="MK_chg_none_groupsale_total_price_sell MK_change_price"><b class = "price-b">0</b></span>원
 										</span><span class="MK_total_delivery">+ 배송비<span
-											class="MK_chg_total_delivery MK_change_price">
-												<%
-													if (cartList.size() == 0) {
-													sevice = 0;
-												%> <%=sevice%> <%
-												 	} else if (cartList.size() >= 1) {
-												 if (coin >= 30000) {
-												 	sevice = 0;
-												 %> <%=sevice%> <%
-												 	} else {
-												 sevice = 2500;
-												 %> <%=sevice%> <%
-												 	}
-												 }
-												 %>
-										</span>원
-										</span> = <strong><span class="MK_total_price"><span
-												class="MK_chg_total_price MK_change_price"><%=sevice%></span>원</span></strong><br>
+											class="MK_chg_total_delivery MK_change_price"><b class="delivery-b">0</b></span>원
+										</span> = <strong><span class="MK_total_price"><span class="MK_chg_total_price MK_change_price"></span><b class="total-b">0</b>원</span></strong><br>
 <!-- 										                           <span class="MK_total_reserve">기본금액<span -->
 <!-- 										                              class="MK_chg_total_reserve MK_change_price">4,380</span>원 -->
 <!-- 										                           </span><span class="MK_group_sale_reserve"> (그룹적립금 원) </span><span -->
@@ -336,15 +311,6 @@ int sum = 0;
 	};
 		
 	
-// 	체크 확인
-// 	function chkOk(){
-		
-// 		var currentRow=$(this).closest("tr"); 
-        
-//         var money = currentRow.find(".back").html();
-// 		alert(money);
-	
-// 	}
 	
 	
 	// 주문 
@@ -383,7 +349,8 @@ int sum = 0;
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
 			var chArr = new Array();
-			
+			var chCoin = 0;
+			var sevice = 2500;
 			// 체크된 체크박스 값을 가져온다
 			checkbox.each(function(i) {
 				// checkbox.parent() : checkbox의 부모는 <td>이다.
@@ -410,25 +377,38 @@ int sum = 0;
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(in3);
 				tdArr.push(in4);
-// 					alert(typeof(in3));
-// 					alert(typeof(in4));
-// 				document.write("<br>in0 : " + in0);
-// 				document.write("<br>in2 : " + in2);
-// 				document.write("<br>in3 : " + in3 + "개");
-// 				document.write("<br>in4 : " + in4);
 
-				// cnt * 상품의 기본금액 
-// 				document.write("<Br>sum : " + sum);
-// 				document.write("<br>in3 * in4 : " + (in3 * in4) + "원");
-// 				alert("sum : " + sum);
-
-				// 할일 
-				// cnt * 상품의 기본금액  값을 금액에 출력 !
-		
 				sum = in3 * in4;
-				// 배열.unshift (앞쪽으로 넣음)
-						alert(chArr); 
+				// chArr 에 합친 값 저장
+				chArr.push(sum);
 			});
+			
+			// 포문으로 chArr 의 길이만큼 돌림
+			// chCoin 에 chArr 의 값을 더함
+			for(var i = 0; i < chArr.length; i++){
+				 chCoin = Number(chCoin) + Number(chArr[i]);
+
+			}
+			// chCoin 이 0 이면 텍스트에 아무것도 안보이게
+			 if(chCoin == 0){
+				 $('.price-b').text(' 0'); 
+			// chCoin 이 0보다 크면 가격 뿌려주기
+			 } else if(chCoin > 0){
+				 $('.price-b').text(chCoin);
+			 }
+			
+			// 배송비 30000 이상이면 0 
+			if(chCoin > 30000){
+				sevice = 0;
+				 $('.delivery-b').text(sevice); 
+			} else if(chCoin < 30000){
+				sevice = 2500;
+				$('.delivery-b').text(sevice); 
+			}
+			
+			
+			// 총 합계 
+			$('.total-b').text(chCoin + sevice); 
 				
 			});
 			

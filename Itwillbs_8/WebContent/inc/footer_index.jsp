@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -304,20 +306,49 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->
 	<script src="vendor/sweetalert/sweetalert.min.js"></script>
 	<script>
-		$('.js-addwish-b2').on('click', function(e){
-			e.preventDefault();
+	//좋아요 관련 스크립트입니다!!
+		$('.js-addwish-b2, .js-addwish-detail, .not_member').on('click', function(e){
+// 			e.preventDefault();
 		});
 
 		$('.js-addwish-b2').each(function(){
 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+			var info = $(this).val().split('/');
 			$(this).on('click', function(){
-				swal(nameProduct, "is added to wishlist !", "success");
 
-				$(this).addClass('js-addedwish-b2');
-				$(this).off('click');
+				$(this).toggleClass('js-addedwish-b2 js-addedwish-b1');
+				if($(this).hasClass('js-addedwish-b2')){
+					$.ajax('ProductLike.po',{
+						data:{
+							id:info[0],
+							basicCode:info[1]
+						},
+						success:function(rdata){
+							$('table').append('<tr><td>'+rdata+'</td></tr>');
+						}
+					  });
+					swal(nameProduct, "상품이 좋아요에 추가됬습니다!", "success");
+				}else{
+					$.ajax('ProductUnLike.po',{
+						data:{
+							id:info[0],
+							basicCode:info[1]
+						},
+						success:function(rdata){
+							$('table').append('<tr><td>'+rdata+'</td></tr>');
+						}
+					  });
+					swal(nameProduct, "상품이 좋아요에서 삭제됬습니다!", "success");
+				}
 			});
 		});
-
+		
+		$('.not_member').each(function(){
+			$(this).on('click', function(){
+					swal("로그인이 필요한 서비스입니다!","로그인을해주세요");
+			});
+		});
+	//--------------------------------------------------------------------
 		$('.js-addwish-detail').each(function(){
 			var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
