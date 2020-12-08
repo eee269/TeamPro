@@ -698,4 +698,74 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		return isUnLikey;
 	}
+
+	// --------------------마이페이지 > 내가 찜한 상품 > 좋아요 리스트----------------------------
+	public ArrayList<String> selectMylikeList(String member_id) {
+		ArrayList<String> list = new ArrayList<String>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select product_basicCode from product_like where member_id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				list.add(rs.getString(1));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		
+		return list;
+	}
+	// --------------------마이페이지 > 내가 찜한 상품 > 좋아요된 상품 리스트----------------------------
+	public ArrayList<ProductBean> selectProductList(ArrayList<String> mylikeList) {
+		
+		ArrayList<ProductBean> productDetailList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		
+		try {
+			for(String basicCode: mylikeList) {
+				String sql = "select * from product where basicCode=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, basicCode);
+				System.out.println("ProductDAO - " + basicCode);
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					ProductBean pb = new ProductBean();
+					pb.setBasicCode(rs.getString("basicCode"));
+					pb.setXcode(rs.getString("xcode"));
+					pb.setNcode(rs.getString("ncode"));
+					pb.setDate(rs.getTimestamp("date"));
+					pb.setMain_img(rs.getString("main_img"));
+					pb.setSub_img(rs.getString("sub_img"));
+	//				pb.setStock(rs.getInt("stock"));
+					pb.setPrice(rs.getInt("price"));
+					pb.setLikey(rs.getInt("likey"));
+					pb.setName(rs.getString("name"));
+					
+					productDetailList.add(pb);
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("selectProductDetailList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return productDetailList;
+	}
 }
