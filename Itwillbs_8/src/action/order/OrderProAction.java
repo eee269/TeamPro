@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import dao.order.OrderDAO;
@@ -17,6 +18,8 @@ public class OrderProAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("OrderProAction!");
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		OrderBean ob = new OrderBean();
@@ -26,8 +29,10 @@ public class OrderProAction implements Action {
 		ob.setAddress(request.getParameter("buyer_addr"));
 		ob.setStatus("결제완료");
 		ob.setPayment(request.getParameter("pay_method"));
-		ob.setMember_id("test");
+		ob.setMember_id(member_id);
 		ob.setDate(date);
+		ob.setTotal_price(Integer.parseInt(request.getParameter("paid_amount")));
+
 //		System.out.println(ob.getCode());
 //		System.out.println(ob.getName());
 //		System.out.println(ob.getPhone());
@@ -54,8 +59,7 @@ public class OrderProAction implements Action {
 
 		} else {
 			forward = new ActionForward();
-			forward.setPath("MyOrderList.or");
-			forward.setRedirect(true);
+			forward.setPath("OrderDetail.or");
 		}
 		
 		

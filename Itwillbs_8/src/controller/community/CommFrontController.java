@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.community.CommBookCountAction;
+import action.community.CommBookAction;
 import action.community.CommDeleteProAction;
 import action.community.CommDetailAction;
 import action.community.CommListAction;
@@ -135,18 +137,24 @@ public class CommFrontController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-				}
 				// ---------------------------글 삭제---------------------------
-				// --------------------내 좋아요 모아보기--------------------
-				else if(command.equals("/CommBookmarkList.co")) {
-					System.out.println("CommBookmarkListAction 포워딩");
-//					action = new CommBookmarkListAction();
-//					try {
-//						forward = action.execute(request, response);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-					forward.setPath("/community/mybookmark.jsp");
+				// ---------------------------북마크 추가---------------------------
+				}else if(command.equals("/CommBook.co")) {
+					System.out.println("CommBook.co 로 포워딩");
+					action = new CommBookAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}else if(command.equals("/CommBookCount.co")) {
+					System.out.println("CommBookCount.co 로 포워딩");
+					action = new CommBookCountAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
