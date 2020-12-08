@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.MemberBean;
+import vo.ProdReviewBean;
 import vo.ProductBean;
 import vo.ProductOptionBean;
 
@@ -767,5 +768,44 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 
 		
 		return productDetailList;
+	}
+
+	public ArrayList<ProdReviewBean> selectMyreviewList(String member_id) {
+		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_review where member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProdReviewBean review = new ProdReviewBean();
+				
+				review.setMember_id(member_id);
+				review.setNum(rs.getInt("num"));
+				review.setContent(rs.getString("content"));
+				review.setStarScore(rs.getInt("starScore"));
+				review.setRe_ref(rs.getInt("re_ref"));
+				review.setRe_lev(rs.getInt("re_lev"));
+				review.setProduct_basicCode(rs.getString("product_basicCode"));
+				review.setProduct_img(rs.getString("product_Img"));
+				review.setDate(rs.getTimestamp("date"));
+				
+				list.add(review);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
 	}
 }
