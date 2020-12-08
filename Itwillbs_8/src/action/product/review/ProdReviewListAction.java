@@ -1,4 +1,4 @@
-package action.product;
+package action.product.review;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;

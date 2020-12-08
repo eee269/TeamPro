@@ -11,15 +11,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.product.ProductDetailAction;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
-import action.product.ProdReviewDeleteAction;
-import action.product.ProdReviewListAction;
-import action.product.ProdReviewWriteAction;
 import action.product.ProductDeleteAction;
+import action.product.ProductDetailAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUploadProAction;
+import action.product.qna.ProdQnaDeleteAction;
+import action.product.qna.ProdQnaModifyAction;
+import action.product.qna.ProdQnaWriteProAction;
+import action.product.review.ProdReviewDeleteAction;
+import action.product.review.ProdReviewListAction;
+import action.product.review.ProdReviewWriteAction;
 import vo.ActionForward;
 
 
@@ -116,6 +119,7 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// --------------------상품 리뷰 삭제--------------------
 		else if(command.equals("/ProdReviewDelete.po")) {
 			System.out.println("ProdReviewDelete.po 포워딩");
 			action = new ProdReviewDeleteAction();
@@ -125,8 +129,40 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	
-		// --------------------상품 리뷰 쓰기--------------------
+		// --------------------상품 qna 쓰기--------------------
+		else if(command.equals("/ProdQnaWriteForm.po")) {
+			System.out.println("ProdQnaWriteForm.po 포워딩");
+			forward = new ActionForward();
+			forward.setPath("/product/qnaWrite.jsp");
+		}else if(command.equals("/ProdQnaWritePro.po")) {
+			System.out.println("ProdQnaWritePro.po");
+			action = new ProdQnaWriteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 삭제--------------------
+		else if(command.equals("/ProdQnaDelete.po")) {
+			System.out.println("ProdQnaDelete.po 포워딩");
+			action = new ProdQnaDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 수정--------------------
+		else if(command.equals("/ProdQnaModify.po")) {
+			System.out.println("ProdQnaModify.po 포워딩");
+			action = new ProdQnaModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
