@@ -13,7 +13,7 @@ public class ProdReviewListService {
 	
 	// ------------------------getReviewListCount()----------------------
 	// 전체 상품 리뷰 수 리턴
-	public int getReviewListCount(String basicCode) {
+	public int getReviewListCount(String basicCode, String active) {
 		System.out.println("ProdReviewListService - getReviewListCount()");
 		
 		Connection con = getConnection();
@@ -21,7 +21,7 @@ public class ProdReviewListService {
 		prodReviewDAO.setConnetion(con);
 		
 		// 리뷰 수 리턴
-		int listCount = prodReviewDAO.selectListCount(basicCode);
+		int listCount = prodReviewDAO.selectListCount(basicCode, active);
 		
 		close(con);
 		
@@ -30,7 +30,7 @@ public class ProdReviewListService {
 	// ------------------------getReviewListCount()----------------------
 	// ------------------------getReviewList()----------------------
 	// 상품 리뷰 가져오기 
-	public ArrayList<ProdReviewBean> getReviewList(int page, int limit, String basicCode) {
+	public ArrayList<ProdReviewBean> getReviewList(int page, int limit, String basicCode, String active) {
 		System.out.println("ProdReviewListService - getReviewList()");
 		ArrayList<ProdReviewBean> reviewList = null;
 		
@@ -39,7 +39,7 @@ public class ProdReviewListService {
 		prodReviewDAO.setConnetion(con);
 		
 		// 상품 리뷰 리턴
-		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode);
+		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode,active);
 		// 멤버 정보 리턴
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
