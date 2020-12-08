@@ -615,7 +615,7 @@
 							</div>
 						</div>
 						<div class="btm_write">
-							<a href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
+							<a href="ProdQnaForm.po?basicCode=<%=basicCode%>">WRITE</a>
 						</div>
 					</div>
 				</div>
