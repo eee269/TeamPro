@@ -57,7 +57,7 @@ int cntSet = 0;
 
 
 
-<jsp:include page="/inc/header.jsp" />
+<jsp:include page="../inc/header.jsp" />
 
 <!-- Cart -->
 
