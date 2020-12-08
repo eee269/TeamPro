@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ProductDetailAction;
 import action.product.ProductMylikeListAction;
+import action.product.ProductMyreviewListAction;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
 import action.product.ProdReviewDeleteAction;
@@ -130,6 +131,17 @@ public class ProductFrontController extends HttpServlet {
 			forward = new ActionForward();
 
 			action = new ProductMylikeListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// -------------마이페이지 > 내 리뷰 리스트 출력----------------
+		else if (command.equals("/ProductMyreviewList.po")) {
+			forward = new ActionForward();
+
+			action = new ProductMyreviewListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

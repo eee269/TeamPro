@@ -44,7 +44,7 @@ public class ProductMylikeListAction implements Action {
 			request.setAttribute("mylikeList", mylikeList);
 			request.setAttribute("productList", productList);
 			
-			forward.setPath("/product/mylike.jsp");
+			forward.setPath("/mypage/mylike.jsp");
 		}
 		
 		return forward;

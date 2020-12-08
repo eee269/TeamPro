@@ -42,7 +42,7 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
-							<li><a href="ProductLikeList.po">상품 보관함</a></li>
+							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
 						</ul>
@@ -53,7 +53,7 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
-							<li><a href="CommBookmarkList.co">내 북마크</a></li>
+							<li><a href="mybookmarkList.co">내 북마크</a></li>
 							<li><a href="#">내 게시글 리뷰</a></li>
 						</ul>
 					</div>
