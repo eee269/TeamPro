@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import svc.product.ProdReviewListService;
+import svc.product.review.ProdReviewListService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProdReviewBean;

@@ -15,6 +15,8 @@ public class ProdQnaBean {
 	private Timestamp date;
 	
 	
+	public ProdQnaBean() {}
+	
 	public ProdQnaBean(int num, String pass, String subject, String content, String file, int re_ref, int re_lev,
 			String member_id, String product_basicCode, Timestamp date) {
 		super();
