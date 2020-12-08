@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import exception.member.QnaException;
 import vo.ProdQnaBean;
@@ -126,4 +127,69 @@ public class ProdQnaDAO {
 			return deleteCount;
 		}
 		// -------------------deleteQna()-----------------------
+		// -------------------selectQnaCount()-----------------------
+		// basicCode에 따른 전체 qna 조회
+		public int selectQnaCount(String basicCode) {
+			int listCount = 0;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+					
+			try {
+				String sql = "SELECT count(num) FROM product_qna WHERE product_basicCode=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, basicCode);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					listCount = rs.getInt(1);
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("ProdQnaDAO - selectQnaCount() 오류 "+e.getMessage());
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(ps);
+			}
+			
+			return listCount;
+		}
+		// -------------------selectQnaCount()-----------------------
+		// -------------------selectQnaList()-----------------------
+		// qna page ~ limit 수 만큼 가져오기
+		public ArrayList<ProdQnaBean> selectQnaList(int page, int limit, String basicCode) {
+			ArrayList<ProdQnaBean> qnaList = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			int startRow = (page - 1) * limit; 
+			
+			try {
+				String sql = "SELECT * FROM product_qna WHERE product_basicCode=? ORDER BY num desc limit ?,?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, basicCode);
+				ps.setInt(2, startRow);
+				ps.setInt(3, limit);
+				rs = ps.executeQuery();
+				
+				qnaList = new ArrayList<ProdQnaBean>();
+				
+				while(rs.next()) {
+					ProdQnaBean qna = new ProdQnaBean();
+					qna.setNum(rs.getInt(1));
+					qna.setSubject(rs.getString(4));
+					qna.setContent(rs.getString(5));
+					qna.setDate(rs.getTimestamp(7));
+					
+					qnaList.add(qna);
+				}
+			} catch (SQLException e) {
+				System.out.println("ProdQnaDAO - selectQnaList() 오류 "+e.getMessage());
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(ps);
+			}
+			return qnaList;
+		}
+		// -------------------selectQnaList()-----------------------
 }

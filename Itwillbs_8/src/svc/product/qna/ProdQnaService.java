@@ -1,8 +1,12 @@
 package svc.product.qna;
 
-import static db.JdbcUtil.*;
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.commit;
+import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.product.ProdQnaDAO;
 import exception.member.QnaException;
@@ -59,5 +63,36 @@ public class ProdQnaService {
 		close(con);
 		return isDeleteSuccess;
 	}
-
+	// qna 전체 갯수 가져오기
+	public int getQnaCount(String basicCode) {
+		System.out.println("ProdQnaService - getQnaCount()");
+		int qnaCount = 0;
+		
+		Connection con = getConnection();
+		ProdQnaDAO prodQnaDAO = ProdQnaDAO.getInstance();
+		prodQnaDAO.setConnetion(con);
+		
+		qnaCount = prodQnaDAO.selectQnaCount(basicCode);
+				
+		close(con);
+		
+		return qnaCount;
+	}
+	// qna page ~ limit 갯수만큼 가져오기
+	public ArrayList<ProdQnaBean> getQnaList(int page, int limit, String basicCode) {
+		System.out.println("ProdQnaService - getQnaList()");
+		ArrayList<ProdQnaBean> qnaList = null;
+		
+		Connection con = getConnection();
+		ProdQnaDAO prodQnaDAO = ProdQnaDAO.getInstance();
+		prodQnaDAO.setConnetion(con);
+		
+		qnaList = prodQnaDAO.selectQnaList(page, limit, basicCode);
+		
+		// 5(공통).
+		close(con);
+		
+		// 6.
+		return qnaList;
+	}
 }

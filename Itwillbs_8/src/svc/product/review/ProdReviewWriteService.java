@@ -1,4 +1,4 @@
-package svc.product;
+package svc.product.review;
 
 import dao.product.ProdReviewDAO;
 import vo.ProdReviewBean;

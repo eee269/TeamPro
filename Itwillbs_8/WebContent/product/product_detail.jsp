@@ -1,3 +1,4 @@
+<%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.HashMap"%>
@@ -8,6 +9,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
+	
+%>
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
@@ -545,8 +551,7 @@
 					<ul>
 						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
 						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll on">상품 Q&amp;A
-								(13)</a></li>
+						<li><a href="#page03" class="tab_scroll on">상품 Q&amp;A(13)</a></li>
 						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
 						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
 					</ul>
@@ -558,6 +563,7 @@
 					<%--					<a href="/board/board.html?code=nasign">+ MORE</a>--%>
 					<%--				</p>--%>
 				</div>
+				<!-- qna 리스트 시작 -BIN- -->
 				<div class="table-slide qna-list">
 					<table summary="번호, 제목, 작성자, 작성일, 조회">
 						<caption>QnA 리스트</caption>
@@ -579,20 +585,22 @@
 								<th scope="col"><div class="tb-center">HIT</div></th>
 							</tr>
 						</thead>
+						<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
+						<%for(int i=0; i<qnaList.size(); i++){ %>
 						<tbody>
-							<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
 							<tr class="nbg">
 								<td><div class="tb-center">
-										<span class="reviewnum">13</span>
+										<span class="reviewnum"><%=qnaList.get(i).getNum() %></span>
 									</div></td>
 								<td><div class="tb-center"></div></td>
 								<td><div class="tb-left reply_depth0">
-										<span> <a href="">배송</a></span> <span style="font-size: 8pt;">(1)</span>
+										<span> <a href=""><%=qnaList.get(i).getContent() %></a></span> 
+										<span style="font-size: 8pt;">(1)</span>
 									</div></td>
-								<td><div class="tb-center">박보배</div></td>
-								<td><div class="tb-center">2020.11.12</div></td>
+								<td><div class="tb-center"><%=qnaList.get(i).getMember_id() %></div></td>
+								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td>
 								<td><div class="tb-center">
-										<span id="qna_board_showhits1">3</span>
+										<span id="qna_board_showhits1">조회수</span>
 									</div></td>
 							</tr>
 							<tr class="MS_qna_content_box cnt" id="qna_board_block1">
@@ -602,10 +610,10 @@
 									</div>
 								</td>
 							</tr>
-
 						</tbody>
+						<%} %>
 					</table>
-
+					<!-- qna 리스트 끝 -BIN- -->
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">

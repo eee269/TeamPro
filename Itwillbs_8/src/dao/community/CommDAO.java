@@ -104,6 +104,7 @@ public class CommDAO {
 	// --------------selectArticleList()---------------
 	// 게시물 목록 조회
 	public ArrayList<CommBean> selectArticleList(int page, int limit){
+		System.out.println("CommDAO - selectArticleList()~");
 		ArrayList<CommBean> articleList = null;
 		
 		PreparedStatement ps = null;

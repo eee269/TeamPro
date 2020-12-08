@@ -11,7 +11,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
-import svc.product.ProdReviewWriteService;
+import svc.product.review.ProdReviewWriteService;
 import vo.ActionForward;
 import vo.ProdReviewBean;
 

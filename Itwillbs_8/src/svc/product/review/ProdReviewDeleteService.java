@@ -1,4 +1,4 @@
-package svc.product;
+package svc.product.review;
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
