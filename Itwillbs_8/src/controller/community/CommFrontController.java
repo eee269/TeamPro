@@ -20,6 +20,7 @@ import action.community.CommModifyProAction;
 import action.community.CommWriteProAction;
 import action.community.MybookmarkListAction;
 import action.community.MycommListAction;
+import action.community.MycommReplyListAction;
 import vo.ActionForward;
 
 @WebServlet("*.co")
@@ -158,9 +159,19 @@ public class CommFrontController extends HttpServlet{
 					}
 				}
 				// ---------------------------내 북마크 보기---------------------------
-	else if(command.equals("/mybookmarkList.co")) {
-		System.out.println("mybookmarkList.co 로 포워딩");
+	else if(command.equals("/MybookmarkList.co")) {
+		System.out.println("MybookmarkList.co 로 포워딩");
 		action = new MybookmarkListAction();
+		try {
+			forward = action.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	// ---------------------------내 댓글 보기---------------------------
+	else if(command.equals("/MycommReplyList.co")) {
+		System.out.println("MycommReplyList.co 로 포워딩");
+		action = new MycommReplyListAction();
 		try {
 			forward = action.execute(request, response);
 		} catch (Exception e) {

@@ -1,11 +1,13 @@
+<%@page import="vo.CommReBean"%>
+<%@page import="vo.ProdReviewBean"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String member_id = (String) session.getAttribute("member_id");
-
-	ArrayList<ProductBean> productList = (ArrayList) request.getAttribute("productList");
+	
+	ArrayList<CommReBean> myreplyList = (ArrayList) request.getAttribute("myreplyList");
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -15,13 +17,11 @@
 
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a>
-		<a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04"> My Page
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> 
-		<span class="stext-109 cl4"> My Like </span>
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home <i
+			class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04">
+			My Page <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <span class="stext-109 cl4"> My Comment </span>
 	</div>
 </div>
 
@@ -36,7 +36,7 @@
 	<div id="contentWrap">
 
 		<div id="aside">
-			<h2 class="aside-tit">MY LIKE</h2>
+			<h2 class="aside-tit">MY COMMENT</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>
@@ -76,50 +76,61 @@
 		<div id="content">
 			<div id="myOrder">
 				<div class="tit-page-2">
-					<h2>내가 찜한 상품</h2>
+					<h2>내가 쓴 댓글</h2>
 				</div>
 				<div class="page-body">
-					<!-- 주문 내역 리스트 -->
 					<div class="table-d2-list">
 						<table>
-<%
-int i=0, j=4;
+							<colgroup>
+								<col width="100">
+								<col width="*">
+								<col width="200">
+								<col width="150">
+								<!-- 								<col width="100"> -->
+							</colgroup>
+							<thead>
+								<tr>
+									<th scope="row"><div class="tb-center">번호</div></th>
+									<th scope="row"><div class="tb-center">원글 제목</div></th>
+									<th scope="row"><div class="tb-center">댓글 내용</div></th>
+									<th scope="row"><div class="tb-center">작성 날짜</div></th>
+									<!-- 									<th scope="row"><div class="tb-center">댓글 수</div></th> -->
+								</tr>
+							</thead>
+							<tbody>
+								<%
+									if (myreplyList.size() == 0) {
+								%>
+								<tr>
+									<td colspan="4" style="padding: 50px 20px; text-align: center; font-size: 15px;">
+										<span>작성하신 댓글이 없습니다.</span>
 
-if(productList.size() == 0) {
-	%>
-	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
-		<span>관심있는 상품이 없습니다.</span>
-		
-	</td></tr>
-	<%
-} else {
-	
-	for(ProductBean product: productList) {
-		if(i%j == 0){
-			%><tr style="height: 400px"><%
-		}
-		String[] img = product.getMain_img().split("/");
-		%><td onclick="location.href='ProductDetail.po?basicCode=<%=product.getBasicCode()%>'">
-			<img alt="productImg" src="product/uploadImg/<%=img[0]%>" width="250px" height="250px"
-				onerror="src='loading.png'"><br>
-			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=product.getName() %></span>&nbsp;&nbsp;&nbsp;
-			<span class="stext-105 cl3"><%=product.getPrice() %></span>
-		</td><%
-		if(i%j == j-1) {
-			%></tr><%
-		}
-		i++;
-	}
-	
-}
+									</td>
+								</tr>
+								<%
+									} else {
+								int i=0, num = 0;
+								
+								for (CommReBean reply : myreplyList) {
+									num = reply.getCommunity_num();
+								%><tr onclick="location.href='CommDetail.co?num=<%=num%>'">
+									<td scope="row"><div class="tb-center"><%=i%></div></td>
+									<td scope="row"><div class="tb-center"><%=num%></div></td>
+									<td scope="row"><div class="tb-center"><%=reply.getContents()%></div></td>
+									<td scope="row"><div class="tb-center"><%=reply.getDate()%></div></td>
+								</tr>
+								<%
+								i++;
+									}
 
-%>
+								}
+								%>
 
-
-					</table>
+							</tbody>
+						</table>
 					</div>
-<!-- 하단 여백 -->
-<div style="height: 150px"></div>
+					<!-- 하단 여백 -->
+					<div style="height: 150px"></div>
 
 				</div>
 				<!-- .page-body -->

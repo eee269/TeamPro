@@ -1,9 +1,9 @@
-package svc.product;
+package svc.product.review;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.product.ProductDAO;
+import dao.product.ProdReviewDAO;
 
 import static db.JdbcUtil.*;
 
@@ -16,7 +16,7 @@ public class ProductMyreviewListService {
 		
 		Connection con = getConnection();
 		
-		ProductDAO pdao = ProductDAO.getInstance();
+		ProdReviewDAO pdao = ProdReviewDAO.getInstance();
 		pdao.setConnection(con);
 		list = pdao.selectMyreviewList(member_id);
 		

@@ -1,4 +1,4 @@
-package action.product;
+package action.product.review;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
-import svc.product.ProductMyreviewListService;
+import svc.product.review.ProductMyreviewListService;
 import vo.ActionForward;
 import vo.ProdReviewBean;
 

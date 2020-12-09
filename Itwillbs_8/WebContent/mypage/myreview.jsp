@@ -98,7 +98,7 @@ if(proReviewList.size() == 0) {
 		if(i%j == 0){
 			%><tr style="height: 400px"><%
 		}
-		%><td onclick="location.href='ProductDetail.po?basicCode=<%=review.getProduct_basicCode()%>'">
+		%><td onclick="location.href='ProductDetail.po?basicCode=<%=review.getProduct_basicCode()%>#page02'">
 			<img alt="productImg" src="product/uploadImg/<%=review.getProduct_img()%>" width="250px" height="250px"
 				onerror="src='loading.png'"><br>
 			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=review.getStarScore() %></span>&nbsp;&nbsp;&nbsp;

@@ -10,7 +10,7 @@ public class ProdReviewDeleteService {
 		boolean isDeleteSuccess = false;
 		Connection con = getConnection();
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
-		prodReviewDAO.setConnetion(con);
+		prodReviewDAO.setConnection(con);
 		
 		int deleteCount = prodReviewDAO.deleteReview(num);
 

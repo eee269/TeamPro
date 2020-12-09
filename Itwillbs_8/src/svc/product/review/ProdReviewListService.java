@@ -18,7 +18,7 @@ public class ProdReviewListService {
 		
 		Connection con = getConnection();
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
-		prodReviewDAO.setConnetion(con);
+		prodReviewDAO.setConnection(con);
 		
 		// 리뷰 수 리턴
 		int listCount = prodReviewDAO.selectListCount(basicCode, active);
@@ -36,7 +36,7 @@ public class ProdReviewListService {
 		
 		Connection con = getConnection();
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
-		prodReviewDAO.setConnetion(con);
+		prodReviewDAO.setConnection(con);
 		
 		// 상품 리뷰 리턴
 		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode,active);

@@ -21,7 +21,7 @@ public class ProdReviewWriteService {
 		
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
 		
-		prodReviewDAO.setConnetion(con);
+		prodReviewDAO.setConnection(con);
 		
 		int insertCount = prodReviewDAO.insertReview(prodReviewBean);
 		
