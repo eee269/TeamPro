@@ -1,3 +1,4 @@
+<%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.HashMap"%>
@@ -9,15 +10,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-// 	ArrayList<ProdReviewBean> reviewList = (ArrayList<ProdReviewBean>)request.getAttribute("reviewList");
-// 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-// 	int nowPage = pageInfo.getPage();
-// 	int maxPage = pageInfo.getMaxPage();
-// 	int startPage = pageInfo.getStartPage();
-// 	int endPage = pageInfo.getEndPage();
-// 	int listCount = pageInfo.getListCount();
+	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
+	
 %>
-<
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
@@ -384,30 +385,13 @@
 			</div>
 		</div>
 
-
-
-
-
 		<!-- 상세정보 시작 -->
 		<div id="productDetail">
-
-
-
-
 			<div class="cboth width1260">
 
 				<div id="page01" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll on">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
-
-
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 				<div class="prd-detail">
 					<form name="allbasket" method="post" action="/shop/basket.html">
 
@@ -443,15 +427,8 @@
 				<a name="reviewboard"></a>
 				<div class="cboth pdt100"></div>
 				<div id="page02" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll on">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 				<!-- BIN -->
 				<!-- ------------------------------상품리뷰---------------------------------------  -->
@@ -520,21 +497,12 @@
 						<ul>
 							<li class="tab signin active"><a href="#signin">포토리뷰(<span class="review_count"></span>)</a></li>
 							<!-- 포토리뷰(db연동값삽입) -->
-							<li class="tab signup"><a href="#signup">일반리뷰(5)</a></li>
+							<li class="tab signup"><a href="#signup">일반리뷰(<span class="review_count"></span>)</a></li>
 							<!-- 일반리뷰(db연동값삽입) -->
 						</ul>
 					</div>
 					<div id="review_list"></div>
 					<!-- ------------------------------상품리뷰---------------------------------------  -->
-						<!-- .PR15N01-review-wrap -->
-						<div class="paging">
-							<a class="now" href="#none"><span>1</span></a> <a
-								href="javascript:power_review_page('2');"><span>2</span></a> <a
-								class="nnext" href="javascript:power_review_page('2');"><img
-								src="/images/d3/modern_simple/btn/btn_h15_review_nnext.gif"
-								alt=""></a>
-						</div>
-						<!-- .paging -->
 					</div>
 					<div id="updatePowerReview" class="MS_power_review_update"></div>
 					<div id="layerReplyModify" style="display: none">
@@ -561,16 +529,9 @@
 
 				<div class="cboth pdt100"></div>
 				<div id="page03" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll on">상품 Q&amp;A
-								(13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
+				
 				<a name="brandqna_list"></a>
 				<div class="tit-detail">
 
@@ -578,6 +539,7 @@
 					<%--					<a href="/board/board.html?code=nasign">+ MORE</a>--%>
 					<%--				</p>--%>
 				</div>
+				<!-- qna 리스트 시작 -BIN- -->
 				<div class="table-slide qna-list">
 					<table summary="번호, 제목, 작성자, 작성일, 조회">
 						<caption>QnA 리스트</caption>
@@ -599,20 +561,22 @@
 								<th scope="col"><div class="tb-center">HIT</div></th>
 							</tr>
 						</thead>
+						<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
+						<%for(int i=0; i<qnaList.size(); i++){ %>
 						<tbody>
-							<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
 							<tr class="nbg">
 								<td><div class="tb-center">
-										<span class="reviewnum">13</span>
+										<span class="reviewnum"><%=qnaList.get(i).getQna_num() %></span>
 									</div></td>
 								<td><div class="tb-center"></div></td>
 								<td><div class="tb-left reply_depth0">
-										<span> <a href="">배송</a></span> <span style="font-size: 8pt;">(1)</span>
+										<span> <a href=""><%=qnaList.get(i).getQna_content() %></a></span> 
+										<span style="font-size: 8pt;">(1)</span>
 									</div></td>
-								<td><div class="tb-center">박보배</div></td>
-								<td><div class="tb-center">2020.11.12</div></td>
+								<td><div class="tb-center"><%=qnaList.get(i).getUsername() %></div></td>
+								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td>
 								<td><div class="tb-center">
-										<span id="qna_board_showhits1">3</span>
+										<span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount() %></span>
 									</div></td>
 							</tr>
 							<tr class="MS_qna_content_box cnt" id="qna_board_block1">
@@ -622,36 +586,44 @@
 									</div>
 								</td>
 							</tr>
-
 						</tbody>
+						<%} %>
 					</table>
-
+					<!-- qna pagin -->
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list" class="now">1</a> 
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list" class="last">&gt;&gt;</a>
+								<%if(nowPage <= 1) {%>
+									<input type="button" value="이전">&nbsp;
+								<%}else {%>
+									<input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>&page=<%=nowPage - 1 %>'">&nbsp;
+								<%} %>
+									<%for(int i = startPage; i <= endPage; i++) { 
+										if(i == nowPage) { %>
+											[<%=i %>]&nbsp;
+										<%}else { %>
+											<a href="ProductDetail.po?basicCode=<%=basicCode %>"  class="now">[<%=i %>]</a>&nbsp;
+										<%} %>
+								<%} %>
+								<%if(nowPage >= maxPage) { %>
+									<input type="button" value="다음">
+								<%}else { %>
+									<input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>&page=<%=nowPage + 1 %>'">
+								<%}%>
 							</div>
 						</div>
 						<div class="btm_write">
-							<a href="/board/board.html?code=nasign&amp;page=1&amp;type=i&amp;branduid=3360799&amp;returnurl=xcode=&amp;mcode=&amp;scode=">WRITE</a>
+							<a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
 						</div>
 					</div>
 				</div>
-				<!-- .qna-list -->
+				<!-- qna pagin -->
+				<!-- qna 리스트 끝 -BIN- -->
 
 				<div class="cboth pdt100"></div>
 				<div id="page04" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll on">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 				<div class="cboth pdt30"></div>
 
@@ -704,15 +676,8 @@
 
 				<div class="cboth pdt100"></div>
 				<div id="page05" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll on">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 
 				<!-- 배송/반품안내 내용 삽입영역 -->
@@ -836,6 +801,11 @@
 			$('.signup-cont').show();
 		}
 	});
+	/* detail_tabmenu 클릭한 #page01에 스크롤 on */
+	$('.detail_tabmenu ul li').click(function(){
+		$('.detail_tabmenu ul li').removeClass('on');
+		$(this).addClass('on');
+	});
 </script>
 <script>
 	<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
@@ -870,12 +840,16 @@
 		    })
 		    // BIN 리뷰 리스트 호출
 		    function getReply(){
-		    	var basicCode = "<%=basicCode%>"
+		    	var basicCode = "<%=basicCode%>";
+		    	var reviewPage = "";
+		    	var active = $('.active').text();
 		    	$.ajax({
 	    			url: "ProdReviewList.po", // 요청 url
 	                type: "POST", // post 방식
 	                data: {
-	                	basicCode : basicCode
+	                	basicCode : basicCode,
+	                	reviewPage : reviewPage,
+	                	active : active
 	                },
 	                success: function (json) { 
 	                	json = json.replace(/\n/gi,"\\r\\n");
@@ -886,34 +860,41 @@
 	                	for (var i = 0; i < replyList.length; i++) {
 	   	                 for (var j = 0; j < replyList[i].length; j++) {
 	    	                    var reply = replyList[i][j];
-// 	    	                    if(j==0){
-// 	    	                    	if(reply.product_img!=null){
-// 			    	                    output += "<div class='signin-cont cont'>";
-// 	    	                    	}else{
-// 		    							output += "<div class='signup-cont cont'>";
-// 	    	                    	}
-// 	    	                    }else 
-    	                    	if(j == 0){
-			   	                    output += "<div class='content'><div class='signin-cont cont'>";
+	    	                    if(j==0){
+	    	                    	if(reply.hasImg){
+			    	                    output += "<div class='content'><div class='signin-cont cont'>";
+	    	                    	}else{
+		    							output += "<div class='content'><div class='signup-cont cont'>";
+	    	                    	}
+	    	                    }else if(j == 1){
 	    	                    	output += "<ul class='PR15N01-review-wrap'><li id='power_review_block995509' class='power-review-list-box'><dl class='desc'>"
 										+"<dt class='first' >작성자</dt><dd>"+reply.id+"</dd>";
-	    	                    }else if(j == 1){
-	    	                    	output += "<dt>작성일</dt><dd>"+reply.date+"</dd></dl>";
 	    	                    }else if(j == 2){
+	    	                    	output += "<dt>작성일</dt><dd>"+reply.date+"</dd></dl>";
+	    	                    }else if(j == 3){
 	    	                    	output += "<div class='hd-box'><div class='star-icon'><span class='mini_rat'><input type='number' class='rating text-default' value='"
 	    	                    	+ reply.starScore +"'data-readonly /></span><span class='survey'>아주만족</span></div></div>";
-	    	                    }else if(j == 3){
+	    	                    }else if(j == 4){
 	    	                    	output += "<div class='pr-options' style='display: none;'><dl><dt class='emp'>구매한 옵션</dt><dd class='emp'>컬러 : BLACK, 사이즈 : S</dd></dl></div>"
 	    	                    		+"<div class='content'><p class='content_p'><a href='javascript:power_review_more('995509', '00000');' class='more-options' id='review_content'>"+reply.content+"</a>"
 	    	                    		+"<a class='pr-close' href='javascript:power_review_more_close('995509');'>... <span>닫기</span></a></p><div class='ctr'></div></div>";
-	    	                    }else if(j == 4){
+	    	                    }else if(j == 5){
 	    	                    	output += "<div class='photo-list'><ul><li><a href='javascript:power_review_view_show('995509', '00000', '0', 'detail');''>"
 	    	                    		+"<img src='product/reviewUploadImg/"+reply.product_img +"'></a><div class='attach-preview'></div></li></ul></div>";
 	    	                    	output += "<div class='reply'><span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span><a class='yes' href='javascript:power_review_good('995509', 'N', 'shopdetail');''><span>0</span></a>"
-	    	                    		+"<a class='no' href='javascript:power_review_bad('995509', 'N', 'shopdetail');''><span>0</span></a></div></li></ul></div>";
-	    	                    }else if(j == 5){
+	    	                    		+"<a class='no' href='javascript:power_review_bad('995509', 'N', 'shopdetail');''><span>0</span></a></div></li></ul>";
+	    	                    }else if(j == 6){
 	    	                    	output +="<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+"<%=basicCode%>"+"'>삭제</a><br></div></div><br><br>";
 	    	                    }
+	    	                    <!-- .PR15N01-review-wrap -->
+// 	    						<div class="paging">
+// 	    							<a class="now" href="#none"><span>1</span></a> <a
+// 	    								href="javascript:power_review_page('2');"><span>2</span></a> <a
+// 	    								class="nnext" href="javascript:power_review_page('2');"><img
+// 	    								src="/images/d3/modern_simple/btn/btn_h15_review_nnext.gif"
+// 	    								alt=""></a>
+// 	    						</div>
+	    						<!-- .paging -->
 	    	        		};
 	                	};
 	   	              	$("#review_list").html(output); 
@@ -949,12 +930,9 @@
 	    		       }
 	    		})
 	  	  	}
-	    })
+	    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->
-
-
-
 
  <jsp:include page="/inc/footer.jsp" />

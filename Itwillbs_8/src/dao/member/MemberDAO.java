@@ -51,7 +51,7 @@ public class MemberDAO {
 				memberBean.setEmail(rs.getString("email"));
 				memberBean.setUsername(rs.getString("username"));
 				memberBean.setImg(rs.getString("img"));
-				memberBean.setPhone(rs.getInt("phone"));
+				memberBean.setPhone(rs.getString("phone"));
 				memberBean.setDate(rs.getTimestamp("date"));
 //				memberBean.setDate(new Timestamp(System.currentTimeMillis()));
 				
@@ -107,7 +107,7 @@ public class MemberDAO {
 			pstmt.setString(4, member.getUsername());
 			pstmt.setString(5, member.getImg());
 			pstmt.setTimestamp(6, member.getDate());
-			pstmt.setInt(7, member.getPhone());
+			pstmt.setString(7, member.getPhone());
 			
 			insertCount=pstmt.executeUpdate();
 			
@@ -184,7 +184,7 @@ public class MemberDAO {
 				member.setUsername(rs.getString("username"));
 				member.setImg(rs.getString("img"));
 				member.setDate(rs.getTimestamp("date"));
-				member.setPhone(rs.getInt("phone"));
+				member.setPhone(rs.getString("phone"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

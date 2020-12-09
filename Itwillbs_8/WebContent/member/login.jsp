@@ -24,7 +24,6 @@ body {
 
 body .container_member {
 	position: relative;
-	overflow: hidden;
 	height: 100%;
 	-moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
 	-webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -216,7 +215,7 @@ body .container_member .content input:focus {
 
 body .container_member .content .checkbox {
 	margin-top: 4px;
-	overflow: hidden;
+	overflow: auto;
 	clip: rect(0, 0, 0, 0);
 	width: 0;
 	height: 0;

@@ -11,11 +11,13 @@ import javax.servlet.http.HttpSession;
 import action.Action;
 import svc.member.MemberMypageService;
 import svc.order.ControlOrderListService;
+import svc.product.ProductMylikeListService;
 import vo.ActionForward;
 import vo.CommBean;
 import vo.DetailOrderBean;
 import vo.MemberBean;
 import vo.OrderBean;
+import vo.ProductBean;
 
 public class MemberMypageAction implements Action {
 
@@ -58,12 +60,19 @@ public class MemberMypageAction implements Action {
 			
 			ArrayList<CommBean> articleList = memberMypageService.getArticleList(member.getUsername());
 			
-			request.setAttribute("articleList", articleList);
+			ProductMylikeListService productMylikeListService = new ProductMylikeListService();
+			ArrayList<String> mylikeList = productMylikeListService.getMylikeList(member_id);
+			ArrayList<ProductBean> productList = productMylikeListService.getProductList(mylikeList);
+			
 			request.setAttribute("mainorderList", mainorderList);
 			request.setAttribute("detailorderList", detailorderList);
 			request.setAttribute("member", member);
 			
-			forward.setPath("/member/mypage.jsp");
+			request.setAttribute("articleList", articleList);
+			
+			request.setAttribute("productList", productList);
+			
+			forward.setPath("/mypage/mypage.jsp");
 		}
 		
 		return forward;

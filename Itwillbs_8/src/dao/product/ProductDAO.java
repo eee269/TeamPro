@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.MemberBean;
+import vo.ProdReviewBean;
 import vo.ProductBean;
 import vo.ProductOptionBean;
 
@@ -768,4 +769,5 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		
 		return productDetailList;
 	}
+
 }

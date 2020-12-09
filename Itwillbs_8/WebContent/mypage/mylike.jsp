@@ -5,7 +5,6 @@
 <%
 	String member_id = (String) session.getAttribute("member_id");
 
-	ArrayList<String> mylikeList = (ArrayList) request.getAttribute("mylikeList");
 	ArrayList<ProductBean> productList = (ArrayList) request.getAttribute("productList");
 %>
 
@@ -86,7 +85,7 @@
 <%
 int i=0, j=4;
 
-if(mylikeList.size() == 0) {
+if(productList.size() == 0) {
 	%>
 	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
 		<span>관심있는 상품이 없습니다.</span>
