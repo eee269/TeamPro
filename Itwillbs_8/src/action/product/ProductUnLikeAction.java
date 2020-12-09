@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import svc.product.ProdReviewListService;
 import svc.product.ProductDetailSelectService;
 import svc.product.ProductLikeInsertService;
 import svc.product.ProductLikeService;
@@ -16,6 +15,7 @@ import svc.product.ProductLikeyService;
 import svc.product.ProductOptionSelectService;
 import svc.product.ProductUnLikeInsertService;
 import svc.product.ProductUnLikeyService;
+import svc.product.review.ProdReviewListService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProdReviewBean;

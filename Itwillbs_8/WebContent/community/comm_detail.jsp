@@ -237,6 +237,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 														<input type="hidden" name="username" value="<%=id %>">
 														<input type="hidden" name="community_num" value="<%=community_num%>">
 														<input type="hidden" name="num" value="<%=commentList.get(i).getNum()%>">
+														<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>">
 														<div class="wrt">
 															<textarea name="contents" id="contents" ><%=commentList.get(i).getContents()%></textarea>
 	<!-- 														<a href="javascript:power_review_comment_write('995511', '995511');">수정</a> -->
@@ -395,3 +396,5 @@ $(function(){
 </script>
 	    
 <jsp:include page="../inc/footer.jsp"/>
+</body>
+</html>

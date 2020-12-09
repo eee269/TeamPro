@@ -21,7 +21,7 @@ public class ProdReviewDAO {
 	// -------------------싱글톤-----------------------
 	
 	Connection con;
-	public void setConnetion(Connection con) {
+	public void setConnection(Connection con) {
 		this.con = con;
 	}
 	
@@ -69,12 +69,18 @@ public class ProdReviewDAO {
 	}
 	// -------------------insertReview()-----------------------
 	// -------------------selectListCount()-----------------------
-	public int selectListCount(String basicCode) {
+	public int selectListCount(String basicCode, String active) {
 		int listCount = 0;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String sql = "";
+		
 		try {
-			String sql = "SELECT count(num) FROM product_review where product_basicCode=?";
+			if(active.equals("포토리뷰()")) {
+				sql = "SELECT count(num) FROM product_review where product_basicCode=? and product_img IS NOT NULL";
+			}else {
+				sql = "SELECT count(num) FROM product_review where product_basicCode=? and product_img IS NULL";
+			}
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			rs = ps.executeQuery();
@@ -93,23 +99,27 @@ public class ProdReviewDAO {
 	}
 	// -------------------selectListCount()-----------------------
 	// -------------------selectReviewList()-----------------------
-	public ArrayList<ProdReviewBean> selectReviewList(int page, int limit, String basicCode) {
+	public ArrayList<ProdReviewBean> selectReviewList(int page, int limit, String basicCode, String active) {
 		ArrayList<ProdReviewBean> reviewList =null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		ResultSet rs2 = null;
-		
+		String sql = "";
 		int startRow = (page-1) * limit;
 		
 		try {
-			String sql = "SELECT * FROM product_review WHERE product_basicCode=? ORDER BY num desc limit ?,?";
+			if(active.equals("포토리뷰()")) {
+				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NOT NULL ORDER BY num desc limit ?,?";
+			}else {
+				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NULL ORDER BY num desc limit ?,?";
+			}
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
 			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			reviewList = new ArrayList<ProdReviewBean>();
-			
+			System.out.println(sql);
 			while(rs.next()) {
 				ProdReviewBean review = new ProdReviewBean();
 				review.setContent(rs.getString("content"));
@@ -149,5 +159,45 @@ public class ProdReviewDAO {
 		return deleteCount;
 	}
 	// -------------------deleteReview()-----------------------
+
+	public ArrayList<ProdReviewBean> selectMyreviewList(String member_id) {
+		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_review where member_id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, member_id);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProdReviewBean review = new ProdReviewBean();
+				
+				review.setMember_id(member_id);
+				review.setNum(rs.getInt("num"));
+				review.setContent(rs.getString("content"));
+				review.setStarScore(rs.getInt("starScore"));
+				review.setRe_ref(rs.getInt("re_ref"));
+				review.setRe_lev(rs.getInt("re_lev"));
+				review.setProduct_basicCode(rs.getString("product_basicCode"));
+				review.setProduct_img(rs.getString("product_Img"));
+				review.setDate(rs.getTimestamp("date"));
+				
+				list.add(review);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+
 	
 }

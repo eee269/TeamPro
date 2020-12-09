@@ -29,11 +29,11 @@ public class CommListAction implements Action {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
-		// getListCount()
+		// 전체 게시물 수 가져오기
 		CommListService commListService = new CommListService();
 		int listCount = commListService.getListCount();
 		
-		// 전체 게시물 수 가져오기
+		// 게시물 page ~ limit 갯수만큼 가져오기
 		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 		articleList = commListService.getArticleList(page, limit);
 		

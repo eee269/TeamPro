@@ -38,7 +38,7 @@ public class MyorderDetailAction implements Action {
 			request.setAttribute("mainorder", mainorder);
 			
 			forward = new ActionForward();
-			forward.setPath("/order/orderDetail.jsp");
+			forward.setPath("/mypage/orderDetail.jsp");
 		
 		}
 		

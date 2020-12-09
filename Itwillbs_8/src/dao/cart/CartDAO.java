@@ -78,6 +78,7 @@ public class CartDAO extends Exception {
 	 return CartList;
 	}
 	
+	
 	// 삭제
 	public int cartDelete(int num) {
 		System.out.println("CartDAO - cartDelete()");
@@ -100,6 +101,7 @@ public class CartDAO extends Exception {
 		
 		return deleteCount;
 	}
+	
 	
 	// 수량 업데이트
 	public int cartUpdate(int num , int cnt) {

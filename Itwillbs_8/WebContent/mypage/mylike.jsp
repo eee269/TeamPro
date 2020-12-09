@@ -1,7 +1,11 @@
+<%@page import="vo.ProductBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String member_id = (String) session.getAttribute("member_id");
+
+	ArrayList<ProductBean> productList = (ArrayList) request.getAttribute("productList");
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -17,7 +21,7 @@
 		<a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04"> My Page
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> 
-		<span class="stext-109 cl4"> My Bookmark </span>
+		<span class="stext-109 cl4"> My Like </span>
 	</div>
 </div>
 
@@ -32,14 +36,14 @@
 	<div id="contentWrap">
 
 		<div id="aside">
-			<h2 class="aside-tit">MY BOOKMARK</h2>
+			<h2 class="aside-tit">MY LIKE</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
-							<li><a href="ProductLikeList.po">상품 보관함</a></li>
+							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
 							<li><a href="#">내 상품 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
 						</ul>
@@ -50,7 +54,7 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
-							<li><a href="CommBookmarkList.co">내 북마크</a></li>
+							<li><a href="mybookmarkList.co">내 북마크</a></li>
 							<li><a href="#">내 게시글 리뷰</a></li>
 						</ul>
 					</div>
@@ -72,14 +76,47 @@
 		<div id="content">
 			<div id="myOrder">
 				<div class="tit-page-2">
-					<h2>북마크</h2>
+					<h2>내가 찜한 상품</h2>
 				</div>
 				<div class="page-body">
 					<!-- 주문 내역 리스트 -->
 					<div class="table-d2-list">
 						<table>
-<!-- 				게시글 목록 가져오기, 기준: member_id, select true -->
-						</table>
+<%
+int i=0, j=4;
+
+if(productList.size() == 0) {
+	%>
+	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
+		<span>관심있는 상품이 없습니다.</span>
+		
+	</td></tr>
+	<%
+} else {
+	
+	for(ProductBean product: productList) {
+		if(i%j == 0){
+			%><tr style="height: 400px"><%
+		}
+		String[] img = product.getMain_img().split("/");
+		%><td onclick="location.href='ProductDetail.po?basicCode=<%=product.getBasicCode()%>'">
+			<img alt="productImg" src="product/uploadImg/<%=img[0]%>" width="250px" height="250px"
+				onerror="src='loading.png'"><br>
+			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=product.getName() %></span>&nbsp;&nbsp;&nbsp;
+			<span class="stext-105 cl3"><%=product.getPrice() %></span>
+		</td><%
+		if(i%j == j-1) {
+			%></tr><%
+		}
+		i++;
+	}
+	
+}
+
+%>
+
+
+					</table>
 					</div>
 <!-- 하단 여백 -->
 <div style="height: 150px"></div>

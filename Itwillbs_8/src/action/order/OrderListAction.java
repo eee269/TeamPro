@@ -41,7 +41,7 @@ public class OrderListAction implements Action {
 			
 			request.setAttribute("orderList", orderList);
 	
-			forward.setPath("/order/myorder.jsp");
+			forward.setPath("/mypage/myorder.jsp");
 		}
 		
 		return forward;

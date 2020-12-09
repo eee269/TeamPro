@@ -43,7 +43,7 @@ public class MycommListAction implements Action {
 			request.setAttribute("articleList", articleList);
 			
 			forward = new ActionForward();
-			forward.setPath("/community/mycomm.jsp");
+			forward.setPath("/mypage/mycomm.jsp");
 		
 		}
 		return forward;

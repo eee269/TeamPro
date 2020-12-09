@@ -1,3 +1,5 @@
+<%@page import="vo.ProductBean"%>
+<%@page import="dao.product.ProductDAO"%>
 <%@page import="vo.CommBean"%>
 <%@page import="vo.DetailOrderBean"%>
 <%@page import="java.util.HashMap"%>
@@ -23,6 +25,7 @@
 	
 	articleList = (ArrayList) request.getAttribute("articleList");	
 	
+	ArrayList<ProductBean> productList = (ArrayList) request.getAttribute("productList");
 %>
 
 
@@ -53,8 +56,8 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
-							<li><a href="ProductLikeList.po">상품 보관함</a></li>
-							<li><a href="#">내 상품 리뷰</a></li>
+							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
+							<li><a href="ProductMyreviewList.po">내가 쓴 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
 						</ul>
 					</div>
@@ -64,8 +67,8 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
-							<li><a href="CommBookmarkList.co">내 북마크</a></li>
-							<li><a href="#">내 게시글 리뷰</a></li>
+							<li><a href="MybookmarkList.co">내 북마크</a></li>
+							<li><a href="MycommReplyList.co">내가 쓴 댓글</a></li>
 						</ul>
 					</div>
 				</div>
@@ -266,49 +269,39 @@
 					<!-- 관심 상품 정보 -->
 					<div class="hd">
 						<h3>관심 상품 정보</h3>
-						<a class="view fe" href="ProductLikeList.po">+ MORE</a>
+						<a class="view fe" href="ProductMylikeList.po">+ MORE</a>
 					</div>
 					<div class="lst">
 						<div class="item-wrap">
 							<div class="item-cont"></div>
-							
-<!-- 							게시글 말고 관심상품으로 변경하기 -->
-							
-							<table summary="등록일자, 제목, 게시판">
-							<caption>최근 등록 게시물 목록</caption>
-							<colgroup>
-								<col width="150">
-								<col width="*">
-								<col width="200">
-							</colgroup>
-							<thead>
-								<tr>
-									<th><div class="tb-center">DATE</div></th>
-									<th><div class="tb-center">SUBJECT</div></th>
-									<th><div class="tb-center">READCOUNT</div></th>
-								</tr>
-							</thead>
-							<tbody>
+														
+							<table>
 							<%
-							if(articleList.size() == 0) {
-								%>
-									<tr><td colspan="3" style="padding:50px 20px; text-align:center; font-size: 15px;">
-            	   						<span> 작성한 게시글이 없습니다 <br><br>
-            	   							<a href='CommList.co'>게시글을 작성해 보세요!</a></span></td></tr>							
-								<%
-							} else {
-								CommBean article = articleList.get(articleList.size()-1);
-								%>
-								<tr onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'" style="cursor: pointer;">
-								<td><div class="tb-center"><%=article.getDate() %></div></td>
-								<td><div class="tb-center"><%=article.getSubject() %></div></td>
-								<td><div class="tb-center"><%=article.getReadCount() %></div></td>
-								</tr>
-								<%
-									
-							}
-							%>
-							</tbody>
+if(productList.size() == 0) {
+	%>
+	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
+		<span>관심있는 상품이 없습니다.</span>
+		
+	</td></tr>
+	<%
+} else {
+	%><tr style="height: 400px"><%
+	
+	for(int i=productList.size()-1;i > productList.size()-5; i--) {
+		if(i < 0) break;
+		ProductBean product = productList.get(i);
+		
+		String[] img = product.getMain_img().split("/");
+		%><td onclick="location.href='ProductDetail.po?basicCode=<%=product.getBasicCode()%>'">
+			<img alt="productImg" src="product/uploadImg/<%=img[0]%>" width="250px" height="250px"
+				onerror="src='loading.png'"><br>
+			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=product.getName() %></span>&nbsp;&nbsp;&nbsp;
+			<span class="stext-105 cl3"><%=product.getPrice() %></span>
+		</td><%
+	}
+	%></tr><%
+}
+%>
 							</table>
 						</div>
 					</div>

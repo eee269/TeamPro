@@ -59,7 +59,7 @@ public class CommReWriteProAction implements Action {
 			// 1.ActionForward 객체 생성
 			forward = new ActionForward();
 			// 2.포워딩 경로(URL) 지정
-			forward.setPath("CommDetail.co?num="+community_num);
+			forward.setPath("CommDetail.co?num="+community_num+"&rePage="+request.getParameter("rePage"));
 			// 3.포워딩 방식(Redirect 방식) 지정
 			forward.setRedirect(true);
 		}
