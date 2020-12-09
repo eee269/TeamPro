@@ -13,7 +13,7 @@ public class MemberBean {
 	private String username;
 	private String img;
 	private Timestamp date;
-	private int phone;
+	private String phone;
 	
 	public MemberBean() {}
 
@@ -65,11 +65,11 @@ public class MemberBean {
 		this.date = date;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	

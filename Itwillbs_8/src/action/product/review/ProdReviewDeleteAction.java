@@ -1,4 +1,4 @@
-package action.product;
+package action.product.review;
 
 import java.io.PrintWriter;
 
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import svc.community.CommDeleteProService;
-import svc.product.ProdReviewDeleteService;
+import svc.product.review.ProdReviewDeleteService;
 import vo.ActionForward;
 
 public class ProdReviewDeleteAction implements Action {

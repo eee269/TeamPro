@@ -1,4 +1,4 @@
-package svc.product;
+package svc.product.review;
 
 import dao.product.ProdReviewDAO;
 import vo.ProdReviewBean;
@@ -21,7 +21,7 @@ public class ProdReviewWriteService {
 		
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
 		
-		prodReviewDAO.setConnetion(con);
+		prodReviewDAO.setConnection(con);
 		
 		int insertCount = prodReviewDAO.insertReview(prodReviewBean);
 		

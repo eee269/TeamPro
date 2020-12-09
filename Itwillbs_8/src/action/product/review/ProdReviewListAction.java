@@ -1,4 +1,4 @@
-package action.product;
+package action.product.review;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import svc.product.ProdReviewListService;
+import svc.product.review.ProdReviewListService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProdReviewBean;
@@ -21,8 +21,11 @@ public class ProdReviewListAction implements Action {
 		ActionForward forward = null;
 		
 		String basicCode = request.getParameter("basicCode");
+		String active = request.getParameter("active");
+		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
+		
 		int page = 1; 
 		int limit = 10; 
 		if(request.getParameter("page") != null) {
@@ -30,12 +33,12 @@ public class ProdReviewListAction implements Action {
 		}
 		ProdReviewListService prodReviewListService = new ProdReviewListService();
 		// 리뷰 총 갯수 카운트
-		int listCount = prodReviewListService.getReviewListCount(basicCode);
+		int listCount = prodReviewListService.getReviewListCount(basicCode, active);
 		
 		ArrayList<ProdReviewBean> reviewList = new ArrayList<ProdReviewBean>();
 		
 		// 리뷰 목록 가져오기
-		reviewList = prodReviewListService.getReviewList(page, limit, basicCode);
+		reviewList = prodReviewListService.getReviewList(page, limit, basicCode, active);
 		
 		int maxPage = (int)((double)listCount / limit + 0.95);
 		
@@ -52,15 +55,22 @@ public class ProdReviewListAction implements Action {
 		// Json
 		String json = "{\"replyList\":["; 
 		for (int i = 0; i < reviewList.size(); i++) {
+			boolean hasImg = false; 
+			String product_img = "";
 			String id = reviewList.get(i).getMember_id();
 			String content = reviewList.get(i).getContent();
 			Date date = reviewList.get(i).getDate();
 			SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
 			int starScore = reviewList.get(i).getStarScore();
-			String product_img = reviewList.get(i).getProduct_img();
+			
+			if(reviewList.get(i).getProduct_img()!=null) {
+				product_img = reviewList.get(i).getProduct_img();
+				hasImg = true;
+			}
 			int num = reviewList.get(i).getNum();
 			
-			json += "[{\"id\":\"" + id + "\"},";
+			json += "[{\"hasImg\":\""+hasImg+"\"},";
+			json += "{\"id\":\"" + id + "\"},";
 			json += "{\"date\":\"" + df.format(date) + "\"},";
 			json += "{\"starScore\":\"" + starScore + "\"},";
 			json += "{\"content\":\"" + content + "\"},";

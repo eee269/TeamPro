@@ -2,8 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 
@@ -25,14 +23,6 @@ int cntSet = 0;
 	width: 1024px;
 	text-align: center;
 }
-.d-block a:hover{
-  background-color: #717fe0;
-}
-.tb-center a:hover{
-  background-color: #717fe0;
-
-}
-
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
@@ -53,12 +43,7 @@ int cntSet = 0;
 	  
 	});		
   
-  function multi_order(){
-	  $(".CSSbuttonBlack").click(function(){ 
-		  document.cartForm.setAttribute("action","Order.or");
-			document.cartForm.submit();
-   });
-  }
+  
 
 		  </script>
 
@@ -186,14 +171,14 @@ int cntSet = 0;
 								<td>
 									<!-- ------------------------------------수량 업다운 --------------------------------------------------------------------------------- -->
 									<div class="tb-center">
-<!-- 										<div class="opt-spin"> -->
-<!-- 							<span class="btns"> -->
+										<div class="opt-spin">
+							
 							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-">
 							<input type="text" id="btn-num<%=i%>" name="amount"	 value="<%=cartList.get(i).getCnt() %>" class="txt-spin"> 
-								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" value="+">
+						<span class="btns">		<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" value="+">
 													
-<!-- 											</span> -->
-<!-- 										</div> -->
+											</span>
+										</div>
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
 									</div> <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -277,11 +262,7 @@ int cntSet = 0;
 				<!--          .table-fill-prd -->
 
 				<div class="btn-order-ctrl">
-					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기
-					<input type="hidden" name="price" class="price-b">
-					<input type="hidden" name="delivery" class="delivery-b">
-					<input type="hidden" name="total_price" class="total-b">
-					</a>
+					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>
 					<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
 					 <a	class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
 				</div>
@@ -452,7 +433,6 @@ $("#allCheck").click(function(){
 	
 		// 체크박스 선택된 한줄 값 가져오기
 		$(".checkSelect").click(function(){ 
-			alert("check");
 			var rowData = new Array();
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
@@ -481,6 +461,7 @@ $("#allCheck").click(function(){
 				// 숫자 뒤에 원 없애기
 				in4 = Number(in4.substr(0, in4.length -1));        
 // 				alert(in4);
+				
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(in3);
 				tdArr.push(in4);
@@ -515,14 +496,8 @@ $("#allCheck").click(function(){
 			
 			// 총 합계 
 			$('.total-b').text(chCoin + sevice); 
-			$('.total-b').attr('value',chCoin+sevice);	
-			$('.price-b').attr('value',chCoin);	
-			$('.delivery-b').attr('value',sevice);	
+				
 			});
-	
-	
-		
-		
 		
 	
 </script>
