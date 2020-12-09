@@ -3,6 +3,7 @@
     <%
     String member_id = (String)session.getAttribute("member_id"); 
     %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>

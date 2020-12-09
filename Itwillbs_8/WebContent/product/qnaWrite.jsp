@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String basicCode = request.getParameter("basicCode");
-
+	String member_id = (String)session.getAttribute("member_id");
 %>
+
 <jsp:include page="../inc/header.jsp" />
+
 <link rel="shortcut icon" href="http://oryany.co.kr/shopimages/nasign/favicon.ico" type="image/x-icon"><link rel="apple-touch-icon-precomposed" href="http://oryany.co.kr/shopimages/nasign/mobile_web_icon.png" /><title>Q&A</title>
 <script type="text/javascript" src="http://oryany.co.kr//wcs.naver.net/wcslog.js"></script>
 <!-- 게시판 CSS -->
@@ -59,11 +61,15 @@
                                     	<tbody>
                                         	<tr>
 	                                            <th><div>이름</div></th>
-	                                            <td><div><input id='bw_input_writer' type='text' name='name'  class="MS_input_txt input_style1"  /></div></td>
+	                                            <td><div><input id='bw_input_writer' type='text' name='qna_name'  class="MS_input_txt input_style1" 
+	                                            <%if(member_id!=null){%>
+	                                            	value="<%=member_id %>" readonly="readonly"
+	                                            <%} %>
+	                                             /></div></td>
 	                                            <th><div>비밀번호</div></th>
 	                                            <td>
                                                 	<div>
-                                                    	<input id='bw_input_passwd' type='password' name='pass'  class="MS_input_txt input_style"  />                                                    
+                                                    	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                    
                                                     	<font color="red">자동 잠금 기능</font>                                                                                                    
                                                    	</div>
                                             	</td>
@@ -72,7 +78,7 @@
                                             	<th><div>제목</div></th>
                                             	<td colspan="3">
                                                 <div class="title">
-													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='subject' value='' />
+													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_subject' value='' />
 													<div class="title_select"></div>
                                                 </div>
 												</td>
@@ -81,7 +87,7 @@
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
                                                 <div>
-                                                	<textarea id='MS_text_content' name='content' wrap="off" onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' >
+                                                	<textarea id='MS_text_content' name='qna_content' wrap="off" onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' >
                                                 		주문자 : 
 														주문번호 : 
 														요청사항 :
@@ -93,7 +99,7 @@
 												<th><div>파일</div></th>
                                             	<td colspan="3">
                                                 	<div>
-                                                    	<input id='bw_input_file' type='file'  class="MS_input_txt input_style2" name="file" />
+                                                    	<input id='bw_input_file' type='file'  class="MS_input_txt input_style2" name="qna_file" />
                                                 	</div>
                                             	</td>
                                         	</tr>
