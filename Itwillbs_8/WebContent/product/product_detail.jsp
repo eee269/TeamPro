@@ -10,8 +10,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-// 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-// 	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
+	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
+	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+	int nowPage = pageInfo.getPage();
+	int maxPage = pageInfo.getMaxPage();
+	int startPage = pageInfo.getStartPage();
+	int endPage = pageInfo.getEndPage();
+	int listCount = pageInfo.getListCount();
 	
 %>
 <jsp:include page="/inc/header.jsp" />
@@ -498,15 +503,6 @@
 					</div>
 					<div id="review_list"></div>
 					<!-- ------------------------------상품리뷰---------------------------------------  -->
-						<!-- .PR15N01-review-wrap -->
-						<div class="paging">
-							<a class="now" href="#none"><span>1</span></a> <a
-								href="javascript:power_review_page('2');"><span>2</span></a> <a
-								class="nnext" href="javascript:power_review_page('2');"><img
-								src="/images/d3/modern_simple/btn/btn_h15_review_nnext.gif"
-								alt=""></a>
-						</div>
-						<!-- .paging -->
 					</div>
 					<div id="updatePowerReview" class="MS_power_review_update"></div>
 					<div id="layerReplyModify" style="display: none">
@@ -566,21 +562,21 @@
 							</tr>
 						</thead>
 						<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
-<%-- 						<%for(int i=0; i<qnaList.size(); i++){ %> --%>
+						<%for(int i=0; i<qnaList.size(); i++){ %>
 						<tbody>
 							<tr class="nbg">
 								<td><div class="tb-center">
-<%-- 										<span class="reviewnum"><%=qnaList.get(i).getNum() %></span> --%>
+										<span class="reviewnum"><%=qnaList.get(i).getQna_num() %></span>
 									</div></td>
 								<td><div class="tb-center"></div></td>
 								<td><div class="tb-left reply_depth0">
-<%-- 										<span> <a href=""><%=qnaList.get(i).getContent() %></a></span>  --%>
+										<span> <a href=""><%=qnaList.get(i).getQna_content() %></a></span> 
 										<span style="font-size: 8pt;">(1)</span>
 									</div></td>
-<%-- 								<td><div class="tb-center"><%=qnaList.get(i).getMember_id() %></div></td> --%>
-<%-- 								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td> --%>
+								<td><div class="tb-center"><%=qnaList.get(i).getUsername() %></div></td>
+								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td>
 								<td><div class="tb-center">
-										<span id="qna_board_showhits1">조회수</span>
+										<span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount() %></span>
 									</div></td>
 							</tr>
 							<tr class="MS_qna_content_box cnt" id="qna_board_block1">
@@ -591,15 +587,29 @@
 								</td>
 							</tr>
 						</tbody>
-<%-- 						<%} %> --%>
+						<%} %>
 					</table>
-					<!-- qna 리스트 끝 -BIN- -->
+					<!-- qna pagin -->
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=1#brandqna_list" class="now">1</a> 
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list">2</a>
-								<a href="/shop/shopdetail.html?branduid=3360799&amp;xcode=006&amp;mcode=001&amp;qnapage=2#brandqna_list" class="last">&gt;&gt;</a>
+								<%if(nowPage <= 1) {%>
+									<input type="button" value="이전">&nbsp;
+								<%}else {%>
+									<input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>&page=<%=nowPage - 1 %>'">&nbsp;
+								<%} %>
+									<%for(int i = startPage; i <= endPage; i++) { 
+										if(i == nowPage) { %>
+											[<%=i %>]&nbsp;
+										<%}else { %>
+											<a href="ProductDetail.po?basicCode=<%=basicCode %>"  class="now">[<%=i %>]</a>&nbsp;
+										<%} %>
+								<%} %>
+								<%if(nowPage >= maxPage) { %>
+									<input type="button" value="다음">
+								<%}else { %>
+									<input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>&page=<%=nowPage + 1 %>'">
+								<%}%>
 							</div>
 						</div>
 						<div class="btm_write">
@@ -607,7 +617,8 @@
 						</div>
 					</div>
 				</div>
-				<!-- .qna-list -->
+				<!-- qna pagin -->
+				<!-- qna 리스트 끝 -BIN- -->
 
 				<div class="cboth pdt100"></div>
 				<div id="page04" class="cboth pdt100"></div>
@@ -875,6 +886,15 @@
 	    	                    }else if(j == 6){
 	    	                    	output +="<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+"<%=basicCode%>"+"'>삭제</a><br></div></div><br><br>";
 	    	                    }
+	    	                    <!-- .PR15N01-review-wrap -->
+// 	    						<div class="paging">
+// 	    							<a class="now" href="#none"><span>1</span></a> <a
+// 	    								href="javascript:power_review_page('2');"><span>2</span></a> <a
+// 	    								class="nnext" href="javascript:power_review_page('2');"><img
+// 	    								src="/images/d3/modern_simple/btn/btn_h15_review_nnext.gif"
+// 	    								alt=""></a>
+// 	    						</div>
+	    						<!-- .paging -->
 	    	        		};
 	                	};
 	   	              	$("#review_list").html(output); 

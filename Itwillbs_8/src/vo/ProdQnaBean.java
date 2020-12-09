@@ -7,28 +7,31 @@ public class ProdQnaBean extends MemberBean{
 	private String qna_pass; // qna 글 마다 개별 비밀번호
 	private String qna_subject; 
 	private String qna_content; 
+	private int qna_readcount;
 	private String qna_file;
 	private int qna_re_ref; // qna 답글
 	private int qna_re_lev;
-	private String qna_member_id; 
-	private String qna_product_basicCode;
 	private Timestamp qna_date;
+	private String product_basicCode;
+	private String member_id; 
 	
 	public ProdQnaBean() {}
 
-	public ProdQnaBean(int qna_num, String qna_pass, String qna_subject, String qna_content, String qna_file,
-			int qna_re_ref, int qna_re_lev, String qna_member_id, String qna_product_basicCode, Timestamp qna_date) {
+	public ProdQnaBean(int qna_num, String qna_pass, String qna_subject, String qna_content, int qna_readcount,
+			String qna_file, int qna_re_ref, int qna_re_lev, Timestamp qna_date, String product_basicCode,
+			String member_id) {
 		super();
 		this.qna_num = qna_num;
 		this.qna_pass = qna_pass;
 		this.qna_subject = qna_subject;
 		this.qna_content = qna_content;
+		this.qna_readcount = qna_readcount;
 		this.qna_file = qna_file;
 		this.qna_re_ref = qna_re_ref;
 		this.qna_re_lev = qna_re_lev;
-		this.qna_member_id = qna_member_id;
-		this.qna_product_basicCode = qna_product_basicCode;
 		this.qna_date = qna_date;
+		this.product_basicCode = product_basicCode;
+		this.member_id = member_id;
 	}
 
 	public int getQna_num() {
@@ -63,6 +66,14 @@ public class ProdQnaBean extends MemberBean{
 		this.qna_content = qna_content;
 	}
 
+	public int getQna_readcount() {
+		return qna_readcount;
+	}
+
+	public void setQna_readcount(int qna_readcount) {
+		this.qna_readcount = qna_readcount;
+	}
+
 	public String getQna_file() {
 		return qna_file;
 	}
@@ -87,22 +98,6 @@ public class ProdQnaBean extends MemberBean{
 		this.qna_re_lev = qna_re_lev;
 	}
 
-	public String getQna_member_id() {
-		return qna_member_id;
-	}
-
-	public void setQna_member_id(String qna_member_id) {
-		this.qna_member_id = qna_member_id;
-	}
-
-	public String getQna_product_basicCode() {
-		return qna_product_basicCode;
-	}
-
-	public void setQna_product_basicCode(String qna_product_basicCode) {
-		this.qna_product_basicCode = qna_product_basicCode;
-	}
-
 	public Timestamp getQna_date() {
 		return qna_date;
 	}
@@ -111,12 +106,28 @@ public class ProdQnaBean extends MemberBean{
 		this.qna_date = qna_date;
 	}
 
+	public String getProduct_basicCode() {
+		return product_basicCode;
+	}
+
+	public void setProduct_basicCode(String product_basicCode) {
+		this.product_basicCode = product_basicCode;
+	}
+
+	public String getMember_id() {
+		return member_id;
+	}
+
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
+	}
+
 	@Override
 	public String toString() {
 		return "ProdQnaBean [qna_num=" + qna_num + ", qna_pass=" + qna_pass + ", qna_subject=" + qna_subject
-				+ ", qna_content=" + qna_content + ", qna_file=" + qna_file + ", qna_re_ref=" + qna_re_ref
-				+ ", qna_re_lev=" + qna_re_lev + ", qna_member_id=" + qna_member_id + ", qna_product_basicCode="
-				+ qna_product_basicCode + ", qna_date=" + qna_date + "]";
+				+ ", qna_content=" + qna_content + ", qna_readcount=" + qna_readcount + ", qna_file=" + qna_file
+				+ ", qna_re_ref=" + qna_re_ref + ", qna_re_lev=" + qna_re_lev + ", qna_date=" + qna_date
+				+ ", product_basicCode=" + product_basicCode + ", member_id=" + member_id + "]";
 	}
 	
-}
+}	
