@@ -152,7 +152,7 @@ public class OrderDAO {
 		ResultSet rs = null;
 		
 		try {
-			String sql = "select * from mainorder";
+			String sql = "select * from mainorder order by date desc";
 			pstmt = con.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			

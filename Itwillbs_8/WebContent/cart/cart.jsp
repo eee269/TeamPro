@@ -50,7 +50,12 @@ int cntSet = 0;
 	  
 	});		
   
-  
+  function multi_order(){
+	  $(".CSSbuttonBlack").click(function(){ 
+		  document.cartForm.setAttribute("action","Order.or");
+			document.cartForm.submit();
+   });
+  }
 
 		  </script>
 
@@ -261,7 +266,11 @@ int cntSet = 0;
 				<!--          .table-fill-prd -->
 
 				<div class="btn-order-ctrl">
-					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>
+					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기
+					<input type="hidden" name="price" class="price-b">
+					<input type="hidden" name="delivery" class="delivery-b">
+					<input type="hidden" name="total_price" class="total-b">
+					</a>
 					<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
 					 <a	class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
 				</div>
@@ -345,6 +354,7 @@ int cntSet = 0;
 	
 		// 체크박스 선택된 한줄 값 가져오기
 		$(".checkSelect").click(function(){ 
+			alert("check");
 			var rowData = new Array();
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
@@ -373,7 +383,6 @@ int cntSet = 0;
 				// 숫자 뒤에 원 없애기
 				in4 = Number(in4.substr(0, in4.length -1));        
 // 				alert(in4);
-				
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(in3);
 				tdArr.push(in4);
@@ -409,9 +418,10 @@ int cntSet = 0;
 			
 			// 총 합계 
 			$('.total-b').text(chCoin + sevice); 
-				
+			$('.total-b').attr('value',chCoin+sevice);	
+			$('.price-b').attr('value',chCoin);	
+			$('.delivery-b').attr('value',sevice);	
 			});
-			
 	
 	
 	

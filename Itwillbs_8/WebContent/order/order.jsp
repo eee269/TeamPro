@@ -14,6 +14,9 @@
 	   int coin = 0;
 	   int cartNo = cartList.size();
 		int num = Integer.parseInt(request.getParameter("chk"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		int delivery = Integer.parseInt(request.getParameter("delivery"));
+		int total_price = Integer.parseInt(request.getParameter("total_price"));
 	%>
 <script src="js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -138,9 +141,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- 오더페이지 시작-->
-
 <div id="contentWrapper">
-	<div></div>
 	<div id="contentWrap">
 
 		<link type="text/css" rel="stylesheet"
@@ -162,96 +163,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
 						<input type="hidden" name="num" id="num" value="<%=cartNo%>">
-							
-<!-- 							<div class="tbl-order"> -->
-<!-- 								<table> -->
-<!-- 									<caption>주문리스트</caption> -->
-<!-- 									<colgroup> -->
-<!-- 										<col style="width: 50px"> -->
-<!-- 										<col style="width: 200px"> -->
-<!-- 										<col style="width: 80px"> -->
-<!-- 										<col style="width: 80px"> -->
-<!-- 										<col style="width: 50px"> -->
-<!-- 									</colgroup> -->
-<!-- 									<thead> -->
-<!-- 										<tr> -->
-<!-- 											<th scope="col"></th> -->
-<!-- 											<th scope="col">제품</th> -->
-<!-- 											<th scope="col">수량</th> -->
-<!-- 											<th scope="col">가격</th> -->
-<!-- 											<th scope="col">적립</th> -->
-<!-- 										</tr> -->
-<!-- 									</thead> -->
-<!-- 									<tbody> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center"> -->
-<!-- 													<div class="thumb"> -->
-<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-left"> -->
-<!-- 													<a -->
-<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360797">로티 -->
-<!-- 														크로커 크로스바디 </a> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">1개</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">4,380</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td colspan="5"> -->
-<!-- 												<div style="padding-left: 25px"> -->
-<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
-<!-- 													색상 : BLACK 1개 -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center"> -->
-<!-- 													<div class="thumb"> -->
-<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-left"> -->
-<!-- 													<a -->
-<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360799">루키 -->
-<!-- 														크로스바디 </a> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">1개</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">4,380</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td colspan="5"> -->
-<!-- 												<div style="padding-left: 25px"> -->
-<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
-<!-- 													색상 : BLACK 1개 -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 									</tbody> -->
-<!-- 								</table> -->
-<!-- 							</div> -->
+						<input type="hidden" name="amount" id="num" value="<%=total_price%>">	
 
 							<h3>주문자정보</h3>
 							<div class="tbl-order">
@@ -404,13 +316,13 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 											<td>
 												<div class="base">
 													<strong><em><span
-															class="op-total block-op-product-price" price="438000">438,000</span></em>원</strong>
+															class="op-total block-op-product-price" ><%=price %></span></em>원</strong>
 												</div>
 											</td>
 											<td>
 												<div class="base">
 													<strong><em><span
-															class="op-total block-op-add-price" price="0">0</span></em>원</strong> <a
+															class="op-total block-op-add-price" ><%=delivery %></span></em>원</strong> <a
 														class="plus"><img src="cart/img/bul_h23_plus.png"
 														alt="plus"></a><a class="minus" style="display: none;"><img
 														src="cart/img/bul_h23_minus.png" alt="minus"></a>
@@ -420,7 +332,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 												<div class="base">
 													<a class="equal"><img src="cart/img/bul_h23_equal.png"
 														alt="equal"></a> <strong><em class="fc-red"><span
-															class="block-op-sum-price" price="438000">438,000</span></em>원</strong>
+															class="block-op-sum-price" ><%=total_price %></span></em>원</strong>
 												</div>
 											</td>
 										</tr>

@@ -14,8 +14,13 @@ String imp_uid = request.getParameter("imp_uid");
 String merchant_uid = request.getParameter("merchant_uid");
 String status = request.getParameter("status");
 int num = Integer.parseInt(request.getParameter("num"));
+int amount = Integer.parseInt(request.getParameter("amount"));
 %>
 <jsp:include page="../inc/header.jsp" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/order_pay.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script type="text/javascript"
@@ -30,7 +35,7 @@ $(function(){
 	    pay_method : '<%=pay_method%>',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : '주문명:결제테스트',
-	    amount : 10000,
+	    amount : <%=amount%>,
 	    buyer_email : '<%=buyer_email%>',
 	    buyer_name : '<%=buyer_name%>',
 	    buyer_tel : '<%=buyer_tel%>',
@@ -72,15 +77,68 @@ $(function(){
 	    $("#buyer_postcode").attr('value','<%=buyer_postcode%>');
 	    $("#buyer_addr").attr('value','<%=buyer_addr%>');
 	    $("#paid_amount").attr('value',rsp.paid_amount)
-	    alert($("#imp_uid").val());
-	    alert($("#paid_amount").val());
+// 	    alert($("#imp_uid").val());
+// 	    alert($("#paid_amount").val());
+document.paymentForm.submit();
 		});
 	});
 	
 	// 아임포트 API 연결을 위한 스크립트 끝
 </script>
 <body>
-	<form action="OrderPro.or" method="post">
+<div id="contentWrapper">
+	<div id="contentWrap">
+
+		<link type="text/css" rel="stylesheet"
+			href="/template_common/shop/basic_simple/menu.1.css?t=201711221039">
+		<div id="content">
+			<div id="order">
+				<dl class="loc-navi">
+					<dt class="blind">현재 위치</dt>
+					<dd>
+						<a href="/">Home</a> &gt; <strong>주문서</strong>
+					</dd>
+				</dl>
+				<div class="page-body">
+						<fieldset>
+						<legend>주문 완료</legend>
+							<h3>주문 완료</h3>
+							<div class="tbl-order">
+								<table>
+									<caption>주문자정보</caption>
+									<colgroup>
+										<col style="width: 130px">
+										<col>
+									</colgroup>
+									<tbody>
+										<tr>
+											<th scope="row"><div class="txt-l">주문코드</div></th>
+											<td>주우무운코오드으</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="txt-l">주문자명</div></th>
+											<td>주우무운자아며엉</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="txt-l">연락처</div></th>
+											<td>저언화아버언호오</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="txt-l">배송지</div></th>
+											<td>배애소옹지이</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="txt-l">결제방법</div></th>
+											<td>겨얼제에바앙버업</td>
+										</tr>
+										<tr>
+											<th scope="row"><div class="txt-l">결제금액</div></th>
+											<td>겨얼제에그음애액</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<form action="OrderPro.or" method="post" name="paymentForm">
 		<input type="hidden" value="" id="imp_uid" name="imp_uid"> <input
 			type="hidden" value="" id="paid_amount" name="paid_amount"> <input
 			type="hidden" value="" id="pay_method" name="pay_method"> <input
@@ -90,6 +148,21 @@ $(function(){
 			type="hidden" value="" id="buyer_postcode" name="buyer_postcode">
 		<input type="hidden" value="" id="buyer_addr" name="buyer_addr">
 		<input type="hidden" value="<%=num%>" name="num" id="num">
-		<input type="submit" value="내 주문 목록">
+		<div id="paybutton">
+								<a class="CSSbuttonWhite">내 주문 목록 보기</a>
+<!-- 								&nbsp &nbsp -->
+<!-- 								<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a> -->
+							</div>
 	</form>
+						</fieldset>
+					</form>
+				</div>
+				<!-- .page-body -->
+			</div>
+			<!-- #order -->
+		</div>
+		<!-- #content -->
+	</div>
+	<!-- #contentWrap -->
+</div>
 <jsp:include page="../inc/footer.jsp" />
