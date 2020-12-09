@@ -49,7 +49,20 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+		} else if (command.equals("/ProductDetail.po")) {
+			action = new ProductDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/ProductLike.po")) {
+			action = new ProductLikeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		// 상품 업로드
 		else if (command.equals("/ProductUpload.po")) {
 			forward = new ActionForward();
