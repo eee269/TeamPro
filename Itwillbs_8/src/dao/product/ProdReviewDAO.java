@@ -119,7 +119,6 @@ public class ProdReviewDAO {
 			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			reviewList = new ArrayList<ProdReviewBean>();
-			System.out.println(sql);
 			while(rs.next()) {
 				ProdReviewBean review = new ProdReviewBean();
 				review.setContent(rs.getString("content"));

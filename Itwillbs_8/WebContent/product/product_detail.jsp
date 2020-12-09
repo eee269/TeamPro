@@ -10,8 +10,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
+// 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+// 	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
 	
 %>
 <jsp:include page="/inc/header.jsp" />
@@ -385,15 +385,8 @@
 			<div class="cboth width1260">
 
 				<div id="page01" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll on">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 				<div class="prd-detail">
 					<form name="allbasket" method="post" action="/shop/basket.html">
 
@@ -429,15 +422,8 @@
 				<a name="reviewboard"></a>
 				<div class="cboth pdt100"></div>
 				<div id="page02" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll on">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 				<!-- BIN -->
 				<!-- ------------------------------상품리뷰---------------------------------------  -->
@@ -547,15 +533,9 @@
 
 				<div class="cboth pdt100"></div>
 				<div id="page03" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll on">상품 Q&amp;A(13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
+				
 				<a name="brandqna_list"></a>
 				<div class="tit-detail">
 
@@ -586,19 +566,19 @@
 							</tr>
 						</thead>
 						<%-- 이곳에 있는 tr 반복해서 리스트 넣기 --%>
-						<%for(int i=0; i<qnaList.size(); i++){ %>
+<%-- 						<%for(int i=0; i<qnaList.size(); i++){ %> --%>
 						<tbody>
 							<tr class="nbg">
 								<td><div class="tb-center">
-										<span class="reviewnum"><%=qnaList.get(i).getNum() %></span>
+<%-- 										<span class="reviewnum"><%=qnaList.get(i).getNum() %></span> --%>
 									</div></td>
 								<td><div class="tb-center"></div></td>
 								<td><div class="tb-left reply_depth0">
-										<span> <a href=""><%=qnaList.get(i).getContent() %></a></span> 
+<%-- 										<span> <a href=""><%=qnaList.get(i).getContent() %></a></span>  --%>
 										<span style="font-size: 8pt;">(1)</span>
 									</div></td>
-								<td><div class="tb-center"><%=qnaList.get(i).getMember_id() %></div></td>
-								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td>
+<%-- 								<td><div class="tb-center"><%=qnaList.get(i).getMember_id() %></div></td> --%>
+<%-- 								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td> --%>
 								<td><div class="tb-center">
 										<span id="qna_board_showhits1">조회수</span>
 									</div></td>
@@ -611,7 +591,7 @@
 								</td>
 							</tr>
 						</tbody>
-						<%} %>
+<%-- 						<%} %> --%>
 					</table>
 					<!-- qna 리스트 끝 -BIN- -->
 					<div class="list-btm">
@@ -623,7 +603,7 @@
 							</div>
 						</div>
 						<div class="btm_write">
-							<a href="ProdQnaForm.po?basicCode=<%=basicCode%>">WRITE</a>
+							<a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
 						</div>
 					</div>
 				</div>
@@ -631,15 +611,8 @@
 
 				<div class="cboth pdt100"></div>
 				<div id="page04" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll on">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll bdr">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 				<div class="cboth pdt30"></div>
 
@@ -692,15 +665,8 @@
 
 				<div class="cboth pdt100"></div>
 				<div id="page05" class="cboth pdt100"></div>
-				<div class="cboth detail_tabmenu">
-					<ul>
-						<li><a href="#page01" class="tab_scroll">상품상세정보</a></li>
-						<li><a href="#page02" class="tab_scroll">상품사용후기 (56)</a></li>
-						<li><a href="#page03" class="tab_scroll">상품 Q&amp;A (13)</a></li>
-						<li><a href="#page04" class="tab_scroll">상품구매안내</a></li>
-						<li><a href="#page05" class="tab_scroll on">배송/반품안내</a></li>
-					</ul>
-				</div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
 
 
 				<!-- 배송/반품안내 내용 삽입영역 -->
@@ -824,6 +790,11 @@
 			$('.signup-cont').show();
 		}
 	});
+	/* detail_tabmenu 클릭한 #page01에 스크롤 on */
+	$('.detail_tabmenu ul li').click(function(){
+		$('.detail_tabmenu ul li').removeClass('on');
+		$(this).addClass('on');
+	});
 </script>
 <script>
 	<%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
@@ -943,8 +914,5 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->
-
-
-
 
  <jsp:include page="/inc/footer.jsp" />

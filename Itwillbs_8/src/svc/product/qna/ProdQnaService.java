@@ -15,11 +15,12 @@ public class ProdQnaService {
 	
 	// qna 등록 작업
 	public boolean registQna(ProdQnaBean prodQnaBean) {
-		System.out.println("ProdQnaService - ProdQnaBean");
+		System.out.println("ProdQnaService - registQna");
 		// 성공 여부
 		boolean isSuccess = false;
 		Connection con = getConnection();
 		ProdQnaDAO instance = ProdQnaDAO.getInstance();
+		instance.setConnetion(con);
 		
 		int insertCount = instance.insertQna(prodQnaBean);
 		// DB 등록 성공 여부
@@ -39,6 +40,7 @@ public class ProdQnaService {
 		System.out.println("ProdQnaService - checkQna");
 		Connection con = getConnection();
 		ProdQnaDAO instance = ProdQnaDAO.getInstance();
+		instance.setConnetion(con);
 		
 		boolean isRightUser = instance.checkQna(num, pass, member_id);
 		
@@ -51,6 +53,7 @@ public class ProdQnaService {
 		boolean isDeleteSuccess = false;
 		Connection con = getConnection();
 		ProdQnaDAO instance = ProdQnaDAO.getInstance();
+		instance.setConnetion(con);
 		
 		int isDeleteCount = instance.deleteQna(num);
 		// qna 삭제 성공 여부
