@@ -17,6 +17,10 @@ import action.community.CommDetailAction;
 import action.community.CommListAction;
 import action.community.CommModifyFormAction;
 import action.community.CommModifyProAction;
+import action.community.CommReDeleteProAction;
+import action.community.CommReModifyProAction;
+import action.community.CommReReWriteProAction;
+import action.community.CommReWriteProAction;
 import action.community.CommWriteProAction;
 import action.community.MycommListAction;
 import vo.ActionForward;
@@ -155,7 +159,46 @@ public class CommFrontController extends HttpServlet{
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
+				// ---------------------------댓글 시작---------------------------	
+				}else if(command.equals("/CommReWritePro.co")) {
+					// 댓글 쓰기
+					action = new CommReWriteProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else if(command.equals("/CommReModifyPro.co")) {
+					// 댓글 수정
+					action = new CommReModifyProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else if(command.equals("/CommReReWritePro.co")) {
+					// 대댓글 쓰기
+					action = new CommReReWriteProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}else if(command.equals("/CommReDeletePro.co")) {
+					// 댓글 삭제
+					action = new CommReDeleteProAction();
+					try {
+						forward = action.execute(request, response);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+
+				
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if(forward != null) {
 			
