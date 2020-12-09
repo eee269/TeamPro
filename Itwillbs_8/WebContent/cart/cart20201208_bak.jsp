@@ -2,8 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
 
@@ -25,14 +23,6 @@ int cntSet = 0;
 	width: 1024px;
 	text-align: center;
 }
-.d-block a:hover{
-  background-color: #717fe0;
-}
-.tb-center a:hover{
-  background-color: #717fe0;
-
-}
-
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
@@ -181,14 +171,14 @@ int cntSet = 0;
 								<td>
 									<!-- ------------------------------------수량 업다운 --------------------------------------------------------------------------------- -->
 									<div class="tb-center">
-<!-- 										<div class="opt-spin"> -->
-<!-- 							<span class="btns"> -->
+										<div class="opt-spin">
+							
 							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-">
 							<input type="text" id="btn-num<%=i%>" name="amount"	 value="<%=cartList.get(i).getCnt() %>" class="txt-spin"> 
-								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" value="+">
+						<span class="btns">		<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" value="+">
 													
-<!-- 											</span> -->
-<!-- 										</div> -->
+											</span>
+										</div>
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
 									</div> <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
 
