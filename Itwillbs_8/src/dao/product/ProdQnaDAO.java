@@ -40,8 +40,9 @@ public class ProdQnaDAO {
 			int num = 1;
 			
 			try {
-				String sql = "SELECT max(num) FROM product_qna";
+				String sql = "SELECT max(num) FROM product_qna WHERE product_basicCode=?";
 				ps = con.prepareStatement(sql);
+				ps.setString(1, prodQnaBean.getProduct_basicCode());
 				rs = ps.executeQuery();
 				
 				// 조회 값 있으면 + 1, 없으면 작성된 글이 없으므로 num = 1 그대로 사용
@@ -59,7 +60,7 @@ public class ProdQnaDAO {
 				ps.setString(8, prodQnaBean.getFile());
 				ps.setString(6, prodQnaBean.getProduct_basicCode());
 				ps.setString(7, prodQnaBean.getMember_id());
-				
+				System.out.println(prodQnaBean.toString());
 				insertCount = ps.executeUpdate();
 			} catch (SQLException e) {
 				System.out.println("ProdReviewDAO - insertReview : "+e.getMessage());
@@ -164,7 +165,9 @@ public class ProdQnaDAO {
 			int startRow = (page - 1) * limit; 
 			
 			try {
-				String sql = "SELECT * FROM product_qna WHERE product_basicCode=? ORDER BY num desc limit ?,?";
+				String sql = "SELECT  "
+						+ "FROM product_qna q JOIN member m "
+						+ "ON q.member_id = m.id WHERE product_basicCode=? ORDER BY num desc limit ?,?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, basicCode);
 				ps.setInt(2, startRow);
@@ -182,6 +185,8 @@ public class ProdQnaDAO {
 					
 					qnaList.add(qna);
 				}
+				
+				
 			} catch (SQLException e) {
 				System.out.println("ProdQnaDAO - selectQnaList() 오류 "+e.getMessage());
 				e.printStackTrace();

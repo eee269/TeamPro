@@ -51,7 +51,7 @@ public class ProductDetailAction implements Action {
 		
 		// qna page ~ limit 갯수만큼 가져오기
 		ArrayList<ProdQnaBean> qnaList = new ArrayList<ProdQnaBean>();
-		qnaList = prodQnaService.getQnaList(page, limit, basicCode);
+//		qnaList = prodQnaService.getQnaList(page, limit, basicCode);
 				
 		// 페이지 계산
 		if(request.getParameter("page") != null) {
@@ -65,7 +65,7 @@ public class ProductDetailAction implements Action {
 		}
 		PageInfo pageInfo = new PageInfo(page, maxPage, startPage, endPage, listCount);
 		request.setAttribute("pageInfo", pageInfo);
-		request.setAttribute("qnaList", qnaList);
+//		request.setAttribute("qnaList", qnaList);
 		// 상품 qna 목록 호출 끝
 		
 		request.setAttribute("productDetailList", productDetailList);
