@@ -12,22 +12,7 @@ import vo.CommBean;
 
 public class MycommListService {
 
-	public String getUsername(String member_id) {
-		String username = null;
-		
-		Connection con = getConnection();
-		
-		MemberDAO memberDAO = MemberDAO.getInstance();
-		memberDAO.setConnection(con);
-		
-		username = memberDAO.getUsername(member_id);
-		
-		close(con);
-		
-		return username;
-	}
-
-	public ArrayList<CommBean> getArticleList(String username) {
+	public ArrayList<CommBean> getArticleList(String member_id) {
 		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 		
 		Connection con = getConnection();
@@ -35,7 +20,7 @@ public class MycommListService {
 		CommDAO commDAO = CommDAO.getInstance();
 		commDAO.setConnection(con);
 		
-		articleList = commDAO.selectArticleList(username);
+		articleList = commDAO.selectArticleList(member_id);
 		
 		close(con);
 		

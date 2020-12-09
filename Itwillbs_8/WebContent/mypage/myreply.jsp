@@ -1,6 +1,6 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="vo.CommBean"%>
 <%@page import="vo.CommReBean"%>
-<%@page import="vo.ProdReviewBean"%>
-<%@page import="vo.ProductBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
@@ -8,6 +8,7 @@
 	String member_id = (String) session.getAttribute("member_id");
 	
 	ArrayList<CommReBean> myreplyList = (ArrayList) request.getAttribute("myreplyList");
+	HashMap<Integer, CommBean> articleList = (HashMap) request.getAttribute("articleList");
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -86,15 +87,10 @@
 								<col width="*">
 								<col width="200">
 								<col width="150">
-								<!-- 								<col width="100"> -->
 							</colgroup>
 							<thead>
 								<tr>
-									<th scope="row"><div class="tb-center">번호</div></th>
-									<th scope="row"><div class="tb-center">원글 제목</div></th>
-									<th scope="row"><div class="tb-center">댓글 내용</div></th>
-									<th scope="row"><div class="tb-center">작성 날짜</div></th>
-									<!-- 									<th scope="row"><div class="tb-center">댓글 수</div></th> -->
+									<th scope="row" colspan=""></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -113,7 +109,9 @@
 								
 								for (CommReBean reply : myreplyList) {
 									num = reply.getCommunity_num();
-								%><tr onclick="location.href='CommDetail.co?num=<%=num%>'">
+									CommBean article = articleList.get(num);
+								%>
+								<tr onclick="location.href='CommDetail.co?num=<%=num%>'">
 									<td scope="row"><div class="tb-center"><%=i%></div></td>
 									<td scope="row"><div class="tb-center"><%=num%></div></td>
 									<td scope="row"><div class="tb-center"><%=reply.getContents()%></div></td>
