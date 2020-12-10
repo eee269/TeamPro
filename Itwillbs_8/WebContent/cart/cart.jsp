@@ -19,6 +19,7 @@ int cntSet = 0;
 	margin: 150px auto;
 	font-size: 20px;
 }
+#whiteBu:hover{color:#fff;}
 
 #emptyArea {
 	margin: auto;
@@ -47,6 +48,10 @@ int cntSet = 0;
   }
 //주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
  </script>
+
+
+  }
+  </script>
 
 
 
@@ -269,7 +274,7 @@ int cntSet = 0;
 				<div class="btn-order-ctrl">
 					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>
 					<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
-					 <a	class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
+					 <a	class="CSSbuttonWhite" id="whiteBu" onclick="document.cartForm.submit()">장바구니 비우기</a>
 				</div>
 
 				<!--          .table-fill-prd -->
@@ -504,6 +509,19 @@ $("#allCheck").click(function(){
 			$('.total-b').attr('value',chCoin+sevice);	
 			$('.price-b').attr('value',chCoin);	
 			$('.delivery-b').attr('value',sevice);	
+			$('.total-b').text(chCoin + sevice);
+
+			
+			
+			// 체크선택이 안되면 삭제div 숨기고 , 체크박스가 1개 이상 체크 되면 삭제div 보이기 
+			//  tr 선택도 포함
+			var chLe = $(".checkSelect:checked").length;	// 체크된 체크박스 길이
+			if(chLe == 0){
+				$('#whiteBu').hide();	// 체크박스가 선택이 안됐을때 숨기기 
+			} else if(chLe >= 1){
+				$('#whiteBu').show(); // 체크박스가 선택이 됐을때 보이기 
+			}
+			
 			});
 	
 	

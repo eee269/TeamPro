@@ -20,12 +20,12 @@ public class ProdQnaDeleteAction implements Action {
 		// 로그인 시 세션 및 입력 정보 가져오기
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("member_id");
-		String pass = request.getParameter("pass");
-		int num = Integer.parseInt(request.getParameter("num")); 
+		String qna_pass = request.getParameter("qna_pass");
+		int qna_num = Integer.parseInt(request.getParameter("qna_num")); 
 		
 		// 입력된 비밀번호 검증
 		ProdQnaService prodQnaService = new ProdQnaService();
-		boolean isRightUser = prodQnaService.checkQna(num, pass, member_id);
+		boolean isRightUser = prodQnaService.checkQna(qna_num, qna_pass, member_id);
 		if(!isRightUser) {
 			// 틀리면 오류
 			response.setContentType("text/html; charset=UTF-8");
@@ -36,7 +36,7 @@ public class ProdQnaDeleteAction implements Action {
 			out.println("</script>");
 		}else {
 			// 맞으면 삭제
-			boolean isDeleteSuccess = prodQnaService.deleteQna(num);
+			boolean isDeleteSuccess = prodQnaService.deleteQna(qna_num);
 			if(!isDeleteSuccess) {
 				// 삭제 실패 시
 				response.setContentType("text/html; charset=UTF-8");
