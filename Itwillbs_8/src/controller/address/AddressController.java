@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.address.AddrAction;
 import action.address.DefaultAddrAction;
+import action.address.RecentAddrAction;
 import vo.ActionForward;
 @WebServlet("*.ad")
 public class AddressController extends HttpServlet{
@@ -45,6 +46,17 @@ public class AddressController extends HttpServlet{
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("DefaultAddrAction으로 포워딩 중 오류 - " +e.getMessage());
+				e.printStackTrace();
+			} 
+		} else if(command.equals("/RecentAddr.ad")) {
+			System.out.println("RecentAddr.ad 포워딩");
+			forward = new ActionForward();
+			action = new RecentAddrAction();
+			try {
+				System.out.println("RecentAddrAction으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("RecentAddrAction으로 포워딩 중 오류 - " +e.getMessage());
 				e.printStackTrace();
 			}
 		}

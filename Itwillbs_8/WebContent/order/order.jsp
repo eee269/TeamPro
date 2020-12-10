@@ -123,32 +123,6 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 }
 // 주소록 팝업 스크립트 끝
 
-// function recentAddr() {
-// 	function copy_data() {
-// 	       $(".ajaxClick").click(function(e){
-
-// 	            var useYn = $(this).val();
-	            
-// 	            $.ajax({
-// 	                type: "POST",   
-// 	                url: "mobileUseYnCheckAction.do?menuCd=" + ${pMap.menuCd},
-// 	                data: {
-// 	                    useYn: useYn
-// 	                },
-// 	                success: function(data){
-// 	                    if (useYn == "successY") {
-// 	  						alert("사용에 동의하셨습니다.");
-// 	                    }
-// 	                    else {
-// 							alert("사용에 미동의하셨습니다.");
-// 	                    }
-// 	                },
-// 	                error: function (xhr, status, error){
-// 	                    alert("error : " + error);
-// 	                }
-// 	            });
-// 	        });
-// }
 function Addr(test) {
 	$(document).ready(function(){
 		
@@ -157,7 +131,24 @@ function Addr(test) {
 		alert(addrType);
 		
 		if(addrType=="defaultAddr"){
-			
+			$.getJSON('DefaultAddr.ad?addrType='+addrType,function(rdata){
+				$.each(rdata, function(index,item){
+					$('#postcode').attr('value',item.postcode),
+					$('#address').attr('value',item.address)
+				});
+			});
+		} else if(addrType == 'recentAddr'){
+			$.getJSON('RecentAddr.ad?addrType='+addrType,function(rdata){
+				$.each(rdata, function(index,item){
+					$('#postcode').attr('value',item.postcode),
+					$('#address').attr('value',item.address)
+				});
+			});
+		}
+		else {
+			$('#postcode').attr('value',""),
+			$('#address').attr('value',"")
+		
 		}
 			
 	});

@@ -45,7 +45,7 @@ public class OrderDAO {
 		PreparedStatement p = null;
 		
 		try {
-			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setString(1, ob.getCode());
 			p.setString(2, ob.getName());
@@ -56,6 +56,7 @@ public class OrderDAO {
 			p.setString(7, ob.getPayment());
 			p.setString(8, ob.getMember_id());
 			p.setInt(9, ob.getTotal_price());
+			p.setString(10, ob.getPostcode());
 			
 			insertCount = p.executeUpdate();
 			System.out.println("insertCount : " +insertCount);

@@ -9,24 +9,22 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 
-import com.mysql.fabric.xmlrpc.base.Array;
-
 import action.Action;
 import svc.address.AddrService;
 import vo.ActionForward;
-import vo.AddrBean;
 
-public class DefaultAddrAction implements Action {
+public class RecentAddrAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("DefaultAddrAction!");
+		System.out.println("RecentAddrAction");
 		ActionForward forward = new ActionForward();
 		
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("member_id");
 		String addrType = request.getParameter("addrType");
 		System.out.println("addrType : " +addrType);
+		
 		if(member_id == null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -38,11 +36,11 @@ public class DefaultAddrAction implements Action {
 		} else {
 			AddrService addrService = new AddrService();
 			
-			ArrayList<JSONArray> defaultAddr = null;
+			ArrayList<JSONArray> recentAddr = null;
 			
-			defaultAddr = addrService.getDefaultAddr(member_id,addrType);
-			request.setAttribute("defaultAddr", defaultAddr);
-			forward.setPath("address/defaultaddr.jsp");
+			recentAddr = addrService.getRecentAddr(member_id);
+			request.setAttribute("recentAddr", recentAddr);
+			forward.setPath("address/recentaddr.jsp");
 		}
 		
 		return forward;
