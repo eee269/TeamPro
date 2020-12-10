@@ -270,9 +270,9 @@
 						<%for(int i=0; i<main.length; i++){%>
 							
 							<div class="item-slick3"
-								data-thumb="product/uploadImg/<%=main[i] %>">
+								data-thumb="upload/productUploadImg/<%=main[i] %>">
 								<div class="wrap-pic-w pos-relative">
-									<img src="product/uploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
+									<img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
 
 									<a
 										class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -410,7 +410,7 @@
 							<tr>
 								<td align="center">
 								<%for(int i=0; i<sub.length; i++){%>
-								<img src="product/uploadImg/<%=sub[i] %>" imgborder="0"><br> 
+								<img src="upload/productUploadImg/<%=sub[i] %>" imgborder="0"><br> 
 								<% }%>
 								</td>
 							</tr>
@@ -565,35 +565,89 @@
 						<%for(int i=0; i<qnaList.size(); i++){ %>
 						<tbody>
 							<tr class="nbg">
-								<td><div class="tb-center">
+								<td>
+									<div class="tb-center">
 										<span class="reviewnum"><%=qnaList.get(i).getQna_num() %></span>
-									</div></td>
-								<td><div class="tb-center"></div></td>
-								<td><div class="tb-left reply_depth0">
-										<span> <a href=""><%=qnaList.get(i).getQna_content() %></a></span> 
+									</div>
+								</td>
+								<td>
+									<div class="tb-center"></div>
+								</td>
+								<td>
+									<div class="tb-left reply_depth0">
+										<span> <a href=""><%=qnaList.get(i).getQna_subject() %></a></span> 
 										<span style="font-size: 8pt;">(1)</span>
-									</div></td>
-								<td><div class="tb-center"><%=qnaList.get(i).getUsername() %></div></td>
-								<td><div class="tb-center"><%=qnaList.get(i).getDate() %></div></td>
-								<td><div class="tb-center">
-										<span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount() %></span>
-									</div></td>
+									</div>
+								</td>
+								<td>
+									<div class="tb-center">
+									<%=qnaList.get(i).getUsername()%>
+									</div>
+								</td>
+								<td>
+									<div class="tb-center">
+									<%=qnaList.get(i).getDate()%>
+									</div>
+								</td>
+								<td>
+									<div class="tb-center">
+										<span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
+									</div>
+								</td>
 							</tr>
-							<tr class="MS_qna_content_box cnt" id="qna_board_block1">
+							<div class="qna_board_content"></div>
+							<tr class="MS_qna_content_box cnt2" id="qna_board_block1">
 								<td colspan="6">
 									<div class="tb-left">
-										<div class="qna_board_content"></div>
+										<div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
+											주문했는데요 사은품키링이랑 가방이랑 한번에 배송오는거맞죠?선물해야되서 그러는데 배송 빠르게될까요ㅜㅜ?
+										</div>
+										<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">MODIFY</a>
+										<a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">REPLY</a>
+									</div>
+								</td>
+							<tr>
+							<tr class="MS_qna_content_box cnt2" id="qna_board_block1">
+								<td colspan="6">
+									<div class="tb-left">
+										<div class="MS_cmt_list_box">
+											<div class="comment_depth1">
+												<table class="MS_cmt_list" border="0" cellspacing="0" cellpadding="0">
+													<tbody>
+														<tr>
+															<td class="MS_cmt_detail">
+															<span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01">ORYANY</span>
+															<span class="MS_cmt_date">2019-12-17 16:32:08</span>
+															<div class="MS_cmt_content MS_cmt_depth01">
+																	안녕하세요 고객님<br> 
+																	주문번호 : 20191217133131-94240461131<br>
+																	키링, 와이드 스트랩, 가방 수령하실 수 있습니다<br> 
+																	17일 주문하신 상품은 18일
+																	출고 대기 상태가 되며 <br> 
+																	출고 이후 1-3배송일이 소요될 수 있습니다<br>
+																	감사합니다.
+															</div>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
 									</div>
 								</td>
 							</tr>
 						</tbody>
-						<%} %>
+						<%
+							}
+						%>
 					</table>
 					<!-- qna pagin -->
 					<div class="list-btm">
 						<div class="paging-wrap">
 							<div class="paging">
-								<%if(nowPage <= 1) {%>
+								<%
+									if (nowPage <= 1) {
+								%>
 									<input type="button" value="이전">&nbsp;
 								<%}else {%>
 									<input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>&page=<%=nowPage - 1 %>'">&nbsp;
@@ -880,7 +934,7 @@
 	    	                    		+"<a class='pr-close' href='javascript:power_review_more_close('995509');'>... <span>닫기</span></a></p><div class='ctr'></div></div>";
 	    	                    }else if(j == 5){
 	    	                    	output += "<div class='photo-list'><ul><li><a href='javascript:power_review_view_show('995509', '00000', '0', 'detail');''>"
-	    	                    		+"<img src='product/reviewUploadImg/"+reply.product_img +"'></a><div class='attach-preview'></div></li></ul></div>";
+	    	                    		+"<img src='upload/prodReviewUpload/"+reply.product_img +"'></a><div class='attach-preview'></div></li></ul></div>";
 	    	                    	output += "<div class='reply'><span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span><a class='yes' href='javascript:power_review_good('995509', 'N', 'shopdetail');''><span>0</span></a>"
 	    	                    		+"<a class='no' href='javascript:power_review_bad('995509', 'N', 'shopdetail');''><span>0</span></a></div></li></ul>";
 	    	                    }else if(j == 6){
@@ -932,6 +986,7 @@
 	  	  	}
 	    }
 </script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->
 

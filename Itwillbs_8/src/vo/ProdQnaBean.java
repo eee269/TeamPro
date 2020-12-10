@@ -14,12 +14,14 @@ public class ProdQnaBean extends MemberBean{
 	private Timestamp qna_date;
 	private String product_basicCode;
 	private String member_id; 
+	private int qna_re_seq;
 	
 	public ProdQnaBean() {}
 
+	
 	public ProdQnaBean(int qna_num, String qna_pass, String qna_subject, String qna_content, int qna_readcount,
 			String qna_file, int qna_re_ref, int qna_re_lev, Timestamp qna_date, String product_basicCode,
-			String member_id) {
+			String member_id, int qna_re_seq) {
 		super();
 		this.qna_num = qna_num;
 		this.qna_pass = qna_pass;
@@ -32,7 +34,9 @@ public class ProdQnaBean extends MemberBean{
 		this.qna_date = qna_date;
 		this.product_basicCode = product_basicCode;
 		this.member_id = member_id;
+		this.qna_re_seq = qna_re_seq;
 	}
+
 
 	public int getQna_num() {
 		return qna_num;
@@ -121,13 +125,23 @@ public class ProdQnaBean extends MemberBean{
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
+	
+	public int getQna_re_seq() {
+		return qna_re_seq;
+	}
+
+
+	public void setQna_re_seq(int qna_re_seq) {
+		this.qna_re_seq = qna_re_seq;
+	}
+
 
 	@Override
 	public String toString() {
 		return "ProdQnaBean [qna_num=" + qna_num + ", qna_pass=" + qna_pass + ", qna_subject=" + qna_subject
 				+ ", qna_content=" + qna_content + ", qna_readcount=" + qna_readcount + ", qna_file=" + qna_file
 				+ ", qna_re_ref=" + qna_re_ref + ", qna_re_lev=" + qna_re_lev + ", qna_date=" + qna_date
-				+ ", product_basicCode=" + product_basicCode + ", member_id=" + member_id + "]";
+				+ ", product_basicCode=" + product_basicCode + ", member_id=" + member_id +", qna_re_seq="+qna_re_seq +"]";
 	}
 	
 }	

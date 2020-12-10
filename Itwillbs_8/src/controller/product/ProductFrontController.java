@@ -18,7 +18,11 @@ import action.product.ProductDetailAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUploadProAction;
 import action.product.qna.ProdQnaDeleteAction;
-import action.product.qna.ProdQnaModifyAction;
+import action.product.qna.ProdQnaModifyFormAction;
+import action.product.qna.ProdQnaModifyProAction;
+import action.product.qna.ProdQnaReplyFormAction;
+import action.product.qna.ProdQnaReplyProAction;
+import action.product.qna.ProdQnaWriteFormAction;
 import action.product.qna.ProdQnaWriteProAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
@@ -132,8 +136,13 @@ public class ProductFrontController extends HttpServlet {
 		// --------------------상품 qna 쓰기--------------------
 		else if(command.equals("/ProdQnaWriteForm.po")) {
 			System.out.println("ProdQnaWriteForm.po 포워딩");
-			forward = new ActionForward();
-			forward.setPath("/product/qnaWrite.jsp");
+			action = new ProdQnaWriteFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		}else if(command.equals("/ProdQnaWritePro.po")) {
 			System.out.println("ProdQnaWritePro.po");
 			action = new ProdQnaWriteProAction();
@@ -154,9 +163,37 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}
 		// --------------------상품 qna 수정--------------------
-		else if(command.equals("/ProdQnaModify.po")) {
-			System.out.println("ProdQnaModify.po 포워딩");
-			action = new ProdQnaModifyAction();
+		else if(command.equals("/ProdQnaModifyForm.po")) {
+			System.out.println("ProdQnaModifyForm.po 포워딩");
+			action = new ProdQnaModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProdQnaModifyPro.po")) {
+			System.out.println("ProdQnaModifyPro.po 포워딩");
+			action = new ProdQnaModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 답글--------------------
+		else if(command.equals("/ProdQnaReplyForm.po")) {
+			System.out.println("ProdQnaReplyForm.po 포워딩");
+			action = new ProdQnaReplyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ProdQnaReplyPro.po")) {
+			System.out.println("ProdQnaReplyPro.po 포워딩");
+			action = new ProdQnaReplyProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

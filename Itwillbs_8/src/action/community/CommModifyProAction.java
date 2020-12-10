@@ -27,7 +27,7 @@ public class CommModifyProAction implements Action {
 		ActionForward forward = null;
 		
 		ServletContext context = request.getServletContext();
-		String saveFolder = "/communityUpload";
+		String saveFolder = "/upload/commUpload";
 		String realFolder = context.getRealPath(saveFolder);
 		int fileSize = 1024 * 1024 * 10;
 		
@@ -43,8 +43,8 @@ public class CommModifyProAction implements Action {
 		
 		// isArticleWriter() 메서드를 호출하여 적합한 사용자인지 판별
 		CommModifyProService boardModifyProService = new CommModifyProService();
-		boolean isRightUser = boardModifyProService.isArticleWriter(num, request.getParameter("pass"));
-		
+		boolean isRightUser = boardModifyProService.isArticleWriter(num, multi.getParameter("pass"));
+		System.out.println(multi.getParameter("pass"));
 		// 적합한 사용자 판별에 따른 처리
 		if(!isRightUser) {
 			response.setContentType("text/html; charset=UTF-8");
