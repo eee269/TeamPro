@@ -3,7 +3,10 @@ package svc.address;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+
 import dao.address.AddrDAO;
+import okhttp3.Request;
 import vo.AddrBean;
 
 import static db.JdbcUtil.*;
@@ -27,9 +30,9 @@ public class AddrService {
 		return addrList;
 	}
 
-	public ArrayList<AddrBean> getDefaultAddr(String member_id, String addrType) {
+	public ArrayList<JSONArray> getDefaultAddr(String member_id, String addrType) {
 		System.out.println("AddrService - getDefaulAddr()!");
-		ArrayList<AddrBean> defaultAddr = null;
+		ArrayList<JSONArray> defaultAddr = null;
 		Connection con = getConnection();
 		
 		AddrDAO addrDAO = AddrDAO.getInstance();
@@ -40,8 +43,23 @@ public class AddrService {
 		
 		close(con);
 		
-		
 		return defaultAddr;
+	}
+
+	public ArrayList<JSONArray> getRecentAddr(String member_id) {
+		System.out.println("AddrService - getRecentAddr()");
+		ArrayList<JSONArray> recentAddr = null;
+		Connection con = getConnection();
+		
+		AddrDAO addrDAO = AddrDAO.getInstance();
+		
+		addrDAO.setConnection(con);
+		
+		recentAddr = addrDAO.getRecentAddr(member_id);
+		
+		close(con);
+		
+		return recentAddr;
 	}
 
 }

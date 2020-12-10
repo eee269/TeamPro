@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import vo.AddrBean;
 import static db.JdbcUtil.*;
 public class AddrDAO {
@@ -60,9 +63,9 @@ public class AddrDAO {
 		return addrList;
 	}
 
-	public ArrayList<AddrBean> getDefaultAddr(String member_id, String addrType) {
+	public JSONArray getDefaultAddr(String member_id, String addrType) {
 		System.out.println("getDefaultAddr()!");
-		ArrayList<AddrBean> defaultAddr = null;
+		JSONArray defaultAddr = null;
 		
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -74,16 +77,24 @@ public class AddrDAO {
 			ps.setString(2, addrType);
 			rs = ps.executeQuery();
 			
-			defaultAddr = new ArrayList<AddrBean>();
+			defaultAddr = new JSONArray();
 			
 			if(rs.next()) {
-				AddrBean addr = new AddrBean();
-				addr.setNum(rs.getInt(1));
-				addr.setLocation(rs.getString(2));
-				addr.setPostcode(rs.getString(3));
-				addr.setAddress(rs.getString(4));
-				addr.setMember_id(rs.getString(5));
-				addr.setAddress(rs.getString(6));
+				JSONObject addr = new JSONObject();
+				
+				addr.put("num", rs.getInt(1));
+				addr.put("location", rs.getString(2));
+				addr.put("postcode", rs.getString(3));
+				addr.put("address", rs.getString(4));
+				addr.put("member_id", rs.getString(5));
+				addr.put("addrType",rs.getString(6));
+				
+//				addr.setNum(rs.getInt(1));
+//				addr.setLocation(rs.getString(2));
+//				addr.setPostcode(rs.getString(3));
+//				addr.setAddress(rs.getString(4));
+//				addr.setMember_id(rs.getString(5));
+//				addr.setAddress(rs.getString(6));
 				
 				defaultAddr.add(addr);
 			}
@@ -95,6 +106,40 @@ public class AddrDAO {
 			close(rs);
 		}
 		return defaultAddr;
+	}
+
+	public JSONArray getRecentAddr(String member_id) {
+		System.out.println("getRecentAddr()");
+		JSONArray recentAddr = null;
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		recentAddr = new JSONArray();
+
+		try {
+			String sql = "select postcode,address from mainorder where date in (select MAX(date) from mainorder)";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				JSONObject addr = new JSONObject();
+				
+				addr.put("postcode", rs.getString(1));
+				addr.put("address", rs.getString(2));
+				
+				recentAddr.add(addr);
+			}
+		} catch (SQLException e) {
+			System.out.println("getRecentAddr() 오류! - " +e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		}
+		
+		
+		return recentAddr;
 	}
 	
 	

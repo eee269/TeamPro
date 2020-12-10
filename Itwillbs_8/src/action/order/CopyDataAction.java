@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 
@@ -19,7 +20,8 @@ public class CopyDataAction implements Action {
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("CopyDataAction!");
 		
-		String member_id = "host";
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
 		
 		CopyDataService copyData = new CopyDataService();
