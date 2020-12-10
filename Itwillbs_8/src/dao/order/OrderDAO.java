@@ -37,6 +37,7 @@ public class OrderDAO {
 		
 	}
 	
+// ----------------------------- 메인 오더 생성 ---------------------------------------------
 	public int insertOrder(OrderBean ob) {
 		System.out.println("OrderDAO - insertOrder()!");
 		int insertCount = 1;
@@ -67,7 +68,9 @@ public class OrderDAO {
 		
 		return insertCount;
 	}
-
+// ----------------------------- 메인 오더 생성 끝 ---------------------------------------------
+	
+// ----------------------------- 메인 오더 리스트 생성 ---------------------------------------------	
 	public ArrayList<OrderBean> selectOrderList(String member_id) {
 		System.out.println("OrderDAO - selectOrderList()");
 		ArrayList<OrderBean> orderList = null;
@@ -110,7 +113,10 @@ public class OrderDAO {
 		
 		return orderList;
 	}
+// ----------------------------- 메인 오더 리스트 생성 끝 ---------------------------------------------	
 
+// ------------------- 주문 페이지에 member_id에 해당하는 정보 가져오기 -------------------------------	
+	
 	public JSONArray getData(String member_id) {
 		System.out.println("OrderDAO - getData()");
 		JSONArray md = new JSONArray();
@@ -144,6 +150,8 @@ public class OrderDAO {
 		}
 		return md;
 	}
+
+// ------------------- 주문 페이지에 member_id에 해당하는 정보 가져오기 -------------------------------	
 
 	public ArrayList<OrderBean> getMainorder() {
 		ArrayList<OrderBean> mainorderList = null;
@@ -181,6 +189,8 @@ public class OrderDAO {
 		
 		return mainorderList;
 	}
+// ------------------- 주문 페이지에 member_id에 해당하는 정보 가져오기 끝 -------------------------------	
+
 
 	public ArrayList<DetailOrderBean> getDetailorderList(String mainorder_code) {
 		ArrayList<DetailOrderBean> detailorderList = null;
@@ -333,7 +343,9 @@ public class OrderDAO {
 		
 		return cartList;
 	}
-
+	
+	
+// ------------------- 디테일 오더 생성 -------------------------------	
 	public int insertDetailOrder(int num, String code) {
 		System.out.println("OrderDAO - insertDetailOrder()-1!");
 		int insertCount = 0;
@@ -341,7 +353,7 @@ public class OrderDAO {
 		PreparedStatement p = null;
 		ResultSet rs = null;
 		
-		int num1= 1;
+		int num1=0;
 		try {
 			String sql = "select max(num) from detailorder";
 			p = con.prepareStatement(sql);
@@ -350,8 +362,9 @@ public class OrderDAO {
 			if(rs.next()) {
 				num1 =  rs.getInt(1)+1;
 			}
+			System.out.println("num1 = " +num1);
 			sql = "select * from cart where num = ?";
-			
+			System.out.println("num : " +num);
 			p = con.prepareStatement(sql);
 			p.setInt(1, num);
 			rs = p.executeQuery();
@@ -400,5 +413,6 @@ public class OrderDAO {
 		
 		return insertCount;
 	}
+// ------------------- 디테일 오더 생성 끝 -------------------------------	
 
 }

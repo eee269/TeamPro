@@ -1,3 +1,5 @@
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="vo.AddrBean"%>
 <%@page import="vo.Cart"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Connection"%>
@@ -9,8 +11,7 @@
 		<%
 	   
 	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
-
-	   int sevice = 2500;
+		int sevice = 2500;
 	   int coin = 0;
 	   int cartNo = cartList.size();
 		int num = Integer.parseInt(request.getParameter("chk"));
@@ -49,7 +50,7 @@ function copy_data() {
 					$('#emergency21').attr('value',item.phone_0),
 					$('#emergency22').attr('value',item.phone_1),
 					$('#emergency23').attr('value',item.phone_2)
-				})
+				});
 			});
 		}else {
 			$('#receiver').attr('value',""),
@@ -121,6 +122,46 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 
 }
 // 주소록 팝업 스크립트 끝
+
+// function recentAddr() {
+// 	function copy_data() {
+// 	       $(".ajaxClick").click(function(e){
+
+// 	            var useYn = $(this).val();
+	            
+// 	            $.ajax({
+// 	                type: "POST",   
+// 	                url: "mobileUseYnCheckAction.do?menuCd=" + ${pMap.menuCd},
+// 	                data: {
+// 	                    useYn: useYn
+// 	                },
+// 	                success: function(data){
+// 	                    if (useYn == "successY") {
+// 	  						alert("사용에 동의하셨습니다.");
+// 	                    }
+// 	                    else {
+// 							alert("사용에 미동의하셨습니다.");
+// 	                    }
+// 	                },
+// 	                error: function (xhr, status, error){
+// 	                    alert("error : " + error);
+// 	                }
+// 	            });
+// 	        });
+// }
+function Addr(test) {
+	$(document).ready(function(){
+		
+		var addrType = document.getElementById(test.getAttribute('id')).getAttribute('id');
+		
+		alert(addrType);
+		
+		if(addrType=="defaultAddr"){
+			
+		}
+			
+	});
+}
 </script>
 <jsp:include page="../inc/header.jsp" />
 
@@ -143,7 +184,6 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 <!-- 오더페이지 시작-->
 <div id="contentWrapper">
 	<div id="contentWrap">
-
 		<link type="text/css" rel="stylesheet"
 			href="/template_common/shop/basic_simple/menu.1.css?t=201711221039">
 		<div id="content">
@@ -162,7 +202,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 						<fieldset>
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
-						<input type="hidden" name="num" id="num" value="<%=cartNo%>">
+						<input type="hidden" name="num" id="num" value="<%=num%>">
 						<input type="hidden" name="amount" id="num" value="<%=total_price%>">	
 
 							<h3>주문자정보</h3>
@@ -240,11 +280,11 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 										</tr>
 										<tr>
 											<th scope="row"><div class="txt-l">배송지 선택</div></th>
-											<td colspan="3"><input type="radio" value="S"
-												form="order_form" name="place" onclick="addrclick()">기본
-												배송지 &nbsp;&nbsp;<input type="radio" value="A" name="place"
-												form="order_form" onclick="addrclick()">최근 배송지
-												&nbsp;&nbsp;<input type="radio" value="E" name="place"
+											<td colspan="3"><input type="radio" value="default"
+												form="order_form" name="place" id="defaultAddr" onclick="Addr(this)">기본
+												배송지 &nbsp;&nbsp;<input type="radio" name="place"
+												form="order_form"  id="recentAddr" onclick="Addr(this)">최근 배송지
+												&nbsp;&nbsp;<input type="radio" value="" name="place" 
 												form="order_form" onclick="execDaumPostcode()">신규
 												배송지 &nbsp;<a href="javascript:openAddrList();"
 												class="past_list"
@@ -272,21 +312,6 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 												</div>
 											</td>
 										</tr>
-										<tr>
-											<th scope="row"><div class="txt-l">
-													주문메세지<br> <span>(100자내외)</span>
-												</div></th>
-											<td colspan="3"><textarea name="message"
-													form="order_form" id="message" cols="50" rows="5"
-													class="MS_textarea"></textarea></td>
-										</tr>
-										<tr>
-											<th scope="row"><div class="txt-l">무통장 입금자명</div></th>
-											<td colspan="3"><input type="text" name="bankname"
-												form="order_form" class="MS_input_txt" size="10"
-												maxlength="40"> <span class="MS_bankname_message">(주문자와
-													같을경우 생략 가능)</span></td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -294,7 +319,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 
 							<label class="chk-label"> <input type="checkbox"
 								name="modify_address" form="order_form" id="modify_address"
-								value="Y"> 해당 배송지 정보를 나의 회원정보로 등록합니다.
+								value="Y"> 해당 배송지 정보를 나의 기본배송지로 등록합니다.
 							</label>
 
 							<h3>주문상품 할인적용</h3>
@@ -381,17 +406,17 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 														name="pay_method" value="card" checked="checked">
 														신용카드 <em><span class="op-card-dc-price fc-red"></span></em>
 													</li>
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="trans" checked="checked"> -->
-<!-- 														실시간계좌이체 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="trans" >
+														실시간계좌이체 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="phone">
+														휴대폰소액결제 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
 <!-- 													<li><input type="radio" class="chk-rdo" -->
 <!-- 														name="pay_method" value="vbank" checked="checked"> -->
 <!-- 														가상계좌 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="phone" checked="checked"> -->
-<!-- 														휴대폰소액결제 <em><span class="op-card-dc-price fc-red"></span></em> -->
 <!-- 													</li> -->
 <!-- 													<li><input type="radio" class="chk-rdo" -->
 <!-- 														name="pay_method" value="cultureland" checked="checked"> -->

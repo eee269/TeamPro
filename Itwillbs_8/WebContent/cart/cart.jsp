@@ -37,30 +37,16 @@ int cntSet = 0;
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-	  
-	
-	  
-	  
-	 
-	// ---------------------------------------------------------
-	
-
-	// ---------------------------------------------------------
-	  
-	  
-	  
-	  
-	});		
-  
+//   $(document).ready(function(){});		
+// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
   function multi_order(){
 	  $(".CSSbuttonBlack").click(function(){ 
 		  document.cartForm.setAttribute("action","Order.or");
 			document.cartForm.submit();
    });
   }
-
-		  </script>
+//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
+ </script>
 
 
 
@@ -96,7 +82,11 @@ int cntSet = 0;
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm">
-
+		<!-- 오더로 넘기는 값 -->
+					<input type="hidden" name="price" class="price-b">
+					<input type="hidden" name="delivery" class="delivery-b">
+					<input type="hidden" name="total_price" class="total-b">
+		<!-- 오더로 넘기는 값 -->
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -277,11 +267,7 @@ int cntSet = 0;
 				<!--          .table-fill-prd -->
 
 				<div class="btn-order-ctrl">
-					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기
-					<input type="hidden" name="price" class="price-b">
-					<input type="hidden" name="delivery" class="delivery-b">
-					<input type="hidden" name="total_price" class="total-b">
-					</a>
+					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>
 					<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
 					 <a	class="CSSbuttonWhite" onclick="document.cartForm.submit()">장바구니 비우기</a>
 				</div>
@@ -452,7 +438,6 @@ $("#allCheck").click(function(){
 	
 		// 체크박스 선택된 한줄 값 가져오기
 		$(".checkSelect").click(function(){ 
-			alert("check");
 			var rowData = new Array();
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
@@ -515,6 +500,7 @@ $("#allCheck").click(function(){
 			
 			// 총 합계 
 			$('.total-b').text(chCoin + sevice); 
+			
 			$('.total-b').attr('value',chCoin+sevice);	
 			$('.price-b').attr('value',chCoin);	
 			$('.delivery-b').attr('value',sevice);	
