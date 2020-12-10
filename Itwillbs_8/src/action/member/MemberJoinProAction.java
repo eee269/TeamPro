@@ -24,7 +24,7 @@ public class MemberJoinProAction implements Action {
 
 		
 		ServletContext context = request.getServletContext();
-		String saveFolder = "member/memberUpload";
+		String saveFolder = "/upload/memberUpload";
 		String realFolder = context.getRealPath(saveFolder);
 		int fileSize = 1024 * 1024 * 10;
 		

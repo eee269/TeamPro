@@ -133,7 +133,7 @@
 			<ul>
 				<li>
 					<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>" class="hov-img0 how-pos5-parent">
-						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG"/>
+						<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG"/>
 						<div class="flex-col-c-m size-123 bg9 how-pos5">
 							<span class="ltext-107 cl2 txt-center"> 22 </span> 
 							<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getDate() %></span>

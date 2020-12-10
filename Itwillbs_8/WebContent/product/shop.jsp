@@ -227,7 +227,7 @@ $( document ).ready(function () {
 				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
-					src="product/uploadImg/<%=main[0]%>"></a>
+					src="upload/productUploadImg/<%=main[0]%>"></a>
 
 			</dt>
 			<dd class="prd-info">
@@ -317,7 +317,7 @@ $( document ).ready(function () {
 					<div class="block2-pic hov-img0">
 						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
-							src="product/uploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
+							src="upload/productUploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
 						</a> 
 					</div>
 
