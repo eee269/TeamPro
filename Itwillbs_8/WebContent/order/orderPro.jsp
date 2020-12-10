@@ -12,9 +12,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	String member_id = "test";
-	String pass = "test";
-	
+	String id = (String) session.getAttribute("member_id");
+	String member_id = id;
+	String addrType = request.getParameter("addrType");
 // 	Class.forName("com.mysql.jdbc.Driver");
 	
 // 	String dbUrl = "jdbc:mysql://192.168.1.26:3306/teampro";
@@ -58,7 +58,5 @@
 		<%= md%>
 		<%
 	}
-	
 
 %>
-<%-- <%=md %> --%>

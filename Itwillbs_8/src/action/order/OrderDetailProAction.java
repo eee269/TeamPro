@@ -17,6 +17,7 @@ public class OrderDetailProAction implements Action {
 		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
 		int num =  Integer.parseInt(request.getParameter("num"));
+		System.out.println("num : "+num);
 		String code = request.getParameter("imp_uid");
 
 		OrderProService orderProService = new OrderProService();
