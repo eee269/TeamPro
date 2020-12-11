@@ -2231,3 +2231,19 @@ span.del {
 	padding-bottom: 10px !important;
 	border-bottom: #212529 3px solid !important;
 }
+
+.recomment_load {
+	display: none;
+}
+
+.recomment_load.on {
+	display: inline-block;
+}
+
+.recomment_close {
+	display: none;
+}
+
+.recomment_close.on {
+	display: inline-block;
+}

@@ -19,6 +19,8 @@ import action.community.CommModifyFormAction;
 import action.community.CommModifyProAction;
 import action.community.CommReDeleteProAction;
 import action.community.CommReModifyProAction;
+import action.community.CommReReCountProAction;
+import action.community.CommReReListProAction;
 import action.community.CommReReWriteProAction;
 import action.community.CommReWriteProAction;
 import action.community.CommWriteProAction;
@@ -189,6 +191,24 @@ public class CommFrontController extends HttpServlet {
 		} else if (command.equals("/CommReDeletePro.co")) {
 			// 댓글 삭제
 			action = new CommReDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if (command.equals("/CommReReListPro.co")) {
+			// 대댓글 리스트 ajax로 불러오기
+			action = new CommReReListProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if (command.equals("/CommReReCountProAction.co")) {
+			// 대댓글 카운트
+			action = new CommReReCountProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

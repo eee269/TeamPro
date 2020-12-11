@@ -36,6 +36,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 
+
+
 	<!-- breadcrumb -->
 	<div class="container">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -191,33 +193,23 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 													</dl>
 													
 													
-													<%
-													if(commentList.get(i).getRe_lev()>0){ //답댓글일경우 왼쪽 여백을 줌 
-														%><div class="content" style="padding-left:50px;"><%
-													}else{
-														%><div class="content"><%
-													}
-													%>
-						
-
-														<p class="content_p">
-															<% //답댓글일경우 [RE]를 붙인다
-																if(commentList.get(i).getRe_lev()>0){ //댓글인경우
-																	%><b>[RE]</b><%
-																}
-															%>
-																									
+													<div class="content">
+														<p class="content_p">																									
 															<%=commentList.get(i).getContents() %>
 														</p>
 														<div class="ctr"></div>
 													</div>
 														
-															
-	
+													<input type="hidden" class="comment_num" value="<%=commentList.get(i).getNum()%>">
+													<input type="hidden" class="num" value="<%=commentList.get(i).getCommunity_num()%>">
+													<div id="replyCount"></div>
+													<input type="button" value="답댓글 열기" class="bu_gray_s recomment_load on">
+													<input type="button" value="답댓글 닫기" class="bu_gray_s recomment_close">
+													<input type="hidden" value="카운트" class="bu_gray_s recomment_count">
 													<%
 														if(id!=null){ //원댓글일 경우에는 답댓글 버튼이보인다
 															if(commentList.get(i).getRe_lev()==0){
-														%><input type="button" value="답댓글" class="bu_gray_s comment_add"></span><%
+														%><input type="button" value="쓰기" class="bu_gray_s comment_add"></span><%
 														}
 													}
 													%>
@@ -230,7 +222,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 													<%}}%>
 													
 													
-													
+					
 													<!-- 댓글 수정 입력폼 시작 -->
 													<div id="obj" class="obj reply-wrap">
 													<form name="comment" id="comment" action="CommReModifyPro.co" method="post" style="margin-top:0px !important; padding-top:0px !important;">
@@ -250,18 +242,23 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 													<!-- 대댓글 입력폼 시작 -->
 													<div id="comm_add" class="comm_add reply-wrap">
 													<form name="comment" id="comment" action="CommReReWritePro.co" method="post">
-													<input type="hidden" name="username" value="<%=id %>">
-													<input type="hidden" name="community_num" value="<%=community_num%>">
-													<input type="hidden" name="num" value="<%=commentList.get(i).getNum()%>">
-													<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>">
+													<input type="hidden" name="username" value="<%=id %>" id="username">
+													<input type="hidden" name="community_num" value="<%=community_num%>" id="community_num">
+													<input type="hidden" name="num" value="<%=commentList.get(i).getNum()%>" id="num">
+													<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>" id="rePage">
 														<div class="wrt">
 															<textarea name="contents" id="contents"></textarea>
-															<input type="submit" value="입력" class="btn_comment">
+<!-- 															<input type="submit" value="입력" class="btn_comment"> -->
+															<input type="button" value="입력" class="btn_comment reReWrite">
 														</div>
 													</form>		
 													</div>
 													<!-- 대댓글 입력폼 끝 -->												
-			
+													
+													<!-- 답댓글 영역 시작 -->
+													<div id="replyList"></div>
+													
+													<!-- 답댓글 영역 끝 -->
 	
 												</li>
 											<%
@@ -307,16 +304,154 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 							</div>
 							<!-- .page-body -->
 						</div>						
+					<!-- -----------------------------Comment----------------------------- -->
 						
 						
-		
-						
-						<!-- -----------------------------Comment----------------------------- -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>	
+
+
+<script>
+ 	$(function(){
+		
+ 		// 대댓글 쓰기 버튼 클릭
+ 		$(".reReWrite").click(function(){
+			 	var a = $(this).parents('li').find('#comm_add'); 
+			 	var b = $(this).parents('li'); 
+			 	
+			 	var username = a.find('#username').val();
+				var community_num = a.find('#community_num').val();
+				var num = a.find('#num').val();
+				var rePage = a.find('#rePage').val();
+				var contents = a.find('#contents').val();
+				
+				var allData = { "username":username,"community_num":community_num,"num": num,"rePage": rePage,"contents":contents};
+
+	    		$.ajax({
+	                type: "POST",
+	    			url: "CommReReWritePro.co",
+// 	    			processData: false,
+// 	                contentType: false,
+	                data: allData,
+	                success: function () {
+// 	                	alert("리뷰 등록 완료");
+	                	a.find('#contents').val("");
+	                	b.find(".recomment_load").trigger("click");
+	                	b.find(".recomment_count").trigger("click");
+	                },
+	    			error: function(request,status,error){
+	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    		       }
+	    		})
+	    	
+	    })
+ 		
+ 		
+ 		// 답댓글 보기 클릭
+ 		$(".recomment_load").click(function(){
+
+ 				  var a = $(this).parents('li'); 
+ 				  var comment_num = a.find('.comment_num').val();
+ 				  var num = a.find('.num').val();
+ 			  
+ 				  var allData = { "comment_num": comment_num,"num": num};
+		    	
+ 				  
+ 				  $.ajax({
+	    			url: "CommReReListPro.co", // 요청 url
+	                type: "POST", // post 방식
+	                data: allData,
+	                success: function (json) { 
+	                	json = json.replace(/\n/gi,"\\r\\n");
+// 	                	$("#replyList").text(""); 
+
+	                	var obj = JSON.parse(json);
+	                	
+	                	var replyList = obj.replyList; 
+	                	var output = ""; 
+	                	for (var i = 0; i < replyList.length; i++) {
+	                	
+	   	                for (var j = 0; j < replyList[i].length; j++) {
+	    	                    var reply = replyList[i][j];
+	    	                    if(j == 0){
+	    	                    	output += "<ul class='rerelist'><li>"+reply.contents+"</li>";
+	    	                    }else if(j == 1){
+	    	                    	output += "<li>작성자 : "+reply.name+"</li>";
+	    	                    }else if(j == 2){
+	    	                    	output += "<li>작성일 : "+reply.date+"</li>";
+	    	                    }else if(j == 3){
+	    	                    	output +="<li><a href='CommReDeletePro.co?num="+reply.comm_re_num+"&community_num="+<%=community_num%>+"&rePage="+<%=request.getParameter("rePage") %>+"' onclick='return button_event();'>삭제</a></li></ul><br>";
+	    	                    }
+	    	                    
+	    	        		};
+	    	        	
+	                	};
+// 	                	alert(output);
+	                	
+	   	              	a.find("#replyList").html(output);
+	   	             	a.find('.recomment_load').removeClass("on");
+	   	             	a.find('.recomment_close').addClass("on"); 
+	                },
+	            error: function(request,status,error){
+    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		      	}
+		    	})
+
+ 		});  
+ 	})
+	
+	// 답댓글 닫기 클릭
+ 	$(function(){
+ 		$(".recomment_close").click(function(){
+
+ 				  var a = $(this).parents('li'); 
+ 				  a.find("#replyList").text(""); 
+
+	   	          a.find('.recomment_close').removeClass("on");
+	   	          a.find('.recomment_load').addClass("on"); 
+
+ 		});  
+ 	})	
+	
+
+	// 카운트 구하기
+ 	$(function(){
+ 		$(".recomment_count").click(function(){
+ 			
+			var a = $(this).parents('li'); 
+			var comment_num = a.find('.comment_num').val();
+			var num = a.find('.num').val();
+			  
+			var allData = { "comment_num": comment_num,"num": num};
+			
+	    	$.ajax({
+    			url: "CommReReCountProAction.co", // 요청 url
+                type: "POST", // post 방식
+                data: allData,
+                success: function (reReCount) {
+                	a.find("#replyCount").html("댓글수 : "+reReCount);
+          		  	if(reReCount==0){
+        				  a.find('.recomment_load').removeClass("on");
+        			}
+                	
+                },
+            error: function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		      	}
+	    	})
+ 		});  
+	    
+
+	})
+
+ 	$(document).ready(function(){
+ 		  $(".recomment_count").trigger("click");
+ 	});
+</script>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -391,7 +526,7 @@ $(function(){
                 },
 			})
 	    };
-	    bookmarkCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+	    
 })
 </script>
 	    
