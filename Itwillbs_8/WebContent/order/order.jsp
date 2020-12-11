@@ -1,3 +1,5 @@
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="vo.AddrBean"%>
 <%@page import="vo.Cart"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Connection"%>
@@ -9,11 +11,13 @@
 		<%
 	   
 	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
-
-	   int sevice = 2500;
+		int sevice = 2500;
 	   int coin = 0;
 	   int cartNo = cartList.size();
 		int num = Integer.parseInt(request.getParameter("chk"));
+		int price = Integer.parseInt(request.getParameter("price"));
+		int delivery = Integer.parseInt(request.getParameter("delivery"));
+		int total_price = Integer.parseInt(request.getParameter("total_price"));
 	%>
 <script src="js/jquery-3.5.1.js"></script>
 <script type="text/javascript">
@@ -46,7 +50,7 @@ function copy_data() {
 					$('#emergency21').attr('value',item.phone_0),
 					$('#emergency22').attr('value',item.phone_1),
 					$('#emergency23').attr('value',item.phone_2)
-				})
+				});
 			});
 		}else {
 			$('#receiver').attr('value',""),
@@ -118,6 +122,37 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 
 }
 // 주소록 팝업 스크립트 끝
+
+function Addr(test) {
+	$(document).ready(function(){
+		
+		var addrType = document.getElementById(test.getAttribute('id')).getAttribute('id');
+		
+		alert(addrType);
+		
+		if(addrType=="defaultAddr"){
+			$.getJSON('DefaultAddr.ad?addrType='+addrType,function(rdata){
+				$.each(rdata, function(index,item){
+					$('#postcode').attr('value',item.postcode),
+					$('#address').attr('value',item.address)
+				});
+			});
+		} else if(addrType == 'recentAddr'){
+			$.getJSON('RecentAddr.ad?addrType='+addrType,function(rdata){
+				$.each(rdata, function(index,item){
+					$('#postcode').attr('value',item.postcode),
+					$('#address').attr('value',item.address)
+				});
+			});
+		}
+		else {
+			$('#postcode').attr('value',""),
+			$('#address').attr('value',"")
+		
+		}
+			
+	});
+}
 </script>
 <jsp:include page="../inc/header.jsp" />
 
@@ -138,11 +173,8 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- 오더페이지 시작-->
-
 <div id="contentWrapper">
-	<div></div>
 	<div id="contentWrap">
-
 		<link type="text/css" rel="stylesheet"
 			href="/template_common/shop/basic_simple/menu.1.css?t=201711221039">
 		<div id="content">
@@ -161,97 +193,8 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 						<fieldset>
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
-						<input type="hidden" name="num" id="num" value="<%=cartNo%>">
-							
-<!-- 							<div class="tbl-order"> -->
-<!-- 								<table> -->
-<!-- 									<caption>주문리스트</caption> -->
-<!-- 									<colgroup> -->
-<!-- 										<col style="width: 50px"> -->
-<!-- 										<col style="width: 200px"> -->
-<!-- 										<col style="width: 80px"> -->
-<!-- 										<col style="width: 80px"> -->
-<!-- 										<col style="width: 50px"> -->
-<!-- 									</colgroup> -->
-<!-- 									<thead> -->
-<!-- 										<tr> -->
-<!-- 											<th scope="col"></th> -->
-<!-- 											<th scope="col">제품</th> -->
-<!-- 											<th scope="col">수량</th> -->
-<!-- 											<th scope="col">가격</th> -->
-<!-- 											<th scope="col">적립</th> -->
-<!-- 										</tr> -->
-<!-- 									</thead> -->
-<!-- 									<tbody> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center"> -->
-<!-- 													<div class="thumb"> -->
-<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-left"> -->
-<!-- 													<a -->
-<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360797">로티 -->
-<!-- 														크로커 크로스바디 </a> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">1개</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">4,380</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td colspan="5"> -->
-<!-- 												<div style="padding-left: 25px"> -->
-<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
-<!-- 													색상 : BLACK 1개 -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center"> -->
-<!-- 													<div class="thumb"> -->
-<!-- 														<img src="cart/img/0010010007533.jpg" width="40"> -->
-<!-- 													</div> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-left"> -->
-<!-- 													<a -->
-<!-- 														href="http://oryany.co.kr/shop/shopdetail.html?branduid=3360799">루키 -->
-<!-- 														크로스바디 </a> -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">1개</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center tb-bold">219,000원</div> -->
-<!-- 											</td> -->
-<!-- 											<td> -->
-<!-- 												<div class="tb-center">4,380</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 										<tr class="nbg"> -->
-<!-- 											<td colspan="5"> -->
-<!-- 												<div style="padding-left: 25px"> -->
-<!-- 													<img src="cart/img/basket_option.gif" alt="옵션" title="옵션"> -->
-<!-- 													색상 : BLACK 1개 -->
-<!-- 												</div> -->
-<!-- 											</td> -->
-<!-- 										</tr> -->
-<!-- 									</tbody> -->
-<!-- 								</table> -->
-<!-- 							</div> -->
+						<input type="hidden" name="num" id="num" value="<%=num%>">
+						<input type="hidden" name="amount" id="num" value="<%=total_price%>">	
 
 							<h3>주문자정보</h3>
 							<div class="tbl-order">
@@ -328,11 +271,11 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 										</tr>
 										<tr>
 											<th scope="row"><div class="txt-l">배송지 선택</div></th>
-											<td colspan="3"><input type="radio" value="S"
-												form="order_form" name="place" onclick="addrclick()">기본
-												배송지 &nbsp;&nbsp;<input type="radio" value="A" name="place"
-												form="order_form" onclick="addrclick()">최근 배송지
-												&nbsp;&nbsp;<input type="radio" value="E" name="place"
+											<td colspan="3"><input type="radio" value="default"
+												form="order_form" name="place" id="defaultAddr" onclick="Addr(this)">기본
+												배송지 &nbsp;&nbsp;<input type="radio" name="place"
+												form="order_form"  id="recentAddr" onclick="Addr(this)">최근 배송지
+												&nbsp;&nbsp;<input type="radio" value="" name="place" 
 												form="order_form" onclick="execDaumPostcode()">신규
 												배송지 &nbsp;<a href="javascript:openAddrList();"
 												class="past_list"
@@ -360,21 +303,6 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 												</div>
 											</td>
 										</tr>
-										<tr>
-											<th scope="row"><div class="txt-l">
-													주문메세지<br> <span>(100자내외)</span>
-												</div></th>
-											<td colspan="3"><textarea name="message"
-													form="order_form" id="message" cols="50" rows="5"
-													class="MS_textarea"></textarea></td>
-										</tr>
-										<tr>
-											<th scope="row"><div class="txt-l">무통장 입금자명</div></th>
-											<td colspan="3"><input type="text" name="bankname"
-												form="order_form" class="MS_input_txt" size="10"
-												maxlength="40"> <span class="MS_bankname_message">(주문자와
-													같을경우 생략 가능)</span></td>
-										</tr>
 									</tbody>
 								</table>
 							</div>
@@ -382,7 +310,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 
 							<label class="chk-label"> <input type="checkbox"
 								name="modify_address" form="order_form" id="modify_address"
-								value="Y"> 해당 배송지 정보를 나의 회원정보로 등록합니다.
+								value="Y"> 해당 배송지 정보를 나의 기본배송지로 등록합니다.
 							</label>
 
 							<h3>주문상품 할인적용</h3>
@@ -404,13 +332,13 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 											<td>
 												<div class="base">
 													<strong><em><span
-															class="op-total block-op-product-price" price="438000">438,000</span></em>원</strong>
+															class="op-total block-op-product-price" ><%=price %></span></em>원</strong>
 												</div>
 											</td>
 											<td>
 												<div class="base">
 													<strong><em><span
-															class="op-total block-op-add-price" price="0">0</span></em>원</strong> <a
+															class="op-total block-op-add-price" ><%=delivery %></span></em>원</strong> <a
 														class="plus"><img src="cart/img/bul_h23_plus.png"
 														alt="plus"></a><a class="minus" style="display: none;"><img
 														src="cart/img/bul_h23_minus.png" alt="minus"></a>
@@ -420,7 +348,7 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 												<div class="base">
 													<a class="equal"><img src="cart/img/bul_h23_equal.png"
 														alt="equal"></a> <strong><em class="fc-red"><span
-															class="block-op-sum-price" price="438000">438,000</span></em>원</strong>
+															class="block-op-sum-price" ><%=total_price %></span></em>원</strong>
 												</div>
 											</td>
 										</tr>
@@ -469,17 +397,17 @@ window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500
 														name="pay_method" value="card" checked="checked">
 														신용카드 <em><span class="op-card-dc-price fc-red"></span></em>
 													</li>
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="trans" checked="checked"> -->
-<!-- 														실시간계좌이체 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="trans" >
+														실시간계좌이체 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="phone">
+														휴대폰소액결제 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
 <!-- 													<li><input type="radio" class="chk-rdo" -->
 <!-- 														name="pay_method" value="vbank" checked="checked"> -->
 <!-- 														가상계좌 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="phone" checked="checked"> -->
-<!-- 														휴대폰소액결제 <em><span class="op-card-dc-price fc-red"></span></em> -->
 <!-- 													</li> -->
 <!-- 													<li><input type="radio" class="chk-rdo" -->
 <!-- 														name="pay_method" value="cultureland" checked="checked"> -->

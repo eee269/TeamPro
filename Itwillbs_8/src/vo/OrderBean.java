@@ -7,6 +7,7 @@ public class OrderBean {
 	private String code;
 	private String name;
 	private String phone;
+	private String postcode;
 	private String address;
 	private Timestamp date;
 	private String status;
@@ -28,6 +29,9 @@ public class OrderBean {
 	}
 	public String getPhone() {
 		return phone;
+	}
+	public String getPostcode() {
+		return postcode;
 	}
 	public String getAddress() {
 		return address;
@@ -52,6 +56,9 @@ public class OrderBean {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 	public void setAddress(String address) {
 		this.address = address;

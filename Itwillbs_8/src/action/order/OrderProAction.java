@@ -26,6 +26,7 @@ public class OrderProAction implements Action {
 		ob.setCode(request.getParameter("imp_uid"));
 		ob.setName(request.getParameter("buyer_name"));
 		ob.setPhone(request.getParameter("buyer_tel"));
+		ob.setPostcode(request.getParameter("buyer_postcode"));
 		ob.setAddress(request.getParameter("buyer_addr"));
 		ob.setStatus("결제완료");
 		ob.setPayment(request.getParameter("pay_method"));

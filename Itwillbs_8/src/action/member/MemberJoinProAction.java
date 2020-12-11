@@ -24,7 +24,7 @@ public class MemberJoinProAction implements Action {
 
 		
 		ServletContext context = request.getServletContext();
-		String saveFolder = "member/memberUpload";
+		String saveFolder = "/upload/memberUpload";
 		String realFolder = context.getRealPath(saveFolder);
 		int fileSize = 1024 * 1024 * 10;
 		
@@ -47,7 +47,7 @@ public class MemberJoinProAction implements Action {
 		member.setUsername(multi.getParameter("username"));
 		member.setImg(multi.getOriginalFileName("img"));
 		member.setDate(new Timestamp(System.currentTimeMillis()));
-		member.setPhone(Integer.parseInt(multi.getParameter("phone")));
+		member.setPhone(multi.getParameter("phone"));
 		
 		System.out.println("멤버조인프로엑션");
 		MemberJoinProService memberJoinProService=new MemberJoinProService();		

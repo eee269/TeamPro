@@ -27,7 +27,7 @@ public class ProdQnaWriteProAction implements Action {
 		String member_id = (String)session.getAttribute("member_id");
 		
 		ServletContext context = request.getServletContext();
-		String saveFolder = "/product/prodQnaUploadImg";
+		String saveFolder = "/upload/prodQnaUpload";
 		String realFolder = context.getRealPath(saveFolder);
 		int fileSize = 1024 * 1024 * 10; // 10MB
 		MultipartRequest multi = new MultipartRequest(
@@ -39,12 +39,13 @@ public class ProdQnaWriteProAction implements Action {
 				);
 		
 		// 입력 받은 데이터 저장
-		String pass = multi.getParameter("pass");
-		String subject = multi.getParameter("subject");
-		String content = multi.getParameter("content");
-		String file = multi.getOriginalFileName("file");
+		String qna_pass = multi.getParameter("qna_pass");
+		String qna_subject = multi.getParameter("qna_subject");
+		String qna_content = multi.getParameter("qna_content");
+		String qna_file = multi.getOriginalFileName("qna_file");
 		String product_basicCode = multi.getParameter("basicCode");
-		ProdQnaBean prodQnaBean = new ProdQnaBean(0, pass, subject, content, file, 0, 0, member_id, product_basicCode, null);
+		ProdQnaBean prodQnaBean = 
+				new ProdQnaBean(0, qna_pass, qna_subject, qna_content, 0, qna_file, 0, 0, null, product_basicCode, member_id,0);
 		
 		// qna 등록 작업 요청
 		ProdQnaService prodQnaService = new ProdQnaService();
@@ -60,9 +61,7 @@ public class ProdQnaWriteProAction implements Action {
 			out.println("</script>"); // 자바스크립트 끝 태그
 		}else {
 			forward = new ActionForward();
-			//    (주의! 경로명 앞에 슬래시(/) 기호 붙이지 말 것!)
 			forward.setPath("ProductDetail.po?basicCode="+product_basicCode);
-			// 3. 포워딩 방식(Redirect 방식) 지정
 			forward.setRedirect(true);
 		}
 		

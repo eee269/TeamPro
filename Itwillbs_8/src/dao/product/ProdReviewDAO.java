@@ -108,18 +108,18 @@ public class ProdReviewDAO {
 		int startRow = (page-1) * limit;
 		
 		try {
-			if(active.equals("포토리뷰()")) {
-				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NOT NULL ORDER BY num desc limit ?,?";
-			}else {
-				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NULL ORDER BY num desc limit ?,?";
-			}
+//			if(active.equals("포토리뷰()")) {
+//				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NOT NULL ORDER BY num desc limit ?,?";
+//			}else {
+//				sql = "SELECT * FROM product_review WHERE product_basicCode=? and product_img IS NULL ORDER BY num desc limit ?,?";
+//			}
+			sql ="SELECT * FROM product_review WHERE product_basicCode=? ORDER BY num desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
 			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			reviewList = new ArrayList<ProdReviewBean>();
-			System.out.println(sql);
 			while(rs.next()) {
 				ProdReviewBean review = new ProdReviewBean();
 				review.setContent(rs.getString("content"));
