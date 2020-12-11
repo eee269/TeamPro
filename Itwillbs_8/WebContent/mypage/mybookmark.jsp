@@ -6,7 +6,6 @@
 <%
 	String member_id = (String) session.getAttribute("member_id");
 
-	ArrayList<Integer> mybookmarkList = (ArrayList) request.getAttribute("mybookList");
 	ArrayList<CommBean> articleList = (ArrayList) request.getAttribute("articleList");
 %>
 
@@ -87,7 +86,7 @@
 <%
 int i=0, j=4;
 
-if(mybookmarkList.size() == 0) {
+if(articleList.size() == 0) {
 	%>
 	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
 		<span>관심있는 게시글이 없습니다.</span>

@@ -58,14 +58,14 @@ public class MemberMypageService {
 		return mainorderList;
 	}
 
-	public ArrayList<CommBean> getArticleList(String username) {
+	public ArrayList<CommBean> getArticleList(String member_id) {
 		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 		
 		Connection con = getConnection();
 		
 		CommDAO commDAO = CommDAO.getInstance();
 		commDAO.setConnection(con);
-		articleList = commDAO.selectArticleList(username);
+		articleList = commDAO.selectArticleList(member_id);
 		
 		close(con);
 		

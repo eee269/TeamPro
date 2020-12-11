@@ -21,7 +21,6 @@ public class MybookmarkListAction implements Action {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
 		
-		ArrayList<Integer> mybookList = new ArrayList<Integer>();
 		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 
 		if (member_id == null) {
@@ -34,13 +33,9 @@ public class MybookmarkListAction implements Action {
 			forward.setPath("MemberLoginForm.mo");
 		} else {
 			MybookmarkListService service = new MybookmarkListService();
-			mybookList = service.getMybookmarkList(member_id);
-			
-			if(mybookList.size() > 0) {
-				articleList = service.getArticleList(mybookList);
-			}
-			
-			request.setAttribute("mybookList", mybookList);
+			//내가 북마크 한 게시글의 목록
+			articleList = service.getMybookArticleList(member_id);
+				
 			request.setAttribute("articleList", articleList);
 			
 			forward.setPath("/mypage/mybookmark.jsp");

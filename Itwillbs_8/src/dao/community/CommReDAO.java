@@ -387,4 +387,50 @@ public class CommReDAO {
 		
 		return listCount;
 	}
+
+
+	public ArrayList<CommReBean> selectMyreplyList(String member_id) {
+		ArrayList<CommReBean> list = new ArrayList<CommReBean>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select username from member where id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				sql = "select * from community_reply where username=?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, rs.getString(1));
+				rs = ps.executeQuery();
+				
+				while(rs.next()) {
+					CommReBean reply = new CommReBean();
+					
+					reply.setCommunity_num(rs.getInt("community_num"));
+					reply.setContents(rs.getString("contents"));
+					reply.setDate(rs.getTimestamp("date"));
+					reply.setNum(rs.getInt("num"));
+					reply.setRe_lev(rs.getInt("re_lev"));
+					reply.setRe_ref(rs.getInt("re_ref"));
+					reply.setUsername(rs.getString("username"));
+					
+					list.add(reply);
+				}
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("CommReDAO - selectMyreplyList Error!!!!!");
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		
+		return list;
+	}
 }
