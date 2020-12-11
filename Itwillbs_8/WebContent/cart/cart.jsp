@@ -3,10 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
-
 
 int coin = 0;
 int cartNo = cartList.size();
@@ -19,7 +17,6 @@ int cntSet = 0;
 	margin: 150px auto;
 	font-size: 20px;
 }
-#whiteBu:hover{color:#fff;}
 
 #emptyArea {
 	margin: auto;
@@ -31,24 +28,27 @@ int cntSet = 0;
 }
 .tb-center a:hover{
   background-color: #717fe0;
+}
 
+#whiteBu:hover{color:#fff;}
+
+.btn-dw {
+	width: 20px;
+	height: 40px;
+	background-color: white;
+}
+
+.btn-up {
+	width: 20px;
+	height: 40px;
+	background-color: white;
 }
 
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
 <script type="text/javascript">
-//   $(document).ready(function(){});		
-// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
-  function multi_order(){
-	  $(".CSSbuttonBlack").click(function(){ 
-		  document.cartForm.setAttribute("action","Order.or");
-			document.cartForm.submit();
-   });
-  }
-//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
- </script>
-
+  $(document).ready(function(){
 
   }
   </script>
@@ -82,16 +82,12 @@ int cntSet = 0;
 		<dl class="loc-navi">
 			<dt class="blind">현재 위치</dt>
 			<dd>
-				<a href="/">HOME</a> &gt; CART
+				<a href="Main.go">HOME</a> &gt; CART
 			</dd>
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm">
-		<!-- 오더로 넘기는 값 -->
-					<input type="hidden" name="price" class="price-b">
-					<input type="hidden" name="delivery" class="delivery-b">
-					<input type="hidden" name="total_price" class="total-b">
-		<!-- 오더로 넘기는 값 -->
+
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -183,10 +179,9 @@ int cntSet = 0;
 									<div class="tb-center">
 <!-- 										<div class="opt-spin"> -->
 <!-- 							<span class="btns"> -->
-							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-">
+							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-"  style="cursor:pointer" >
 							<input type="text" id="btn-num<%=i%>" name="amount"	 value="<%=cartList.get(i).getCnt() %>" class="txt-spin"> 
-								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" value="+">
-													
+								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" style="cursor:pointer" value="+">
 <!-- 											</span> -->
 <!-- 										</div> -->
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
@@ -258,10 +253,6 @@ int cntSet = 0;
 										</span><span class="MK_total_delivery">+ 배송비<span
 											class="MK_chg_total_delivery MK_change_price"><b class="delivery-b">0</b></span>원
 										</span> = <strong><span class="MK_total_price"><span class="MK_chg_total_price MK_change_price"></span><b class="total-b">0</b>원</span></strong><br>
-<!-- 										                           <span class="MK_total_reserve">기본금액<span -->
-<!-- 										                              class="MK_chg_total_reserve MK_change_price">4,380</span>원 -->
-<!-- 										                           </span><span class="MK_group_sale_reserve"> (그룹적립금 원) </span><span -->
-<!-- 										                              class="MK_total_point"> / 포인트 </span> -->
 									</div>
 								</td>
 							</tr>
@@ -273,8 +264,8 @@ int cntSet = 0;
 
 				<div class="btn-order-ctrl">
 					<a href="javascript:multi_order()" class="CSSbuttonBlack">주문하기</a>
-					<a href="/html/mainm.html" class="CSSbuttonWhite">계속 쇼핑하기</a>
-					 <a	class="CSSbuttonWhite" id="whiteBu" onclick="document.cartForm.submit()">장바구니 비우기</a>
+					<a href="Main.go" class="CSSbuttonWhite">계속 쇼핑하기</a>
+					 <a	class="CSSbuttonWhite" id ="whiteBu"onclick="document.cartForm.submit()">장바구니 비우기</a>
 				</div>
 
 				<!--          .table-fill-prd -->
@@ -285,19 +276,27 @@ int cntSet = 0;
 	<!-- #cartWrap -->
 </div>
 <!-- Shoping Cart 끝 -->
+
+
 <script type="text/javascript">
+//----------------------------------tr 체크박스 선택 , 해제  및   tr 체크박스 선택시 총금액 계산-------------------------------------------------------------------
+// 체크박스 선택 전 전체선택 div 숨기기
+$('#whiteBu').hide();
 	
 $("#allCheck").click(function(){
 	  // 전체 선택
-      if($("#allCheck").prop("checked")){	// 맨위 체크박스가 true 
-          $("input[name=chk]").prop("checked",true); // td 체크박스도 체크
-      	$("#allCheck").click(function(){  // td 체크박스 누르면 총 금액 
+      if($("#allCheck").prop("checked")){	// 맨위 체크박스가 체크되면  
+          $("input[name=chk]").prop("checked",true); // td 체크박스도 전체체크
+       // tr 체크박스 누르면 총 금액  표시
+      	$("#allCheck").click(function(){  
   			var rowData = new Array();
   			var tdArr = new Array();
   			var checkbox = $("input[name=chk]:checked");
-  			var chArr = new Array();
-  			var chCoin = 0;
-  			var sevice = 2500;
+  			var chArr = new Array();	//체크박스 배열
+  			var chCoin = 0;	 // 총합
+  			var sevice = 2500;	// 배송비
+
+  		
   			// 체크된 체크박스 값을 가져온다
   			checkbox.each(function(i) {
   				// checkbox.parent() : checkbox의 부모는 <td>이다.
@@ -319,7 +318,6 @@ $("#allCheck").click(function(){
   				var in4 = td.eq(4).text();
   				// 숫자 뒤에 원 없애기
   				in4 = Number(in4.substr(0, in4.length -1));        
-//   				alert(in4);
   				
   				// 가져온 값을 배열에 담는다.
   				tdArr.push(in3);
@@ -336,18 +334,19 @@ $("#allCheck").click(function(){
   				 chCoin = Number(chCoin) + Number(chArr[i]);
 
   			}
-  			// chCoin 이 0 이면 텍스트에 아무것도 안보이게
+  			// chCoin 이 0원 이면 텍스트에 0원 표시
   			 if(chCoin == 0){
   				 $('.price-b').text(' 0'); 
-  			// chCoin 이 0보다 크면 가격 뿌려주기
+  			// chCoin 이 0보다 크면 가격 표시
   			 } else if(chCoin > 0){
   				 $('.price-b').text(chCoin);
+  				 
   			 }
   			
-  			// 배송비 30000 이상이면 0 
+  			// 30000원 이상이면 배송비 0 
   			if(chCoin >= 30000 || chCoin == 0){
   				sevice = 0;
-  				 $('.delivery-b').text(sevice); 
+  				 $('.delivery-b').text(sevice);
   			} else if(chCoin < 30001){
   				sevice = 2500;
   				$('.delivery-b').text(sevice); 
@@ -361,86 +360,12 @@ $("#allCheck").click(function(){
      // 전체 해제
       } else {	// 맨위 체크박스가 해제되면 
           $("input[name=chk]").prop("checked",false);	// td도 해제
+	
       }
   });
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 상품개수증가
-  function cntUp(id) {
-		var numid = id.replace("up", "num");
-		var result = parseInt(numid)+1
-		var cnt = Number($('#'+numid).val());
-		cnt += 1;
-		
-		$('#'+numid).val(cnt);
-		
-	};
-	
-	// 상품개수감소
-	function cntDown(id) {
-		var numid = id.replace("down", "num");
-		
-		var cnt = Number($('#'+numid).val());
-		if(cnt > 1) {
-			cnt -= 1;
-			$('#'+numid).val(cnt);
-		}
-	};
-	
-	
-	// 수량 변경
-	function cntUpdate(num , id){
-		
-		var numid = id.replace("Save", "num");
-		var cnt = Number($('#'+numid).val());
-		alert(cnt);
-		
-	location.href='CartUpdate.ca?num='+num+'&cnt='+cnt+'&member_id=dodo';
-	
-	};
-		
-	
-	
-	
-	// 주문 
-// 	$(".checkSelect").click(function(){ 
-		
-// 		var rowData = new Array();
-// 		var tdArr = new Array();
-		
-// 		var checkbox = $("input[name=chk]:checked");
-// 		checkbox.each(function(i) {
-			
-		
-// 			var tr = checkbox.parent().parent().eq(i);
-// 			var td = tr.children();
-// 			// 배열에 담기
-// 			rowData.push(tr.text());
-			
-// 			var in0 = td.eq(0).text();
-// 			var in1 = td.eq(2).text();
-// 			var in2 = td.eq(2).text();
-// 			var in3 = td.eq(3).text();
-// 			var in4 = td.eq(4).text();
-// 			var in5 = td.eq(5).text();
-// 			var in6 = td.eq(6).text();
-// 			var in7 = td.eq(7).text();
-// 		}
-		
-// 	location.href='CartUpdate.ca?num='+num+'&cnt='+cnt+'&member_id=dodo';
-	
-// 	}
-	var tmp = $('[name=tr-check]').prop('checked');
-	var tmp2 = $('[name=chk]').prop('checked'); 
-	
+// --------------------------------------------td 금액계산------------------------------------------------------
+	 	// td 체크박스 누르면 총 금액  표시
 		// 체크박스 선택된 한줄 값 가져오기
 		$(".checkSelect").click(function(){ 
 			var rowData = new Array();
@@ -449,6 +374,7 @@ $("#allCheck").click(function(){
 			var chArr = new Array();
 			var chCoin = 0;
 			var sevice = 2500;
+		
 			// 체크된 체크박스 값을 가져온다
 			checkbox.each(function(i) {
 				// checkbox.parent() : checkbox의 부모는 <td>이다.
@@ -470,7 +396,7 @@ $("#allCheck").click(function(){
 				var in4 = td.eq(4).text();
 				// 숫자 뒤에 원 없애기
 				in4 = Number(in4.substr(0, in4.length -1));        
-// 				alert(in4);
+				
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(in3);
 				tdArr.push(in4);
@@ -478,13 +404,14 @@ $("#allCheck").click(function(){
 				sum = in3 * in4;
 				// chArr 에 합친 값 저장
 				chArr.push(sum);
+
+			
 			});
 			
 			// 포문으로 chArr 의 길이만큼 돌림
 			// chCoin 에 chArr 의 값을 더함
 			for(var i = 0; i < chArr.length; i++){
 				 chCoin = Number(chCoin) + Number(chArr[i]);
-
 			}
 			// chCoin 이 0 이면 텍스트에 아무것도 안보이게
 			 if(chCoin == 0){
@@ -497,18 +424,14 @@ $("#allCheck").click(function(){
 			// 배송비 30000 이상이면 0 
 			if(chCoin >= 30000 || chCoin == 0){
 				sevice = 0;
-				 $('.delivery-b').text(sevice); 
+			 $('.delivery-b').text(sevice); 
+	  		
 			} else if(chCoin < 30000){
 				sevice = 2500;
 				$('.delivery-b').text(sevice); 
 			}
 			
 			// 총 합계 
-			$('.total-b').text(chCoin + sevice); 
-			
-			$('.total-b').attr('value',chCoin+sevice);	
-			$('.price-b').attr('value',chCoin);	
-			$('.delivery-b').attr('value',sevice);	
 			$('.total-b').text(chCoin + sevice);
 
 			
@@ -523,11 +446,49 @@ $("#allCheck").click(function(){
 			}
 			
 			});
-	
-	
-		
-		
 		
 	
+// -------------------------------------------------------------------------------------------------
+		
+		// 상품개수증가
+	  function cntUp(id) {
+			var numid = id.replace("up", "num");
+			var result = parseInt(numid)+1
+			var cnt = Number($('#'+numid).val());
+			cnt += 1;
+			
+			$('#'+numid).val(cnt);
+		};
+		
+		// 상품개수감소
+		function cntDown(id) {
+			var numid = id.replace("down", "num");
+			
+			var cnt = Number($('#'+numid).val());
+			if(cnt > 1) {
+				cnt -= 1;
+				$('#'+numid).val(cnt);
+			}
+		};
+		
+		// 수량 변경
+		function cntUpdate(num , id){
+			
+			var numid = id.replace("Save", "num");
+			var cnt = Number($('#'+numid).val());
+			
+		location.href='CartUpdate.ca?num='+num+'&cnt='+cnt+'&member_id=dodo';
+		
+		};
+		
+		
+	
+
+		
+		
+		 
 </script>
+
+
+
 <jsp:include page="../inc/footer.jsp" />
