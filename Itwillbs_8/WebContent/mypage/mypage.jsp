@@ -137,14 +137,6 @@
 							<dd style="width: 300px"><span><%=mainorderList.size() %> </span>건</dd>
 							<dt>게시글 수</dt>
 							<dd style="width: 300px"><span><%=articleList.size() %> </span>개</dd>
-<!-- 							<dt>적 립 금</dt> -->
-<!-- 							<dd> -->
-<!-- 								<a href="/shop/mypage.html?mypage_type=myreserve"><strong>5,000</strong>원</a> -->
-<!-- 							</dd> -->
-<!-- 							<dt>쿠 &nbsp;&nbsp;&nbsp; 폰</dt> -->
-<!-- 							<dd> -->
-<!-- 								<a href="/shop/mypage.html?mypage_type=mycoupon"><strong>0</strong>개</a> -->
-<!-- 							</dd> -->
 						</dl>
 					</div>
 					<!-- //회원 정보 -->

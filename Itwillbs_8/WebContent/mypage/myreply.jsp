@@ -1,3 +1,5 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Arrays"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="vo.CommBean"%>
 <%@page import="vo.CommReBean"%>
@@ -9,6 +11,7 @@
 	
 	ArrayList<CommReBean> myreplyList = (ArrayList) request.getAttribute("myreplyList");
 	HashMap<Integer, CommBean> articleList = (HashMap) request.getAttribute("articleList");
+	int cnt = myreplyList.size();
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -31,6 +34,18 @@
 <link type="text/css" rel="stylesheet" href="scss/header.1.css" />
 <link type="text/css" rel="stylesheet" href="scss/menu.2.css" />
 <!-- 주문상세 시작 -->
+
+<script type="text/javascript">
+	function addtag() {
+		var html = 
+			"<tr>" + 
+			"<td scope='row'></td>" + 
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"</tr>";
+	}
+</script>
 
 
 <div id="contentWrapper">
@@ -77,16 +92,16 @@
 		<div id="content">
 			<div id="myOrder">
 				<div class="tit-page-2">
-					<h2>내가 쓴 댓글</h2>
+					<h2>내가 쓴 댓글&nbsp;&nbsp;&nbsp; (<%=cnt %> 개)</h2>
 				</div>
 				<div class="page-body">
 					<div class="table-d2-list">
 						<table>
 							<colgroup>
-								<col width="100">
+								<col width="50">
+								<col width="50">
 								<col width="*">
 								<col width="200">
-								<col width="150">
 							</colgroup>
 							<thead>
 								<tr>
@@ -105,21 +120,24 @@
 								</tr>
 								<%
 									} else {
-								int i=0, num = 0;
+								int num = 0;
 								
-								for (CommReBean reply : myreplyList) {
-									num = reply.getCommunity_num();
-									CommBean article = articleList.get(num);
-								%>
-								<tr onclick="location.href='CommDetail.co?num=<%=num%>'">
-									<td scope="row"><div class="tb-center"><%=i%></div></td>
-									<td scope="row"><div class="tb-center"><%=num%></div></td>
-									<td scope="row"><div class="tb-center"><%=reply.getContents()%></div></td>
-									<td scope="row"><div class="tb-center"><%=reply.getDate()%></div></td>
-								</tr>
-								<%
-								i++;
-									}
+								Object[] mapkey = articleList.keySet().toArray();
+								Arrays.sort(mapkey);
+								
+								for(Integer key : articleList.keySet()) {
+									CommBean article = articleList.get(key);
+									num = article.getNum();
+									%>
+									<tr id="article<%=num %>" onload="addtag(this.id)"
+ 										 onclick="location.href='CommDetail.co?num=<%=num%>'">
+										<td scope="row" colspan="2"><div class="tb-center"><%=num%></div></td>
+										<td scope="row"><div class="tb-center"><%=article.getSubject()%></div></td>
+										<td scope="row"><div class="tb-center"><%=article.getUsername()%></div></td>
+									</tr >
+									
+									<%
+								}
 
 								}
 								%>
@@ -142,6 +160,14 @@
 
 
 <!-- 주문상세 끝 -->
+
+<script type="text/javascript">
+$(function() {
+	function addtag(trId) {
+		var replyId = <%=myreplyList.get(0)%>
+	}
+});
+</script>
 
 
 <jsp:include page="/inc/footer.jsp" />
