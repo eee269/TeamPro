@@ -193,29 +193,5 @@ public class MemberDAO {
 		return member;
 	}
 
-// 회원의 닉네임 가져오기
-	public String getUsername(String member_id) {
-		String username = null;
-		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select username from member where id=?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, member_id);
-			rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				username = rs.getString(1);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return username;
-	}
-	
-	
 	
 }

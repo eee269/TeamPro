@@ -27,7 +27,7 @@ public class ProdQnaWriteProAction implements Action {
 		String member_id = (String)session.getAttribute("member_id");
 		
 		ServletContext context = request.getServletContext();
-		String saveFolder = "/product/prodQnaUploadImg";
+		String saveFolder = "/upload/prodQnaUpload";
 		String realFolder = context.getRealPath(saveFolder);
 		int fileSize = 1024 * 1024 * 10; // 10MB
 		MultipartRequest multi = new MultipartRequest(
@@ -44,7 +44,8 @@ public class ProdQnaWriteProAction implements Action {
 		String qna_content = multi.getParameter("qna_content");
 		String qna_file = multi.getOriginalFileName("qna_file");
 		String product_basicCode = multi.getParameter("basicCode");
-		ProdQnaBean prodQnaBean = new ProdQnaBean(0, qna_pass, qna_subject, qna_content, 0, qna_file, 0, 0, null, product_basicCode, member_id);
+		ProdQnaBean prodQnaBean = 
+				new ProdQnaBean(0, qna_pass, qna_subject, qna_content, 0, qna_file, 0, 0, null, product_basicCode, member_id,0);
 		
 		// qna 등록 작업 요청
 		ProdQnaService prodQnaService = new ProdQnaService();

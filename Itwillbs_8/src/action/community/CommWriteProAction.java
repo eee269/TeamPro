@@ -26,7 +26,7 @@ public class CommWriteProAction implements Action {
 		ServletContext context = request.getServletContext();
 		
 		// 프로젝트 상에서 설정한 가상 업로드 폴더 경로 지정
-		String saveFolder = "/communityUpload";
+		String saveFolder = "/upload/commUpload";
 		
 		// 가상 폴더에 대응하는 실제 폴더 위치를 가져오기 위해
 		// ServletContext 객체의 getRealPath() 메서드를 호출

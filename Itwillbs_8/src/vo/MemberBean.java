@@ -3,9 +3,6 @@ package vo;
 
 import java.sql.Timestamp;
 
-
-
-
 public class MemberBean {
 	private String id;
 	private String pass;
@@ -72,6 +69,7 @@ public class MemberBean {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	
 	
 	

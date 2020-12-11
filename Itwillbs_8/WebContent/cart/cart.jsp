@@ -82,7 +82,7 @@ int cntSet = 0;
 		<dl class="loc-navi">
 			<dt class="blind">현재 위치</dt>
 			<dd>
-				<a href="Main.go">HOME</a> &gt; CART
+				<a href="/">HOME</a> &gt; CART
 			</dd>
 		</dl>
 
@@ -318,6 +318,7 @@ $("#allCheck").click(function(){
   				var in4 = td.eq(4).text();
   				// 숫자 뒤에 원 없애기
   				in4 = Number(in4.substr(0, in4.length -1));        
+//   				alert(in4);
   				
   				// 가져온 값을 배열에 담는다.
   				tdArr.push(in3);
@@ -396,6 +397,7 @@ $("#allCheck").click(function(){
 				var in4 = td.eq(4).text();
 				// 숫자 뒤에 원 없애기
 				in4 = Number(in4.substr(0, in4.length -1));        
+// 				alert(in4);
 				
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(in3);
@@ -476,6 +478,7 @@ $("#allCheck").click(function(){
 			
 			var numid = id.replace("Save", "num");
 			var cnt = Number($('#'+numid).val());
+			alert(cnt);
 			
 		location.href='CartUpdate.ca?num='+num+'&cnt='+cnt+'&member_id=dodo';
 		

@@ -80,9 +80,9 @@ public class ProdReviewListAction implements Action {
 			if (i != reviewList.size() - 1) {
 				json += ",";
 			}
+			System.out.println(id);
 		}
 		json += "]}";
-		
 		out.print(json);
 		
 		
