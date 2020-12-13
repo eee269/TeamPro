@@ -174,7 +174,7 @@ public class ProdQnaDAO {
 						+ "FROM product_qna q JOIN member m "
 						+ "ON q.member_id = m.id "
 						+ "WHERE product_basicCode=? "
-						+ "ORDER BY qna_num desc limit ?,?";
+						+ "ORDER BY qna_re_seq ASC, qna_re_ref desc limit ?,?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, basicCode);
 				ps.setInt(2, startRow);
@@ -195,7 +195,8 @@ public class ProdQnaDAO {
 					qna.setQna_re_lev((rs.getInt(8)));
 					qna.setDate(rs.getTimestamp(9));
 					qna.setProduct_basicCode((rs.getString(10)));
-					qna.setUsername((rs.getString(12)));
+					qna.setQna_re_seq((rs.getInt(12)));
+					qna.setUsername((rs.getString(13)));
 					
 					qnaList.add(qna);
 				}

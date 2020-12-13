@@ -94,24 +94,24 @@
                                                 </div>
 												</td>
                                         	</tr>
-                                            <tr>
-                                            	<th><div>주문자</div></th>
-                                            	<td colspan="3">
-                                                <div class="title">
-													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_customer' value='' />
-													<div class="title_select"></div>
-                                                </div>
-												</td>
-                                        	</tr>
-                                            <tr>
-                                            	<th><div>주문번호</div></th>
-                                            	<td colspan="3">
-                                                <div class="title">
-													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_orderNum' value='' />
-													<div class="title_select"></div>
-                                                </div>
-												</td>
-                                        	</tr>
+<!--                                             <tr> -->
+<!--                                             	<th><div>주문자</div></th> -->
+<!--                                             	<td colspan="3"> -->
+<!--                                                 <div class="title"> -->
+<!-- 													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_customer' value='' /> -->
+<!-- 													<div class="title_select"></div> -->
+<!--                                                 </div> -->
+<!-- 												</td> -->
+<!--                                         	</tr> -->
+<!--                                             <tr> -->
+<!--                                             	<th><div>주문번호</div></th> -->
+<!--                                             	<td colspan="3"> -->
+<!--                                                 <div class="title"> -->
+<!-- 													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_orderNum' value='' /> -->
+<!-- 													<div class="title_select"></div> -->
+<!--                                                 </div> -->
+<!-- 												</td> -->
+<!--                                         	</tr> -->
                                         	<tr>
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
