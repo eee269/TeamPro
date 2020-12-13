@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import exception.member.LoginException;
-import vo.CommBean;
 import vo.MemberBean;
 
 import static db.JdbcUtil.*;

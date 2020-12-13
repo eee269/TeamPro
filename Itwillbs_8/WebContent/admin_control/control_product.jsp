@@ -67,7 +67,7 @@
 			<td><%=product.getMain_img()%></td>
 			<td><%=product.getSub_img()%></td>
 			<td><input class="in_bu" type="button" value="삭제"
-				onclick="location.href='OptionDelete.po?productCode=<%=option.getProductCode()%>&basicCode=<%=basicCode%>'"></td>
+				onclick="location.href='OptionDelete.po?productCode=<%=option.getProductCode()%>'"></td>
 		</tr>
 		<%
 			}

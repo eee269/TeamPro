@@ -27,7 +27,7 @@ public class ControlMemberListAction implements Action {
 		
 		request.setAttribute("memberList", memberList);
 		forward = new ActionForward();
-		forward.setPath("/member/control_member.jsp");
+		forward.setPath("/admin_control/control_member.jsp");
 		return forward;
 	}
 
