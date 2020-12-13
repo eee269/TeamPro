@@ -101,11 +101,6 @@
 								<col width="*">
 								<col width="200">
 							</colgroup>
-							<thead>
-								<tr>
-									<th scope="row" colspan=""></th>
-								</tr>
-							</thead>
 							<tbody>
 								<%
 									if (myreplyList.size() == 0) {
@@ -159,14 +154,5 @@
 
 
 <!-- 주문상세 끝 -->
-
-<script type="text/javascript">
-$(function() {
-	function addtag(trId) {
-		var replyId = <%=myreplyList.get(0)%>
-	}
-});
-</script>
-
 
 <jsp:include page="/inc/footer.jsp" />
