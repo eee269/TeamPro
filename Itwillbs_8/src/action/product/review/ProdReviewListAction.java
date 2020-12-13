@@ -85,7 +85,6 @@ public class ProdReviewListAction implements Action {
 		json += "]}";
 		out.print(json);
 		
-		
 		return null;
 	}
 
