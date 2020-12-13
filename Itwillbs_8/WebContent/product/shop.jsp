@@ -1,3 +1,4 @@
+<%@page import="vo.ProductLikeBean"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.HashMap"%>
@@ -15,7 +16,7 @@
 <%-- <jsp:include page="../sub_cart.jsp" /> --%>
 
 <%
-	String id= (String)session.getAttribute("member_id");
+	String member_id= (String)session.getAttribute("member_id");
 	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");
 	String ncode=request.getParameter("ncode");
@@ -23,6 +24,8 @@
 	ArrayList<ProductBean> ncodeList = (ArrayList<ProductBean>)request.getAttribute("ncodeList");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
 	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
+	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
+	
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
@@ -289,15 +292,15 @@ $( document ).ready(function () {
 									<dd>
 										<ul>
 										<%if(ncode !=null){%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }else{%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }%>										
 										</ul>
 									</dd>
@@ -310,7 +313,7 @@ $( document ).ready(function () {
 		<%
 		for(int i=0; i<productList.size(); i++){
 			String[] main = productList.get(i).getMain_img().split("/");
-			String likeCheck = id+"/"+productList.get(i).getBasicCode();
+			String likeCheck = member_id+"/"+productList.get(i).getBasicCode();
 			%>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
@@ -330,12 +333,13 @@ $( document ).ready(function () {
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">
-							<%if(id != null){ %>
+							<%if(member_id != null){ %>
 							<button 
-								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" value="<%=likeCheck%>">
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){%>js-addedwish-b2<%}else{%>js-addedwish-b1<%}%>" 
+								value="<%=likeCheck%>">
 								<img class="icon-heart1 dis-block trans-04"
-								src="images/icons/icon-heart-01.png" alt="ICON"> <img
-								class="icon-heart2 dis-block trans-04 ab-t-l"
+								src="images/icons/icon-heart-01.png" alt="ICON"> 
+								<img class="icon-heart2 dis-block trans-04 ab-t-l"
 								src="images/icons/icon-heart-02.png" alt="ICON">
 							</button>
 							<%}else{ %>

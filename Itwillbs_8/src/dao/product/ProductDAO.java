@@ -9,9 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import vo.MemberBean;
 import vo.ProdReviewBean;
 import vo.ProductBean;
+import vo.ProductLikeBean;
 import vo.ProductOptionBean;
 
 public class ProductDAO {
@@ -768,6 +772,32 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 
 		
 		return productDetailList;
+	}
+
+	public ArrayList<String> selectLikeBasicCodeList(String id) {
+		ArrayList<String> likeBasicCodeList = new ArrayList<String>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_like where member_id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				likeBasicCodeList.add(rs.getString("product_basicCode"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		return likeBasicCodeList;
 	}
 
 }

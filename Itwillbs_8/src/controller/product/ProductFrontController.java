@@ -15,7 +15,9 @@ import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
+import action.product.ProductLikeAction;
 import action.product.ProductSelectAction;
+import action.product.ProductUnLikeAction;
 import action.product.ProductUploadProAction;
 import action.product.qna.ProdQnaDeleteAction;
 import action.product.qna.ProdQnaModifyFormAction;
@@ -51,6 +53,20 @@ public class ProductFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/ProductDetail.po")) {
 			action = new ProductDetailAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/ProductLike.po")) {
+			action = new ProductLikeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else if(command.equals("/ProductUnLike.po")) {
+			action = new ProductUnLikeAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
