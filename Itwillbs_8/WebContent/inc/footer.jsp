@@ -308,7 +308,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script>
 	//좋아요 관련 스크립트입니다!!
 		$('.js-addwish-b2, .js-addwish-detail, .not_member').on('click', function(e){
-// 			e.preventDefault();
+			e.preventDefault();
 		});
 
 		$('.js-addwish-b2').each(function(){
