@@ -47,7 +47,7 @@ public class MemberJoinProAction implements Action {
 		member.setUsername(multi.getParameter("username"));
 		member.setImg(multi.getOriginalFileName("img"));
 		member.setDate(new Timestamp(System.currentTimeMillis()));
-		member.setPhone((multi.getParameter("phone")));
+		member.setPhone(multi.getParameter("phone"));
 		
 		System.out.println("멤버조인프로엑션");
 		MemberJoinProService memberJoinProService=new MemberJoinProService();		

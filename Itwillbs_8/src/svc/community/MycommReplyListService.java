@@ -28,19 +28,4 @@ public class MycommReplyListService {
 		return list;
 	}
 
-	public HashMap<Integer, CommBean> getArticleHash(ArrayList<CommReBean> myreplyList) {
-		HashMap<Integer, CommBean> hash = new HashMap<Integer, CommBean>();
-		
-		Connection con = getConnection();
-		
-		CommDAO commDAO = CommDAO.getInstance();
-		commDAO.setConnection(con);
-		hash = commDAO.selectArticleHash(myreplyList);
-		
-		close(con);
-		
-		
-		return hash;
-	}
-
 }

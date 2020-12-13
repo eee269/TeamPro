@@ -41,7 +41,7 @@ public class ControlOrderListAction implements Action {
 		request.setAttribute("detailorderList", detailorderList);
 
 		forward = new ActionForward();
-		forward.setPath("/order/control_order.jsp");
+		forward.setPath("/admin_control/control_order.jsp");
 
 		return forward;
 	}

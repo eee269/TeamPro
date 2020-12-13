@@ -84,7 +84,6 @@ public class ProdReviewListAction implements Action {
 		JSONObject jsonObject = new JSONObject(reviewMap);
 		out.print(jsonObject);
 		
-		
 		return null;
 	}
 

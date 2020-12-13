@@ -10,7 +10,6 @@
 	String member_id = (String) session.getAttribute("member_id");
 	
 	ArrayList<CommReBean> myreplyList = (ArrayList) request.getAttribute("myreplyList");
-	HashMap<Integer, CommBean> articleList = (HashMap) request.getAttribute("articleList");
 	int cnt = myreplyList.size();
 %>
 
@@ -60,7 +59,7 @@
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
-							<li><a href="#">내 상품 리뷰</a></li>
+							<li><a href="ProductMyreviewList.po">내가 쓴 리뷰</a></li>
 							<li><a href="#">상품 QnA</a></li>
 						</ul>
 					</div>
@@ -70,8 +69,8 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
-							<li><a href="mybookmarkList.co">내 북마크</a></li>
-							<li><a href="#">내 게시글 리뷰</a></li>
+							<li><a href="MybookmarkList.co">내 북마크</a></li>
+							<li><a href="MycommReplyList.co">내가 쓴 댓글</a></li>
 						</ul>
 					</div>
 				</div>
@@ -99,15 +98,9 @@
 						<table>
 							<colgroup>
 								<col width="50">
-								<col width="50">
 								<col width="*">
 								<col width="200">
 							</colgroup>
-							<thead>
-								<tr>
-									<th scope="row" colspan=""></th>
-								</tr>
-							</thead>
 							<tbody>
 								<%
 									if (myreplyList.size() == 0) {
@@ -120,24 +113,25 @@
 								</tr>
 								<%
 									} else {
-								int num = 0;
-								
-								Object[] mapkey = articleList.keySet().toArray();
-								Arrays.sort(mapkey);
-								
-								for(Integer key : articleList.keySet()) {
-									CommBean article = articleList.get(key);
-									num = article.getNum();
-									%>
-									<tr id="article<%=num %>" onload="addtag(this.id)"
- 										 onclick="location.href='CommDetail.co?num=<%=num%>'">
-										<td scope="row" colspan="2"><div class="tb-center"><%=num%></div></td>
-										<td scope="row"><div class="tb-center"><%=article.getSubject()%></div></td>
-										<td scope="row"><div class="tb-center"><%=article.getUsername()%></div></td>
-									</tr >
-									
-									<%
-								}
+									for(CommReBean reply: myreplyList) {
+										if(reply.getRe_lev() == 0) {
+											%>
+											<tr onclick="location.href='CommDetail.co?num=<%=reply.getCommunity_num()%>'">
+												<td scope="row"><div class="tb-center">댓글</div></td>
+												<td scope="row"><div class="tb-center"><%=reply.getContents() %></div></td>
+												<td scope="row"><div class="tb-center"><%=reply.getDate() %></div></td>
+											</tr>
+											<%
+										} else {
+											%>
+											<tr onclick="location.href='CommDetail.co?num=<%=reply.getCommunity_num()%>'">
+												<td scope="row"><div class="tb-center">대댓글</div></td>
+												<td scope="row"><div class="tb-center"><%=reply.getContents() %></div></td>
+												<td scope="row"><div class="tb-center"><%=reply.getDate() %></div></td>
+											</tr>
+											<%
+										}
+									}
 
 								}
 								%>
@@ -160,14 +154,5 @@
 
 
 <!-- 주문상세 끝 -->
-
-<script type="text/javascript">
-$(function() {
-	function addtag(trId) {
-		var replyId = <%=myreplyList.get(0)%>
-	}
-});
-</script>
-
 
 <jsp:include page="/inc/footer.jsp" />
