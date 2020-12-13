@@ -28,7 +28,6 @@ public class ProductSelectAction implements Action {
 		String xcode = request.getParameter("xcode");
 		String ncode = request.getParameter("ncode");
 		String id = request.getParameter("id");
-		System.out.println("맞남자나"+id);
 		
 		NcodeSelectService ncodeSelectService = new NcodeSelectService();
 		BestSelectService bestSelectService = new BestSelectService();

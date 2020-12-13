@@ -10,6 +10,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	String member_id= (String)session.getAttribute("member_id");
 	ArrayList<ProdQnaBean> qnaList = (ArrayList<ProdQnaBean>)request.getAttribute("qnaList");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
@@ -235,10 +236,13 @@
     ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
     ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
     ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
+	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
     
 
     String[] main = productDetailList.get(0).getMain_img().split("/");
     String[] sub = productDetailList.get(0).getSub_img().split("/");
+    
+    String likeCheck = member_id+"/"+productDetailList.get(0).getBasicCode();
     
     DecimalFormat priceFormat = new DecimalFormat("###,###");
 %>
@@ -353,21 +357,30 @@
 								<br>
 								<input type="submit" value="Add to cart"
 								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-<!-- 								<button -->
-<!-- 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"> -->
-<!-- 									Add to cart</button> -->
 							</div>
+							
 						</div>
 					</div>
 
 					<%-- 좋아요 + 각종 공유 / yj --%>
 					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
 						<div class="flex-m bor9 p-r-10 m-r-11">
+						<%if(member_id !=null){%>
+							
+							<button 
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productDetailList.get(0).getBasicCode())){%> js-addedwish-b2 <%}else{%>js-addedwish-b1<%}%>" value="<%=likeCheck%>">
+								<img class="icon-heart1 dis-block trans-04"
+								src="images/icons/icon-heart-01.png" alt="ICON"> 
+								<img class="icon-heart2 dis-block trans-04 ab-t-l"
+								src="images/icons/icon-heart-02.png" alt="ICON">
+							</button>
+						<% }else{%>
 							<a href="#"
-								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-								data-tooltip="Add to Wishlist"> <i
-								class="zmdi zmdi-favorite"></i>
+								class="not_member">
+								<img class="icon-heart1 dis-block trans-04"
+								src="images/icons/icon-heart-01.png" alt="ICON">
 							</a>
+						 <% } %>
 						</div>
 
 						<a href="#"
