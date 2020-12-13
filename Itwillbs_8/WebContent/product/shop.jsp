@@ -206,7 +206,7 @@ $( document ).ready(function () {
 		<ul class="cboth">
 			<%for(int i =0; i<ncodeList.size(); i++){%>
 			<li>
-			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%>">
+			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%><%if(member_id !=null){%>&id=<%=member_id %><%}%>">
 			   <%=ncodeList.get(i).getNcode()%></a>
 			</li>
 			<%} %>	
