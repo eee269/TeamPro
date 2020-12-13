@@ -29,6 +29,11 @@ public class MainFrontController extends HttpServlet {
 			forward = new ActionForward();
 			forward.setPath("/index.jsp");
 		}
+		// -------------- 관리자 리스트 ----------------
+		else if(command.equals("/ControlList.go")) {
+			forward = new ActionForward();
+			forward.setPath("/admin_control/control_main.jsp");
+		}
 		
 		if(forward != null) {
 			if(forward.isRedirect()) {

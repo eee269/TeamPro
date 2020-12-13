@@ -33,17 +33,13 @@ public class MycommReplyListAction implements Action {
 			
 			forward.setPath("MemberLoginForm.mo");
 		} else {
-			HashMap<Integer, CommBean> articleList = new HashMap<Integer, CommBean>();
 			ArrayList<CommReBean> myreplyList = new ArrayList<CommReBean>();
 			
 			MycommReplyListService service = new MycommReplyListService();
 			
 			// num값을 key로 가지는 HashMap 형식으로 게시글 목록 가져오기
 			myreplyList = service.getMyreplyList(member_id);
-			articleList = service.getArticleHash(myreplyList);
 			
-			
-			request.setAttribute("articleList", articleList);
 			request.setAttribute("myreplyList", myreplyList);
 			
 			forward.setPath("/mypage/myreply.jsp");

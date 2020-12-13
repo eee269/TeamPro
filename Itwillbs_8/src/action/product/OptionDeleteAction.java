@@ -17,11 +17,11 @@ public class OptionDeleteAction implements Action {
 		ActionForward forward = null;
 		
 		String productCode = request.getParameter("productCode");
-		String basicCode = request.getParameter("basicCode");
 		OptionDeleteService optionDeleteService = new OptionDeleteService();
 		
-		System.out.println("OptionDeleteAction");
 		boolean isDelete = optionDeleteService.getDeleteOption(productCode);
+		
+		
 		
 		if(!isDelete) {
 			response.setContentType("text/html; charset=UTF-8");

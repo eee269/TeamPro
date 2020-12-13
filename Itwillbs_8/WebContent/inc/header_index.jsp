@@ -63,16 +63,27 @@
 						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
 							회원가입
 						</a>
-						<%} else{ %>
-							<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
-							<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
-						<%} %>
+						<%} else if(member_id.equals("admin")){ %>
+					<a href="ControlList.go" class="flex-c-m trans-04 p-lr-15">
+					관리자페이지
+				</a>
+				<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
+							로그아웃
+						</a>
+				<%} else { %>
+						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">
+							마이페이지
+						</a>
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
 						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
+							로그아웃
+						</a>
+						<%} %>
 					</div>
 				</div>
 			</div>

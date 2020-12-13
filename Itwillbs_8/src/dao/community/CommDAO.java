@@ -480,43 +480,6 @@ public class CommDAO {
 			
 			return list;
 		}
-		// ------------------내가 쓴 댓글이 달려있는 게시글 목록 <community_num, CommBean>--------------------
-		public HashMap<Integer, CommBean> selectArticleHash(ArrayList<CommReBean> myreplyList) {
-			HashMap<Integer, CommBean> hash = new HashMap<Integer, CommBean>();
-			
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			for(CommReBean reply: myreplyList) {
-				try {
-					String sql = "select * from community where num = ?";
-					pstmt = con.prepareStatement(sql);
-					pstmt.setInt(1, reply.getCommunity_num());
-					rs = pstmt.executeQuery();
-					
-					while(rs.next()) {
-						CommBean article = new CommBean();
-						
-						article.setNum(rs.getInt("num"));
-						article.setContent(rs.getNString("content"));
-						article.setDate(rs.getTimestamp("date"));
-						article.setImg(rs.getString("img"));
-						article.setPass(rs.getString("pass"));
-						article.setReadCount(rs.getInt("readcount"));
-						article.setSubject(rs.getString("subject"));
-						article.setUsername(rs.getString("username"));
-						
-						hash.put(article.getNum(), article);
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
-				} finally {
-					close(pstmt);
-					close(rs);
-				}
-			}
-			return hash;
-		}
 		
 	
 }

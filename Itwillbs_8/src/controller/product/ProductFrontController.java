@@ -29,6 +29,7 @@ import action.product.qna.ProdQnaWriteProAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
 import action.product.review.ProdReviewWriteAction;
+import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
 
 
@@ -210,6 +211,16 @@ public class ProductFrontController extends HttpServlet {
 		else if(command.equals("/ProdQnaReplyPro.po")) {
 			System.out.println("ProdQnaReplyPro.po 포워딩");
 			action = new ProdQnaReplyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//-------------------마이페이지 > 내 상품 리뷰 보기-------------
+		else if(command.equals("/ProductMyreviewList.po")) {
+			System.out.println("ProductMyreviewList.po 포워딩");
+			action = new ProductMyreviewListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
