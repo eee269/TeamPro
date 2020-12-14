@@ -23,8 +23,9 @@
 	String type=request.getParameter("type");
 	ArrayList<ProductBean> ncodeList = (ArrayList<ProductBean>)request.getAttribute("ncodeList");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
-	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
+	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");	
 	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
+
 	
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -206,7 +207,7 @@ $( document ).ready(function () {
 		<ul class="cboth">
 			<%for(int i =0; i<ncodeList.size(); i++){%>
 			<li>
-			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%><%if(member_id !=null){%>&id=<%=member_id %><%}%>">
+			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%>">
 			   <%=ncodeList.get(i).getNcode()%></a>
 			</li>
 			<%} %>	
@@ -292,15 +293,15 @@ $( document ).ready(function () {
 									<dd>
 										<ul>
 										<%if(ncode !=null){%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }else{%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }%>										
 										</ul>
 									</dd>
@@ -335,7 +336,12 @@ $( document ).ready(function () {
 						<div class="block2-txt-child2 flex-r p-t-3">
 							<%if(member_id != null){ %>
 							<button 
-								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){%>js-addedwish-b2<%}else{%>js-addedwish-b1<%}%>" 
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%
+								if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){
+								%>js-addedwish-b2<%
+								}else{
+									%>js-addedwish-b1<%
+									}%>" 
 								value="<%=likeCheck%>">
 								<img class="icon-heart1 dis-block trans-04"
 								src="images/icons/icon-heart-01.png" alt="ICON"> 

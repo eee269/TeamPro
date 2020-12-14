@@ -63,27 +63,16 @@
 						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
 							회원가입
 						</a>
-						<%} else if(member_id.equals("admin")){ %>
-					<a href="ControlList.go" class="flex-c-m trans-04 p-lr-15">
-					관리자페이지
-				</a>
-				<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
-							로그아웃
-						</a>
-				<%} else { %>
-						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">
-							마이페이지
-						</a>
+						<%} else{ %>
+							<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
+							<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
+						<%} %>
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
 						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
-						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">
-							로그아웃
-						</a>
-						<%} %>
 					</div>
 				</div>
 			</div>
@@ -100,34 +89,34 @@
 								<a href="Main.go">HOME</a>
 							</li>
 							<li>
-								<a href="ProductShop.po?type=X&xcode=CLOTHES<%if(member_id != null){%>&id=<%=member_id %><%}%>">CLOTHES</a>
+								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
 								<ul class="sub-menu">						
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP<%if(member_id != null){%>&id=<%=member_id %><%}%>">TOP</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM<%if(member_id != null){%>&id=<%=member_id %><%}%>">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS<%if(member_id != null){%>&id=<%=member_id %><%}%>" >DRESS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER<%if(member_id != null){%>&id=<%=member_id %><%}%>">OUTER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS" >DRESS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="ProductShop.po?type=X&xcode=BAGS<%if(member_id != null){%>&id=<%=member_id %><%}%>">BAGS</a>
+								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
 								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS<%if(member_id != null){%>&id=<%=member_id %><%}%>">CROSS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH<%if(member_id != null){%>&id=<%=member_id %><%}%>">CLUTCH</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER<%if(member_id != null){%>&id=<%=member_id %><%}%>">SHOULDER</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE<%if(member_id != null){%>&id=<%=member_id %><%}%>">TOTE</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET<%if(member_id != null){%>&id=<%=member_id %><%}%>">BUCKET</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK<%if(member_id != null){%>&id=<%=member_id %><%}%>">BACKPACK</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER<%if(member_id != null){%>&id=<%=member_id %><%}%>">SHOPPER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CROSS">CROSS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=CLUTCH">CLUTCH</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOULDER">SHOULDER</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=TOTE">TOTE</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BUCKET">BUCKET</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=BACKPACK">BACKPACK</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=BAGS&ncode=SHOPPER">SHOPPER</a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="ProductShop.po?type=X&xcode=SHOES<%if(member_id != null){%>&id=<%=member_id %><%}%>">SHOES</a>
+								<a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a>
 								<ul class="sub-menu">
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS<%if(member_id != null){%>&id=<%=member_id %><%}%>">SNEAKERS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS<%if(member_id != null){%>&id=<%=member_id %><%}%>">BOOTS</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS<%if(member_id != null){%>&id=<%=member_id %><%}%>">LOAFERS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS<%if(member_id != null){%>&id=<%=member_id %><%}%>">SANDALS</a></li>
-								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER<%if(member_id != null){%>&id=<%=member_id %><%}%>">SLIPPER</a></li>	
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SNEAKERS">SNEAKERS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=BOOTS">BOOTS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=LOAFERS">LOAFERS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SANDALS">SANDALS</a></li>
+								    <li><a href="ProductShop.po?type=N&xcode=SHOES&ncode=SLIPPER">SLIPPER</a></li>	
 								</ul>
 							</li>
 							<li class="label1" data-label1="hot">
