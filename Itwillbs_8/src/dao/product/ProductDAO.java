@@ -512,8 +512,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			if(rs.next()) {
 				String[] main = rs.getString(1).split("/");
 				String[] sub = rs.getString(2).split("/");
-				String path = "upload/productUploadImg/";
-				String realPath = ;
+				String path = "../upload/productUploadImg/";
 				File f = new File(path+main[0]);
 				
 				if(main.length == 0) {
