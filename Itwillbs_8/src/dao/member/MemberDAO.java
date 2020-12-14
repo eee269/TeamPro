@@ -341,6 +341,26 @@ public class MemberDAO {
 		return member;
 	}
 	
+	public int passMember(String id, String pass) {
+		int count = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		try {
+			String sql = "update member set pass=? where id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, pass);
+			pstmt.setString(2, id);
+			count = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return count;
+	}
+	
 	
 	
 	
