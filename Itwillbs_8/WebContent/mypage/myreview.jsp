@@ -46,7 +46,7 @@
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
 							<li><a href="ProductMyreviewList.po">내가 쓴 리뷰</a></li>
-							<li><a href="#">상품 QnA</a></li>
+							<li><a href="ProductMyqnaList.po">상품 QnA</a></li>
 						</ul>
 					</div>
 				</div>

@@ -1,12 +1,11 @@
-<%@page import="vo.CommBean"%>
-<%@page import="vo.ProductBean"%>
+<%@page import="vo.ProdQnaBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
 	String member_id = (String) session.getAttribute("member_id");
-
-	ArrayList<CommBean> articleList = (ArrayList) request.getAttribute("articleList");
+	
+	ArrayList<ProdQnaBean> myqnaList = (ArrayList) request.getAttribute("myqnaList");
 %>
 
 <jsp:include page="/inc/header.jsp" />
@@ -16,13 +15,11 @@
 
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a>
-		<a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04"> My Page
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> 
-		<span class="stext-109 cl4"> My Bookmark </span>
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home <i
+			class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <a href="MemberMypage.mo" class="stext-109 cl8 hov-cl1 trans-04">
+			My Page <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <span class="stext-109 cl4"> My QnA </span>
 	</div>
 </div>
 
@@ -32,12 +29,24 @@
 <link type="text/css" rel="stylesheet" href="scss/menu.2.css" />
 <!-- 주문상세 시작 -->
 
+<script type="text/javascript">
+	function addtag() {
+		var html = 
+			"<tr>" + 
+			"<td scope='row'></td>" + 
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"<td scope='row'><div class='tb-center'></div></td>" +
+			"</tr>";
+	}
+</script>
+
 
 <div id="contentWrapper">
 	<div id="contentWrap">
 
 		<div id="aside">
-			<h2 class="aside-tit">MY BOOKMARK</h2>
+			<h2 class="aside-tit">MY QnA</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>
@@ -77,50 +86,50 @@
 		<div id="content">
 			<div id="myOrder">
 				<div class="tit-page-2">
-					<h2>내 북마크</h2>
+					<h2>나의 상품 문의글</h2>
 				</div>
 				<div class="page-body">
-					<!-- 주문 내역 리스트 -->
 					<div class="table-d2-list">
 						<table>
-<%
-int i=0, j=4;
+							<colgroup>
+								<col width="100">
+								<col width="*">
+								<col width="200">
+								<col width="100">
+							</colgroup>
+							<tbody>
+								<%
+									if (myqnaList.size() == 0) {
+								%>
+								<tr>
+									<td colspan="4" style="padding: 50px 20px; text-align: center; font-size: 15px;">
+										<span>작성하신 문의글이 없습니다.</span>
 
-if(articleList.size() == 0) {
-	%>
-	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
-		<span>관심있는 게시글이 없습니다.</span>
-		
-	</td></tr>
-	<%
-} else {
-	
-	for(CommBean article: articleList) {
-		if(i%j == 0){
-			%><tr style="height: 350px"><%
-		}
-		String[] img = article.getImg().split("/");
-		%><td onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'">
-			<img alt="productImg" src="communityUpload/<%=img[0]%>" width="250px" height="250px"
-				onerror="src='loading.png'"><br>
-			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=article.getSubject()%></span>&nbsp;&nbsp;&nbsp;
-			<span class="stext-105 cl3"><%=article.getUsername() %></span><br>
-			<span class="stext-105 cl3"><%=article.getDate() %></span>
-		</td><%
-		if(i%j == j-1) {
-			%></tr><%
-		}
-		i++;
-	}
-	
-}
-%>
+									</td>
+								</tr>
+								<%
+									} else {
+									for(ProdQnaBean qna: myqnaList) {
+										if(qna.getQna_re_lev() != 2) {
+											%>
+											<tr onclick="location.href='ProductDetail.po?basicCode=<%=qna.getProduct_basicCode() %>#page03'">
+												<td scope="row"><div class="tb-center"><%=qna.getQna_num() %></div></td>
+												<td scope="row"><div class="tb-center"><%=qna.getQna_subject()%></div></td>
+												<td scope="row"><div class="tb-center"><%=qna.getQna_date() %></div></td>
+												<td scope="row"><div class="tb-center"><%=qna.getQna_readcount() %></div></td>
+											</tr>
+											<%
+										}
+									}
 
+								}
+								%>
 
-					</table>
+							</tbody>
+						</table>
 					</div>
-<!-- 하단 여백 -->
-<div style="height: 150px"></div>
+					<!-- 하단 여백 -->
+					<div style="height: 150px"></div>
 
 				</div>
 				<!-- .page-body -->
@@ -134,6 +143,5 @@ if(articleList.size() == 0) {
 
 
 <!-- 주문상세 끝 -->
-
 
 <jsp:include page="/inc/footer.jsp" />
