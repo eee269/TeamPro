@@ -113,7 +113,6 @@ public class ProdReviewDAO {
 			}else if(pic == 1) {
 				sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY num desc limit ?,?";
 			}
-			System.out.println("sql : "+sql);
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
@@ -161,6 +160,25 @@ public class ProdReviewDAO {
 		return deleteCount;
 	}
 	// -------------------deleteReview()-----------------------
+	// -------------------updateReview()-----------------------
+	public int updateReview(ProdReviewBean prodReviewBean, int num) {
+		int updateCount = 0;
+		PreparedStatement ps = null;
+		try {
+			String sql = "UPDATE product_review SET starScore=?, content=?, product_img=? WHERE num=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, prodReviewBean.getStarScore());
+			ps.setString(2, prodReviewBean.getContent());
+			ps.setString(3, prodReviewBean.getProduct_img());
+			ps.setInt(4, num);
+			updateCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - updateReview : "+e.getMessage());
+			e.printStackTrace();
+		}
+		return updateCount;
+	}
+	// -------------------updateReview()-----------------------
 
 	public ArrayList<ProdReviewBean> selectMyreviewList(String member_id) {
 		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
@@ -200,6 +218,8 @@ public class ProdReviewDAO {
 		
 		return list;
 	}
+
+	
 
 	
 }

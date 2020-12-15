@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProdReviewModifyAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
 import action.product.ProductLikeAction;
@@ -143,6 +144,16 @@ public class ProductFrontController extends HttpServlet {
 		else if (command.equals("/ProdReviewDelete.po")) {
 			System.out.println("ProdReviewDelete.po 포워딩");
 			action = new ProdReviewDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 수정--------------------
+		else if(command.equals("/ProdReviewModify.po")) {
+			System.out.println("ProdReviewModify.po 포워딩");
+			action = new ProdReviewModifyAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

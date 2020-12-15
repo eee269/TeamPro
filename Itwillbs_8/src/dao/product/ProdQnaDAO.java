@@ -193,7 +193,7 @@ public class ProdQnaDAO {
 					qna.setQna_file((rs.getString(6)));
 					qna.setQna_re_ref((rs.getInt(7)));
 					qna.setQna_re_lev((rs.getInt(8)));
-					qna.setDate(rs.getTimestamp(9));
+					qna.setQna_date(rs.getTimestamp(9));
 					qna.setProduct_basicCode((rs.getString(10)));
 					qna.setQna_re_seq((rs.getInt(12)));
 					qna.setUsername((rs.getString(13)));
