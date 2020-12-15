@@ -892,13 +892,13 @@
 	                	loop : loop
 	                },
 	                success: function (jsonObject) { 
-	                	jsonParse = jsonObject.replace(/\n/gi,"\\r\\n");
-                		var json = JSON.parse(jsonParse);
+	                	jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
+                		var json = JSON.parse(jsonObject);
                 		
                 		// 포토리뷰, 일반리뷰 따로 가져오기 위해 2번 반복
 	                	for (key in json){
-	                		json = json[key].replace(/\s/gi,"\\r\\n");
-	                		var newJson = JSON.parse(json);
+	                		jsonReplace = json[key].replace(/\s{2,}/gi,"\\r\\n");
+	                		var newJson = JSON.parse(jsonReplace);
 	                		if(newJson.replyList!=null){
 		                			
 			                	var replyList = newJson.replyList; 
@@ -966,16 +966,20 @@
 			    	                    	output +=			"<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+<%=basicCode%>+"'>삭제</a>";
 			    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>";
 		    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-			    	                    	output +=		"</div>";
+			   	                 		}else if(member_id == 'admin' && j == 5){
+			    	                    	output +=			"<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+<%=basicCode%>+"'>삭제</a>";
+			    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+")'>답글</a>";
+			   	                 		}
+			                	} // 리뷰 하나에 대한 for 문 => reveiwDetail
+		    	                    		output +=		"</div>";
 			                				output += 	"<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
 			                				output += 	"<input type='hidden' name='prm_num' value='"+reply.num+"'>";
-			   	                 	}
-			                	} // 리뷰 하나에 대한 for 문
 	    	                	output += 			"</form>";
 	    	                	output += 		"</div>";
 	    	                	output += 	"</div>";
 	    	                	output += "</li>";
-	                		} // 포토리뷰 또는 일반리뷰 전체에 대한 for 문
+	    	                	output += "<div class='PR15N01-write prr_reply"+reply.num+"' style='visibility:hidden;'></div>";
+	                		} // 리뷰 하나 하나에 대한 for 문
                 			output+="</ul>";
                 			// review paging
                 			var pageInfo = paging(newJson.listCount, page, limit);
@@ -1087,6 +1091,25 @@
 		       }
 		}); // end ajax
 	} // end prm_modifySub
+	function prr_reply(num){
+		$(function(){
+			// reivew 답글 폼 생성		
+			var newform = $('<form></form>');
+			newform.attr("name","prr_reply");
+			newform.attr("method","post");
+			newform.attr("action","");
+			// set attribute(input)
+			newform.append($('<textarea/>',{name: 'content'}));
+			newform.append($('<input/>',{type: 'file', name: 'file'}));
+			newform.append($('<input/>',{type: 'button', value: '전송', onclick: 'prr_replySub'}));
+			// append 
+			newform.appendTo('.prr_reply'+num);
+			$('.prr_reply'+num).css('visibility','visible');
+		});
+	};
+	function prr_replySub(){
+		alert(3);
+	}
 </script>
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
