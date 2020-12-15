@@ -33,9 +33,8 @@ public class MycommListAction implements Action {
 			ArrayList<CommBean> articleList = new ArrayList<CommBean>();
 			
 			MycommListService service = new MycommListService();
-			String username = service.getUsername(member_id);
 			// 회원의 username으로 작성한 게시글 목록
-			articleList = service.getArticleList(username);
+			articleList = service.getArticleList(member_id);
 			
 			// reply 갯수 가지고 올건지?
 			

@@ -11,9 +11,8 @@
 <style>
 body .container_comm_write {
   position: relative;
-  overflow: hidden;
-  width: 700px;
-  height: 1000px;
+  overflow: auto;
+  width: 800px;
   margin: 80px auto 0;
   background-color: #ffffff;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -31,6 +30,37 @@ body .container_comm_write {
   color: #263238;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+.summernoter{
+	resize: none;
+}
+/* #header-v4 { */
+/* color: #424242; */
+/* line-height: 1; */
+/* font-family: "Noto Sans KR", "Apple SD Gothic Neo", "맑은 고딕", "Malgun Gothic", sans-serif; */
+/* -webkit-font-smoothing: antialiased; */
+/* letter-spacing: -0.4px; */
+/* font-size: 15px; */
+/* -webkit-box-direction: normal; */
+/* -webkit-tap-highlight-color: transparent; */
+/* margin: 0; */
+/* padding: 0; */
+/* transition: top .1s; */
+/* background-color: #fff; */
+/* border-bottom: 1px solid #ededed; */
+/* z-index: 502; */
+/* position: relative; */
+/* } */
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 4px;
+}
+.wrap-menu-desktop{
+	z-index: 2;
 }
 /* #header-v4 { */
 /* color: #424242; */
@@ -82,9 +112,11 @@ input[type=text] {
 			            <div class="signin-cont cont">
 			                <form action="CommModifyPro.co" method="post" enctype="multipart/form-data">
 			                	<input type="hidden" id="num" name="num" value="<%=article.getNum()%>">
-								<label>현재 파일 :<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>"></label><br>
+								<label>현재 파일 :<img src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>"></label><br>
 								<input type="file" name="img" id="img" value=" <%=article.getImg() %>"><br>
         						<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>"><br>
+        						<label>비밀번호 확인</label>
+        						<input type="password" id="pass" name="pass" ><br>
 								<textarea id ="summernote" name="content" ><%=article.getContent() %></textarea><br>
 								<input type="submit" class="btn btn-primary" value="수정">
 								<input type="button" class="btn btn-primary" value="뒤로" onclick="location.href='history.back()'">

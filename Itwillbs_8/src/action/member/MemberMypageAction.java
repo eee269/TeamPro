@@ -58,7 +58,7 @@ public class MemberMypageAction implements Action {
 	
 			}
 			
-			ArrayList<CommBean> articleList = memberMypageService.getArticleList(member.getUsername());
+			ArrayList<CommBean> articleList = memberMypageService.getArticleList(member_id);
 			
 			ProductMylikeListService productMylikeListService = new ProductMylikeListService();
 			ArrayList<String> mylikeList = productMylikeListService.getMylikeList(member_id);

@@ -24,6 +24,20 @@ public class BestSelectService {
 		
 		return bestList;
 	}
+	public ArrayList<ProductBean> getNewList() throws Exception {
+		
+		ArrayList<ProductBean> bestList = null;
+		
+		Connection con = getConnection();
+		ProductDAO pd = ProductDAO.getInstance();
+		pd.setConnection(con);
+		
+		bestList = pd.selectNewList();
+		
+		close(con);
+		
+		return bestList;
+	}
 	
 	
 

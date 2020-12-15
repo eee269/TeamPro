@@ -27,7 +27,7 @@ public class ProdReviewWriteAction implements Action{
 		String id = (String)session.getAttribute("member_id");
 		ServletContext context = request.getServletContext();
 		
-		String saveFolder = "product/reviewUploadImg";
+		String saveFolder = "/upload/prodReviewUpload";
 		
 		String realFolder = context.getRealPath(saveFolder);
 		

@@ -34,7 +34,7 @@ public class cartUpdateAction implements Action {
 	
 		} else {
 			forward = new ActionForward();
-			forward.setPath("Cart.ca?member_id=dodo");
+			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 		}
 		

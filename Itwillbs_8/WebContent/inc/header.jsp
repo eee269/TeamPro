@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
@@ -74,6 +75,7 @@
 	margin-left: -36px;
 }
 </style>
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body class="animsition">
 	<!-- Header -->
@@ -129,7 +131,7 @@
 								<ul class="sub-menu">						
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS" >DRESS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
 								</ul>
 							</li>

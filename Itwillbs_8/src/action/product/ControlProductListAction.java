@@ -43,7 +43,7 @@ public class ControlProductListAction implements Action {
 		request.setAttribute("optionList", optionList);
 		
 		forward = new ActionForward();
-		forward.setPath("/product/control_product.jsp");
+		forward.setPath("/admin_control/control_product.jsp");
 		return forward;
 	}
 

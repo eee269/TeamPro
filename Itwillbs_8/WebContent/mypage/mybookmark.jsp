@@ -6,7 +6,6 @@
 <%
 	String member_id = (String) session.getAttribute("member_id");
 
-	ArrayList<Integer> mybookmarkList = (ArrayList) request.getAttribute("mybookList");
 	ArrayList<CommBean> articleList = (ArrayList) request.getAttribute("articleList");
 %>
 
@@ -46,8 +45,8 @@
 						<ul>
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
-							<li><a href="#">내 상품 리뷰</a></li>
-							<li><a href="#">상품 QnA</a></li>
+							<li><a href="ProductMyreviewList.po">내가 쓴 리뷰</a></li>
+							<li><a href="ProductMyqnaList.po">상품 QnA</a></li>
 						</ul>
 					</div>
 				</div>
@@ -56,8 +55,8 @@
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MycommList.co">내 게시글 보기</a></li>
-							<li><a href="mybookmarkList.co">내 북마크</a></li>
-							<li><a href="#">내 게시글 리뷰</a></li>
+							<li><a href="MybookmarkList.co">내 북마크</a></li>
+							<li><a href="MycommReplyList.co">내가 쓴 댓글</a></li>
 						</ul>
 					</div>
 				</div>
@@ -87,7 +86,7 @@
 <%
 int i=0, j=4;
 
-if(mybookmarkList.size() == 0) {
+if(articleList.size() == 0) {
 	%>
 	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
 		<span>관심있는 게시글이 없습니다.</span>

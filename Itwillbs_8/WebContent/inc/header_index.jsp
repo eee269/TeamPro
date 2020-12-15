@@ -40,6 +40,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body class="animsition">
 	<!-- Header -->
@@ -69,7 +70,7 @@
 						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
 							장바구니
 						</a>
-						<a href="MyOrder.or" class="flex-c-m trans-04 p-lr-15">
+						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
 							주문정보
 						</a>
 					</div>
@@ -87,17 +88,15 @@
 							<li>
 								<a href="Main.go">HOME</a>
 							</li>
-
 							<li>
 								<a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a>
 								<ul class="sub-menu">						
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=TOP">TOP</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=BOTTOM">BOTTOM</a></li>
-									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS">DRESS</a></li>
+									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=DRESS" >DRESS</a></li>
 									<li><a href="ProductShop.po?type=N&xcode=CLOTHES&ncode=OUTER">OUTER</a></li>
 								</ul>
 							</li>
-							
 							<li>
 								<a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a>
 								<ul class="sub-menu">

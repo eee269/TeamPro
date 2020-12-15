@@ -1,3 +1,4 @@
+<%@page import="vo.ProductLikeBean"%>
 <%@page import="java.util.Comparator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.HashMap"%>
@@ -15,14 +16,17 @@
 <%-- <jsp:include page="../sub_cart.jsp" /> --%>
 
 <%
-	String id= (String)session.getAttribute("member_id");
+	String member_id= (String)session.getAttribute("member_id");
 	String sort = request.getParameter("sort");
 	String xcode=request.getParameter("xcode");
 	String ncode=request.getParameter("ncode");
 	String type=request.getParameter("type");
 	ArrayList<ProductBean> ncodeList = (ArrayList<ProductBean>)request.getAttribute("ncodeList");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
-	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
+	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");	
+	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
+
+	
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
@@ -227,7 +231,7 @@ $( document ).ready(function () {
 				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
-					src="product/uploadImg/<%=main[0]%>"></a>
+					src="upload/productUploadImg/<%=main[0]%>"></a>
 
 			</dt>
 			<dd class="prd-info">
@@ -264,7 +268,7 @@ $( document ).ready(function () {
 				</div>
 			</div>
 
-			<!-- Search product -->
+		<!-- Search product  -->
 			<div class="dis-none panel-search w-full p-t-10 p-b-15">
 				<div class="bor8 dis-flex p-l-15">
 					<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
@@ -279,6 +283,7 @@ $( document ).ready(function () {
 		</div>
 <!-- Search -->
 <!-- 정렬프론트 코드 -->
+
 						<div class="container">
 								<div class="cboth total-sort">
 									<dl class="total">
@@ -310,14 +315,14 @@ $( document ).ready(function () {
 		<%
 		for(int i=0; i<productList.size(); i++){
 			String[] main = productList.get(i).getMain_img().split("/");
-			String likeCheck = id+"/"+productList.get(i).getBasicCode();
+			String likeCheck = member_id+"/"+productList.get(i).getBasicCode();
 			%>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
+						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode()%>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
-							src="product/uploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
+							src="upload/productUploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
 						</a> 
 					</div>
 
@@ -330,12 +335,18 @@ $( document ).ready(function () {
 						</div>
 
 						<div class="block2-txt-child2 flex-r p-t-3">
-							<%if(id != null){ %>
+							<%if(member_id != null){ %>
 							<button 
-								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2" value="<%=likeCheck%>">
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%
+								if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){
+								%>js-addedwish-b2<%
+								}else{
+									%>js-addedwish-b1<%
+									}%>" 
+								value="<%=likeCheck%>">
 								<img class="icon-heart1 dis-block trans-04"
-								src="images/icons/icon-heart-01.png" alt="ICON"> <img
-								class="icon-heart2 dis-block trans-04 ab-t-l"
+								src="images/icons/icon-heart-01.png" alt="ICON"> 
+								<img class="icon-heart2 dis-block trans-04 ab-t-l"
 								src="images/icons/icon-heart-02.png" alt="ICON">
 							</button>
 							<%}else{ %>

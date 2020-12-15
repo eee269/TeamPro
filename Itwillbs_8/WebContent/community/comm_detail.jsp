@@ -63,7 +63,7 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<div class="wrap-pic-w how-pos5-parent">
-							<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>">
+							<img src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" onclick="getOffset()">
 							<div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
 									22
@@ -89,11 +89,15 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 									태그 자리 
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
-
 								<span>
 									댓글 갯수
+									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
-								<span class="bookmark_count"> 북마크 갯수
+								<span>
+									북마크 갯수
+									<span class="cl12 m-l-4 m-r-6">|
+										<span class="bookmark_count"></span>
+									</span>
 								</span>
 							</span>
 

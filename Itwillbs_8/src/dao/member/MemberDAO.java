@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 
 import exception.member.LoginException;
-import vo.CommBean;
 import vo.MemberBean;
 
 import static db.JdbcUtil.*;
@@ -215,6 +213,136 @@ public class MemberDAO {
 		
 		return username;
 	}
+	
+	//----------------회원정보수정----------------------
+	public int userCheck(String id,String pass) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int check=-1;
+		try {
+			
+			String sql="select * from member where id=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			// 4
+			rs=pstmt.executeQuery();
+			//5
+			if(rs.next()) {
+				if(pass.equals(rs.getString("pass"))) {
+					check=1;
+				}else {
+					check=0;
+				}
+			}else {
+				check=-1;
+			}
+		} catch (SQLException e) {
+			System.out.println("userCheck 오류! - " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return check;
+	}
+	
+	
+	
+	public int updateMember(MemberBean member) {
+		System.out.println("정보수정디에이오");
+		int insertCount=0;
+		
+		PreparedStatement pstmt=null;
+		
+		try {
+//			String sql="insert into member(id,pass,email,username,img,datd,phone) values(?,?,?,?,?,?,?)";
+			String sql="update member set pass=?,email=?,username=?,img=?,phone=? where id=?";
+			pstmt=con.prepareStatement(sql);
+
+			pstmt.setString(1, member.getPass());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setString(3, member.getUsername());
+			pstmt.setString(4, member.getImg());
+			pstmt.setString(5, member.getPhone());
+			pstmt.setString(6, member.getId());
+			
+			insertCount=pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("updateMember() 오류! - " + e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}	
+		
+		
+		return insertCount;		
+	}
+	
+	public boolean isUpdateMember(String id, String pass) {
+		boolean isUpdateSuccess=false;
+		
+		PreparedStatement pstmt=null;
+		
+		ResultSet rs=null;
+		
+		try {
+			String sql="SELECT pass FROM member WHERE id=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(pass.equals(rs.getString("pass"))) {
+					isUpdateSuccess = true;
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("isUpdateMember() 오류! - " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		return isUpdateSuccess;
+	}
+	
+	//selectMember반복
+	public MemberBean jselectMember(String id) {
+		MemberBean member=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+		try {
+			String sql="SELECT*FROM member WHERE id=?";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();		
+			if(rs.next()) {
+				member = new MemberBean();
+				member.setId(rs.getString("id"));
+				member.setPass(rs.getString("pass"));
+				member.setEmail(rs.getString("email"));
+				member.setUsername(rs.getString("username"));
+				member.setImg(rs.getString("img"));
+				member.setDate(rs.getTimestamp("date"));
+				member.setPhone(rs.getString("phone"));
+
+			}
+		} catch (SQLException e) {
+			System.out.println("jselectMember() 오류! - " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		return member;
+	}
+	
+	
+	
 	
 	
 	

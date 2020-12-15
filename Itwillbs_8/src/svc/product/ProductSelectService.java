@@ -40,6 +40,21 @@ public class ProductSelectService {
 		return productList;
 	}
 	
+	public ArrayList<ProductBean> getMainProductList() throws Exception{
+		
+		ArrayList<ProductBean> productList = null;
+		
+		Connection con = getConnection();
+		ProductDAO pd = ProductDAO.getInstance();
+		pd.setConnection(con);
+		
+		productList = pd.selectMainProductList();
+		
+		close(con);
+		
+		return productList;
+	}
+	
 	
 
 }

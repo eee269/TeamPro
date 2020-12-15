@@ -58,7 +58,7 @@
 							<li class="first"><a href="MyOrderList.or">주문내역</a></li>
 							<li><a href="ProductMylikeList.po">내가 찜한 상품</a></li>
 							<li><a href="ProductMyreviewList.po">내가 쓴 리뷰</a></li>
-							<li><a href="#">상품 QnA</a></li>
+							<li><a href="ProductMyqnaList.po">상품 QnA</a></li>
 						</ul>
 					</div>
 				</div>
@@ -93,7 +93,7 @@
 					<div class="info">
 						<div class="user">
 							<div class="user-img">
-								<img alt="profileImg" src="member/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
+								<img alt="profileImg" src="upload/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
 							</div>
 							<div class="user-info">
 								<p>
@@ -137,14 +137,6 @@
 							<dd style="width: 300px"><span><%=mainorderList.size() %> </span>건</dd>
 							<dt>게시글 수</dt>
 							<dd style="width: 300px"><span><%=articleList.size() %> </span>개</dd>
-<!-- 							<dt>적 립 금</dt> -->
-<!-- 							<dd> -->
-<!-- 								<a href="/shop/mypage.html?mypage_type=myreserve"><strong>5,000</strong>원</a> -->
-<!-- 							</dd> -->
-<!-- 							<dt>쿠 &nbsp;&nbsp;&nbsp; 폰</dt> -->
-<!-- 							<dd> -->
-<!-- 								<a href="/shop/mypage.html?mypage_type=mycoupon"><strong>0</strong>개</a> -->
-<!-- 							</dd> -->
 						</dl>
 					</div>
 					<!-- //회원 정보 -->
