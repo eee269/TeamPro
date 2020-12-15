@@ -228,7 +228,7 @@ $( document ).ready(function () {
 		
 		<dl class="item-list">
 			<dt class="thumb">
-				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="upload/productUploadImg/<%=main[0]%>"></a>
@@ -236,7 +236,7 @@ $( document ).ready(function () {
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=bestList.get(i).getName() %>
 							</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
@@ -268,7 +268,7 @@ $( document ).ready(function () {
 				</div>
 			</div>
 
-			<!-- Search product -->
+		<!-- Search product  -->
 			<div class="dis-none panel-search w-full p-t-10 p-b-15">
 				<div class="bor8 dis-flex p-l-15">
 					<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
@@ -283,6 +283,7 @@ $( document ).ready(function () {
 		</div>
 <!-- Search -->
 <!-- 정렬프론트 코드 -->
+
 						<div class="container">
 								<div class="cboth total-sort">
 									<dl class="total">
@@ -319,7 +320,7 @@ $( document ).ready(function () {
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode()%><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode()%>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
 							src="upload/productUploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
 						</a> 
@@ -327,7 +328,7 @@ $( document ).ready(function () {
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								<%=productList.get(i).getName()%></a>
 								<span class="stext-105 cl3"> <%=priceFormat.format(productList.get(i).getPrice())%>원</span>

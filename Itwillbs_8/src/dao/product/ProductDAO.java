@@ -109,6 +109,79 @@ public class ProductDAO {
 		
 		return bestList;
 	}
+	public ArrayList<ProductBean> selectNewList() {
+		
+		ArrayList<ProductBean> bestList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product order by date DESC LIMIT 4";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+								
+				bestList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectNewList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return bestList;
+	}
+	public ArrayList<ProductBean> selectMainProductList() {
+		
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from product order by likey DESC LIMIT 16";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+				
+				productList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectMainProductList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+		
+		return productList;
+	}
 	
 	public ArrayList<ProductBean> selectProductListX(String xcode,int page, int limit) {
 		
@@ -384,7 +457,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		ResultSet rs = null;
 				
 		try {
-			String sql = "SELECT * FROM product ORDER BY date desc";
+			String sql = "SELECT * FROM product ORDER BY likey desc";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
