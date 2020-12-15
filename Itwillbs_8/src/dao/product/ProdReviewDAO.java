@@ -219,6 +219,39 @@ public class ProdReviewDAO {
 		return list;
 	}
 
+	// 페이징 없이 상품 목록 받아가기 ( 상품삭제 )
+	public ArrayList<ProdReviewBean> selectReviewList(String basicCode) {
+		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_review where product_basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProdReviewBean review = new ProdReviewBean();
+				
+				review.setProduct_basicCode(rs.getString("product_basicCode"));
+				review.setProduct_img(rs.getString("product_Img"));
+				
+				list.add(review);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+
 	
 
 	

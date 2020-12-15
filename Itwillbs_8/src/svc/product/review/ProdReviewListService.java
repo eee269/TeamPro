@@ -50,5 +50,22 @@ public class ProdReviewListService {
 		return reviewList;
 	}
 	// ------------------------getReviewList()----------------------
+	// ------------------------getReviewList()----------------------
+	// 페이징 없이 상품 리뷰 가져오기
+	public ArrayList<ProdReviewBean> getReviewList(String basicCode) {
+		System.out.println("ProdReviewListService - getReviewList()/페이징없이");
+		ArrayList<ProdReviewBean> reviewList = null;
+		
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+
+		reviewList=prodReviewDAO.selectReviewList(basicCode);
+		
+		close(con);
+		
+		return reviewList;
+	}
+	// ------------------------getReviewList()----------------------
 
 }

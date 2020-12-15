@@ -406,4 +406,35 @@ public class ProdQnaDAO {
 			
 			return list;
 		}
+
+		// ProductDeleteAction에서 쓸 이미지 가져갈 리스트
+		public ArrayList<ProdQnaBean> selectQnaList(String basicCode) {
+			ArrayList<ProdQnaBean> list = new ArrayList<ProdQnaBean>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "select * from product_qna where product_basicCode = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, basicCode);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProdQnaBean qna = new ProdQnaBean();
+					
+					qna.setQna_file(rs.getString("qna_file"));
+					qna.setProduct_basicCode(basicCode);
+					
+					list.add(qna);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return list;
+		}
 }

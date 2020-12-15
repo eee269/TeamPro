@@ -13,7 +13,10 @@ import action.product.review.ProdReviewListAction;
 import svc.product.ProductDeleteService;
 import svc.product.ProductDetailSelectService;
 import svc.product.qna.ProdQnaService;
+import svc.product.review.ProdReviewListService;
 import vo.ActionForward;
+import vo.ProdQnaBean;
+import vo.ProdReviewBean;
 import vo.ProductBean;
 
 public class ProductDeleteAction implements Action {
@@ -25,12 +28,16 @@ public class ProductDeleteAction implements Action {
 		// OptionDeleteAction에서 넘겨 받음
 		String basicCode = (String) request.getAttribute("basicCode");
 		
-		// basicCode에 딸린 review, qna의 file 이름 list가져오기 (예정)
+		// basicCode에 딸린 review, qna의 file 이름 list가져오기
+		ProdReviewListService reviewService = new ProdReviewListService();
+		ArrayList<ProdReviewBean> reviewList = reviewService.getReviewList(basicCode);
 		
+		ProdQnaService qnaService = new ProdQnaService();
+		ArrayList<ProdQnaBean> qnaList = qnaService.getQnaList(basicCode);
 		
 		// basicCode에 딸린 상품 mainImg, subImg 가져오기
-		ProductDetailSelectService pdss = new ProductDetailSelectService();
-		ArrayList<ProductBean> productDetailList = pdss.getProductDetailList(basicCode);
+		ProductDetailSelectService detailService = new ProductDetailSelectService();
+		ArrayList<ProductBean> productDetailList = detailService.getProductDetailList(basicCode);
 		
 		ProductBean product = productDetailList.get(0);
 		String mainImg = product.getMain_img();
@@ -51,6 +58,7 @@ public class ProductDeleteAction implements Action {
 
 			ServletContext context = request.getServletContext();
 			
+			// 해당 basicCode를 가지는 product의 저장된 이미지 삭제
 			String saveFolder = "upload/productUploadImg";
 			String realFolder = context.getRealPath(saveFolder);
 			
@@ -75,6 +83,26 @@ public class ProductDeleteAction implements Action {
 					f = new File(realFolder + "/" + s);
 					if(f.exists()) 	f.delete();
 				}
+			}
+
+			// 해당 basicCode를 가지는 review의 저장된 이미지 삭제
+			saveFolder = "upload/prodReviewUpload";
+			realFolder = context.getRealPath(saveFolder);
+			
+			for(ProdReviewBean review: reviewList) {
+				String img = review.getProduct_img();
+				f = new File(realFolder + "/" + img);
+				if(f.exists()) 	f.delete();
+			}
+
+			// 해당 basicCode를 가지는 qna의 저장된 이미지 삭제
+			saveFolder = "upload/prodQnaUpload";
+			realFolder = context.getRealPath(saveFolder);
+			
+			for(ProdQnaBean qna: qnaList) {
+				String img = qna.getQna_file();
+				f = new File(realFolder + "/" + img);
+				if(f.exists()) 	f.delete();
 			}
 			
 			
