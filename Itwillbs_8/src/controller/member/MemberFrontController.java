@@ -14,6 +14,7 @@ import action.member.MemberLogoutAction;
 import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
+import action.member.MemberPassProAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteProAction;
@@ -77,6 +78,18 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/MemberPassForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/pass_Update.jsp");
+		} else if (command.equals("/MemberPassPro.mo")) {
+			forward = new ActionForward();
+
+			action = new MemberPassProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// -------------전체 멤버 리스트 보기----------------
@@ -127,6 +140,8 @@ public class MemberFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
+		
+		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 
 	}

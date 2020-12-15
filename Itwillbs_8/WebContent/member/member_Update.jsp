@@ -282,9 +282,29 @@ body .container_member .content .signup-cont {
 <script type="text/javascript">
 
 	 var pwJ = /^[A-Za-z0-9]{4,12}$/; 
+	 
+	 function passUpdate() {
+			if(document.fr.pass.value==""){
+				alert("비밀번호를 입력하세요");
+				document.fr.pass.focus();
+				return;
+			}
+			
+			if(document.fr.pass.value != document.fr.hiddenpass.value){
+	    		alert("비밀번호가 일치하지 않습니다");
+	    		document.fr.pass2.focus();
+	    		return false;
+	    	}
+			var wpass=document.fr.pass.value;
+// 			window.open("member/pass_Update.jsp");
+			location.href="MemberPassForm.mo";
+
+		}
+	 
 	
  
 </script>
+
 
 <body>
 <section class="container_member">
@@ -298,13 +318,17 @@ body .container_member .content .signup-cont {
 			        <div class="content">
 
     				        <div class="signup">
-                <form action="MemberModifyPro.mo" method="post" enctype="multipart/form-data">
+                <form action="MemberModifyPro.mo" method="post" enctype="multipart/form-data" name="fr">
 						                    <input type="text" name="id" id="id" class="inpt" required="required" value="<%=member.getId() %>" readonly>
 						                    <label for="text">ID</label><br>
 						                    
-						                    <input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
+						                    <input type="button" value="비밀번호 수정" onclick="passUpdate()">
+<!--                 						   	<input type="button" value="비밀번호 수정" onclick="location.href='MemberPassForm.mo'"> -->
+											<input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
+											<input type="hidden" name="hiddenpass" id="password" class="inpt" value="<%=member.getPass() %>" required="required" placeholder="Your Password">
                 						    <label for="password">Password</label><br>
                 						   	<div id = "pwc"></div>
+
                 						   	
                 						   	<input type="text" name="username" id="name" class="inpt" required="required" value="<%=member.getUsername() %>" placeholder="Your name">
 						                    <label for="name">Name</label>	  <br>
@@ -312,9 +336,18 @@ body .container_member .content .signup-cont {
                   							<input type="email" name="email" id="email" class="inpt" required="required" value="<%=member.getEmail()%>" placeholder="Your email">
 						                    <label for="email">e-mail</label>	  <br>
 						                    
-						                    <input type="file" name="img" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요">
-						                   	 프로필 사진:<%if(!(member.getImg() == null)) { %><a href="member/file_down.jsp?downFile=<%=member.getImg()%>"><%=member.getImg() %></a><%} %>						             
-						                    <label for="img">Image</label>	  <br><br>	    
+						                    <input type="file" name="img" id="img" class="inpt" placeholder="프로필 사진을 첨부하세요">
+						                    <input type="hidden" name="oldimg" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요">
+						                    
+						                   	 <%if(!(member.getImg() == null)) { %>
+						                   	 프로필 사진:<a href="member/file_down.jsp?downFile=<%=member.getImg()%>"><%=member.getImg() %></a><%} %>						             
+						                    <label for="img">Image</label>	  <br><br>    
+											
+<%-- 						                   	 <%if(!(member.getImg() == null)) { %> --%>
+<%-- 						                   	 <input type="file" name="img" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요"> --%>
+<%-- 						                   	 프로필 사진:<a href="member/file_down.jsp?downFile=<%=member.getImg()%>"><%=member.getImg() %></a><%} else { %> --%>
+<%-- 						                   	 	<input type="file" name="img" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요"><% } %>					              --%>
+<!-- 						                    <label for="img">Image</label>	  <br><br>     -->
 						                    
 						                    
 						                    <input type="text" name="phone" id="phone" class="inpt" required="required" value="<%=member.getPhone()%>" placeholder="Your PhoneNumber">
@@ -324,9 +357,6 @@ body .container_member .content .signup-cont {
 						                    <input type="button" value="탈퇴" class="submit" onclick="location.href='MemberDeleteForm.mo'" style="font-size: 18px; width: 30%; align-content: center; margin:auto;">
 						                    <input type="reset" value="취소" class="submit" style="font-size: 18px; width: 30%; align-content: center; margin:auto;"> 
 						                    
-<!-- 						                    <input type="submit" value="회원정보 수정" class="submit"> -->
-<!-- 						                    <input type="button" value="탈퇴" class="submit" onclick=""> -->
-<!-- 						                    <input type="reset" value="취소" class="submit"> -->
 						                 
 						                    
 
