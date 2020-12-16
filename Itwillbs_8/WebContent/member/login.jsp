@@ -5,6 +5,10 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
+<meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 <style rel="stylesheet">
 
@@ -484,6 +488,12 @@ margin-left:0px;}
 							<a href="#" class="more">Forgot your password?</a>
 						</div>
 					</form>
+					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+					<!-- 구글 로그인 버튼 노출 영역 -->
+					<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					<!-- //구글 로그인 버튼 노출 영역 -->
+					<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+					<div id="naverIdLogin"></div>
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
@@ -576,6 +586,28 @@ margin-left:0px;}
 			$('.signup-cont').show();
 
 		}
+		
+
+		// 구글 로그인 API
+		function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			  console.log('Name: ' + profile.getName());
+			  console.log('Image URL: ' + profile.getImageUrl());
+			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			}
+		
+		// 네이버 로그인 API
+		var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "jjXgPjWf7pqDUU6YqA_B",
+				callbackUrl: "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp",
+				isPopup: true,
+				loginButton: {color: "green", type: 1, height: 60} 
+			}
+		);
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
 	</script>
 </body>
 

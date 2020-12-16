@@ -375,6 +375,39 @@ public class CommReDAO {
 		}		
 		
 		return listCount;
+	}
+
+	// MycommReplyListService 에서 내 댓글 가지고 가기
+	public ArrayList<CommReBean> selectMyreplyList(String member_id) {
+		ArrayList<CommReBean> list = new ArrayList<CommReBean>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from community_reply where member_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				CommReBean reply = new CommReBean();
+				
+				reply.setCommunity_num(rs.getInt("community_num"));
+				reply.setContents(rs.getString("contents"));
+				reply.setDate(rs.getTimestamp("date"));
+				reply.setNum(rs.getInt("num"));
+				reply.setRe_lev(rs.getInt("re_lev"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		return list;
 	}	
 	
 	

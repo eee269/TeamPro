@@ -129,6 +129,11 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		//--------------- 네이버 로그인 후 naver_callback.jsp로 이동----------
+		else if (command.equals("/MemberNaverLogin.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/naver_callback.jsp");
+		}
 
 		// ------------공통적으로 수행할 포워딩 작업----------------
 		if (forward != null) {

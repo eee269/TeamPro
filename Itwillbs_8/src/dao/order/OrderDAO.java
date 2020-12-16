@@ -7,7 +7,6 @@ import java.util.Date;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import com.sun.xml.internal.ws.Closeable;
 
 import vo.Cart;
 import vo.DetailOrderBean;
