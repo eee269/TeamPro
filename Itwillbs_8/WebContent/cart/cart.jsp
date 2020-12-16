@@ -6,7 +6,7 @@
 
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
-
+	
 
 int coin = 0;
 int cartNo = cartList.size();
@@ -43,6 +43,7 @@ int cntSet = 0;
   function multi_order(){
 	  $(".CSSbuttonBlack").click(function(){ 
 		  document.cartForm.setAttribute("action","Order.or");
+		  document.cartForm.setAttribute("method","POST");
 			document.cartForm.submit();
    });
   }
@@ -76,7 +77,6 @@ int cntSet = 0;
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <!-- Shoping Cart 시작
 <input type="hidden" name="num" value="" />-->
-
 <div id="content">
 	<div id="cartWrap">
 		<dl class="loc-navi">
@@ -168,13 +168,12 @@ int cntSet = 0;
 								</td>
 								<td>
 									<div class="tb-left">
-										<a href="" class="tb-bold"><%=cartList.get(i).getProduct_name()%></a>
+										<a href="" class="tb-bold name"><%=cartList.get(i).getProduct_name()%></a>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">색상 : <%=cartList.get(i).getColor()%></span></span>
+											<span class="tb-dl"><span class="opt_dd color">색상 : <%=cartList.get(i).getColor()%></span></span>
 										</div>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">사이즈 :
-													<%=cartList.get(i).getSize()%></span></span>
+											<span class="tb-dl"><span class="opt_dd size">사이즈 : <%=cartList.get(i).getSize()%></span></span>
 										</div>
 									</div>
 								</td>
@@ -442,7 +441,12 @@ $("#allCheck").click(function(){
 	var tmp2 = $('[name=chk]').prop('checked'); 
 	
 		// 체크박스 선택된 한줄 값 가져오기
-		$(".checkSelect").click(function(){ 
+		$(".checkSelect").click(function(){
+			
+			// Order페이지로 넘길 데이터 변수 선언
+			var num,name,color,size,cnt,eprice;
+			var orderData = new Array();
+			
 			var rowData = new Array();
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
@@ -458,6 +462,8 @@ $("#allCheck").click(function(){
 				
 				// 체크된 row의 모든 값을 배열에 담는다.
 				rowData.push(tr.text());
+				
+			
 				
 				// 0번 num값
 				var in0 = td.eq(0).text();
@@ -478,8 +484,17 @@ $("#allCheck").click(function(){
 				sum = in3 * in4;
 				// chArr 에 합친 값 저장
 				chArr.push(sum);
+				
+				// Order 페이지로 가져갈 데이터 지정
+				num = $('[name=chk]').val()
+				name = td.eq(2).find('.name').text();
+				size = td.eq(2).find('.size').text().substr(6);
+				color = td.eq(2).find('.color').text().substr(5);
+				cnt =  td.eq(3).find('.txt-spin').val();
+				eprice = td.eq(4).text().substr(0, td.eq(4).text().length -1);
+				// Order 페이지로 가져갈 데이터 지정 끝
 			});
-			
+				
 			// 포문으로 chArr 의 길이만큼 돌림
 			// chCoin 에 chArr 의 값을 더함
 			for(var i = 0; i < chArr.length; i++){
@@ -525,7 +540,7 @@ $("#allCheck").click(function(){
 			});
 	
 	
-		
+
 		
 		
 	

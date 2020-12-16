@@ -118,8 +118,9 @@ public class AddrDAO {
 		recentAddr = new JSONArray();
 
 		try {
-			String sql = "select postcode,address from mainorder where date in (select MAX(date) from mainorder)";
+			String sql = "select postcode,address from mainorder where member_id = ? and date in (select MAX(date) from mainorder)";
 			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
@@ -140,6 +141,34 @@ public class AddrDAO {
 		
 		
 		return recentAddr;
+	}
+
+	public int insertDefaultAddr(String member_id, String postcode, String address) {
+		System.out.println("AddrDAO - insertDefaultAddr()");
+		int insertCount = 0;
+		
+		PreparedStatement p = null;
+
+		try {
+			String sql = "insert into memberaddress values(?,?,?,?,?,?)";
+			p = con.prepareStatement(sql);
+			p.setInt(1, 0);
+			p.setString(2, null);
+			p.setString(3, postcode);
+			p.setString(4, address);
+			p.setString(5, member_id);
+			p.setNString(6, "defaultAddr");
+			
+			insertCount = p.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("insertDefaultAddr() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(p);
+		}
+		
+		return insertCount;
 	}
 	
 	
