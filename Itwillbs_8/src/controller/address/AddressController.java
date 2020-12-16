@@ -13,6 +13,7 @@ import action.Action;
 import action.address.AddrAction;
 import action.address.DefaultAddrAction;
 import action.address.RecentAddrAction;
+import action.address.RegistDefaultAddrAction;
 import vo.ActionForward;
 @WebServlet("*.ad")
 public class AddressController extends HttpServlet{
@@ -57,6 +58,17 @@ public class AddressController extends HttpServlet{
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("RecentAddrAction으로 포워딩 중 오류 - " +e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/RegistDefaultAddr.ad")) {
+			System.out.println("RegistDefaultAddr.ad 포워딩");
+			forward = new ActionForward();
+			action = new RegistDefaultAddrAction();
+			try {
+				System.out.println("registDefaultAddrAction으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("registDefaultAddrAction으로 포워딩 중 오류 - "+e.getMessage());
 				e.printStackTrace();
 			}
 		}

@@ -1,4 +1,3 @@
-<%@page import="org.json.simple.JSONArray"%>
 <%@page import="vo.AddrBean"%>
 <%@page import="vo.Cart"%>
 <%@page import="java.util.ArrayList"%>
@@ -9,11 +8,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 		<%
-	   
-	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
-		int sevice = 2500;
-	   int coin = 0;
-	   int cartNo = cartList.size();
+// 	  String[] orderData = request.getParameterValues("orderData");
+// 	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+// 		int sevice = 2500;
+// 	   int coin = 0;
+// 	   int cartNo = cartList.size();
 		int num = Integer.parseInt(request.getParameter("chk"));
 		int price = Integer.parseInt(request.getParameter("price"));
 		int delivery = Integer.parseInt(request.getParameter("delivery"));
@@ -137,15 +136,14 @@ function Addr(test) {
 					$('#address').attr('value',item.address)
 				});
 			});
-		} else if(addrType == 'recentAddr'){
+		}else if(addrType == 'recentAddr'){
 			$.getJSON('RecentAddr.ad?addrType='+addrType,function(rdata){
 				$.each(rdata, function(index,item){
 					$('#postcode').attr('value',item.postcode),
 					$('#address').attr('value',item.address)
 				});
 			});
-		}
-		else {
+		}else {
 			$('#postcode').attr('value',""),
 			$('#address').attr('value',"")
 		
@@ -153,6 +151,27 @@ function Addr(test) {
 			
 	});
 }
+function regist_defaultAddr(test) {
+	$(document).ready(function(){
+		var regist = $(test).val();
+// 		alert(regist);
+		if(regist=="Y"){
+			alert("YESSSSSSSS");
+			$.ajax({
+				url:'RegistDefaultAddr.ad',
+				type:'POST',
+				data:{
+					postcode:$('#postcode').val(),
+					address:$('#address').val()
+				},
+				success:function(data){
+					alert("successssss");
+				}
+			});
+		}
+	});
+}
+
 </script>
 <jsp:include page="../inc/header.jsp" />
 
@@ -173,6 +192,7 @@ function Addr(test) {
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 
 <!-- 오더페이지 시작-->
+
 <div id="contentWrapper">
 	<div id="contentWrap">
 		<link type="text/css" rel="stylesheet"
@@ -194,8 +214,7 @@ function Addr(test) {
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
 						<input type="hidden" name="num" id="num" value="<%=num%>">
-						<input type="hidden" name="amount" id="num" value="<%=total_price%>">	
-
+						<input type="hidden" name="amount" id="num" value="<%=total_price%>">
 							<h3>주문자정보</h3>
 							<div class="tbl-order">
 								<table>
@@ -308,9 +327,9 @@ function Addr(test) {
 							</div>
 							<!-- .tbl-order -->
 
-							<label class="chk-label"> <input type="checkbox"
-								name="modify_address" form="order_form" id="modify_address"
-								value="Y"> 해당 배송지 정보를 나의 기본배송지로 등록합니다.
+							<label class="chk-label"> <input type="checkbox" 
+								name="regist" form="order_form" id="regist"
+								value="Y" onclick="regist_defaultAddr(this)"> 해당 배송지 정보를 나의 기본배송지로 등록합니다.
 							</label>
 
 							<h3>주문상품 할인적용</h3>
@@ -359,12 +378,6 @@ function Addr(test) {
 
 							<h3>
 								결제 정보
-								<div class="before_pay">
-									<label> <input type="checkbox" id="before_pay_agree"
-										name="before_pay_agree" form="order_form"> 선택하신 결제수단을
-										다음에도 적용
-									</label>
-								</div>
 							</h3>
 							<table class="escrow-info">
 								<caption>에스크로</caption>
@@ -447,6 +460,5 @@ function Addr(test) {
 </div>
 
 <!-- 오더페이지 끝 -->
-
 
 <jsp:include page="../inc/footer.jsp" />

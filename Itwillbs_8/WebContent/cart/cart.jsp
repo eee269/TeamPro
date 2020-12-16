@@ -3,8 +3,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
+	
 
 int coin = 0;
 int cartNo = cartList.size();
@@ -17,6 +19,7 @@ int cntSet = 0;
 	margin: 150px auto;
 	font-size: 20px;
 }
+#whiteBu:hover{color:#fff;}
 
 #emptyArea {
 	margin: auto;
@@ -28,27 +31,25 @@ int cntSet = 0;
 }
 .tb-center a:hover{
   background-color: #717fe0;
-}
 
-#whiteBu:hover{color:#fff;}
-
-.btn-dw {
-	width: 20px;
-	height: 40px;
-	background-color: white;
-}
-
-.btn-up {
-	width: 20px;
-	height: 40px;
-	background-color: white;
 }
 
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
 <script type="text/javascript">
-  $(document).ready(function(){
+//   $(document).ready(function(){});		
+// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
+  function multi_order(){
+	  $(".CSSbuttonBlack").click(function(){ 
+		  document.cartForm.setAttribute("action","Order.or");
+		  document.cartForm.setAttribute("method","POST");
+			document.cartForm.submit();
+   });
+  }
+//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
+ </script>
+
 
   }
   </script>
@@ -76,7 +77,6 @@ int cntSet = 0;
 <link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <!-- Shoping Cart 시작
 <input type="hidden" name="num" value="" />-->
-
 <div id="content">
 	<div id="cartWrap">
 		<dl class="loc-navi">
@@ -87,7 +87,11 @@ int cntSet = 0;
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm">
-
+		<!-- 오더로 넘기는 값 -->
+					<input type="hidden" name="price" class="price-b">
+					<input type="hidden" name="delivery" class="delivery-b">
+					<input type="hidden" name="total_price" class="total-b">
+		<!-- 오더로 넘기는 값 -->
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -164,13 +168,12 @@ int cntSet = 0;
 								</td>
 								<td>
 									<div class="tb-left">
-										<a href="" class="tb-bold"><%=cartList.get(i).getProduct_name()%></a>
+										<a href="" class="tb-bold name"><%=cartList.get(i).getProduct_name()%></a>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">색상 : <%=cartList.get(i).getColor()%></span></span>
+											<span class="tb-dl"><span class="opt_dd color">색상 : <%=cartList.get(i).getColor()%></span></span>
 										</div>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">사이즈 :
-													<%=cartList.get(i).getSize()%></span></span>
+											<span class="tb-dl"><span class="opt_dd size">사이즈 : <%=cartList.get(i).getSize()%></span></span>
 										</div>
 									</div>
 								</td>
@@ -185,7 +188,7 @@ int cntSet = 0;
 <!-- 											</span> -->
 <!-- 										</div> -->
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
-									</div> <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
+									</div> <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 							
@@ -276,8 +279,6 @@ int cntSet = 0;
 	<!-- #cartWrap -->
 </div>
 <!-- Shoping Cart 끝 -->
-
-
 <script type="text/javascript">
 //----------------------------------tr 체크박스 선택 , 해제  및   tr 체크박스 선택시 총금액 계산-------------------------------------------------------------------
 // 체크박스 선택 전 전체선택 div 숨기기
@@ -367,7 +368,12 @@ $("#allCheck").click(function(){
 // --------------------------------------------td 금액계산------------------------------------------------------
 	 	// td 체크박스 누르면 총 금액  표시
 		// 체크박스 선택된 한줄 값 가져오기
-		$(".checkSelect").click(function(){ 
+		$(".checkSelect").click(function(){
+			
+			// Order페이지로 넘길 데이터 변수 선언
+			var num,name,color,size,cnt,eprice;
+			var orderData = new Array();
+			
 			var rowData = new Array();
 			var tdArr = new Array();
 			var checkbox = $("input[name=chk]:checked");
@@ -384,6 +390,8 @@ $("#allCheck").click(function(){
 				
 				// 체크된 row의 모든 값을 배열에 담는다.
 				rowData.push(tr.text());
+				
+			
 				
 				// 0번 num값
 				var in0 = td.eq(0).text();
@@ -404,10 +412,17 @@ $("#allCheck").click(function(){
 				sum = in3 * in4;
 				// chArr 에 합친 값 저장
 				chArr.push(sum);
-
-			
+				
+				// Order 페이지로 가져갈 데이터 지정
+				num = $('[name=chk]').val()
+				name = td.eq(2).find('.name').text();
+				size = td.eq(2).find('.size').text().substr(6);
+				color = td.eq(2).find('.color').text().substr(5);
+				cnt =  td.eq(3).find('.txt-spin').val();
+				eprice = td.eq(4).text().substr(0, td.eq(4).text().length -1);
+				// Order 페이지로 가져갈 데이터 지정 끝
 			});
-			
+				
 			// 포문으로 chArr 의 길이만큼 돌림
 			// chCoin 에 chArr 의 값을 더함
 			for(var i = 0; i < chArr.length; i++){
@@ -432,6 +447,11 @@ $("#allCheck").click(function(){
 			}
 			
 			// 총 합계 
+			$('.total-b').text(chCoin + sevice); 
+			
+			$('.total-b').attr('value',chCoin+sevice);	
+			$('.price-b').attr('value',chCoin);	
+			$('.delivery-b').attr('value',sevice);	
 			$('.total-b').text(chCoin + sevice);
 
 			

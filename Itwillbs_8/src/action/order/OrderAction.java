@@ -21,14 +21,10 @@ public class OrderAction implements Action {
 		ActionForward forward = null;
 		int num = Integer.parseInt(request.getParameter("chk"));
 		
-		System.out.println("OrderAction에서 : " +num);
-		
 		OrderService orderService = new OrderService();
 		
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
 		cartList = orderService.getSelectCart(num);
-		
-		request.setAttribute("cartList", cartList);
 		
 		forward = new ActionForward();
 		forward.setPath("/order/order.jsp");
