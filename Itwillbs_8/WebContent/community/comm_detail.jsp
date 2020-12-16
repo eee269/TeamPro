@@ -13,13 +13,6 @@
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
 
-// PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
-// int reNowPage = pageInfo.getPage();
-// int reMaxPage = pageInfo.getMaxPage();
-// int reStartPage = pageInfo.getStartPage();
-// int reEndPage = pageInfo.getEndPage();
-// int reListCount = pageInfo.getListCount();
-
 // String id = (String)session.getAttribute("id");
 String id = "dodo";
 int community_num=Integer.parseInt(request.getParameter("num"));
@@ -28,6 +21,16 @@ int community_num=Integer.parseInt(request.getParameter("num"));
 SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp"/>
+
+
+<script type="text/javascript" src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css" href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.fancybox').fancybox();
+});
+</script>
+
 <link type="text/css" rel="stylesheet" href="scss/common.css" />
 <link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
 <link type="text/css" rel="stylesheet" href="scss/header.1.css" />
@@ -102,8 +105,11 @@ border-radius: 15px;
     *: ;
     height: 50px;
 }
-</style>
 
+#powerReview .PR15N01-review-wrap>li .desc dt {
+    padding-top: 5px;
+}
+</style>
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -207,6 +213,7 @@ border-radius: 15px;
 	
 	
 											<!-- 댓글등록 폼 시작 -->
+											<form name="comm_re_form" id="comm_re_form" method="post" autocomplete="off" enctype="multipart/form-data">
 											<div name="comm_re" id="comm_re">
 											<input type="hidden" id="username" name="username" value="<%=id %>">
 											<input type="hidden" id="community_num" name="community_num" value="<%=community_num%>">
@@ -214,10 +221,10 @@ border-radius: 15px;
 												<div class="PR15N01-write">
 						
 														<div class="pr-txtbox">
-															<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="contents" name="contents"></textarea>												
+															<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="reply_contents" name="reply_contents"></textarea>												
 															<div class="thumb-wrap"></div>
 														</div>
-													
+														<input type="file" name="reply_file" id="reply_file" class="trick file-attach"> 
 												</div>
 												<!-- .PR15N01-write -->
 												<div class="PR15N01-recmd">
@@ -236,7 +243,7 @@ border-radius: 15px;
 												<!-- .PR15N01-recmd -->
 											</div>
 											</div><!-- comm_re 끝 -->
-											
+											</form>
 											<div class="cboth"></div><br><br><br>
 											<!-- 댓글등록 폼 끝 -->
 											
@@ -269,14 +276,13 @@ border-radius: 15px;
 
 						<!-- -----------------------------Comment----------------------------- -->
 						
-						
+					
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>	
-
-
+<div id="image_view_load"></div><a class="fancybox" href="#inline"></a>
 
 <script>
 
@@ -316,12 +322,18 @@ $(function(){
 								
 	                    }else if(j == 2){
 	                    	var core_content = coReply.content;
-	                    	output += "<div class='content'><p class='content_p'>"+coReply.content+"</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
 	                  
-	                    }else if(j == 3){	
+	                    }else if(j == 3){
+	                    	var img = coReply.img;
+	                    	if(img != ""){
+	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
+	                    	}
+	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	                    }else if(j == 4){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 4){		
+	                    }else if(j == 5){		
 	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
 	                    	output += "<div id='replyCount'></div>";
 	                    	
@@ -404,28 +416,34 @@ $(function(){
 	
 
 	$(function(){		
-	    //==================== 원댓글 쓰기 버튼 클릭 ====================//
- 		$(document).on("click", ".review_write", function () {
-			 	var a = $(this).parents('div').find('#comm_re'); 			 	
-			 	var username = a.find('#username').val();
-				var community_num = a.find('#community_num').val();
-				var contents = a.find('#contents').val();
-				var allData = { "username":username,"community_num":community_num,"contents":contents};
-	    		$.ajax({
-	                type: "POST",
-	    			url: "CommReWritePro.co",
-// 	    			processData: false,
-// 	                contentType: false,
-	                data: allData,
-	                success: function () {
-	                	a.find('#contents').val("");	
-	                	getReplyCall();	                	
-	                },
-	    			error: function(request,status,error){
-	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    		       }
-	    		})	    	
-	    })	    
+	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
+		    $(".review_write").click(function(){
+			    	if($("#reply_contents").val().trim() === ""){
+			    		alert("리뷰를 입력하세요.");
+			    		$("#reply_contents").val("").focus();
+			    	}else{
+			            var form = $('#comm_re_form')[0];
+			            var data = new FormData(form);
+			    		$.ajax({
+			                type: "POST",
+			    			enctype: 'multipart/form-data',
+			    			url: "CommReWritePro.co",
+			    			processData: false,
+			                contentType: false,
+			                data: data,
+			                success: function () {
+// 			                	alert("리뷰 등록 완료");
+			                	$("#reply_contents").val("");
+			                	$("#reply_file").val("");
+			                	getReplyCall();
+			                },
+			    			error: function(request,status,error){
+			    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+			    		       }
+			    		}); // ajax 종료
+			    	}; // else end
+		    });	    
+	    
 	    
 	    //==================== 원댓글 수정 ====================//
  		$(document).on("click", ".reReModify", function () {
@@ -627,7 +645,6 @@ $(function(){
 	    })
 	    
 
-
  		//==================== 대댓글 삭제  ====================//
  		$(document).on("click", ".rere_delete", function () {
 
@@ -690,7 +707,21 @@ $(function(){
 		      	}
 	    	})
  		});  
-	    
+
+
+ 		//==================== 상세 이미지 보기  ====================//
+ 		$(document).on("click", ".image_view_load", function () {
+ 				 var a = $(this).parents('li'); 
+ 				 var content = a.find('.content_p').text();
+ 				 var img = a.find('#img').val();
+ 				 var output = ""; 
+ 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
+ 				 
+ 				 $("#image_view_load").html(output); 
+ 				 $(".fancybox").trigger("click");
+
+ 		});
+ 			
 	 	
  	}) //$(function()
  		    
@@ -715,7 +746,7 @@ $(function(){
 </script>
 
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 <script>
 
 
@@ -772,7 +803,7 @@ $(document).on("click", ".rerere_write_open", function () {
  
 	
 </script>
-	
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->	
 <script>
 $(function(){
 		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
