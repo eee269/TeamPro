@@ -26,6 +26,8 @@ public class ProdReviewListAction implements Action {
 		int limit = 10;
 		int loop = Integer.parseInt(request.getParameter("loop"));
 		int pic = 0;
+		// 정렬 방식
+		int sort = Integer.parseInt(request.getParameter("sort"));
 		
 		if(loop < 2) {
 			// 사용자가 포토 또는 일반 리뷰탭을 선택할 시 해당 값들만 가져오기 위한 설정
@@ -49,7 +51,7 @@ public class ProdReviewListAction implements Action {
 			int listCount = prodReviewListService.getReviewListCount(basicCode, loop > 1 ?  i:pic);
 			
 			// i값(포토 유무)에 따른 리뷰 목록 호출
-			reviewList = prodReviewListService.getReviewList(page, limit, basicCode, loop > 1 ?  i:pic);
+			reviewList = prodReviewListService.getReviewList(page, limit, basicCode, loop > 1 ?  i:pic, sort);
 			
 			// Json
 			json = "{\"replyList\":["; 
