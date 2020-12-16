@@ -29,7 +29,6 @@ import action.product.qna.ProdQnaWriteProAction;
 import action.product.qna.ProductMyqnaListAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
-import action.product.review.ProdReviewModifyAction;
 import action.product.review.ProdReviewWriteAction;
 import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
@@ -60,7 +59,16 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductLike.po")) {
+		}else if (command.equals("/ProductSearch.po")) {
+//			action = new ProductDetailAction();
+			forward = new ActionForward();
+			forward.setPath("/product/shopSearch.jsp");
+//			try {
+//				forward = action.execute(request, response);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+		}else if (command.equals("/ProductLike.po")) {
 			action = new ProductLikeAction();
 			try {
 				forward = action.execute(request, response);
