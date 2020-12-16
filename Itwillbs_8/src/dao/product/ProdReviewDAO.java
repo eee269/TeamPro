@@ -157,29 +157,48 @@ public class ProdReviewDAO {
 			if(pic == 0) {
 				switch (sort) {
 					case 0:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY re_ref desc, re_lev limit ?,?";
+						sql ="SELECT * "
+							+ "FROM product_review "
+							+ "WHERE product_basicCode=? AND product_img IS NOT NULL "
+							+ "ORDER BY re_ref desc, re_lev limit ?,?";
 						break;
 					case 1:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT * "
+							+ "FROM product_review "
+							+ "WHERE product_basicCode=? AND product_img IS NOT NULL "
+							+ "ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
 						break;
 					default:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY re_ref, re_lev desc limit ?,?";
+						sql ="SELECT r.*, count(g.review_num) AS 'good' "
+							+ "FROM product_review r JOIN review_good g "
+							+ "ON r.num = g.review_num "
+							+ "WHERE r.product_basicCode=? AND r.product_img IS NOT NULL "
+							+ "ORDER BY good desc, re_ref, re_lev desc limit ?,?";
 						break;
 				}
 			}else if(pic == 1) {
 				switch (sort) {
 					case 0:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY re_ref desc, re_lev limit ?,?";
+						sql ="SELECT * "
+							+ "FROM product_review "
+							+ "WHERE product_basicCode=? AND product_img IS NULL "
+							+ "ORDER BY re_ref desc, re_lev limit ?,?";
 						break;
 					case 1:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT * "
+							+ "FROM product_review "
+							+ "WHERE product_basicCode=? AND product_img IS NULL "
+							+ "ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
 						break;
 					default:
-						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY re_ref desc, re_lev limit ?,?";
+						sql ="SELECT r.*, count(g.review_num) AS 'good' "
+								+ "FROM product_review r JOIN review_good g "
+								+ "ON r.num = g.review_num "
+								+ "WHERE r.product_basicCode=? AND r.product_img IS NULL "
+								+ "ORDER BY good desc, re_ref, re_lev desc limit ?,?";
 						break;
 				}
 			}
-			System.out.println(sql);
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
@@ -248,7 +267,123 @@ public class ProdReviewDAO {
 		return updateCount;
 	}
 	// -------------------updateReview()-----------------------
-
+	// -------------------checkReviewRec()-----------------------
+	public int checkReviewRec(int num, String id, int recommand) {
+		int checkcount = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "";
+			if(recommand == 0) {
+				// 추천 조회
+				sql = "SELECT count(*) FROM review_good WHERE review_mem_id =? AND review_num = ?";
+			}else if(recommand == 1) {
+				// 비추천 조회
+				sql = "SELECT count(*) FROM review_bad WHERE review_mem_id =? AND review_num = ?";
+			}
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, num);
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				checkcount = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - checkReviewRec : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return checkcount;
+	}
+	// -------------------checkReviewRec()-----------------------
+	// -------------------updateReviewRec()-----------------------
+	public int updateReviewRec(int num, String id, int recommand) {
+		int updateCount = 0;
+		PreparedStatement ps = null;
+		try {
+			String sql = "";
+			if(recommand == 0) {
+				// 추천 조회
+				sql = "INSERT INTO review_good values(?,?)";
+			}else if(recommand == 1) {
+				// 비추천 조회
+				sql = "INSERT INTO review_bad values(?,?)";
+			}
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, num);
+			updateCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - updateReviewRec : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
+		
+		return updateCount;
+	}
+	// -------------------updateReviewRec()-----------------------
+	// -------------------deleteReviewRec()-----------------------
+	public int deleteReviewRec(int num, String id, int recommand) {
+		int deleteCount = 0;
+		PreparedStatement ps = null;
+		try {
+			String sql = "";
+			if(recommand == 0) {
+				// 추천 조회
+				sql = "DELETE FROM review_good WHERE review_mem_id =? and review_num =?";
+			}else if(recommand == 1) {
+				// 비추천 조회
+				sql = "DELETE FROM review_bad WHERE review_mem_id =? and review_num =?";
+			}
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			ps.setInt(2, num);
+			deleteCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - deleteReviewRec : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(ps);
+		}
+		return deleteCount;
+	}
+	// -------------------deleteReviewRec()-----------------------
+	// -------------------CountReviewRec()-----------------------
+	public int CountReviewRec(int num, int recommand) {
+		int count = 0;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "";
+			if(recommand == 0) {
+				sql ="SELECT count(*) FROM review_good WHERE review_num =?";
+			}else if(recommand == 1) {
+				sql ="SELECT count(*) FROM review_bad WHERE review_num =?";
+			}
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - CountReviewRec : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(ps);
+		}
+		return count;
+	}
+	// -------------------CountReviewRec()-----------------------
 	public ArrayList<ProdReviewBean> selectMyreviewList(String member_id) {
 		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
 		
@@ -321,6 +456,11 @@ public class ProdReviewDAO {
 		return list;
 	}
 
+
+
+
+
+	
 	
 
 	

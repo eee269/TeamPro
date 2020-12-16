@@ -14,7 +14,6 @@ import org.json.simple.JSONObject;
 import action.Action;
 import svc.product.review.ProdReviewListService;
 import vo.ActionForward;
-import vo.PageInfo;
 import vo.ProdReviewBean;
 
 public class ProdReviewListAction implements Action {
@@ -39,7 +38,6 @@ public class ProdReviewListAction implements Action {
 		
 		ProdReviewListService prodReviewListService = new ProdReviewListService();
 		
-		
 		ArrayList<ProdReviewBean> reviewList = new ArrayList<ProdReviewBean>();
 		
 		// 리뷰 목록 가져오기
@@ -56,7 +54,19 @@ public class ProdReviewListAction implements Action {
 			// Json
 			json = "{\"replyList\":["; 
 			for (int j = 0; j < reviewList.size(); j++) {
+				
 				int num = reviewList.get(j).getNum();
+				int good = 0;
+				int bad = 0;
+				// 추천 수 가져오기
+				for(int k =0; k < 2; k++) {
+					if(k == 0) {
+						good = prodReviewListService.CountReviewRec(num, k);
+					}else {
+						bad = prodReviewListService.CountReviewRec(num, k);
+					}
+				}
+				
 				String id = reviewList.get(j).getMember_id();
 				SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
 				Date date = reviewList.get(j).getDate();
@@ -75,7 +85,8 @@ public class ProdReviewListAction implements Action {
 				json += "{\"num\":\""+num+"\",\"starScore\":\"" + starScore + "\"},";
 				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";
 				json += "{\"num\":\""+num+"\",\"product_img\":\""+product_img+"\"},";
-				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\",\"re_ref\":\""+re_ref+"\"}]";
+				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\",\"re_ref\":\""+re_ref+"\""
+						+ ",\"good\":\""+good+"\",\"bad\":\""+bad+"\"}]";
 				
 				if (j != reviewList.size() - 1) {
 					json += ",";
@@ -86,7 +97,7 @@ public class ProdReviewListAction implements Action {
 		}
 		JSONObject jsonObject = new JSONObject(reviewMap);
 		out.print(jsonObject);
-		
+		out.close();
 		return null;
 	}
 
