@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import svc.community.CommListService;
 import svc.product.BestSelectService;
 import svc.product.ProductAjaxService;
 import svc.product.ProductSelectService;
 import vo.ActionForward;
+import vo.CommBean;
 import vo.ProductBean;
 
 public class MainSelectAction implements Action {
@@ -21,6 +23,13 @@ public class MainSelectAction implements Action {
 		
 		ActionForward forward = null;
 		String id =(String)session.getAttribute("member_id");
+		
+		// 게시글 받아오기
+		CommListService commListService = new CommListService();
+		ArrayList<CommBean> commList = commListService.getArticleList(0, 4);
+		
+		
+		
 		
 		BestSelectService bestSelectService = new BestSelectService();
 		ProductSelectService productSelectService = new ProductSelectService();
