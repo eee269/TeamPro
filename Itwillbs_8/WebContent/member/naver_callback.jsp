@@ -43,12 +43,14 @@ callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바
 						return;
 					}
 
-					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/Itwillbs_8/Main.go");
+					window.location.replace("http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/Itwillbs_8/MemberLoginPro.mo");
 				} else {
 					console.log("callback 처리에 실패하였습니다.");
 				}
 			});
 		});
+		
+
 	</script>
 </body>
 </html>

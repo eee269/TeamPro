@@ -116,7 +116,7 @@
 
 	// 선택된 옵션체크
 	function optcheck(mixopt) {
-		var mix[] = mixopt.split("/");
+		var mix = mixopt.split("/");
 		var productCode = <%=basicCode%> + mix[0] + mix[1];
 		
 		var oldopt = $('ul#show-option li span.show-value').html();
@@ -226,13 +226,6 @@
 	}
 	
 	// 장바구니,,,,넣어야함,,,
-// 	function(){
-// 	if(rating == 0) {
-// 		alert("별점을 입력하세요");
-// 		$('#rating1').focus();
-// 		return false;
-// 		}
-// 	}
 
 	// 옵션 관련 스크립트 끝
 </script>
@@ -360,7 +353,7 @@
 									<span></span>
 								</div>
 								<br>
-								<input type="submit" value="Add to cart"
+								<input type="submit" value="Add to cart" id=""
 								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
 							</div>
 							
@@ -1188,6 +1181,7 @@ function show_hide(){
 		$('.detail_tabmenu ul li').removeClass('on');
 		$(this).addClass('on');
 	});
+	
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->
