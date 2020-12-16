@@ -218,14 +218,6 @@
 		calculatePrice();
 	}
 	
-	// 장바구니,,,,넣어야함,,,
-// 	function(){
-// 	if(rating == 0) {
-// 		alert("별점을 입력하세요");
-// 		$('#rating1').focus();
-// 		return false;
-// 		}
-// 	}
 
 	// 옵션 관련 스크립트 끝
 </script>
@@ -259,7 +251,12 @@
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
 	<div class="container">
+	
+	<!--  카트 넣기 폼 -->
+	<form action="cartUpAction.ca" method="post" name="cartUpForm">
+	<!--  ------------- -->
 		<div class="row">
+		
 			<div class="col-md-6 col-lg-7 p-b-30">
 				<div class="p-l-25 p-r-30 p-lr-0-lg">
 					<div class="wrap-slick3 flex-sb flex-w">
@@ -268,7 +265,8 @@
 
 						<div class="slick3 gallery-lb">
 						<%for(int i=0; i<main.length; i++){%>
-							
+				
+								
 							<div class="item-slick3"
 								data-thumb="upload/productUploadImg/<%=main[i] %>">
 								<div class="wrap-pic-w pos-relative">
@@ -351,8 +349,9 @@
 									<span></span>
 								</div>
 								<br>
-								<input type="submit" value="Add to cart"
-								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+								<input type="button" value="Add to cart"
+								class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="addToCart"
+								onclick="document.cartUpForm.submit()">
 <!-- 								<button -->
 <!-- 									class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"> -->
 <!-- 									Add to cart</button> -->
@@ -384,7 +383,7 @@
 				</div>
 			</div>
 		</div>
-
+				</form>
 		<!-- 상세정보 시작 -->
 		<div id="productDetail">
 			<div class="cboth width1260">
@@ -748,7 +747,7 @@
 						<div class="deli_title02">
 							<span></span> 주문 전 오야니 프리미엄 가죽에 대한 정보를 확인해 주세요.
 						</div>
-						글로벌 토탈 패션 브랜드 오야니(ORYANY)는 명품 하우스에서 사용하는 최고급 소재를 고집하여 세계 최고의 검사,
+						글로벌 토탈 패션 브랜드 (ORYANY)는 명품 하우스에서 사용하는 최고급 소재를 고집하여 세계 최고의 검사,
 						검증,<br> 테스트를 인증하는 SGS*의 인증처에서 엄격한 품질, 공정관리를 거쳐 제작되었습니다. 패셔너블한
 						디자인으로 최상의 제품<br> 퀄리티를 선보이는 동시에 최고의 가치소비를 지향하며 합리적인 가격대를
 						제시합니다.<br> 오야니의 가죽은 천연가죽으로, 미세한 핏줄자국, 주름, 반점 등이 보일 수 있습니다.

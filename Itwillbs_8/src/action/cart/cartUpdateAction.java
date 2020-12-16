@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import svc.cart.CartUpdateService;
@@ -16,6 +17,19 @@ public class cartUpdateAction implements Action {
 		System.out.println("cartUpdateAction");
 		ActionForward forward = null;
 		
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
+		
+		if (member_id == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("</script>");
+			
+			forward.setPath("MemberLoginForm.mo");
+		}
+		
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		
@@ -23,6 +37,9 @@ public class cartUpdateAction implements Action {
 		CartUpdateService cartUpdateService = new CartUpdateService();
 		
 		boolean isUpdateSuccess= cartUpdateService.isCartUpdate(num, cnt);
+		
+		
+		
 		
 		if(!isUpdateSuccess) {
 			response.setContentType("text/html;charset=UTF-8");
