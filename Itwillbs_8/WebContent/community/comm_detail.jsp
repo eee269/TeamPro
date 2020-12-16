@@ -318,7 +318,7 @@ $(function(){
 	                    	var core_username = coReply.username;
 	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'><dt class='first'>작성자</dt><dd>"+core_username+"</dd>";
 	                    }else if(j == 1){
-	                    	output += "<dt>작성일</dt><dd>"+coReply.date+"</dd></dl>";
+	                    	output += "<dt>작성일</dt><dd>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
 								
 	                    }else if(j == 2){
 	                    	var core_content = coReply.content;
