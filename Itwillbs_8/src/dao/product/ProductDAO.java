@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -886,6 +887,44 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		}
 		
 		return likeBasicCodeList;
+	}
+	
+	public HashMap<String, String> selectCartLike(String id) {
+		HashMap<String, String> cartLike = new HashMap<String, String>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		
+		try {
+			String sql = "select COUNT(*) from cart where member_id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cartLike.put("Cart", Integer.toString(rs.getInt(1)));
+			}
+			
+			String sql2 = "select COUNT(*) from product_like where member_id=?";
+			ps2 = con.prepareStatement(sql2);
+			ps2.setString(1, id);
+			rs2 = ps2.executeQuery();
+			
+			while(rs2.next()) {
+				cartLike.put("Like", Integer.toString(rs2.getInt(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+			close(ps2);
+			close(rs2);
+		}
+		
+		return cartLike;
 	}
 
 }

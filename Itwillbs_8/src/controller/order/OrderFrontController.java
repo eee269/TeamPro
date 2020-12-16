@@ -1,6 +1,7 @@
 package controller.order;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import action.order.OrderListAction;
 import action.order.OrderProAction;
 import action.order.UpdateOrderStatusAction;
 import vo.ActionForward;
+import vo.Cart;
 
 @WebServlet("*.or")
 public class OrderFrontController extends HttpServlet {
@@ -105,7 +107,8 @@ public class OrderFrontController extends HttpServlet {
 				System.out.println("OrderDetailPro로 포워딩 중 오류! - "+e.getMessage());
 				e.printStackTrace();
 			}
-		}
+		} 
+		
 		// -------------------------주문 상세 페이지--------------------------------
 		else if(command.equals("/MyorderDetail.or")) {
 			System.out.println("MyOrderDetailPro");
@@ -122,7 +125,7 @@ public class OrderFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		} 
+		}
 
 		// -------------------------주문 관리 페이지--------------------------------
 		else if (command.equals("/ControlOrderList.or")) {
@@ -188,7 +191,6 @@ public class OrderFrontController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doProcess(request, response);
 	}
 

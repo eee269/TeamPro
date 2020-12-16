@@ -132,7 +132,7 @@ public class OrderDAO {
 		if(rs.next()){
 			JSONObject mb = new JSONObject();
 			mb.put("id",rs.getString("id"));
-			mb.put("name",rs.getString("pass"));
+			mb.put("name",rs.getString("username"));
 			mb.put("email",rs.getString("email"));
 			
 			mb.put("phone_0",rs.getString("phone").substring(0, 3));
@@ -300,50 +300,6 @@ public class OrderDAO {
 		
 		return mainorder;
 	}
-
-	public ArrayList<Cart> selectCart(int num) {
-		System.out.println("orderDAO - selectCart()!");
-		ArrayList<Cart> cartList = null;
-		
-		PreparedStatement p = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select * from cart where num = ?";
-			p = con.prepareStatement(sql);
-			p.setInt(1, num);
-			rs = p.executeQuery();
-			
-			cartList = new ArrayList<Cart>();
-			
-			while(rs.next()) {
-				Cart cart = new Cart();
-				
-				cart.setNum(rs.getInt(1));
-				cart.setCnt(rs.getInt(2));
-				cart.setProduct_name(rs.getString(3));
-				cart.setPrice(rs.getInt(4));
-				cart.setColor(rs.getString(5));
-				cart.setSize(rs.getString(6));
-				cart.setMember_id(rs.getString(7));
-				cart.setProduct_basicCode(rs.getString(8));
-				cart.setOpt_productCode(rs.getString(9));
-				
-				cartList.add(cart);
-			}
-			
-			
-		} catch (Exception e) {
-			System.out.println("selectCart() 오류! - "+e.getMessage());
-			e.printStackTrace();
-		}finally {
-			close(rs);
-			close(p);
-		}
-		
-		return cartList;
-	}
-	
 	
 // ------------------- 디테일 오더 생성 -------------------------------	
 	public int insertDetailOrder(int num, String code) {
@@ -414,5 +370,48 @@ public class OrderDAO {
 		return insertCount;
 	}
 // ------------------- 디테일 오더 생성 끝 -------------------------------	
+
+	public ArrayList<Cart> selectCart(int num) {
+		System.out.println("orderDAO - selectCart()!");
+		ArrayList<Cart> cartList = null;
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from cart where num = ?";
+			p = con.prepareStatement(sql);
+			p.setInt(1,num);
+			rs = p.executeQuery();
+			
+			cartList = new ArrayList<Cart>();
+			
+			while(rs.next()) {
+				Cart c = new Cart();
+				
+				c.setNum(rs.getInt(1));
+				c.setCnt(rs.getInt(2));
+				c.setProduct_name(rs.getString(3));
+				c.setPrice(rs.getInt(4));
+				c.setColor(rs.getString(5));
+				c.setSize(rs.getString(6));
+				c.setMember_id(rs.getString(7));
+				c.setProduct_basicCode(rs.getString(8));
+				c.setOpt_productCode(rs.getString(9));
+				
+				cartList.add(c);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println("selectCart() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(p);
+		}
+		
+		return cartList;
+	}
 
 }

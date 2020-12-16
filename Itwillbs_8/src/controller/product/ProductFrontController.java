@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProductCartLikeAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
 import action.product.ProductLikeAction;
@@ -68,6 +69,14 @@ public class ProductFrontController extends HttpServlet {
 //			} catch (Exception e) {
 //				e.printStackTrace();
 //			}
+		}else if (command.equals("/ProductCartLike.po")) {
+			
+			action = new ProductCartLikeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if (command.equals("/ProductLike.po")) {
 			action = new ProductLikeAction();
 			try {

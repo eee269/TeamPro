@@ -99,7 +99,7 @@ public class ProdReviewDAO {
 	// -------------------selectListCount()-----------------------
 	// -------------------selectReviewList()-----------------------
 	// 리뷰 목록 호출
-	public ArrayList<ProdReviewBean> selectReviewList(int page, int limit, String basicCode, int pic) {
+	public ArrayList<ProdReviewBean> selectReviewList(int page, int limit, String basicCode, int pic, int sort) {
 		ArrayList<ProdReviewBean> reviewList =null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -109,10 +109,31 @@ public class ProdReviewDAO {
 		
 		try {
 			if(pic == 0) {
-				sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY num desc limit ?,?";
+				switch (sort) {
+					case 0:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY num desc limit ?,?";
+						break;
+					case 1:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY StarScore desc, num desc limit ?,?";
+						break;
+					default:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NOT NULL ORDER BY num desc limit ?,?";
+						break;
+				}
 			}else if(pic == 1) {
-				sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY num desc limit ?,?";
+				switch (sort) {
+					case 0:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY num desc limit ?,?";
+						break;
+					case 1:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY StarScore desc, num desc limit ?,?";
+						break;
+					default:
+						sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY num desc limit ?,?";
+						break;
+				}
 			}
+			System.out.println(sql);
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
