@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.address.AddrAction;
+import action.address.AddrBookAction;
 import action.address.DefaultAddrAction;
 import action.address.RecentAddrAction;
 import action.address.RegistDefaultAddrAction;
@@ -18,7 +19,7 @@ import vo.ActionForward;
 @WebServlet("*.ad")
 public class AddressController extends HttpServlet{
 	
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		
 		ActionForward forward = null;
@@ -27,7 +28,7 @@ public class AddressController extends HttpServlet{
 		
 		if(command.equals("/Addr.ad")) {
 			System.out.println("Addr.ad 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new AddrAction();
 			
 			try {
@@ -39,7 +40,7 @@ public class AddressController extends HttpServlet{
 			}
 		} else if(command.equals("/DefaultAddr.ad")) {
 			System.out.println("DefaultAddr.ad 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new DefaultAddrAction();
 			
 			try {
@@ -51,7 +52,7 @@ public class AddressController extends HttpServlet{
 			} 
 		} else if(command.equals("/RecentAddr.ad")) {
 			System.out.println("RecentAddr.ad 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new RecentAddrAction();
 			try {
 				System.out.println("RecentAddrAction으로 포워딩");
@@ -62,13 +63,24 @@ public class AddressController extends HttpServlet{
 			}
 		} else if(command.equals("/RegistDefaultAddr.ad")) {
 			System.out.println("RegistDefaultAddr.ad 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new RegistDefaultAddrAction();
 			try {
 				System.out.println("registDefaultAddrAction으로 포워딩");
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("registDefaultAddrAction으로 포워딩 중 오류 - "+e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AddrBook.ad")) {
+			System.out.println("AddrBook.ad 포워딩");
+//			forward = new ActionForward();
+			action = new AddrBookAction();
+			try {
+				System.out.println("AddrBookAction으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("AddrBookAction으로 포워딩 중 오류 - " +e.getMessage());
 				e.printStackTrace();
 			}
 		}
