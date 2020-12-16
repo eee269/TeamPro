@@ -88,7 +88,27 @@
 	margin-left: -36px;
 }
 </style>
+<!-- 장바구니,좋아요  ajax -->
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+	 
+	 $.ajax({
+		    url:'ProductCartLike.po', 
+		    type:'post', 
+<%-- 		    data:{'id':'<%=member_id%>'},  --%>
+		    success: function(data) {
+		    	var data = data.split('/');
+		    	$('.icon-header-noti').attr('data-notify',data[1]);
+		    	$('.js-show-cart').attr('data-notify',data[0]);
+		    },
+		    error: function(err) {
+		        
+		    }
+		});
+	 
+ });
+</script>
 </head>
 <body class="animsition">
 	<!-- Header -->
@@ -185,7 +205,7 @@
 						</div>
 						<a href="Cart.ca"
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-							data-notify="장바구니갯수"> <i class="zmdi zmdi-shopping-cart"></i>
+							data-notify="0"> <i class="zmdi zmdi-shopping-cart"></i>
 						</a> <a href="ProductMylikeList.po"
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti"
 							data-notify="0"> <i class="zmdi zmdi-favorite-outline"></i>
@@ -209,7 +229,7 @@
 				</div>
 				<div
 					class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-					data-notify="2">
+					data-notify="0">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 				<a href="#"
