@@ -113,7 +113,6 @@ public class ProdReviewDAO {
 			}else if(pic == 1) {
 				sql ="SELECT * FROM product_review WHERE product_basicCode=? AND product_img IS NULL ORDER BY num desc limit ?,?";
 			}
-			System.out.println("sql : "+sql);
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);
 			ps.setInt(2, startRow);
@@ -161,6 +160,25 @@ public class ProdReviewDAO {
 		return deleteCount;
 	}
 	// -------------------deleteReview()-----------------------
+	// -------------------updateReview()-----------------------
+	public int updateReview(ProdReviewBean prodReviewBean, int num) {
+		int updateCount = 0;
+		PreparedStatement ps = null;
+		try {
+			String sql = "UPDATE product_review SET starScore=?, content=?, product_img=? WHERE num=?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, prodReviewBean.getStarScore());
+			ps.setString(2, prodReviewBean.getContent());
+			ps.setString(3, prodReviewBean.getProduct_img());
+			ps.setInt(4, num);
+			updateCount = ps.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - updateReview : "+e.getMessage());
+			e.printStackTrace();
+		}
+		return updateCount;
+	}
+	// -------------------updateReview()-----------------------
 
 	public ArrayList<ProdReviewBean> selectMyreviewList(String member_id) {
 		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
@@ -200,6 +218,41 @@ public class ProdReviewDAO {
 		
 		return list;
 	}
+
+	// 페이징 없이 상품 목록 받아가기 ( 상품삭제 )
+	public ArrayList<ProdReviewBean> selectReviewList(String basicCode) {
+		ArrayList<ProdReviewBean> list = new ArrayList<ProdReviewBean>();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product_review where product_basicCode=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, basicCode);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProdReviewBean review = new ProdReviewBean();
+				
+				review.setProduct_basicCode(rs.getString("product_basicCode"));
+				review.setProduct_img(rs.getString("product_Img"));
+				
+				list.add(review);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return list;
+	}
+
+	
 
 	
 }

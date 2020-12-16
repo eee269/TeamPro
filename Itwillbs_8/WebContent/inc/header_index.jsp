@@ -55,24 +55,25 @@
 					</div>
 					<div class="right-top-bar flex-w h-full">
 						<%
-					if(member_id == null){
-					%>
-						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15">
-							로그인
-						</a>
-						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15">
-							회원가입
-						</a>
-						<%} else{ %>
-							<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15">로그아웃</a>
-							<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15">마이페이지</a>
-						<%} %>
-						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15">
-							장바구니
-						</a>
-						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15">
-							주문정보
-						</a>
+							if (member_id == null) {
+						%>
+						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15"> 로그인 </a>
+						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15"> 회원가입 </a>
+						<%
+							} else if (member_id.equals("admin")) {
+						%>
+						<a href="ControlList.go" class="flex-c-m trans-04 p-lr-15"> 관리자페이지 </a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15"> 로그아웃 </a>
+						<%
+							} else {
+						%>
+						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15"> 마이페이지 </a>
+						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15"> 장바구니 </a> 
+						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15"> 주문정보 </a> 
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15"> 로그아웃 </a>
+						<%
+							}
+						%>
 					</div>
 				</div>
 			</div>
@@ -178,14 +179,26 @@
 
 				<li>
 					<div class="right-top-bar flex-w h-full">
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							로그인
-						</a>
-
-						<a href="#" class="flex-c-m p-lr-10 trans-04">
-							회원가입
-						</a>
-
+						<%
+							if (member_id == null) {
+						%>
+						<a href="MemberLoginForm.mo" class="flex-c-m trans-04 p-lr-15"> 로그인 </a>
+						<a href="MemberLoginForm.mo#signup" class="flex-c-m trans-04 p-lr-15"> 회원가입 </a>
+						<%
+							} else if (member_id.equals("admin")) {
+						%>
+						<a href="ControlList.go" class="flex-c-m trans-04 p-lr-15"> 관리자페이지 </a>
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15"> 로그아웃 </a>
+						<%
+							} else {
+						%>
+						<a href="MemberMypage.mo" class="flex-c-m trans-04 p-lr-15"> 마이페이지 </a>
+						<a href="Cart.ca" class="flex-c-m trans-04 p-lr-15"> 장바구니 </a> 
+						<a href="MyOrderList.or" class="flex-c-m trans-04 p-lr-15"> 주문정보 </a> 
+						<a href="MemberLogout.mo" class="flex-c-m trans-04 p-lr-15"> 로그아웃 </a>
+						<%
+							}
+						%>
 					</div>
 				</li>
 			</ul>
