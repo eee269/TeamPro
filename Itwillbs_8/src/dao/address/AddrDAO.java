@@ -118,9 +118,10 @@ public class AddrDAO {
 		recentAddr = new JSONArray();
 
 		try {
-			String sql = "select postcode,address from mainorder where member_id = ? and date in (select MAX(date) from mainorder)";
+			String sql = "select postcode,address from mainorder where member_id = ? and date in (select MAX(date) from mainorder where member_id = ?)";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, member_id);
+			ps.setString(2, member_id);
 			rs = ps.executeQuery();
 			
 			if(rs.next()) {
