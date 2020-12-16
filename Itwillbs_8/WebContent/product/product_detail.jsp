@@ -496,12 +496,12 @@
 					</div>
 					<div class="PR15N01-hd">
 								<h2>
-									프리미엄 상품평<span>(20개)</span>
+									프리미엄 상품평<span>(<span class="totalReview_count"></span>)</span>
 								</h2>
 								<ul class="sort">
-									<li class="now" value="date"><a href="javascript:power_review_sort('date');">최신 순</a></li>
-									<li value="score"><a href="javascript:power_review_sort('score');">평점 순</a></li>
-									<li value="good"><a href="javascript:power_review_sort('good');">추천 순</a></li>
+									<li class="now" value="date"><a href="javascript:getReplyCall();">최신 순</a></li>
+									<li value="score"><a href="javascript:getReplyCall('','1');">평점 순</a></li>
+									<li value="good"><a href="javascript:getReplyCall();">추천 순</a></li>
 								</ul>
 							</div>
 					<div class="tabs">
@@ -862,10 +862,10 @@
 			    	}; // else end
 		    });
 		    // BIN 리뷰 리스트 호출
-		    function getReply(page){
+		    function getReply(page,sort){
+		    	var totalReview_count = 0;
 		    	var limit = 10;
 		    	var loop = 1;
-		    	
 		    	// 처음 들어오거나 새로고침 시 기본설정
 		    	if(!page){
 		    		var page = 1;
@@ -879,8 +879,10 @@
 			    		var pic = 1;
 			    		$("#signin-cont").text(""); 
 			    	}
+	    		}
+		    	if(!sort){
+		    		var sort = 0;
 		    	}
-		    	
 		    	$.ajax({
 	    			url: "ProdReviewList.po", // 요청 url
 	                type: "POST", // post 방식
@@ -889,7 +891,8 @@
 	                	pic : pic,
 	                	page : page,
 	                	limit : limit,
-	                	loop : loop
+	                	loop : loop,
+	                	sort : sort
 	                },
 	                success: function (jsonObject) { 
 	                	jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
@@ -1013,6 +1016,8 @@
 				   	              	$(".signin-cont").html(output);
 				   	             	$(".review_count").html(newJson.listCount);
 			   	              	}
+                				totalReview_count += (newJson.listCount*1);
+                				alert(totalReview_count);
 			   	            // 포토 또는 일반리뷰 탭 선택 시
                 			}else{
                 				if(pic==0){
@@ -1025,6 +1030,7 @@
                 			}
                 		} // if replyList != null end
                		} // 첫 번째 key in for문
+                	$(".totalReview_count").html(totalReview_count);
           		}, // success end
 	        	error: function(request,status,error){
    		      		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

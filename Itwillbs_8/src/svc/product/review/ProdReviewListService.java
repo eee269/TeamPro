@@ -30,7 +30,7 @@ public class ProdReviewListService {
 	// ------------------------getReviewListCount()----------------------
 	// ------------------------getReviewList()----------------------
 	// 상품 리뷰 가져오기 
-	public ArrayList<ProdReviewBean> getReviewList(int page, int limit, String basicCode, int pic) {
+	public ArrayList<ProdReviewBean> getReviewList(int page, int limit, String basicCode, int pic, int sort) {
 		System.out.println("ProdReviewListService - getReviewList()");
 		ArrayList<ProdReviewBean> reviewList = null;
 		
@@ -39,7 +39,7 @@ public class ProdReviewListService {
 		prodReviewDAO.setConnection(con);
 		
 		// 상품 리뷰 리턴
-		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode,pic);
+		reviewList=prodReviewDAO.selectReviewList(page,limit,basicCode,pic,sort);
 		// 멤버 정보 리턴
 		MemberDAO memberDAO = MemberDAO.getInstance();
 		memberDAO.setConnection(con);
