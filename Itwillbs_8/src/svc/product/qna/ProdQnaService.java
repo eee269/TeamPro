@@ -165,6 +165,19 @@ public class ProdQnaService {
 		
 		return prodQnaBean;
 	}
+	// ProductDeleteAction에서 쓸 qna file정보
+	public ArrayList<ProdQnaBean> getQnaList(String basicCode) {
+		ArrayList<ProdQnaBean> list = new ArrayList<ProdQnaBean>();
+		
+		Connection con = getConnection();
+		ProdQnaDAO dao = ProdQnaDAO.getInstance();
+		dao.setConnection(con);
+		list = dao.selectQnaList(basicCode);
+		
+		close(con);
+		
+		return list;
+	}
 
 	
 

@@ -23,8 +23,9 @@
 	String type=request.getParameter("type");
 	ArrayList<ProductBean> ncodeList = (ArrayList<ProductBean>)request.getAttribute("ncodeList");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
-	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
+	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");	
 	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
+
 	
 	
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
@@ -206,7 +207,7 @@ $( document ).ready(function () {
 		<ul class="cboth">
 			<%for(int i =0; i<ncodeList.size(); i++){%>
 			<li>
-			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%><%if(member_id !=null){%>&id=<%=member_id %><%}%>">
+			<a href="ProductShop.po?type=N&xcode=<%=ncodeList.get(i).getXcode()%>&ncode=<%=ncodeList.get(i).getNcode()%>">
 			   <%=ncodeList.get(i).getNcode()%></a>
 			</li>
 			<%} %>	
@@ -227,7 +228,7 @@ $( document ).ready(function () {
 		
 		<dl class="item-list">
 			<dt class="thumb">
-				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+				<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 					class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><img
 					class="MS_prod_img_m"
 					src="upload/productUploadImg/<%=main[0]%>"></a>
@@ -235,7 +236,7 @@ $( document ).ready(function () {
 			</dt>
 			<dd class="prd-info">
 				<ul>
-					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+					<li class="prd-name"><a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>"
 						class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=bestList.get(i).getName() %>
 							</a></li>
 					<li class="subname"><%=bestList.get(i).getNcode() %>-<%=bestList.get(i).getBasicCode()%></li>
@@ -267,7 +268,7 @@ $( document ).ready(function () {
 				</div>
 			</div>
 
-			<!-- Search product -->
+		<!-- Search product  -->
 			<div class="dis-none panel-search w-full p-t-10 p-b-15">
 				<div class="bor8 dis-flex p-l-15">
 					<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
@@ -282,6 +283,7 @@ $( document ).ready(function () {
 		</div>
 <!-- Search -->
 <!-- 정렬프론트 코드 -->
+
 						<div class="container">
 								<div class="cboth total-sort">
 									<dl class="total">
@@ -292,15 +294,15 @@ $( document ).ready(function () {
 									<dd>
 										<ul>
 										<%if(ncode !=null){%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&ncode=<%=ncode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }else{%>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new<%if(member_id != null){%>&id=<%=member_id %><%}%>">신상품순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">높은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice<%if(member_id != null){%>&id=<%=member_id %><%}%>">낮은 가격순</a>&nbsp;&nbsp;|</li>
-											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey<%if(member_id != null){%>&id=<%=member_id %><%}%>">좋아요순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=new">신상품순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=hprice">높은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=lprice">낮은 가격순</a>&nbsp;&nbsp;|</li>
+											<li><a href="ProductShop.po?type=<%=type%>&xcode=<%=xcode%>&sort=likey">좋아요순</a>&nbsp;&nbsp;|</li>
 										<% }%>										
 										</ul>
 									</dd>
@@ -318,7 +320,7 @@ $( document ).ready(function () {
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox"<%if(i>3){%>style="display:none;"<%}%>>
 				<div class="block2">
 					<div class="block2-pic hov-img0">
-						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode()%><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+						<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode()%>"
 							class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> <img
 							src="upload/productUploadImg/<%=main[0]%>" alt="IMG-PRODUCT">
 						</a> 
@@ -326,7 +328,7 @@ $( document ).ready(function () {
 
 					<div class="block2-txt flex-w flex-t p-t-14">
 						<div class="block2-txt-child1 flex-col-l ">
-							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %><%if(member_id !=null){%>&id=<%=member_id %><%}%>"
+							<a href="ProductDetail.po?basicCode=<%=productList.get(i).getBasicCode() %>"
 								class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 								<%=productList.get(i).getName()%></a>
 								<span class="stext-105 cl3"> <%=priceFormat.format(productList.get(i).getPrice())%>원</span>
@@ -335,7 +337,12 @@ $( document ).ready(function () {
 						<div class="block2-txt-child2 flex-r p-t-3">
 							<%if(member_id != null){ %>
 							<button 
-								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){%>js-addedwish-b2<%}else{%>js-addedwish-b1<%}%>" 
+								class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%
+								if(likeBaiscCodeList.contains(productList.get(i).getBasicCode())){
+								%>js-addedwish-b2<%
+								}else{
+									%>js-addedwish-b1<%
+									}%>" 
 								value="<%=likeCheck%>">
 								<img class="icon-heart1 dis-block trans-04"
 								src="images/icons/icon-heart-01.png" alt="ICON"> 

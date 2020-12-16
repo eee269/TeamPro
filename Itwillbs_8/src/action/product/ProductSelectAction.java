@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 
@@ -24,10 +25,12 @@ public class ProductSelectAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
+		
 		ActionForward forward = null;
 		String xcode = request.getParameter("xcode");
 		String ncode = request.getParameter("ncode");
-		String id = request.getParameter("id");
+		String id =(String)session.getAttribute("member_id");
 		
 		NcodeSelectService ncodeSelectService = new NcodeSelectService();
 		BestSelectService bestSelectService = new BestSelectService();
@@ -94,8 +97,11 @@ public class ProductSelectAction implements Action {
 
 		}
 		
-		likeBasicCodeList = pas.getLikeBasicCodeList(id);
-		request.setAttribute("likeBasicCodeList",likeBasicCodeList);
+		if(id !=null) {
+			
+			likeBasicCodeList = pas.getLikeBasicCodeList(id);
+			request.setAttribute("likeBasicCodeList",likeBasicCodeList);
+		}
 		
 		
 		forward = new ActionForward();

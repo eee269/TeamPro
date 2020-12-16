@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import vo.ActionForward;
 import vo.MemberBean;
 import vo.ProdReviewBean;
 import vo.ProductBean;
@@ -108,6 +109,79 @@ public class ProductDAO {
 
 		
 		return bestList;
+	}
+	public ArrayList<ProductBean> selectNewList() {
+		
+		ArrayList<ProductBean> bestList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from product order by date DESC LIMIT 4";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+								
+				bestList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectNewList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+
+		
+		return bestList;
+	}
+	public ArrayList<ProductBean> selectMainProductList() {
+		
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from product order by likey DESC LIMIT 16";
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+				
+				productList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectMainProductList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+		
+		return productList;
 	}
 	
 	public ArrayList<ProductBean> selectProductListX(String xcode,int page, int limit) {
@@ -384,7 +458,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		ResultSet rs = null;
 				
 		try {
-			String sql = "SELECT * FROM product ORDER BY date desc";
+			String sql = "SELECT * FROM product ORDER BY likey desc";
 			ps = con.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
@@ -455,7 +529,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 
 	// 옵션 삭제 + 옵션 없을때 상품도 같이 삭제
 	public int deleteOption(String productCode) {
-		int count = 0;
+		int resultOptCount = 0;
 		
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -464,20 +538,17 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			String sql = "delete from opt where productCode=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, productCode);
-			count = pstmt.executeUpdate();
-			if(count > 0) {
+			resultOptCount = pstmt.executeUpdate();
+			
+			// 옵션 삭제 성공 시 남은 옵션 수 구하기
+			if(resultOptCount > 0) {
 				sql = "select count(*) from opt where basicCode=?";
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, productCode.substring(0, 4));
 				rs = pstmt.executeQuery();
 				
-				
 				if(rs.next()) {
-					if(rs.getInt(1) == 0) {
-						count = deleteProduct(productCode.substring(0, 4));
-					} else {
-						return count;
-					}
+					resultOptCount = rs.getInt(1);
 				}
 			}
 		} catch (SQLException e) {
@@ -487,7 +558,7 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 			close(rs);
 		}
 		
-		return count;
+		return resultOptCount;
 	}
 	
 	// 상품 삭제
@@ -495,50 +566,16 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		int count = 0;
 		
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
 		
 		try {
-			String sql = "select main_img, sub_img from product where basicCode=?";
-			pstmt = con.prepareStatement(sql);
-			pstmt.setString(1, basicCode);
-			rs = pstmt.executeQuery();
-			
-			sql = "delete from product where basicCode=?";
+			String sql = "delete from product where basicCode=?";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, basicCode);
 			count = pstmt.executeUpdate();
-			
-			// 저장된 이미지도 같이 삭제하기
-			if(rs.next()) {
-				String[] main = rs.getString(1).split("/");
-				String[] sub = rs.getString(2).split("/");
-				String path = "../upload/productUploadImg/";
-				File f = new File(path+main[0]);
-				
-				if(main.length == 0) {
-					f = new File(path+rs.getString(1));
-					if(f.exists()) 		f.delete();
-				} else {
-					for(String s: main) {
-						f = new File(path+s);
-						if(f.exists()) 	f.delete();
-					}
-				}
-				if(sub.length == 0) {
-					f = new File(path+rs.getString(1));
-					if(f.exists()) 		f.delete();
-				} else {
-					for(String s: main) {
-						f = new File(path+s);
-						if(f.exists()) 	f.delete();
-					}
-				}
-			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
-			close(rs);
 		}
 		
 		return count;

@@ -16,7 +16,7 @@ public class ProductMyqnaListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = null;
+		ActionForward forward = new ActionForward();
 		
 
 		HttpSession session = request.getSession();
@@ -36,7 +36,6 @@ public class ProductMyqnaListAction implements Action {
 			
 			request.setAttribute("myqnaList", myqnaList);
 			
-			forward = new ActionForward();
 			forward.setPath("/mypage/myqna.jsp");
 		}
 		
