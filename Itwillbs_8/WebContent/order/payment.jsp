@@ -1,4 +1,3 @@
-<%@page import="org.omg.CORBA.IMP_LIMIT"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
