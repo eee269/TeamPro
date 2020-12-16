@@ -963,11 +963,11 @@
 		    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
 			    	                    	output +=		"<br>";
 			    	                    	output +=		"<div id='button'>";
-			    	                    	output +=			"<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+<%=basicCode%>+"'>삭제</a>";
+			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>";
 			    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>";
 		    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
 			   	                 		}else if(member_id == 'admin' && j == 5){
-			    	                    	output +=			"<a href='ProdReviewDelete.po?num="+reply.num+"&basicCode="+<%=basicCode%>+"'>삭제</a>";
+			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>";
 			    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+")'>답글</a>";
 			   	                 		}
 			                	} // 리뷰 하나에 대한 for 문 => reveiwDetail
@@ -1110,6 +1110,27 @@
 	function prr_replySub(){
 		alert(3);
 	}
+	function prd_review(num){
+		 // 리뷰 삭제
+	    if(!confirm("정말 삭제하시겠습니까?")){
+	    	return;
+	    }else{
+	    		$.ajax({
+	                type: "POST",
+	    			url: "ProdReviewDelete.po",
+	                data: {
+	                	num:  num
+	                },
+	                success: function () {
+	                	alert("리뷰 삭제 완료");
+	                	getReplyCall();
+	                },
+	    			error: function(request,status,error){
+	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    		       }
+	    		})// end ajax
+	  	  	}
+	    }
 </script>
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
@@ -1153,30 +1174,6 @@ function show_hide(){
 		$('.detail_tabmenu ul li').removeClass('on');
 		$(this).addClass('on');
 	});
-</script>
-
-<script type="text/javascript">
-	function review_delete(num){
-		 // 리뷰 삭제
-	    if(!confirm("정말 삭제하시겠습니까?")){
-	    	return;
-	    }else{
-	    		$.ajax({
-	                type: "POST",
-	    			url: "ProdReviewDelete.po",
-	                data: {
-	                	num:  $("#num").val()
-	                },
-	                success: function () {
-	                	alert("리뷰 삭제 완료");
-	                	getReply();
-	                },
-	    			error: function(request,status,error){
-	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    		       }
-	    		})// end ajax
-	  	  	}
-	    }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->

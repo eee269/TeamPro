@@ -29,6 +29,7 @@ import action.product.qna.ProdQnaWriteProAction;
 import action.product.qna.ProductMyqnaListAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
+import action.product.review.ProdReviewModifyAction;
 import action.product.review.ProdReviewWriteAction;
 import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
