@@ -4,9 +4,12 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 
 import action.Action;
 import svc.product.review.ProdReviewListService;
@@ -18,73 +21,68 @@ public class ProdReviewListAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ActionForward forward = null;
-		
 		String basicCode = request.getParameter("basicCode");
-		String active = request.getParameter("active");
+		int	page = Integer.parseInt(request.getParameter("page"));
+		int limit = 10;
+		int loop = Integer.parseInt(request.getParameter("loop"));
+		int pic = 0;
+		
+		if(loop < 2) {
+			// 사용자가 포토 또는 일반 리뷰탭을 선택할 시 해당 값들만 가져오기 위한 설정
+			pic = Integer.parseInt(request.getParameter("pic"));
+		}
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		int page = 1; 
-		int limit = 10; 
-		if(request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
 		ProdReviewListService prodReviewListService = new ProdReviewListService();
-		// 리뷰 총 갯수 카운트
-		int listCount = prodReviewListService.getReviewListCount(basicCode, active);
+		
 		
 		ArrayList<ProdReviewBean> reviewList = new ArrayList<ProdReviewBean>();
 		
 		// 리뷰 목록 가져오기
-		reviewList = prodReviewListService.getReviewList(page, limit, basicCode, active);
-		
-		int maxPage = (int)((double)listCount / limit + 0.95);
-		
-		int startPage = ((int)((double)page / 10 + 0.9) - 1) * 10 + 1;
-		
-		int endPage = startPage + 10 - 1;
-		
-		if(endPage > maxPage) {
-			endPage = maxPage;
-		}
-		
-		PageInfo pageInfo = new PageInfo(
-				page, maxPage, startPage, endPage, listCount);
-		// Json
-		String json = "{\"replyList\":["; 
-		for (int i = 0; i < reviewList.size(); i++) {
-			boolean hasImg = false; 
-			String product_img = "";
-			String id = reviewList.get(i).getMember_id();
-			String content = reviewList.get(i).getContent();
-			Date date = reviewList.get(i).getDate();
-			SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
-			int starScore = reviewList.get(i).getStarScore();
+		HashMap<Integer, String> reviewMap = new HashMap<Integer, String>();
+		for(int i =0; i < loop; i++) {
+			String json="";
 			
-			if(reviewList.get(i).getProduct_img()!=null) {
-				product_img = reviewList.get(i).getProduct_img();
-				hasImg = true;
+			// 리뷰 총 갯수 카운트
+			int listCount = prodReviewListService.getReviewListCount(basicCode, loop > 1 ?  i:pic);
+			
+			// i값(포토 유무)에 따른 리뷰 목록 호출
+			reviewList = prodReviewListService.getReviewList(page, limit, basicCode, loop > 1 ?  i:pic);
+			
+			// Json
+			json = "{\"replyList\":["; 
+			for (int j = 0; j < reviewList.size(); j++) {
+				int num = reviewList.get(j).getNum();
+				String id = reviewList.get(j).getMember_id();
+				SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
+				Date date = reviewList.get(j).getDate();
+				int starScore = reviewList.get(j).getStarScore();
+				String content = reviewList.get(j).getContent();
+				String product_img = reviewList.get(j).getProduct_img();
+				
+				if(product_img == null) {
+					product_img = ""; // javascipt 에서 null 로 인식 시키기 위해 초기화
+				}
+				
+				
+				json += "[{\"num\":\""+num+"\",\"id\":\"" + id + "\"},";
+				json += "{\"num\":\""+num+"\",\"date\":\"" + df.format(date) + "\"},";
+				json += "{\"num\":\""+num+"\",\"starScore\":\"" + starScore + "\"},";
+				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";
+				json += "{\"num\":\""+num+"\",\"product_img\":\""+product_img+"\"},";
+				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\"}]";
+				
+				if (j != reviewList.size() - 1) {
+					json += ",";
+				}
 			}
-			int num = reviewList.get(i).getNum();
-			
-			json += "[{\"hasImg\":\""+hasImg+"\"},";
-			json += "{\"id\":\"" + id + "\"},";
-			json += "{\"date\":\"" + df.format(date) + "\"},";
-			json += "{\"starScore\":\"" + starScore + "\"},";
-			json += "{\"content\":\"" + content + "\"},";
-			json += "{\"product_img\":\""+product_img+"\"},";
-			json += "{\"num\":\""+num+"\"}]";
-			
-			if (i != reviewList.size() - 1) {
-				json += ",";
-			}
+			json += "],\"listCount\":\""+listCount+"\"}";
+			reviewMap.put(i, json);
 		}
-		json += "]}";
-		
-		out.print(json);
-		
+		JSONObject jsonObject = new JSONObject(reviewMap);
+		out.print(jsonObject);
 		
 		return null;
 	}

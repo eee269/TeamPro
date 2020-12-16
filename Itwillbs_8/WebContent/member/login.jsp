@@ -7,6 +7,7 @@
 
 
 <style rel="stylesheet">
+
 @charset "UTF-8";
 
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -319,6 +320,143 @@ margin-left:0px;}
 	text-decoration: none;
 }
 </style>
+<script type="text/javascript">
+	var checkIdResult = false, checkPasswdResult = false; 
+
+	function checkId(idForm) { 
+		var id = idForm.value; 
+		
+		
+		var element = document.getElementById('checkIdResult');
+		
+		var regex = /^[A-Za-z]+[A-Za-z0-9]{2,7}$/g;
+		var caseRegex = /[A-Za-z]/;
+		var digitRegex = /[0-9]/;
+		
+// 		if(regex.exec(id)) { 
+// 			element.innerHTML = "사용 가능";
+// 			checkIdResult = true; 
+// 		} else { 
+// 			element.innerHTML = "사용 불가";
+// 			checkIdResult = false; 
+// 		}
+
+		if(regex.exec(id)) {
+			var count = 0;
+			if(caseRegex.exec(id)) count++;
+			if(digitRegex.exec(id)) count++;
+			
+			if(count == 2 ){
+				element.innerHTML = "사용 가능";
+	 			checkIdResult = true; 
+			} else {
+				element.innerHTML = "사용 불가";
+	 			checkIdResult = false; 
+			}
+		} else {
+			element.innerHTML = "사용 불가";
+ 			checkIdResult = false; 
+		}
+		
+	}
+	
+	function checkPasswd(passwdForm) { 
+		var passwd = passwdForm.value; 
+		
+		var element = document.getElementById('checkPasswdResult');
+		
+		var lengthRegex = /^[A-Za-z0-9!@#$%]{2,7}$/;
+		var upperCaseRegex = /[A-Z]/;
+		var lowerCaseRegex = /[a-z]/;
+		var digitRegex = /[0-9]/;
+		var specRegex = /[!@#$%]/;
+		
+		if(lengthRegex.exec(passwd)) {
+			var count = 0;
+			if(upperCaseRegex.exec(passwd)) count++;
+			if(lowerCaseRegex.exec(passwd)) count++;
+			if(digitRegex.exec(passwd)) count++;
+			if(specRegex.exec(passwd)) count++;
+			
+// 			element.innerHTML = "사용 가능 " + count;
+
+			// 점수(count) 에 따른 안전도 출력
+			if(count == 4) {
+				element.innerHTML = "사용 가능(안전)";
+				checkPasswdResult = true; // 전역변수 true 로 변경
+			} else if(count == 3) {
+				element.innerHTML = "사용 가능(보통)";
+				checkPasswdResult = true; // 전역변수 true 로 변경
+			} else if(count == 2) {
+				element.innerHTML = "사용 가능(위험)";
+				checkPasswdResult = true; // 전역변수 true 로 변경
+			} else {
+				element.innerHTML = "사용 불가(두 가지 이상 조합)";
+				checkPasswdResult = false; // 전역변수 false 로 변경
+			}
+
+		} else {
+			element.innerHTML = "사용 불가";
+			checkPasswdResult = false; // 전역변수 false 로 변경
+		}
+		
+	}
+	
+	function checkPasswd2(passwdForm){
+		var passwd2 = passwdForm.value; 
+		
+		var element = document.getElementById('checkPasswdResult2');
+		if(document.fr.pass.value != document.fr.pass2.value){
+			element.innerHTML = "비밀번호 불일치";
+    		checkPasswdResult2 = true;    		
+    	} else {
+    		element.innerHTML = "비밀번호 일치";
+    		checkPasswdResult2 = false;
+    	}
+	}
+	
+	function checkPhone(phoneForm) { 
+		var phone = phoneForm.value; 
+		
+		
+		var element = document.getElementById('checkPhoneResult');
+		
+		var regex = /^[0-9]*$/;
+		
+		if(regex.exec(phone)) { 
+			element.innerHTML = "사용 가능";
+			checkPhoneResult = true; 
+		} else { 
+			element.innerHTML = "숫자만 입력하세요";
+			checkPhoneResult = false; 
+		}
+		
+	}
+	
+	// 아이디, 패스워드 정규표현식 체크 후 정상이면 true 리턴(submit), 아니면 false 리턴
+	function check() {
+		if(checkIdResult && checkPasswdResult) {
+			return true;
+		} else {
+			alert('아이디 또는 패스워드 규칙 확인 필수!');
+			return false;
+		}
+	}
+	
+</script>
+<%
+	// session 객체에 저장된 id 값이 존재할 경우
+	// "잘못된 접근입니다." 출력 후 메인페이지로 이동
+	if(session.getAttribute("id") != null) {
+		%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href="./";
+		</script>
+		<%
+	}
+
+%>    
 <body>
 	<section class="container_member">
 		<article class="half">
@@ -349,17 +487,20 @@ margin-left:0px;}
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
-						style="height: 1000px;">
+						style="height: 1000px;" name="fr" onsubmit="return check()">
 						<input type="text" name="id" id="id" class="inpt"
-							required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요">
+							required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" onkeyup="checkId(this)">
+							<div id="checkIdResult"></div>
 						<label for="text">ID</label>
 						
 						<input type="password" name="pass" id="password" class="inpt" required="required"
-							placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요">
+							placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요" onkeyup="checkPasswd(this)">
+							<div id="checkPasswdResult"></div>
 						<label for="password">Password</label>
 						
-						<input type="password" name="pass" id="password2" class="inpt" required="required"
-							placeholder="비밀번호를 한번 더 입력하세요"> 
+						<input type="password" name="pass2" id="password2" class="inpt" required="required"
+							placeholder="비밀번호를 한번 더 입력하세요" onkeyup="checkPasswd2(this)"> 
+							<div id="checkPasswdResult2"> </div>
 						<label for="password">Password</label>
 						
 						<input type="email" name="email" id="email" class="inpt"
@@ -375,7 +516,8 @@ margin-left:0px;}
 						<label for="img">Image</label>
 						
 						<input type="text" name="phone" id="phone" class="inpt" required="required"
-							placeholder="연락처는 숫자만 입력하세요">
+							placeholder="연락처는 숫자만 입력하세요" onkeyup="checkPhone(this)">
+							<div id="checkPhoneResult"></div>
 						<label for="phone">Phone Number</label> <br>
 
 						<div class="term" style="padding-top: 30px;">

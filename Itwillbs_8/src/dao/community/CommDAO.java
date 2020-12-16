@@ -5,8 +5,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vo.CommBean;
+import vo.CommReBean;
 
 import static db.JdbcUtil.*;
 
@@ -151,38 +153,45 @@ public class CommDAO {
 	// --------------selectArticleList()---------------
 	// --------------selectArticleList(username)---------------
 		// 회원별 게시물 목록 조회
-		public ArrayList<CommBean> selectArticleList(String username){
+		public ArrayList<CommBean> selectArticleList(String member_id){
 			ArrayList<CommBean> articleList = null;
 			
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT * FROM community where username=? order by date desc";
+				String sql = "select username from member where id=?";
 				ps = con.prepareStatement(sql);
-				ps.setString(1, username);
+				ps.setString(1, member_id);
 				rs = ps.executeQuery();
 				
-				articleList = new ArrayList<CommBean>();
-				
-				while(rs.next()) {
-					// 1개 게시물 정보를 저장할 CommBean 객체 생성 및 데이터 저장
-					CommBean article = new CommBean();
+				if(rs.next()) {
+					String username = rs.getString(1);
 					
-					// 비밀번호는 제외
-					article.setNum(rs.getInt(1));
-					article.setUsername(rs.getString(2));
-					article.setSubject(rs.getString(4));
-					article.setContent(rs.getString(5));
-					article.setReadCount(rs.getInt(6));
-					article.setDate(rs.getTimestamp(7));
-					article.setImg(rs.getString(8));
+					sql = "SELECT * FROM community where username=? order by date desc";
+					ps = con.prepareStatement(sql);
+					ps.setString(1, username);
+					rs = ps.executeQuery();
 					
-					// 1개 게시물을 전체 게시물 저장 객체에 추가
-					articleList.add(article);
+					articleList = new ArrayList<CommBean>();
 					
+					while(rs.next()) {
+						// 1개 게시물 정보를 저장할 CommBean 객체 생성 및 데이터 저장
+						CommBean article = new CommBean();
+						
+						// 비밀번호는 제외
+						article.setNum(rs.getInt(1));
+						article.setUsername(rs.getString(2));
+						article.setSubject(rs.getString(4));
+						article.setContent(rs.getString(5));
+						article.setReadCount(rs.getInt(6));
+						article.setDate(rs.getTimestamp(7));
+						article.setImg(rs.getString(8));
+						
+						// 1개 게시물을 전체 게시물 저장 객체에 추가
+						articleList.add(article);
+					}
 				}
-				
 			} catch (SQLException e) {
 				System.out.println("selectArticleList() 오류 "+e.getMessage());
 				e.printStackTrace();
@@ -425,12 +434,13 @@ public class CommDAO {
 		}
 		// -------------------------- CountBook() --------------------------------
 		
-		// -------------------------- 마이페이지 > 내 북마크 > 북마크 리스트 --------------------------------
-		public ArrayList<Integer> selectMybookmarkList(String member_id) {
-			ArrayList<Integer> list = new ArrayList<Integer>();
+		// -------------------------- 마이페이지 > 내 북마크 > 북마크된 게시글 리스트 --------------------------------
+		public ArrayList<CommBean> selectMybookArticleList(String member_id) {
+			ArrayList<CommBean> list = new ArrayList<CommBean>();
 			
 			PreparedStatement ps = null;
 			ResultSet rs = null;
+			ResultSet rs2 = null;
 			
 			try {
 				String sql = "select community_num from bookmark where member_id=?";
@@ -438,31 +448,14 @@ public class CommDAO {
 				ps.setString(1, member_id);
 				rs = ps.executeQuery();
 				
-				if(rs.next()) {
-					list.add(rs.getInt(1));
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			
-			return list;
-		}
-		// -------------------------- 마이페이지 > 내 북마크 > 북마크된 게시글 리스트 --------------------------------
-		public ArrayList<CommBean> selectArticleList(ArrayList<Integer> mybookList) {
-			ArrayList<CommBean> list = new ArrayList<CommBean>();
-			
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			
-			try {
-				for(int num: mybookList) {
-					String sql = "SELECT * FROM community WHERE num = ?";
+				while(rs.next()) {
+					sql = "SELECT * FROM community WHERE num = ?";
 					ps = con.prepareStatement(sql);
-					ps.setInt(1, num);
-					rs = ps.executeQuery();
+					ps.setInt(1, rs.getInt(1));
+					rs2 = ps.executeQuery();
 					
 					// 게시물이 존재할 경우 CommBean 객체를 생성하여 게시물 내용 저장
-					if(rs.next()) {
+					while(rs2.next()) {
 						CommBean article = new CommBean();
 						
 						article.setNum(rs.getInt("num"));
@@ -479,6 +472,10 @@ public class CommDAO {
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
+			} finally {
+				close(ps);
+				close(rs);
+				close(rs2);
 			}
 			
 			return list;

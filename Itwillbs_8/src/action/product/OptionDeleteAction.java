@@ -17,20 +17,23 @@ public class OptionDeleteAction implements Action {
 		ActionForward forward = null;
 		
 		String productCode = request.getParameter("productCode");
-		String basicCode = request.getParameter("basicCode");
 		OptionDeleteService optionDeleteService = new OptionDeleteService();
 		
-		System.out.println("OptionDeleteAction");
 		boolean isDelete = optionDeleteService.getDeleteOption(productCode);
 		
 		if(!isDelete) {
-			response.setContentType("text/html; charset=UTF-8");
-			PrintWriter out = response.getWriter();
-
-			out.println("<script>");
-			out.println("alert('상품 옵션 삭제 실패!')");
-			out.println("history.back()");
-			out.println("</script>");
+//			response.setContentType("text/html; charset=UTF-8");
+//			PrintWriter out = response.getWriter();
+//
+//			out.println("<script>");
+//			out.println("alert('상품 옵션 삭제 실패!')");
+//			out.println("history.back()");
+//			out.println("</script>");
+			
+			request.setAttribute("basicCode", productCode.substring(0, 4));
+			forward = new ActionForward();
+			forward.setPath("ProductDelete.po");
+			
 		} else {
 			forward = new ActionForward();
 			forward.setPath("ControlProductList.po");

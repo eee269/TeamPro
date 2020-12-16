@@ -1,13 +1,42 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="vo.PageInfo"%>
+<%@page import="vo.CommReBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="vo.CommBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	CommBean article = (CommBean)request.getAttribute("article");
 	String nowPage = request.getParameter("page");
+	
+//==============댓글시작==============//
+// 전달받은 request 객체로부터 데이터 가져오기
+ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
+
+PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
+int reNowPage = pageInfo.getPage();
+int reMaxPage = pageInfo.getMaxPage();
+int reStartPage = pageInfo.getStartPage();
+int reEndPage = pageInfo.getEndPage();
+int reListCount = pageInfo.getListCount();
+
+// String id = (String)session.getAttribute("id");
+String id = "dodo";
+int community_num=Integer.parseInt(request.getParameter("num"));
+
+//날짜 => 원하는 모양을 변경 문자열 결과값
+SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
-    <jsp:include page="../inc/header.jsp"/>
+<jsp:include page="../inc/header.jsp"/>
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/power_review_custom.4.css" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
+
+
 
 	<!-- breadcrumb -->
 	<div class="container">
@@ -34,7 +63,7 @@
 				<div class="col-md-8 col-lg-9 p-b-80">
 					<div class="p-r-45 p-r-0-lg">
 						<div class="wrap-pic-w how-pos5-parent">
-							<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>">
+							<img src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" onclick="getOffset()">
 							<div class="flex-col-c-m size-123 bg9 how-pos5">
 								<span class="ltext-107 cl2 txt-center">
 									22
@@ -60,11 +89,15 @@
 									태그 자리 
 									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
-
 								<span>
 									댓글 갯수
+									<span class="cl12 m-l-4 m-r-6">|</span>
 								</span>
-								<span class="bookmark_count"> 북마크 갯수
+								<span>
+									북마크 갯수
+									<span class="cl12 m-l-4 m-r-6">|
+										<span class="bookmark_count"></span>
+									</span>
 								</span>
 							</span>
 
@@ -98,31 +131,376 @@
 						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 							value="북마크" id="bookmark">
 						<br>
+						
+						
+						
 						<!-- -----------------------------Comment----------------------------- -->
-						<div class="p-t-40">
-							<h5 class="mtext-113 cl2 p-b-12">
-								Leave a Comment
-							</h5>
-
-							<p class="stext-107 cl6 p-b-40">
-								Your email address will not be published. Required fields are marked *
-							</p>
-
-							<form>
-								<div class="bor19 m-b-20">
-									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
+						<h2 class="comment_title">COMMENT</h2>
+						<div id="productDetail" style="padding-top:20px;">
+							<div class="page-body">
+								<div class="cboth">
+								<div id="powerReview">
+										<div id="listPowerReview" class="MS_power_review_list">
+	
+	
+											<!-- 댓글등록 폼 시작 -->
+											<form name="comm_re" id="comm_re" action="CommReWritePro.co" method="post" class="w-full">
+											<input type="hidden" name="username" value="<%=id %>">
+											<input type="hidden" name="community_num" value="<%=community_num%>">
+											<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>">
+											<div id="writePowerReview">
+												<div class="PR15N01-write">
+													<form name="prw_form" id="prw_form" action="" method="post"
+														autocomplete="off">
+														<div class="pr-txtbox">
+															<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="contents" name="contents"></textarea>												
+															<div class="thumb-wrap"></div>
+														</div>
+													</form>
+												</div>
+												<!-- .PR15N01-write -->
+												<div class="PR15N01-recmd">
+	
+													<div class="cvr right">
+														<%
+														if(id!=null){
+															%><input type="submit" value="댓글등록" class="lnk-review review_write"><%
+														}else{
+															%><input type="submit" value="댓글등록" class="lnk-review review_write" onclick="return loginCheck()"><%
+														}
+														%>
+														
+													</div>
+												</div>
+												<!-- .PR15N01-recmd -->
+											</div>
+											<div class="cboth"></div><br><br><br>
+											<!-- 댓글등록 폼 끝 -->
+	
+	
+	
+											
+											<ul class="PR15N01-review-wrap">
+	
+											<!-- 댓글 반복문 시작 -->
+											<%
+												for(int i = 0; i < commentList.size(); i++) {
+											%>
+											
+												<li id="power_review_block995511"
+													class="power-review-list-box">
+													<dl class="desc">
+														<dt class="first">작성자</dt>
+														<dd><%=commentList.get(i).getUsername() %></dd>
+														<dt>작성일</dt>
+														<dd><%=sdf.format(commentList.get(i).getDate()) %></dd>
+													</dl>
+													
+													
+													<div class="content">
+														<p class="content_p">																									
+															<%=commentList.get(i).getContents() %>
+														</p>
+														<div class="ctr"></div>
+													</div>
+														
+													<input type="hidden" class="comment_num" value="<%=commentList.get(i).getNum()%>">
+													<input type="hidden" class="num" value="<%=commentList.get(i).getCommunity_num()%>">
+													<div id="replyCount"></div>
+													<input type="button" value="답댓글 열기" class="bu_gray_s recomment_load on">
+													<input type="button" value="답댓글 닫기" class="bu_gray_s recomment_close">
+													<input type="hidden" value="카운트" class="bu_gray_s recomment_count">
+													<%
+														if(id!=null){ //원댓글일 경우에는 답댓글 버튼이보인다
+															if(commentList.get(i).getRe_lev()==0){
+														%><input type="button" value="쓰기" class="bu_gray_s comment_add"></span><%
+														}
+													}
+													%>
+													
+													<%if(id!=null){
+														if(id.equals(commentList.get(i).getUsername())){%>																					
+															<input type="button" value="수정" class="bu_gray_s comment_modify">
+	 														<a href="CommReDeletePro.co?num=<%=commentList.get(i).getNum()%>&community_num=<%=commentList.get(i).getCommunity_num() %>&rePage=<%=request.getParameter("rePage") %>" class="bu_gray_s" onclick='return button_event();' style="line-height:1.25;">삭제</a>						
+																								
+													<%}}%>
+													
+													
+					
+													<!-- 댓글 수정 입력폼 시작 -->
+													<div id="obj" class="obj reply-wrap">
+													<form name="comment" id="comment" action="CommReModifyPro.co" method="post" style="margin-top:0px !important; padding-top:0px !important;">
+														<input type="hidden" name="username" value="<%=id %>">
+														<input type="hidden" name="community_num" value="<%=community_num%>">
+														<input type="hidden" name="num" value="<%=commentList.get(i).getNum()%>">
+														<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>">
+														<div class="wrt">
+															<textarea name="contents" id="contents" ><%=commentList.get(i).getContents()%></textarea>
+	<!-- 														<a href="javascript:power_review_comment_write('995511', '995511');">수정</a> -->
+															<input type="submit" value="수정" class="btn_comment">
+														</div>
+													</form>	
+													</div>
+													<!-- 댓글 수정 입력폼 끝 -->
+													
+													<!-- 대댓글 입력폼 시작 -->
+													<div id="comm_add" class="comm_add reply-wrap">
+													<form name="comment" id="comment" action="CommReReWritePro.co" method="post">
+													<input type="hidden" name="username" value="<%=id %>" id="username">
+													<input type="hidden" name="community_num" value="<%=community_num%>" id="community_num">
+													<input type="hidden" name="num" value="<%=commentList.get(i).getNum()%>" id="num">
+													<input type="hidden" name="rePage" value="<%=request.getParameter("rePage")%>" id="rePage">
+														<div class="wrt">
+															<textarea name="contents" id="contents"></textarea>
+<!-- 															<input type="submit" value="입력" class="btn_comment"> -->
+															<input type="button" value="입력" class="btn_comment reReWrite">
+														</div>
+													</form>		
+													</div>
+													<!-- 대댓글 입력폼 끝 -->												
+													
+													<!-- 답댓글 영역 시작 -->
+													<div id="replyList"></div>
+													
+													<!-- 답댓글 영역 끝 -->
+	
+												</li>
+											<%
+												}
+											%>
+											<!-- 댓글 반복문 끝 -->
+				
+			
+												
+											</ul>
+											<!-- .PR15N01-review-wrap -->
+											<div class="paging">
+												<section id="pageList">
+												<%if(reNowPage <= 1) {%>
+														<input type="button" value="이전" style="background-color: #fff !important;">&nbsp;
+												<%} else {%>
+														<input type="button" value="이전" style="background-color: #fff !important;" onclick="location.href='CommDetail.co?num=<%=community_num%>&rePage=<%=reNowPage - 1 %>'">&nbsp;
+												<%} %>
+												
+												<%for(int i = reStartPage; i <= reEndPage; i++) { 
+														if(i == reNowPage) { %>
+															<a href="" class="now"><%=i %></a>&nbsp;
+														<%} else { %>
+															<a href="CommDetail.co?num=<%=community_num%>&rePage=<%=i %>"><%=i %></a>&nbsp;
+														<%} %>
+												<%} %>
+												
+												<%if(reNowPage >= reMaxPage) { %>
+														<input type="button" value="다음" style="background-color: #fff !important;">
+												<%} else { %>
+														<input type="button" value="다음" style="background-color: #fff !important;" onclick="location.href='CommDetail.co?num=<%=community_num%>&rePage=<%=reNowPage + 1 %>'">
+												<%} %>
+												</section>	
+											</div>
+											<!-- .paging -->
+										</div>
+									</div>
+									<!-- #powerReview-->
+									<p style="clear: both"></p>
+	
 								</div>
-								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-									Post Comment
-								</button>
-							</form>
-						</div>
-						<!-- -----------------------------Comment----------------------------- -->
+								<!-- width1260 -->
+							</div>
+							<!-- .page-body -->
+						</div>						
+					<!-- -----------------------------Comment----------------------------- -->
+						
+						
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>	
+
+
+<script>
+ 	$(function(){
+		
+ 		// 대댓글 쓰기 버튼 클릭
+ 		$(".reReWrite").click(function(){
+			 	var a = $(this).parents('li').find('#comm_add'); 
+			 	var b = $(this).parents('li'); 
+			 	
+			 	var username = a.find('#username').val();
+				var community_num = a.find('#community_num').val();
+				var num = a.find('#num').val();
+				var rePage = a.find('#rePage').val();
+				var contents = a.find('#contents').val();
+				
+				var allData = { "username":username,"community_num":community_num,"num": num,"rePage": rePage,"contents":contents};
+
+	    		$.ajax({
+	                type: "POST",
+	    			url: "CommReReWritePro.co",
+// 	    			processData: false,
+// 	                contentType: false,
+	                data: allData,
+	                success: function () {
+// 	                	alert("리뷰 등록 완료");
+	                	a.find('#contents').val("");
+	                	b.find(".recomment_load").trigger("click");
+	                	b.find(".recomment_count").trigger("click");
+	                },
+	    			error: function(request,status,error){
+	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    		       }
+	    		})
+	    	
+	    })
+ 		
+ 		
+ 		// 답댓글 보기 클릭
+ 		$(".recomment_load").click(function(){
+
+ 				  var a = $(this).parents('li'); 
+ 				  var comment_num = a.find('.comment_num').val();
+ 				  var num = a.find('.num').val();
+ 			  
+ 				  var allData = { "comment_num": comment_num,"num": num};
+		    	
+ 				  
+ 				  $.ajax({
+	    			url: "CommReReListPro.co", // 요청 url
+	                type: "POST", // post 방식
+	                data: allData,
+	                success: function (json) { 
+	                	json = json.replace(/\n/gi,"\\r\\n");
+// 	                	$("#replyList").text(""); 
+
+	                	var obj = JSON.parse(json);
+	                	
+	                	var replyList = obj.replyList; 
+	                	var output = ""; 
+	                	for (var i = 0; i < replyList.length; i++) {
+	                	
+	   	                for (var j = 0; j < replyList[i].length; j++) {
+	    	                    var reply = replyList[i][j];
+	    	                    if(j == 0){
+	    	                    	output += "<ul class='rerelist'><li>"+reply.contents+"</li>";
+	    	                    }else if(j == 1){
+	    	                    	output += "<li>작성자 : "+reply.name+"</li>";
+	    	                    }else if(j == 2){
+	    	                    	output += "<li>작성일 : "+reply.date+"</li>";
+	    	                    }else if(j == 3){
+	    	                    	output +="<li><a href='CommReDeletePro.co?num="+reply.comm_re_num+"&community_num="+<%=community_num%>+"&rePage="+<%=request.getParameter("rePage") %>+"' onclick='return button_event();'>삭제</a></li></ul><br>";
+	    	                    }
+	    	                    
+	    	        		};
+	    	        	
+	                	};
+// 	                	alert(output);
+	                	
+	   	              	a.find("#replyList").html(output);
+	   	             	a.find('.recomment_load').removeClass("on");
+	   	             	a.find('.recomment_close').addClass("on"); 
+	                },
+	            error: function(request,status,error){
+    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+ 		      	}
+		    	})
+
+ 		});  
+ 	})
+	
+	// 답댓글 닫기 클릭
+ 	$(function(){
+ 		$(".recomment_close").click(function(){
+
+ 				  var a = $(this).parents('li'); 
+ 				  a.find("#replyList").text(""); 
+
+	   	          a.find('.recomment_close').removeClass("on");
+	   	          a.find('.recomment_load').addClass("on"); 
+
+ 		});  
+ 	})	
+	
+
+	// 카운트 구하기
+ 	$(function(){
+ 		$(".recomment_count").click(function(){
+ 			
+			var a = $(this).parents('li'); 
+			var comment_num = a.find('.comment_num').val();
+			var num = a.find('.num').val();
+			  
+			var allData = { "comment_num": comment_num,"num": num};
+			
+	    	$.ajax({
+    			url: "CommReReCountProAction.co", // 요청 url
+                type: "POST", // post 방식
+                data: allData,
+                success: function (reReCount) {
+                	a.find("#replyCount").html("댓글수 : "+reReCount);
+          		  	if(reReCount==0){
+        				  a.find('.recomment_load').removeClass("on");
+        			}
+                	
+                },
+            error: function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		      	}
+	    	})
+ 		});  
+	    
+
+	})
+
+ 	$(document).ready(function(){
+ 		  $(".recomment_count").trigger("click");
+ 	});
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+function loginCheck() {
+	alert("회원전용입니다.");
+	return false;
+}
+
+$(document).ready(function(){
+	  $(".comment_modify").click(function(){
+		  $('.comm_add').removeClass("on");
+		  var a = $(this).parents('li'); 
+		  
+		  if(a.find('.obj').hasClass("on")){
+			  a.find('.obj').removeClass("on");
+		  }else{
+			  a.find('.obj').addClass("on"); 
+		  }
+		  	  
+	  });
+});
+
+$(document).ready(function(){
+	  $(".comment_add").click(function(){
+		  $('.obj').removeClass("on");
+		  var a = $(this).parents('li');
+		  
+		  if(a.find('.comm_add').hasClass("on")){
+			  a.find('.comm_add').removeClass("on");
+		  }else{
+			  a.find('.comm_add').addClass("on"); 
+		  }
+		  
+	  });
+});
+
+function button_event(){
+    if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+        document.form.submit();
+    }else{   //취소
+        return false;
+    }
+}
+</script>
+	
 <script>
 $(function(){
 		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
@@ -152,7 +530,7 @@ $(function(){
                 },
 			})
 	    };
-	    bookmarkCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+	    
 })
 </script>
 	    

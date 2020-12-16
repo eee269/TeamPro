@@ -10,19 +10,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.product.ControlProductListAction;
+import action.product.OptionDeleteAction;
+import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
 import action.product.ProductLikeAction;
 import action.product.ProductMylikeListAction;
-import action.product.review.ProductMyreviewListAction;
-import action.product.ControlProductListAction;
-import action.product.OptionDeleteAction;
-import action.product.review.ProdReviewDeleteAction;
-import action.product.review.ProdReviewListAction;
-import action.product.review.ProdReviewWriteAction;
-import action.product.ProductDeleteAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUnLikeAction;
 import action.product.ProductUploadProAction;
+import action.product.qna.ProdQnaDeleteAction;
+import action.product.qna.ProdQnaModifyFormAction;
+import action.product.qna.ProdQnaModifyProAction;
+import action.product.qna.ProdQnaReplyFormAction;
+import action.product.qna.ProdQnaReplyProAction;
+import action.product.qna.ProdQnaWriteFormAction;
+import action.product.qna.ProdQnaWriteProAction;
+import action.product.qna.ProductMyqnaListAction;
+import action.product.review.ProdReviewDeleteAction;
+import action.product.review.ProdReviewListAction;
+import action.product.review.ProdReviewWriteAction;
+import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
 
 @WebServlet("*.po")
@@ -51,21 +59,23 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if (command.equals("/ProductDetail.po")) {
-			action = new ProductDetailAction();
-			try {
-				forward = action.execute(request, response);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}else if(command.equals("/ProductLike.po")) {
+		}else if (command.equals("/ProductSearch.po")) {
+//			action = new ProductDetailAction();
+			forward = new ActionForward();
+			forward.setPath("/product/shopSearch.jsp");
+//			try {
+//				forward = action.execute(request, response);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+		}else if (command.equals("/ProductLike.po")) {
 			action = new ProductLikeAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if(command.equals("/ProductUnLike.po")) {
+		} else if (command.equals("/ProductUnLike.po")) {
 			action = new ProductUnLikeAction();
 			try {
 				forward = action.execute(request, response);
@@ -149,10 +159,84 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// -------------상품 좋아요 리스트 출력----------------
-		else if (command.equals("/ProductMylikeList.po")) {
-			forward = new ActionForward();
+		// --------------------상품 리뷰 수정--------------------
+		else if (command.equals("/ProdReviewModify.po")) {
+			System.out.println("ProdReviewModify.po 포워딩");
+//			action = new ProdReviewModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 쓰기--------------------
+		else if (command.equals("/ProdQnaWriteForm.po")) {
+			System.out.println("ProdQnaWriteForm.po 포워딩");
+			action = new ProdQnaWriteFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
+		} else if (command.equals("/ProdQnaWritePro.po")) {
+			System.out.println("ProdQnaWritePro.po");
+			action = new ProdQnaWriteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 삭제--------------------
+		else if (command.equals("/ProdQnaDelete.po")) {
+			System.out.println("ProdQnaDelete.po 포워딩");
+			action = new ProdQnaDeleteAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 수정--------------------
+		else if (command.equals("/ProdQnaModifyForm.po")) {
+			System.out.println("ProdQnaModifyForm.po 포워딩");
+			action = new ProdQnaModifyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ProdQnaModifyPro.po")) {
+			System.out.println("ProdQnaModifyPro.po 포워딩");
+			action = new ProdQnaModifyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 qna 답글--------------------
+		else if (command.equals("/ProdQnaReplyForm.po")) {
+			System.out.println("ProdQnaReplyForm.po 포워딩");
+			action = new ProdQnaReplyFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ProdQnaReplyPro.po")) {
+			System.out.println("ProdQnaReplyPro.po 포워딩");
+			action = new ProdQnaReplyProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// -------------------마이페이지 > 내가 찜한 상품 보기-------------
+		else if (command.equals("/ProductMylikeList.po")) {
+			System.out.println("ProductMylikeList.po 포워딩");
 			action = new ProductMylikeListAction();
 			try {
 				forward = action.execute(request, response);
@@ -160,11 +244,20 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		// -------------마이페이지 > 내 리뷰 리스트 출력----------------
+		// -------------------마이페이지 > 내 상품 리뷰 보기-------------
 		else if (command.equals("/ProductMyreviewList.po")) {
-			forward = new ActionForward();
-
+			System.out.println("ProductMyreviewList.po 포워딩");
 			action = new ProductMyreviewListAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// -------------------마이페이지 > 내 상품 qna 보기-------------
+		else if (command.equals("/ProductMyqnaList.po")) {
+			System.out.println("ProductMyqnaList.po 포워딩");
+			action = new ProductMyqnaListAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

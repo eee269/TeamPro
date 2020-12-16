@@ -308,11 +308,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script>
 	//좋아요 관련 스크립트입니다!!
 		$('.js-addwish-b2, .js-addwish-detail, .not_member').on('click', function(e){
-// 			e.preventDefault();
+			e.preventDefault();
 		});
 
 		$('.js-addwish-b2').each(function(){
-			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+// 			var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
 			var info = $(this).val().split('/');
 			$(this).on('click', function(){
 
@@ -327,7 +327,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							$('table').append('<tr><td>'+rdata+'</td></tr>');
 						}
 					  });
-					swal(nameProduct, "상품이 좋아요에 추가됬습니다!", "success");
+					swal("٩(ˊᗜˋ*)و" ,"상품이 좋아요에 추가됬습니다!", "success");
 				}else{
 					$.ajax('ProductUnLike.po',{
 						data:{
@@ -338,14 +338,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 							$('table').append('<tr><td>'+rdata+'</td></tr>');
 						}
 					  });
-					swal(nameProduct, "상품이 좋아요에서 삭제됬습니다!", "success");
+					swal("(｡•́︿•̀｡)","상품이 좋아요에서 삭제됬습니다!", "success");
 				}
 			});
 		});
 		
 		$('.not_member').each(function(){
 			$(this).on('click', function(){
-					swal("로그인이 필요한 서비스입니다!","로그인을해주세요");
+					swal("٩(๑`^´๑)۶","로그인이 필요한 서비스입니다!","success");
 			});
 		});
 	//-----------------------------------------------------------------------------	

@@ -6,9 +6,11 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import svc.community.CommListService;
+import svc.product.ProductAjaxService;
 import svc.product.ProductDetailSelectService;
 import svc.product.ProductOptionSelectService;
 import svc.product.qna.ProdQnaService;
@@ -26,15 +28,20 @@ public class ProductDetailAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
+		
 		ActionForward forward = null;
 		ArrayList<ProductBean> productDetailList = new ArrayList<ProductBean>();
 		ProductDetailSelectService pdss = new ProductDetailSelectService();
 		String basicCode = request.getParameter("basicCode");
+		String id =(String)session.getAttribute("member_id");
 		//-------옵션가져오는겁니다-------
 		ArrayList<ProductOptionBean> productColorList = new ArrayList<ProductOptionBean>();
 		ArrayList<ProductOptionBean> productSizeList = new ArrayList<ProductOptionBean>();
 		//---------------------------------
 		ProductOptionSelectService poss = new ProductOptionSelectService();
+		ProductAjaxService pas = new ProductAjaxService();
+		ArrayList<String> likeBasicCodeList = new ArrayList<String>();
 		
 		productDetailList = pdss.getProductDetailList(basicCode);
 		productColorList = poss.getColorList(basicCode);
@@ -72,6 +79,12 @@ public class ProductDetailAction implements Action {
 		request.setAttribute("productColorList", productColorList);
 		request.setAttribute("productSizeList", productSizeList);
 		
+		if(id != null) {
+			
+			likeBasicCodeList = pas.getLikeBasicCodeList(id);
+			request.setAttribute("likeBasicCodeList",likeBasicCodeList);
+			
+		}
 		forward = new ActionForward();
 		forward.setPath("/product/product_detail.jsp");
 		
