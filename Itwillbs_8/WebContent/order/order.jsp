@@ -128,8 +128,6 @@ function Addr(test) {
 		
 		var addrType = document.getElementById(test.getAttribute('id')).getAttribute('id');
 		
-		alert(addrType);
-		
 		if(addrType=="defaultAddr"){
 			$.getJSON('DefaultAddr.ad?addrType='+addrType,function(rdata){
 				$.each(rdata, function(index,item){
@@ -157,7 +155,6 @@ function regist_defaultAddr(test) {
 		var regist = $(test).val();
 // 		alert(regist);
 		if(regist=="Y"){
-			alert("YESSSSSSSS");
 			$.ajax({
 				url:'RegistDefaultAddr.ad',
 				type:'POST',
@@ -166,7 +163,7 @@ function regist_defaultAddr(test) {
 					address:$('#address').val()
 				},
 				success:function(data){
-					alert("successssss");
+					alert("해당 배송지를 기본 배송지로 설정했습니다.");
 				}
 			});
 		}

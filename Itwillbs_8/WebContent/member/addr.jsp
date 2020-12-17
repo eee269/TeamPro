@@ -121,7 +121,7 @@ String member_id = (String) session.getAttribute("member_id");
 									</td>
 									<td>
 										<div class="tb-center">
-											<a href="javascript:del_addrbook('1');"
+											<a onclick="javascript:del_addrbook();"
 												class="CSSbuttonWhite"
 												style="width: 46px; height: 40px; text-align: center;">삭제</a>
 										</div>
@@ -136,7 +136,7 @@ String member_id = (String) session.getAttribute("member_id");
 					<div class="btn-area">
 						<a href="javascript:getAddr();" class="CSSbuttonBlack">배송지 선택</a>
 						<a href="javascript:pop_addplace();" class="CSSbuttonWhite">주소록
-							추가</a> <a href="javascript:multi_del_addrbook();"
+							추가</a> <a href="javascript:del_addrbook();"
 							class="CSSbuttonWhite">선택 삭제</a>
 					</div>
 
@@ -153,20 +153,50 @@ String member_id = (String) session.getAttribute("member_id");
 	</div>
 </div>
 </div>
+<script src="js/jquery-3.5.1.js"></script>
 <script>
 // 배송지 추가를 위한 함수 
 	function pop_addplace() {
-		var url = "addr_plus.html?";
+		var url = "member/addr_plus.jsp";
 		var option = "left=720, top=210, width=480, height=742, resizable=no, scrollbars=yes, status=no;"; //팝업창 옵션(optoin)
 		window.open(url, "place", option);
 	}
 // 배송지 추가를 위한 함수 끝
 
+// 배송지 삭제를 위한 함수 
+	function del_addrbook() {
+		var checkbox = $("input[name=checkbox]:checked")
+		if (checkbox.prop("checked")) {
+			checkbox.each(function(i) {
+				var tr = $(this).parent().parent().parent().eq(i);
+				var td = tr.children();
+				
+				var postcode = td.eq(2).text().trim();
+				jQuery.ajaxSettings.traditional = true;
+				alert(postcode);
+				$.ajax({
+					url:"RemoveDestination.ad",
+					type:'POST',
+					data:{
+						postcode:postcode
+					},
+					success:function(data){
+						alert("successsssssssssss!!");
+					},
+					error:function(error){
+						alert(error);
+					}
+				});
+						history.go(0);
+			});
+		}
+	}
+// 배송지 삭제를 위한 함수 끝
+
 // 선택한 배송지를 오더 페이지로 가져가기 위한 함수
 	function getAddr() {
 		var checkbox = $("input[name=checkbox]:checked")
 		if (checkbox.prop("checked")) {
-			alert("Hello");
 			checkbox.each(function(i) {
 				var tr = $(this).parent().parent().parent().eq(i);
 				var td = tr.children();
