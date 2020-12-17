@@ -6,6 +6,10 @@ import java.sql.Timestamp;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
 import svc.community.CommReWriteProService;
@@ -19,21 +23,32 @@ public class CommReWriteProAction implements Action {
 		System.out.println("CommReWriteProAction");
 		
 		ActionForward forward = null;
-		
+		HttpSession session = request.getSession();
 		// 현재 컨텍스트(객체) 정보 가져오기 위해 
 		// request 객체의 getServletContext() 메서드를 호출
 		ServletContext context = request.getServletContext();
 		
+		String saveFolder = "/upload/commReUpload";
+		
+		String realFolder = context.getRealPath(saveFolder);
+		
+		int fileSize = 1024 * 1024 * 10; // 10mb		
+
+		MultipartRequest multi= new MultipartRequest(request,realFolder,fileSize,"UTF-8",new DefaultFileRenamePolicy());
+		
 		Timestamp date=new Timestamp(System.currentTimeMillis());		
-		int community_num=Integer.parseInt(request.getParameter("community_num"));
+		int community_num=Integer.parseInt(multi.getParameter("community_num"));
 		
-		
+
 		
 		CommReBean crb = new CommReBean();
-		crb.setUsername(request.getParameter("username"));
+		crb.setUsername(multi.getParameter("username"));
 		crb.setCommunity_num(community_num);
-		crb.setContents(request.getParameter("contents"));
+		crb.setContents(multi.getParameter("reply_contents"));	
 		crb.setDate(date);
+		crb.setImg(multi.getOriginalFileName("reply_file"));
+		
+
 
 //		// 서비스 클래스를 통해 실제 글 등록 작업 수행을 위한 요청
 		CommReWriteProService commReWriteProService = new CommReWriteProService();
@@ -59,7 +74,7 @@ public class CommReWriteProAction implements Action {
 			// 1.ActionForward 객체 생성
 			forward = new ActionForward();
 			// 2.포워딩 경로(URL) 지정
-			forward.setPath("CommDetail.co?num="+community_num+"&rePage="+request.getParameter("rePage"));
+			forward.setPath("CommDetail.co?num="+community_num);
 			// 3.포워딩 방식(Redirect 방식) 지정
 			forward.setRedirect(true);
 		}

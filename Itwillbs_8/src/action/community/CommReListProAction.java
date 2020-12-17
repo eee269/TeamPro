@@ -58,11 +58,17 @@ public class CommReListProAction implements Action {
 			Timestamp date = commentList.get(j).getDate();
 			int re_lev = commentList.get(j).getRe_lev();
 			int re_ref = commentList.get(j).getRe_ref();
+			String img = commentList.get(j).getImg();
+			
+			if(img == null) {
+				img = ""; // javascipt 에서 null 로 인식 시키기 위해 초기화
+			}
 			
 				
 			json += "[{\"username\":\""+username+"\"},";
 			json += "{\"date\":\"" + date + "\"},";
 			json += "{\"content\":\"" + content + "\"},";
+			json += "{\"img\":\"" + img + "\"},";
 			json += "{\"num\":\"" + num + "\"},";
 			json += "{\"community_num\":\"" + community_num + "\"},";		
 			json += "{\"re_lev\":\"" + re_lev + "\"},";
