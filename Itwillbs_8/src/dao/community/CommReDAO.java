@@ -11,7 +11,7 @@ import vo.CommReBean;
 import static db.JdbcUtil.*;
 
 public class CommReDAO {
-	// --------------싱글톤 패턴 활용--------------- git test
+	// --------------싱글톤 패턴 활용---------------
 	private CommReDAO() {}
 	
 	private static CommReDAO instance = new CommReDAO();
@@ -50,7 +50,7 @@ public class CommReDAO {
 				num=rs.getInt(1)+1; // 새 글 번호 만들기
 			}
 			
-			sql = "INSERT INTO community_reply(username,contents,num,community_num,date,re_lev,re_ref) VALUES(?,?,?,?,?,?,?)";
+			sql = "INSERT INTO community_reply(username,contents,num,community_num,date,re_lev,re_ref,img) VALUES(?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			//CommReBean 객체로부터 데이터를 꺼내서 쿼리문 ? 대체
 			pstmt.setString(1, crb.getUsername());
@@ -60,6 +60,7 @@ public class CommReDAO {
 			pstmt.setTimestamp(5, crb.getDate());
 			pstmt.setInt(6, crb.getRe_lev());
 			pstmt.setInt(7, num); //참조글 번호(새 글이므로 자신이 참조글이 됨)
+			pstmt.setString(8, crb.getImg());
 			
 			insertCount = pstmt.executeUpdate();
 		
@@ -114,7 +115,8 @@ public class CommReDAO {
 				crb.setDate(rs.getTimestamp("date"));
 				crb.setRe_lev(rs.getInt("re_lev"));
 				crb.setRe_ref(rs.getInt("re_ref"));
-								
+				crb.setImg(rs.getString("img"));
+				
 				commentList.add(crb);
 			}	
 			
