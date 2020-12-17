@@ -10,6 +10,7 @@ public class CommReBean {
 	private int re_ref;
 	private int re_lev;
 	private int community_num;
+	private String img;
 
 	public int getNum() {
 		return num;
@@ -52,6 +53,12 @@ public class CommReBean {
 	}
 	public void setCommunity_num(int community_num) {
 		this.community_num = community_num;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 }

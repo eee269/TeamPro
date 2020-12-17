@@ -46,8 +46,10 @@ public class AddrDAO {
 				
 				addr.setNum(rs.getInt(1));
 				addr.setLocation(rs.getString(2));
-				addr.setAddress(rs.getString(3));
-				addr.setMember_id(rs.getString(4));
+				addr.setPostcode(rs.getString(3));
+				addr.setAddress(rs.getString(4));
+				addr.setMember_id(rs.getString(5));
+				addr.setType(rs.getString(6));
 				
 				addrList.add(addr);
 			}
@@ -170,6 +172,53 @@ public class AddrDAO {
 		}
 		
 		return insertCount;
+	}
+
+	public int insertDestination(AddrBean addr) {
+		System.out.println("insertDestination()!");
+		int insertCount = 0;
+		
+		PreparedStatement p = null;
+		
+		try {
+			String sql = "insert into memberaddress values(?,?,?,?,?,?)";
+			p = con.prepareStatement(sql);
+			p.setInt(1, addr.getNum());
+			p.setString(2, addr.getLocation());
+			p.setString(3, addr.getPostcode());
+			p.setString(4, addr.getAddress());
+			p.setString(5, addr.getMember_id());
+			p.setString(6, addr.getType());
+			
+			insertCount = p.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("insertDestination() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(p);
+		}
+		return insertCount;
+	}
+
+	public int deleteDestination(String postcode) {
+		System.out.println("deleteDestination()!");
+		int deleteCount = 0;
+		
+		PreparedStatement p = null;
+		
+		try {
+			String sql = "delete from memberaddress where postcode = ?";
+			p = con.prepareStatement(sql);
+			p.setString(1,postcode);
+			
+			deleteCount = p.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("deleteDestination() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(p);
+		}
+		return deleteCount;
 	}
 	
 	

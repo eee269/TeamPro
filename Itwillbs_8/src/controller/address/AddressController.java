@@ -11,14 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.address.AddrAction;
+import action.address.AddrBookAction;
 import action.address.DefaultAddrAction;
 import action.address.RecentAddrAction;
 import action.address.RegistDefaultAddrAction;
+import action.address.RegistDestinationAction;
+import action.address.RemoveDestinationAction;
 import vo.ActionForward;
 @WebServlet("*.ad")
 public class AddressController extends HttpServlet{
 	
-	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		request.setCharacterEncoding("UTF-8");
 		
 		ActionForward forward = null;
@@ -69,6 +72,38 @@ public class AddressController extends HttpServlet{
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("registDefaultAddrAction으로 포워딩 중 오류 - "+e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/AddrBook.ad")) {
+			System.out.println("AddrBook.ad 포워딩");
+			forward = new ActionForward();
+			action = new AddrBookAction();
+			try {
+				System.out.println("AddrBookAction으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("AddrBookAction으로 포워딩 중 오류 - " +e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/RegistDestination.ad")) {
+			System.out.println("RegistDestination.ad 포워딩");
+			action = new RegistDestinationAction();
+			try {
+				System.out.println("RegistDestinationAction으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("RegistDestinationAction으로 포워딩 중 오류 - "+e.getMessage());
+				e.printStackTrace();
+
+			}
+		} else if(command.equals("/RemoveDestination.ad")) {
+			System.out.println("RemoveDestination.ad 포워딩");
+			action = new RemoveDestinationAction();
+			try {
+				System.out.println("RemoveDestinationAction()으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("RemoveDestinationAction()으로 포워딩 중 오류 - "+e.getMessage());
 				e.printStackTrace();
 			}
 		}

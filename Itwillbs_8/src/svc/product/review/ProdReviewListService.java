@@ -1,12 +1,15 @@
 package svc.product.review;
 
+import static db.JdbcUtil.close;
+import static db.JdbcUtil.commit;
+import static db.JdbcUtil.getConnection;
+import static db.JdbcUtil.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import dao.member.MemberDAO;
 import dao.product.ProdReviewDAO;
-
-import static db.JdbcUtil.*;
 import vo.ProdReviewBean;
 
 public class ProdReviewListService {
@@ -67,5 +70,70 @@ public class ProdReviewListService {
 		return reviewList;
 	}
 	// ------------------------getReviewList()----------------------
+	// ------------------------checkReview()----------------------
+	public int checkReviewRec(int num, String id, int recommand) {
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		int checkCount = prodReviewDAO.checkReviewRec(num,id,recommand);
+		close(con);
+		
+		return checkCount;
+	}
+	// ------------------------checkReview()----------------------
+	// ------------------------updateReview()----------------------
+	public void updateReviewRec(int num, String id, int recommand) {
+		// 리뷰 추천 추가
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		int updateCount = prodReviewDAO.updateReviewRec(num,id,recommand);
+		if(updateCount > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+		
+	}
+	// ------------------------updateReview()----------------------
+	// ------------------------deleteReview()----------------------
+	public void deleteReviewRec(int num, String id, int recommand) {
+		// 리뷰 추천 삭제
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		int deleteCount = prodReviewDAO.deleteReviewRec(num,id,recommand);
+		if(deleteCount > 0) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		close(con);
+	}
+	// ------------------------deleteReview()----------------------
+	// ------------------------CountReviewRec()----------------------
+	public int CountReviewRec(int num, int recommand) {
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		int count = prodReviewDAO.CountReviewRec(num, recommand);
+		close(con);
+		
+		return count;
+	}
+	// ------------------------CountReviewRec()----------------------
+	// ------------------------getStarScoreCount()----------------------
+	public ArrayList<Integer> getStarScoreCount(String basicCode) {
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		
+		// 별점 별 갯수 가져오기
+		ArrayList<Integer> starCount = prodReviewDAO.getStarScoreCount(basicCode);
+		close(con);
+		return starCount;
+	}
+	// ------------------------getStarScoreCount()----------------------
 
 }

@@ -49,13 +49,13 @@
 	href="vendor/perfect-scrollbar/perfect-scrollbar.css">
 <!--===============================================================================================-->
 <!--===============================================================================================-->
-<script src="community/summernote-ko-KR.js"></script>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css">
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
 <style>
 .arrow_box {
 	position: relative;
@@ -291,12 +291,12 @@
 					class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
-				<form class="wrap-search-header flex-w p-l-15">
+				<form action="ProductSearch.po" class="wrap-search-header flex-w p-l-15">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
 					<input class="plh3" type="text" name="search"
-						placeholder="Search...">
+						placeholder="찾으시는 상품명을 검색해주세요!">
 				</form>
 			</div>
 		</div>

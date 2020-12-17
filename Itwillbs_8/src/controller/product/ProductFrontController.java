@@ -17,6 +17,7 @@ import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
 import action.product.ProductLikeAction;
 import action.product.ProductMylikeListAction;
+import action.product.ProductSearchAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUnLikeAction;
 import action.product.ProductUploadProAction;
@@ -30,6 +31,11 @@ import action.product.qna.ProdQnaWriteProAction;
 import action.product.qna.ProductMyqnaListAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
+import action.product.review.ProdReviewModifyAction;
+import action.product.review.ProdReviewRecAction;
+import action.product.review.ProdReviewRecCountAction;
+import action.product.review.ProdReviewReplyAction;
+import action.product.review.ProdReviewStarAction;
 import action.product.review.ProdReviewWriteAction;
 import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
@@ -60,15 +66,6 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/ProductSearch.po")) {
-//			action = new ProductDetailAction();
-			forward = new ActionForward();
-			forward.setPath("/product/shopSearch.jsp");
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
 		}else if (command.equals("/ProductCartLike.po")) {
 			
 			action = new ProductCartLikeAction();
@@ -86,6 +83,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/ProductUnLike.po")) {
 			action = new ProductUnLikeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ProductSearch.po")) {
+			action = new ProductSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -171,7 +175,47 @@ public class ProductFrontController extends HttpServlet {
 		// --------------------상품 리뷰 수정--------------------
 		else if (command.equals("/ProdReviewModify.po")) {
 			System.out.println("ProdReviewModify.po 포워딩");
-//			action = new ProdReviewModifyAction();
+			action = new ProdReviewModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 추천--------------------
+		else if(command.equals("/ProdReviewRec.po")) {
+			System.out.println("ProdReviewRec.po 포워딩");
+			action = new ProdReviewRecAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 추천 수 계산--------------------
+		else if(command.equals("/ProdReviewRecCount.po")) {
+			System.out.println("ProdReviewRecCount.po 포워딩");
+			action = new ProdReviewRecCountAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 답글--------------------
+		else if(command.equals("/ProdReviewReply.po")) {
+			System.out.println("ProdReviewReply.po 포워딩");
+			action = new ProdReviewReplyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 별점 카운트--------------------
+		else if(command.equals("/ProdReviewStar.po")) {
+			System.out.println("ProdReviewStar.po 포워딩");
+			action = new ProdReviewStarAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
