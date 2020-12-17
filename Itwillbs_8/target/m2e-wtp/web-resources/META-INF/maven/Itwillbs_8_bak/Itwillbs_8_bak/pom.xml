@@ -24,17 +24,24 @@
       </plugin>
     </plugins>
   </build>
-  	<repositories>
-		<repository>
-		    <id>jitpack.io</id>
-		    <url>https://jitpack.io</url>
-		</repository>
-	</repositories>
-	<dependencies>
-	<dependency>
-	    <groupId>com.github.iamport</groupId>
-	    <artifactId>iamport-rest-client-java</artifactId>
-	    <version>0.2.12</version>
-	</dependency>
-	</dependencies>
+     <repositories>
+      <repository>
+          <id>jitpack.io</id>
+          <url>https://jitpack.io</url>
+      </repository>
+   </repositories>
+   <dependencies>
+   <dependency>
+       <groupId>com.github.iamport</groupId>
+       <artifactId>iamport-rest-client-java</artifactId>
+       <version>0.2.12</version>
+   </dependency>
+   
+   <!-- naver -->
+<dependency>
+    <groupId>com.github.scribejava</groupId>
+    <artifactId>scribejava-core</artifactId>
+    <version>2.8.1</version>
+</dependency>
+   </dependencies>
 </project>
