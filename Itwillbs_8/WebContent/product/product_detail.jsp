@@ -44,8 +44,8 @@
 	font-size: 15px;
 }
 .rating-input{
-	color: yellow;
-	background-color: black;
+	color: #F5DF4D;
+	background-color: #939597;
 	position: absolute;
 }
 
@@ -993,8 +993,12 @@
 			    	                    }else if(j == 5){
 			    	                    	output += "<div class='reply'>"
 			    	                    				+"<span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span>"
-		    	                    					+"<a class='good"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+good+");' >&nbsp<span>"+reply.good+"</span></a>"
-		    	                    					+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");' >&nbsp - <span>"+reply.bad+"</span></a>"
+		    	                    					+"<a class='good"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+good+");' >"
+		    	                    					+"<img src='images/icons/in-love_face.png' alt='yes' style='width:15px;height:15px;'>&nbsp"
+		    	                    					+"<span>"+reply.good+"</span></a>&nbsp"
+		    	                    					+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");'>"
+		    	                    					+"<img src='images/icons/angry_face.png' alt='no' style='width:15px;height:15px;'>&nbsp"
+		    	                    					+"<span>"+reply.bad+"</span></a>&nbsp"
 	    	                    					 +"</div>";
 			   	                 		}else if(reply.id == member_id && j == 5 ){
 		    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
@@ -1267,9 +1271,9 @@ function prd_review(num){
                },
 		})
     };
-    setInterval(function(){
-    	$('.rating-input').toggle();
-    },250);
+//     setInterval(function(){
+//     	$('.rating-input').toggle();
+//     },100);
 </script>
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
