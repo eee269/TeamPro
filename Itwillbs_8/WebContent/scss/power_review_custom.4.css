@@ -2,7 +2,6 @@
 /* PR15N01LIST RESET */
 #powerReview * {
 	margin: 0;
-	padding: 0;
 }
 
 #powerReview, #powerReview input, #powerReview textarea {
@@ -2294,16 +2293,11 @@ span.del {
 	font-weight: bold;
 	font-family: "나눔고딕", "NanumGothic", "맑은 고딕", "Malgun Gothic", "돋움",
 		"Dotum", "굴림", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	padding: 0;
 	width: 62px;
 	margin-left: 5px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis
-}
-
-body[lang="ja-JP"] .comment__lpane {
-	font-family: "meiryo", "Helvetica Neue", Helvetica, Arial, sans-serif
 }
 
 .comment__rpane {
@@ -2328,7 +2322,8 @@ body[lang="ja-JP"] .comment__lpane {
 	margin-right: 30px;
 	padding: 10px 15px;
 	text-align: left;
-	max-width: 800px
+	max-width: 400px;
+	min-height: 100px;
 }
 
 .comments__arrow_top:before {
@@ -2354,3 +2349,24 @@ body[lang="ja-JP"] .comment__lpane {
 	left: 21px;
 	content: ''
 }
+
+.pr_button{
+	float:right;
+	padding: 10px;
+	text-align: center;
+}
+
+.pr_button > * {
+	background-color: skyblue;
+}
+
+.pr_r_button{
+	position: relative;
+	float: right;
+	top: 50px;
+}
+
+.pr_r_button > *{
+	background-color: skyblue;
+}
+

@@ -32,6 +32,8 @@ import action.product.qna.ProductMyqnaListAction;
 import action.product.review.ProdReviewDeleteAction;
 import action.product.review.ProdReviewListAction;
 import action.product.review.ProdReviewModifyAction;
+import action.product.review.ProdReviewRecAction;
+import action.product.review.ProdReviewRecCountAction;
 import action.product.review.ProdReviewReplyAction;
 import action.product.review.ProdReviewWriteAction;
 import action.product.review.ProductMyreviewListAction;
@@ -173,6 +175,26 @@ public class ProductFrontController extends HttpServlet {
 		else if (command.equals("/ProdReviewModify.po")) {
 			System.out.println("ProdReviewModify.po 포워딩");
 			action = new ProdReviewModifyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 추천--------------------
+		else if(command.equals("/ProdReviewRec.po")) {
+			System.out.println("ProdReviewRec.po 포워딩");
+			action = new ProdReviewRecAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 추천 수 계산--------------------
+		else if(command.equals("/ProdReviewRecCount.po")) {
+			System.out.println("ProdReviewRecCount.po 포워딩");
+			action = new ProdReviewRecCountAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
