@@ -45,8 +45,8 @@
 }
 .rating-input{
 	color: #F5DF4D;
-	background-color: #939597;
-	position: absolute;
+/* 	background-color: #939597; */
+/* 	position: absolute; */
 }
 
 </style>
@@ -465,26 +465,26 @@
 					</div>
 					<div class="PR15N01-info">
 						<dl class="score">
-							<dt>5.0</dt>
-							<dd>56개 리뷰 평점</dd>
+							<dt></dt>
+							<dd><span></span>개 리뷰 평점</dd>
 						</dl>
 						<div class="chart">
 							<ul>
 								<li><span class="tit">5 Stars</span> <span class="bar">
 										<span class="abs" style="width: 95%"></span>
-								</span> <span class="num">(53)</span></li>
+								</span> (<span class="score5 num"></span>)</li>
 								<li><span class="tit">4 Stars</span> <span class="bar">
 										<span class="abs" style="width: 5%"></span>
-								</span> <span class="num">(3)</span></li>
+								</span> (<span class="score4 num"></span>)</li>
 								<li><span class="tit">3 Stars</span> <span class="bar">
 										<span class="abs" style="width: 0%"></span>
-								</span> <span class="num">(0)</span></li>
+								</span> (<span class="score3 num"></span>)</li>
 								<li><span class="tit">2 Stars</span> <span class="bar">
 										<span class="abs" style="width: 0%"></span>
-								</span> <span class="num">(0)</span></li>
+								</span> (<span class="score2 num"></span>)</li>
 								<li><span class="tit">1 Stars</span> <span class="bar">
 										<span class="abs" style="width: 0%"></span>
-								</span> <span class="num">(0)</span></li>
+								</span> (<span class="score1 num"></span>)</li>
 							</ul>
 						</div>
 						<div class="photo">
@@ -877,7 +877,9 @@
 	    	if(!page){
 	    		var page = 1;
 	    		loop = $('.reviewTabs > li').length; // tabs 수 만큼 반복
-	    		$("#powerReviewList").text(""); 
+	    		$("#powerReviewList").text("");
+	    		// 상품 별점 계산 함수 호출
+	    		starScoreCount(basicCode);
 	    	}else{
 	    		// 0 일 때 포토리뷰
 		    	if($('.active').text()=="포토리뷰()"){
@@ -972,7 +974,7 @@
 			    	                    					+"<dl><dt class='emp'>구매한 옵션</dt><dd class='emp'>컬러 : BLACK, 사이즈 : S</dd></dl>"
 		    	                    				 	+"</div>"
 			    	                    			 	+"<div class='content'>"
-		    	                    				 		+"<p class='content_p' style='margin-top:36px;'>"
+		    	                    				 		+"<p class='content_p'>"
 		    	                    				 			+"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
 			    	                    				 		+"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
 				    	                    			 		+"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
@@ -1100,6 +1102,39 @@
     		endPage : endPage
     	};
     }; // paging end
+    
+    // 리뷰 별점 별 카운트
+    function starScoreCount(a){
+    	$.ajax({
+            type: "POST",
+    		url: "ProdReviewStar.po",
+            data: {
+            	basicCode : a
+            },
+            success: function (json) {
+            	var jsonParse = JSON.parse(json);
+            	var star = jsonParse.star[0];
+            	// 별점 총 개수
+           		var score = 0;
+           		// 별점 총 합
+           		var total = 0;
+           		var num = 1;
+            	for(key in star){
+            		score += star[key]*1;
+            		total += star[key]*num*1;
+            		$('.'+key).html(star[key]);
+            		num++;
+            	}
+            		total = (total / score *1).toFixed(1);
+            		$('.score dt').html(total);
+            		$('.score span').html(score);
+            	
+            },
+    		error: function(request,status,error){
+    	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    	       }
+    	}); // end ajax
+    }
     
     // 포토, 일반 리뷰 탭 기능
 	$('.tabs .tab').click(function(){

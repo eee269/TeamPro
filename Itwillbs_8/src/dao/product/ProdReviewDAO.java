@@ -71,6 +71,7 @@ public class ProdReviewDAO {
 			int insertCount = 0;
 			int num = 1;
 			int re_lev = 0;
+			int starScore = 0; // 추천 순으로 정렬할 때 사용
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
@@ -82,20 +83,22 @@ public class ProdReviewDAO {
 					num = rs.getInt(1)+1;
 				}
 				
-				sql = "SELECT max(re_lev) FROM product_review WHERE re_ref = ?";
+				sql = "SELECT max(re_lev), max(starScore) FROM product_review WHERE re_ref = ?";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, prodReviewBean.getRe_ref());
 				rs = ps.executeQuery();
 				
 				if(rs.next()) {
 					re_lev = rs.getInt(1)+1;
+					starScore = rs.getInt(2);
+					
 				}
 				
 				sql = "INSERT INTO product_review VALUES(?,?,?,?,?,?,?,now(),?)";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, num);
 				ps.setString(2, prodReviewBean.getContent());
-				ps.setInt(3, 0);
+				ps.setInt(3, starScore);
 				ps.setInt(4, prodReviewBean.getRe_ref());
 				ps.setInt(5, re_lev);
 				ps.setString(6, prodReviewBean.getProduct_basicCode());
@@ -166,7 +169,7 @@ public class ProdReviewDAO {
 						sql ="SELECT * "
 							+ "FROM product_review "
 							+ "WHERE product_basicCode=? AND product_img IS NOT NULL "
-							+ "ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
+							+ "ORDER BY starScore desc, re_ref, re_lev desc limit ?,?";
 						break;
 					default:
 						sql ="SELECT r.*, count(g.review_num) AS 'good' "
@@ -188,7 +191,7 @@ public class ProdReviewDAO {
 						sql ="SELECT * "
 							+ "FROM product_review "
 							+ "WHERE product_basicCode=? AND product_img IS NULL "
-							+ "ORDER BY StarScore desc, re_ref, re_lev desc limit ?,?";
+							+ "ORDER BY starScore desc, re_ref, re_lev desc limit ?,?";
 						break;
 					default:
 						sql ="SELECT r.*, count(g.review_num) AS 'good' "
@@ -267,6 +270,38 @@ public class ProdReviewDAO {
 		return updateCount;
 	}
 	// -------------------updateReview()-----------------------
+	// -------------------getStarScoreCount()-----------------------
+	public ArrayList<Integer> getStarScoreCount(String basicCode) {
+		ArrayList<Integer> starScore = new ArrayList<Integer>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "";
+			for(int i=1; i<6; i++) {
+				sql = "SELECT count(starScore) FROM product_review WHERE product_basicCode =? AND starScore = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, basicCode);
+				ps.setInt(2, i);
+				rs = ps.executeQuery();
+				
+				if(rs.next()) {
+					int star = rs.getInt(1);
+					starScore.add(star);
+				}
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - getStarScoreCount : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(ps);
+		}
+		
+		return starScore;
+	}
+	// -------------------getStarScoreCount()-----------------------
 	// -------------------checkReviewRec()-----------------------
 	public int checkReviewRec(int num, String id, int recommand) {
 		int checkcount = 0;
@@ -455,6 +490,9 @@ public class ProdReviewDAO {
 		
 		return list;
 	}
+
+
+	
 
 
 

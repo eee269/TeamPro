@@ -8,7 +8,6 @@ import static db.JdbcUtil.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import dao.community.CommDAO;
 import dao.member.MemberDAO;
 import dao.product.ProdReviewDAO;
 import vo.ProdReviewBean;
@@ -124,5 +123,17 @@ public class ProdReviewListService {
 		return count;
 	}
 	// ------------------------CountReviewRec()----------------------
+	// ------------------------getStarScoreCount()----------------------
+	public ArrayList<Integer> getStarScoreCount(String basicCode) {
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		
+		// 별점 별 갯수 가져오기
+		ArrayList<Integer> starCount = prodReviewDAO.getStarScoreCount(basicCode);
+		close(con);
+		return starCount;
+	}
+	// ------------------------getStarScoreCount()----------------------
 
 }
