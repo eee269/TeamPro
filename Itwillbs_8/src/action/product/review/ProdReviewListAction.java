@@ -63,6 +63,7 @@ public class ProdReviewListAction implements Action {
 				int starScore = reviewList.get(j).getStarScore();
 				String content = reviewList.get(j).getContent();
 				String product_img = reviewList.get(j).getProduct_img();
+				int re_ref = reviewList.get(j).getRe_ref();
 				
 				if(product_img == null) {
 					product_img = ""; // javascipt 에서 null 로 인식 시키기 위해 초기화
@@ -74,7 +75,7 @@ public class ProdReviewListAction implements Action {
 				json += "{\"num\":\""+num+"\",\"starScore\":\"" + starScore + "\"},";
 				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";
 				json += "{\"num\":\""+num+"\",\"product_img\":\""+product_img+"\"},";
-				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\"}]";
+				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\",\"re_ref\":\""+re_ref+"\"}]";
 				
 				if (j != reviewList.size() - 1) {
 					json += ",";
