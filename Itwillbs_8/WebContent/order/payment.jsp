@@ -1,4 +1,3 @@
-<%@page import="org.omg.CORBA.IMP_LIMIT"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
@@ -95,10 +94,12 @@ $(function(){
 
 			if ($('#status').val() == "paid") {
 				// 			  document.paymentForm.setAttribute("action","OrderPro.or");
+				$('img').attr("src",'order/payment_success.jpg')
 				document.paymentForm.submit();
 			} else {
 				$('.page-body').show();
 				$('.paybutton').show();
+				$('img').attr("src",'order/payment_fail.jpg')
 				$('img').show();
 				// 			$('table').hide();
 			}
@@ -141,7 +142,7 @@ $(function(){
 						<fieldset>
 							<legend>주문 결과</legend>
 							<div class="tbl-order">
-								<img alt="" src="order/payment_fail.jpg" class="fail">
+								<img alt="" src="" class="fail">
 							</div>
 							<form action="OrderPro.or" method="post" name="paymentForm">
 								<input type="hidden" value="" id="imp_uid" name="imp_uid">

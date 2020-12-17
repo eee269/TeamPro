@@ -24,10 +24,10 @@ int cntSet = 0;
 	text-align: center;
 }
 .d-block a:hover{
-  background-color: #717fe0;
+  background-color: gray;
 }
 .tb-center a:hover{
-  background-color: #717fe0;
+  background-color: gray;
 }
 
 #whiteBu:hover{color:#fff;}
@@ -82,12 +82,12 @@ int cntSet = 0;
 		<dl class="loc-navi">
 			<dt class="blind">현재 위치</dt>
 			<dd>
-				<a href="Main.go">HOME</a> &gt; CART
+				<a href="/">HOME</a> &gt; CART
 			</dd>
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm">
-
+			
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -136,7 +136,11 @@ int cntSet = 0;
 								if (cartList.size() > 0) {
 							%>
 							<input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>">
-								
+									<!-- 오더로 넘기는 값 -->
+							<input type="hidden" name="price" class="price-b">
+							<input type="hidden" name="delivery" class="delivery-b">
+							<input type="hidden" name="total_price" class="total-b">
+								<!-- 오더로 넘기는 값 -->
 							<%
 								}
 							coin += cartList.get(i).getPrice();
@@ -477,12 +481,20 @@ $("#allCheck").click(function(){
 			var numid = id.replace("Save", "num");
 			var cnt = Number($('#'+numid).val());
 			
-		location.href='CartUpdate.ca?num='+num+'&cnt='+cnt+'&member_id=dodo';
+		location.href='CartUpdate.ca?num='+num+'&cnt='+cnt;
 		
 		};
 		
 		
-	
+		
+		// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
+		  function multi_order(){
+		     $(".CSSbuttonBlack").click(function(){ 
+		        document.cartForm.setAttribute("action","Order.or");
+		         document.cartForm.submit();
+		   });
+		  }
+		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
 
 		
 		

@@ -18,6 +18,8 @@
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	
+	String basicCode = request.getParameter("basicCode"); 
 %>
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
@@ -114,9 +116,12 @@
 
 	// 선택된 옵션체크
 	function optcheck(mixopt) {
+		var mix[] = mixopt.split("/");
+		var productCode = <%=basicCode%> + mix[0] + mix[1];
+		
 		var oldopt = $('ul#show-option li span.show-value').html();
 		if(oldopt != mixopt) {
-			showlist(mixopt); 
+			showlist(mixopt, productCode); 
 		} else {
 			alert('이미 선택된 옵션입니다.');
 			return false;
@@ -128,15 +133,25 @@
 	// ul뒤에 li 형식으로 달아놓기
 	// 선택된 옵션명: '.show-value', 수량 감소: '#optminus', 수량 증가: '#optplus'
 	// 선택된 수량: '#optnum', 선택 옵션 삭제: '#optdel'
-	function showlist(mixopt) {
+	function showlist(mixopt, productCode) {
+		// 선택된 opt 수 가져와서 다음 번호 만들기
+		// 선택된 옵션이 0개 -> resultcount = 1
 		var resultcount = $('ul#show-option li').length+1+'';
+		
+		// ul 뒤에 붙일 거라 li태그 들어가게 만들기
 		var optcol=document.createElement('li');
+		// optcol id 설정 -> 이런모양( <li id="optcol1"> )
 		var id = "optcol"+resultcount;
 		optcol.id = id;
 
+		// body에서 id가 show-option인 ul을 찾아서 li추가 
 		$('ul#show-option').append(optcol);
-		var html = "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt
-			 + "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
+		// 
+		var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "'>" + 
+		// productCode, id="productCode숫자"
+			 "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
+		// 옵션 이름, ( BK/M )
+			 "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
 			 "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +
 			 "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
 			 "<i class='fs-16 zmdi zmdi-minus'></i></span>" + 
@@ -223,7 +238,6 @@
 </script>
 <!-- productDetail 관련  -->
 <%
-	String basicCode = request.getParameter("basicCode"); 
     ArrayList<ProductBean> productDetailList =(ArrayList<ProductBean>)request.getAttribute("productDetailList");
     ArrayList<ProductOptionBean> productColorList =(ArrayList<ProductOptionBean>)request.getAttribute("productColorList");
     ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
