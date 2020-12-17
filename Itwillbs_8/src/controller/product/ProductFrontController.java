@@ -17,6 +17,7 @@ import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
 import action.product.ProductLikeAction;
 import action.product.ProductMylikeListAction;
+import action.product.ProductSearchAction;
 import action.product.ProductSelectAction;
 import action.product.ProductUnLikeAction;
 import action.product.ProductUploadProAction;
@@ -60,15 +61,6 @@ public class ProductFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}else if (command.equals("/ProductSearch.po")) {
-//			action = new ProductDetailAction();
-			forward = new ActionForward();
-			forward.setPath("/product/shopSearch.jsp");
-//			try {
-//				forward = action.execute(request, response);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
 		}else if (command.equals("/ProductCartLike.po")) {
 			
 			action = new ProductCartLikeAction();
@@ -86,6 +78,13 @@ public class ProductFrontController extends HttpServlet {
 			}
 		} else if (command.equals("/ProductUnLike.po")) {
 			action = new ProductUnLikeAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if (command.equals("/ProductSearch.po")) {
+			action = new ProductSearchAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

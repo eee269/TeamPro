@@ -185,6 +185,44 @@ public class ProductDAO {
 		return productList;
 	}
 	
+ public ArrayList<ProductBean> selectSearchProductList(String search) {
+		
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from product where name LIKE ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, "%"+search+"%");
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+				
+				productList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectSearchProductList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+		
+		return productList;
+	}
+	
 	public ArrayList<ProductBean> selectProductListX(String xcode,int page, int limit) {
 		
 		ArrayList<ProductBean> productListX = new ArrayList<ProductBean>();
