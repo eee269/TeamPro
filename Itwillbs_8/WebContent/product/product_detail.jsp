@@ -31,7 +31,7 @@
 <link type="text/css" rel="stylesheet" href="scss/power_review_custom.4.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
-<script src="js/bootstrap4-rating-input.js"></script>
+<script src="js/bootstrap4-rating-input.js?t=<%=System.currentTimeMillis()%>"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 .rat {
@@ -43,6 +43,12 @@
 	margin: 150px auto;
 	font-size: 15px;
 }
+.rating-input{
+	color: yellow;
+	background-color: black;
+	position: absolute;
+}
+
 </style>
 
 <!-- TAB기능 스타일 -->
@@ -815,6 +821,8 @@
 <!-- 자바스크립트 코드들 .js 파일로 변환하면 쓸 코드 -->
 <%-- <script type="text/javascript" src="js/prodReview.js?basicCode=<%=basicCode%>&member_id=<%=member_id%>"></script> --%>
 <!-- 자바스크립트 코드들 .js 파일로 변환하면 쓸 코드 -->
+
+
 <script type="text/javascript">
 	var basicCode = '<%=basicCode%>';
 	var member_id = '<%=member_id%>';
@@ -896,6 +904,8 @@
                 	sort : sort
                 },
                 success: function (jsonObject) { 
+                	// jsonObject 에 다시 별점 부트스트랩 적용하기 위해 재선언
+                	$('head').append('<script src=\'js/bootstrap4-rating-input.js\'><\/script>');
                 	jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
             		var json = JSON.parse(jsonObject);
             		
@@ -954,9 +964,7 @@
 			    	                    }else if(j == 2){
 			    	                    	output +=		"<div class='hd-box'>"
 			    	                    			 			+"<div class='star-icon'>"
-			    	                    							+"<div class='rat'>"
-			    	                    								+"<input type='number' name='starScore' id ='rating1' class='rating text-warning' value='"+reply.starScore+"' disabled />"
-		    	                    								+"</div>"
+	    	                    									+"<input type='number' name='starScore' class='rating' id='rating-readonly' data-clearable='remove' value='"+reply.starScore+"' data-readonly/>"
 	    	                    								+"</div>"
     	                    						 		+"</div>";
 			    	                    }else if(j == 3){
@@ -964,7 +972,7 @@
 			    	                    					+"<dl><dt class='emp'>구매한 옵션</dt><dd class='emp'>컬러 : BLACK, 사이즈 : S</dd></dl>"
 		    	                    				 	+"</div>"
 			    	                    			 	+"<div class='content'>"
-		    	                    				 		+"<p class='content_p'>"
+		    	                    				 		+"<p class='content_p' style='margin-top:36px;'>"
 		    	                    				 			+"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
 			    	                    				 		+"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
 				    	                    			 		+"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
@@ -1194,22 +1202,22 @@ function prd_review(num){
     if(!confirm("정말 삭제하시겠습니까?")){
     	return;
     }else{
-    		$.ajax({
-                type: "POST",
-    			url: "ProdReviewDelete.po",
-                data: {
-                	num:  num
-                },
-                success: function () {
-                	alert("리뷰 삭제 완료");
-                	getReplyCall();
-                },
-    			error: function(request,status,error){
-    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-    		       }
-    		})// end ajax
-  	  	}
-    }
+   		$.ajax({
+               type: "POST",
+   			url: "ProdReviewDelete.po",
+               data: {
+               	num:  num
+               },
+               success: function () {
+               	alert("리뷰 삭제 완료");
+               	getReplyCall();
+               },
+   			error: function(request,status,error){
+   		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   		       }
+   		})// end ajax
+	 }
+}
 
 </script>
 <script type="text/javascript">
@@ -1259,6 +1267,9 @@ function prd_review(num){
                },
 		})
     };
+    setInterval(function(){
+    	$('.rating-input').toggle();
+    },250);
 </script>
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
@@ -1296,20 +1307,22 @@ function showReply(num){
 		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
-// 	try {
-// 		fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
-// 			return true;
-// 		}).catch(function(e) {
-// 			var carbonScript = document.createElement("script");
-// 			carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
-// 			carbonScript.id = "_carbonads_js";
-// 			document.getElementById("carbon-block").appendChild(carbonScript);
-// 		});
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-
-
+</script>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+<script>
 	/* detail_tabmenu 클릭한 #page01에 스크롤 on */
 	$('.detail_tabmenu ul li').click(function(){
 		$('.detail_tabmenu ul li').removeClass('on');
