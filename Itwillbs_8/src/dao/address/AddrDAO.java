@@ -46,8 +46,10 @@ public class AddrDAO {
 				
 				addr.setNum(rs.getInt(1));
 				addr.setLocation(rs.getString(2));
-				addr.setAddress(rs.getString(3));
-				addr.setMember_id(rs.getString(4));
+				addr.setPostcode(rs.getString(3));
+				addr.setAddress(rs.getString(4));
+				addr.setMember_id(rs.getString(5));
+				addr.setType(rs.getString(6));
 				
 				addrList.add(addr);
 			}

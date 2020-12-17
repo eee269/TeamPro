@@ -117,7 +117,8 @@ function execDaumPostcode() {
 // 주소록 팝업을 위한 스크립트
 function openAddrList(){
 	
-window.open("member/addr.jsp", "startpop", "top=0, left=0, width=800, height=500, scrollbars=no, resizable=no ,status=no ,toolbar=no");
+window.open("AddrBook.ad", "startpop", "top=0, left=0, width=820, height=500, scrollbars=no, resizable=no ,status=no ,toolbar=no");
+// 	window.open("AddrBook.ad");
 
 }
 // 주소록 팝업 스크립트 끝
@@ -440,9 +441,9 @@ function regist_defaultAddr(test) {
 							<div id="paybutton">
 								<input type="submit" value="주문하기"
 									style="font-size: 1em; text-align: center; padding: 1.23em 3em;"
-									class="CSSbuttonWhite"> &nbsp
+									class="CSSbuttonWhite"> &nbsp;
 								<!-- 								<button class="CSSbuttonWhite" onclick="payment()">주문하기</button> -->
-								&nbsp <input type="reset" value="주문취소"
+								&nbsp; <input type="reset" value="주문취소"
 									style="font-size: 1em; text-align: center; padding: 1.23em 3em;"
 									class="CSSbuttonWhite">
 
