@@ -33,6 +33,7 @@ import action.product.review.ProdReviewModifyAction;
 import action.product.review.ProdReviewRecAction;
 import action.product.review.ProdReviewRecCountAction;
 import action.product.review.ProdReviewReplyAction;
+import action.product.review.ProdReviewStarAction;
 import action.product.review.ProdReviewWriteAction;
 import action.product.review.ProductMyreviewListAction;
 import vo.ActionForward;
@@ -197,6 +198,16 @@ public class ProductFrontController extends HttpServlet {
 		else if(command.equals("/ProdReviewReply.po")) {
 			System.out.println("ProdReviewReply.po 포워딩");
 			action = new ProdReviewReplyAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------------상품 리뷰 별점 카운트--------------------
+		else if(command.equals("/ProdReviewStar.po")) {
+			System.out.println("ProdReviewStar.po 포워딩");
+			action = new ProdReviewStarAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
