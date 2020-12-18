@@ -28,7 +28,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.3.1/flatly/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="scss/power_review_custom.4.css" />
+<link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
 <script src="js/bootstrap4-rating-input.js?t=<%=System.currentTimeMillis()%>"></script>
@@ -96,10 +96,10 @@
 <!-- 끝 -->
 
 
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 
 <script type="text/javascript">
 	// option으로 선택한 값 받아와서 임시 저장

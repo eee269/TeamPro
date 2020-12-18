@@ -192,10 +192,10 @@ $( document ).ready(function () {
 </script>
 <!-- 끝 -->
 
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/shopbrand.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.2.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/shopbrand.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_2.css" />
 
 <div class="cboth sub_top_ban <%=small%>">
 	<div class="width1260 sub_top_text"><%=xcode%></div>

@@ -16,10 +16,10 @@ int num = Integer.parseInt(request.getParameter("num"));
 int amount = Integer.parseInt(request.getParameter("amount"));
 %>
 <jsp:include page="../inc/header.jsp" />
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/order_pay.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/order_pay.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <style>
 .fail {
 	margin-left: 33%;
