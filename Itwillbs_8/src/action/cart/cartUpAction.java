@@ -57,7 +57,6 @@ public class cartUpAction implements Action {
 		 ca.setCnt(cnt);
 		 
 		
-		
 		cartUpService cartUpService = new cartUpService();
 		boolean isCartUpSuccess	= cartUpService.isCartUp(ca);
 		System.out.println("isCartUpSuccess : " +  isCartUpSuccess);
