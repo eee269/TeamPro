@@ -1,7 +1,5 @@
 package action.product.review;
 
-import java.io.PrintWriter;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -22,24 +20,18 @@ public class ProdReviewRecAction implements Action {
 		String id = (String)session.getAttribute("member_id");
 		
 		ProdReviewListService prodReviewListService = new ProdReviewListService();
-		// 0 -> Good, 1 -> bad
 		int recommand = Integer.parseInt(request.getParameter("recommand"));
 		
 		// 현재 로그인 아이디로 추천했는지 판별
 		int checkCount = prodReviewListService.checkReviewRec(num,id,recommand);
 		
+		// 0 -> 추천 안함
 		if(checkCount == 0) {
-			// 0 -> 추천 안함
 			prodReviewListService.updateReviewRec(num,id,recommand);
 		}else {
 			// -> 추천했음
 			prodReviewListService.deleteReviewRec(num,id,recommand);
 		}
-		
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.print(checkCount);
-		out.close();
 		
 		return null;
 	}
