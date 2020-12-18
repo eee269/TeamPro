@@ -28,8 +28,8 @@ int cntSet = 0;
 }
 .tb-center a:hover{
   background-color: gray;
+  background-color: #717fe0;
 }
-
 #whiteBu:hover{color:#fff;}
 
 .btn-dw {
@@ -70,10 +70,10 @@ int cntSet = 0;
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="css/common.css" />
-<link type="text/css" rel="stylesheet" href="css/basket.css" />
-<link type="text/css" rel="stylesheet" href="css/header.css" />
-<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
+<link type="text/css" rel="stylesheet" href="scss/common.css" />
+<link type="text/css" rel="stylesheet" href="scss/basket.css" />
+<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
+<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
 <!-- Shoping Cart 시작
 <input type="hidden" name="num" value="" />-->
 
@@ -408,16 +408,7 @@ $("#allCheck").click(function(){
 				// chArr 에 합친 값 저장
 				chArr.push(sum);
 
-				
-				// Order 페이지로 가져갈 데이터 지정
-				num = $('[name=chk]').val()
-				name = td.eq(2).find('.name').text();
-				size = td.eq(2).find('.size').text().substr(6);
-				color = td.eq(2).find('.color').text().substr(5);
-				cnt =  td.eq(3).find('.txt-spin').val();
-				eprice = td.eq(4).text().substr(0, td.eq(4).text().length -1);
-				// Order 페이지로 가져갈 데이터 지정 끝
-				
+			
 			});
 			
 			// 포문으로 chArr 의 길이만큼 돌림
@@ -445,11 +436,7 @@ $("#allCheck").click(function(){
 			
 			// 총 합계 
 			$('.total-b').text(chCoin + sevice);
-			
-			// Order로 넘기기위한 벨류 작업 
-			$('.total-b').attr('value',chCoin+sevice);	
-			$('.price-b').attr('value',chCoin);	
-			$('.delivery-b').attr('value',sevice);	
+
 			
 			
 			// 체크선택이 안되면 삭제div 숨기고 , 체크박스가 1개 이상 체크 되면 삭제div 보이기 
@@ -497,20 +484,16 @@ $("#allCheck").click(function(){
 		
 		};
 		
-		
-		
 		// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
 		  function multi_order(){
 		     $(".CSSbuttonBlack").click(function(){ 
 		        document.cartForm.setAttribute("action","Order.or");
-				document.cartForm.setAttribute("method","POST");
-		        document.cartForm.submit();
+		         document.cartForm.submit();
 		   });
 		  }
 		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
 
-		
-		
+	
 		 
 </script>
 
