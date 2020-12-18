@@ -6,7 +6,7 @@
 <jsp:include page="/inc/header_index.jsp" />
 <jsp:include page="/quickMenu_index.jsp" />
 <link type="text/css" rel="stylesheet" href="css/common.css" />
-<link type="text/css" rel="stylesheet" href="css/main.css" />
+<link type="text/css" rel="stylesheet" href="css/main_1.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 
