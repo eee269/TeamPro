@@ -100,7 +100,7 @@ if(productList.size() == 0) {
 		}
 		String[] img = product.getMain_img().split("/");
 		%><td onclick="location.href='ProductDetail.po?basicCode=<%=product.getBasicCode()%>'">
-			<img alt="productImg" src="product/uploadImg/<%=img[0]%>" width="250px" height="250px"
+			<img alt="productImg" src="upload/productUploadImg/<%=img[0]%>" width="250px" height="250px"
 				onerror="src='loading.png'"><br>
 			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=product.getName() %></span>&nbsp;&nbsp;&nbsp;
 			<span class="stext-105 cl3"><%=product.getPrice() %></span>

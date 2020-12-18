@@ -21,15 +21,15 @@ DBCP(DataBase Connection Pool) 설정
  -->
 	<Resource 
 		name="jdbc/MySQL"
-		auth="Container"
-		type="javax.sql.DataSource"
-		username="team"
-		password="teampro1"
-		driverClassName="com.mysql.jdbc.Driver"
-		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
-		url="jdbc:mysql://3.35.82.26:3306/teampro?useSSL=false"
-		maxActive="500"
-		maxIdle="20"
+      auth="Container"
+      type="javax.sql.DataSource"
+      username="team"
+      password="teampro1"
+      driverClassName="com.mysql.jdbc.Driver"
+      factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+      url="jdbc:mysql://3.35.82.26:3306/teampro?useSSL=false"
+      maxActive="500"
+      maxIdle="20"
 		
 				/>
 <!-- 		username="team" 공유 계정 -->
