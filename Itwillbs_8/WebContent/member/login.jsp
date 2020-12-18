@@ -11,7 +11,8 @@
 <meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
 
 <style rel="stylesheet">
 
@@ -451,19 +452,6 @@ margin-left:0px;}
 	}
 	
 </script>
-<%
-	// session 객체에 저장된 id 값이 존재할 경우
-	// "잘못된 접근입니다." 출력 후 메인페이지로 이동
-	if(session.getAttribute("id") != null) {
-		%>
-		<script>
-			alert("잘못된 접근입니다.");
-			location.href="./";
-		</script>
-		<%
-	}
-
-%>    
 <body>
 	<section class="container_member">
 		<article class="half">
@@ -495,19 +483,9 @@ margin-left:0px;}
 					<!-- 구글 로그인 버튼 노출 영역 -->
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 					<!-- //구글 로그인 버튼 노출 영역 -->
-					<%
-    String clientId = "jjXgPjWf7pqDUU6YqA_B";//애플리케이션 클라이언트 아이디값
-    String redirectURI = URLEncoder.encode("http://localhost:8090/Itwillbs_8/member/naver_callback.jsp", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-    apiURL += "&client_id=" + clientId;
-    apiURL += "&redirect_uri=" + redirectURI;
-    apiURL += "&state=" + state;
-    session.setAttribute("state", state);
- %>
-					<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-					<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+					 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+  <div id="naver_id_login"></div>
+  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
@@ -612,16 +590,12 @@ margin-left:0px;}
 			}
 		
 		// 네이버 로그인 API
-		var naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "jjXgPjWf7pqDUU6YqA_B",
-				callbackUrl: "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp",
-				isPopup: true,
-				loginButton: {color: "green", type: 1, height: 60} 
-			}
-		);
-		/* 설정정보를 초기화하고 연동을 준비 */
-		naverLogin.init();
+		var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8090/Itwillbs_8/MemberLoginForm.mo#");
+  	naver_id_login.setState(state);
+  	naver_id_login.init_naver_id_login();
 	</script>
 </body>
 
