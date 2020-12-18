@@ -16,6 +16,7 @@ import exception.member.LoginException;
 import svc.member.MemberLoginProService;
 import vo.ActionForward;
 
+
 public class MemberLoginProAction implements Action {
 
 	@Override
@@ -37,6 +38,8 @@ public class MemberLoginProAction implements Action {
 				forward = new ActionForward();
 				forward.setPath("Main.go"); 
 			}
+			
+
 		} catch (LoginException e) { 
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

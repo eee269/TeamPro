@@ -62,4 +62,26 @@ public class AddrService {
 		return recentAddr;
 	}
 
+	public boolean RegistDefaultAddr(String member_id, String postcode, String address) {
+		System.out.println("AddrService - RegistDefaultAddr()");
+		boolean isRegistSuccess = false;
+		
+		Connection con = getConnection();
+		
+		AddrDAO addrDAO = AddrDAO.getInstance();
+		
+		addrDAO.setConnection(con);
+		
+		int insertCount = addrDAO.insertDefaultAddr(member_id, postcode, address);
+		
+		if(insertCount > 0) {
+			commit(con);
+			isRegistSuccess = true;
+		}else {
+			rollback(con);
+		}
+		
+		return isRegistSuccess;
+	}
+
 }

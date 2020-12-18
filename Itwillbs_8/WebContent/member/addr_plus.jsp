@@ -1,7 +1,10 @@
-
+<%@page import="vo.AddrBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
-<title>ÃÖ±Ù ¹è¼ÛÁö °Ë»ö</title>
+<title>ìµœê·¼ ë°°ì†¡ì§€ ê²€ìƒ‰</title>
 <meta http-equiv="CONTENT-TYPE" content="text/html;charset=EUC-KR">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,7 +20,7 @@
 	href="/images/d3/m_01/css/font-awesome.min.css" />
 </head>
 <script type="text/javascript">
-	// Ãë¼Ò ¹öÆ° Å¬¸¯ ½Ã
+	// ì·¨ì†Œ ë²„íŠ¼ í´ë¦­ ì‹œ
 	function cancle(){
 		window.close();
 	}
@@ -64,7 +67,7 @@ a {
 li {
 	list-style: none;
 }
-/* pc ÆË¾÷ */
+/* pc íŒì—… */
 .address-pop {
 	padding: 30px 20px;
 }
@@ -449,7 +452,7 @@ li {
 	margin-right: 5px;
 	vertical-align: middle;
 }
-/* mobile ÆË¾÷ */
+/* mobile íŒì—… */
 .popup {
 	padding: 20px 10px;
 	font-size: 11px;
@@ -828,7 +831,7 @@ li {
 	float: right;
 }
 
-/* ¿ìÆí¹øÈ£ ·¹ÀÌ¾î */
+/* ìš°í¸ë²ˆí˜¸ ë ˆì´ì–´ */
 .layer {
 	width: 100%;
 	min-height: 100%;
@@ -1021,8 +1024,8 @@ body #comment_password .contents .form-wrap2 p:last-child a {
 <body>
 	<div class="address-pop">
 		<div class="addplace">
-			<div class="title">¹è¼ÛÁö Ãß°¡</div>
-			<form action="#" name="form1" method="post">
+			<div class="title">ë°°ì†¡ì§€ ì¶”ê°€</div>
+			<form action="../RegistDestination.ad" name="form1" method="post">
 				<div class="table">
 					<table class="addplace-table" cellpadding="0" cellspacing="0">
 						<colgroup>
@@ -1031,71 +1034,36 @@ body #comment_password .contents .form-wrap2 p:last-child a {
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>¹è¼ÛÁö¸í</th>
-								<td><input type="text" name="title" value="" maxlength="30" /></td>
+								<th>ë°°ì†¡ì§€ëª…</th>
+								<td><input type="text" name="location" maxlength="30" placeholder="ë°°ì†¡ì§€ëª…" /></td>
 							</tr>
 							<tr>
-								<th>¹Ş´Â »ç¶÷</th>
-								<td><input type="text" name="receiver" value=""
-									maxlength="30" /></td>
-							</tr>
-							<tr>
-								<th>ÁÖ¼Ò</th>
+								<th>ì£¼ì†Œ</th>
 								<td>
 									<div class="post">
 										<p class="post-number-input">
-											<input type="text" name="postcode" id="postcode" placeholder="¿ìÆí¹øÈ£" />
-											<input type="button" onclick="execDaumPostcode()" value="ÁÖ¼Ò Ã£±â">
+											<input type="text" name="postcode" id="postcode" placeholder="ìš°í¸ë²ˆí˜¸" />
+											<input type="button" onclick="execDaumPostcode()" value="ì£¼ì†Œ ì°¾ê¸°">
 										</p>
 										<p>
-											<input type="text" name="address" id="address" placeholder="ÁÖ¼Ò"/>
+											<input type="text" name="address" id="address" placeholder="ì£¼ì†Œ"/>
 										</p>
 										<p>
-											<input type="text" name="detailAddress" id="detailAddress" placeholder="»ó¼¼ÁÖ¼Ò" />
+											<input type="text" name="detailAddress" id="detailAddress" placeholder="ìƒì„¸ì£¼ì†Œ" />
 										</p>
 										<p>
-											<input type="text" name="extraAddress" id="extraAddress" placeholder="Âü°íÇ×¸ñ" />
+											<input type="text" name="extraAddress" id="extraAddress" placeholder="ì°¸ê³ í•­ëª©" />
 										</p>
 									</div>
 								</td>
-							</tr>
-							<tr>
-								<th>¿¬¶ôÃ³</th>
-								<td>
-									<div class="phone">
-										<input type="text" name="emergency21" value="" maxlength="4" />
-										<span>-</span> <input type="text" name="emergency22" value=""
-											maxlength="4" /> <span>-</span> <input type="text"
-											name="emergency23" value="" maxlength="4" />
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>ÇÚµåÆù</th>
-								<td>
-									<div class="phone">
-										<input type="text" name="emergency31" value="" maxlength="4" />
-										<span>-</span> <input type="text" name="emergency32" value=""
-											maxlength="4" /> <span>-</span> <input type="text"
-											name="emergency33" value="" maxlength="4" />
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<th>ÁÖ¹®¸Ş½ÃÁö<br>
-								<em>(100ÀÚ³»¿Ü)</em></th>
-								<td><textarea name="message"></textarea></td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
-				<label> <input type="checkbox" name="is_standard" value="Y" />±âº»
-					¹è¼ÛÁö·Î ÀúÀå
-				</label>
 				<div class="btn-area">
 					<div>
-						<input type="submit" value="ÀúÀå" class="btn40 blue btn-save-addrbook" style="cursor: pointer;"> 
-						<input type="button" value="Ãë¼Ò" class="btn40 black btn-cancel" style="cursor: pointer;" onclick="cancle()">
+						<input type="submit" value="ì €ì¥" class="btn40 blue btn-save-addrbook" style="cursor: pointer;"> 
+						<input type="button" value="ì·¨ì†Œ" class="btn40 black btn-cancel" style="cursor: pointer;" onclick="cancle()">
 					</div>
 				</div>
 			</form>
@@ -1107,46 +1075,46 @@ body #comment_password .contents .form-wrap2 p:last-child a {
     function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
-                // ÆË¾÷¿¡¼­ °Ë»ö°á°ú Ç×¸ñÀ» Å¬¸¯ÇßÀ»¶§ ½ÇÇàÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ´Â ºÎºĞ.
+                // íŒì—…ì—ì„œ ê²€ìƒ‰ê²°ê³¼ í•­ëª©ì„ í´ë¦­í–ˆì„ë•Œ ì‹¤í–‰í•  ì½”ë“œë¥¼ ì‘ì„±í•˜ëŠ” ë¶€ë¶„.
 
-                // °¢ ÁÖ¼ÒÀÇ ³ëÃâ ±ÔÄ¢¿¡ µû¶ó ÁÖ¼Ò¸¦ Á¶ÇÕÇÑ´Ù.
-                // ³»·Á¿À´Â º¯¼ö°¡ °ªÀÌ ¾ø´Â °æ¿ì¿£ °ø¹é('')°ªÀ» °¡Áö¹Ç·Î, ÀÌ¸¦ Âü°íÇÏ¿© ºĞ±â ÇÑ´Ù.
-                var addr = ''; // ÁÖ¼Ò º¯¼ö
-                var extraAddr = ''; // Âü°íÇ×¸ñ º¯¼ö
+                // ê° ì£¼ì†Œì˜ ë…¸ì¶œ ê·œì¹™ì— ë”°ë¼ ì£¼ì†Œë¥¼ ì¡°í•©í•œë‹¤.
+                // ë‚´ë ¤ì˜¤ëŠ” ë³€ìˆ˜ê°€ ê°’ì´ ì—†ëŠ” ê²½ìš°ì—” ê³µë°±('')ê°’ì„ ê°€ì§€ë¯€ë¡œ, ì´ë¥¼ ì°¸ê³ í•˜ì—¬ ë¶„ê¸° í•œë‹¤.
+                var addr = ''; // ì£¼ì†Œ ë³€ìˆ˜
+                var extraAddr = ''; // ì°¸ê³ í•­ëª© ë³€ìˆ˜
 
-                //»ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò Å¸ÀÔ¿¡ µû¶ó ÇØ´ç ÁÖ¼Ò °ªÀ» °¡Á®¿Â´Ù.
-                if (data.userSelectedType === 'R') { // »ç¿ëÀÚ°¡ µµ·Î¸í ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì
+                //ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œ íƒ€ì…ì— ë”°ë¼ í•´ë‹¹ ì£¼ì†Œ ê°’ì„ ê°€ì ¸ì˜¨ë‹¤.
+                if (data.userSelectedType === 'R') { // ì‚¬ìš©ìê°€ ë„ë¡œëª… ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°
                     addr = data.roadAddress;
-                } else { // »ç¿ëÀÚ°¡ Áö¹ø ÁÖ¼Ò¸¦ ¼±ÅÃÇßÀ» °æ¿ì(J)
+                } else { // ì‚¬ìš©ìê°€ ì§€ë²ˆ ì£¼ì†Œë¥¼ ì„ íƒí–ˆì„ ê²½ìš°(J)
                     addr = data.jibunAddress;
                 }
 
-                // »ç¿ëÀÚ°¡ ¼±ÅÃÇÑ ÁÖ¼Ò°¡ µµ·Î¸í Å¸ÀÔÀÏ¶§ Âü°íÇ×¸ñÀ» Á¶ÇÕÇÑ´Ù.
+                // ì‚¬ìš©ìê°€ ì„ íƒí•œ ì£¼ì†Œê°€ ë„ë¡œëª… íƒ€ì…ì¼ë•Œ ì°¸ê³ í•­ëª©ì„ ì¡°í•©í•œë‹¤.
                 if(data.userSelectedType === 'R'){
-                    // ¹ıÁ¤µ¿¸íÀÌ ÀÖÀ» °æ¿ì Ãß°¡ÇÑ´Ù. (¹ıÁ¤¸®´Â Á¦¿Ü)
-                    // ¹ıÁ¤µ¿ÀÇ °æ¿ì ¸¶Áö¸· ¹®ÀÚ°¡ "µ¿/·Î/°¡"·Î ³¡³­´Ù.
-                    if(data.bname !== '' && /[µ¿|·Î|°¡]$/g.test(data.bname)){
+                    // ë²•ì •ë™ëª…ì´ ìˆì„ ê²½ìš° ì¶”ê°€í•œë‹¤. (ë²•ì •ë¦¬ëŠ” ì œì™¸)
+                    // ë²•ì •ë™ì˜ ê²½ìš° ë§ˆì§€ë§‰ ë¬¸ìê°€ "ë™/ë¡œ/ê°€"ë¡œ ëë‚œë‹¤.
+                    if(data.bname !== '' && /[ë™|ë¡œ|ê°€]$/g.test(data.bname)){
                         extraAddr += data.bname;
                     }
-                    // °Ç¹°¸íÀÌ ÀÖ°í, °øµ¿ÁÖÅÃÀÏ °æ¿ì Ãß°¡ÇÑ´Ù.
+                    // ê±´ë¬¼ëª…ì´ ìˆê³ , ê³µë™ì£¼íƒì¼ ê²½ìš° ì¶”ê°€í•œë‹¤.
                     if(data.buildingName !== '' && data.apartment === 'Y'){
                         extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
                     }
-                    // Ç¥½ÃÇÒ Âü°íÇ×¸ñÀÌ ÀÖÀ» °æ¿ì, °ıÈ£±îÁö Ãß°¡ÇÑ ÃÖÁ¾ ¹®ÀÚ¿­À» ¸¸µç´Ù.
+                    // í‘œì‹œí•  ì°¸ê³ í•­ëª©ì´ ìˆì„ ê²½ìš°, ê´„í˜¸ê¹Œì§€ ì¶”ê°€í•œ ìµœì¢… ë¬¸ìì—´ì„ ë§Œë“ ë‹¤.
                     if(extraAddr !== ''){
                         extraAddr = ' (' + extraAddr + ')';
                     }
-                    // Á¶ÇÕµÈ Âü°íÇ×¸ñÀ» ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                    // ì¡°í•©ëœ ì°¸ê³ í•­ëª©ì„ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
                     document.getElementById("extraAddress").value = extraAddr;
                 
                 } else {
                     document.getElementById("extraAddress").value = '';
                 }
 
-                // ¿ìÆí¹øÈ£¿Í ÁÖ¼Ò Á¤º¸¸¦ ÇØ´ç ÇÊµå¿¡ ³Ö´Â´Ù.
+                // ìš°í¸ë²ˆí˜¸ì™€ ì£¼ì†Œ ì •ë³´ë¥¼ í•´ë‹¹ í•„ë“œì— ë„£ëŠ”ë‹¤.
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("address").value = addr;
-                // Ä¿¼­¸¦ »ó¼¼ÁÖ¼Ò ÇÊµå·Î ÀÌµ¿ÇÑ´Ù.
+                // ì»¤ì„œë¥¼ ìƒì„¸ì£¼ì†Œ í•„ë“œë¡œ ì´ë™í•œë‹¤.
                 document.getElementById("detailAddress").focus();
             }
         }).open();

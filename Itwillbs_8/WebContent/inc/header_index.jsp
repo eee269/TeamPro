@@ -1,7 +1,7 @@
 <%@page import="javax.websocket.Session"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
+<%
 	String member_id=(String)session.getAttribute("member_id");
 %>
 <!DOCTYPE html>
@@ -40,7 +40,28 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+<!-- 장바구니,좋아요  ajax -->
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+		 
+	 $.ajax({
+		    url:'ProductCartLike.po', 
+		    type:'post', 
+<%-- 		    data:{'id':'<%=member_id%>'},  --%>
+		    success: function(data) {
+		    	var data = data.split('/');
+		    	$('.icon-header-noti').attr('data-notify',data[1]);
+		    	$('.js-show-cart').attr('data-notify',data[0]);
+		    },
+		    error: function(err) {
+		        
+		    }
+		});
+	 
+	 
+});
+</script>
 </head>
 <body class="animsition">
 	<!-- Header -->
@@ -130,7 +151,7 @@
 						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
 							<i class="zmdi zmdi-search"></i>
 						</div>
-						<a href="Cart.ca" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="장바구니갯수">
+						<a href="Cart.ca" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="0">
 							<i class="zmdi zmdi-shopping-cart"></i>
 						</a>
 						<a href="ProductMylikeList.po" class="dis-block icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
@@ -149,11 +170,12 @@
 
 			<!-- Icon header -->
 			<div class="wrap-icon-header flex-w flex-r-m m-r-15">
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 js-show-modal-search">
-					<i class="zmdi zmdi-search"></i>
-				</div>
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
+							<input type="text" name="search" value="ss" placeholder="search">
+							<i class="zmdi zmdi-search"></i>
+						</div>
 
-				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
+				<div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="0">
 					<i class="zmdi zmdi-shopping-cart"></i>
 				</div>
 
@@ -226,11 +248,11 @@
 				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
 					<img src="images/icons/icon-close2.png" alt="CLOSE">
 				</button>
-				<form class="wrap-search-header flex-w p-l-15">
+				<form action="ProductSearch.po" class="wrap-search-header flex-w p-l-15">
 					<button class="flex-c-m trans-04">
 						<i class="zmdi zmdi-search"></i>
 					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
+					<input class="plh3" type="text" name="search" placeholder="찾으시는 상품명을 검색해주세요!">
 				</form>
 			</div>
 		</div>

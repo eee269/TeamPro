@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
+//import action.cart.cartUpAction;
 import action.cart.cartUpdateAction;
 import vo.ActionForward;
 
@@ -31,7 +32,7 @@ public class CartFrontController extends HttpServlet {
 		Action action = null;
 		ActionForward forward = null;
 		
-		
+		// 리스트
 		if(command.equals("/Cart.ca")) {
 			System.out.println("컨트롤러 - Cart.cart 로 포워딩");
 			
@@ -41,13 +42,13 @@ public class CartFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 				
 			} catch (Exception e) {
-				System.out.println("List컨트롤러 에러" + e.getMessage());
+				System.out.println("List컨트롤러 에러 : " + e.getMessage());
 				e.printStackTrace();
 		
 			} finally {
 				
 			}
-			
+			// 지우기
 		} else if(command.equals("/CartDelete.ca")) {
 			System.out.println("컨트롤러 - CartDelete");
 			
@@ -57,10 +58,10 @@ public class CartFrontController extends HttpServlet {
 				forward = action.execute(request, response);
 				//forward.setPath("/Cart.cart");
 			} catch (Exception e) {
-				System.out.println("CartDelete" + e.getMessage());
+				System.out.println("CartDelete : " + e.getMessage());
 				e.printStackTrace();
 			}
-	
+			//수량변경 
 		} else if(command.equals("/CartUpdate.ca")) {
 			System.out.println("컨트롤러 - CartUpdate");
 			
@@ -69,9 +70,22 @@ public class CartFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("CartUpdate ->: " + e.getMessage());
+				System.out.println("CartUpdate : " + e.getMessage());
 				e.printStackTrace();
 			}
+			// 장바구니로 담기
+		} else if(command.equals("/cartUpAction.ca")) {
+			System.out.println("컨트롤러 - CartUpdate");
+//			action = new cartUpAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("CartUpdate : " + e.getMessage());
+				e.printStackTrace();
+				
+			}
+
 		}
 		
 		
