@@ -131,13 +131,11 @@ public class CartDAO extends Exception {
 		System.out.println("CartDAO - cartUp");
 		int upCount = 0;
 		
-		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
 		
 		try {
-			con = getConnection();
 			String sql2 = "SELECT max(num) FROM cart";
 			pstmt2 = con.prepareStatement(sql2);
 			rs = pstmt2.executeQuery();
@@ -146,7 +144,7 @@ public class CartDAO extends Exception {
 
 		if(rs.next()) {
 			num = rs.getInt("max(num)") + 1;			
-			String sql = "insert into cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode) values(?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode)VALUES(?,?,?,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -168,7 +166,6 @@ public class CartDAO extends Exception {
 			System.out.println("cartUp :" + e.getMessage());
 			e.printStackTrace();
 		} finally {
-			close(con);
 			close(pstmt);
 			close(pstmt2);
 			close(rs);
