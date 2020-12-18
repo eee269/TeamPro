@@ -21,7 +21,7 @@ public class CartListService {
 		
 		cartDAO.setConnection(con);
 		CartList = cartDAO.selectList(member_id);
-		
+		 
 		close(con);
 		
 		return CartList;

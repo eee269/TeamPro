@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
+import action.cart.cartUpAction;
 //import action.cart.cartUpAction;
 import action.cart.cartUpdateAction;
 import vo.ActionForward;
@@ -76,7 +77,7 @@ public class CartFrontController extends HttpServlet {
 			// 장바구니로 담기
 		} else if(command.equals("/cartUpAction.ca")) {
 			System.out.println("컨트롤러 - CartUpdate");
-//			action = new cartUpAction();
+			action = new cartUpAction();
 			
 			try {
 				forward = action.execute(request, response);
