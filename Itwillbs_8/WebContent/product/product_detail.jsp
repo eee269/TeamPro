@@ -1,3 +1,4 @@
+<%@page import="jdk.internal.misc.FileSystemOption"%>
 <%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
@@ -174,8 +175,10 @@ var productCode = "";
       $('#'+id).append(html);
       
       // cnt 값 보내기
-       
-   	var ca_cnt = $("#slick-slide05").val(1);
+      // 20.12.19. yj 바뀜!
+      $("#ca_cnt").val(1);
+//    	var ca_cnt = $("#slick-slide05").val(1);
+// 이거는 $("#slick-slide05").val(1) 이 값을 ca_cnt라는 변수에 넣어주고 끝이라서 body까지 안간당..! 
       calculatePrice();
       
    }
@@ -207,8 +210,9 @@ var productCode = "";
      
       $('#'+numid).val(cnt);
       // cnt 값 보내기 
-         var ca_cnt = $("#slick-slide05").val(cnt);
-      
+      // 20.12.19. yj 바뀜!
+//          var ca_cnt = $("#slick-slide05").val(cnt);
+      $("#ca_cnt").val(cnt);
       calculatePrice();
    }
    
@@ -223,7 +227,9 @@ var productCode = "";
          cnt -= 1;
          $('#'+numid).val(cnt);
          // cnt 값 보내기
-         var ca_cnt = $("#slick-slide05").val(cnt);
+         // 20.12.19. yj 바뀜!
+         $("#ca_cnt").val(cnt);
+//          var ca_cnt = $("#slick-slide05").val(cnt);
        
 
       }
@@ -260,6 +266,7 @@ var productCode = "";
     
     String likeCheck = member_id+"/"+productDetailList.get(0).getBasicCode();
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
+	System.out.println(productDetailList.size());
 %>
 <!-- 끝 -->
 
@@ -291,14 +298,6 @@ var productCode = "";
                   <div class="slick3 gallery-lb">
                   <%for(int i=0; i<main.length; i++){%>
                   
-						             	<!-- ----수정하기 --- -->
-							<input type="hidden" name="name" value="<%=productDetailList.get(i).getName() %>">
-							<input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
-							<input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
-							<input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="ca_cnt">
-							
 <%-- 							<%=productDetailList.get(0).getName() %> --%>
 <%-- 							<%=productDetailList.get(0).getPrice()%> --%>
 <%-- 							<%=productSizeList.get(i).getSize()%> --%>
@@ -319,6 +318,16 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
+                  
+						             	<!-- ----수정하기 --- -->
+						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
+							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
+							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
+							<input type="hidden" name="size" value="<%=productSizeList.get(0).getSize()%>">
+							<input type="hidden" name="color" value="<%=productColorList.get(0).getColor() %>">
+							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
+							<input type="hidden" name="cnt" value="0" id="ca_cnt">
+							
 
                   </div>
                </div>

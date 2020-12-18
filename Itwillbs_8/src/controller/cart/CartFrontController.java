@@ -76,13 +76,13 @@ public class CartFrontController extends HttpServlet {
 			}
 			// 장바구니로 담기
 		} else if(command.equals("/cartUpAction.ca")) {
-			System.out.println("컨트롤러 - CartUpdate");
+			System.out.println("컨트롤러 - CartUpAction");
 			action = new cartUpAction();
 			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("CartUpdate : " + e.getMessage());
+				System.out.println("CartUpAction : " + e.getMessage());
 				e.printStackTrace();
 				
 			}
