@@ -6,10 +6,10 @@ import java.sql.Connection;
 import dao.cart.CartDAO;
 import vo.Cart;
 
-public class cartUpService {
+public class cartGetService {
 	
 	
-	public boolean isCartUp(Cart ca) throws Exception{
+	public boolean isCartGet(Cart ca) throws Exception{
 		System.out.println("cartDeleteService - isCartUp");
 		
 		int upCount = 0;	
@@ -22,7 +22,7 @@ public class cartUpService {
 		
 		cartDAO.setConnection(con);
 
-		upCount = cartDAO.cartUp(ca);
+		upCount = cartDAO.cartGet(ca);
 		System.out.println("upCount : " + upCount);
 		
 		if(upCount > 0) {

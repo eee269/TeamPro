@@ -127,7 +127,7 @@ public class CartDAO extends Exception {
 	}
 	
 	// 가져오기
-	public int cartUp(Cart ca) {
+	public int cartGet(Cart ca) {
 		System.out.println("CartDAO - cartUp");
 		int upCount = 0;
 		
