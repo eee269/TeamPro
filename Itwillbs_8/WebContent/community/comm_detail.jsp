@@ -4,27 +4,29 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="vo.CommBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
-	CommBean article = (CommBean)request.getAttribute("article");
-	String nowPage = request.getParameter("page");
-	
+	CommBean article = (CommBean) request.getAttribute("article");
+String nowPage = request.getParameter("page");
+
 //==============댓글시작==============//
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
 
-// String id = (String)session.getAttribute("id");
-String id = "dodo";
-int community_num=Integer.parseInt(request.getParameter("num"));
+// String id = "dodo";
+String id = (String) session.getAttribute("member_id");
+int community_num = Integer.parseInt(request.getParameter("num"));
 
 //날짜 => 원하는 모양을 변경 문자열 결과값
 SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
-<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="../inc/header.jsp" />
 
 
-<script type="text/javascript" src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
-<link rel="stylesheet" type="text/css" href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript"
+	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css"
+	href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
 <script type="text/javascript">
 $(document).ready(function() {
     $('.fancybox').fancybox();
@@ -35,271 +37,279 @@ $(document).ready(function() {
 <link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
-<link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
+<link type="text/css" rel="stylesheet"
+	href="css/power_review_custom.css" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
 <style>
 .rerelist {
-background-color: #e9e9e9;
-padding: 15px !important;
-margin-top: 10px !important;
-margin-left: 30px !important;
-border-radius: 15px;
+	background-color: #e9e9e9;
+	padding: 15px !important;
+	margin-top: 10px !important;
+	margin-left: 30px !important;
+	border-radius: 15px;
 }
 
 .desc_re {
-    /* position: absolute; */
-    width: 160px;
-    float: right;
+	/* position: absolute; */
+	width: 160px;
+	float: right;
 }
+
 .content_re {
-    /* clear: both; */
-    overflow: hidden;
-    /* margin: 0px 220px 0 0; */
-    color: #89888e;
-    line-height: 1.5;
-    word-wrap: break-word;
-/*     min-height: 75px; */
-    float: left;
-    width: 400px;
+	/* clear: both; */
+	overflow: hidden;
+	/* margin: 0px 220px 0 0; */
+	color: #89888e;
+	line-height: 1.5;
+	word-wrap: break-word;
+	/*     min-height: 75px; */
+	float: left;
+	width: 400px;
 }
+
 .desc_re dt:first-child {
-    border-top: 0;
+	border-top: 0;
 }
+
 .desc_re dt {
-    padding: 0px 0 0 5px;
-    color: #a8a8a8;
-    border-top: 1px solid #dadada;
+	padding: 0px 0 0 5px;
+	color: #a8a8a8;
+	border-top: 1px solid #dadada;
 }
+
 .desc_re dd {
-    padding: 0 0 5px 5px !important;
-    color: #000;
+	padding: 0 0 5px 5px !important;
+	color: #000;
 }
 
 /*대댓글*/
 #re_wrt {
 	display: none;
-	margin-top:10px;
+	margin-top: 10px;
 }
 
 #re_wrt.on {
 	display: block;
 }
 
-#re_wrt #rere_contents{
-	margin-left:12px;
+#re_wrt #rere_contents {
+	margin-left: 12px;
 }
 
 #re_wrt .btn_comment {
-/*     position: absolute; */
-/*     top: 0; */
-/*     right: 0; */
-/*     height: 72px; */
-    line-height: 50px;
-    padding: 0 45px;
-    background: #f3f3f3;
-    border-left: 1px solid #dadada;
-    color: #818391;
-    font-weight: bold;
-    letter-spacing: -1px;
-    *: ;
-    height: 50px;
+	/*     position: absolute; */
+	/*     top: 0; */
+	/*     right: 0; */
+	/*     height: 72px; */
+	line-height: 50px;
+	padding: 0 45px;
+	background: #f3f3f3;
+	border-left: 1px solid #dadada;
+	color: #818391;
+	font-weight: bold;
+	letter-spacing: -1px; *:;
+	height: 50px;
 }
 
 #powerReview .PR15N01-review-wrap>li .desc dt {
-    padding-top: 5px;
+	padding-top: 5px;
+}
+
+ul.arraymodeTab>.active a{
+font-weight: bold !important;
 }
 </style>
 
-	<!-- breadcrumb -->
-	<div class="container">
-		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Home
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04">
-				Blog
-				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-			</a>
-
-			<span class="stext-109 cl4">
-				8 Inspiring Ways to Wear Dresses in the Winter
-			</span>
-		</div>
+<!-- breadcrumb -->
+<div class="container">
+	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Blog
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <span class="stext-109 cl4"> 8 Inspiring Ways to Wear Dresses
+			in the Winter </span>
 	</div>
-	<!-- Content page -->
-	<section class="bg0 p-t-52 p-b-20">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-lg-9 p-b-80">
-					<div class="p-r-45 p-r-0-lg">
-						<div class="wrap-pic-w how-pos5-parent">
-							<img src="communityUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>">
-							<div class="flex-col-c-m size-123 bg9 how-pos5">
-								<span class="ltext-107 cl2 txt-center">
-									22
-								</span>
-								<span class="stext-109 cl3 txt-center">
-									Jan 2018
-								</span>
-							</div>
+</div>
+<!-- Content page -->
+<section class="bg0 p-t-52 p-b-20">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-lg-9 p-b-80">
+				<div class="p-r-45 p-r-0-lg">
+					<div class="wrap-pic-w how-pos5-parent">
+						<img src="communityUpload/<%=article.getImg()%>"
+							alt="<%=article.getImg()%>">
+						<div class="flex-col-c-m size-123 bg9 how-pos5">
+							<span class="ltext-107 cl2 txt-center"> 22 </span> <span
+								class="stext-109 cl3 txt-center"> Jan 2018 </span>
 						</div>
-						<div class="p-t-32">
-							<span class="flex-w flex-m stext-111 cl2 p-b-19">
-								<span>
-									<span class="cl4">By</span> <%=article.getUsername()%>  
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
+					</div>
+					<div class="p-t-32">
+						<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+								<span class="cl4">By</span> <%=article.getUsername()%> <span
+								class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> <%=article.getDate()%> <span
+								class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> 태그 자리 <span class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> 댓글 갯수 </span> <span class="bookmark_count"> 북마크 갯수
+						</span>
+						</span>
 
-								<span>
-									<%=article.getDate()%>
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
+						<h4 class="ltext-109 cl2 p-b-28">
+							<%=article.getSubject()%>
+						</h4>
+					</div>
+					<p class="stext-117 cl6 p-b-26">
+						<%=article.getContent()%>
+					</p>
+					<div class="flex-w flex-t p-t-16">
+						<span class="size-216 stext-116 cl8 p-t-4"> Tags </span>
 
-								<span>
-									태그 자리 
-									<span class="cl12 m-l-4 m-r-6">|</span>
-								</span>
-
-								<span>
-									댓글 갯수
-								</span>
-								<span class="bookmark_count"> 북마크 갯수
-								</span>
-							</span>
-
-							<h4 class="ltext-109 cl2 p-b-28">
-								<%= article.getSubject() %>
-							</h4>
+						<div class="flex-w size-217">
+							<a href="#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle </a> <a href="#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Crafts </a>
 						</div>
-							<p class="stext-117 cl6 p-b-26">
-								<%= article.getContent() %>
-							</p>
-						<div class="flex-w flex-t p-t-16">
-							<span class="size-216 stext-116 cl8 p-t-4">
-								Tags
-							</span>
+					</div>
+					<br> <input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="삭제"
+						onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+					<input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="수정"
+						onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+					<input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="북마크" id="bookmark"> <br>
 
-							<div class="flex-w size-217">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
-						</div>
-						<br>
-						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-							value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-							value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						<input type="button" class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-							value="북마크" id="bookmark">
-						<br>
-						
-						
-						
-						<!-- -----------------------------Comment----------------------------- -->
-						<h2 class="comment_title">COMMENT</h2>
-						<div id="productDetail" style="padding-top:20px;">
-							<div class="page-body">
-								<div class="cboth">
+
+					<!-- -----------------------------Comment----------------------------- -->
+					<h2 class="comment_title">COMMENT</h2>
+					<div id="productDetail" style="padding-top: 20px;">
+						<div class="page-body">
+							<div class="cboth">
 								<div id="powerReview">
-										<div id="listPowerReview" class="MS_power_review_list">
-	
-	
-											<!-- 댓글등록 폼 시작 -->
-											<form name="comm_re_form" id="comm_re_form" method="post" autocomplete="off" enctype="multipart/form-data">
+									<div id="listPowerReview" class="MS_power_review_list">
+
+
+										<!-- 댓글등록 폼 시작 -->
+										<form name="comm_re_form" id="comm_re_form" method="post"
+											autocomplete="off" enctype="multipart/form-data">
 											<div name="comm_re" id="comm_re">
-											<input type="hidden" id="username" name="username" value="<%=id %>">
-											<input type="hidden" id="community_num" name="community_num" value="<%=community_num%>">
-											<div id="writePowerReview">
-												<div class="PR15N01-write">
-						
+												<input type="hidden" id="username" name="username"
+													value="<%=id%>"> <input type="hidden"
+													id="community_num" name="community_num"
+													value="<%=community_num%>">
+												<div id="writePowerReview">
+													<div class="PR15N01-write">
+
 														<div class="pr-txtbox">
-															<textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="reply_contents" name="reply_contents"></textarea>												
+															<textarea
+																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+																id="reply_contents" name="reply_contents"></textarea>
 															<div class="thumb-wrap"></div>
 														</div>
-														<input type="file" name="reply_file" id="reply_file" class="trick file-attach"> 
-												</div>
-												<!-- .PR15N01-write -->
-												<div class="PR15N01-recmd">
-	
-													<div class="cvr right">
-														<%
-														if(id!=null){
-															%><input type="button" value="댓글등록" class="lnk-review review_write"><%
-														}else{
-															%><input type="button" value="댓글등록" class="lnk-review review_write" onclick="return loginCheck()"><%
-														}
-														%>
-														
+														<input type="file" name="reply_file" id="reply_file"
+															class="trick file-attach">
 													</div>
+													<!-- .PR15N01-write -->
+													<div class="PR15N01-recmd">
+
+														<div class="cvr right">
+															<%
+																if (id != null) {
+															%><input type="button" value="댓글등록"
+																class="lnk-review review_write">
+															<%
+																} else {
+															%><input type="button" value="댓글등록"
+																class="lnk-review review_write"
+																onclick="return loginCheck()">
+															<%
+																}
+															%>
+
+														</div>
+													</div>
+													<!-- .PR15N01-recmd -->
 												</div>
-												<!-- .PR15N01-recmd -->
 											</div>
-											</div><!-- comm_re 끝 -->
-											</form>
-											<div class="cboth"></div><br><br><br>
-											<!-- 댓글등록 폼 끝 -->
-											
-											
-											
-											
+											<!-- comm_re 끝 -->
+										</form>
+										<div class="cboth"></div>
+										<br>
+										<br>
+										<br>
+										<!-- 댓글등록 폼 끝 -->
 
-											<ul class="PR15N01-review-wrap"></ul>
-	
-											
-											
-											
-											
-											<!-- .PR15N01-review-wrap -->
 
-											<!-- .paging -->
-										</div>
+										<ul class="arraymodeTab">
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
+											<li class="arraymode newest"><a href="#newest">최신순</a></li>
+										</ul>
+
+
+										<ul class="PR15N01-review-wrap"></ul>
+
+
+
+
+
+										<!-- .PR15N01-review-wrap -->
+
+										<!-- .paging -->
 									</div>
-									<!-- #powerReview-->
-									<p style="clear: both"></p>
-	
 								</div>
-								<!-- width1260 -->
-							</div>
-							<!-- .page-body -->
-						</div>						
-						
-						
-		
+								<!-- #powerReview-->
+								<p style="clear: both"></p>
 
-						<!-- -----------------------------Comment----------------------------- -->
-						
-					
+							</div>
+							<!-- width1260 -->
+						</div>
+						<!-- .page-body -->
 					</div>
+
+
+
+
+					<!-- -----------------------------Comment----------------------------- -->
+
+
 				</div>
 			</div>
 		</div>
-	</section>	
-<div id="image_view_load"></div><a class="fancybox" href="#inline"></a>
+	</div>
+</section>
+<div id="image_view_load"></div>
+<a class="fancybox" href="#inline"></a>
 
 <script>
 
 //==================== 원댓글 로딩  ====================//
 $(function(){
     function getCommReply(page){
-    	var id = "<%= id %>";
-	    var community_num = "<%= community_num %>";
+    	var id = "<%=id%>";
+	    var community_num = "<%=community_num%>";
 
 	    if(!page){
     		var page = 1;
     	}  
 	    
-	    var limit = 5;	    
+	    var limit = 5;
+	    
+	    if($('.active').text()=="답댓글많은순"){
+    		var arraymode = 0;
+    	}else{
+    		var arraymode = 1;
+    	}
 
-		var allData = { "community_num": community_num,"page": page,"limit":limit};
-    	
+		var allData = { "community_num": community_num,"page": page,"limit":limit,"arraymode":arraymode};
 		$.ajax({
 			url: "CommReListPro.co", // 요청 url
             type: "POST", // post 방식
@@ -361,8 +371,7 @@ $(function(){
 	                    	output += "	</div>";
 	                    	output += "</form>	";
 	                    	output += "</div>";
-	                    	 	                    	
-	                    	
+	                    	 	                    	             	
 	                    	output += "<div id='comm_add' class='comm_add reply-wrap'>";
 	                    	output += "<form name='comment' id='comment' action='CommReReWritePro.co' method='post'>";
 	                    	output += "<input type='hidden' name='username' value='"+core_username+"' id='username'>";
@@ -402,9 +411,9 @@ $(function(){
     						+"</div>";
      	
 	              	$(".PR15N01-review-wrap").html(output);
-	                $(".recomment_count").trigger('click');  	              	
+	                $(".recomment_count").trigger('click');
             },
-        error: function(request,status,error){
+        	error: function(request,status,error){
 	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	      	}
     	})
@@ -435,6 +444,8 @@ $(function(){
 // 			                	alert("리뷰 등록 완료");
 			                	$("#reply_contents").val("");
 			                	$("#reply_file").val("");
+			                	$('.popular').removeClass("active");
+			      			  	$('.newest').addClass('active');
 			                	getReplyCall();
 			                },
 			    			error: function(request,status,error){
@@ -442,8 +453,8 @@ $(function(){
 			    		       }
 			    		}); // ajax 종료
 			    	}; // else end
+			    	
 		    });	    
-	    
 	    
 	    //==================== 원댓글 수정 ====================//
  		$(document).on("click", ".reReModify", function () {
@@ -502,7 +513,7 @@ $(function(){
 	    
 		//==================== 대댓글 보기  ====================//
 		$(document).on("click", ".recomment_load", function () {
-			      var id = "<%= id %>";
+			      var id = "<%=id%>";
 				  var a = $(this).parents('li'); 
 				  var comment_num = a.find('.comment_num').val();
 				  var num = a.find('.num').val();
@@ -653,7 +664,7 @@ $(function(){
 	 			var num = $(this).siblings('.rere_num').val();
 
 	 			var community_num = <%=community_num%>;
-				var rePage = <%=request.getParameter("rePage") %>;
+				var rePage = <%=request.getParameter("rePage")%>;
 				
 				var allData = {"community_num": community_num,"num": num,"rePage":rePage};
 				
@@ -743,6 +754,26 @@ $(function(){
 			endPage : endPage
 		};
 	};
+	
+	
+	// 댓글많은순, 최신순 불러오기
+	$(document).ready(function(){
+		  $(document).on("click", ".popular", function () {	
+			  $('.newest').removeClass("active");
+			  $(this).addClass('active');
+			  getReplyCall();	  
+		  });
+	});
+	
+
+	$(document).ready(function(){
+		  $(document).on("click", ".newest", function () {	
+			  $('.popular').removeClass("active");
+			  $(this).addClass('active');
+			  getReplyCall();	  
+		  });
+	});	
+		
 </script>
 
 
@@ -803,7 +834,7 @@ $(document).on("click", ".rerere_write_open", function () {
  
 	
 </script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->	
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <script>
 $(function(){
 		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
@@ -826,17 +857,19 @@ $(function(){
 				url: "CommBookCount.co",
                 type: "POST",
                 data: {
-                    num: "<%=article.getNum()%>"
-                },
-                success: function (count) {
-                	$(".bookmark_count").html(count);
-                },
+                    num: "<%=article.getNum()%>
+	"
+				},
+				success : function(count) {
+					$(".bookmark_count").html(count);
+				},
 			})
-	    };
-	    
-})
+		}
+		;
+
+	})
 </script>
-	    
-<jsp:include page="../inc/footer.jsp"/>
+
+<jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

@@ -37,7 +37,7 @@ public class CommReListService {
 		return listCount;
 	}	
 	
-	public ArrayList<CommReBean> getCommentList(int community_num,int page,int limit) {
+	public ArrayList<CommReBean> getCommentList (int community_num, int page, int limit, int arraymode) {
 //		System.out.println("CommReListService - getCommentList()");
 		
 		ArrayList<CommReBean> commentList = null;
@@ -51,14 +51,13 @@ public class CommReListService {
 				
 		//4. commReDAO 객체의 selectcommentList() 메서드를 호출하여
 		//   게시물 목록 조회 결과를 ArrayList 객체로 리턴받기	
-		commentList = commReDAO.selectcommentList(community_num,page,limit);
+		commentList = commReDAO.selectcommentList(community_num,page, limit,arraymode);
 				
 		//5. 공통
 		close(con);
 		
 		return commentList;
 	}
-
 
 
 }
