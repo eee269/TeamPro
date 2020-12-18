@@ -14,6 +14,7 @@ import action.member.MemberLogoutAction;
 import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
+import action.member.MemberNaverLoginAction;
 import action.member.MemberPassProAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
@@ -129,10 +130,16 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		//--------------- 네이버 로그인 후 naver_callback.jsp로 이동----------
+		//--------------- 네이버 로그인 후 json처리 하기 위해 이동----------
 		else if (command.equals("/MemberNaverLogin.mo")) {
 			forward = new ActionForward();
-			forward.setPath("/member/naver_callback.jsp");
+
+			action = new MemberNaverLoginAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// ------------공통적으로 수행할 포워딩 작업----------------
