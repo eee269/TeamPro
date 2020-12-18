@@ -41,19 +41,19 @@ public class cartUpAction implements Action {
 		 color.trim(); 	// 색 공백제거
 		 String size = request.getParameter("size"); // 사이즈 
 		 size = size.trim();  	// 사이즈 공백제거
-		 String basicCode = request.getParameter("basicCode");  // basicCode코드
-		 String  productCode = basicCode + color + size;  // productCode코드
-		 productCode =  productCode.replace(" ", ""); 	// productCode코드 공백제거
+		 String product_basicCode = request.getParameter("product_basicCode");  // basicCode코드
+		 String opt_productCode = product_basicCode + color + size;  // productCode코드
+		 opt_productCode =  opt_productCode.replace(" ", ""); 	// productCode코드 공백제거
 		 int cnt = Integer.parseInt(request.getParameter("cnt")); 	// 수량
 		  
 		 Cart ca = new Cart();
 		 ca.setMember_id(member_id);
 		 ca.setColor(color);
-		 ca.setOpt_productCode(productCode);
+		 ca.setOpt_productCode(opt_productCode);
 		 ca.setPrice(price);
 		 ca.setProduct_name(product_name);
 		 ca.setSize(size);
-		 ca.setProduct_basicCode(basicCode);
+		 ca.setProduct_basicCode(product_basicCode);
 		 ca.setCnt(cnt);
 		 
 		
@@ -71,7 +71,7 @@ public class cartUpAction implements Action {
 			out.println("</script>");
 		} else {
 			forward = new ActionForward();
-			forward.setPath("/ProductDetail.po?basicCode=0007");
+			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 		}
 		
