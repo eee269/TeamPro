@@ -93,7 +93,15 @@
 					<div class="info">
 						<div class="user">
 							<div class="user-img">
+							<%
+							if(member.getImg().contains("http://") || member.getImg().contains("https://")) {
+								%>
+								<img alt="" src="<%=member.getImg()%>">
+								<%
+							} else {
+							%>
 								<img alt="profileImg" src="upload/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
+								<% } %>
 							</div>
 							<div class="user-info">
 								<p>
