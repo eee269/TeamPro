@@ -1,5 +1,6 @@
 package action.order;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,9 +17,19 @@ public class OrderAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("OrderAction!");
+		ActionForward forward = null;
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
-		ActionForward forward = null;
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(member_id == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("</script>");
+			
+			forward.setPath("MemberLoginForm.mo");
+		} else {
 		int num = Integer.parseInt(request.getParameter("chk"));
 		
 		OrderService orderService = new OrderService();
@@ -28,7 +39,7 @@ public class OrderAction implements Action {
 		
 		forward = new ActionForward();
 		forward.setPath("/order/order.jsp");
-		
+		}
 		return forward;
 	}
 
