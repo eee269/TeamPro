@@ -31,6 +31,10 @@ ActionForward forward = null;
 		MemberBean member=new MemberBean();
 		String id = multi.getParameter("id");
 		String pass = multi.getParameter("pass");	
+		String img= multi.getFilesystemName("img");
+		if(img==null) {
+			img=multi.getParameter("oldimg");
+		}
 		
 		MemberModifyProService memberUpdateProService = new MemberModifyProService();
 		boolean isUpdateUser = memberUpdateProService.isUpdateMember(id, pass, member);
@@ -43,11 +47,11 @@ ActionForward forward = null;
 			out.println("history.back()");
 			out.println("</script>");
 		} else {
-			member.setId(multi.getParameter("id"));
-			member.setPass(multi.getParameter("pass"));
+			member.setId(id);
+			member.setPass(pass);
 			member.setEmail(multi.getParameter("email"));
 			member.setUsername(multi.getParameter("username"));
-			member.setImg(multi.getOriginalFileName("img"));
+			member.setImg(img);
 			member.setPhone(multi.getParameter("phone"));
 			
 			boolean isUpdateSuccess=memberUpdateProService.updateMember(member);

@@ -65,7 +65,6 @@ public class MemberFrontController extends HttpServlet {
 		}
 		else if(command.equals("/MemberModifyPro.mo")) {
 			action = new MemberModifyAction();
-			System.out.println("멤버모디파이액션으로 이동");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -73,7 +72,6 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} else if(command.equals("/MemberModifyForm.mo")) {
 			action = new MemberModifyFormAction();
-			System.out.println("멤버모디파이폼엑션으로 이동");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
