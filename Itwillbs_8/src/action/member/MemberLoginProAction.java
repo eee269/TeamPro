@@ -26,29 +26,43 @@ public class MemberLoginProAction implements Action {
 		String id = request.getParameter("id");
 		String pass = request.getParameter("pass");
 
-		MemberLoginProService memberLoginProService = new MemberLoginProService();
-		
-		try {
-			boolean isMember = memberLoginProService.isLoginMember(id, pass);
-			
-			if(isMember) {
-				HttpSession session = request.getSession();
-				session.setAttribute("member_id", id);
-								
-				forward = new ActionForward();
-				forward.setPath("Main.go"); 
-			}
-			
+		HttpSession session = request.getSession();
+		String member_id = (String) session.getAttribute("member_id");
 
-		} catch (LoginException e) { 
+		if (member_id != null) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('" + e.getMessage() + "')"); // 실패 메세지 출력
-			out.println("history.back()");
+			out.println("alert('잘못된 접근입니다.')");
 			out.println("</script>");
+			
+			forward = new ActionForward();
+			forward.setPath("Main.go");
+			forward.setRedirect(true);
+		} else {
+
+			MemberLoginProService memberLoginProService = new MemberLoginProService();
+			
+			try {
+				boolean isMember = memberLoginProService.isLoginMember(id, pass);
+				
+				if(isMember) {
+					session.setAttribute("member_id", id);
+									
+					forward = new ActionForward();
+					forward.setPath("Main.go"); 
+				}
+				
+	
+			} catch (LoginException e) { 
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>");
+				out.println("alert('" + e.getMessage() + "')"); // 실패 메세지 출력
+				out.println("history.back()");
+				out.println("</script>");
+			}
 		}
-		
 		return forward;
 	}
 
