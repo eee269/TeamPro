@@ -260,7 +260,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</div>
 <!--===============================================================================================-->	
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!-- 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
 <!--===============================================================================================-->
 	<script src="community/summernote-ko-KR.min.js"></script>
 	<script src="community/summernote-ko-KR.js"></script>

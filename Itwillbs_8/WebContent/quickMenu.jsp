@@ -982,9 +982,9 @@ keyframes swiper-preloader-spin { 100%{
 
 <!--   const swiper = new Swiper(...) -->
 <!-- </script> -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-<script src="http://malsup.github.com/jquery.cycle2.js"></script>
-<script src="js/jquery-3.5.1.js"></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> -->
+<!-- <script src="http://malsup.github.com/jquery.cycle2.js"></script> -->
+<!-- <script src="js/jquery-3.5.1.js"></script> -->
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.img_open_close').click(function(){
