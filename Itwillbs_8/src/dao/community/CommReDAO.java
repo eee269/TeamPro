@@ -80,22 +80,26 @@ public class CommReDAO {
 	}
 
 
-	
-	public ArrayList<CommReBean> selectcommentList(int community_num,int page,int limit) {
+
+	public ArrayList<CommReBean> selectcommentList(int community_num,int page,int limit, int arraymode) {
 		// 지정된 갯수만큼의 게시물 조회 후 ArrayList 객체에 저장한 뒤 리턴
 		ArrayList<CommReBean> commentList = null;
-		
+//		int limit = 5;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+		String sql = "";
 		// 조회를 시작할 레코드(행) 번호 계산
 		int startRow = (page-1)*limit;
-		
 		// 게시물 조회
 
-		try {
+		try {			
+			if(arraymode == 0) {
+				sql=" SELECT * FROM community_reply as p INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as c "
+						+ "on p.num = c.re_ref where community_num=? and re_lev=0 Order by c.ct desc limit ?,?";
+			}else if(arraymode == 1) {
+				sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
+			}
 			
-			String sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=0 ORDER BY re_ref,num limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, community_num);
 			pstmt.setInt(2, startRow);
@@ -132,9 +136,7 @@ public class CommReDAO {
 		}
 		
 		return commentList;
-	}
-	
-
+	}	
 	
 	public int updateComment(CommReBean crb) {	
 		System.out.println("DAO - updateComment");
@@ -377,39 +379,6 @@ public class CommReDAO {
 		}		
 		
 		return listCount;
-	}
-
-	// MycommReplyListService 에서 내 댓글 가지고 가기
-	public ArrayList<CommReBean> selectMyreplyList(String member_id) {
-		ArrayList<CommReBean> list = new ArrayList<CommReBean>();
-		
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = "select * from community_reply where member_id = ?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, member_id);
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				CommReBean reply = new CommReBean();
-				
-				reply.setCommunity_num(rs.getInt("community_num"));
-				reply.setContents(rs.getString("contents"));
-				reply.setDate(rs.getTimestamp("date"));
-				reply.setNum(rs.getInt("num"));
-				reply.setRe_lev(rs.getInt("re_lev"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(ps);
-			close(rs);
-		}
-		
-		return list;
 	}	
 	
 	

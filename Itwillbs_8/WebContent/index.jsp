@@ -9,6 +9,7 @@
 <link type="text/css" rel="stylesheet" href="css/main_1.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
+<link type="text/css" rel="stylesheet" href="css/team.css" />
 
 <%
 	String member_id =(String)session.getAttribute("member_id");
@@ -173,6 +174,43 @@
 	</div>
 	
 </section>
-<!-- 예진이누나 여기밑으로 게시글 넣으면되요! -->
+<%
+	
+	String[] name ={"SUJIN","JUNGHA","SANGBIN","BYUNGHOON","UNA","YEJIN","SEYONG"};
+	String[] github={"jeongsujin001","pumkin-ha","SangBinKR","lbhlucky","GoUNaa","eee269","xeyong"};
+%>
+<section id="team">
+	<div class="container">
+		<div class="main_pro_title_area cboth ">
+			<div class="main_pro_title cboth">MEET OUR TEAM</div>
+		</div>
+		<div class="row mt-50">
+			<%
+				for (int i = 0; i < 7; i++) {
+			%>
+			<div class="col-xl-3 col-sm-6 mb-5">
+				<div class="team-single wow zoomIn" data-wow-delay=".3s">
+					<div class="team-thumb">
+						<img
+							src="https://www.tolmatol.com/uploads-images/bootrap-snippets-our-team/3.jpg"
+							alt="" />
+						<div class="social-icons style-2">
+							<a href="https://github.com/<%=github[i]%>" target="blank" class="fa fa-github"></a>
+							<a href="#" class="fa fa-instagram"></a>
+							<a href="#" class="fa fa-facebook"></a>
+						</div>
+					</div>
+					<div class="team-bio">
+						<h4><%=name[i] %></h4>
+						<h5>#OOTD</h5>
+					</div>
+				</div>
+			</div>
+			<%
+				}
+			%>
+		</div>
+	</div>
+</section>
 
 <jsp:include page="/inc/footer_index.jsp" />

@@ -1,0 +1,94 @@
+@charset "UTF-8";
+#team {
+    background: #fff;
+    padding: 60px 0;
+    box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1)
+}
+.team-single {
+  background-color:#ffffff;
+  text-align:center;
+  box-shadow: 5.5px 9.526px 43px 0px rgba( 98, 143, 144, .15 );
+  border-radius:10px;
+  padding:40px 0 35px 0;
+  margin-bottom:30px;
+}
+.team-thumb {
+  width:200px;
+  height:200px;
+  display:inline-block;
+  position:relative;
+}
+.team-thumb img {
+  border-radius:100%; width: 100%;
+}
+.team-bio {
+  margin-top:20px;
+  
+}
+.team-bio h4 {
+  font-family: Arial, sans-serif;
+  font-size:22px;
+  margin-bottom:0;
+}
+.team-bio h5 {
+font-family: Arial, sans-serif;
+  font-size:14px;
+  color:#fb5c71;
+  text-transform:uppercase;
+}
+.team-thumb .social-icons.style-2 {
+    display: block;
+    padding: 0;
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    right: -15px;
+  transition:.3s;
+  opacity:0;
+  visibility:hidden;
+}
+.team-single:hover .social-icons.style-2 {
+  opacity:1;
+  visibility:visible;
+}
+.team-single .social-icons a {
+  display:block;
+  color:#ffffff;
+  margin:0 0 15px 0;
+}
+.team-thumb .social-icons.style-2 .fa-facebook {
+    background-color: #3973e8;
+    border-color: #3973e8;
+    position: relative;
+    right: 29px;
+    top: -10px;
+}
+.team-thumb .social-icons.style-2 .fa-instagram {
+    background-color: #f74d91;
+    border-color: #f74d91;
+    position: relative;
+    right: 2px;
+    top: -1px;
+}
+.team-thumb .social-icons.style-2 .fa-twitter {
+  background-color:#29bfe8;
+  border-color:#29bfe8;
+}
+.team-thumb .social-icons.style-2 .fa-github {
+  background-color:#211F1F;
+  border-color:#29bfe8;
+}
+.team-carousel .team-single {
+  box-shadow:none;
+  border:1px solid #ebebeb;
+}
+.social-icons.style-2 a {
+    font-size: 16px;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border: 1px solid #feced4;
+    border-radius: 100%;
+    color: #FFFFFF;
+}

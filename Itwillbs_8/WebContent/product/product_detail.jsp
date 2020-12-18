@@ -296,8 +296,7 @@ var productCode = "";
 							<input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
 							<input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
 							<input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
-							<input type="hidden" name="basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="productCode" value="productCode">
+							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
 										<!-- ----수정하기 --- -->
 							<input type="hidden" name="cnt" value="ca_cnt">
 						             	<!-- ----수정하기 --- -->
