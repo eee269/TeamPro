@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import action.member.MemberLogoutAction;
+import action.member.MemberModifyAction;
+import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
+import action.member.MemberPassProAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteProAction;
@@ -53,7 +56,35 @@ public class MemberFrontController extends HttpServlet {
 			forward.setPath("/member/join_complete.jsp");
 		} else if (command.equals("/MemberLogout.mo")) {
 			action = new MemberLogoutAction();
-			System.out.println("로그아웃액션으로 이동");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/MemberModifyPro.mo")) {
+			action = new MemberModifyAction();
+			System.out.println("멤버모디파이액션으로 이동");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MemberModifyForm.mo")) {
+			action = new MemberModifyFormAction();
+			System.out.println("멤버모디파이폼엑션으로 이동");
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MemberPassForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/pass_Update.jsp");
+		} else if (command.equals("/MemberPassPro.mo")) {
+			forward = new ActionForward();
+
+			action = new MemberPassProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -109,6 +140,8 @@ public class MemberFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
+		
+		
 		// ------------공통적으로 수행할 포워딩 작업----------------
 
 	}

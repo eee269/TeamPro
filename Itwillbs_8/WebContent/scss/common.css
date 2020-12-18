@@ -192,7 +192,7 @@ table img { vertical-align: middle; }
 .tb-center,
 .tb-right { padding: 0 10px; }
 .tb-btn { padding: 0; }
-.tb-left { text-align: left; height:70px;}
+/* .tb-left { text-align: left;} */
 .tb-center { text-align: center; }
 .tb-right { text-align: right; }
 .tb-label-r5 label { margin-right: 5px; }

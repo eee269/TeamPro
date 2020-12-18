@@ -14,13 +14,17 @@ public class OptionDeleteService {
 		Connection con = getConnection();
 		ProductDAO productDAO = ProductDAO.getInstance();
 		productDAO.setConnection(con);
-		int count = productDAO.deleteOption(productCode);
+		
+		// option 테이블에 남은 basicCode기준 옵션 수 체크
+		int resultOptCount = productDAO.deleteOption(productCode);
 
-		if(count > 0) {
+		/*
+		 *  option 테이블에 남은 basicCode가 있으면 커밋
+		 *  없으면 Action에서 productDelete.po로 포워딩
+		 */
+		if(resultOptCount > 0) {
 			commit(con);
 			isDelete = true;
-		} else {
-			rollback(con);
 		}
 		
 		close(con);

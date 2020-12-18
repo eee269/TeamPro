@@ -28,8 +28,8 @@ int cntSet = 0;
 }
 .tb-center a:hover{
   background-color: gray;
+  background-color: #717fe0;
 }
-
 #whiteBu:hover{color:#fff;}
 
 .btn-dw {
@@ -87,7 +87,6 @@ int cntSet = 0;
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm">
-			
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -485,8 +484,6 @@ $("#allCheck").click(function(){
 		
 		};
 		
-		
-		
 		// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
 		  function multi_order(){
 		     $(".CSSbuttonBlack").click(function(){ 
@@ -496,8 +493,7 @@ $("#allCheck").click(function(){
 		  }
 		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
 
-		
-		
+	
 		 
 </script>
 

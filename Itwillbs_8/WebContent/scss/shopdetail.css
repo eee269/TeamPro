@@ -215,7 +215,7 @@ border-bottom:0px solid #222;} /* 수정 border-bottom:1px solid #222; */
 #productDetail .table-slide tr.nbg td { background-image: none; }
 #productDetail .table-slide tr.ndata td { border-bottom: 1px solid #b4b4b5; }
 #productDetail .table-slide tr.reply .tb-txt { padding-left: 30px; background: url(/images/d3/modern_simple/common/bull_reply.gif) no-repeat 10px 0; }
-*/
+ */
 
 #productDetail .table-slide { border-top: 1px solid #000 }
 #productDetail .table-slide thead th { padding:15px 0; font-size:13px; border-bottom: 1px solid #e9e9e9; font-weight: normal; font-family:Verdana }

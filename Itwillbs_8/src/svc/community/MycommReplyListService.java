@@ -21,26 +21,11 @@ public class MycommReplyListService {
 		
 		CommReDAO redao = CommReDAO.getInstance();
 		redao.setConnection(con);
-		list = redao.selectMyreplyList(member_id);
+//		list = redao.selectMyreplyList(member_id);
 		
 		close(con);
 		
 		return list;
-	}
-
-	public HashMap<Integer, CommBean> getArticleHash(ArrayList<CommReBean> myreplyList) {
-		HashMap<Integer, CommBean> hash = new HashMap<Integer, CommBean>();
-		
-		Connection con = getConnection();
-		
-		CommDAO commDAO = CommDAO.getInstance();
-		commDAO.setConnection(con);
-		hash = commDAO.selectArticleHash(myreplyList);
-		
-		close(con);
-		
-		
-		return hash;
 	}
 
 }

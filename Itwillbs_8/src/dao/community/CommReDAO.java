@@ -11,7 +11,7 @@ import vo.CommReBean;
 import static db.JdbcUtil.*;
 
 public class CommReDAO {
-	// --------------싱글톤 패턴 활용---------------
+	// --------------싱글톤 패턴 활용--------------- git test
 	private CommReDAO() {}
 	
 	private static CommReDAO instance = new CommReDAO();
@@ -79,60 +79,6 @@ public class CommReDAO {
 	}
 
 
-//	public ArrayList<CommReBean> selectcommentList(int community_num) {
-//		// 지정된 갯수만큼의 게시물 조회 후 ArrayList 객체에 저장한 뒤 리턴
-//		ArrayList<CommReBean> commentList = null;
-//		
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		// 게시물 조회
-//		// 참조글번호(board_re_ref) 번호를 기준으로 내림차순 정렬,
-//		// 순서번호(board_re_seq) 번호를 기준으로 오름차순 정렬
-//		// 조회 시작 게시물 번호(startRow)부터 limit 갯수만큼 조회
-//
-//		try {
-//			
-//			String sql="SELECT * FROM community_reply WHERE community_num=? ORDER BY re_ref,num";
-//			pstmt=con.prepareStatement(sql);
-//			pstmt.setInt(1, community_num);
-//			rs=pstmt.executeQuery();
-//			
-//			commentList= new ArrayList<CommReBean>();
-//			
-//			// 읽어올 게시물이 존재할 경우 다음 작업 반복
-//			
-//			
-//			
-//			while(rs.next()) {
-//				CommReBean crb = new CommReBean();
-//				crb.setUsername(rs.getString("username"));
-//				crb.setContents(rs.getString("contents"));
-//				crb.setNum(rs.getInt("num"));
-//				crb.setCommunity_num(rs.getInt("community_num"));
-//				crb.setDate(rs.getTimestamp("date"));
-//				crb.setRe_lev(rs.getInt("re_lev"));
-//				crb.setRe_ref(rs.getInt("re_ref"));
-//								
-//				commentList.add(crb);
-//			}	
-//			
-//		} catch (SQLException e) {
-//			System.out.println("selectListCount() 오류! - "+e.getMessage());
-//			e.printStackTrace();
-//		} finally {
-//			// 자원 반환
-//			// 주의! DAO 클래스 내에서 Connection 객체 반환 금지!
-//			close(rs);
-//			close(pstmt);
-//			
-//		}
-//
-//		
-//		return commentList;
-//	}
-
-
 	
 	public ArrayList<CommReBean> selectcommentList(int community_num,int page,int limit) {
 		// 지정된 갯수만큼의 게시물 조회 후 ArrayList 객체에 저장한 뒤 리턴
@@ -148,7 +94,7 @@ public class CommReDAO {
 
 		try {
 			
-			String sql="SELECT * FROM community_reply WHERE community_num=? ORDER BY re_ref,num limit ?,?";
+			String sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=0 ORDER BY re_ref,num limit ?,?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, community_num);
 			pstmt.setInt(2, startRow);
@@ -187,61 +133,6 @@ public class CommReDAO {
 	}
 	
 
-	
-	
-	public ArrayList<CommReBean> selectcommentReList(int community_num, int re_ref) {
-		// 지정된 갯수만큼의 게시물 조회 후 ArrayList 객체에 저장한 뒤 리턴
-		ArrayList<CommReBean> commentReList = null;
-		
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		// 게시물 조회
-		// 참조글번호(board_re_ref) 번호를 기준으로 내림차순 정렬,
-		// 순서번호(board_re_seq) 번호를 기준으로 오름차순 정렬
-		// 조회 시작 게시물 번호(startRow)부터 limit 갯수만큼 조회
-
-		try {
-			
-			String sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=1 ORDER BY re_ref,num";
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, community_num);
-			pstmt.setInt(2, re_ref);
-			rs=pstmt.executeQuery();
-			
-			commentReList= new ArrayList<CommReBean>();
-			
-			// 읽어올 게시물이 존재할 경우 다음 작업 반복
-	
-			while(rs.next()) {
-				CommReBean crb = new CommReBean();
-				crb.setUsername(rs.getString("username"));
-				crb.setContents(rs.getString("contents"));
-				crb.setNum(rs.getInt("num"));
-				crb.setCommunity_num(rs.getInt("community_num"));
-				crb.setDate(rs.getTimestamp("date"));
-				crb.setRe_lev(rs.getInt("re_lev"));
-				crb.setRe_ref(rs.getInt("re_ref"));
-								
-				commentReList.add(crb);
-			}	
-			
-		} catch (SQLException e) {
-			System.out.println("selectListCount() 오류! - "+e.getMessage());
-			e.printStackTrace();
-		} finally {
-			// 자원 반환
-			// 주의! DAO 클래스 내에서 Connection 객체 반환 금지!
-			close(rs);
-			close(pstmt);
-			
-		}
-		
-		return commentReList;
-	}
-	
-	
-	
 	
 	public int updateComment(CommReBean crb) {	
 		System.out.println("DAO - updateComment");
@@ -283,9 +174,9 @@ public class CommReDAO {
 		int num = 1; // 댓글번호를 저장할 변수
 		
 		try {
-			String sql="SELECT MAX(num) FROM community_reply where community_num=?";
+			String sql="SELECT MAX(num) FROM community_reply";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, crb.getCommunity_num());
+//			pstmt.setInt(1, crb.getCommunity_num());
 			rs=pstmt.executeQuery();
 			
 			// 조회된 결과가 있을 경우 조회된 번호 +1 값을 num에 저장
@@ -332,11 +223,14 @@ public class CommReDAO {
 		PreparedStatement pstmt = null;
 	
 		try {
-			String sql = "DELETE FROM community_reply WHERE num=? and community_num=?";
+//			String sql = "DELETE FROM community_reply WHERE num=? and community_num=?";
+			String sql = "UPDATE community_reply SET contents=?,username=? where num=? and community_num=?";
 			pstmt = con.prepareStatement(sql);
 			//BoardBean 객체로부터 데이터를 꺼내서 쿼리문 ? 대체
-			pstmt.setInt(1, num);
-			pstmt.setInt(2, community_num);
+			pstmt.setString(1, "<span class='del'>작성자에 의해 삭제된 댓글입니다.</span>");
+			pstmt.setString(2, "<span class='del'>-</span>");
+			pstmt.setInt(3, num);
+			pstmt.setInt(4, community_num);
 			deleteCount = pstmt.executeUpdate();
 
 			
@@ -362,7 +256,7 @@ public class CommReDAO {
 		ResultSet rs = null;
 			
 		try {
-			String sql = "SELECT COUNT(*) FROM community_reply where community_num=?";
+			String sql = "SELECT COUNT(*) FROM community_reply where community_num=? and re_lev=0";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, community_num);
 			rs=pstmt.executeQuery();
@@ -388,49 +282,102 @@ public class CommReDAO {
 		return listCount;
 	}
 
+	
+	
 
-	public ArrayList<CommReBean> selectMyreplyList(String member_id) {
-		ArrayList<CommReBean> list = new ArrayList<CommReBean>();
+	
+	public ArrayList<CommReBean> selectReCommentList(int community_num, int re_ref) {
+		// 지정된 갯수만큼의 게시물 조회 후 ArrayList 객체에 저장한 뒤 리턴
+		System.out.println("selectReCommentList");
 		
-		PreparedStatement ps = null;
+		ArrayList<CommReBean> commentReList = null;
+		
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
+		// 게시물 조회
+		// 참조글번호(board_re_ref) 번호를 기준으로 내림차순 정렬,
+		// 순서번호(board_re_seq) 번호를 기준으로 오름차순 정렬
+		// 조회 시작 게시물 번호(startRow)부터 limit 갯수만큼 조회
+
 		try {
-			String sql = "select username from member where id=?";
-			ps = con.prepareStatement(sql);
-			ps.setString(1, member_id);
-			rs = ps.executeQuery();
+			
+			String sql="SELECT * FROM community_reply WHERE community_num=? and re_ref=? and re_lev=1 ORDER BY re_ref,num";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, community_num);
+			pstmt.setInt(2, re_ref);
+			rs=pstmt.executeQuery();
+			
+			commentReList= new ArrayList<CommReBean>();
+			
+			// 읽어올 게시물이 존재할 경우 다음 작업 반복
+	
+			while(rs.next()) {
+				CommReBean crb = new CommReBean();
+				crb.setUsername(rs.getString("username"));
+				crb.setContents(rs.getString("contents"));
+				crb.setNum(rs.getInt("num"));
+				crb.setCommunity_num(rs.getInt("community_num"));
+				crb.setDate(rs.getTimestamp("date"));
+				crb.setRe_lev(rs.getInt("re_lev"));
+				crb.setRe_ref(rs.getInt("re_ref"));
+								
+				commentReList.add(crb);
+			}	
+			
+		} catch (SQLException e) {
+			System.out.println("selectListCount() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			// 자원 반환
+			// 주의! DAO 클래스 내에서 Connection 객체 반환 금지!
+			close(rs);
+			close(pstmt);
+			
+		}
+		
+		return commentReList;
+	}	
+	
+	
+	
+	
+	public int selectReCommCount(int community_num, int re_ref) {
+		System.out.println("selectReCommCount");
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+			
+		try {
+			String sql = "SELECT COUNT(*) FROM community_reply where community_num=? and re_ref=? and re_lev=1";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, community_num);
+			pstmt.setInt(2, re_ref);
+			rs=pstmt.executeQuery();
+			
+			// 조회 결과가 있을 경우 (= 게시물이 하나라도 존재하는 경우)
+			// => 게시물 수를 listCount 에 저장
 			
 			if(rs.next()) {
-				sql = "select * from community_reply where username=?";
-				ps = con.prepareStatement(sql);
-				ps.setString(1, rs.getString(1));
-				rs = ps.executeQuery();
-				
-				while(rs.next()) {
-					CommReBean reply = new CommReBean();
-					
-					reply.setCommunity_num(rs.getInt("community_num"));
-					reply.setContents(rs.getString("contents"));
-					reply.setDate(rs.getTimestamp("date"));
-					reply.setNum(rs.getInt("num"));
-					reply.setRe_lev(rs.getInt("re_lev"));
-					reply.setRe_ref(rs.getInt("re_ref"));
-					reply.setUsername(rs.getString("username"));
-					
-					list.add(reply);
-				}
+				listCount=rs.getInt(1);
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("CommReDAO - selectMyreplyList Error!!!!!");
+			System.out.println("selectCommCount() 오류! - "+e.getMessage());
 			e.printStackTrace();
 		} finally {
-			close(ps);
+			// 자원 반환
+			// 주의! DAO 클래스 내에서 Connection 객체 반환 금지!
 			close(rs);
-		}
+			close(pstmt);
+			
+		}		
 		
-		
-		return list;
-	}
+		return listCount;
+	}	
+	
+	
+	
+	
 }

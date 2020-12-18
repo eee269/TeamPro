@@ -5,29 +5,39 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
 
 import action.Action;
 import svc.product.BestSelectService;
 import svc.product.NcodeSelectService;
+import svc.product.ProductAjaxService;
 import svc.product.ProductCountService;
 import svc.product.ProductSelectService;
 import vo.ActionForward;
 import vo.PageInfo;
 import vo.ProductBean;
+import vo.ProductLikeBean;
 
 public class ProductSelectAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		HttpSession session = request.getSession();
+		
 		ActionForward forward = null;
 		String xcode = request.getParameter("xcode");
 		String ncode = request.getParameter("ncode");
+		String id =(String)session.getAttribute("member_id");
 		
 		NcodeSelectService ncodeSelectService = new NcodeSelectService();
 		BestSelectService bestSelectService = new BestSelectService();
 		ProductSelectService productSelectService = new ProductSelectService();
 		ProductCountService productCountService = new ProductCountService();
+		ProductAjaxService pas = new ProductAjaxService();
+		ArrayList<String> likeBasicCodeList = new ArrayList<String>();
 		
 		int page = 1;
 		int limit = 8;
@@ -86,6 +96,14 @@ public class ProductSelectAction implements Action {
 		    request.setAttribute("pageInfo", pageInfo);
 
 		}
+		
+		if(id !=null) {
+			
+			likeBasicCodeList = pas.getLikeBasicCodeList(id);
+			request.setAttribute("likeBasicCodeList",likeBasicCodeList);
+		}
+		
+		
 		forward = new ActionForward();
 		forward.setPath("/product/shop.jsp");
 		

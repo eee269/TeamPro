@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
+import action.MainSelectAction;
 import vo.ActionForward;
 
 /**
@@ -26,8 +27,18 @@ public class MainFrontController extends HttpServlet {
 		String command = request.getServletPath();
 		
 		if(command.equals("/Main.go")) {
+			action = new MainSelectAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+		}
+		// -------------- 관리자 리스트 ----------------
+		else if(command.equals("/ControlList.go")) {
 			forward = new ActionForward();
-			forward.setPath("/index.jsp");
+			forward.setPath("/admin_control/control_main.jsp");
 		}
 		
 		if(forward != null) {

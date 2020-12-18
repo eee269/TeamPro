@@ -174,7 +174,7 @@ public class ProdQnaDAO {
 						+ "FROM product_qna q JOIN member m "
 						+ "ON q.member_id = m.id "
 						+ "WHERE product_basicCode=? "
-						+ "ORDER BY qna_num desc limit ?,?";
+						+ "ORDER BY qna_re_seq ASC, qna_re_ref desc limit ?,?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, basicCode);
 				ps.setInt(2, startRow);
@@ -193,9 +193,10 @@ public class ProdQnaDAO {
 					qna.setQna_file((rs.getString(6)));
 					qna.setQna_re_ref((rs.getInt(7)));
 					qna.setQna_re_lev((rs.getInt(8)));
-					qna.setDate(rs.getTimestamp(9));
+					qna.setQna_date(rs.getTimestamp(9));
 					qna.setProduct_basicCode((rs.getString(10)));
-					qna.setUsername((rs.getString(12)));
+					qna.setQna_re_seq((rs.getInt(12)));
+					qna.setUsername((rs.getString(13)));
 					
 					qnaList.add(qna);
 				}
@@ -358,9 +359,82 @@ public class ProdQnaDAO {
 			} catch (SQLException e) {
 				System.out.println("ProdQnaDAO - getQna : "+e.getMessage());
 				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(ps);
 			}
 			
 			return prodQnaBean;
 		}
 		// -------------------getQna()-----------------------
+
+		public ArrayList<ProdQnaBean> selectMyqnaList(String member_id) {
+			ArrayList<ProdQnaBean> list = new ArrayList<ProdQnaBean>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "select * from product_qna where member_id = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, member_id);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProdQnaBean qna = new ProdQnaBean();
+					
+					qna.setQna_num((rs.getInt(1)));
+					qna.setQna_pass((rs.getString(2)));
+					qna.setQna_subject((rs.getString(3)));
+					qna.setQna_content((rs.getString(4)));
+					qna.setQna_readcount((rs.getInt(5)));
+					qna.setQna_file((rs.getString(6)));
+					qna.setQna_re_ref((rs.getInt(7)));
+					qna.setQna_re_lev((rs.getInt(8)));
+					qna.setQna_date(rs.getTimestamp(9));
+					qna.setProduct_basicCode((rs.getString(10)));
+					qna.setUsername((rs.getString(12)));
+					
+					list.add(qna);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return list;
+		}
+
+		// ProductDeleteAction에서 쓸 이미지 가져갈 리스트
+		public ArrayList<ProdQnaBean> selectQnaList(String basicCode) {
+			ArrayList<ProdQnaBean> list = new ArrayList<ProdQnaBean>();
+			
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				String sql = "select * from product_qna where product_basicCode = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, basicCode);
+				rs = pstmt.executeQuery();
+				
+				while(rs.next()) {
+					ProdQnaBean qna = new ProdQnaBean();
+					
+					qna.setQna_file(rs.getString("qna_file"));
+					qna.setProduct_basicCode(basicCode);
+					
+					list.add(qna);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rs);
+				close(pstmt);
+			}
+			
+			return list;
+		}
 }

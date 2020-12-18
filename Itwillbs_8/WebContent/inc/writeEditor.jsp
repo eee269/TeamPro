@@ -6,7 +6,8 @@
 	        $('#summernote').summernote({
 	        	focus: true,
 	        	disableResizeEditor: true,
-	        	height: 600
+	        	height: 500,
+	        	width: 800
 	        });
 	        $('.note-statusbar').hide();
 	    });

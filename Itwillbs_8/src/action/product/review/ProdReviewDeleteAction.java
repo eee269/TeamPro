@@ -28,14 +28,9 @@ public class ProdReviewDeleteAction implements Action {
 			out.println("alert('글 삭제 실패!!')");
 			out.println("history.back()");
 			out.println("</script>");
-		}else {
-			// 삭제 성공 시
-			forward = new ActionForward();
-			forward.setPath("ProductDetail.po?basicCode="+basicCode);
-			forward.setRedirect(true);
 		}
 		
-		return forward;
+		return null;
 	}
 
 }
