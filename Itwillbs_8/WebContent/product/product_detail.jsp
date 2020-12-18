@@ -102,29 +102,29 @@
    
    var mixopt = [];
    function submix(id, val) {
-	   if (val != null) {
-		   if(id == 'opt1') {
-			   mixopt[0] = val;
-		   } else if(id == 'opt2') {
-			   mixopt[1] = val;
-		   }
-	   } else return;
-	   
-	   if(mixopt[0] != null && mixopt[1] != null) {
-		   optcheck(mixopt);
-		   $('#opt1 option:eq(0)').prop('selected', true);
-		   $('#opt2 option:eq(0)').prop('selected', true);
-		   mixopt =[]; 
-		   return;
-	   }
-	   
+      if (val != null) {
+         if(id == 'opt1') {
+            mixopt[0] = val;
+         } else if(id == 'opt2') {
+            mixopt[1] = val;
+         }
+      } else return;
+      
+      if(mixopt[0] != null && mixopt[1] != null) {
+         optcheck(mixopt);
+         $('#opt1 option:eq(0)').prop('selected', true);
+         $('#opt2 option:eq(0)').prop('selected', true);
+         mixopt =[]; 
+         return;
+      }
+      
    }
 var productCode = "";
    // 선택된 옵션체크
    function optcheck(mixopt) {
        productCode = <%=basicCode%> + mixopt[0] + mixopt[1];
-       $("#slick-slide02").val(mixopt[0]); 	// 컬러
-       $("#slick-slide03").val(mixopt[1]);	// 사이즈
+       $("#slick-slide02").val(mixopt[0]);    // 컬러
+       $("#slick-slide03").val(mixopt[1]);   // 사이즈
       console.log(productCode);
        
       var oldopt = $('ul#show-option li span.show-value').html();
@@ -134,9 +134,9 @@ var productCode = "";
          showlist(newopt, productCode); 
       } else {
          $('#opt1 option:eq(0)').prop('selected', true);
-		 $('#opt2 option:eq(0)').prop('selected', true);
+       $('#opt2 option:eq(0)').prop('selected', true);
          alert('이미 선택된 옵션입니다.');
-		 return;
+       return;
       }
    }
    
@@ -175,7 +175,7 @@ var productCode = "";
       
       // cnt 값 보내기
        
-   	var ca_cnt =  $("#slick-slide06").val(1);
+      var ca_cnt =  $("#slick-slide06").val(1);
       calculatePrice();
       
    }
@@ -241,7 +241,7 @@ var productCode = "";
 //    var input = document.getElementById("optnum").value
 //    var a = $('#mtext-104 cl3 txt-center num-product').val();
 //    alert(input);
-	
+   
 
    // 옵션 관련 스크립트 끝
 </script>
@@ -259,7 +259,7 @@ var productCode = "";
     String[] sub = productDetailList.get(0).getSub_img().split("/");
     
     String likeCheck = member_id+"/"+productDetailList.get(0).getBasicCode();
-	DecimalFormat priceFormat = new DecimalFormat("###,###");
+   DecimalFormat priceFormat = new DecimalFormat("###,###");
 %>
 <!-- 끝 -->
 
@@ -291,23 +291,23 @@ var productCode = "";
                   <div class="slick3 gallery-lb">
                   <%for(int i=0; i<main.length; i++){%>
                   
-						<!-- 	------------------------------------------------     -->
-							<input type="hidden" name="name" value="<%=productDetailList.get(i).getName() %>">
-							<input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
-							<input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
-							<input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-										<!-- ----수정하기 --- -->
-							<input type="hidden" name="cnt" value="ca_cnt">
-						             	<!-- ----수정하기 --- -->
-							
-<%-- 							<%=productDetailList.get(0).getName() %> --%>
-<%-- 							<%=productDetailList.get(0).getPrice()%> --%>
-<%-- 							<%=productSizeList.get(i).getSize()%> --%>
-<%-- 							<%=productColorList.get(i).getColor() %> --%>
-<%-- 							<%=basicCode%> --%>
-						<!-- 	------------------------------------------------     -->
-						
+                  <!--    ------------------------------------------------     -->
+                     <input type="hidden" name="name" value="<%=productDetailList.get(i).getName() %>">
+                     <input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
+                     <input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
+                     <input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
+                     <input type="hidden" name="product_basicCode" value="<%=basicCode%>">
+                              <!-- ----수정하기 --- -->
+                     <input type="hidden" name="cnt" id="slick-slide06" value="1">
+                                  <!-- ----수정하기 --- -->
+                     
+<%--                      <%=productDetailList.get(0).getName() %> --%>
+<%--                      <%=productDetailList.get(0).getPrice()%> --%>
+<%--                      <%=productSizeList.get(i).getSize()%> --%>
+<%--                      <%=productColorList.get(i).getColor() %> --%>
+<%--                      <%=basicCode%> --%>
+                  <!--    ------------------------------------------------     -->
+                  
                      <div class="item-slick3"
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
@@ -1223,8 +1223,8 @@ function show_hide(){
    });
 
 
-		
-			
+      
+         
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- 스크립트파일끝 -->
