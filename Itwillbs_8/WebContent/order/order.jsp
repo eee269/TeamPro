@@ -184,10 +184,10 @@ function regist_defaultAddr(test) {
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/order_pay.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/order_pay.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 
 <!-- 오더페이지 시작-->
 

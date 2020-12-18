@@ -21,6 +21,16 @@ public class OrderProAction implements Action {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(member_id == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("</script>");
+			
+			forward.setPath("MemberLoginForm.mo");
+		}else {
 		Timestamp date = new Timestamp(System.currentTimeMillis());
 		OrderBean ob = new OrderBean();
 		ob.setCode(request.getParameter("imp_uid"));
@@ -49,10 +59,6 @@ public class OrderProAction implements Action {
 		boolean isInsertSuccecc = orderService.InsertOrder(ob);
 		
 		if(!isInsertSuccecc) {
-			response.setContentType("text/html; charset=UTF-8");
-			
-			PrintWriter out = response.getWriter();
-			
 			out.println("<script>");
 			out.println("alert('주문 등록 실패");
 			out.println("history.back()");
@@ -63,7 +69,7 @@ public class OrderProAction implements Action {
 			forward.setPath("OrderDetail.or");
 		}
 		
-		
+		}
 		return forward;
 	}
 

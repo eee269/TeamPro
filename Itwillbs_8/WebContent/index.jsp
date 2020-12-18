@@ -5,10 +5,10 @@
 <%@page import="vo.ProductBean"%>
 <jsp:include page="/inc/header_index.jsp" />
 <jsp:include page="/quickMenu_index.jsp" />
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/main.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/main_1.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 
 <%
 	String member_id =(String)session.getAttribute("member_id");
