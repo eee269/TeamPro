@@ -22,9 +22,10 @@ public class OrderService {
 	orderDAO.setConnection(con);
 	
 	cartList = orderDAO.selectCart(num);
-//			
+			
 	close(con);
 	
 	return cartList;
 	}
+
 }

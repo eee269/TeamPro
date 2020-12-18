@@ -1231,13 +1231,15 @@
 }
 
 #powerReview .PR15N01-review-wrap>li .desc {
-	position: absolute;
-	top: 5px;
-	right: 0;
+/* 	position: absolute; */
+	position: relative; /* 수정 */
+/* 	top: 5px; */
+/* 	right: 0; */
 	width: 180px;
+	float: right;
 } /* 수정 top: 30px*/
 #powerReview .PR15N01-review-wrap>li .desc dt {
-	padding: 7px 0 0 5px;
+	padding: 0px 0 0 5px; /* 수정 7px 0 0 5px;*/
 	color: #a8a8a8;
 	border-top: 1px solid #dadada;
 }
@@ -1365,16 +1367,19 @@
 #powerReview .PR15N01-review-wrap>li .content a {
 	color: #89888e;
 	line-height: 1.5;
+	
 }
 
 #powerReview .PR15N01-review-wrap>li .content {
-	clear: both;
+/* 	clear: both; */
 	overflow: hidden;
-	margin: 0px 220px 0 0;
+/* 	margin: 0px 220px 0 0; */
 	color: #89888e;
 	line-height: 1.5;
 	word-wrap: break-word;
 	min-height: 75px;
+	float: left; /* 수정 추가*/
+	width:600px;
 } /* 수정 margin: 15px 220px 0 0;*/
 #powerReview .PR15N01-review-wrap>li .content .pr-more {
 	color: #6fb592;
@@ -2162,11 +2167,11 @@
 .bu_gray_s {
 	background-color: #5D5D5D;
 	border: 0px solid #5D5D5D;
-	font-size: 12px;
+	font-size: 12px !important;
 	line-height: 17px;
 	color: #fff !important;
 	border-radius: 0px;
-	padding: 5px 15px !important;
+	padding: 5px 10px !important;
 	margin: 2px;
 	transition: 0.2s all;
 	display: inline-block;
@@ -2176,6 +2181,25 @@
 	background-color: #8C8C8C;
 	color: #fff;
 }
+
+.bu_gray_p {
+	background-color: #fff;
+	border: 1px solid #5D5D5D;
+	font-size: 12px !important;
+	line-height: 17px;
+	color: #5D5D5D !important;
+	border-radius: 0px;
+	padding: 5px 10px !important;
+	margin: 2px;
+	transition: 0.2s all;
+	display: inline-block;
+}
+
+.bu_gray_p:hover {
+	background-color: #fff;
+	color: #5D5D5D;
+}
+
 
 #powerReview .PR15N01-review-wrap>li .reply-wrap .btn_comment {
 	position: absolute;

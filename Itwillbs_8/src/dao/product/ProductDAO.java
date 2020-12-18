@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -175,6 +176,44 @@ public class ProductDAO {
 			}
 		} catch (SQLException e) {
 			System.out.println("selectMainProductList()의 오류" +e.getMessage());
+			e.printStackTrace();
+		}finally{
+			close(ps);
+			close(rs);
+		}
+		
+		return productList;
+	}
+	
+ public ArrayList<ProductBean> selectSearchProductList(String search) {
+		
+		ArrayList<ProductBean> productList = new ArrayList<ProductBean>();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "select * from product where name LIKE ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, "%"+search+"%");
+			rs = ps.executeQuery();
+			
+			
+			while(rs.next()) {
+				ProductBean pb = new ProductBean();
+				pb.setBasicCode(rs.getString("basicCode"));
+				pb.setXcode(rs.getString("xcode"));
+				pb.setNcode(rs.getString("ncode"));
+				pb.setDate(rs.getTimestamp("date"));
+				pb.setMain_img(rs.getString("main_img"));
+				pb.setSub_img(rs.getString("sub_img"));
+//				pb.setStock(rs.getInt("stock"));
+				pb.setPrice(rs.getInt("price"));
+				pb.setLikey(rs.getInt("likey"));
+				pb.setName(rs.getString("name"));
+				
+				productList.add(pb);
+			}
+		} catch (SQLException e) {
+			System.out.println("selectSearchProductList()의 오류" +e.getMessage());
 			e.printStackTrace();
 		}finally{
 			close(ps);
@@ -886,6 +925,44 @@ public ArrayList<ProductBean> selectProductDetailList(String basicCode) {
 		}
 		
 		return likeBasicCodeList;
+	}
+	
+	public HashMap<String, String> selectCartLike(String id) {
+		HashMap<String, String> cartLike = new HashMap<String, String>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs2 = null;
+		
+		try {
+			String sql = "select COUNT(*) from cart where member_id=?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, id);
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				cartLike.put("Cart", Integer.toString(rs.getInt(1)));
+			}
+			
+			String sql2 = "select COUNT(*) from product_like where member_id=?";
+			ps2 = con.prepareStatement(sql2);
+			ps2.setString(1, id);
+			rs2 = ps2.executeQuery();
+			
+			while(rs2.next()) {
+				cartLike.put("Like", Integer.toString(rs2.getInt(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+			close(ps2);
+			close(rs2);
+		}
+		
+		return cartLike;
 	}
 
 }

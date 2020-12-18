@@ -14,6 +14,7 @@ import action.member.MemberLogoutAction;
 import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
+import action.member.MemberNaverLoginAction;
 import action.member.MemberPassProAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
@@ -64,7 +65,6 @@ public class MemberFrontController extends HttpServlet {
 		}
 		else if(command.equals("/MemberModifyPro.mo")) {
 			action = new MemberModifyAction();
-			System.out.println("멤버모디파이액션으로 이동");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -72,7 +72,6 @@ public class MemberFrontController extends HttpServlet {
 			}
 		} else if(command.equals("/MemberModifyForm.mo")) {
 			action = new MemberModifyFormAction();
-			System.out.println("멤버모디파이폼엑션으로 이동");
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -123,6 +122,17 @@ public class MemberFrontController extends HttpServlet {
 			forward = new ActionForward();
 
 			action = new MemberDeleteProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		//--------------- 네이버 로그인 후 json처리 하기 위해 이동----------
+		else if (command.equals("/MemberNaverLogin.mo")) {
+			forward = new ActionForward();
+
+			action = new MemberNaverLoginAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

@@ -4,6 +4,7 @@ import static db.JdbcUtil.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.simple.JSONArray;
 
@@ -26,6 +27,21 @@ public class ProductAjaxService {
 		close(con);
 		
 		return likeBasicCodeList;
+	}
+	
+	public HashMap<String, String> getCartLike(String id) throws Exception{
+		
+		HashMap<String, String> cartLike = null;
+		
+		Connection con = getConnection();
+		ProductDAO pd = ProductDAO.getInstance();
+		pd.setConnection(con);
+		
+		cartLike = pd.selectCartLike(id);
+		
+		close(con);
+		
+		return cartLike;
 	}
 	
 

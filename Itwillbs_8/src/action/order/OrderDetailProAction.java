@@ -1,5 +1,7 @@
 package action.order;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,16 @@ public class OrderDetailProAction implements Action {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
+
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(member_id == null) {
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("</script>");
+			
+			forward.setPath("MemberLoginForm.mo");
+		}else {
 		int num =  Integer.parseInt(request.getParameter("num"));
 		System.out.println("num : "+num);
 		String code = request.getParameter("imp_uid");
@@ -29,6 +41,7 @@ public class OrderDetailProAction implements Action {
 			forward = new ActionForward();
 			forward.setPath("MyOrderList.or");
 			forward.setRedirect(true);
+		}
 		}
 		
 		return forward;
