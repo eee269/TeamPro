@@ -925,7 +925,7 @@
 		                		var isImg = false;
 		                		// 리뷰 하나에 대한 반복문	
 		   	                	for (var j = 0; j < replyList[i].length; j++) {
-		    	                	var reply = replyList[i][j];
+		   	                		var reply = replyList[i][j];
 		    	                	
 		    	                	// 상품 리뷰 관리자 답글
 		    	                	if(replyList[i][0].id == 'admin'){
@@ -996,35 +996,49 @@
 			    	                    	output += "<div class='reply'>"
 			    	                    				+"<span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span>"
 		    	                    					+"<a class='good"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+good+");' >"
-		    	                    					+"<img src='images/icons/in-love_face.png' alt='yes' style='width:15px;height:15px;'>&nbsp"
-		    	                    					+"<span>"+reply.good+"</span></a>&nbsp"
-		    	                    					+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");'>"
-		    	                    					+"<img src='images/icons/angry_face.png' alt='no' style='width:15px;height:15px;'>&nbsp"
-		    	                    					+"<span>"+reply.bad+"</span></a>&nbsp"
-	    	                    					 +"</div>";
-			   	                 		}else if(reply.id == member_id && j == 5 ){
-		    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
-			    	                    	output +=		"<button class='pr_button'>";
-			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-			    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
-		    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-			    	                    	output +=		"</button>";
-			   	                 		}else if(member_id == 'admin' && j == 5){
-			    	                    	output +=		"<button class='pr_button'>";
-			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-			    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>답글</a>";
-			    	                    	output +=		"</button>";
-			   	                 		}
-			   	                 			
-			   	                 		
-		   	                	}
-		                	} // 리뷰 하나에 대한 for 문 => reveiwDetail
+		    	                    						+"<span class='imgRecG"+reply.num+"'>";
+		    	                    					if(reply.recG == 0){
+			    	                    	output +=			"<img src='images/icons/in-love_face_before.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}else{
+  	                    					output +=			"<img src='images/icons/in-love_face.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}
+		    	                    					
+   	                    					output +=		"</span>"
+   	                    									+"<span class='recCount'>"+reply.good+"</span></a>&nbsp"
+		    	                    						+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");'>"
+		    	                    						+"<span class='imgRecB"+reply.num+"'>";
+		    	                    					if(reply.recB == 0){
+  	                    					output +=			"<img src='images/icons/angry_face_before.png' alt='no' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}else{
+  	                    					output +=			"<img src='images/icons/angry_face.png' alt='no' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}
+		    	                    					
+  	                    					output += 		"</span>"
+  	                    								+"<span class='recCount'>"+reply.bad+"</span></a>&nbsp"
+	    	                    					 	+"</div>";
+				   	                 		if(reply.id == member_id){
+			    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
+				    	                    	output +=		"<button class='pr_button'>";
+				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
+				    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
+			    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
+				    	                    	output +=		"</button>";
+				    	                    }	
+				   	                 		if(member_id == 'admin'){
+				    	                    	output +=		"<button class='pr_button'>";
+				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
+				    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>답글</a>";
+				    	                    	output +=		"</button>";
+				   	                 		}
+		   	                		}
+		                		}
+	   	                	}// 리뷰 하나에 대한 for 문 => reveiwDetail
 	    	                    		output +=		"</div>";
 		                				output += 	"<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
 		                				output += 	"<input type='hidden' name='prm_num' value='"+reply.num+"'>";
     	                	output += 			"</div>";
     	                	output += 		"</div>";
-	                			output +=	"</form>";
+	                		output +=	"</form>";
     	                	output += "</li>";
     	                	output += "<div class='PR15N01-write prr_reply"+reply.num+"' style='display:none;'></div>";
 		   	                
@@ -1084,7 +1098,8 @@
 	} // getReply end
 	getReplyCall = getReply;
 	getReply(); // 해당 페이지 실행 시 해당 함수 호출
-    
+// 	ProdReviewRecCount(); // 페이지 실행 시 호출
+	
     // paging
     function paging(a,b,c){
     	var listCount = a;
@@ -1280,7 +1295,30 @@ function prd_review(num){
 	                   num: num,
 	                   recommand : recommand
 	               },
-	               success: function () {
+	               success: function (isRec) {
+            		   var goodAf ="in-love_face.png";
+            		   var goodBe ="in-love_face_before.png";
+            		   var badAf ="angry_face.png";
+            		   var badBe ="angry_face_before.png";
+            		   img = (recommand == 0 ? (isRec == 0 ? goodAf : goodBe) : (isRec == 0 ? badAf : badBe));
+            		   alt = (recommand == 0 ? 'yes' : 'no');
+           			   var imgResult = "<img src='images/icons/"+img+"' alt='"+alt+"' style='width:15px;height:15px;'>&nbsp";
+           			   
+           			   // recommand = 0 -> good, 1 -> bad 
+	            	   if(recommand == 0){
+	            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
+	            		   if(isRec == 0){
+	            			   $('.imgRecG'+num).html(imgResult);
+	            		   }else{
+	            			   $('.imgRecG'+num).html(imgResult);
+	            		   }
+	            	   }else{
+	            		   if(isRec == 0){
+	            			   $('.imgRecB'+num).html(imgResult);
+	            		   }else{
+	            			   $('.imgRecB'+num).html(imgResult);
+	            		   }
+	            	   }
 			        ProdReviewRecCount(num,recommand);
 	               },
 			})
@@ -1288,8 +1326,9 @@ function prd_review(num){
 	}
 	// 리뷰 추천 수
     function ProdReviewRecCount(num,rec) {
-        var rec = rec;
-        
+        var rec = rec; // good, bad 판별 변수
+        if(rec == null){
+        }
 		$.ajax({
 			url: "ProdReviewRecCount.po",
                type: "POST",
@@ -1299,9 +1338,9 @@ function prd_review(num){
                },
                success: function (count) {
             	   if(rec == 0){
-	               	$(".good"+num+" span").html(count);
+	               	$(".good"+num+" .recCount").html(count);
             	   }else{
-	               	$(".bad"+num+" span").html(count);
+	               	$(".bad"+num+" .recCount").html(count);
             	   }
                },
 		})
