@@ -175,7 +175,7 @@ var productCode = "";
       
       // cnt 값 보내기
        
-   	var ca_cnt =  $("#slick-slide06").val(1);
+   	var ca_cnt = $("#slick-slide05").val(1);
       calculatePrice();
       
    }
@@ -207,7 +207,7 @@ var productCode = "";
      
       $('#'+numid).val(cnt);
       // cnt 값 보내기 
-      var ca_cnt =  $("#slick-slide06").val(cnt);
+         var ca_cnt = $("#slick-slide05").val(cnt);
       
       calculatePrice();
    }
@@ -223,7 +223,7 @@ var productCode = "";
          cnt -= 1;
          $('#'+numid).val(cnt);
          // cnt 값 보내기
-         var ca_cnt = $("#slick-slide06").val(cnt);
+         var ca_cnt = $("#slick-slide05").val(cnt);
        
 
       }
@@ -291,15 +291,13 @@ var productCode = "";
                   <div class="slick3 gallery-lb">
                   <%for(int i=0; i<main.length; i++){%>
                   
-						<!-- 	------------------------------------------------     -->
+						             	<!-- ----수정하기 --- -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(i).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
 							<input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
 							<input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-										<!-- ----수정하기 --- -->
 							<input type="hidden" name="cnt" value="ca_cnt">
-						             	<!-- ----수정하기 --- -->
 							
 <%-- 							<%=productDetailList.get(0).getName() %> --%>
 <%-- 							<%=productDetailList.get(0).getPrice()%> --%>
