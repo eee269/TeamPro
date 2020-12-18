@@ -124,8 +124,9 @@ var productCode = "";
    // 선택된 옵션체크
    function optcheck(mixopt) {
        productCode = <%=basicCode%> + mixopt[0] + mixopt[1];
-       $("#slick-slide02").val(mixopt[0]); 	// 컬러
-       $("#slick-slide03").val(mixopt[1]);	// 사이즈
+    // 20.12.19. yj 바뀜!
+       $("#slick-slide03").attr('value', mixopt[0]); 	// 사이즈
+       $("#slick-slide04").attr('value', mixopt[1]);	// 컬러
       console.log(productCode);
        
       var oldopt = $('ul#show-option li span.show-value').html();
@@ -176,7 +177,7 @@ var productCode = "";
       
       // cnt 값 보내기
       // 20.12.19. yj 바뀜!
-      $("#ca_cnt").val(1);
+      $("#slick-slide06").attr('value', 1);
 //    	var ca_cnt = $("#slick-slide05").val(1);
 // 이거는 $("#slick-slide05").val(1) 이 값을 ca_cnt라는 변수에 넣어주고 끝이라서 body까지 안간당..! 
       calculatePrice();
@@ -212,7 +213,7 @@ var productCode = "";
       // cnt 값 보내기 
       // 20.12.19. yj 바뀜!
 //          var ca_cnt = $("#slick-slide05").val(cnt);
-      $("#ca_cnt").val(cnt);
+      $("#slick-slide06").attr('value', cnt);
       calculatePrice();
    }
    
@@ -228,7 +229,7 @@ var productCode = "";
          $('#'+numid).val(cnt);
          // cnt 값 보내기
          // 20.12.19. yj 바뀜!
-         $("#ca_cnt").val(cnt);
+         $("#slick-slide06").attr('value', cnt);
 //          var ca_cnt = $("#slick-slide05").val(cnt);
        
 
@@ -320,13 +321,14 @@ var productCode = "";
                   <%}%>
                   
 						             	<!-- ----수정하기 --- -->
+<!-- 						             	 20.12.19. yj 바뀜! -->
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name="size" value="<%=productSizeList.get(0).getSize()%>">
-							<input type="hidden" name="color" value="<%=productColorList.get(0).getColor() %>">
+							<input type="hidden" name="size" value="">
+							<input type="hidden" name="color" value="">
 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="0" id="ca_cnt">
+							<input type="hidden" name="cnt" value="0">
 							
 
                   </div>
