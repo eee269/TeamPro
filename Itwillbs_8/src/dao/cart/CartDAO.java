@@ -29,7 +29,6 @@ public class CartDAO extends Exception {
 		
 	}
 	
-	
 
 	// 주문 조회
 	public ArrayList<Cart> selectList(String member_id) {
@@ -127,8 +126,55 @@ public class CartDAO extends Exception {
 		return updateCount;
 	}
 	
-	
-	
+	// 가져오기
+	public int cartUp(Cart ca) {
+		System.out.println("CartDAO - cartUp");
+		int upCount = 0;
+		
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		
+		try {
+			con = getConnection();
+			String sql2 = "SELECT max(num) FROM cart";
+			pstmt2 = con.prepareStatement(sql2);
+			rs = pstmt2.executeQuery();
+			
+			int num = 0;
+
+		if(rs.next()) {
+			num = rs.getInt("max(num)") + 1;			
+			String sql = "insert into cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode) values(?,?,?,?,?,?,?,?,?)";
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, ca.getCnt());
+			pstmt.setString(3, ca.getProduct_name());
+			pstmt.setInt(4, ca.getPrice());
+			pstmt.setString(5, ca.getColor());
+			pstmt.setString(6, ca.getSize());
+			pstmt.setString(7, ca.getMember_id());
+			pstmt.setString(8, ca.getProduct_basicCode());
+			pstmt.setString(9, ca.getOpt_productCode());
+			
+			upCount = pstmt.executeUpdate();
+			System.out.println("DAO upCount : " + upCount);
+		}
+			
+		} catch (SQLException e) {
+			System.out.println("cartUp :" + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			close(con);
+			close(pstmt);
+			close(pstmt2);
+			close(rs);
+		}
+		
+		return upCount;
+	}
 	
 	
 	
