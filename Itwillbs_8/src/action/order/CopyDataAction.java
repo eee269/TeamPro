@@ -23,7 +23,15 @@ public class CopyDataAction implements Action {
 		HttpSession session = request.getSession();
 		String member_id = (String) session.getAttribute("member_id");
 		ActionForward forward = null;
-		
+		if(member_id == null) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>");
+			out.println("alert('로그인이 필요합니다.')");
+			out.println("</script>");
+			
+			forward.setPath("MemberLoginForm.mo");
+		} else {
 		CopyDataService copyData = new CopyDataService();
 		
 		ArrayList<JSONArray> mb = copyData.CopyData(member_id);
@@ -42,7 +50,7 @@ public class CopyDataAction implements Action {
 			forward.setPath("order/orderPro.jsp");
 			
 		}
-		
+		}
 		return forward;
 	}
 
