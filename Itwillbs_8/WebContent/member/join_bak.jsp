@@ -81,10 +81,10 @@
 	<div class="container">
 
 
-<link type="text/css" rel="stylesheet" href="../scss/common.css" />
-<link type="text/css" rel="stylesheet" href="../scss/join_simple.css" />
-<link type="text/css" rel="stylesheet" href="../scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="../scss/menu.1.css" />
+<link type="text/css" rel="stylesheet" href="../css/common.css" />
+<link type="text/css" rel="stylesheet" href="../css/join_simple.css" />
+<link type="text/css" rel="stylesheet" href="../css/header.css" />
+<link type="text/css" rel="stylesheet" href="../css/menu_1.css" />
 <style type="text/css">
 
 /* 약관 동의 */

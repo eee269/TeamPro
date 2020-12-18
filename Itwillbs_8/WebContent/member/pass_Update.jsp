@@ -76,10 +76,10 @@
 %>
 
 <jsp:include page="/inc/header.jsp" />
-<link type="text/css" rel="stylesheet" href="scss/common.css" />
-<link type="text/css" rel="stylesheet" href="scss/mp_main.css" />
-<link type="text/css" rel="stylesheet" href="scss/header.1.css" />
-<link type="text/css" rel="stylesheet" href="scss/menu.2.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/mp_main.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_2.css" />
 
 <div id="contentWrapper">
 	<div id="contentWrap">
