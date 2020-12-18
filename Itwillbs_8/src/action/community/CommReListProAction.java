@@ -32,7 +32,7 @@ public class CommReListProAction implements Action {
 		int community_num=Integer.parseInt(request.getParameter("community_num"));
 		int	page = Integer.parseInt(request.getParameter("page"));
 		int limit = 5;
-		
+		int arraymode = Integer.parseInt(request.getParameter("arraymode"));
 		
 		CommReListService commReListService = new CommReListService();	
 		
@@ -44,9 +44,9 @@ public class CommReListProAction implements Action {
 		int listCount = commReListService.getCommCount(community_num);
 		System.out.println("listCount??"+listCount);	
 //		// i값(포토 유무)에 따른 리뷰 목록 호출
-		commentList = commReListService.getCommentList(community_num, page, limit);
+//		commentList = commReListService.getCommentList(community_num, page, arraymode);
 //	
-
+		commentList = commReListService.getCommentList(community_num, page, limit, arraymode);
 		// Json
 		json = "{\"coReplyList\":["; 
 		for (int j = 0; j < commentList.size(); j++) {
