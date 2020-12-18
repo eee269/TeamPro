@@ -1,66 +1,64 @@
-<%@page import="org.json.simple.JSONObject"%>
-<%@page import="org.json.simple.parser.JSONParser"%>
-<%@ page import="java.net.URLEncoder" %>
-<%@ page import="java.net.URL" %>
-<%@ page import="java.net.HttpURLConnection" %>
-<%@ page import="java.io.BufferedReader" %>
-<%@ page import="java.io.InputStreamReader" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>네이버로그인</title>
-  </head>
-  <body>
-  <%
-    String clientId = "jjXgPjWf7pqDUU6YqA_B";//애플리케이션 클라이언트 아이디값";
-    String clientSecret = "jjXgPjWf7pqDUU6YqA_B";//애플리케이션 클라이언트 시크릿값";
-    String code = request.getParameter("code");
-    String state = request.getParameter("state");
-    String redirectURI = URLEncoder.encode("http://localhost:8090/Itwillbs_8/member/naver_callback.jsp", "UTF-8");
-    String apiURL;
-    apiURL = "https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&";
-    apiURL += "client_id=" + clientId;
-    apiURL += "&client_secret=" + clientSecret;
-    apiURL += "&redirect_uri=" + redirectURI;
-    apiURL += "&code=" + code;
-    apiURL += "&state=" + state;
-    String access_token = "";
-    String refresh_token = "";
-    System.out.println("apiURL="+apiURL);
-    try {
-      URL url = new URL(apiURL);
-      HttpURLConnection con = (HttpURLConnection)url.openConnection();
-      con.setRequestMethod("GET");
-      int responseCode = con.getResponseCode();
-      BufferedReader br;
-      System.out.print("responseCode="+responseCode);
-      if(responseCode==200) { // 정상 호출
-        br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-      } else {  // 에러 발생
-        br = new BufferedReader(new InputStreamReader(con.getErrorStream()));
-      }
-      String inputLine;
-      StringBuffer res = new StringBuffer();
-      while ((inputLine = br.readLine()) != null) {
-        res.append(inputLine);
-      }
-      br.close();
-      if(responseCode==200) {
-        out.println(res.toString());
-        
-        JSONParser parser = new JSONParser();
-        JSONObject result = (JSONObject) parser.parse(res.toString());
-        
-        out.print("<br>" + result.get("access_token"));
-        
-        session.setAttribute("access_token", result.get("access_token"));
-        
-        response.sendRedirect("/Itwillbs_8/MemberNaverLogin.mo");
-        
-      }
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-  %>
-  </body>
+<head>
+<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>NaverLoginSDK</title>
+	<!-- (1) LoginWithNaverId Javscript SDK -->
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바로 main으로 redirect하기때문에 이 메시지가 보이면 안됩니다.
+	<!-- (2) LoginWithNaverId Javscript 설정 정보 및 초기화 -->
+	<script>
+		var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp");
+		  // 접근 토큰 값 출력
+		  alert(naver_id_login.oauthParams.access_token);
+		  // 네이버 사용자 프로필 조회
+		  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+		  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+		  var email, username, id, img;
+		  function naverSignInCallback() {
+			  // 토큰에 있는 프로필 정보 가져와서 저장
+			  email = naver_id_login.getProfileData('email');
+			  username = naver_id_login.getProfileData('nickname');
+			  id = naver_id_login.getProfileData('id');
+			  img = naver_id_login.getProfileData('profileImage');
+			  
+			  var url = "http://" + window.location.hostname + ( (location.port==""||location.port==undefined)?"":":" + location.port) + "/Itwillbs_8/MemberNaverLogin.mo"; 
+		    post_to_url( url,
+		    		{'id': id, 'username': username, 'email': email, 'img': img})
+		  }
+		  
+	</script>
+</body>
+
+<script type="text/javascript">
+
+// url로 넘기면서 정보도 같이 담아서 갖고가기
+function post_to_url(path, params, method='post') {
+	  
+	  const form = document.createElement('form');
+	  form.method = method;
+	  form.action = path;
+	  
+	  for(const key in params) {
+		  if(params.hasOwnProperty(key)) {
+			  const hiddenField = document.createElement('input');
+			  hiddenField.type = 'hidden';
+		      hiddenField.name = key;
+		      hiddenField.value = params[key];
+		      form.appendChild(hiddenField);
+		    }
+		  }
+		  document.body.appendChild(form);
+		  form.submit();
+}
+
+</script>
 </html>
