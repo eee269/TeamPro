@@ -1300,26 +1300,20 @@ function prd_review(num){
             		   var goodBe ="in-love_face_before.png";
             		   var badAf ="angry_face.png";
             		   var badBe ="angry_face_before.png";
+           			   // recommand = 0 -> good, 1 -> bad 
+            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
             		   img = (recommand == 0 ? (isRec == 0 ? goodAf : goodBe) : (isRec == 0 ? badAf : badBe));
             		   alt = (recommand == 0 ? 'yes' : 'no');
            			   var imgResult = "<img src='images/icons/"+img+"' alt='"+alt+"' style='width:15px;height:15px;'>&nbsp";
            			   
-           			   // recommand = 0 -> good, 1 -> bad 
 	            	   if(recommand == 0){
-	            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
-	            		   if(isRec == 0){
-	            			   $('.imgRecG'+num).html(imgResult);
-	            		   }else{
-	            			   $('.imgRecG'+num).html(imgResult);
-	            		   }
+            			   $('.imgRecG'+num).html(imgResult);
 	            	   }else{
-	            		   if(isRec == 0){
-	            			   $('.imgRecB'+num).html(imgResult);
-	            		   }else{
-	            			   $('.imgRecB'+num).html(imgResult);
-	            		   }
+            			   $('.imgRecB'+num).html(imgResult);
 	            	   }
-			        ProdReviewRecCount(num,recommand);
+	            	   
+			       		ProdReviewRecCount(num,recommand);
+			       
 	               },
 			})
 		}
