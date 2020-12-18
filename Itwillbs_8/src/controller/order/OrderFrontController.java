@@ -41,7 +41,7 @@ public class OrderFrontController extends HttpServlet {
 
 		if(command.equals("/Order.or")) {
 			System.out.println("Order.or 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new OrderAction();
 			
 			try {
@@ -53,7 +53,7 @@ public class OrderFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}else if(command.equals("/OrderPro.or")){
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new OrderProAction();
 			
 			try {
@@ -66,7 +66,7 @@ public class OrderFrontController extends HttpServlet {
 			}
 			
 		}else if(command.equals("/MyOrderList.or")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			
 			action = new OrderListAction();
 			try {
@@ -80,7 +80,7 @@ public class OrderFrontController extends HttpServlet {
 			}
 		} else if(command.equals("/CopyData.or")) {
 			System.out.println("CopyData.or 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new CopyDataAction();
 			try {
 				System.out.println("CopyDataAction으로 포워딩");
@@ -93,11 +93,11 @@ public class OrderFrontController extends HttpServlet {
 			}
 		}else if(command.equals("/Payment.or")) {
 			System.out.println("Payment.or 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			forward.setPath("/order/payment.jsp");
 		} else if(command.equals("/OrderDetail.or")) {
 			System.out.println("OrderDetail.or 포워딩");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			action = new OrderDetailProAction();
 			try {
 				System.out.println("OrderDetailPro로 포워딩");
@@ -112,7 +112,7 @@ public class OrderFrontController extends HttpServlet {
 		// -------------------------주문 상세 페이지--------------------------------
 		else if(command.equals("/MyorderDetail.or")) {
 			System.out.println("MyOrderDetailPro");
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			
 			action = new MyorderDetailAction();
 			try {
@@ -129,7 +129,7 @@ public class OrderFrontController extends HttpServlet {
 
 		// -------------------------주문 관리 페이지--------------------------------
 		else if (command.equals("/ControlOrderList.or")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 
 			action = new ControlOrderListAction();
 			try {
@@ -142,7 +142,7 @@ public class OrderFrontController extends HttpServlet {
 		}
 		// -------------------------주문 상태 변경--------------------------------
 		else if (command.equals("/UpdateOrderStatus.or")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 
 			action = new UpdateOrderStatusAction();
 			try {
@@ -155,7 +155,7 @@ public class OrderFrontController extends HttpServlet {
 		}
 		// -------------------------주문 취소--------------------------------
 		else if (command.equals("/DeleteMainorder.or")) {
-			forward = new ActionForward();
+//			forward = new ActionForward();
 
 			action = new DeleteMainorderAction();
 			try {
