@@ -160,7 +160,7 @@ var productCode = "";
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='" + productCode + "' id='productCode' class='pro' name='cartHd" + resultcount + "'>" +  
+      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
       // productCode, id="productCode숫자"
           "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
       // 옵션 이름, ( BK/M )
@@ -180,16 +180,18 @@ var productCode = "";
       $("#slick-slide06").attr('value', 1);
 //    	var ca_cnt = $("#slick-slide05").val(1);
 // 이거는 $("#slick-slide05").val(1) 이 값을 ca_cnt라는 변수에 넣어주고 끝이라서 body까지 안간당..! 
-      calculatePrice();
+      calculatePrice('optnum'+resultcount);
       
    }
 
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
-   function calculatePrice() {
+   // 수량의 id를 넘겨 받고
+   function calculatePrice(id) {
       var totalprice = 0;
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
       $('ul#show-option li').each(function() {
-         var itcnt = parseInt($(this).find('input').val());
+//          var itcnt = parseInt($(this).find('#'+id).val());
+		var itcnt = parseInt($('#'+id).val());
          totalprice += itemprice * itcnt;
       });
       
@@ -209,12 +211,12 @@ var productCode = "";
       var cnt = Number($('#'+numid).val());
       cnt += 1;
      
-      $('#'+numid).val(cnt);
+      $('#'+numid).attr('value', cnt);
       // cnt 값 보내기 
       // 20.12.19. yj 바뀜!
 //          var ca_cnt = $("#slick-slide05").val(cnt);
       $("#slick-slide06").attr('value', cnt);
-      calculatePrice();
+      calculatePrice(numid);
    }
    
    // 상품개수감소
@@ -226,7 +228,7 @@ var productCode = "";
 
       if(cnt > 1) {
          cnt -= 1;
-         $('#'+numid).val(cnt);
+         $('#'+numid).attr('value', cnt);
          // cnt 값 보내기
          // 20.12.19. yj 바뀜!
          $("#slick-slide06").attr('value', cnt);
@@ -236,7 +238,7 @@ var productCode = "";
       }
       // 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
       
-      calculatePrice();
+      calculatePrice(numid);
    }
 
    // 선택옵션삭제
