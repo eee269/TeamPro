@@ -93,7 +93,7 @@ public class ProdReviewListAction implements Action {
 				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";
 				json += "{\"num\":\""+num+"\",\"product_img\":\""+product_img+"\"},";
 				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\",\"re_ref\":\""+re_ref+"\""
-						+ ",\"recG\":\""+recommendG+"\",\"recB\":\""+recommendG+"\""
+						+ ",\"recG\":\""+recommendG+"\",\"recB\":\""+recommendB+"\""
 						+ ",\"good\":\""+good+"\",\"bad\":\""+bad+"\"}]";
 				
 				if (j != reviewList.size() - 1) {
