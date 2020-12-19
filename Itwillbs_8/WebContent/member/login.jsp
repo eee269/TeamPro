@@ -1,4 +1,3 @@
-
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.security.SecureRandom"%>
 <%@page import="java.net.URLEncoder"%>
@@ -8,11 +7,15 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
+<!-- 구글 로그인 SDK -->
 <meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
+<!-- 네이버 로그인 SDK -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script> -->
+
+<!-- 카카오 로그인 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <style rel="stylesheet">
 
@@ -451,6 +454,45 @@ margin-left:0px;}
 		}
 	}
 	
+
+	// 구글 로그인 API
+	function onSignIn(googleUser) {
+		// 페이지 로딩 시 자동으로 값들고오지 않게 끔.
+		var auth2 = gapi.auth2.currentUser.get().getBasicProfile();
+// 		  var profile = googleUser.getBasicProfile();
+		  alert('img: ' + profile.getImageUrl());
+		  id = profile.getId();
+		  username = profile.getName();
+		  img = profile.getImageUrl();
+		  email = profile.getEmail();
+		  
+		  // 이거 토큰인디.. 토큰 어따써..?
+// 		  var id_token = googleUser.getAuthResponse().id_token;
+// 		  console.log("ID Token: " + id_token);
+		  
+		  post_to_url( "MemberGoogleLogin.mo",
+		    		{'id': id, 'username': username, 'email': email, 'img': img})
+	}
+
+		// 구글 로그인 API
+		function post_to_url(path, params, method='post') {
+		  
+		  const form = document.createElement('form');
+		  form.method = method;
+		  form.action = path;
+		  
+		  for(const key in params) {
+			  if(params.hasOwnProperty(key)) {
+				  const hiddenField = document.createElement('input');
+				  hiddenField.type = 'hidden';
+			      hiddenField.name = key;
+			      hiddenField.value = params[key];
+			      form.appendChild(hiddenField);
+			    }
+			  }
+			  document.body.appendChild(form);
+			  form.submit();
+		}
 </script>
 <body>
 	<section class="container_member">
@@ -479,13 +521,19 @@ margin-left:0px;}
 							<a href="#" class="more">Forgot your password?</a>
 						</div>
 					</form>
-					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
 					<!-- 구글 로그인 버튼 노출 영역 -->
 					<div class="g-signin2" data-onsuccess="onSignIn"></div>
 					<!-- //구글 로그인 버튼 노출 영역 -->
 					 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  <div id="naver_id_login"></div>
-  <!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  					<div id="naver_id_login"></div>
+  					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+  					<!-- 카카오 로그인 버튼 노출 영역 -->
+<!--   					<a id="custom-login-btn" href="javascript:loginWithKakao()"> -->
+<!-- 					  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" -->
+<!-- 					    width="222" /> -->
+<!-- 					</a> -->
+					<a id="kakao-login-btn"></a>
+					<!-- //카카오 로그인 버튼 노출 영역 -->
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
@@ -580,22 +628,51 @@ margin-left:0px;}
 		}
 		
 
-		// 구글 로그인 API
-		function onSignIn(googleUser) {
-			  var profile = googleUser.getBasicProfile();
-			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-			  console.log('Name: ' + profile.getName());
-			  console.log('Image URL: ' + profile.getImageUrl());
-			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-			}
 		
 		// 네이버 로그인 API
 		var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp");
-  	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
-  	naver_id_login.setDomain("http://localhost:8090/Itwillbs_8/MemberLoginForm.mo#");
-  	naver_id_login.setState(state);
-  	naver_id_login.init_naver_id_login();
+  		var state = naver_id_login.getUniqState();
+  		naver_id_login.setButton("white", 2,40);
+  		naver_id_login.setDomain("http://localhost:8090/Itwillbs_8/MemberLoginForm.mo#");
+  		naver_id_login.setState(state);
+  		naver_id_login.init_naver_id_login();
+  		
+  		
+  		// 카카오 로그인 API
+  		// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+  		Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+  		// SDK 초기화 여부를 판단합니다.
+		Kakao.isInitialized();
+//   		function loginWithKakao() {
+// 		    Kakao.Auth.login({
+// 		      success: function(authObj) {
+// 		        alert(JSON.stringify(authObj))
+// 		      },
+// 		      fail: function(err) {
+// 		        alert(JSON.stringify(err))
+// 		      },
+// 		    })
+// 		  }
+Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(res) {
+          alert(JSON.stringify(res))
+        },
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
 	</script>
 </body>
 

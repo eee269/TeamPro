@@ -18,7 +18,7 @@ callback 처리중입니다. 이 페이지에서는 callback을 처리하고 바
 	<script>
 		var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp");
 		  // 접근 토큰 값 출력
-		  alert(naver_id_login.oauthParams.access_token);
+// 		  alert(naver_id_login.oauthParams.access_token);
 		  // 네이버 사용자 프로필 조회
 		  naver_id_login.get_naver_userprofile("naverSignInCallback()");
 		  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function

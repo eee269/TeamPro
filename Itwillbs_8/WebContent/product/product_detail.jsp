@@ -123,8 +123,9 @@ var productCode = "";
    // 선택된 옵션체크
    function optcheck(mixopt) {
        productCode = <%=basicCode%> + mixopt[0] + mixopt[1];
-       $("#slick-slide02").val(mixopt[0]); 	// 컬러
-       $("#slick-slide03").val(mixopt[1]);	// 사이즈
+    // 20.12.19. yj 바뀜!
+       $("#slick-slide03").attr('value', mixopt[0]); 	// 사이즈
+       $("#slick-slide04").attr('value', mixopt[1]);	// 컬러
       console.log(productCode);
        
       var oldopt = $('ul#show-option li span.show-value').html();
@@ -158,7 +159,7 @@ var productCode = "";
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='" + productCode + "' id='productCode' class='pro' name='cartHd" + resultcount + "'>" +  
+      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
       // productCode, id="productCode숫자"
           "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
       // 옵션 이름, ( BK/M )
@@ -174,18 +175,22 @@ var productCode = "";
       $('#'+id).append(html);
       
       // cnt 값 보내기
-       
-   	var ca_cnt = $("#slick-slide05").val(1);
-      calculatePrice();
+      // 20.12.19. yj 바뀜!
+      $("#slick-slide06").attr('value', 1);
+//    	var ca_cnt = $("#slick-slide05").val(1);
+// 이거는 $("#slick-slide05").val(1) 이 값을 ca_cnt라는 변수에 넣어주고 끝이라서 body까지 안간당..! 
+      calculatePrice('optnum'+resultcount);
       
    }
 
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
-   function calculatePrice() {
+   // 수량의 id를 넘겨 받고
+   function calculatePrice(id) {
       var totalprice = 0;
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
       $('ul#show-option li').each(function() {
-         var itcnt = parseInt($(this).find('input').val());
+//          var itcnt = parseInt($(this).find('#'+id).val());
+		var itcnt = parseInt($('#'+id).val());
          totalprice += itemprice * itcnt;
       });
       
@@ -205,11 +210,12 @@ var productCode = "";
       var cnt = Number($('#'+numid).val());
       cnt += 1;
      
-      $('#'+numid).val(cnt);
+      $('#'+numid).attr('value', cnt);
       // cnt 값 보내기 
-         var ca_cnt = $("#slick-slide05").val(cnt);
-      
-      calculatePrice();
+      // 20.12.19. yj 바뀜!
+//          var ca_cnt = $("#slick-slide05").val(cnt);
+      $("#slick-slide06").attr('value', cnt);
+      calculatePrice(numid);
    }
    
    // 상품개수감소
@@ -221,15 +227,17 @@ var productCode = "";
 
       if(cnt > 1) {
          cnt -= 1;
-         $('#'+numid).val(cnt);
+         $('#'+numid).attr('value', cnt);
          // cnt 값 보내기
-         var ca_cnt = $("#slick-slide05").val(cnt);
+         // 20.12.19. yj 바뀜!
+         $("#slick-slide06").attr('value', cnt);
+//          var ca_cnt = $("#slick-slide05").val(cnt);
        
 
       }
       // 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
       
-      calculatePrice();
+      calculatePrice(numid);
    }
 
    // 선택옵션삭제
@@ -260,6 +268,7 @@ var productCode = "";
     
     String likeCheck = member_id+"/"+productDetailList.get(0).getBasicCode();
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
+	System.out.println(productDetailList.size());
 %>
 <!-- 끝 -->
 
@@ -291,14 +300,6 @@ var productCode = "";
                   <div class="slick3 gallery-lb">
                   <%for(int i=0; i<main.length; i++){%>
                   
-						             	<!-- ----수정하기 --- -->
-							<input type="hidden" name="name" value="<%=productDetailList.get(i).getName() %>">
-							<input type="hidden" name="price" value="<%=productDetailList.get(i).getPrice()%>">
-							<input type="hidden" name="size" value="<%=productSizeList.get(i).getSize()%>">
-							<input type="hidden" name="color" value="<%=productColorList.get(i).getColor() %>">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="ca_cnt">
-							
 <%-- 							<%=productDetailList.get(0).getName() %> --%>
 <%-- 							<%=productDetailList.get(0).getPrice()%> --%>
 <%-- 							<%=productSizeList.get(i).getSize()%> --%>
@@ -319,6 +320,17 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
+                  
+						             	<!-- ----수정하기 --- -->
+<!-- 						             	 20.12.19. yj 바뀜! -->
+						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
+							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
+							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
+							<input type="hidden" name="size" value="">
+							<input type="hidden" name="color" value="">
+							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
+							<input type="hidden" name="cnt" value="0">
+							
 
                   </div>
                </div>

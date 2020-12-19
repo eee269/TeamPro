@@ -148,6 +148,7 @@ public class CartDAO extends Exception {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
+			System.out.println(num);
 			pstmt.setInt(2, ca.getCnt());
 			pstmt.setString(3, ca.getProduct_name());
 			pstmt.setInt(4, ca.getPrice());

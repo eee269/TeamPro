@@ -33,6 +33,7 @@ public class cartUpdateAction implements Action {
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		
+		System.out.println(cnt + ", " +  num);
 		
 		CartUpdateService cartUpdateService = new CartUpdateService();
 		
