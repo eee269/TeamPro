@@ -34,7 +34,7 @@ public class cartUpAction implements Action {
 			forward.setPath("MemberLoginForm.mo");
 		}
 		
-		
+		 // 히든으로 넘긴값 가져오기
 		 String product_name = request.getParameter("name");	// 상품이름
 		 int price = Integer.parseInt(request.getParameter("price"));  //가격
 		 String color = request.getParameter("color"); //색  color
@@ -45,19 +45,8 @@ public class cartUpAction implements Action {
 		 String opt_productCode = product_basicCode + color + size;  // productCode코드
 		 opt_productCode =  opt_productCode.replace(" ", ""); 	// productCode코드 공백제거
 		 int cnt = Integer.parseInt(request.getParameter("cnt")); 	// 수량
-		  
-		 
-		 System.out.println("cnt : " + cnt);
-		 System.out.println("product_name : " + product_name);
-		 System.out.println("price : " + price);
-		 System.out.println("color : " + color);
-		 System.out.println("size : " + size);
-		 System.out.println("member_id : " + member_id);
-		 System.out.println("product_basicCode : " + product_basicCode);
-		 System.out.println("opt_productCode : " + opt_productCode);
-		 
-		 System.out.println("-------------------------------------------------------");
-
+		  	
+		 // 객체 생성 후 저장
 		 Cart ca = new Cart();
 		 ca.setMember_id(member_id);
 		 ca.setColor(color);
@@ -68,21 +57,9 @@ public class cartUpAction implements Action {
 		 ca.setProduct_basicCode(product_basicCode);
 		 ca.setCnt(cnt);
 		 
-		 System.out.println("-------------------------------------------------------");
-		 System.out.println("ca.getCnt() : " + ca.getCnt());
-		 System.out.println("ca.getProduct_name() : " + ca.getProduct_name());
-		 System.out.println("ca.getPrice() : " + ca.getPrice());
-		 System.out.println("ca.getColor() : " + ca.getColor());
-		 System.out.println("ca.getSize() : " + ca.getSize());
-		 System.out.println("ca.getMember_id() : " + ca.getMember_id());
-		 System.out.println("ca.getProduct_basicCode() : " + ca.getProduct_basicCode());
-		 System.out.println("ca.getOpt_productCode() : " + ca.getOpt_productCode());
-
-		
-		
+		// 서비스 이동
 		cartGetService cartGetService = new cartGetService();
 		boolean isCartUpSuccess	= cartGetService.isCartGet(ca);
-		System.out.println("isCartUpSuccess : " +  isCartUpSuccess);
 		
 		if(!isCartUpSuccess) {
 			response.setContentType("text/html;charset=UTF-8");
