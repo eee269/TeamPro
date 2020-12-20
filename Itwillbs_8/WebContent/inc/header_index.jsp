@@ -40,6 +40,7 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
+
 <!-- 장바구니,좋아요  ajax -->
 <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
