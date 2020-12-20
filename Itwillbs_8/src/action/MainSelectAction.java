@@ -26,9 +26,8 @@ public class MainSelectAction implements Action {
 		
 		// 게시글 받아오기
 		CommListService commListService = new CommListService();
-		ArrayList<CommBean> commList = commListService.getArticleList(0, 4);
-		
-		
+		ArrayList<CommBean> commList = commListService.getArticleList(1, 4);
+		request.setAttribute("commList", commList);
 		
 		
 		BestSelectService bestSelectService = new BestSelectService();
