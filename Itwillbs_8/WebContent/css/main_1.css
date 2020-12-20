@@ -1,9 +1,6 @@
 /* BASIC css start */
 #mheader {position:absolute; z-index:1000; width:100%; width:1260px;  min-width:1260px; margin:0 auto; left:0%; right:0%; border-bottom:0px !important;}
 
-
-
-
 /* 메인 롤링이미지 */
 .main_img {width:100%; height:800px; clear:both; margin:0px; padding:0px; font-size:0px;}
 .swiper1 {width:100%; height:800px;}

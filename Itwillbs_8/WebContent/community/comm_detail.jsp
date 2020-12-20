@@ -121,17 +121,26 @@ $(document).ready(function() {
 ul.arraymodeTab>.active a{
 font-weight: bold !important;
 }
+
+/* 업로드한 게시글의 이미지 크기 강제로 맞추기 */
+.wrap-pic-w img {
+	width: 250px;
+	height: 250px;
+}
+/* 게시글 제목 밑에 구분선 추가 */
+h4.ltext-109 {
+	border-bottom: #212529 1px solid !important;
+}
 </style>
 
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Blog
+		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> 8 Inspiring Ways to Wear Dresses
-			in the Winter </span>
+		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
 	</div>
 </div>
 <!-- Content page -->
@@ -141,12 +150,7 @@ font-weight: bold !important;
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<div class="wrap-pic-w how-pos5-parent">
-						<img src="communityUpload/<%=article.getImg()%>"
-							alt="<%=article.getImg()%>">
-						<div class="flex-col-c-m size-123 bg9 how-pos5">
-							<span class="ltext-107 cl2 txt-center"> 22 </span> <span
-								class="stext-109 cl3 txt-center"> Jan 2018 </span>
-						</div>
+						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>">
 					</div>
 					<div class="p-t-32">
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
@@ -170,10 +174,9 @@ font-weight: bold !important;
 						<span class="size-216 stext-116 cl8 p-t-4"> Tags </span>
 
 						<div class="flex-w size-217">
-							<a href="#"
-								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Streetstyle </a> <a href="#"
-								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle </a>
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 								Crafts </a>
 						</div>
 					</div>
@@ -866,8 +869,7 @@ $(function(){
 				url: "CommBookCount.co",
                 type: "POST",
                 data: {
-                    num: "<%=article.getNum()%>
-	"
+                    num: "<%=article.getNum()%>"
 				},
 				success : function(count) {
 					$(".bookmark_count").html(count);
