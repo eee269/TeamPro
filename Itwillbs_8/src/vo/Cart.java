@@ -13,7 +13,18 @@ public class Cart {
 	private String member_id;
 	private String product_basicCode;
 	private String opt_productCode;
+	private String main_img;
 	
+	
+	
+	public String getMain_img() {
+		return main_img;
+	}
+
+	public void setMain_img(String main_img) {
+		this.main_img = main_img;
+	}
+
 	public String getProduct_name() {
 		return product_name;
 	}

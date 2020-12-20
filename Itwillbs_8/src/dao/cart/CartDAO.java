@@ -59,7 +59,8 @@ public class CartDAO extends Exception {
 			cart.setMember_id(rs.getString("member_id"));
 			cart.setProduct_basicCode(rs.getString("product_basicCode"));
 			cart.setOpt_productCode(rs.getString("opt_productCode"));
-			
+			cart.setMain_img(rs.getString("main_img"));
+
 			CartList.add(cart);
 			
 			
@@ -141,10 +142,10 @@ public class CartDAO extends Exception {
 			rs = pstmt2.executeQuery();
 			
 			int num = 0;
-
+			
 		if(rs.next()) {
 			num = rs.getInt("max(num)") + 1;			
-			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode)VALUES(?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode,main_img)VALUES(?,?,?,?,?,?,?,?,?,?)";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
@@ -157,7 +158,8 @@ public class CartDAO extends Exception {
 			pstmt.setString(7, ca.getMember_id());
 			pstmt.setString(8, ca.getProduct_basicCode());
 			pstmt.setString(9, ca.getOpt_productCode());
-			
+			pstmt.setString(10, ca.getMain_img());
+
 			upCount = pstmt.executeUpdate();
 			System.out.println("DAO upCount : " + upCount);
 		}
@@ -175,9 +177,60 @@ public class CartDAO extends Exception {
 	}
 	
 	
+	public int cartPlus(Cart ca) {
+		System.out.println("CartDAO - cartPlus");
+
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
+
+
+		int plusCount = 0;
+		
+		
+		try {
+			String sql = "SELECT * FROM cart WHERE opt_productCode = ?";	
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, ca.getOpt_productCode());
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				String sql2 = "SELECT cnt FROM cart WHERE opt_productCode =? and member_id = ?";
+				pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setString(1, ca.getOpt_productCode());
+				pstmt2.setString(2, ca.getMember_id());
+				rs2 = pstmt2.executeQuery();
+			}
+			int cnt2 = 0;
+			if(rs2.next()) {
+				cnt2 = rs2.getInt("cnt");
+				plusCount = 1;
+				String sql3 = "UPDATE cart SET cnt = ? WHERE opt_productCode = ? and member_id = ?";
+				pstmt3 = con.prepareStatement(sql3);
+				pstmt3.setInt(1, cnt2 + ca.getCnt());
+				pstmt3.setString(2, ca.getOpt_productCode());
+				pstmt3.setString(3, ca.getMember_id());
+
+				plusCount = pstmt3.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("cartPlus -" + e.getMessage());
+		} finally {
+			close(pstmt);
+			close(pstmt2);
+			close(pstmt3);
+			close(rs);
+			close(rs2);
+		}
+
+		
+		
+		return plusCount;
+	}
 	
-	
-	
+
 	
 	
 	

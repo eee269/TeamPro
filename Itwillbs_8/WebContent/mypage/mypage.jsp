@@ -94,8 +94,7 @@
 						<div class="user">
 							<div class="user-img">
 							<%
-// 							if(member.getImg().contains("http://") || member.getImg().contains("https://")) {
-	if(member.getImg() == null) {
+							if(member.getImg() == null) {
 								%>
 								<img alt="profileImg" src="upload/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
 								<%

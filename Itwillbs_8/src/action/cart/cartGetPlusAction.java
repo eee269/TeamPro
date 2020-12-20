@@ -9,19 +9,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import svc.cart.CartPlusService;
 import svc.cart.CartUpdateService;
 import svc.cart.cartGetService;
 import vo.ActionForward;
 import vo.Cart;
 
-public class cartUpAction implements Action {
+public class cartGetPlusAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("Action - cartUpAction");
 		HttpSession session = request.getSession();
 		ActionForward forward = null;
-		
+		Cart ca = new Cart();
+
 		boolean isCartUpSuccess	= false;
 		
 		String member_id = (String) session.getAttribute("member_id"); 	// 아이디
@@ -48,7 +50,10 @@ public class cartUpAction implements Action {
 		String[] product_basicCode = request.getParameterValues("product_basicCode");  // basicCode코드
 		String[] opt_productCode = new String[length];
 		String[] s_cnt = request.getParameterValues("cnt");
+		
 		int[] cnt = new int[length]; 	// 수량
+		String[] main_img = request.getParameterValues("main_img");
+		int result = 0;
 		
 		for(int i=0; i<length; i++) {
 			color[i] = color[i].trim(); 	// 색 공백제거
@@ -56,20 +61,10 @@ public class cartUpAction implements Action {
 			opt_productCode[i] = product_basicCode[i].toString() + color[i].toString() + size[i].toString();  // productCode코드
 			opt_productCode[i] =  opt_productCode[i].replace(" ", ""); 	// productCode코드 공백제거
 			cnt[i] = Integer.parseInt(s_cnt[i]);
-		 
-		  
-			 System.out.println("cnt : " + cnt[i]);
-			 System.out.println("product_name : " + product_name);
-			 System.out.println("price : " + price);
-			 System.out.println("color : " + color[i]);
-			 System.out.println("size : " + size[i]);
-			 System.out.println("member_id : " + member_id);
-			 System.out.println("product_basicCode : " + product_basicCode[i]);
-			 System.out.println("opt_productCode : " + opt_productCode[i]);
-			 
-			 System.out.println("-------------------------------------------------------");
-
-			 Cart ca = new Cart();
+			
+			
+			 ca = new Cart();
+			 System.out.println("ca.getCnt() : " + ca.getCnt());
 			 ca.setMember_id(member_id);
 			 ca.setColor(color[i].toString());
 			 ca.setOpt_productCode(opt_productCode[i].toString());
@@ -77,34 +72,38 @@ public class cartUpAction implements Action {
 			 ca.setProduct_name(product_name);
 			 ca.setSize(size[i]);
 			 ca.setProduct_basicCode(product_basicCode[i]);
-			 ca.setCnt(cnt[i]);
+			 ca.setCnt(cnt[i] + ca.getCnt());
+			 ca.setMain_img(main_img[i]);
 			 
-			 System.out.println("-------------------------------------------------------");
-			 System.out.println("ca.getCnt() : " + ca.getCnt());
-			 System.out.println("ca.getProduct_name() : " + ca.getProduct_name());
-			 System.out.println("ca.getPrice() : " + ca.getPrice());
-			 System.out.println("ca.getColor() : " + ca.getColor());
-			 System.out.println("ca.getSize() : " + ca.getSize());
-			 System.out.println("ca.getMember_id() : " + ca.getMember_id());
-			 System.out.println("ca.getProduct_basicCode() : " + ca.getProduct_basicCode());
-			 System.out.println("ca.getOpt_productCode() : " + ca.getOpt_productCode());
+				// 			cartUpAction -> CartPlusService -> CartDAO.cartPlus
+				//--------------------------------수정하기--------------------------------------
+			 // isPlusSuccess => true 면 중복 상품 있음 수량만 업데이트 
+			 // isPlusSuccess => false 면 중복 상품 없음 cartGetService 로 이동
 			 
 			 
+			 	// 같은 상품 있는지 체크
+			CartPlusService cartPlustService = new CartPlusService();
+			boolean isPlusSuccess = cartPlustService.isCartPlus(ca);
+			System.out.println("isPlusSuccess : " + isPlusSuccess);
+			
+				//--------------------------------수정하기--------------------------------------
+				
 			 // 이거..리스트로..바꿀까..?
-			 cartGetService cartGetService = new cartGetService();
-			 isCartUpSuccess= cartGetService.isCartGet(ca);
-			 System.out.println("isCartUpSuccess : " +  isCartUpSuccess);
+			if(!isPlusSuccess) {
+				cartGetService cartGetService = new cartGetService();
+				isCartUpSuccess= cartGetService.isCartGet(ca);
+				System.out.println("isCartUpSuccess : " +  isCartUpSuccess);
+			}
 		 }
 		 
 		
 		if(!isCartUpSuccess) {
-			response.setContentType("text/html;charset=UTF-8");
-			PrintWriter out = response.getWriter();
-			out.println("<script>");
-			out.println("alert('담기 실패!')");
-			out.println("history.back()");
-			out.println("</script>");
+			// 수량만 업데이트
+			forward = new ActionForward();
+			forward.setPath("Cart.ca");
+			forward.setRedirect(true);
 		} else {
+			// 상품 업데이트
 			forward = new ActionForward();
 			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
