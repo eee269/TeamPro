@@ -894,8 +894,8 @@ function sendLink() {
       imageUrl:
         'upload/productUploadImg/<%=article.getImg() %>',
       link: {
-        mobileWebUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-        webUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
       },
     },
     social: {
@@ -907,8 +907,8 @@ function sendLink() {
       {
         title: '웹으로 보기',
         link: {
-          mobileWebUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-          webUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+          mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+          webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
         }
       }]
   })
