@@ -32,7 +32,7 @@ public class OrderProService {
 			return isInsertSuccess;
 		}
 
-		public boolean insertDetailOrder(int num, String code) {
+		public boolean insertDetailOrder(String[] nums, String code) {
 			System.out.println("OrderProService - InsertDetailOrder!");
 			boolean isInsertSuccess = false;
 			
@@ -42,7 +42,10 @@ public class OrderProService {
 			
 			orderDAO.setConnection(con);
 			
-			int insertCount = orderDAO.insertDetailOrder(num,code);
+			for(String str : nums) {
+				System.out.println("orderPRo : "+str);
+			}
+			int insertCount = orderDAO.insertDetailOrder(nums,code);
 			
 			if(insertCount > 0) {
 				commit(con);

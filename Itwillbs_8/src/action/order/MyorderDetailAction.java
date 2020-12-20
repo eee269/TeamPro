@@ -31,12 +31,6 @@ public class MyorderDetailAction implements Action {
 			out.println("</script>");
 			
 			forward.setPath("MemberLoginForm.mo");
-		} else if (!member_id.equals("admin")) {
-			out.println("<script>");
-			out.println("alert('접근 권한이 없습니다.')");
-			out.println("</script>");
-			
-			forward.setPath("Main.go");
 		} else {
 		MyorderDetailService service = new MyorderDetailService();
 		OrderBean mainorder = service.selectMainorder(mainorder_code);
