@@ -330,6 +330,20 @@ margin-left:0px;}
 	font-weight: 700;
 	text-decoration: none;
 }
+
+/* 구글, 네이버, 카카오 api 아이콘 정렬 */
+.api {
+	text-align: center;
+}
+.api div, .api img {
+  	display: inline-block;
+  	vertical-align: middle;
+	padding-right: 10px;
+	height: 40px;
+}
+#naver_id_login img {
+	width: 130px;
+}
 </style>
 <script type="text/javascript">
 	var checkIdResult = false, checkPasswdResult = false; 
@@ -460,7 +474,7 @@ margin-left:0px;}
 		// 페이지 로딩 시 자동으로 값들고오지 않게 끔.
 		var auth2 = gapi.auth2.currentUser.get().getBasicProfile();
 // 		  var profile = googleUser.getBasicProfile();
-		  alert('img: ' + profile.getImageUrl());
+// 		  alert('img: ' + profile.getImageUrl());
 		  id = profile.getId();
 		  username = profile.getName();
 		  img = profile.getImageUrl();
@@ -521,19 +535,17 @@ margin-left:0px;}
 							<a href="#" class="more">Forgot your password?</a>
 						</div>
 					</form>
-					<!-- 구글 로그인 버튼 노출 영역 -->
-					<div class="g-signin2" data-onsuccess="onSignIn"></div>
-					<!-- //구글 로그인 버튼 노출 영역 -->
-					 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-  					<div id="naver_id_login"></div>
-  					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-  					<!-- 카카오 로그인 버튼 노출 영역 -->
-<!--   					<a id="custom-login-btn" href="javascript:loginWithKakao()"> -->
-<!-- 					  <img src="//k.kakaocdn.net/14/dn/btqCn0WEmI3/nijroPfbpCa4at5EIsjyf0/o.jpg" -->
-<!-- 					    width="222" /> -->
-<!-- 					</a> -->
-					<a id="kakao-login-btn"></a>
-					<!-- //카카오 로그인 버튼 노출 영역 -->
+					<div class="api">
+						<!-- 구글 로그인 버튼 노출 영역 -->
+						<div class="g-signin2" data-onsuccess="onSignIn"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<!-- //구글 로그인 버튼 노출 영역 -->
+						 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
+	  					<div id="naver_id_login"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+	  					<!-- 카카오 로그인 버튼 노출 영역 -->
+						<a id="kakao-login-btn"></a>
+						<!-- //카카오 로그인 버튼 노출 영역 -->
+					</div>
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
