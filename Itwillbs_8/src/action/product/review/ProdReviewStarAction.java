@@ -23,14 +23,16 @@ public class ProdReviewStarAction implements Action {
 		
 		String json = "{\"star\":[{";
 		int num = 1;
+		int total = 0;
 		for(int i : starScore) {
-			json += "\"score"+num+"\":\""+i+"\"";
+			total += i;
+			json += "\""+num+"\":\""+i+"\"";
 			num++;
 			if(num != 6) {
 				json += ",";
 			}
 		}
-		json += "}]}";
+		json += "}],\"total\":\""+total+"\"}";
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();

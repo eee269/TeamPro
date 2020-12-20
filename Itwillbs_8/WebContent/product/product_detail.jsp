@@ -1,4 +1,3 @@
-<%-- <%@page import="jdk.internal.misc.FileSystemOption"%> --%>
 <%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
@@ -25,6 +24,10 @@
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
+
+<!-- 카카오 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -35,17 +38,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<style type="text/css">
-.rat {
-   margin: 150px auto;
-   font-size: 20px;
-}
-
-.mini_rat {
-   margin: 150px auto;
-   font-size: 15px;
-}
-</style>
 
 <!-- TAB기능 스타일 -->
 <style>
@@ -288,7 +280,7 @@ var productCode = "";
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
       <!-- 폼 -->
-   <form action="cartUpAction.ca" method="post" name="cartUp">
+   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
       <!-- 폼 -->
       <div class="row">
          <div class="col-md-6 col-lg-7 p-b-30">
@@ -311,6 +303,7 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
+                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -426,6 +419,11 @@ var productCode = "";
                         src="images/icons/icon-heart-01.png" alt="ICON">
                      </a>
                    <% } %>
+                   <!-- 카카오톡으로 공유하기 기능 -->
+                   &nbsp;&nbsp;&nbsp;
+                   <a id="kakao-link-btn" href="javascript:sendLink()">
+  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="20px"/>
+				   </a>
                   </div>
 
                   <a href="#"
@@ -521,34 +519,18 @@ var productCode = "";
 						</dl>
 						<div class="chart">
 							<ul>
-								<li><span class="tit">5 Stars</span> <span class="bar">
-										<span class="absscore5 " style="width: 0%"></span>
-								</span> <span class="score5 num"></span></li>
-								<li><span class="tit">4 Stars</span> <span class="bar">
-										<span class="absscore4" style="width: 0%"></span>
-								</span> <span class="score4 num"></span></li>
-								<li><span class="tit">3 Stars</span> <span class="bar">
-										<span class="absscore3" style="width: 0%"></span>
-								</span> <span class="score3 num"></span></li>
-								<li><span class="tit">2 Stars</span> <span class="bar">
-										<span class="absscore2" style="width: 0%"></span>
-								</span> <span class="score2 num"></span></li>
-								<li><span class="tit">1 Stars</span> <span class="bar">
-										<span class="absscore1" style="width: 0%"></span>
-								</span> <span class="score1 num"></span></li>
 							</ul>
 						</div>
 						<div class="photo">
 							<ul>
-								<li><a
-									href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img
-										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg"
-										alt=""></a>
-								</li>
+<!-- 								<li><a -->
+<!-- 									href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img -->
+<!-- 										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg" -->
+<!-- 										alt=""></a> -->
+<!-- 								</li> -->
 							</ul>
 						</div>
 						<p class="like">
-							<strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
 						</p>
 					</div>
 					<div class="PR15N01-hd" id="viewPoint">
@@ -575,305 +557,299 @@ var productCode = "";
 				</div>
 				<!-- #powerReview-->
 				<p style="clear: both"></p>
+            <div class="cboth pdt100"></div>
+            <div id="page03" class="cboth pdt100"></div>
+            <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+            <jsp:include page="../inc/detail_tabmenu.jsp" />
+            <div class="tit-detail">
+            </div>
+            <!-- qna 리스트 시작 -BIN- -->
+            <div class="table-slide qna-list">
+               <table summary="번호, 제목, 작성자, 작성일, 조회">
+                  <caption>QnA 리스트</caption>
+                  <colgroup>
+                     <col width="80">
+                     <col width="30">
+                     <col width="*">
+                     <col width="100">
+                     <col width="100">
+                     <col width="80">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th scope="col"><div class="tb-center">NO</div></th>
+                        <th scope="col"></th>
+                        <th scope="col"><div class="tb-center">SUBJECT</div></th>
+                        <th scope="col"><div class="tb-center">NAME</div></th>
+                        <th scope="col"><div class="tb-center">DATE</div></th>
+                        <th scope="col"><div class="tb-center">HIT</div></th>
+                     </tr>
+                  </thead>
+                  <%
+                     for (int i = 0; i < qnaList.size(); i++) {
+                        if(qnaList.get(i).getQna_re_seq()==0){
+                  %>
+                  <tbody>
+                     <tr class="nbg">
+                        <td>
+                           <div class="tb-center">
+                              <span class="qnanum"><%=qnaList.get(i).getQna_num()%></span>
+                           </div>
+                        </td>
+                        <td>
+                           <div class="tb-center"></div>
+                        </td>
+                        <td>
+                           <div class="tb-left reply_depth0">
+                              <span><a href="javascript:void(0)" onclick = "show_hide(this); return false;"><%=qnaList.get(i).getQna_subject()%></a></span>
+                              <span style="font-size: 8pt;">(1)</span>
+                           </div>
+                        </td>
+                        <td>
+                           <div class="tb-center">
+                           <%=qnaList.get(i).getUsername()%>
+                           </div>
+                        </td>
+                        <td>
+                           <div class="tb-center">
+                           <%=qnaList.get(i).getQna_date()%>
+                           </div>
+                        </td>
+                        <td>
+                           <div class="tb-center">
+                              <span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
+                           </div>
+                        </td>
+                     </tr>
+                     <tr class="MS_qna_content_box cnt2" id="qna_board_block1" style="display: none;">
+                        <td colspan="6">
+                           <div class="tb-left">
+                              <div class="qna_board_content">
+                                 <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
+                                    <%=qnaList.get(i).getQna_content() %>
+                                 </div>
+                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
+                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
+                                 <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
+                                 <div class="MS_cmt_list_box">
+                                    <div class="comment_depth1">
+                                       <table class="MS_cmt_list" border="0" cellspacing="0" cellpadding="0">
+                                          <tbody>
+                                             <tr>
+                                                <td class="MS_cmt_detail">
+                                                   <span class="MS_cmt_date">답글란입니다</span> <br>
+                                                   <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span>
+                                                   <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span>
+                                                   <div class="MS_cmt_content MS_cmt_depth01">
+                                                      <%=qnaList.get(i).getQna_content() %>
+                                                   </div>
+                                                </td>
+                                             </tr>
+                                          </tbody>
+                                       </table>
+                                    </div>
+                                 </div>
+                                 <%}else if(qnaList.get(i+1).getQna_re_seq()==0){%>
+                              </div>
+                           </div>
+                        </td>
+                     </tr>
+                  </tbody>
+                     <%}
+                  }%>
+                  </table>
+                  <!-- qna pagin -->
+                  <div class="list-btm">
+                     <div class="paging-wrap">
+                        <div class="paging">
+                           <%
+                              if (nowPage <= 1) {
+                           %>
+                              <input type="button" value="이전">&nbsp;
+                           <%
+                              } else {
+                           %>
+                              <input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>'">&nbsp;
+                           <%
+                              }
+                           %>
+                              <%
+                                 for (int i = startPage; i <= endPage; i++) {
+                                 if (i == nowPage) {
+                              %>
+                                    [<%=i%>]&nbsp;
+                                 <%
+                                    } else {
+                                 %>
+                                    <a href="ProductDetail.po?basicCode=<%=basicCode%>"  class="now">[<%=i%>]</a>&nbsp;
+                                 <%
+                                    }
+                                 %>
+                           <%
+                              }
+                           %>
+                           <%
+                              if (nowPage >= maxPage) {
+                           %>
+                              <input type="button" value="다음">
+                           <%
+                              } else {
+                           %>
+                              <input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>'">
+                           <%
+                              }
+                           %>
+                        </div>
+                     </div>
+                     <div class="btm_write">
+                        <a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
+                     </div>
+                  </div>
+               </div>
+               <!-- qna pagin -->
+               <!-- qna 리스트 끝 -BIN- -->
 
-				<div class="cboth pdt100"></div>
-				<div id="page03" class="cboth pdt100"></div>
-				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
-				<jsp:include page="../inc/detail_tabmenu.jsp" />
-				<div class="tit-detail">
-				</div>
-				<!-- qna 리스트 시작 -BIN- -->
-				<div class="table-slide qna-list">
-					<table summary="번호, 제목, 작성자, 작성일, 조회">
-						<caption>QnA 리스트</caption>
-						<colgroup>
-							<col width="80">
-							<col width="30">
-							<col width="*">
-							<col width="100">
-							<col width="100">
-							<col width="80">
-						</colgroup>
-						<thead>
-							<tr>
-								<th scope="col"><div class="tb-center">NO</div></th>
-								<th scope="col"></th>
-								<th scope="col"><div class="tb-center">SUBJECT</div></th>
-								<th scope="col"><div class="tb-center">NAME</div></th>
-								<th scope="col"><div class="tb-center">DATE</div></th>
-								<th scope="col"><div class="tb-center">HIT</div></th>
-							</tr>
-						</thead>
-						<%
-							for (int i = 0; i < qnaList.size(); i++) {
-								if(qnaList.get(i).getQna_re_seq()==0){
-						%>
-						<tbody>
-							<tr class="nbg">
-								<td>
-									<div class="tb-center">
-										<span class="qnanum"><%=qnaList.get(i).getQna_num()%></span>
-									</div>
-								</td>
-								<td>
-									<div class="tb-center"></div>
-								</td>
-								<td>
-									<div class="tb-left reply_depth0">
-										<span><a href="javascript:void(0)" onclick = "show_hide(this); return false;"><%=qnaList.get(i).getQna_subject()%></a></span>
-										<span style="font-size: 8pt;">(1)</span>
-									</div>
-								</td>
-								<td>
-									<div class="tb-center">
-									<%=qnaList.get(i).getUsername()%>
-									</div>
-								</td>
-								<td>
-									<div class="tb-center">
-									<%=qnaList.get(i).getQna_date()%>
-									</div>
-								</td>
-								<td>
-									<div class="tb-center">
-										<span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
-									</div>
-								</td>
-							</tr>
-							<tr class="MS_qna_content_box cnt2" id="qna_board_block1" style="display: none;">
-								<td colspan="6">
-									<div class="tb-left">
-										<div class="qna_board_content">
-											<div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
-												<%=qnaList.get(i).getQna_content() %>
-											</div>
-											<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-											<a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
-											<%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
-											<div class="MS_cmt_list_box">
-												<div class="comment_depth1">
-													<table class="MS_cmt_list" border="0" cellspacing="0" cellpadding="0">
-														<tbody>
-															<tr>
-																<td class="MS_cmt_detail">
-																	<span class="MS_cmt_date">답글란입니다</span> <br>
-																	<span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span>
-																	<span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span>
-																	<div class="MS_cmt_content MS_cmt_depth01">
-																		<%=qnaList.get(i).getQna_content() %>
-																	</div>
-																</td>
-															</tr>
-														</tbody>
-													</table>
-												</div>
-											</div>
-											<%}else if(qnaList.get(i+1).getQna_re_seq()==0){%>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-							<%}
-						}%>
-						</table>
-						<!-- qna pagin -->
-						<div class="list-btm">
-							<div class="paging-wrap">
-								<div class="paging">
-									<%
-										if (nowPage <= 1) {
-									%>
-										<input type="button" value="이전">&nbsp;
-									<%
-										} else {
-									%>
-										<input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>'">&nbsp;
-									<%
-										}
-									%>
-										<%
-											for (int i = startPage; i <= endPage; i++) {
-											if (i == nowPage) {
-										%>
-												[<%=i%>]&nbsp;
-											<%
-												} else {
-											%>
-												<a href="ProductDetail.po?basicCode=<%=basicCode%>"  class="now">[<%=i%>]</a>&nbsp;
-											<%
-												}
-											%>
-									<%
-										}
-									%>
-									<%
-										if (nowPage >= maxPage) {
-									%>
-										<input type="button" value="다음">
-									<%
-										} else {
-									%>
-										<input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>'">
-									<%
-										}
-									%>
-								</div>
-							</div>
-							<div class="btm_write">
-								<a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
-							</div>
-						</div>
-					</div>
-					<!-- qna pagin -->
-					<!-- qna 리스트 끝 -BIN- -->
+            <div class="cboth pdt100"></div>
+            <div id="page04" class="cboth pdt100"></div>
+            <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+            <jsp:include page="../inc/detail_tabmenu.jsp" />
 
-				<div class="cboth pdt100"></div>
-				<div id="page04" class="cboth pdt100"></div>
-				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
-				<jsp:include page="../inc/detail_tabmenu.jsp" />
+            <div class="cboth pdt30"></div>
 
-				<div class="cboth pdt30"></div>
-
-				<!-- s: 상품 일반정보(상품정보제공 고시) -->
-				<div id="productWrap">
-					<table>
-						<colgroup>
-							<col width="210">
-							<col width="*">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th><span>종류</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>소재</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>색상</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>크기</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>제조자</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>제조국</span></th>
-								<td><span>상세설명참조</span></td>
-							</tr>
-							<tr>
-								<th><span>품질보증기준</span></th>
-								<td><span>관련법 및 소비자 분쟁해결 규정에 따름</span></td>
-							</tr>
-							<tr>
-								<th><span>A/S 책임자와 전화번호</span></th>
-								<td><span>(주)내자인/02-6224-8900</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-
-
-				<!-- e: 상품 일반정보(상품정보제공 고시) -->
-
-				<div class="cboth pdt100"></div>
-				<div id="page05" class="cboth pdt100"></div>
-				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
-				<jsp:include page="../inc/detail_tabmenu.jsp" />
+            <!-- s: 상품 일반정보(상품정보제공 고시) -->
+            <div id="productWrap">
+               <table>
+                  <colgroup>
+                     <col width="210">
+                     <col width="*">
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <th><span>종류</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>소재</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>색상</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>크기</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>제조자</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>제조국</span></th>
+                        <td><span>상세설명참조</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>품질보증기준</span></th>
+                        <td><span>관련법 및 소비자 분쟁해결 규정에 따름</span></td>
+                     </tr>
+                     <tr>
+                        <th><span>A/S 책임자와 전화번호</span></th>
+                        <td><span>(주)내자인/02-6224-8900</span></td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
 
 
-				<!-- 배송/반품안내 내용 삽입영역 -->
-				<div class="deli_info_area">
-					<div class="deli_title">1. 주문 및 배송</div>
-					<div class="deli_txt01">
-						- 평일 오전 9시 이전 주문건은 당일 출고 진행되며, 이후 주문건은 익일(평일 기준) 출고 됩니다.<br>
-						- 당일 주문 건 중 물류에 재고가 없을 경우, 약 2~3일의 재고 수급 기간이 소요될 수 있으며,<br>
-						&nbsp;&nbsp;부득이하게 재고 수급이 불가할 경우, 품절 안내를 드릴 수 있으니 구매 시 참고 부탁 드립니다.<br>
-						- 사이즈 및 무게는 기준에 따라 약간의 오차가 있을 수 있으며, 모니터 사양에 따라 색상이 다르게 보일 수 있습니다.
-					</div>
+            <!-- e: 상품 일반정보(상품정보제공 고시) -->
 
-					<div class="deli_txt02">
-						<div class="deli_title02">
-							<span></span> 주문 전 오야니 프리미엄 가죽에 대한 정보를 확인해 주세요.
-						</div>
-						글로벌 토탈 패션 브랜드 오야니(ORYANY)는 명품 하우스에서 사용하는 최고급 소재를 고집하여 세계 최고의 검사,
-						검증,<br> 테스트를 인증하는 SGS*의 인증처에서 엄격한 품질, 공정관리를 거쳐 제작되었습니다. 패셔너블한
-						디자인으로 최상의 제품<br> 퀄리티를 선보이는 동시에 최고의 가치소비를 지향하며 합리적인 가격대를
-						제시합니다.<br> 오야니의 가죽은 천연가죽으로, 미세한 핏줄자국, 주름, 반점 등이 보일 수 있습니다.
-						천연가죽의 특성으로 인한 가죽의 상태와,<br> 제거가 가능한 실밥, 봉제선의 미세한 흔들림 등 핸드메이드
-						공정 중 발생할 수 있는 현상들은 제품의 불량 사유에 해당하지<br> 않으니, 참고 부탁 드립니다.<br>
-						* SGS는 국제표준(ISO)절차를 준수하는 세계 최고의 검사, 검증, 테스트 및 인증 회사입니다.
-						<div class="deli_title02">
-							<span></span> LAUNDRY &amp; FABRIC CARE
-						</div>
-						- 천연가죽은 사람 피부와 동일 하므로 사용시 표면에 흠집 또는 색이 벗겨질 수 있습니다. 이는 제품의 하자가 아닌
-						사용에 의한<br> &nbsp;&nbsp;자연적인 현상입니다.<br> - 상품 보관시 직사광선이나
-						온도, 또는 습기가 높은 곳을 피하십시오.<br> - 가죽 염료는 수성이므로 면,마, 린넨 등의 흰 천연
-						섬유에 오염될 염려가 있으므로 습기,땀 등에 주의하셔야 합니다.<br> - 천연가죽(스웨이드) 제품은 물에
-						젖었을 경우 물이 빠질 수 있습니다.<br> - 에나멜, 가죽 및 합성피혁은 다른 소재와 밀착시 색이 이염되는
-						현상이 있사오니, 취급 또는 보관시 주의하십시오.<br> - 볼펜이나 신문, 잡지 등에 색이 이염될 수 있으니
-						주의해주시기 바랍니다.<br> - 물에 젖었을 경우 직사광선이나 열로 직접 건조하면 변질될 수 있으니 통풍이
-						잘 되는 그늘에서 건조하시기 바랍니다.<br> - 가죽전용 크림으로 주 1회 정도 손질하여 주시면 제품을 오래
-						사용하실 수 있습니다.<br> &nbsp;&nbsp;(단, 소재가 세무 종류일 경우에는 가죽 전용솔 및 깨끗한
-						고무 지우개만 사용 가능)<br> - 오염되었을 때는 가죽전용 크림으로 세척하시고 일반세척제나 벤졸은 절대
-						사용하시면 안됩니다.
-					</div>
+            <div class="cboth pdt100"></div>
+            <div id="page05" class="cboth pdt100"></div>
+            <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+            <jsp:include page="../inc/detail_tabmenu.jsp" />
 
-					<div class="deli_title">2. 교환 및 반품</div>
-					<div class="deli_txt01">
-						- 교환/반품 신청은 구매하신 사이트를 통해 접수 가능합니다.<br> - 상품 수령 후 7일 이내 미사용
-						제품에 한해 신청 가능하며, 반품 상품 입고 확인 후 약 2~3일의 검품기간을 거쳐 교환/반품 진행됩니다.<br>
-						&nbsp;&nbsp;(무통장 입금 건의 경우, 검품 완료 후 약 4~5일 정도의 환불 기간이 소요될 수 있습니다.)<br>
-						- 오야니 직영몰 회원분께는 교환/반품 신청시 회수 접수 진행을 해드리고 있으며, 1회에 한해 무료 교환/반품
-						가능합니다.
-					</div>
 
-					<div class="deli_txt02">
-						<div class="deli_title02">
-							<span></span> 교환/반품 불가 사유
-						</div>
-						- 상품 TAG을 제거 또는 포장 등의 손상이 있을 경우<br> - 제품을 사용했거나 사용 흔적이 있을 경우
-						/ 향수 또는 화장품 등 이물이 묻었을 경우<br> - 제품 구성품을 분실 또는 동봉하지 않은 경우<br>
-						- 미세한 스크래치 또는 실밥, 이중 봉제 등 불량이 아닌 사유로 교환/반품 신청할 경우<br> - 포장 상태
-						불량으로 인한 제품 훼손의 경우<br> - 구매 내역이 확인되지 않을 경우<br> - 교환/반품
-						접수를 하지 않고 상품만 반송한 경우
-					</div>
+            <!-- 배송/반품안내 내용 삽입영역 -->
+            <div class="deli_info_area">
+               <div class="deli_title">1. 주문 및 배송</div>
+               <div class="deli_txt01">
+                  - 평일 오전 9시 이전 주문건은 당일 출고 진행되며, 이후 주문건은 익일(평일 기준) 출고 됩니다.<br>
+                  - 당일 주문 건 중 물류에 재고가 없을 경우, 약 2~3일의 재고 수급 기간이 소요될 수 있으며,<br>
+                  &nbsp;&nbsp;부득이하게 재고 수급이 불가할 경우, 품절 안내를 드릴 수 있으니 구매 시 참고 부탁 드립니다.<br>
+                  - 사이즈 및 무게는 기준에 따라 약간의 오차가 있을 수 있으며, 모니터 사양에 따라 색상이 다르게 보일 수 있습니다.
+               </div>
 
-					<div class="deli_title">3. A/S 접수</div>
-					<div class="deli_txt01">
-						- 품질 보증 기준 : 구입일로부터 1년 (수선 내용에 따라 무상 또는 유상 수선 진행)<br> - 구매하시는
-						고객님께는 개런티 카드가 발송되며, 개런티 카드를 지참하셔야 A/S가 가능합니다.<br> 1) 전국 오야니
-						매장 방문 접수 (면세점 접수 불가)<br> 2) 택배 접수<br> - 고객정보, 구매정보, 수선
-						요청 사항 기재 / 개런티 카드 (또는 구매내역서) 동봉<br> - 택배지 주소 : (04995) 서울시
-						광진구 군자동 동일로 284, 4층 오야니 AS담당자 앞 (T.02-6224-8900)
-					</div>
+               <div class="deli_txt02">
+                  <div class="deli_title02">
+                     <span></span> 주문 전 오야니 프리미엄 가죽에 대한 정보를 확인해 주세요.
+                  </div>
+                  글로벌 토탈 패션 브랜드 오야니(ORYANY)는 명품 하우스에서 사용하는 최고급 소재를 고집하여 세계 최고의 검사,
+                  검증,<br> 테스트를 인증하는 SGS*의 인증처에서 엄격한 품질, 공정관리를 거쳐 제작되었습니다. 패셔너블한
+                  디자인으로 최상의 제품<br> 퀄리티를 선보이는 동시에 최고의 가치소비를 지향하며 합리적인 가격대를
+                  제시합니다.<br> 오야니의 가죽은 천연가죽으로, 미세한 핏줄자국, 주름, 반점 등이 보일 수 있습니다.
+                  천연가죽의 특성으로 인한 가죽의 상태와,<br> 제거가 가능한 실밥, 봉제선의 미세한 흔들림 등 핸드메이드
+                  공정 중 발생할 수 있는 현상들은 제품의 불량 사유에 해당하지<br> 않으니, 참고 부탁 드립니다.<br>
+                  * SGS는 국제표준(ISO)절차를 준수하는 세계 최고의 검사, 검증, 테스트 및 인증 회사입니다.
+                  <div class="deli_title02">
+                     <span></span> LAUNDRY &amp; FABRIC CARE
+                  </div>
+                  - 천연가죽은 사람 피부와 동일 하므로 사용시 표면에 흠집 또는 색이 벗겨질 수 있습니다. 이는 제품의 하자가 아닌
+                  사용에 의한<br> &nbsp;&nbsp;자연적인 현상입니다.<br> - 상품 보관시 직사광선이나
+                  온도, 또는 습기가 높은 곳을 피하십시오.<br> - 가죽 염료는 수성이므로 면,마, 린넨 등의 흰 천연
+                  섬유에 오염될 염려가 있으므로 습기,땀 등에 주의하셔야 합니다.<br> - 천연가죽(스웨이드) 제품은 물에
+                  젖었을 경우 물이 빠질 수 있습니다.<br> - 에나멜, 가죽 및 합성피혁은 다른 소재와 밀착시 색이 이염되는
+                  현상이 있사오니, 취급 또는 보관시 주의하십시오.<br> - 볼펜이나 신문, 잡지 등에 색이 이염될 수 있으니
+                  주의해주시기 바랍니다.<br> - 물에 젖었을 경우 직사광선이나 열로 직접 건조하면 변질될 수 있으니 통풍이
+                  잘 되는 그늘에서 건조하시기 바랍니다.<br> - 가죽전용 크림으로 주 1회 정도 손질하여 주시면 제품을 오래
+                  사용하실 수 있습니다.<br> &nbsp;&nbsp;(단, 소재가 세무 종류일 경우에는 가죽 전용솔 및 깨끗한
+                  고무 지우개만 사용 가능)<br> - 오염되었을 때는 가죽전용 크림으로 세척하시고 일반세척제나 벤졸은 절대
+                  사용하시면 안됩니다.
+               </div>
 
-				</div>
+               <div class="deli_title">2. 교환 및 반품</div>
+               <div class="deli_txt01">
+                  - 교환/반품 신청은 구매하신 사이트를 통해 접수 가능합니다.<br> - 상품 수령 후 7일 이내 미사용
+                  제품에 한해 신청 가능하며, 반품 상품 입고 확인 후 약 2~3일의 검품기간을 거쳐 교환/반품 진행됩니다.<br>
+                  &nbsp;&nbsp;(무통장 입금 건의 경우, 검품 완료 후 약 4~5일 정도의 환불 기간이 소요될 수 있습니다.)<br>
+                  - 오야니 직영몰 회원분께는 교환/반품 신청시 회수 접수 진행을 해드리고 있으며, 1회에 한해 무료 교환/반품
+                  가능합니다.
+               </div>
 
-			</div>
+               <div class="deli_txt02">
+                  <div class="deli_title02">
+                     <span></span> 교환/반품 불가 사유
+                  </div>
+                  - 상품 TAG을 제거 또는 포장 등의 손상이 있을 경우<br> - 제품을 사용했거나 사용 흔적이 있을 경우
+                  / 향수 또는 화장품 등 이물이 묻었을 경우<br> - 제품 구성품을 분실 또는 동봉하지 않은 경우<br>
+                  - 미세한 스크래치 또는 실밥, 이중 봉제 등 불량이 아닌 사유로 교환/반품 신청할 경우<br> - 포장 상태
+                  불량으로 인한 제품 훼손의 경우<br> - 구매 내역이 확인되지 않을 경우<br> - 교환/반품
+                  접수를 하지 않고 상품만 반송한 경우
+               </div>
 
-		</div>
-		<!-- productDetail -->
-		<!-- 상세정보 끝 -->
+               <div class="deli_title">3. A/S 접수</div>
+               <div class="deli_txt01">
+                  - 품질 보증 기준 : 구입일로부터 1년 (수선 내용에 따라 무상 또는 유상 수선 진행)<br> - 구매하시는
+                  고객님께는 개런티 카드가 발송되며, 개런티 카드를 지참하셔야 A/S가 가능합니다.<br> 1) 전국 오야니
+                  매장 방문 접수 (면세점 접수 불가)<br> 2) 택배 접수<br> - 고객정보, 구매정보, 수선
+                  요청 사항 기재 / 개런티 카드 (또는 구매내역서) 동봉<br> - 택배지 주소 : (04995) 서울시
+                  광진구 군자동 동일로 284, 4층 오야니 AS담당자 앞 (T.02-6224-8900)
+               </div>
 
-	</div>
+            </div>
 
-	<div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
-		<span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> 
-<%-- 		<span class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span> --%>
-	</div>
+         </div>
+
+      </div>
+      <!-- productDetail -->
+      <!-- 상세정보 끝 -->
+
+   </div>
+
+   <div class="bg6 flex-c-m flex-w size-302 m-t-73 p-tb-15">
+      <span class="stext-107 cl6 p-lr-25"> SKU: JAK-01 </span> 
+<%--       <span class="stext-107 cl6 p-lr-25"> Categories: <%=productDetailList.get(0).getBasicCode() %>, Men </span> --%>
+   </div>
 </section>
-<!-- 자바스크립트 코드들 .js 파일로 변환하면 쓸 코드 -->
-<%-- <script type="text/javascript" src="js/prodReview.js?basicCode=<%=basicCode%>&member_id=<%=member_id%>"></script> --%>
-<!-- 자바스크립트 코드들 .js 파일로 변환하면 쓸 코드 -->
-
-
 <script type="text/javascript">
 	var basicCode = '<%=basicCode%>';
 	var member_id = '<%=member_id%>';
@@ -964,7 +940,8 @@ var productCode = "";
                 	$('head').append('<script src=\'js/bootstrap4-rating-input.js\'><\/script>');
                 	jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
             		var json = JSON.parse(jsonObject);
-            		
+            		// 평점 옆 사진 초기화
+            		$('.photo ul').html("");
             		// 포토리뷰, 일반리뷰 따로 가져오기 위해 2번 반복
                 	for (key in json){
                 		jsonReplace = json[key].replace(/\s{2,}/gi,"\\r\\n");
@@ -1045,6 +1022,12 @@ var productCode = "";
 			    	                    						+"</li>"
 		    	                    						+"</ul>"
 	    	                    						+"</div>";
+	    	                    						// 평점 옆 사진 추가 하는 코드
+	    	                    						var photoCount = 0;
+	    	                    						if(photoCount != 8){
+	    	                    							var photo = "<li><img src='upload/prodReviewUpload/"+reply.product_img +"'></li>";
+	    	                    							$('.photo ul').append(photo);
+	    	                    						}
 	    	                    			isImg = true;
 			    	                    }else if(j == 5){
 			    	                    	output += "<div class='reply'>"
@@ -1184,21 +1167,34 @@ var productCode = "";
             success: function (json) {
             	var jsonParse = JSON.parse(json);
             	var star = jsonParse.star[0];
-            	// 별점 총 개수
-           		var score = 0;
+            	// 별점 총 갯수
+            	var total = jsonParse.total;
            		// 별점 총 합
-           		var total = 0;
-           		var num = 1;
+           		var score = 0;
+           		// 별점 호감도 측정
+           		var starLike = 0;
+           		var starChart = "";
+           		
             	for(key in star){
-            		score += star[key]*1;
-            		total += star[key]*num*1;
-            		$('.'+key).html(star[key]);
-//             		$('.'+key).parent().css('width','50%');
-            		num++;
+            	if(key > 2){
+            		starLike += star[key]*1;
             	}
-            		total = (total / score *1).toFixed(1);
-            		$('.score dt').html(total);
-            		$('.score span').html(score);
+           		score += key*star[key]*1;
+            	starChart += "<li>"
+           						+"<span class='tit'>star"+key+"</span>"
+           							+"<span class='bar'>"
+										+"<span class='abs' style='width: "+100 / total * star[key] * 1+"%'></span>"
+									+"</span>"
+									+"<span class='num'>"+star[key]+"</span>"
+							+"</li>";
+            		
+            	}
+           		var like = "<strong>"+(starLike / total * 100).toFixed(1)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
+            		result = (score / total *1).toFixed(1);
+            		$('.like').html(like);
+            		$('.chart ul').html(starChart);
+            		$('.score dt').html(result);
+            		$('.score span').html(total);
             	
             },
     		error: function(request,status,error){
@@ -1295,9 +1291,8 @@ function prr_replySub(num,re_ref,isImg){
             	isImg : isImg
             },
             success: function () {
-            	alert("리뷰 답글 등록 완료");
-            	$("#prr_content").val("");
-            	getReplyCall();
+               alert("리뷰 수정 완료");
+               getReplyCall();
             },
 			error: function(request,status,error){
 		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -1401,60 +1396,80 @@ function prd_review(num){
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
 function show_hide(){
-	$(function(){
-		var content = $('.MS_qna_content_box').css('display');
-		if(content == 'table-row' || content == 'block'){
-			$('.MS_qna_content_box').css('display','none');
-		}else {
-			$('.MS_qna_content_box').css('display','inline-block').focus();
-		}
-	});
+   $(function(){
+      var content = $('.MS_qna_content_box').css('display');
+      if(content == 'table-row' || content == 'block'){
+         $('.MS_qna_content_box').css('display','none');
+      }else {
+         $('.MS_qna_content_box').css('display','table-row').focus();
+      }
+   });
 };
-
-// review 답글 클릭 시 보여주기
-function showReply(num){
-	$(function(){
-		var form = $('#prm_form'+num).css('display');
-		if(form == 'table-row' || form == 'inline' || form == 'block'){
-			$('#prm_form'+num).css('display','none');
-		}else {
-			$('#prm_form'+num).css('display','inline').focus();
-		}
-	});
-}
-
 </script>
 <script type="text/javascript">
-	var _gaq = _gaq || [];
-	_gaq.push(['_setAccount', 'UA-36251023-1']);
-	_gaq.push(['_setDomainName', 'jqueryscript.net']);
-	_gaq.push(['_trackPageview']);
-	(function() {
-		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-	})();
-</script>
-<script>
-try {
-  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
-    return true;
-  }).catch(function(e) {
-    var carbonScript = document.createElement("script");
-    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
-    carbonScript.id = "_carbonads_js";
-    document.getElementById("carbon-block").appendChild(carbonScript);
-  });
-} catch (error) {
-  console.log(error);
-}
-</script>
-<script>
-	/* detail_tabmenu 클릭한 #page01에 스크롤 on */
-	$('.detail_tabmenu ul li').click(function(){
-		$('.detail_tabmenu ul li').removeClass('on');
-		$(this).addClass('on');
-	});
+   var _gaq = _gaq || [];
+   _gaq.push(['_setAccount', 'UA-36251023-1']);
+   _gaq.push(['_setDomainName', 'jqueryscript.net']);
+   _gaq.push(['_trackPageview']);
+   (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+//    try {
+//       fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+//          return true;
+//       }).catch(function(e) {
+//          var carbonScript = document.createElement("script");
+//          carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+//          carbonScript.id = "_carbonads_js";
+//          document.getElementById("carbon-block").appendChild(carbonScript);
+//       });
+//    } catch (error) {
+//       console.log(error);
+//    }
+
+
+   /* detail_tabmenu 클릭한 #page01에 스크롤 on */
+   $('.detail_tabmenu ul li').click(function(){
+      $('.detail_tabmenu ul li').removeClass('on');
+      $(this).addClass('on');
+   });
+
+//    카카오톡으로 공유하기 
+
+	Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+   function sendLink() {
+	    Kakao.Link.createDefaultButton({
+	    	container: '#kakao-link-btn',
+	      objectType: 'feed',
+	      content: {
+	        title: '<%=productDetailList.get(0).getName() %>',
+	        description: '상품 공유',
+	        imageUrl:
+	          'upload/productUploadImg/<%=main[0] %>',
+	        link: {
+	          mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	          webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	        },
+	      },
+	      social: {
+	        likeCount: 286,
+	        commentCount: 45,
+	        sharedCount: 845,
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	            webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	          }
+	        }]
+	    })
+	  }
+		
+			
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
