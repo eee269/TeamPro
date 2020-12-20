@@ -302,14 +302,15 @@ public class OrderDAO {
 	}
 	
 // ------------------- 디테일 오더 생성 -------------------------------	
-	public int insertDetailOrder(int num, String code) {
+	public int insertDetailOrder(String[] nums, String code) {
 		System.out.println("OrderDAO - insertDetailOrder()-1!");
 		int insertCount = 0;
 		
 		PreparedStatement p = null;
 		ResultSet rs = null;
-		
+		int seq = 0;
 		int num1=0;
+
 		try {
 			String sql = "select max(num) from detailorder";
 			p = con.prepareStatement(sql);
@@ -319,10 +320,11 @@ public class OrderDAO {
 				num1 =  rs.getInt(1)+1;
 			}
 			System.out.println("num1 = " +num1);
+			for(String str : nums) {
 			sql = "select * from cart where num = ?";
-			System.out.println("num : " +num);
+			System.out.println("num : " +Integer.parseInt(str));
 			p = con.prepareStatement(sql);
-			p.setInt(1, num);
+			p.setInt(1, Integer.parseInt(str));
 			rs = p.executeQuery();
 			 
 			if(rs.next()) {
@@ -334,19 +336,19 @@ public class OrderDAO {
 				String color = rs.getString(5);
 				String size = rs.getString(6);
 				String opt_productCode = rs.getString(9);
+				String main_img = rs.getString(10);
 				sql = "select * from mainorder where code = ?";
 				p = con.prepareStatement(sql);
 				p.setNString(1, code);
 				rs = p.executeQuery();
-				
 				if(rs.next()) {
 					System.out.println("OrderDAO - insertDetailOrder()-3!");
 
-					sql = "insert into detailorder values(?,?,?,?,?,?,?,?,?,?)";
+					sql = "insert into detailorder values(?,?,?,?,?,?,?,?,?,?,?)";
 					p = con.prepareStatement(sql);
 					p.setInt(1, num1);
 					p.setNString(2, name);
-					p.setString(3, "null");
+					p.setString(3, main_img);
 					p.setInt(4, price);
 					p.setInt(5, cnt);
 					p.setTimestamp(6, rs.getTimestamp(5));
@@ -354,10 +356,16 @@ public class OrderDAO {
 					p.setString(8, size);
 					p.setString(9, code);
 					p.setString(10, opt_productCode);
+					p.setInt(11, seq);
+					num1+=1;
+					seq++;
+					
+					
 					
 					insertCount = p.executeUpdate();
 				}
 				
+			}
 			}
 		} catch (Exception e) {
 			System.out.println("OrderDAO insertDetailOrder() 오류! - " +e.getMessage());
@@ -371,9 +379,10 @@ public class OrderDAO {
 	}
 // ------------------- 디테일 오더 생성 끝 -------------------------------	
 
-	public ArrayList<Cart> selectCart(int num) {
+	public Cart selectCart(int num) {
 		System.out.println("orderDAO - selectCart()!");
-		ArrayList<Cart> cartList = null;
+//		ArrayList<Cart> cartList = null;
+		Cart cart = null;
 		
 		PreparedStatement p = null;
 		ResultSet rs = null;
@@ -384,23 +393,31 @@ public class OrderDAO {
 			p.setInt(1,num);
 			rs = p.executeQuery();
 			
-			cartList = new ArrayList<Cart>();
-			
+//			cartList = new ArrayList<Cart>();
+			cart = new Cart();
 			while(rs.next()) {
-				Cart c = new Cart();
-				
-				c.setNum(rs.getInt(1));
-				c.setCnt(rs.getInt(2));
-				c.setProduct_name(rs.getString(3));
-				c.setPrice(rs.getInt(4));
-				c.setColor(rs.getString(5));
-				c.setSize(rs.getString(6));
-				c.setMember_id(rs.getString(7));
-				c.setProduct_basicCode(rs.getString(8));
-				c.setOpt_productCode(rs.getString(9));
-				
-				cartList.add(c);
+				cart.setNum(rs.getInt(1));
+				cart.setCnt(rs.getInt(2));
+				cart.setProduct_name(rs.getString(3));
+				cart.setPrice(rs.getInt(4));
+				cart.setColor(rs.getString(5));
+				cart.setSize(rs.getString(6));
+				cart.setMember_id(rs.getString(7));
+				cart.setProduct_basicCode(rs.getString(8));
+				cart.setOpt_productCode(rs.getString(9));
+
+//				cartList.add(c);
 			}
+			
+			System.out.println("DAO : "+cart.getNum());
+			System.out.println("DAO : "+cart.getCnt());
+			System.out.println("DAO : "+cart.getProduct_name());
+			System.out.println("DAO : "+cart.getPrice());
+			System.out.println("DAO : "+cart.getColor());
+			System.out.println("DAO : "+cart.getSize());
+			System.out.println("DAO : "+cart.getMember_id());
+			System.out.println("DAO : "+cart.getProduct_basicCode());
+			System.out.println("DAO : "+cart.getOpt_productCode());
 			
 			
 		} catch (Exception e) {
@@ -411,7 +428,8 @@ public class OrderDAO {
 			close(p);
 		}
 		
-		return cartList;
+//		return cartList;
+		return cart;
 	}
 
 }

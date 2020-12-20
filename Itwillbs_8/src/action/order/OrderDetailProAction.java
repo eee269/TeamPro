@@ -28,12 +28,17 @@ public class OrderDetailProAction implements Action {
 			
 			forward.setPath("MemberLoginForm.mo");
 		}else {
-		int num =  Integer.parseInt(request.getParameter("num"));
-		System.out.println("num : "+num);
+//		int num =  Integer.parseInt(request.getParameter("num"));
+//		System.out.println("num : "+num);
+		String[] nums = request.getParameterValues("num");
 		String code = request.getParameter("imp_uid");
 
+		for(String str : nums) {
+			System.out.println("orderDetailProAction : "+str);
+		}
+		
 		OrderProService orderProService = new OrderProService();
-		boolean isInsertSuccess = orderProService.insertDetailOrder(num,code);
+		boolean isInsertSuccess = orderProService.insertDetailOrder(nums,code);
 		
 		if(!isInsertSuccess) {
 			System.out.println("디테일 오더 생성 실패");

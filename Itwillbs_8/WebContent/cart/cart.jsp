@@ -134,8 +134,8 @@ int cntSet = 0;
 								for (int i = 0; i < cartList.size(); i++) {
 								if (cartList.size() > 0) {
 							%>
-							<input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>">
 									<!-- 오더로 넘기는 값 -->
+							<input type="hidden" name="num" value="<%=cartList.get(i).getNum()%>">
 							<input type="hidden" name="price" class="price-b">
 							<input type="hidden" name="delivery" class="delivery-b">
 							<input type="hidden" name="total_price" class="total-b">
@@ -436,7 +436,9 @@ $("#allCheck").click(function(){
 			
 			// 총 합계 
 			$('.total-b').text(chCoin + sevice);
-
+			$('.total-b').attr('value',chCoin+sevice);	
+			$('.price-b').attr('value',chCoin);	
+			$('.delivery-b').attr('value',sevice);	
 			
 			
 			// 체크선택이 안되면 삭제div 숨기고 , 체크박스가 1개 이상 체크 되면 삭제div 보이기 

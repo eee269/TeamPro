@@ -9,10 +9,10 @@
 	pageEncoding="UTF-8"%>
 		<%
 // 	  String[] orderData = request.getParameterValues("orderData");
-// 	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+	   ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 // 		int sevice = 2500;
-// 	   int coin = 0;
-// 	   int cartNo = cartList.size();
+	   int coin = 0;
+	   int cartNo = cartList.size();
 		int num = Integer.parseInt(request.getParameter("chk"));
 		int price = Integer.parseInt(request.getParameter("price"));
 		int delivery = Integer.parseInt(request.getParameter("delivery"));
@@ -190,6 +190,7 @@ function regist_defaultAddr(test) {
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 
 <!-- 오더페이지 시작-->
+
 <div id="contentWrapper">
 	<div id="contentWrap">
 		<link type="text/css" rel="stylesheet"
@@ -210,8 +211,100 @@ function regist_defaultAddr(test) {
 						<fieldset>
 							<legend>주문 폼</legend>
 							<h3>주문리스트</h3>
-						<input type="hidden" name="num" id="num" value="<%=num%>">
-						<input type="hidden" name="amount" id="num" value="<%=total_price%>">
+							<div class="table-cart table-fill-prd">
+					<table style="clear:both;">
+						<caption>주문 예정 상품</caption>
+
+						<colgroup>
+							<col width="11%">
+							<col width="11%">
+							<col width="25%">
+							<col width="12%">
+							<col width="12%">
+							<col width="12%">
+							<col width="12%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th scope="col"><div class="tb-center">번호</div></th>
+								<th scope="col"><div class="tb-center">사진</div></th>
+								<th scope="col"><div class="tb-center">상품명</div></th>
+								<th scope="col"><div class="tb-center">색상</div></th>
+								<th scope="col"><div class="tb-center">사이즈</div></th>
+								<th scope="col"><div class="tb-center">수량</div></th>
+								<th scope="col"><div class="tb-center">개별금액</div></th>
+								
+							</tr>
+						</thead>
+							<tbody>
+							<%
+	for(int i = 0 ; i < cartList.size() ; i++){
+		%>
+								<input type="hidden" name="num" id="num" value="<%=cartList.get(i).getNum()%>"> 
+								<input type="hidden" name="amount" id="num" value="<%=total_price%>">
+		<%
+// 		out.println("Order페이지에서"+cartList.get(i).getNum());
+// 		out.println("Order페이지에서"+cartList.get(i).getCnt());
+// 		out.println("Order페이지에서"+cartList.get(i).getProduct_name());
+// 		out.println("Order페이지에서"+cartList.get(i).getPrice());
+// 		out.println("Order페이지에서"+cartList.get(i).getColor());
+// 		out.println("Order페이지에서"+cartList.get(i).getSize());
+// 		out.println("Order페이지에서"+cartList.get(i).getMember_id());
+// 		out.println("Order페이지에서"+cartList.get(i).getProduct_basicCode());
+// 		out.println("Order페이지에서"+cartList.get(i).getOpt_productCode());
+	
+%>
+	<tr>
+	
+	<td><div class = "tb-center"><%=cartNo %></div></td>
+	
+	<td><div class = "tb-center">
+		 <div class="thumb">
+		<a href=""><img
+		src="http://oryany.co.kr/shopimages/nasign/0010010007533.jpg?1597366090"
+		alt="상품 섬네일" title="상품 섬네일" width="1"></a>
+		</div>
+		</div></td>
+		
+	<td><div class="tb-center">
+	<a href="" class="tb-bold"><%=cartList.get(i).getProduct_name()%></a></div></td>
+	
+	<td><div class="tb-center">
+		<span class="tb-dl"><span class="opt_dd"><%=cartList.get(i).getColor()%></span></span>
+	</div></td>	
+	
+	<td><div class="tb-center">
+		<span class="tb-dl"><span class="opt_dd"><%=cartList.get(i).getSize()%></span></span>
+	</div></td>	
+	
+	<td>
+	<div class="tb-center">
+		<span class="tb-dl"><span class="opt_dd"><%=cartList.get(i).getCnt()%></span></span>
+	</div></td>
+						
+	<td><div class="tb-center "><span class="back"><b><%=cartList.get(i).getPrice()%></b></span>원</div></td>
+	
+	</tr>	
+		
+		
+							
+</tbody>
+<%cartNo--;} %>			
+<tfoot>
+	<tr>
+		<td colspan="8">
+			<div class="tb-right">
+			<span class="MK_none_groupsale_total_price_sell"> 
+			총구매금액<span class="MK_chg_none_groupsale_total_price_sell MK_change_price"><%=price %></b></span>원
+			</span><span class="MK_total_delivery">+ 배송비<span
+			class="MK_chg_total_delivery MK_change_price"><%=delivery %></b></span>원
+			</span> = <strong><span class="MK_total_price"><span class="MK_chg_total_price MK_change_price"></span><%=total_price %></b>원</span></strong><br>
+			</div>
+		</td>
+	</tr>
+</tfoot>							
+</table>				
+
 							<h3>주문자정보</h3>
 							<div class="tbl-order">
 								<table>
