@@ -19,11 +19,11 @@ public class cartGetPlusAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("Action - cartUpAction");
+		System.out.println("Action - cartGetPlusAction");
 		HttpSession session = request.getSession();
 		ActionForward forward = null;
 		Cart ca = new Cart();
-
+		boolean isPlusSuccess = false;
 		boolean isCartUpSuccess	= false;
 		
 		String member_id = (String) session.getAttribute("member_id"); 	// 아이디
@@ -64,26 +64,24 @@ public class cartGetPlusAction implements Action {
 			
 			
 			 ca = new Cart();
-			 System.out.println("ca.getCnt() : " + ca.getCnt());
-			 ca.setMember_id(member_id);
-			 ca.setColor(color[i].toString());
-			 ca.setOpt_productCode(opt_productCode[i].toString());
-			 ca.setPrice(price);
-			 ca.setProduct_name(product_name);
-			 ca.setSize(size[i]);
-			 ca.setProduct_basicCode(product_basicCode[i]);
 			 ca.setCnt(cnt[i] + ca.getCnt());
+			 ca.setProduct_name(product_name);
+			 ca.setPrice(price);
+			 ca.setColor(color[i].toString());
+			 ca.setSize(size[i]);
+			 ca.setMember_id(member_id);
+			 ca.setProduct_basicCode(product_basicCode[i]);
+			 ca.setOpt_productCode(opt_productCode[i].toString());
 			 ca.setMain_img(main_img[i]);
 			 
-				// 			cartUpAction -> CartPlusService -> CartDAO.cartPlus
-				//--------------------------------수정하기--------------------------------------
+			// 			cartUpAction -> CartPlusService -> CartDAO.cartPlus
+			//--------------------------------수정하기--------------------------------------
 			 // isPlusSuccess => true 면 중복 상품 있음 수량만 업데이트 
 			 // isPlusSuccess => false 면 중복 상품 없음 cartGetService 로 이동
 			 
-			 
-			 	// 같은 상품 있는지 체크
+			// 같은 상품 있는지 체크
 			CartPlusService cartPlustService = new CartPlusService();
-			boolean isPlusSuccess = cartPlustService.isCartPlus(ca);
+			 isPlusSuccess = cartPlustService.isCartPlus(ca);
 			System.out.println("isPlusSuccess : " + isPlusSuccess);
 			
 				//--------------------------------수정하기--------------------------------------
@@ -91,7 +89,7 @@ public class cartGetPlusAction implements Action {
 			 // 이거..리스트로..바꿀까..?
 			if(!isPlusSuccess) {
 				cartGetService cartGetService = new cartGetService();
-				isCartUpSuccess= cartGetService.isCartGet(ca);
+				isCartUpSuccess = cartGetService.isCartGet(ca);
 				System.out.println("isCartUpSuccess : " +  isCartUpSuccess);
 			}
 		 }

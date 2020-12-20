@@ -82,7 +82,7 @@ public class CartFrontController extends HttpServlet {
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("CartUpAction : " + e.getMessage());
+				System.out.println("cartGetPlusAction : " + e.getMessage());
 				e.printStackTrace();
 				
 			}

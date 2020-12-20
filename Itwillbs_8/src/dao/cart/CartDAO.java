@@ -146,7 +146,6 @@ public class CartDAO extends Exception {
 		if(rs.next()) {
 			num = rs.getInt("max(num)") + 1;			
 			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode,main_img)VALUES(?,?,?,?,?,?,?,?,?,?)";
-			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			System.out.println(num);
@@ -177,6 +176,7 @@ public class CartDAO extends Exception {
 	}
 	
 	
+	// 상품 있는 체크 후 있으면 수량만 업데이트
 	public int cartPlus(Cart ca) {
 		System.out.println("CartDAO - cartPlus");
 
@@ -186,9 +186,7 @@ public class CartDAO extends Exception {
 		PreparedStatement pstmt2 = null;
 		PreparedStatement pstmt3 = null;
 
-
 		int plusCount = 0;
-		
 		
 		try {
 			String sql = "SELECT * FROM cart WHERE opt_productCode = ?";	
@@ -201,7 +199,7 @@ public class CartDAO extends Exception {
 				pstmt2.setString(1, ca.getOpt_productCode());
 				pstmt2.setString(2, ca.getMember_id());
 				rs2 = pstmt2.executeQuery();
-			}
+			
 			int cnt2 = 0;
 			if(rs2.next()) {
 				cnt2 = rs2.getInt("cnt");
@@ -213,6 +211,7 @@ public class CartDAO extends Exception {
 				pstmt3.setString(3, ca.getMember_id());
 
 				plusCount = pstmt3.executeUpdate();
+			}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
