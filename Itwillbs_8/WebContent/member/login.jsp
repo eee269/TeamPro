@@ -469,24 +469,22 @@ margin-left:0px;}
 	}
 	
 
-	// 구글 로그인 API
-	function onSignIn(googleUser) {
-		// 페이지 로딩 시 자동으로 값들고오지 않게 끔.
-// 		var auth2 = gapi.auth2.currentUser.get().getBasicProfile();
-		  var profile = googleUser.getBasicProfile();
-// 		  alert('img: ' + profile.getImageUrl());
-		  id = profile.getId();
-		  username = profile.getName();
-		  img = profile.getImageUrl();
-		  email = profile.getEmail();
-		  
-		  // 이거 토큰인디.. 토큰 어따써..?
-// 		  var id_token = googleUser.getAuthResponse().id_token;
-// 		  console.log("ID Token: " + id_token);
-		  
-		  post_to_url( "MemberGoogleKakaoLogin.mo",
-		    		{'id': id, 'username': username, 'email': email, 'img': img})
-	}
+
+		// 구글 로그인 API
+		function onSignIn() {
+			  var profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+			  id = profile.getId();
+			  username = profile.getName();
+			  img = profile.getImageUrl();
+			  email = profile.getEmail();
+			 alert('로그인 완료');
+			  
+			  // 이거 토큰인디.. 토큰 어따써..?
+	// 		  var id_token = googleUser.getAuthResponse().id_token;
+	// 		  console.log("ID Token: " + id_token);
+			  post_to_url( "MemberGoogleKakaoLogin.mo",
+			    		{'id': id, 'username': username, 'email': email, 'img': img});
+		}
 
 		// 구글, 카카오 로그인 API
 		function post_to_url(path, params, method='post') {
@@ -537,7 +535,7 @@ margin-left:0px;}
 					</form>
 					<div class="api">
 						<!-- 구글 로그인 버튼 노출 영역 -->
-						<div class="g-signin2" data-onsuccess="onSignIn"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<div class="g-signin2" onclick='onSignIn()'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<!-- //구글 로그인 버튼 노출 영역 -->
 						 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
 	  					<div id="naver_id_login"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
