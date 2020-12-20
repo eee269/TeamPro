@@ -292,7 +292,7 @@ var productCode = "";
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
       <!-- 폼 -->
-   <form action="cartUpAction.ca" method="post" name="cartUp">
+   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
       <!-- 폼 -->
       <div class="row">
          <div class="col-md-6 col-lg-7 p-b-30">
@@ -315,6 +315,7 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
+                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"

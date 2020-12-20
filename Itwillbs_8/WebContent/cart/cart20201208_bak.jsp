@@ -72,8 +72,8 @@ int cntSet = 0;
 
 <link type="text/css" rel="stylesheet" href="css/common.css" />
 <link type="text/css" rel="stylesheet" href="css/basket.css" />
-<link type="text/css" rel="stylesheet" href="css/header.css" />
-<link type="text/css" rel="stylesheet" href="css/menu_1.css" />
+<link type="text/css" rel="stylesheet" href="css/header.1.css" />
+<link type="text/css" rel="stylesheet" href="css/menu.1.css" />
 <!-- Shoping Cart 시작
 <input type="hidden" name="num" value="" />-->
 
