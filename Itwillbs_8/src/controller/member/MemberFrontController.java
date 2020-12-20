@@ -15,7 +15,7 @@ import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
 import action.member.MemberPassProAction;
-import action.member.api.MemberGoogleLoginAction;
+import action.member.api.MemberGoogleKakaoLoginAction;
 import action.member.api.MemberNaverLoginAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
@@ -140,10 +140,10 @@ public class MemberFrontController extends HttpServlet {
 			}
 		}
 		// --------------- 구글 로그인 후 json처리 하기 위해 이동----------
-		else if (command.equals("/MemberGoogleLogin.mo")) {
+		else if (command.equals("/MemberGoogleKakaoLogin.mo")) {
 			forward = new ActionForward();
 
-			action = new MemberGoogleLoginAction();
+			action = new MemberGoogleKakaoLoginAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

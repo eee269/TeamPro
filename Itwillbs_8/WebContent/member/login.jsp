@@ -470,11 +470,11 @@ margin-left:0px;}
 // 		  var id_token = googleUser.getAuthResponse().id_token;
 // 		  console.log("ID Token: " + id_token);
 		  
-		  post_to_url( "MemberGoogleLogin.mo",
+		  post_to_url( "MemberGoogleKakaoLogin.mo",
 		    		{'id': id, 'username': username, 'email': email, 'img': img})
 	}
 
-		// 구글 로그인 API
+		// 구글, 카카오 로그인 API
 		function post_to_url(path, params, method='post') {
 		  
 		  const form = document.createElement('form');
@@ -659,7 +659,21 @@ Kakao.Auth.createLoginButton({
       Kakao.API.request({
         url: '/v2/user/me',
         success: function(res) {
-          alert(JSON.stringify(res))
+          console.log(res.id);
+          console.log(res.kakao_account['email']);
+          console.log(res.properties['nickname']);
+          console.log(res.properties['profile_image']);
+          
+          console.log(authObj.access_token);
+          
+          var id = res.id;
+          var email = res.kakao_account['email'];
+          var username = res.properties['nickname'];
+          var img = res.properties['profile_image']
+          
+          post_to_url( "MemberGoogleKakaoLogin.mo",
+		    		{'id': id, 'username': username, 'email': email, 'img': img});
+          
         },
         fail: function(error) {
           alert(
