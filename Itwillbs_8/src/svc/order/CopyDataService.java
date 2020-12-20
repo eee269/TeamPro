@@ -33,6 +33,7 @@ public class CopyDataService implements IntefaceSVC {
 		OrderDAO orderDAO = OrderDAO.getInstance();
 		orderDAO.setConnection(con);
 		ArrayList<JSONArray> mb = orderDAO.getData(member_id);
+
 		return mb;
 	}
 

@@ -134,11 +134,15 @@ public class OrderDAO {
 			mb.put("id",rs.getString("id"));
 			mb.put("name",rs.getString("username"));
 			mb.put("email",rs.getString("email"));
-			
+			if(rs.getString("phone")!=null) {
 			mb.put("phone_0",rs.getString("phone").substring(0, 3));
 			mb.put("phone_1",rs.getString("phone").substring(3, 7));
 			mb.put("phone_2",rs.getString("phone").substring(7));
-			
+			} else {
+				mb.put("phone_0","");
+				mb.put("phone_1","");
+				mb.put("phone_2","");
+			}
 			
 			
 			md.add(mb);

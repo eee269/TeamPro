@@ -66,7 +66,7 @@ ActionForward forward = null;
 			} else {
 			forward = new ActionForward();
 			forward.setRedirect(true);
-			forward.setPath("MemberModifyForm.mo"); 
+			forward.setPath("Main.go"); 
 			}
 		}		
 
