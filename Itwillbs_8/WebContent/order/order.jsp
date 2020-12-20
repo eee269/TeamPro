@@ -265,7 +265,7 @@ function regist_defaultAddr(test) {
 	<td><div class = "tb-center">
 		 <div class="thumb">
 		<a href=""><img
-		src="http://oryany.co.kr/shopimages/nasign/0010010007533.jpg?1597366090"
+		src="<%=cartList.get(i).getMain_img()%>"
 		alt="상품 섬네일" title="상품 섬네일" width="1"></a>
 		</div>
 		</div></td>

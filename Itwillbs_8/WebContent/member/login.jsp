@@ -479,6 +479,10 @@ margin-left:0px;}
 		  username = profile.getName();
 		  img = profile.getImageUrl();
 		  email = profile.getEmail();
+		  console.log("id : "+id);
+		  console.log("username : "+username);
+		  console.log("img : "+img);
+		  console.log("email : "+email);
 		  
 		  // 이거 토큰인디.. 토큰 어따써..?
 // 		  var id_token = googleUser.getAuthResponse().id_token;
