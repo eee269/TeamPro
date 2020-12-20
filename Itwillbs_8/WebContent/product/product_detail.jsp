@@ -34,7 +34,6 @@
 <link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
-<script src="js/bootstrap4-rating-input.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <style type="text/css">
 .rat {
@@ -491,8 +490,8 @@ var productCode = "";
             <div id="page02" class="cboth pdt100"></div>
             <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
             <jsp:include page="../inc/detail_tabmenu.jsp" />
-
-<!-- BIN -->
+			<script src="js/bootstrap4-rating-input.js"></script>
+				<!-- BIN -->
 				<!-- ------------------------------상품리뷰---------------------------------------  -->
 				<div id="powerReview">
 					<div class="hd-t">
@@ -523,20 +522,20 @@ var productCode = "";
 						<div class="chart">
 							<ul>
 								<li><span class="tit">5 Stars</span> <span class="bar">
-										<span class="abs" style="width: 95%"></span>
-								</span> (<span class="score5 num"></span>)</li>
+										<span class="absscore5 " style="width: 0%"></span>
+								</span> <span class="score5 num"></span></li>
 								<li><span class="tit">4 Stars</span> <span class="bar">
-										<span class="abs" style="width: 5%"></span>
-								</span> (<span class="score4 num"></span>)</li>
+										<span class="absscore4" style="width: 0%"></span>
+								</span> <span class="score4 num"></span></li>
 								<li><span class="tit">3 Stars</span> <span class="bar">
-										<span class="abs" style="width: 0%"></span>
-								</span> (<span class="score3 num"></span>)</li>
+										<span class="absscore3" style="width: 0%"></span>
+								</span> <span class="score3 num"></span></li>
 								<li><span class="tit">2 Stars</span> <span class="bar">
-										<span class="abs" style="width: 0%"></span>
-								</span> (<span class="score2 num"></span>)</li>
+										<span class="absscore2" style="width: 0%"></span>
+								</span> <span class="score2 num"></span></li>
 								<li><span class="tit">1 Stars</span> <span class="bar">
-										<span class="abs" style="width: 0%"></span>
-								</span> (<span class="score1 num"></span>)</li>
+										<span class="absscore1" style="width: 0%"></span>
+								</span> <span class="score1 num"></span></li>
 							</ul>
 						</div>
 						<div class="photo">
@@ -552,7 +551,7 @@ var productCode = "";
 							<strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
 						</p>
 					</div>
-					<div class="PR15N01-hd">
+					<div class="PR15N01-hd" id="viewPoint">
 								<h2>
 									프리미엄 상품평<span>(<span class="totalReview_count"></span>)</span>
 								</h2>
@@ -891,7 +890,10 @@ var productCode = "";
 			}
 		});		
 	    $("#lnk-review").click(function(){
-			if($("#prw_content").val().trim() === ""){
+	    	if($('#rating1').val() == 0){
+	    		alert("별점을 입력하세요.");
+	    		$('.fa fa-star').data-val(1).focus();
+	    	}else if($("#prw_content").val().trim() === ""){
 		    		alert("리뷰를 입력하세요.");
 		    		$("#prw_content").val("").focus();
 		    	}else{
@@ -908,7 +910,7 @@ var productCode = "";
 		                	alert("리뷰 등록 완료");
 		                	$("#prw_content").val("");
 		                	$("#prw_file").val("");
-		                	$("#rating").val("rating-clear");
+		                	$('.fa-star').attr('class','fa fa-star-o');
 		                	getReply();
 		                },
 		    			error: function(request,status,error){
@@ -1109,7 +1111,7 @@ var productCode = "";
             							if(i == page){
           				output+=			"<a href='javascript:void(0);' class='now'>["+i+"]</a>&nbsp;";
             							}else{
-          				output+=			"<a href='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
+          				output+=			"<a href='#powerReview' onclick='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
             							}
             						}	
                 					if(page >= pageInfo.maxPage){
@@ -1138,6 +1140,7 @@ var productCode = "";
 			   	              	$(".signin-cont").html(output);
 			   	             	$(".review_count").html(newJson.listCount);
         			    	}
+            				totalReview_count += (newJson.listCount*1);
             			}
             		} // if replyList != null end
            		} // 첫 번째 key in for문
@@ -1190,6 +1193,7 @@ var productCode = "";
             		score += star[key]*1;
             		total += star[key]*num*1;
             		$('.'+key).html(star[key]);
+//             		$('.'+key).parent().css('width','50%');
             		num++;
             	}
             		total = (total / score *1).toFixed(1);
@@ -1352,24 +1356,17 @@ function prd_review(num){
             		   var goodBe ="in-love_face_before.png";
             		   var badAf ="angry_face.png";
             		   var badBe ="angry_face_before.png";
+            		   
+           			   // recommand = 0 -> good, 1 -> bad 
+            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
             		   img = (recommand == 0 ? (isRec == 0 ? goodAf : goodBe) : (isRec == 0 ? badAf : badBe));
             		   alt = (recommand == 0 ? 'yes' : 'no');
            			   var imgResult = "<img src='images/icons/"+img+"' alt='"+alt+"' style='width:15px;height:15px;'>&nbsp";
            			   
-           			   // recommand = 0 -> good, 1 -> bad 
 	            	   if(recommand == 0){
-	            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
-	            		   if(isRec == 0){
-	            			   $('.imgRecG'+num).html(imgResult);
-	            		   }else{
-	            			   $('.imgRecG'+num).html(imgResult);
-	            		   }
+            			   $('.imgRecG'+num).html(imgResult);
 	            	   }else{
-	            		   if(isRec == 0){
-	            			   $('.imgRecB'+num).html(imgResult);
-	            		   }else{
-	            			   $('.imgRecB'+num).html(imgResult);
-	            		   }
+            			   $('.imgRecB'+num).html(imgResult);
 	            	   }
 			        ProdReviewRecCount(num,recommand);
 	               },
@@ -1460,6 +1457,7 @@ try {
 	});
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- 스크립트파일끝 -->
 
  <jsp:include page="/inc/footer.jsp" />
