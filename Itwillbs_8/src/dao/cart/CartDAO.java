@@ -201,18 +201,18 @@ public class CartDAO extends Exception {
 				pstmt2.setString(1, ca.getOpt_productCode());
 				pstmt2.setString(2, ca.getMember_id());
 				rs2 = pstmt2.executeQuery();
-			}
-			int cnt2 = 0;
-			if(rs2.next()) {
-				cnt2 = rs2.getInt("cnt");
-				plusCount = 1;
-				String sql3 = "UPDATE cart SET cnt = ? WHERE opt_productCode = ? and member_id = ?";
-				pstmt3 = con.prepareStatement(sql3);
-				pstmt3.setInt(1, cnt2 + ca.getCnt());
-				pstmt3.setString(2, ca.getOpt_productCode());
-				pstmt3.setString(3, ca.getMember_id());
-
-				plusCount = pstmt3.executeUpdate();
+				int cnt2 = 0;
+				if(rs2.next()) {
+					cnt2 = rs2.getInt("cnt");
+					plusCount = 1;
+					String sql3 = "UPDATE cart SET cnt = ? WHERE opt_productCode = ? and member_id = ?";
+					pstmt3 = con.prepareStatement(sql3);
+					pstmt3.setInt(1, cnt2 + ca.getCnt());
+					pstmt3.setString(2, ca.getOpt_productCode());
+					pstmt3.setString(3, ca.getMember_id());
+					
+					plusCount = pstmt3.executeUpdate();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
