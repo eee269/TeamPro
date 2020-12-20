@@ -29,6 +29,10 @@ $(document).ready(function(){
 			$('#emergency11').attr('value',item.phone_0),
 			$('#emergency12').attr('value',item.phone_1),
 			$('#emergency13').attr('value',item.phone_2)
+			if($('#emergency11').val()==""|$('#emergency12').val()==""|$('#emergency13').val()==""){
+				alert("회원정보에 연락처가 비어있습니다.");
+				location.href="MemberMypage.mo";
+			}
 		});
 	});
 });
