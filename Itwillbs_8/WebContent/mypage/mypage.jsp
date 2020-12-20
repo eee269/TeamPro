@@ -110,7 +110,7 @@
 							<div class="user-info">
 								<p>
 									<b><%=member.getUsername() %></b> [<span id="MK_user_id"><%=member.getId() %></span>]님
-									  &nbsp;&nbsp;&nbsp; <a href="MemberModifyForm.mo" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
+									  &nbsp;&nbsp;&nbsp; <a href="회원정보수정" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
 								</p>
 								<div class="box">
 									<dl>

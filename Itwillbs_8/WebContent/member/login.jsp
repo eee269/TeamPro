@@ -472,8 +472,8 @@ margin-left:0px;}
 	// 구글 로그인 API
 	function onSignIn(googleUser) {
 		// 페이지 로딩 시 자동으로 값들고오지 않게 끔.
-		var auth2 = gapi.auth2.currentUser.get().getBasicProfile();
-// 		  var profile = googleUser.getBasicProfile();
+// 		var auth2 = gapi.auth2.currentUser.get().getBasicProfile();
+		  var profile = googleUser.getBasicProfile();
 // 		  alert('img: ' + profile.getImageUrl());
 		  id = profile.getId();
 		  username = profile.getName();
