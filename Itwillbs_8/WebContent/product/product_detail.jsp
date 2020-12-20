@@ -24,6 +24,10 @@
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
+
+<!-- 카카오 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <!-- 별점 스크립트 -->
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -426,6 +430,11 @@ var productCode = "";
                         src="images/icons/icon-heart-01.png" alt="ICON">
                      </a>
                    <% } %>
+                   <!-- 카카오톡으로 공유하기 기능 -->
+                   &nbsp;&nbsp;&nbsp;
+                   <a id="kakao-link-btn" href="javascript:sendLink()">
+  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="20px"/>
+				   </a>
                   </div>
 
                   <a href="#"
@@ -1232,7 +1241,38 @@ function show_hide(){
       $(this).addClass('on');
    });
 
+//    카카오톡으로 공유하기 
 
+	Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+   function sendLink() {
+	    Kakao.Link.createDefaultButton({
+	    	container: '#kakao-link-btn',
+	      objectType: 'feed',
+	      content: {
+	        title: '<%=productDetailList.get(0).getName() %>',
+	        description: '상품 공유',
+	        imageUrl:
+	          'upload/productUploadImg/<%=main[0] %>',
+	        link: {
+	          mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	          webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	        },
+	      },
+	      social: {
+	        likeCount: 286,
+	        commentCount: 45,
+	        sharedCount: 845,
+	      },
+	      buttons: [
+	        {
+	          title: '웹으로 보기',
+	          link: {
+	            mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	            webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+	          }
+	        }]
+	    })
+	  }
 		
 			
 </script>

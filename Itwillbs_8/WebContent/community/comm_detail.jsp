@@ -22,6 +22,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 카카오 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
@@ -183,10 +185,17 @@ font-weight: bold !important;
 						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 						value="수정"
 						onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+						&nbsp;&nbsp;&nbsp;
 					<input type="button"
 						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 						value="북마크" id="bookmark"> <br>
-
+						
+                   <!-- 카카오톡으로 공유하기 기능 -->
+                   &nbsp;&nbsp;&nbsp;
+                   <a id="kakao-link-btn" href="javascript:sendLink()">
+  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40px"/>
+				   </a>
+				<!-- // 카카오톡으로 공유하기 기능 -->
 
 
 					<!-- -----------------------------Comment----------------------------- -->
@@ -868,6 +877,42 @@ $(function(){
 		;
 
 	})
+</script>
+
+<script type="text/javascript">
+
+//카카오톡으로 공유하기 
+
+Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+function sendLink() {
+  Kakao.Link.createDefaultButton({
+  	container: '#kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: '<%=article.getSubject() %>',
+      description: '게시글 공유',
+      imageUrl:
+        'upload/productUploadImg/<%=article.getImg() %>',
+      link: {
+        mobileWebUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        webUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+          webUrl: 'http://localhost:8090/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        }
+      }]
+  })
+}
 </script>
 
 <jsp:include page="../inc/footer.jsp" />

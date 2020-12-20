@@ -7,11 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
-import svc.member.api.MemberNaverLoginService;
+import svc.member.MemberApiLoginService;
 import vo.ActionForward;
 import vo.MemberBean;
 
-public class MemberGoogleLoginAction implements Action {
+public class MemberGoogleKakaoLoginAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -40,7 +40,7 @@ public class MemberGoogleLoginAction implements Action {
 				img = null;
 			}
 			
-			MemberNaverLoginService service = new MemberNaverLoginService();
+			MemberApiLoginService service = new MemberApiLoginService();
 			boolean isMember = service.isMember(id);
 			
 			if(isMember) {
