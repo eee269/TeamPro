@@ -163,7 +163,9 @@ var productCode = "";
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
+      var html = "<input type='hidden' value='<%=basicCode%>' id='basicCode'  name='basicCode'>" +
+      "<input type='hidden' value='"+ mixopt+"' name='mixopt'>" +
+      
       // productCode, id="productCode숫자"
           "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
       // 옵션 이름, ( BK/M )
@@ -315,7 +317,7 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
+                           
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -331,10 +333,11 @@ var productCode = "";
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name="size" value="">
-							<input type="hidden" name="color" value="">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="0">
+							<input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[0] %>">
+<!-- 							<input type="hidden" name="size" value=""> -->
+<!-- 							<input type="hidden" name="color" value=""> -->
+<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
+<!-- 							<input type="hidden" name="cnt" value="0"> -->
 							
 
                   </div>
