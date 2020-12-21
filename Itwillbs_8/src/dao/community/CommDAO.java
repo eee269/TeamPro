@@ -128,13 +128,13 @@ public class CommDAO {
 				CommBean article = new CommBean();
 				
 				// 비밀번호는 제외
-				article.setNum(rs.getInt(1));
-				article.setUsername(rs.getString(2));
-				article.setSubject(rs.getString(4));
-				article.setContent(rs.getString(5));
-				article.setReadCount(rs.getInt(6));
-				article.setDate(rs.getTimestamp(7));
-				article.setImg(rs.getString(8));
+				article.setNum(rs.getInt("num"));
+				article.setUsername(rs.getString("username"));
+				article.setSubject(rs.getString("subject"));
+				article.setContent(rs.getString("content"));
+				article.setReadCount(rs.getInt("readcount"));
+				article.setDate(rs.getTimestamp("date"));
+				article.setImg(rs.getString("img"));
 				
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
