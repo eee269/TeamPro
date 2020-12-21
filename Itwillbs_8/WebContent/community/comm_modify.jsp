@@ -4,7 +4,18 @@
 <%
 	CommBean article = (CommBean)request.getAttribute("article");
 	String nowPage = request.getParameter("page");
+	String member_id = (String)session.getAttribute("member_id");
+	
+	if(member_id == null){
+		%>
+		<script>
+			alert("잘못된 접근입니다!");
+			history.back();
+		</script>
+		<%
+	}
 %>
+
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />

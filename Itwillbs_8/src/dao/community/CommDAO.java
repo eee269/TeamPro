@@ -52,15 +52,14 @@ public class CommDAO {
 				num = rs.getInt(1) + 1;
 			}
 			
-			sql = "INSERT INTO community VALUES(?,?,?,?,?,?,now(),?)";
+			sql = "INSERT INTO community VALUES(?,?,?,?,?,now(),?)";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, num);
-			ps.setString(2, commBean.getUsername());
-			ps.setString(3, commBean.getPass());
-			ps.setString(4, commBean.getSubject());
-			ps.setString(5, commBean.getContent());
-			ps.setInt(6, commBean.getReadCount());
-			ps.setString(7, commBean.getImg());
+			ps.setString(2, commBean.getMember_id());
+			ps.setString(3, commBean.getSubject());
+			ps.setString(4, commBean.getContent());
+			ps.setInt(5, commBean.getReadCount());
+			ps.setString(6, commBean.getImg());
 			insertCount = ps.executeUpdate();
 			
 		} catch (Exception e) {
@@ -115,7 +114,7 @@ public class CommDAO {
 		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
 		
 		try {
-			String sql = "SELECT * FROM community ORDER BY date desc limit ?,?";
+			String sql = "SELECT * FROM community ORDER BY num desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, limit);
@@ -128,13 +127,13 @@ public class CommDAO {
 				CommBean article = new CommBean();
 				
 				// 비밀번호는 제외
-				article.setNum(rs.getInt("num"));
-				article.setUsername(rs.getString("member_id"));
-				article.setSubject(rs.getString("subject"));
-				article.setContent(rs.getString("content"));
-				article.setReadCount(rs.getInt("readcount"));
-				article.setDate(rs.getTimestamp("date"));
-				article.setImg(rs.getString("img"));
+				article.setNum(rs.getInt(1));
+				article.setMember_id(rs.getString(2));
+				article.setSubject(rs.getString(4));
+				article.setContent(rs.getString(5));
+				article.setReadCount(rs.getInt(6));
+				article.setDate(rs.getTimestamp(7));
+				article.setImg(rs.getString(8));
 				
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
@@ -160,18 +159,12 @@ public class CommDAO {
 			ResultSet rs = null;
 			
 			try {
-				String sql = "select username from member where id=?";
+				String sql = "SELECT c.*, m.username FROM community c JOIN member m ON c.member_id = m.id where c.member_id=? order by date desc";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, member_id);
 				rs = ps.executeQuery();
 				
 				if(rs.next()) {
-					String username = rs.getString(1);
-					
-					sql = "SELECT * FROM community where username=? order by date desc";
-					ps = con.prepareStatement(sql);
-					ps.setString(1, username);
-					rs = ps.executeQuery();
 					
 					articleList = new ArrayList<CommBean>();
 					
@@ -181,7 +174,7 @@ public class CommDAO {
 						
 						// 비밀번호는 제외
 						article.setNum(rs.getInt(1));
-						article.setUsername(rs.getString(2));
+						article.setUsername(rs.getString("m.username"));
 						article.setSubject(rs.getString(4));
 						article.setContent(rs.getString(5));
 						article.setReadCount(rs.getInt(6));
@@ -223,8 +216,7 @@ public class CommDAO {
 				if(rs.next()) {
 					article = new CommBean();
 					article.setNum(rs.getInt("num"));
-					article.setUsername(rs.getString("username"));
-					article.setPass(rs.getString("pass"));
+					article.setMember_id(rs.getString("member_id"));
 					article.setSubject(rs.getString("subject"));
 					article.setContent(rs.getString("content"));
 					article.setDate(rs.getTimestamp("date"));
@@ -272,25 +264,23 @@ public class CommDAO {
 		}
 		// -------------------------- updateReadcount() --------------------------------
 		// -------------------------- isArticleCommWriter() --------------------------------
-		public boolean isArticleCommWriter(int num, String pass) {
+		public boolean isArticleCommWriter(String pass, String member_id) {
 			boolean isArticleWriter = false;
 			
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT pass FROM community WHERE num = ?";
+				String sql = "SELECT pass FROM member WHERE id = ?";
 				ps = con.prepareStatement(sql);
-				ps.setInt(1, num);
+				ps.setString(1, member_id);
 				rs = ps.executeQuery();
 				
 				if(rs.next()) {
-//					if(rs.getString(1).equals(pass)) {
-					if(rs.getString(1).equals("123")) {
+					if(rs.getString(1).equals(pass)) {
 						isArticleWriter = true;
 					}
 				}
-				System.out.println("CommDAO - isArticleWrite : "+ isArticleWriter);
 			} catch (SQLException e) {
 				System.out.println("CommDAO - isArticleCommWriter : "+e.getMessage());
 				e.printStackTrace();
@@ -459,8 +449,7 @@ public class CommDAO {
 						CommBean article = new CommBean();
 						
 						article.setNum(rs.getInt("num"));
-						article.setUsername(rs.getString("username"));
-						article.setPass(rs.getString("pass"));
+						article.setMember_id(rs.getString("member_id"));
 						article.setSubject(rs.getString("subject"));
 						article.setContent(rs.getString("content"));
 						article.setDate(rs.getTimestamp("date"));

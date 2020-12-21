@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/* 커뮤니티 글 쓰기 페이지 css */
+#subject {
+	border: 1px solid black;
+	width: 500px;
+	margin : 10px 0;
+}
+
+#edit, #save{
+	background-color: gray;
+	border: none;
+	text-align: right;
+}
+#edit, #save:hover{
+	cursor: pointer;
+}
+
+#writeBtn{
+	width: 68%;
+	text-align: right;
+}

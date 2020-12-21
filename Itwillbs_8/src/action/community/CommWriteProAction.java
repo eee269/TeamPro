@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -21,7 +22,8 @@ public class CommWriteProAction implements Action {
 		System.out.println("CommWriteProAction!");
 		
 		ActionForward forward = null;
-		
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("member_id");
 		// 전달받은 파라미터(글쓴이, 비밀번호, 글제목, 내용, 작성일) 가져오기
 		ServletContext context = request.getServletContext();
 		
@@ -45,8 +47,7 @@ public class CommWriteProAction implements Action {
 		
 		// 전달할 데이터를 CommBean 객체에 저장
 		CommBean commBean = new CommBean();
-		commBean.setUsername(multi.getParameter("username"));
-		commBean.setPass(multi.getParameter("pass"));
+		commBean.setMember_id(member_id);
 		commBean.setSubject(multi.getParameter("subject"));
 		commBean.setContent(multi.getParameter("content"));
 		commBean.setImg(multi.getOriginalFileName("img"));
