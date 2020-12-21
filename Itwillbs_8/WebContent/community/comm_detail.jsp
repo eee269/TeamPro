@@ -1,3 +1,4 @@
+<%@page import="vo.MemberBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.CommReBean"%>
@@ -6,12 +7,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	CommBean article = (CommBean) request.getAttribute("article");
+CommBean article = (CommBean) request.getAttribute("article");
 String nowPage = request.getParameter("page");
 
 //==============댓글시작==============//
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
+MemberBean member = (MemberBean) request.getAttribute("member");
 
 // String id = "dodo";
 String id = (String) session.getAttribute("member_id");
@@ -100,10 +102,6 @@ $(document).ready(function() {
 }
 
 #re_wrt .btn_comment {
-	/*     position: absolute; */
-	/*     top: 0; */
-	/*     right: 0; */
-	/*     height: 72px; */
 	line-height: 50px;
 	padding: 0 45px;
 	background: #f3f3f3;
@@ -121,6 +119,49 @@ $(document).ready(function() {
 ul.arraymodeTab>.active a{
 font-weight: bold !important;
 }
+
+ul.arraymodeTab>li{
+display: inline-block;
+}
+.arraymode a{
+font-size: 12px; 
+}
+
+.bu_gray_p {
+	background-color: #fff;
+	border: 1px solid #5D5D5D;
+	font-size: 12px !important;
+	line-height: 17px;
+	color: #5D5D5D !important;
+	border-radius: 0px;
+	padding: 5px 10px !important;
+	margin: 2px;
+	transition: 0.2s all;
+	display: inline-block;
+}
+
+.bu_gray_p:hover {
+	background-color: #fff;
+	color: #5D5D5D;
+}
+
+.bu_gray_p  {
+	display: none;
+}
+
+.bu_gray_p .on {
+	display: inline-block;
+}
+
+.review_btn {
+	color: #fff !important;
+	text-align: center !important;
+	background-color: #5D5D5D !important;
+	padding: 5px 20px !important;
+	font-size: 16px !important;
+	font-weight: bold !important;
+}
+
 
 /* 업로드한 게시글의 이미지 크기 강제로 맞추기 */
 .wrap-pic-w img {
@@ -237,11 +278,11 @@ h4.ltext-109 {
 															<%
 																if (id != null) {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write">
+																class="review_btn review_write">
 															<%
 																} else {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write"
+																class="review_btn"
 																onclick="return loginCheck()">
 															<%
 																}
@@ -337,25 +378,41 @@ $(function(){
 	                    var coReply = coReplyList[i][j];
 	                    
 	                    if(j == 0){
-	                    	var core_username = coReply.username;
-	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'><dt class='first'>작성자</dt><dd>"+core_username+"</dd>";
+	                    	var core_del = coReply.del;
 	                    }else if(j == 1){
-	                    	output += "<dt>작성일</dt><dd>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
-								
+	                    	var core_username = coReply.username;
+	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'>"
+		                    		                    	
+	                    		if(core_del == "N"){
+		                    		output += "<dt class='first'>작성자</dt><dd class='re_name'>"+core_username+"</dd>";
+			                    }else{
+			                    	output += "<dt class='first'>작성자</dt><dd class='re_name'><span class='del'>-</span></dd>"
+		 	                    }                    	
+	                    	
 	                    }else if(j == 2){
-	                    	var core_content = coReply.content;
-	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-	                  
+	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
+								
 	                    }else if(j == 3){
+	                    	var core_content = coReply.content;
+// 	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
+               	
+	                    	if(core_del == "N"){
+	                    		output += "<div class='content'><p class='content_p'>"+coReply.content;
+		                    }else{
+		                    	output += "<div class='content'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span>"
+	 	                    }
+	                    	
+	                  
+	                    }else if(j == 4){
 	                    	var img = coReply.img;
 	                    	if(img != ""){
 	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
 	                    	}
 	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
-	                    }else if(j == 4){	
+	                    }else if(j == 5){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 5){		
+	                    }else if(j == 6){		
 	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
 	                    	output += "<div id='replyCount'></div>";
 	                    	
@@ -363,15 +420,21 @@ $(function(){
 	                    	output += "<input type='button' value='답댓글 닫기' class='bu_gray_p recomment_close'> ";
 	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";
 	                    	
-	                    	if(core_username != "<span class='del'>-</span>"){
-	                    	output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
-	                    	}
-	                    	
-	                    	if(core_username == id){
-	                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
-	                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
-	                    	}
-	                    	
+                    		if(core_del == "N"){
+                    			if(id != "null"){
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
+                    			}else{
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s' onclick='return loginCheck()'>";
+                    			}
+		                    }
+                    		
+                    		if(core_del == "N"){
+		                    	if(core_username == id){
+		                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
+		                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
+		                    	}
+                    		}
+                    		
 	                    	output += "<div id='obj' class='obj reply-wrap'>";
 	                    	output += "<form name='comment' id='comment' action='CommReModifyPro.co' method='post' style='margin-top:0px !important; padding-top:0px !important;'>";
 	                    	output += "	<input type='hidden' id='username' name='username' value='"+core_username+"'>";
@@ -434,7 +497,6 @@ $(function(){
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
     
 })	
-	
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
@@ -549,26 +611,39 @@ $(function(){
    	                for (var j = 0; j < replyList[i].length; j++) {
     	                    var reply = replyList[i][j];
     	                    if(j == 0){
-    	                    	var reply_contents = reply.contents;
-    	                    	output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	var reply_del = reply.del;
     	                    }else if(j == 1){
-    	                    	var re_name = reply.name;
-    	                    	output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
+    	                    	var reply_contents = reply.contents;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	}else{
+    	                    		output += "<ul class='rerelist'><li class='content_re'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span></li>";
+    	                    	}
+    	                    	
     	                    }else if(j == 2){
+    	                    	var re_name = reply.name;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
+    	                    	}else{
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd><span class='del'>-</span></dd>";
+    	                    	}
+    	                    	
+    	                    }else if(j == 3){
     	                    	
     	                    	
     	                    	output += "<dt>작성일 </dt><dd>"+moment(reply.date).format("YY-MM-DD ")+"</dd></dl></li><div style='clear: both;'></div>";
-    	                    }else if(j == 3){
+    	                    }else if(j == 4){
 	    	                   
-    	                    	if(id!=null){
-									if(re_name != id){
-									output += "</ul>"
-	    	                    	}else{
-									
-	    	                    	output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
+    	                    	if(id!="null"){
+									if(reply_del=="Y"){
+										output += "</ul>"
+	    	                    	}else if(id == re_name){			
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
-	    	                    	output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    	output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
+	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    	}else{
+	    	                    		output += "</ul>";
 	    	                    	}
 	    	                    }else{
 									output += "</ul>";   	                    		    	                    	
@@ -737,8 +812,14 @@ $(function(){
  				 var a = $(this).parents('li'); 
  				 var content = a.find('.content_p').text();
  				 var img = a.find('#img').val();
+ 				 var name = a.find('.re_name').text();
+ 				 var date = a.find('.re_date').text();
+//  				 alert(name);
  				 var output = ""; 
- 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
+ 				 output += "<div id='inline' style='max-width:600px; display: none;'>"
+ 				 +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
+ 				 +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+ 				 +"<div class='popup-name-date' style='margin-top:40px;'><b>작성자</b> : "+name+" , <b>작성일</b> : "+date+"</div></div>"
  				 
  				 $("#image_view_load").html(output); 
  				 $(".fancybox").trigger("click");
