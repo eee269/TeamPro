@@ -491,7 +491,6 @@ var productCode = "";
                   </tbody>
                </table>
 
-               &gt;
                <!-- 몰티비 플레이어 노출 위치 -->
                <div id="malltb_video_player"
                   style="margin-top: 10px; margin-bottom: 10px; text-align: center; display: none;"></div>
