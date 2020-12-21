@@ -58,14 +58,8 @@ public class ProdReviewListAction implements Action {
 				int num = reviewList.get(j).getNum();
 				int good = 0;
 				int bad = 0;
-				// 추천 수 가져오기
-				for(int k =0; k < 2; k++) {
-					if(k == 0) {
-						good = prodReviewListService.CountReviewRec(num, k);
-					}else {
-						bad = prodReviewListService.CountReviewRec(num, k);
-					}
-				}
+				int recommendG = 0;
+				int recommendB = 1;
 				
 				String id = reviewList.get(j).getMember_id();
 				SimpleDateFormat df = new SimpleDateFormat("YY-MM-dd");
@@ -74,6 +68,19 @@ public class ProdReviewListAction implements Action {
 				String content = reviewList.get(j).getContent();
 				String product_img = reviewList.get(j).getProduct_img();
 				int re_ref = reviewList.get(j).getRe_ref();
+				
+				// 추천 수 가져오기
+				for(int k =0; k < 2; k++) {
+					if(k == 0) {
+						// good 전체 개수, 해당 아이디로 추천 했는지 판별
+						recommendG = prodReviewListService.checkReviewRec(num, id, recommendG);
+						good = prodReviewListService.CountReviewRec(num, k);
+					}else {
+						// bad 전체 개수, 해당 아이디로 추천 했는지 판별
+						recommendB = prodReviewListService.checkReviewRec(num, id, recommendB);
+						bad = prodReviewListService.CountReviewRec(num, k);
+					}
+				}
 				
 				if(product_img == null) {
 					product_img = ""; // javascipt 에서 null 로 인식 시키기 위해 초기화
@@ -86,6 +93,7 @@ public class ProdReviewListAction implements Action {
 				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";
 				json += "{\"num\":\""+num+"\",\"product_img\":\""+product_img+"\"},";
 				json += "{\"num\":\""+num+"\",\"id\":\""+id+"\",\"re_ref\":\""+re_ref+"\""
+						+ ",\"recG\":\""+recommendG+"\",\"recB\":\""+recommendB+"\""
 						+ ",\"good\":\""+good+"\",\"bad\":\""+bad+"\"}]";
 				
 				if (j != reviewList.size() - 1) {

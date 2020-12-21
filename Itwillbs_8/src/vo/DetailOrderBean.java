@@ -13,6 +13,8 @@ public class DetailOrderBean {
 	private String size;
 	private String mainorder_code;
 	private String opt_productCode;
+//	private int ref;
+	private int seq;
 	public int getNum() {
 		return num;
 	}
@@ -72,6 +74,18 @@ public class DetailOrderBean {
 	}
 	public void setOpt_productCode(String opt_productCode) {
 		this.opt_productCode = opt_productCode;
+	}
+//	public int getRef() {
+//		return ref;
+//	}
+	public int getSeq() {
+		return seq;
+	}
+//	public void setRef(int ref) {
+//		this.ref = ref;
+//	}
+	public void setSeq(int seq) {
+		this.seq = seq;
 	}
 	
 	

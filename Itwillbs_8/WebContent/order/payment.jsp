@@ -12,7 +12,8 @@ String buyer_postcode = request.getParameter("postcode");
 String imp_uid = request.getParameter("imp_uid");
 String merchant_uid = request.getParameter("merchant_uid");
 String status = request.getParameter("status");
-int num = Integer.parseInt(request.getParameter("num"));
+// int num = Integer.parseInt(request.getParameter("num"));
+String[] nums = request.getParameterValues("num");
 int amount = Integer.parseInt(request.getParameter("amount"));
 %>
 <jsp:include page="../inc/header.jsp" />
@@ -156,7 +157,11 @@ $(function(){
 									id="buyer_postcode" name="buyer_postcode"> <input
 									type="hidden" value="" id="buyer_addr" name="buyer_addr">
 								<input type="hidden" value="" id="status" name="status">
-								<input type="hidden" value="<%=num%>" name="num" id="num">
+								<%
+								for(int i = 0 ; i < nums.length ; i ++){
+								%>
+								<input type="hidden" value="<%=nums[i]%>" name="num" id="num">
+								<%}	%>
 								<div id="paybutton">
 									<a class="CSSbuttonWhite" onclick="move(this)" id="goList">내
 										주문 목록 보기</a> &nbsp &nbsp <a class="CSSbuttonWhite"

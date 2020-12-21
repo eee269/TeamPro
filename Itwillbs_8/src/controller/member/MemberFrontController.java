@@ -14,11 +14,13 @@ import action.member.MemberLogoutAction;
 import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
-import action.member.MemberNaverLoginAction;
 import action.member.MemberPassProAction;
+import action.member.api.MemberGoogleKakaoLoginAction;
+import action.member.api.MemberNaverLoginAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteProAction;
+import action.member.MemberDupCheckAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -62,28 +64,37 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		else if(command.equals("/MemberModifyPro.mo")) {
+		} else if (command.equals("/MemberModifyPro.mo")) {
 			action = new MemberModifyAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MemberModifyForm.mo")) {
+		} else if (command.equals("/MemberModifyForm.mo")) {
 			action = new MemberModifyFormAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		} else if(command.equals("/MemberPassForm.mo")) {
+		} else if (command.equals("/MemberPassForm.mo")) {
 			forward = new ActionForward();
 			forward.setPath("/member/pass_Update.jsp");
 		} else if (command.equals("/MemberPassPro.mo")) {
 			forward = new ActionForward();
 
 			action = new MemberPassProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/dupCheckForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/dupCheck.jsp");
+		} else if (command.equals("/dupCheck.mo")) {
+			action = new MemberDupCheckAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -128,11 +139,22 @@ public class MemberFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		//--------------- 네이버 로그인 후 json처리 하기 위해 이동----------
+		// --------------- 네이버 로그인 후 json처리 하기 위해 이동----------
 		else if (command.equals("/MemberNaverLogin.mo")) {
 			forward = new ActionForward();
 
 			action = new MemberNaverLoginAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		// --------------- 구글 로그인 후 json처리 하기 위해 이동----------
+		else if (command.equals("/MemberGoogleKakaoLogin.mo")) {
+			forward = new ActionForward();
+
+			action = new MemberGoogleKakaoLoginAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
@@ -150,8 +172,7 @@ public class MemberFrontController extends HttpServlet {
 				dispatcher.forward(request, response);
 			}
 		}
-		
-		
+
 		// ------------공통적으로 수행할 포워딩 작업----------------
 
 	}

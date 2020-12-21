@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.cart.cartDeleteAction;
 import action.cart.cartListAction;
+import action.cart.cartGetPlusAction;
 //import action.cart.cartUpAction;
 import action.cart.cartUpdateAction;
 import vo.ActionForward;
@@ -74,14 +75,14 @@ public class CartFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 			// 장바구니로 담기
-		} else if(command.equals("/cartUpAction.ca")) {
-			System.out.println("컨트롤러 - CartUpdate");
-//			action = new cartUpAction();
+		} else if(command.equals("/cartGetPlusAction.ca")) {
+			System.out.println("컨트롤러 - CartUpAction");
+			action = new cartGetPlusAction();
 			
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
-				System.out.println("CartUpdate : " + e.getMessage());
+				System.out.println("CartUpAction : " + e.getMessage());
 				e.printStackTrace();
 				
 			}

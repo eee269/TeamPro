@@ -326,6 +326,9 @@ margin-left:0px;}
 	font-weight: 700;
 	text-decoration: none;
 }
+.tc{
+	color: red;
+}
 </style>
 <script type="text/javascript">
 	var checkIdResult = false, checkPasswdResult = false; 
@@ -340,13 +343,6 @@ margin-left:0px;}
 		var caseRegex = /[A-Za-z]/;
 		var digitRegex = /[0-9]/;
 		
-// 		if(regex.exec(id)) { 
-// 			element.innerHTML = "사용 가능";
-// 			checkIdResult = true; 
-// 		} else { 
-// 			element.innerHTML = "사용 불가";
-// 			checkIdResult = false; 
-// 		}
 
 		if(regex.exec(id)) {
 			var count = 0;
@@ -357,11 +353,11 @@ margin-left:0px;}
 				element.innerHTML = "사용 가능";
 	 			checkIdResult = true; 
 			} else {
-				element.innerHTML = "사용 불가";
+				element.innerHTML = "사용 불가(영문자,숫자를 혼용하여 3~8글자 입력하세요)";
 	 			checkIdResult = false; 
 			}
 		} else {
-			element.innerHTML = "사용 불가";
+			element.innerHTML = "사용 불가(영문자,숫자를 혼용하여 3~8글자 입력하세요)";
  			checkIdResult = false; 
 		}
 		
@@ -398,12 +394,12 @@ margin-left:0px;}
 				element.innerHTML = "사용 가능(위험)";
 				checkPasswdResult = true; // 전역변수 true 로 변경
 			} else {
-				element.innerHTML = "사용 불가(두 가지 이상 조합)";
+				element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 				checkPasswdResult = false; // 전역변수 false 로 변경
 			}
 
 		} else {
-			element.innerHTML = "사용 불가";
+			element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 			checkPasswdResult = false; // 전역변수 false 로 변경
 		}
 		
@@ -448,6 +444,22 @@ margin-left:0px;}
 			alert('아이디 또는 패스워드 규칙 확인 필수!');
 			return false;
 		}
+	}
+	
+	function openIdChk() {
+		if(document.fr.id.value==""){
+			alert('아이디를 입력해주세요')
+			return false;
+		} else {
+			window.name="parentForm";
+			window.open("dupCheckForm.mo",
+					"chkForm", "width=500, height=300, resizable = no, scrollbars = no");
+			
+		}
+	}
+
+	function inputIdChk(){
+		document.userInfo.idDuplication.value ="idUncheck";
 	}
 	
 </script>
@@ -512,36 +524,43 @@ margin-left:0px;}
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
 						style="height: 1000px;" name="fr" onsubmit="return check()">
+						
+						<div id="re"></div><br> <!-- onclick="dupCheck()" -->
+						<b>아이디</b><b id="checkIdResult" class="tc"></b>
 						<input type="text" name="id" id="id" class="inpt"
 							required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" onkeyup="checkId(this)">
-							<div id="checkIdResult"></div>
-						<label for="text">ID</label>
+							<input type="button" value="아이디중복확인" onclick="openIdChk()">
+						<input type="hidden" name="idDuplication" value="idUncheck">							
+						<label for="text">ID</label><br><br>
 						
+						<b>비밀번호</b><b id="checkPasswdResult" class="tc"></b>
 						<input type="password" name="pass" id="password" class="inpt" required="required"
 							placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요" onkeyup="checkPasswd(this)">
-							<div id="checkPasswdResult"></div>
 						<label for="password">Password</label>
 						
+						<b>비밀번호 재확인</b><b id="checkPasswdResult2" class="tc"> </b>
 						<input type="password" name="pass2" id="password2" class="inpt" required="required"
 							placeholder="비밀번호를 한번 더 입력하세요" onkeyup="checkPasswd2(this)"> 
-							<div id="checkPasswdResult2"> </div>
-						<label for="password">Password</label>
+						<label for="password">Password</label><br>
 						
+						<b>이메일</b>
 						<input type="email" name="email" id="email" class="inpt"
 							required="required" placeholder="이메일을 입력하세요">
 						<label for="email">e-mail</label>
 						
+						<b>이름</b>
 						<input type="text" name="username" id="name" class="inpt" required="required"
 							placeholder="닉네임을 입력하세요"> 
-						<label for="name">Username</label>
+						<label for="name">Username</label><br>
 						
+						<b>프로필사진</b>
 						<input type="file" name="img" id="img" class="inpt"
 							required="required" placeholder="프로필 사진을 첨부하세요">
 						<label for="img">Image</label>
 						
+						<b>전화번호</b><b id="checkPhoneResult" class="tc"></b>
 						<input type="text" name="phone" id="phone" class="inpt" required="required"
 							placeholder="연락처는 숫자만 입력하세요" onkeyup="checkPhone(this)">
-							<div id="checkPhoneResult"></div>
 						<label for="phone">Phone Number</label> <br>
 
 						<div class="term" style="padding-top: 30px;">
@@ -560,7 +579,7 @@ margin-left:0px;}
 			</div>
 		</article>
 	</section>
- <div style="height: 150px"></div>
+ <div style="height: 470px"></div>
 
 
 	<script

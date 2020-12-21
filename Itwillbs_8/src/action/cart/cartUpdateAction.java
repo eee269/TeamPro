@@ -26,13 +26,14 @@ public class cartUpdateAction implements Action {
 			out.println("<script>");
 			out.println("alert('로그인이 필요합니다.')");
 			out.println("</script>");
-			
+			forward = new ActionForward();
 			forward.setPath("MemberLoginForm.mo");
 		}
 		
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
 		int num = Integer.parseInt(request.getParameter("num"));
 		
+		System.out.println(cnt + ", " +  num);
 		
 		CartUpdateService cartUpdateService = new CartUpdateService();
 		
