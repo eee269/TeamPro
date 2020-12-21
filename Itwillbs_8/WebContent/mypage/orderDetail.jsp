@@ -101,7 +101,7 @@ System.out.println("orderDetail.jsp - detailorderList.size(): " + detailorderLis
 							String basicCode = detailorder.getOpt_productCode().substring(0, 4);
 						%>
 							<tr height="200px" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>'">
-								<td scope="row" width="300px"><div class="tb-center"><%=detailorder.getMain_img()%></div></td>
+								<td scope="row" width="300px"><div class="tb-center"><img src="<%=detailorder.getMain_img()%>"></div></td>
 								<td scope="row"><div class="tb-center">
 										<span><strong  style="font-size: 15px"><%=detailorder.getName()%></strong><br><br>
 											<%=detailorder.getPrice()%> 원 / <%=detailorder.getCnt()%> 개

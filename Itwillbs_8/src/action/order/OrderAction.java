@@ -30,15 +30,32 @@ public class OrderAction implements Action {
 			
 			forward.setPath("MemberLoginForm.mo");
 		} else {
-		int num = Integer.parseInt(request.getParameter("chk"));
+		String[] nums = request.getParameterValues("chk");
 		
+		
+		for(String str : nums) {
+			System.out.println("액션에서의 : "+str);
+		}
 		OrderService orderService = new OrderService();
 		
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
-		cartList = orderService.getSelectCart(num);
-		
+		cartList = orderService.getSelectCart(nums);
+//		cartList = orderService.getSelectCart(Integer.parseInt(str));
+		for(int i = 0 ; i <cartList.size() ; i++) {
+			System.out.println("Action List : "+cartList.get(i).getNum());
+			System.out.println("Action List : "+cartList.get(i).getCnt());
+			System.out.println("Action List : "+cartList.get(i).getProduct_name());
+			System.out.println("Action List : "+cartList.get(i).getPrice());
+			System.out.println("Action List : "+cartList.get(i).getColor());
+			System.out.println("Action List : "+cartList.get(i).getSize());
+			System.out.println("Action List : "+cartList.get(i).getMember_id());
+			System.out.println("Action List : "+cartList.get(i).getProduct_basicCode());
+			System.out.println("Action List : "+cartList.get(i).getOpt_productCode());
+		}
+
 		forward = new ActionForward();
 		forward.setPath("/order/order.jsp");
+		request.setAttribute("cartList", cartList);
 		}
 		return forward;
 	}

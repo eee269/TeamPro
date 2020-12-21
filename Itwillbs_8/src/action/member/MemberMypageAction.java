@@ -37,7 +37,7 @@ public class MemberMypageAction implements Action {
 			
 			forward.setPath("MemberLoginForm.mo");
 		} else {
-		
+			System.out.println("memberMypageActionMember_id : "+member_id);
 			MemberMypageService memberMypageService = new MemberMypageService();
 			MemberBean member = memberMypageService.getMember(member_id);
 			

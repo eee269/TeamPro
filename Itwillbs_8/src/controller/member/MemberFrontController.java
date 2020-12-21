@@ -15,11 +15,12 @@ import action.member.MemberModifyAction;
 import action.member.MemberModifyFormAction;
 import action.member.MemberMypageAction;
 import action.member.MemberPassProAction;
-import action.member.api.MemberGoogleLoginAction;
+import action.member.api.MemberGoogleKakaoLoginAction;
 import action.member.api.MemberNaverLoginAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteProAction;
+import action.member.MemberDupCheckAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -89,6 +90,16 @@ public class MemberFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else if(command.equals("/dupCheckForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/dupCheck.jsp");
+		} else if (command.equals("/dupCheck.mo")) {
+			action = new MemberDupCheckAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// -------------전체 멤버 리스트 보기----------------
@@ -140,10 +151,10 @@ public class MemberFrontController extends HttpServlet {
 			}
 		}
 		// --------------- 구글 로그인 후 json처리 하기 위해 이동----------
-		else if (command.equals("/MemberGoogleLogin.mo")) {
+		else if (command.equals("/MemberGoogleKakaoLogin.mo")) {
 			forward = new ActionForward();
 
-			action = new MemberGoogleLoginAction();
+			action = new MemberGoogleKakaoLoginAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

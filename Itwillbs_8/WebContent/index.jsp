@@ -1,8 +1,9 @@
+<%@page import="vo.CommBean"%>
+<%@page import="vo.ProductBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="vo.ProductBean"%>
 <jsp:include page="/inc/header_index.jsp" />
 <jsp:include page="/quickMenu_index.jsp" />
 <link type="text/css" rel="stylesheet" href="css/common.css" />
@@ -17,6 +18,8 @@
 	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
 	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
+	
+	ArrayList<CommBean> commList = (ArrayList) request.getAttribute("commList");
 %>
 <!-- Slider -->
 <section class="section-slide">
@@ -32,7 +35,72 @@
 </section>
 
 
-<!-- Banner -->
+<!-- 게시글 새 글 리스트 -->
+<section class="bg0 p-t-23">
+	<div class="container">
+		<div class="main_pro_title_area cboth ">
+			<div class="main_pro_title cboth">NEW ARTICLE</div>
+		</div>
+
+		<div class="row">
+			<%
+		for(int i=0; i<commList.size(); i++){
+			CommBean article = commList.get(i);
+			%>
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox">
+				<div class="block2">
+					<div class="block2-pic hov-img0">
+<!-- 						main_1.css에 block2-pic클래스의 img width, height 300px로 지정해놨음 -->
+						<a href="CommDetail.co?num=<%=article.getNum() %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> 
+							<img src="upload/commUpload/<%=article.getImg() %>" alt="IMG-PRODUCT"
+								onerror="this.style.display='none'" width="300px" height="300px">
+						</a> 
+					</div>
+
+					<div class="block2-txt flex-w flex-t p-t-14">
+						<div class="block2-txt-child1 flex-col-l ">
+							<a href="CommDetail.co?num=" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<%=article.getSubject() %></a>
+							<span class="stext-105 cl3">
+								<%=article.getUsername() %><br><%=article.getDate() %>
+							</span>
+						</div>
+						
+						
+<!-- 						북마크				 -->
+						<div class="block2-txt-child2 flex-r p-t-3">
+<%-- 							<%if(member_id != null){ %> --%>
+<%-- 							<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <% --%>
+<!--  								if(likeBaiscCodeList.contains(newList.get(i).getBasicCode())){ -->
+<%-- 								%>js-addedwish-b2<% --%>
+<!-- 	 								}else{ -->
+<%-- 									%>js-addedwish-b1<% --%>
+<%-- 									}%>"  --%>
+<%-- 								value="<%=likeCheck%>"> --%>
+<!-- 								<img class="icon-heart1 dis-block trans-04" -->
+<!-- 								src="images/icons/icon-heart-01.png" alt="ICON">  -->
+<!-- 								<img class="icon-heart2 dis-block trans-04 ab-t-l" -->
+<!-- 								src="images/icons/icon-heart-02.png" alt="ICON"> -->
+<!-- 							</button> -->
+<%-- 							<%}else{ %> --%>
+							<a href="#" class="not_member">
+								<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+							</a>
+<%-- 							<%} %> --%>
+						</div>
+					</div>
+				</div>
+			</div>
+		<% }%>
+		</div>
+	</div>
+	
+</section>
+
+
+
+
+
 <!-- 베스트 -->
 <section class="bg0 p-t-23">
 	<div class="container">

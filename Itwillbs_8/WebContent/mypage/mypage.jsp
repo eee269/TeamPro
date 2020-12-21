@@ -9,7 +9,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/inc/header.jsp" />
-
+<!-- QuickMenu -->
+<jsp:include page="../quickMenu.jsp" />
 <%
 	MemberBean member = new MemberBean(); 
 
@@ -94,7 +95,11 @@
 						<div class="user">
 							<div class="user-img">
 							<%
-							if(member.getImg().contains("http://") || member.getImg().contains("https://")) {
+							if(member.getImg() == null) {
+								%>
+								<img alt="profileImg" src="upload/memberUpload/<%=member.getImg()%>" onerror="this.style.display='none'">
+								<%
+							} else if(member.getImg().contains("http://") || member.getImg().contains("https://")) {
 								%>
 								<img alt="" src="<%=member.getImg()%>">
 								<%
@@ -106,7 +111,7 @@
 							<div class="user-info">
 								<p>
 									<b><%=member.getUsername() %></b> [<span id="MK_user_id"><%=member.getId() %></span>]님
-									  &nbsp;&nbsp;&nbsp; <a href="회원정보수정" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
+									  &nbsp;&nbsp;&nbsp; <a href="MemberModifyForm.mo" class="CSSbuttonWhite CSSbuttonMin">EDIT</a>
 								</p>
 								<div class="box">
 									<dl>

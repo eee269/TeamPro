@@ -1025,7 +1025,7 @@ keyframes swiper-preloader-spin { 100%{
 
 		<div class="right_quick_close cboth "><img src="images/quick/quick_open.gif" class="img_open_close"></div>
 		<div class="cboth sm_btn"><a href="Main.go"><img src="images/quick/quick_home.gif"><div class="sm_btn_text">Home</div></a></div>
-		<div class="cboth sm_btn"><a href="MyOrderList.or"><img src="images/quick/quick_delivery.gif"><div class="sm_btn_text">Tracking</div></a></div>
+		<div class="cboth sm_btn"><a href="MyOrderList.or"><img src="images/quick/quick_delivery.gif"><div class="sm_btn_text">MyOrderList</div></a></div>
 		<div class="cboth sm_btn"><a href="Cart.ca"><img src="images/quick/quick_cart.gif"><div class="sm_btn_text">Cart</div></a></div>
 		<div class="cboth sm_btn"><a href="MemberMypage.mo"><img src="images/quick/quick_mypage.gif"><div class="sm_btn_text">Mypage</div></a></div>
 		<div class="cboth sm_btn"><a href="ProductMylikeList.po"><img src="images/quick/quick_like.gif"><div class="sm_btn_text">Like List</div></a></div>
@@ -1045,20 +1045,20 @@ keyframes swiper-preloader-spin { 100%{
 	<!-- 퀵메뉴 커뮤니티 -->
 		<div class="cboth quick_comm_area">
 			<ul>
-				<li><a href="/board/board.html?code=nasign_board1">NOTICE</a></li>
-				<li><a href="/board/board.html?code=nasign_board8">REVIEW</a></li>
+				<li><a href="Main.go">HOME</a></li>
+				<li><a href="ProductShop.po?type=X&xcode=CLOTHES">CLOTHES</a></li>
 			</ul>
 			<ul>
-				<li><a href="/board/board.html?code=nasign_board2">STAFF</a></li>
-				<li><a href="/board/board.html?code=nasign_image4">EVENT</a></li>
+				<li><a href="ProductShop.po?type=X&xcode=BAGS">BAGS</a></li>
+				<li><a href="ProductShop.po?type=X&xcode=SHOES">SHOES</a></li>
 			</ul>
 			<ul>
-				<li><a href="/board/board.html?code=nasign_image3">CELEB</a></li>
-				<li><a href="/board/board.html?code=nasign_image1">NEWS</a></li>
+				<li><a href="CommList.co">COMMUNITY</a></li>
+				<li><a href="MemberMypage.mo">MY PAGE</a></li>
 			</ul>
 			<ul>
-				<li><a href="/board/board.html?code=nasign">Q&amp;A</a></li>
-				<li><a href="/shop/faq.html">FAQ</a></li>
+				<li><a href="Cart.ca">CART</a></li>
+				<li><a href="MyOrderList.or">MY ORDER</a></li>
 			</ul>
 		</div>
 	
@@ -1066,7 +1066,7 @@ keyframes swiper-preloader-spin { 100%{
 	<div class="quick_cs cboth">
 		<div class="quick_ttitle cboth">CS CENTER</div>
 		<div class="quick_bt cboth"></div>
-		<div class="quick_cs_numb cboth">02.6224.8900</div>
+		<div class="quick_cs_numb cboth">01.2345.6789</div>
 		<div class="quick_cs_txt cboth">
 			MON -FRI AM 10:00 -  PM 17:00<br>
 			LUNCH  PM 12:00 - 13:00<br>

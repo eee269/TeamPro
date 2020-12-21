@@ -22,6 +22,8 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
+<!-- 카카오 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
@@ -119,6 +121,16 @@ $(document).ready(function() {
 ul.arraymodeTab>.active a{
 font-weight: bold !important;
 }
+
+/* 업로드한 게시글의 이미지 크기 강제로 맞추기 */
+.wrap-pic-w img {
+	width: 250px;
+	height: 250px;
+}
+/* 게시글 제목 밑에 구분선 추가 */
+h4.ltext-109 {
+	border-bottom: #212529 1px solid !important;
+}
 </style>
 <!-- Menu Mobile -->
 		<div class="menu-mobile">
@@ -129,6 +141,7 @@ font-weight: bold !important;
 					</div>
 				</li>
 
+<<<<<<< HEAD
 				<li>
 					<div class="right-top-bar flex-w h-full">
 						<a href="#" class="flex-c-m p-lr-10 trans-04">
@@ -223,21 +236,167 @@ font-weight: bold !important;
 						<div class="header-cart-item-img">
 							<img src="images/item-cart-01.jpg" alt="IMG">
 						</div>
+=======
+<!-- breadcrumb -->
+<div class="container">
+	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
+			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
+	</div>
+</div>
+<!-- Content page -->
+<section class="bg0 p-t-52 p-b-20">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-lg-9 p-b-80">
+				<div class="p-r-45 p-r-0-lg">
+					<div class="wrap-pic-w how-pos5-parent">
+						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>">
+					</div>
+					<div class="p-t-32">
+						<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
+								<span class="cl4">By</span> <%=article.getUsername()%> <span
+								class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> <%=article.getDate()%> <span
+								class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> 태그 자리 <span class="cl12 m-l-4 m-r-6">|</span>
+						</span> <span> 댓글 갯수 </span> <span class="bookmark_count"> 북마크 갯수
+						</span>
+						</span>
+>>>>>>> 2406cc371e19785286e9c769a1bc353fde2f5605
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 								White Shirt Pleat
 							</a>
 
+<<<<<<< HEAD
 							<span class="header-cart-item-info">
 								1 x $19.00
 							</span>
+=======
+						<div class="flex-w size-217">
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle </a>
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Crafts </a>
+>>>>>>> 2406cc371e19785286e9c769a1bc353fde2f5605
 						</div>
+<<<<<<< HEAD
 					</li>
 
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
 							<img src="images/item-cart-02.jpg" alt="IMG">
+=======
+					</div>
+					<br> <input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="삭제"
+						onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+					<input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="수정"
+						onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+						&nbsp;&nbsp;&nbsp;
+					<input type="button"
+						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
+						value="북마크" id="bookmark"> <br>
+						
+                   <!-- 카카오톡으로 공유하기 기능 -->
+                   &nbsp;&nbsp;&nbsp;
+                   <a id="kakao-link-btn" href="javascript:sendLink()">
+  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40px"/>
+				   </a>
+				<!-- // 카카오톡으로 공유하기 기능 -->
+
+
+					<!-- -----------------------------Comment----------------------------- -->
+					<h2 class="comment_title">COMMENT</h2>
+					<div id="productDetail" style="padding-top: 20px;">
+						<div class="page-body">
+							<div class="cboth">
+								<div id="powerReview">
+									<div id="listPowerReview" class="MS_power_review_list">
+
+
+										<!-- 댓글등록 폼 시작 -->
+										<form name="comm_re_form" id="comm_re_form" method="post"
+											autocomplete="off" enctype="multipart/form-data">
+											<div name="comm_re" id="comm_re">
+												<input type="hidden" id="username" name="username"
+													value="<%=id%>"> <input type="hidden"
+													id="community_num" name="community_num"
+													value="<%=community_num%>">
+												<div id="writePowerReview">
+													<div class="PR15N01-write">
+
+														<div class="pr-txtbox">
+															<textarea
+																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+																id="reply_contents" name="reply_contents"></textarea>
+															<div class="thumb-wrap"></div>
+														</div>
+														<input type="file" name="reply_file" id="reply_file"
+															class="trick file-attach">
+													</div>
+													<!-- .PR15N01-write -->
+													<div class="PR15N01-recmd">
+
+														<div class="cvr right">
+															<%
+																if (id != null) {
+															%><input type="button" value="댓글등록"
+																class="lnk-review review_write">
+															<%
+																} else {
+															%><input type="button" value="댓글등록"
+																class="lnk-review review_write"
+																onclick="return loginCheck()">
+															<%
+																}
+															%>
+
+														</div>
+													</div>
+													<!-- .PR15N01-recmd -->
+												</div>
+											</div>
+											<!-- comm_re 끝 -->
+										</form>
+										<div class="cboth"></div>
+										<br>
+										<br>
+										<br>
+										<!-- 댓글등록 폼 끝 -->
+
+
+										<ul class="arraymodeTab">
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
+											<li class="arraymode newest"><a href="#newest">최신순</a></li>
+										</ul>
+
+
+										<ul class="PR15N01-review-wrap"></ul>
+
+
+
+
+
+										<!-- .PR15N01-review-wrap -->
+
+										<!-- .paging -->
+									</div>
+								</div>
+								<!-- #powerReview-->
+								<p style="clear: both"></p>
+
+							</div>
+							<!-- width1260 -->
+>>>>>>> 2406cc371e19785286e9c769a1bc353fde2f5605
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
@@ -827,6 +986,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				dropdownParent: $(this).next('.dropDownSelect2')
 			});
 		})
+<<<<<<< HEAD
 	</script>
 <!--===============================================================================================-->
 	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
@@ -841,6 +1001,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				scrollingThreshold: 1000,
 				wheelPropagation: false,
 			});
+=======
+		
+		// 게시글 추천수
+	    function bookmarkCount() {
+			$.ajax({
+				url: "CommBookCount.co",
+                type: "POST",
+                data: {
+                    num: "<%=article.getNum()%>"
+				},
+				success : function(count) {
+					$(".bookmark_count").html(count);
+				},
+			})
+		}
+		;
+>>>>>>> 2406cc371e19785286e9c769a1bc353fde2f5605
 
 			$(window).on('resize', function(){
 				ps.update();
@@ -849,6 +1026,42 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	</script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+
+<script type="text/javascript">
+
+//카카오톡으로 공유하기 
+
+Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+function sendLink() {
+  Kakao.Link.createDefaultButton({
+  	container: '#kakao-link-btn',
+    objectType: 'feed',
+    content: {
+      title: '<%=article.getSubject() %>',
+      description: '게시글 공유',
+      imageUrl:
+        'upload/productUploadImg/<%=article.getImg() %>',
+      link: {
+        mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+      },
+    },
+    social: {
+      likeCount: 286,
+      commentCount: 45,
+      sharedCount: 845,
+    },
+    buttons: [
+      {
+        title: '웹으로 보기',
+        link: {
+          mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+          webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
+        }
+      }]
+  })
+}
+</script>
 
 <jsp:include page="../inc/footer.jsp" />
 </body>

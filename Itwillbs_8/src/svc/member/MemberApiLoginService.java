@@ -1,4 +1,4 @@
-package svc.member.api;
+package svc.member;
 
 import static db.JdbcUtil.*;
 
@@ -7,7 +7,7 @@ import java.sql.Connection;
 import dao.member.MemberApiDAO;
 import vo.MemberBean;
 
-public class MemberNaverLoginService {
+public class MemberApiLoginService {
 
 	public boolean isMember(String id) {
 		boolean isMember = false;

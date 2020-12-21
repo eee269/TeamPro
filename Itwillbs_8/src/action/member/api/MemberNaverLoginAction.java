@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import action.Action;
-import svc.member.api.MemberNaverLoginService;
+import svc.member.MemberApiLoginService;
 import vo.ActionForward;
 import vo.MemberBean;
 
@@ -38,7 +38,7 @@ public class MemberNaverLoginAction implements Action {
 		}
 
 		
-		MemberNaverLoginService service = new MemberNaverLoginService();
+		MemberApiLoginService service = new MemberApiLoginService();
 		boolean isMember = service.isMember(id);
 		
 		if(isMember) {
