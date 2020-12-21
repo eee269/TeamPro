@@ -341,7 +341,7 @@ h4.ltext-109 {
 </section>
 <div id="image_view_load"></div>
 <a class="fancybox" href="#inline"></a>
-
+테테테테테
 <script>
 
 //==================== 원댓글 로딩  ====================//

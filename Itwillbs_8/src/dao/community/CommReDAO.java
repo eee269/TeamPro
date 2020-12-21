@@ -100,6 +100,10 @@ public class CommReDAO {
 //						+ "on p.num = c.re_ref where community_num=? and re_lev=0 Order by c.ct desc limit ?,?";
 				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
 				
+				
+//				sql=" SELECT c.*,m.username FROM community_reply c JOIN member m ON  c.member_id = m.id as p INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as d "
+//						+ "on p.num = d.re_ref where community_num=? and re_lev=0 Order by c.ct desc limit ?,?";
+				
 			}else if(arraymode == 1) {
 //				sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
 				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
