@@ -20,6 +20,7 @@ import action.member.api.MemberNaverLoginAction;
 import action.member.MemberJoinProAction;
 import action.member.ControlMemberListAction;
 import action.member.MemberDeleteProAction;
+import action.member.MemberDupCheckAction;
 import action.member.MemberLoginProAction;
 import vo.ActionForward;
 
@@ -84,6 +85,16 @@ public class MemberFrontController extends HttpServlet {
 			forward = new ActionForward();
 
 			action = new MemberPassProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if(command.equals("/dupCheckForm.mo")) {
+			forward = new ActionForward();
+			forward.setPath("/member/dupCheck.jsp");
+		} else if (command.equals("/dupCheck.mo")) {
+			action = new MemberDupCheckAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {
