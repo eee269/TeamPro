@@ -114,7 +114,7 @@ public class CommDAO {
 		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
 		
 		try {
-			String sql = "SELECT * FROM community ORDER BY date desc limit ?,?";
+			String sql = "SELECT c.*, m.username FROM community c JOIN member m ON c.member_id = m.id ORDER BY date desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, limit);
@@ -128,7 +128,7 @@ public class CommDAO {
 				
 				// 비밀번호는 제외
 				article.setNum(rs.getInt(1));
-				article.setMember_id(rs.getString(2));
+				article.setUsername((rs.getString("m.username")));
 				article.setSubject(rs.getString(3));
 				article.setContent(rs.getString(4));
 				article.setReadCount(rs.getInt(5));
