@@ -195,6 +195,7 @@ public class ProdQnaDAO {
 					qna.setQna_re_lev((rs.getInt(8)));
 					qna.setQna_date(rs.getTimestamp(9));
 					qna.setProduct_basicCode((rs.getString(10)));
+					qna.setMember_id((rs.getString(11)));
 					qna.setQna_re_seq((rs.getInt(12)));
 					qna.setUsername((rs.getString(13)));
 					
@@ -393,6 +394,7 @@ public class ProdQnaDAO {
 					qna.setQna_re_lev((rs.getInt(8)));
 					qna.setQna_date(rs.getTimestamp(9));
 					qna.setProduct_basicCode((rs.getString(10)));
+					qna.setMember_id((rs.getString(11)));
 					qna.setUsername((rs.getString(12)));
 					
 					list.add(qna);

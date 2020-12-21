@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
@@ -20,6 +21,7 @@
    int listCount = pageInfo.getListCount();
    
    String basicCode = request.getParameter("basicCode"); 
+   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
@@ -612,7 +614,7 @@ var productCode = "";
                         </td>
                         <td>
                            <div class="tb-center">
-                           <%=qnaList.get(i).getQna_date()%>
+                           <%=sdf.format(qnaList.get(i).getQna_date())%>
                            </div>
                         </td>
                         <td>
@@ -628,8 +630,13 @@ var productCode = "";
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
-                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
+	                                <%if(qnaList.get(i).getMember_id().equals(member_id)){ %>
+	                                 <div class="pr_r_button">
+	                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
+	                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
+	                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+	                                 </div>
+	                                 <%} %>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
                                     <div class="comment_depth1">
@@ -637,12 +644,32 @@ var productCode = "";
                                           <tbody>
                                              <tr>
                                                 <td class="MS_cmt_detail">
-                                                   <span class="MS_cmt_date">답글란입니다</span> <br>
-                                                   <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span>
-                                                   <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span>
-                                                   <div class="MS_cmt_content MS_cmt_depth01">
-                                                      <%=qnaList.get(i).getQna_content() %>
-                                                   </div>
+<!--                                                    <span class="MS_cmt_date">답글란입니다</span> <br> -->
+<%--                                                    <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span> --%>
+<%--                                                    <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span> --%>
+<!--                                                    <div class="MS_cmt_content MS_cmt_depth01"> -->
+<%--                                                       <%=qnaList.get(i).getQna_content() %> --%>
+<!--                                                    </div> -->
+
+														<div class="comments">
+															<div class="comments__arrow_top"></div>
+															<div class="comment__inner">
+																<div class="comment__lpane"><%= qnaList.get(i).getUsername() %></div>
+																<div class="comment__rpane">
+																	<div class="comment__error_message"></div>
+																<div class="comment__message">
+																	<span class="comment__message_text"><%= qnaList.get(i).getQna_content() %></span>
+																</div>
+					    	                					<div class="pr_r_button">
+					    	                					<%if(member_id.equals("admin")){ %>
+							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
+									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+						    	                    			<%} %>
+					    	                					</div>
+		    	                							</div>
+		    	                						</div>
+		    	                					</div>
+		    	                			
                                                 </td>
                                              </tr>
                                           </tbody>
@@ -1034,12 +1061,13 @@ var productCode = "";
 			    	                    				+"<span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span>"
 		    	                    					+"<a class='good"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+good+");' >"
 		    	                    						+"<span class='imgRecG"+reply.num+"'>";
+		    	                    						
+		    	                    					// 아이디 값 기반으로 추천을 이미 눌렀을 시 나타나는 이미지 나눔
 		    	                    					if(reply.recG == 0){
 			    	                    	output +=			"<img src='images/icons/in-love_face_before.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
 		    	                    					}else{
   	                    					output +=			"<img src='images/icons/in-love_face.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
 		    	                    					}
-		    	                    					
    	                    					output +=		"</span>"
    	                    									+"<span class='recCount'>"+reply.good+"</span></a>&nbsp"
 		    	                    						+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");'>"
@@ -1088,7 +1116,7 @@ var productCode = "";
                 					if(page <= 1){
           				output+=			"<input type='button' value='이전'> &nbsp;";
                 					}else{
-          				output+=			"<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+page-1+"');''>&nbsp";
+          				output+=			"<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&nbsp";
                 					}
             						for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
             							if(i == page){
@@ -1141,7 +1169,7 @@ var productCode = "";
     // paging
     function paging(a,b,c){
     	var listCount = a;
-    	var maxPage = Math.ceil(listCount / c);
+    	var maxPage = Math.ceil(listCount / c * 1);
     	var startPage = Math.floor(b / 10) * 10 +1;
     	var endPage = startPage + 10 -1;
     	
@@ -1405,6 +1433,32 @@ function show_hide(){
       }
    });
 };
+// qna 비회원이 글 쓰려고 할 시 로그인 유도
+$(function(){
+	$('.btm_write').click(function(){
+		var member_id = '<%=member_id%>';
+		if(member_id == 'null'){
+			if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+				return false;
+			}else{
+				location.href="MemberLoginForm.mo";
+				return false;
+			}
+		}
+	});
+});
+
+//review 답글 클릭 시 보여주기
+function showReply(num){
+	$(function(){
+		var form = $('#prm_form'+num).css('display');
+		if(form == 'table-row' || form == 'inline' || form == 'block'){
+			$('#prm_form'+num).css('display','none');
+		}else {
+			$('#prm_form'+num).css('display','inline').focus();
+		}
+	});
+}
 </script>
 <script type="text/javascript">
    var _gaq = _gaq || [];

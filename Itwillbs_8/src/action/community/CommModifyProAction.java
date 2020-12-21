@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -25,6 +26,8 @@ public class CommModifyProAction implements Action {
 		System.out.println("CommModifyProAction!");
 		
 		ActionForward forward = null;
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("member_id");
 		
 		ServletContext context = request.getServletContext();
 		String saveFolder = "/upload/commUpload";
@@ -43,10 +46,11 @@ public class CommModifyProAction implements Action {
 		
 		// isArticleWriter() 메서드를 호출하여 적합한 사용자인지 판별
 		CommModifyProService boardModifyProService = new CommModifyProService();
-		boolean isRightUser = boardModifyProService.isArticleWriter(num, multi.getParameter("pass"));
-		System.out.println(multi.getParameter("pass"));
+		boolean isRightUser = boardModifyProService.isArticleWriter(multi.getParameter("pass"), member_id);
+		
 		// 적합한 사용자 판별에 따른 처리
 		if(!isRightUser) {
+			// 비밀번호 틀림
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -54,7 +58,7 @@ public class CommModifyProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
-			
+			// 본인 맞음
 			CommBean article = new CommBean();
 			article.setNum(num);
 			article.setSubject(multi.getParameter("subject"));
