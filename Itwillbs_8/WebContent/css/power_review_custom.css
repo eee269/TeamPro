@@ -3,7 +3,9 @@
 #powerReview * {
 	margin: 0;
 }
-
+.star-icon{
+	color: #F5DF4D;	
+}
 #powerReview, #powerReview input, #powerReview textarea {
 	color: #444;
 	font-family: Dotum, Sans-Serif;
@@ -930,6 +932,10 @@
 	height: 100%;
 }
 
+.abs {
+	background-color: red;
+}
+
 #powerReview .PR15N01-info .chart li .num {
 	position: absolute;
 	top: 0;
@@ -980,7 +986,7 @@
 	filter: alpha(opacity = 30);
 }
 
-#powerReview .PR15N01-info .photo ul li a img {
+#powerReview .PR15N01-info .photo ul li img {
 	width: 54px;
 	height: 54px;
 }
