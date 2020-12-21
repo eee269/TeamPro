@@ -1,4 +1,7 @@
 /* BASIC css start */
+@import url(https://fonts.googleapis.com/css?family=Francois+One);
+@import url(https://fonts.googleapis.com/css?family=PT+Sans);
+
 #mask { display:none; position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:200 }
 
 
@@ -242,6 +245,50 @@ a:hover img.menuoff {display:none;}
 .icon_new {display:inline-block;}
 .icon_new img {padding:3px;}
 
+.main {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.main a {
+font-family: 'Roboto', "Nanum Gothic" , sans-serif;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  font-size: 23px;
+  background: linear-gradient(to bottom, #000, #000 80%, #fff 80%, #fff 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-repeat: no-repeat;
+  transition: background 0.2s ease-out;
+  white-space: nowrap;
+}
+
+.main span {
+  position: relative;
+}
+
+.main span:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: #000;
+  bottom: 3px;
+  transition: all 0.2s ease-out;
+}
+
+.main a:hover {
+  background-position: 0 5px;
+}
+
+.main span:hover:before {
+  transform: translateY(10px)
+}
 
 
 
