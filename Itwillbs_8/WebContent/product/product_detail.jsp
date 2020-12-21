@@ -281,7 +281,7 @@ var productCode = "";
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
       <!-- 폼 -->
-   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
+<!--    <form action="cartGetPlusAction.ca" method="post" name="cartUp"> -->
       <!-- 폼 -->
       <div class="row">
          <div class="col-md-6 col-lg-7 p-b-30">
@@ -304,7 +304,6 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -318,9 +317,6 @@ var productCode = "";
 						             	<!-- ----수정하기 --- -->
 <!-- 						             	 20.12.19. yj 바뀜! -->
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
-							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
-							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name="main_img" value="<%=main[0] %>">
 <!-- 							<input type="hidden" name="size" value=""> -->
 <!-- 							<input type="hidden" name="color" value=""> -->
 <%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
@@ -333,9 +329,15 @@ var productCode = "";
          </div>
 
          <div class="col-md-6 col-lg-5 p-b-30">
+         <!-- form태그도 위치변경 -->
+         <form action="cartGetPlusAction.ca" method="post" name="cartUp"> 
             <div class="p-r-50 p-t-5 p-lr-0-lg">
             <!-- 상품코드 -->
             <input type="hidden" id="item-code" value="code,,">
+            <!-- 여기로 위치변경 -->
+            				<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
+							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
+							<input type="hidden" name="main_img" value="<%=main[0] %>">
             <!-- 상품명 -->
                <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
                   </h4>
@@ -440,11 +442,12 @@ var productCode = "";
                   </a>
                </div>
             </div>
+         </form>
          </div>
       </div>
 
 <!--    폼 끝 -->
-      </form>
+<!--       </form> -->
       
       <!-- 상세정보 시작 -->
       <div id="productDetail">
