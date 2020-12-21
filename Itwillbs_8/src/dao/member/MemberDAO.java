@@ -119,6 +119,37 @@ public class MemberDAO {
 		
 		return insertCount;		
 	}
+	
+	public boolean dupCheck(String id) {
+		boolean isDupSuccess=false;
+		
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		
+	try {
+		String sql="SELECT * FROM member WHERE id=?";
+		
+
+		pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, id);
+		rs = pstmt.executeQuery();				
+		
+		rs=pstmt.executeQuery();
+		if(rs.next()){
+			//"아이디중복"
+			isDupSuccess = true;
+		}else{
+			//"아이디 사용가능"
+			isDupSuccess = false;
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		close(pstmt);
+		close(rs);
+	}
+		return isDupSuccess;
+	}
 
 //---------------------------로그인-------------------------------
 	public boolean selectLoginMember(String id, String pass) throws LoginException {
