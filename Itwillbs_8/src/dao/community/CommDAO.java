@@ -59,7 +59,7 @@ public class CommDAO {
 			ps.setString(3, commBean.getSubject());
 			ps.setString(4, commBean.getContent());
 			ps.setInt(5, commBean.getReadCount());
-			ps.setString(6, commBean.getImg());
+			ps.setString(7, commBean.getImg());
 			insertCount = ps.executeUpdate();
 			
 		} catch (Exception e) {
@@ -129,11 +129,11 @@ public class CommDAO {
 				// 비밀번호는 제외
 				article.setNum(rs.getInt(1));
 				article.setMember_id(rs.getString(2));
-				article.setSubject(rs.getString(4));
-				article.setContent(rs.getString(5));
-				article.setReadCount(rs.getInt(6));
-				article.setDate(rs.getTimestamp(7));
-				article.setImg(rs.getString(8));
+				article.setSubject(rs.getString(3));
+				article.setContent(rs.getString(4));
+				article.setReadCount(rs.getInt(5));
+				article.setDate(rs.getTimestamp(6));
+				article.setImg(rs.getString(7));
 				
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
@@ -174,12 +174,13 @@ public class CommDAO {
 						
 						// 비밀번호는 제외
 						article.setNum(rs.getInt(1));
+						article.setMember_id(rs.getString(2));
+						article.setSubject(rs.getString(3));
+						article.setContent(rs.getString(4));
+						article.setReadCount(rs.getInt(5));
+						article.setDate(rs.getTimestamp(6));
+						article.setImg(rs.getString(7));
 						article.setUsername(rs.getString("m.username"));
-						article.setSubject(rs.getString(4));
-						article.setContent(rs.getString(5));
-						article.setReadCount(rs.getInt(6));
-						article.setDate(rs.getTimestamp(7));
-						article.setImg(rs.getString(8));
 						
 						// 1개 게시물을 전체 게시물 저장 객체에 추가
 						articleList.add(article);
