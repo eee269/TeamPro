@@ -129,7 +129,7 @@ public class CommDAO {
 				
 				// 비밀번호는 제외
 				article.setNum(rs.getInt("num"));
-				article.setUsername(rs.getString("username"));
+				article.setUsername(rs.getString("member_id"));
 				article.setSubject(rs.getString("subject"));
 				article.setContent(rs.getString("content"));
 				article.setReadCount(rs.getInt("readcount"));
