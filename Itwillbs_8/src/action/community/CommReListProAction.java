@@ -51,7 +51,8 @@ public class CommReListProAction implements Action {
 		json = "{\"coReplyList\":["; 
 		for (int j = 0; j < commentList.size(); j++) {
 			
-			String username = commentList.get(j).getId();
+			String username = commentList.get(j).getUsername();
+			String mem_id = commentList.get(j).getId();
 			String content = commentList.get(j).getContents();
 			int num = commentList.get(j).getNum();
 			community_num = commentList.get(j).getCommunity_num();
@@ -67,6 +68,7 @@ public class CommReListProAction implements Action {
 			
 				
 			json += "[{\"del\":\""+del+"\"},";
+			json += "{\"mem_id\":\"" + mem_id + "\"},";
 			json += "{\"username\":\"" + username + "\"},";
 			json += "{\"date\":\"" + date + "\"},";
 			json += "{\"content\":\"" + content + "\"},";

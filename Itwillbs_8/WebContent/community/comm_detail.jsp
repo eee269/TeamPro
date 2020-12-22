@@ -260,7 +260,7 @@ h4.ltext-109 {
 
 														<div class="pr-txtbox">
 															<textarea
-																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+																class="size-110 bor8 stext-102 cl2 p-tb-10"
 																id="reply_contents" name="reply_contents"></textarea>
 															<div class="thumb-wrap"></div>
 														</div>
@@ -376,19 +376,21 @@ $(function(){
 	                    if(j == 0){
 	                    	var core_del = coReply.del;
 	                    }else if(j == 1){
+	                    	var core_mem_id = coReply.mem_id;
+	                    }else if(j == 2){
 	                    	var core_username = coReply.username;
 	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'>"
 		                    		                    	
 	                    		if(core_del == "N"){
-		                    		output += "<dt class='first'>작성자</dt><dd class='re_name'>"+core_username+"</dd>";
+		                    		output += "<dt class='first'>작성자</dt><dd class='re_name'>"+core_mem_id+"</dd>";
 			                    }else{
 			                    	output += "<dt class='first'>작성자</dt><dd class='re_name'><span class='del'>-</span></dd>"
 		 	                    }                    	
 	                    	
-	                    }else if(j == 2){
+	                    }else if(j == 3){
 	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
 								
-	                    }else if(j == 3){
+	                    }else if(j == 4){
 	                    	var core_content = coReply.content;
 // 	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
                	
@@ -399,16 +401,16 @@ $(function(){
 	 	                    }
 	                    	
 	                  
-	                    }else if(j == 4){
+	                    }else if(j == 5){
 	                    	var img = coReply.img;
 	                    	if(img != ""){
 	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
 	                    	}
 	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
-	                    }else if(j == 5){	
+	                    }else if(j == 6){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 6){		
+	                    }else if(j == 7){		
 	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
 	                    	output += "<div id='replyCount'></div>";
 	                    	
@@ -618,18 +620,20 @@ $(function(){
     	                    	}
     	                    	
     	                    }else if(j == 2){
+    	                    	var reply_mem_id = reply.mem_id;
+   	                		}else if(j == 3){
     	                    	var re_name = reply.name;
     	                    	if(reply_del=="N"){
-    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply_mem_id+"</dd>";
     	                    	}else{
     	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd><span class='del'>-</span></dd>";
     	                    	}
     	                    	
-    	                    }else if(j == 3){
+    	                    }else if(j == 4){
     	                    	
     	                    	
     	                    	output += "<dt>작성일 </dt><dd>"+moment(reply.date).format("YY-MM-DD ")+"</dd></dl></li><div style='clear: both;'></div>";
-    	                    }else if(j == 4){
+    	                    }else if(j == 5){
 	    	                   
     	                    	if(id!="null"){
 									if(reply_del=="Y"){

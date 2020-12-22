@@ -71,7 +71,8 @@ public class CommReReListProAction implements Action {
 		String json = "{\"replyList\":[";
 		for (int i = 0; i < reCommentList.size(); i++) {
 			int comm_re_num = reCommentList.get(i).getNum();
-			String name = reCommentList.get(i).getId();
+			String name = reCommentList.get(i).getUsername();
+			String mem_id = reCommentList.get(i).getId();
 			String contents = reCommentList.get(i).getContents();
 			Timestamp date =reCommentList.get(i).getDate();	
 			community_num=reCommentList.get(i).getCommunity_num();
@@ -83,6 +84,7 @@ public class CommReReListProAction implements Action {
 			
 			json += "[{\"del\":\"" + del + "\"},";
 			json += "{\"contents\":\"" + contents + "\"},";
+			json += "{\"mem_id\":\"" + mem_id + "\"},";
 			json += "{\"name\":\"" + name + "\"},";
 			json += "{\"date\":\"" + date + "\"},";
 			json += "{\"comm_re_num\":\"" + comm_re_num + "\"}]";
