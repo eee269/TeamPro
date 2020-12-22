@@ -241,6 +241,12 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// --------------------상품 qna 삭제 폼--------------------
+		else if (command.equals("/ProdQnaDeleteForm.po")) {
+			System.out.println("ProdQnaDeleteForm.po 포워딩");
+			forward = new ActionForward();
+			forward.setPath("product/qnaDelete.jsp");
+		}
 		// --------------------상품 qna 삭제--------------------
 		else if (command.equals("/ProdQnaDelete.po")) {
 			System.out.println("ProdQnaDelete.po 포워딩");

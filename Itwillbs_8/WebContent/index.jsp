@@ -1,9 +1,9 @@
 <%@page import="vo.CommBean"%>
+<%@page import="vo.ProductBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="vo.ProductBean"%>
 <jsp:include page="/inc/header_index.jsp" />
 <jsp:include page="/quickMenu_index.jsp" />
 <link type="text/css" rel="stylesheet" href="css/common.css" />

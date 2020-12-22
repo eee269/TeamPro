@@ -147,9 +147,9 @@
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->
-					<a href="Main.go" class="logo"> <img
-						src="images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
+				<div class="main">
+				  <span><a href="Main.go">#OOTD</a></span>
+				</div>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">

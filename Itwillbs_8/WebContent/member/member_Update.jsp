@@ -24,8 +24,7 @@ body {
 }
 body .container_member {
   position: relative;
-  overflow: hidden;
-  height: 100%;
+  height: 1000px;
   -moz-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
   -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 30px;
@@ -35,7 +34,7 @@ body .container_member .half {
   float: left;
   width: 100%;
   height: 100%;
-  padding: 58px 30em; 0;
+  padding: 58px 20% 0 20%;
 }
 body .container_member .half.bg {
   background-image: url("http://www.blueb.co.kr/SRC2/_image/v01.jpg");
@@ -319,23 +318,26 @@ body .container_member .content .signup-cont {
 
     				        <div class="signup">
                 <form action="MemberModifyPro.mo" method="post" enctype="multipart/form-data" name="fr">
+                							<b>아이디</b>
 						                    <input type="text" name="id" id="id" class="inpt" required="required" value="<%=member.getId() %>" readonly>
 						                    <label for="text">ID</label><br>
 						                    
-						                    <input type="button" value="비밀번호 수정" onclick="passUpdate()">
+						                    <b>비밀번호</b>
 <!--                 						   	<input type="button" value="비밀번호 수정" onclick="location.href='MemberPassForm.mo'"> -->
 											<input type="password" name="pass" id="password" class="inpt" required="required" placeholder="Your Password">
 											<input type="hidden" name="hiddenpass" id="password" class="inpt" value="<%=member.getPass() %>" required="required" placeholder="Your Password">
                 						    <label for="password">Password</label><br>
                 						   	<div id = "pwc"></div>
 
-                						   	
+                						   	<b>이름</b>
                 						   	<input type="text" name="username" id="name" class="inpt" required="required" value="<%=member.getUsername() %>" placeholder="Your name">
 						                    <label for="name">Name</label>	  <br>
 						                    
+						                    <b>이메일</b>
                   							<input type="email" name="email" id="email" class="inpt" required="required" value="<%=member.getEmail()%>" placeholder="Your email">
 						                    <label for="email">e-mail</label>	  <br>
 						                    
+						                    <b>프로필사진</b>
 						                    <input type="file" name="img" id="img" class="inpt" placeholder="프로필 사진을 첨부하세요">
 						                    <input type="hidden" name="oldimg" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요">
 						                    
@@ -349,13 +351,14 @@ body .container_member .content .signup-cont {
 <%-- 						                   	 	<input type="file" name="img" id="img" class="inpt" value="<%=member.getImg()%>" placeholder="프로필 사진을 첨부하세요"><% } %>					              --%>
 <!-- 						                    <label for="img">Image</label>	  <br><br>     -->
 						                    
-						                    
+						                    <b>전화번호</b>
 						                    <input type="text" name="phone" id="phone" class="inpt" required="required" value="<%=member.getPhone()%>" placeholder="Your PhoneNumber">
 						                    <label for="phone">Phone Number</label>	  <br>						   	
                 						   	
-						                    <input type="submit" value="회원정보 수정" class="submit" style="font-size: 18px; width: 30%; align-content: center; margin:auto;">
-						                    <input type="button" value="탈퇴" class="submit" onclick="location.href='MemberDeleteForm.mo'" style="font-size: 18px; width: 30%; align-content: center; margin:auto;">
-						                    <input type="reset" value="취소" class="submit" style="font-size: 18px; width: 30%; align-content: center; margin:auto;"> 
+						                    <input type="submit" value="회원정보 수정" class="submit">
+						                    <input type="button" value="비밀번호 수정" onclick="passUpdate()" class="submit">
+						                    <input type="button" value="탈퇴" class="submit" onclick="location.href='MemberDeleteForm.mo'">
+						                    <input type="reset" value="취소" class="submit"> 
 						                    
 						                 
 						                    

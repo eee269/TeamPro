@@ -1,3 +1,4 @@
+
 <%@page import="java.math.BigInteger"%>
 <%@page import="java.security.SecureRandom"%>
 <%@page import="java.net.URLEncoder"%>
@@ -7,15 +8,10 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
-<!-- 구글 로그인 SDK -->
 <meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<!-- 네이버 로그인 SDK -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-
-<!-- 카카오 로그인 SDK -->
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
 
 <style rel="stylesheet">
 
@@ -330,19 +326,8 @@ margin-left:0px;}
 	font-weight: 700;
 	text-decoration: none;
 }
-
-/* 구글, 네이버, 카카오 api 아이콘 정렬 */
-.api {
-	text-align: center;
-}
-.api div, .api img {
-  	display: inline-block;
-  	vertical-align: middle;
-	padding-right: 10px;
-	height: 40px;
-}
-#naver_id_login img {
-	width: 130px;
+.tc{
+	color: red;
 }
 </style>
 <script type="text/javascript">
@@ -358,13 +343,6 @@ margin-left:0px;}
 		var caseRegex = /[A-Za-z]/;
 		var digitRegex = /[0-9]/;
 		
-// 		if(regex.exec(id)) { 
-// 			element.innerHTML = "사용 가능";
-// 			checkIdResult = true; 
-// 		} else { 
-// 			element.innerHTML = "사용 불가";
-// 			checkIdResult = false; 
-// 		}
 
 		if(regex.exec(id)) {
 			var count = 0;
@@ -375,11 +353,11 @@ margin-left:0px;}
 				element.innerHTML = "사용 가능";
 	 			checkIdResult = true; 
 			} else {
-				element.innerHTML = "사용 불가";
+				element.innerHTML = "사용 불가(영문자,숫자를 혼용하여 3~8글자 입력하세요)";
 	 			checkIdResult = false; 
 			}
 		} else {
-			element.innerHTML = "사용 불가";
+			element.innerHTML = "사용 불가(영문자,숫자를 혼용하여 3~8글자 입력하세요)";
  			checkIdResult = false; 
 		}
 		
@@ -416,12 +394,12 @@ margin-left:0px;}
 				element.innerHTML = "사용 가능(위험)";
 				checkPasswdResult = true; // 전역변수 true 로 변경
 			} else {
-				element.innerHTML = "사용 불가(두 가지 이상 조합)";
+				element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 				checkPasswdResult = false; // 전역변수 false 로 변경
 			}
 
 		} else {
-			element.innerHTML = "사용 불가";
+			element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 			checkPasswdResult = false; // 전역변수 false 로 변경
 		}
 		
@@ -468,44 +446,36 @@ margin-left:0px;}
 		}
 	}
 	
-
-
-		// 구글 로그인 API
-		function onSignIn() {
-			  var profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
-			  id = profile.getId();
-			  username = profile.getName();
-			  img = profile.getImageUrl();
-			  email = profile.getEmail();
-			 alert('로그인 완료');
-			  
-			  // 이거 토큰인디.. 토큰 어따써..?
-	// 		  var id_token = googleUser.getAuthResponse().id_token;
-	// 		  console.log("ID Token: " + id_token);
-			  post_to_url( "MemberGoogleKakaoLogin.mo",
-			    		{'id': id, 'username': username, 'email': email, 'img': img});
+	function openIdChk() {
+		if(document.fr.id.value==""){
+			alert('아이디를 입력해주세요')
+			return false;
+		} else {
+			window.name="parentForm";
+			window.open("dupCheckForm.mo",
+					"chkForm", "width=500, height=380, resizable = no, scrollbars = no");
+			
 		}
+	}
 
-		// 구글, 카카오 로그인 API
-		function post_to_url(path, params, method='post') {
-		  
-		  const form = document.createElement('form');
-		  form.method = method;
-		  form.action = path;
-		  
-		  for(const key in params) {
-			  if(params.hasOwnProperty(key)) {
-				  const hiddenField = document.createElement('input');
-				  hiddenField.type = 'hidden';
-			      hiddenField.name = key;
-			      hiddenField.value = params[key];
-			      form.appendChild(hiddenField);
-			    }
-			  }
-			  document.body.appendChild(form);
-			  form.submit();
-		}
+	function inputIdChk(){
+		document.userInfo.idDuplication.value ="idUncheck";
+	}
+	
 </script>
+<%
+	// session 객체에 저장된 id 값이 존재할 경우
+	// "잘못된 접근입니다." 출력 후 메인페이지로 이동
+	if(session.getAttribute("id") != null) {
+		%>
+		<script>
+			alert("잘못된 접근입니다.");
+			location.href="./";
+		</script>
+		<%
+	}
+
+%>    
 <body>
 	<section class="container_member">
 		<article class="half">
@@ -533,51 +503,64 @@ margin-left:0px;}
 							<a href="#" class="more">Forgot your password?</a>
 						</div>
 					</form>
-					<div class="api">
-						<!-- 구글 로그인 버튼 노출 영역 -->
-						<div class="g-signin2" onclick='onSignIn()'></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<!-- //구글 로그인 버튼 노출 영역 -->
-						 <!-- 네이버아이디로로그인 버튼 노출 영역 -->
-	  					<div id="naver_id_login"></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	  					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-	  					<!-- 카카오 로그인 버튼 노출 영역 -->
-						<a id="kakao-login-btn"></a>
-						<!-- //카카오 로그인 버튼 노출 영역 -->
-					</div>
+					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+					<!-- 구글 로그인 버튼 노출 영역 -->
+					<div class="g-signin2" data-onsuccess="onSignIn"></div>
+					<!-- //구글 로그인 버튼 노출 영역 -->
+					<%
+    String clientId = "jjXgPjWf7pqDUU6YqA_B";//애플리케이션 클라이언트 아이디값
+    String redirectURI = URLEncoder.encode("http://localhost:8090/Itwillbs_8/member/naver_callback.jsp", "UTF-8");
+    SecureRandom random = new SecureRandom();
+    String state = new BigInteger(130, random).toString();
+    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
+    apiURL += "&client_id=" + clientId;
+    apiURL += "&redirect_uri=" + redirectURI;
+    apiURL += "&state=" + state;
+    session.setAttribute("state", state);
+ %>
+					<!-- 네이버아이디로로그인 버튼 노출 영역 -->
+					<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
 						style="height: 1000px;" name="fr" onsubmit="return check()">
+						
+						<div id="re"></div><br> <!-- onclick="dupCheck()" -->
+						<b>아이디</b><b id="checkIdResult" class="tc"></b>
 						<input type="text" name="id" id="id" class="inpt"
 							required="required" placeholder="영문자,숫자를 혼용하여 3~8글자 입력하세요" onkeyup="checkId(this)">
-							<div id="checkIdResult"></div>
-						<label for="text">ID</label>
+							<input type="button" value="아이디중복확인" onclick="openIdChk()">
+						<input type="hidden" name="idDuplication" value="idUncheck">							
+						<label for="text">ID</label><br><br>
 						
+						<b>비밀번호</b><b id="checkPasswdResult" class="tc"></b>
 						<input type="password" name="pass" id="password" class="inpt" required="required"
 							placeholder="영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요" onkeyup="checkPasswd(this)">
-							<div id="checkPasswdResult"></div>
 						<label for="password">Password</label>
 						
+						<b>비밀번호 재확인</b><b id="checkPasswdResult2" class="tc"> </b>
 						<input type="password" name="pass2" id="password2" class="inpt" required="required"
 							placeholder="비밀번호를 한번 더 입력하세요" onkeyup="checkPasswd2(this)"> 
-							<div id="checkPasswdResult2"> </div>
-						<label for="password">Password</label>
+						<label for="password">Password</label><br>
 						
+						<b>이메일</b>
 						<input type="email" name="email" id="email" class="inpt"
 							required="required" placeholder="이메일을 입력하세요">
 						<label for="email">e-mail</label>
 						
+						<b>이름</b>
 						<input type="text" name="username" id="name" class="inpt" required="required"
 							placeholder="닉네임을 입력하세요"> 
-						<label for="name">Username</label>
+						<label for="name">Username</label><br>
 						
+						<b>프로필사진</b>
 						<input type="file" name="img" id="img" class="inpt"
 							required="required" placeholder="프로필 사진을 첨부하세요">
 						<label for="img">Image</label>
 						
+						<b>전화번호</b><b id="checkPhoneResult" class="tc"></b>
 						<input type="text" name="phone" id="phone" class="inpt" required="required"
 							placeholder="연락처는 숫자만 입력하세요" onkeyup="checkPhone(this)">
-							<div id="checkPhoneResult"></div>
 						<label for="phone">Phone Number</label> <br>
 
 						<div class="term" style="padding-top: 30px;">
@@ -596,7 +579,7 @@ margin-left:0px;}
 			</div>
 		</article>
 	</section>
- <div style="height: 150px"></div>
+ <div style="height: 470px"></div>
 
 
 	<script
@@ -638,65 +621,26 @@ margin-left:0px;}
 		}
 		
 
+		// 구글 로그인 API
+		function onSignIn(googleUser) {
+			  var profile = googleUser.getBasicProfile();
+			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			  console.log('Name: ' + profile.getName());
+			  console.log('Image URL: ' + profile.getImageUrl());
+			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+			}
 		
 		// 네이버 로그인 API
-		var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8080/Itwillbs_8/member/naver_callback.jsp");
-  		var state = naver_id_login.getUniqState();
-  		naver_id_login.setButton("white", 2,40);
-  		naver_id_login.setDomain("http://localhost:8080/Itwillbs_8/MemberLoginForm.mo#");
-  		naver_id_login.setState(state);
-  		naver_id_login.init_naver_id_login();
-  		
-  		
-  		// 카카오 로그인 API
-  		// SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
-  		Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
-  		// SDK 초기화 여부를 판단합니다.
-		Kakao.isInitialized();
-//   		function loginWithKakao() {
-// 		    Kakao.Auth.login({
-// 		      success: function(authObj) {
-// 		        alert(JSON.stringify(authObj))
-// 		      },
-// 		      fail: function(err) {
-// 		        alert(JSON.stringify(err))
-// 		      },
-// 		    })
-// 		  }
-Kakao.Auth.createLoginButton({
-    container: '#kakao-login-btn',
-    success: function(authObj) {
-      Kakao.API.request({
-        url: '/v2/user/me',
-        success: function(res) {
-          console.log(res.id);
-          console.log(res.kakao_account['email']);
-          console.log(res.properties['nickname']);
-          console.log(res.properties['profile_image']);
-          
-          console.log(authObj.access_token);
-          
-          var id = res.id;
-          var email = res.kakao_account['email'];
-          var username = res.properties['nickname'];
-          var img = res.properties['profile_image']
-          
-          post_to_url( "MemberGoogleKakaoLogin.mo",
-		    		{'id': id, 'username': username, 'email': email, 'img': img});
-          
-        },
-        fail: function(error) {
-          alert(
-            'login success, but failed to request user information: ' +
-              JSON.stringify(error)
-          )
-        },
-      })
-    },
-    fail: function(err) {
-      alert('failed to login: ' + JSON.stringify(err))
-    },
-  })
+		var naverLogin = new naver.LoginWithNaverId(
+			{
+				clientId: "jjXgPjWf7pqDUU6YqA_B",
+				callbackUrl: "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp",
+				isPopup: true,
+				loginButton: {color: "green", type: 1, height: 60} 
+			}
+		);
+		/* 설정정보를 초기화하고 연동을 준비 */
+		naverLogin.init();
 	</script>
 </body>
 

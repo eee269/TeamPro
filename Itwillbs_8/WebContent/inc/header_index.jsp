@@ -102,9 +102,9 @@ $(document).ready(function(){
 			<div class="wrap-menu-desktop">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->		
-					<a href="Main.go" class="logo">
-						<img src="images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
+				<div class="main">
+				  <span><a href="Main.go">#OOTD</a></span>
+				</div>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">
@@ -165,8 +165,11 @@ $(document).ready(function(){
 		<!-- Header Mobile -->
 		<div class="wrap-header-mobile">
 			<!-- Logo moblie -->		
-			<div class="logo-mobile">
-				<a href="Main.go"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a>
+<!-- 			<div class="logo-mobile"> -->
+<!-- 				<a href="Main.go"><img src="images/icons/logo-01.png" alt="IMG-LOGO"></a> -->
+<!-- 			</div> -->
+			<div class="headingWrapper color-bright">
+			  <a href="Main.go" class="header header--raiseUp header--shadow">#OOTD</a>
 			</div>
 
 			<!-- Icon header -->

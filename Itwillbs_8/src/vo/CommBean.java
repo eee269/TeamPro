@@ -3,10 +3,9 @@ package vo;
 import java.sql.Timestamp;
 
 // 게시판 정보 저장할 변수 설정
-public class CommBean {
+public class CommBean extends MemberBean{
 	private int num;
-	private String username;
-	private String pass;
+	private String member_id;
 	private String subject;
 	private String content;
 	private int readCount;
@@ -18,17 +17,11 @@ public class CommBean {
 	public void setNum(int num) {
 		this.num = num;
 	}
-	public String getUsername() {
-		return username;
+	public String getMember_id() {
+		return member_id;
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPass() {
-		return pass;
-	}
-	public void setPass(String pass) {
-		this.pass = pass;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	public String getSubject() {
 		return subject;

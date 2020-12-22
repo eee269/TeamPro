@@ -22,8 +22,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
-<!-- 카카오 SDK -->
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
@@ -121,801 +119,736 @@ $(document).ready(function() {
 ul.arraymodeTab>.active a{
 font-weight: bold !important;
 }
-
-/* 업로드한 게시글의 이미지 크기 강제로 맞추기 */
-.wrap-pic-w img {
-	width: 250px;
-	height: 250px;
-}
-/* 게시글 제목 밑에 구분선 추가 */
-h4.ltext-109 {
-	border-bottom: #212529 1px solid !important;
-}
 </style>
-
-<!-- breadcrumb -->
-<div class="container">
-	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
-			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
-	</div>
-</div>
-<!-- Content page -->
-<section class="bg0 p-t-52 p-b-20">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-8 col-lg-9 p-b-80">
-				<div class="p-r-45 p-r-0-lg">
-					<div class="wrap-pic-w how-pos5-parent">
-						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>">
+<!-- Menu Mobile -->
+		<div class="menu-mobile">
+			<ul class="topbar-mobile">
+				<li>
+					<div class="left-top-bar">
+						Free shipping for standard order over $100
 					</div>
-					<div class="p-t-32">
-						<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
-								<span class="cl4">By</span> <%=article.getUsername()%> <span
-								class="cl12 m-l-4 m-r-6">|</span>
-						</span> <span> <%=article.getDate()%> <span
-								class="cl12 m-l-4 m-r-6">|</span>
-						</span> <span> 태그 자리 <span class="cl12 m-l-4 m-r-6">|</span>
-						</span> <span> 댓글 갯수 </span> <span class="bookmark_count"> 북마크 갯수
-						</span>
-						</span>
+				</li>
 
-						<h4 class="ltext-109 cl2 p-b-28">
-							<%=article.getSubject()%>
-						</h4>
+				<li>
+					<div class="right-top-bar flex-w h-full">
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							Help & FAQs
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							My Account
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							EN
+						</a>
+
+						<a href="#" class="flex-c-m p-lr-10 trans-04">
+							USD
+						</a>
 					</div>
-					<p class="stext-117 cl6 p-b-26">
-						<%=article.getContent()%>
-					</p>
-					<div class="flex-w flex-t p-t-16">
-						<span class="size-216 stext-116 cl8 p-t-4"> Tags </span>
+				</li>
+			</ul>
 
-						<div class="flex-w size-217">
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Streetstyle </a>
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Crafts </a>
+			<ul class="main-menu-m">
+				<li>
+					<a href="index.html">Home</a>
+					<ul class="sub-menu-m">
+						<li><a href="index.html">Homepage 1</a></li>
+						<li><a href="home-02.html">Homepage 2</a></li>
+						<li><a href="home-03.html">Homepage 3</a></li>
+					</ul>
+					<span class="arrow-main-menu-m">
+						<i class="fa fa-angle-right" aria-hidden="true"></i>
+					</span>
+				</li>
+
+				<li>
+					<a href="product.html">Shop</a>
+				</li>
+
+				<li>
+					<a href="shoping-cart.html" class="label1 rs1" data-label1="hot">Features</a>
+				</li>
+
+				<li>
+					<a href="blog.html">Blog</a>
+				</li>
+
+				<li>
+					<a href="about.html">About</a>
+				</li>
+
+				<li>
+					<a href="contact.html">Contact</a>
+				</li>
+			</ul>
+		</div>
+
+		<!-- Modal Search -->
+		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
+			<div class="container-search-header">
+				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
+					<img src="images/icons/icon-close2.png" alt="CLOSE">
+				</button>
+
+				<form class="wrap-search-header flex-w p-l-15">
+					<button class="flex-c-m trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+					<input class="plh3" type="text" name="search" placeholder="Search...">
+				</form>
+			</div>
+		</div>
+	</header>
+
+	<!-- Cart -->
+	<div class="wrap-header-cart js-panel-cart">
+		<div class="s-full js-hide-cart"></div>
+
+		<div class="header-cart flex-col-l p-l-65 p-r-25">
+			<div class="header-cart-title flex-w flex-sb-m p-b-8">
+				<span class="mtext-103 cl2">
+					Your Cart
+				</span>
+
+				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
+					<i class="zmdi zmdi-close"></i>
+				</div>
+			</div>
+			
+			<div class="header-cart-content flex-w js-pscroll">
+				<ul class="header-cart-wrapitem w-full">
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-01.jpg" alt="IMG">
 						</div>
-					</div>
-					<br> <input type="button"
-						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-						value="삭제"
-						onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-					<input type="button"
-						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-						value="수정"
-						onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						&nbsp;&nbsp;&nbsp;
-					<input type="button"
-						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
-						value="북마크" id="bookmark"> <br>
-						
-                   <!-- 카카오톡으로 공유하기 기능 -->
-                   &nbsp;&nbsp;&nbsp;
-                   <a id="kakao-link-btn" href="javascript:sendLink()">
-  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40px"/>
-				   </a>
-				<!-- // 카카오톡으로 공유하기 기능 -->
 
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								White Shirt Pleat
+							</a>
 
-					<!-- -----------------------------Comment----------------------------- -->
-					<h2 class="comment_title">COMMENT</h2>
-					<div id="productDetail" style="padding-top: 20px;">
-						<div class="page-body">
-							<div class="cboth">
-								<div id="powerReview">
-									<div id="listPowerReview" class="MS_power_review_list">
-
-
-										<!-- 댓글등록 폼 시작 -->
-										<form name="comm_re_form" id="comm_re_form" method="post"
-											autocomplete="off" enctype="multipart/form-data">
-											<div name="comm_re" id="comm_re">
-												<input type="hidden" id="username" name="username"
-													value="<%=id%>"> <input type="hidden"
-													id="community_num" name="community_num"
-													value="<%=community_num%>">
-												<div id="writePowerReview">
-													<div class="PR15N01-write">
-
-														<div class="pr-txtbox">
-															<textarea
-																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
-																id="reply_contents" name="reply_contents"></textarea>
-															<div class="thumb-wrap"></div>
-														</div>
-														<input type="file" name="reply_file" id="reply_file"
-															class="trick file-attach">
-													</div>
-													<!-- .PR15N01-write -->
-													<div class="PR15N01-recmd">
-
-														<div class="cvr right">
-															<%
-																if (id != null) {
-															%><input type="button" value="댓글등록"
-																class="lnk-review review_write">
-															<%
-																} else {
-															%><input type="button" value="댓글등록"
-																class="lnk-review review_write"
-																onclick="return loginCheck()">
-															<%
-																}
-															%>
-
-														</div>
-													</div>
-													<!-- .PR15N01-recmd -->
-												</div>
-											</div>
-											<!-- comm_re 끝 -->
-										</form>
-										<div class="cboth"></div>
-										<br>
-										<br>
-										<br>
-										<!-- 댓글등록 폼 끝 -->
-
-
-										<ul class="arraymodeTab">
-											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
-											<li class="arraymode newest"><a href="#newest">최신순</a></li>
-										</ul>
-
-
-										<ul class="PR15N01-review-wrap"></ul>
-
-
-
-
-
-										<!-- .PR15N01-review-wrap -->
-
-										<!-- .paging -->
-									</div>
-								</div>
-								<!-- #powerReview-->
-								<p style="clear: both"></p>
-
-							</div>
-							<!-- width1260 -->
+							<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
 						</div>
-						<!-- .page-body -->
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-02.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Converse All Star
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $39.00
+							</span>
+						</div>
+					</li>
+
+					<li class="header-cart-item flex-w flex-t m-b-12">
+						<div class="header-cart-item-img">
+							<img src="images/item-cart-03.jpg" alt="IMG">
+						</div>
+
+						<div class="header-cart-item-txt p-t-8">
+							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+								Nixon Porter Leather
+							</a>
+
+							<span class="header-cart-item-info">
+								1 x $17.00
+							</span>
+						</div>
+					</li>
+				</ul>
+				
+				<div class="w-full">
+					<div class="header-cart-total w-full p-tb-40">
+						Total: $75.00
 					</div>
 
+					<div class="header-cart-buttons flex-w w-full">
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
+							View Cart
+						</a>
 
-
-
-					<!-- -----------------------------Comment----------------------------- -->
-
-
+						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+							Check Out
+						</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</section>
-<div id="image_view_load"></div>
-<a class="fancybox" href="#inline"></a>
 
-<script>
 
-//==================== 원댓글 로딩  ====================//
-$(function(){
-    function getCommReply(page){
-    	var id = "<%=id%>";
-	    var community_num = "<%=community_num%>";
+	<!-- breadcrumb -->
+	<div class="container">
+		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04">
+				Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
 
-	    if(!page){
-    		var page = 1;
-    	}  
-	    
-	    var limit = 5;
-	    
-	    if($('.active').text()=="답댓글많은순"){
-    		var arraymode = 0;
-    	}else{
-    		var arraymode = 1;
-    	}
+			<a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04">
+				Blog
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+			</a>
 
-		var allData = { "community_num": community_num,"page": page,"limit":limit,"arraymode":arraymode};
-		$.ajax({
-			url: "CommReListPro.co", // 요청 url
-            type: "POST", // post 방식
-            data: allData,
-            success: function (json) { 
-            	json = json.replace(/\n/gi,"\\r\\n");
-            	var obj = JSON.parse(json);
-            	var coReplyList = obj.coReplyList; 
-            	var output = "";
-//             	alert(obj.listCount);
-            	for (var i = 0; i < coReplyList.length; i++) {
-	                 for (var j = 0; j < coReplyList[i].length; j++) {
-	                    var coReply = coReplyList[i][j];
-	                    
-	                    if(j == 0){
-	                    	var core_username = coReply.username;
-	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'><dt class='first'>작성자</dt><dd>"+core_username+"</dd>";
-	                    }else if(j == 1){
-	                    	output += "<dt>작성일</dt><dd>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
-								
-	                    }else if(j == 2){
-	                    	var core_content = coReply.content;
-	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-	                  
-	                    }else if(j == 3){
-	                    	var img = coReply.img;
-	                    	if(img != ""){
-	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
-	                    	}
-	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
-	                    }else if(j == 4){	
-	                    	var core_num = coReply.num;
-	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 5){		
-	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
-	                    	output += "<div id='replyCount'></div>";
-	                    	
-	                    	output += "<input type='button' value='답댓글 열기' class='bu_gray_p recomment_load on'> ";
-	                    	output += "<input type='button' value='답댓글 닫기' class='bu_gray_p recomment_close'> ";
-	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";
-	                    	
-	                    	if(core_username != "<span class='del'>-</span>"){
-	                    	output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
-	                    	}
-	                    	
-	                    	if(core_username == id){
-	                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
-	                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
-	                    	}
-	                    	
-	                    	output += "<div id='obj' class='obj reply-wrap'>";
-	                    	output += "<form name='comment' id='comment' action='CommReModifyPro.co' method='post' style='margin-top:0px !important; padding-top:0px !important;'>";
-	                    	output += "	<input type='hidden' id='username' name='username' value='"+core_username+"'>";
-	                    	output += "	<input type='hidden' id='community_num' name='community_num' value='"+community_num+"'>";
-	                    	output += "	<input type='hidden' id='num' name='num' value='"+core_num+"'>";
-	                    	output += "	<div class='wrt'>";
-	                    	output += "		<textarea name='content' id='contents' >"+core_content+"</textarea>";
-	                    	output += "		<input type='button' value='수정' class='btn_comment reReModify'>";
-	                    	output += "	</div>";
-	                    	output += "</form>	";
-	                    	output += "</div>";
-	                    	 	                    	             	
-	                    	output += "<div id='comm_add' class='comm_add reply-wrap'>";
-	                    	output += "<form name='comment' id='comment' action='CommReReWritePro.co' method='post'>";
-	                    	output += "<input type='hidden' name='username' value='"+core_username+"' id='username'>";
-	                    	output += "<input type='hidden' name='community_num' value='"+community_num+"' id='community_num'>";
-	                    	output += "<input type='hidden' name='num' value='"+core_num+"' id='num'>";
-	                    	output += "	<div class='wrt'>";
-	                    	output += "		<textarea name='contents' id='contents'></textarea>";
-	                    	output += "		<input type='button' value='입력' class='btn_comment reReWrite'>";
-	                    	output += "	</div>";
-	                    	output += "</form>	";	
-	                    	output += "</div><div id='replyList'></div></li>";
-	                    	
-	                    } //if문	                    
-	        		};//for문  	        		
-            	};//for문
-            	
-            	
-    			var pageInfo = paging(obj.listCount, page, limit);
-    			output+="<div class='paging'>";
-        					if(page <= 1){
-  				output+=			"<input type='button' value='이전' style='background-color: #fff !important;'> &nbsp;";
-        					}else{
-  				output+=			"<input type='button' value='이전'  style='background-color: #fff !important;' onclick='getReplyCall("+(page-1)+");'> &nbsp";
-        					}
-    						for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
-    							if(i == page){
-  				output+=			"<a href='javascript:void(0);' class='now'>"+i+"</a>&nbsp;";
-    							}else{
-  				output+=			"<a href='javascript:getReplyCall("+i+");'>"+i+"</a>&nbsp;";
-    							}
-    						}	
-        					if(page >= pageInfo.maxPage){
-  				output+=			"<input type='button' value='다음' style='background-color: #fff !important;'> &nbsp;";
-        					}else{
-  				output+=			"<input type='button' value='다음'  style='background-color: #fff !important;' onclick='getReplyCall("+(page+1)+");'> &nbsp";//   				"<input type='button' value='다음'  style='background-color: #fff !important;' onclick='location.href='javascript:getReplyCall('"+(page+1)+"');''> &nbsp";
-        					}
-    						+"</div>";
-     	
-	              	$(".PR15N01-review-wrap").html(output);
-	                $(".recomment_count").trigger('click');
-            },
-        	error: function(request,status,error){
-	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	      	}
-    	})
-    }
-    getReplyCall = getCommReply;
-    getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
-    
-})	
+			<span class="stext-109 cl4">
+				8 Inspiring Ways to Wear Dresses in the Winter
+			</span>
+		</div>
+	</div>
+
+
+	<!-- Content page -->
+	<section class="bg0 p-t-52 p-b-20">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-lg-9 p-b-80">
+					<div class="p-r-45 p-r-0-lg">
+						<!--  -->
+						<div class="wrap-pic-w how-pos5-parent">
+							<img src="images/blog-04.jpg" alt="IMG-BLOG">
+
+							<div class="flex-col-c-m size-123 bg9 how-pos5">
+								<span class="ltext-107 cl2 txt-center">
+									22
+								</span>
+
+								<span class="stext-109 cl3 txt-center">
+									Jan 2018
+								</span>
+							</div>
+						</div>
+
+						<div class="p-t-32">
+							<span class="flex-w flex-m stext-111 cl2 p-b-19">
+								<span>
+									<span class="cl4">By</span> Admin  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
+
+								<span>
+									22 Jan, 2018
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
+
+								<span>
+									StreetStyle, Fashion, Couple  
+									<span class="cl12 m-l-4 m-r-6">|</span>
+								</span>
+
+								<span>
+									8 Comments
+								</span>
+							</span>
+
+							<h4 class="ltext-109 cl2 p-b-28">
+								8 Inspiring Ways to Wear Dresses in the Winter
+							</h4>
+
+							<p class="stext-117 cl6 p-b-26">
+								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sit amet est vel orci luctus sollicitudin. Duis eleifend vestibulum justo, varius semper lacus condimentum dictum. Donec pulvinar a magna ut malesuada. In posuere felis diam, vel sodales metus accumsan in. Duis viverra dui eu pharetra pellentesque. Donec a eros leo. Quisque sed ligula vitae lorem efficitur faucibus. Praesent sit amet imperdiet ante. Nulla id tellus auctor, dictum libero a, malesuada nisi. Nulla in porta nibh, id vestibulum ipsum. Praesent dapibus tempus erat quis aliquet. Donec ac purus id sapien condimentum feugiat.
+							</p>
+
+							<p class="stext-117 cl6 p-b-26">
+								Praesent vel mi bibendum, finibus leo ac, condimentum arcu. Pellentesque sem ex, tristique sit amet suscipit in, mattis imperdiet enim. Integer tempus justo nec velit fringilla, eget eleifend neque blandit. Sed tempor magna sed congue auctor. Mauris eu turpis eget tortor ultricies elementum. Phasellus vel placerat orci, a venenatis justo. Phasellus faucibus venenatis nisl vitae vestibulum. Praesent id nibh arcu. Vivamus sagittis accumsan felis, quis vulputate
+							</p>
+						</div>
+
+						<div class="flex-w flex-t p-t-16">
+							<span class="size-216 stext-116 cl8 p-t-4">
+								Tags
+							</span>
+
+							<div class="flex-w size-217">
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Streetstyle
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Crafts
+								</a>
+							</div>
+						</div>
+
+						<!--  -->
+						<div class="p-t-40">
+							<h5 class="mtext-113 cl2 p-b-12">
+								Leave a Comment
+							</h5>
+
+							<p class="stext-107 cl6 p-b-40">
+								Your email address will not be published. Required fields are marked *
+							</p>
+
+							<form>
+								<div class="bor19 m-b-20">
+									<textarea class="stext-111 cl2 plh3 size-124 p-lr-18 p-tb-15" name="cmt" placeholder="Comment..."></textarea>
+								</div>
+
+								<div class="bor19 size-218 m-b-20">
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="name" placeholder="Name *">
+								</div>
+
+								<div class="bor19 size-218 m-b-20">
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="email" placeholder="Email *">
+								</div>
+
+								<div class="bor19 size-218 m-b-30">
+									<input class="stext-111 cl2 plh3 size-116 p-lr-18" type="text" name="web" placeholder="Website">
+								</div>
+
+								<button class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+									Post Comment
+								</button>
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-lg-3 p-b-80">
+					<div class="side-menu">
+						<div class="bor17 of-hidden pos-relative">
+							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+
+							<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+						</div>
+
+						<div class="p-t-55">
+							<h4 class="mtext-112 cl2 p-b-33">
+								Categories
+							</h4>
+
+							<ul>
+								<li class="bor18">
+									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+										Fashion
+									</a>
+								</li>
+
+								<li class="bor18">
+									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+										Beauty
+									</a>
+								</li>
+
+								<li class="bor18">
+									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+										Street Style
+									</a>
+								</li>
+
+								<li class="bor18">
+									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+										Life Style
+									</a>
+								</li>
+
+								<li class="bor18">
+									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
+										DIY & Crafts
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="p-t-65">
+							<h4 class="mtext-112 cl2 p-b-33">
+								Featured Products
+							</h4>
+
+							<ul>
+								<li class="flex-w flex-t p-b-30">
+									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<img src="images/product-min-01.jpg" alt="PRODUCT">
+									</a>
+
+									<div class="size-215 flex-col-t p-t-8">
+										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											White Shirt With Pleat Detail Back
+										</a>
+
+										<span class="stext-116 cl6 p-t-20">
+											$19.00
+										</span>
+									</div>
+								</li>
+
+								<li class="flex-w flex-t p-b-30">
+									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<img src="images/product-min-02.jpg" alt="PRODUCT">
+									</a>
+
+									<div class="size-215 flex-col-t p-t-8">
+										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											Converse All Star Hi Black Canvas
+										</a>
+
+										<span class="stext-116 cl6 p-t-20">
+											$39.00
+										</span>
+									</div>
+								</li>
+
+								<li class="flex-w flex-t p-b-30">
+									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<img src="images/product-min-03.jpg" alt="PRODUCT">
+									</a>
+
+									<div class="size-215 flex-col-t p-t-8">
+										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											Nixon Porter Leather Watch In Tan
+										</a>
+
+										<span class="stext-116 cl6 p-t-20">
+											$17.00
+										</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+
+						<div class="p-t-55">
+							<h4 class="mtext-112 cl2 p-b-20">
+								Archive
+							</h4>
+
+							<ul>
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											July 2018
+										</span>
+
+										<span>
+											(9)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											June 2018
+										</span>
+
+										<span>
+											(39)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											May 2018
+										</span>
+
+										<span>
+											(29)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											April  2018
+										</span>
+
+										<span>
+											(35)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											March 2018
+										</span>
+
+										<span>
+											(22)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											February 2018
+										</span>
+
+										<span>
+											(32)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											January 2018
+										</span>
+
+										<span>
+											(21)
+										</span>
+									</a>
+								</li>
+
+								<li class="p-b-7">
+									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
+										<span>
+											December 2017
+										</span>
+
+										<span>
+											(26)
+										</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="p-t-50">
+							<h4 class="mtext-112 cl2 p-b-27">
+								Tags
+							</h4>
+
+							<div class="flex-w m-r--5">
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Fashion
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Lifestyle
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Denim
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Streetstyle
+								</a>
+
+								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+									Crafts
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
 	
-
-	$(function(){		
-	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
-		    $(".review_write").click(function(){
-			    	if($("#reply_contents").val().trim() === ""){
-			    		alert("리뷰를 입력하세요.");
-			    		$("#reply_contents").val("").focus();
-			    	}else{
-			            var form = $('#comm_re_form')[0];
-			            var data = new FormData(form);
-			    		$.ajax({
-			                type: "POST",
-			    			enctype: 'multipart/form-data',
-			    			url: "CommReWritePro.co",
-			    			processData: false,
-			                contentType: false,
-			                data: data,
-			                success: function () {
-// 			                	alert("리뷰 등록 완료");
-			                	$("#reply_contents").val("");
-			                	$("#reply_file").val("");
-			                	$('.popular').removeClass("active");
-			      			  	$('.newest').addClass('active');
-			                	getReplyCall();
-			                },
-			    			error: function(request,status,error){
-			    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-			    		       }
-			    		}); // ajax 종료
-			    	}; // else end
-			    	
-		    });	    
-	    
-	    //==================== 원댓글 수정 ====================//
- 		$(document).on("click", ".reReModify", function () {
-			 	var a = $(this).parents('li').find('#obj'); 
-			 	var b = $(this).parents('li'); 
-			 	
-			 	var username = a.find('#username').val();
-				var community_num = a.find('#community_num').val();
-				var num = a.find('#num').val();
-				var contents = a.find('#contents').val();
-				var allData = { "username":username,"community_num":community_num,"num": num,"contents":contents};
-	    		$.ajax({
-	                type: "POST",
-	    			url: "CommReModifyPro.co",
-// 	    			processData: false,
-// 	                contentType: false,
-	                data: allData,
-	                success: function () {
-	                	getReplyCall();
-	                },
-	    			error: function(request,status,error){
-	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    		       }
-	    		})	    	
-	    })
-	    
-	    //==================== 원댓글 삭제 ====================//
- 		$(document).on("click", ".comment_delete", function () {			 	
-	    	if (confirm("정말 삭제하시겠습니까?") == true){    //확인
-
-				var a = $(this).parents('li'); 
-			 	
-				var community_num = a.find('#community_num').val();
-				var num = a.find('#num').val();
-
-				var allData = { "community_num":community_num,"num": num};
-	    		$.ajax({
-	                type: "POST",
-	    			url: "CommReDeletePro.co",
-// 	    			processData: false,
-// 	                contentType: false,
-	                data: allData,
-	                success: function () {
-	                	getReplyCall();
-	                },
-	    			error: function(request,status,error){
-	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    		       }
-	    		})    		
-	    	}else{   //취소
-	        	return false;
-	    	}	
-	    })
-	    
-
-	    
-		//==================== 대댓글 보기  ====================//
-		$(document).on("click", ".recomment_load", function () {
-			      var id = "<%=id%>";
-				  var a = $(this).parents('li'); 
-				  var comment_num = a.find('.comment_num').val();
-				  var num = a.find('.num').val();
-		  
-				  var allData = { "comment_num": comment_num,"num": num};
-			  
-				  $.ajax({
-    				url: "CommReReListPro.co", // 요청 url
-                	type: "POST", // post 방식
-                	data: allData,
-//	                async:false,
-               		success: function (json) { 
-                	json = json.replace(/\n/gi,"\\r\\n");
-
-                	var obj = JSON.parse(json);                	
-                	var replyList = obj.replyList; 
-                	var output = ""; 
-                	
-                	for (var i = 0; i < replyList.length; i++) {
-                	
-   	                for (var j = 0; j < replyList[i].length; j++) {
-    	                    var reply = replyList[i][j];
-    	                    if(j == 0){
-    	                    	var reply_contents = reply.contents;
-    	                    	output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
-    	                    }else if(j == 1){
-    	                    	var re_name = reply.name;
-    	                    	output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
-    	                    }else if(j == 2){
-    	                    	
-    	                    	
-    	                    	output += "<dt>작성일 </dt><dd>"+moment(reply.date).format("YY-MM-DD ")+"</dd></dl></li><div style='clear: both;'></div>";
-    	                    }else if(j == 3){
-	    	                   
-    	                    	if(id!=null){
-									if(re_name != id){
-									output += "</ul>"
-	    	                    	}else{
-									
-	    	                    	output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
-	    	                    	
-	    	                    	output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    	output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
-	    	                    	}
-	    	                    }else{
-									output += "</ul>";   	                    		    	                    	
-    	                    	}	
-    	                    };
-    	        		}; 	        	
-                	};
-
-					if(a.find('.recomment_close').hasClass("on")){
-						a.find("#replyList").html(output);
-	   	             	a.find('.recomment_load').removeClass("on");
-	   	             	a.find('.recomment_close').addClass("on"); 
-					}else{
-						a.find("#replyList").html(output).hide().slideDown(800);
-	   	             	a.find('.recomment_load').removeClass("on");
-	   	             	a.find('.recomment_close').addClass("on");
-					};
-
-
-                },
-            	error: function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		      	}
-	    	})
-
-		});
 		
- 			    
- 		//==================== 댓글보기 닫기  ====================// 	
- 		$(document).on("click", ".recomment_close", function () {
- 				  var a = $(this).parents('li'); 
- 				  a.find("#replyList").slideUp(800); 
-	   	          a.find('.recomment_close').removeClass("on");
-	   	          a.find('.recomment_load').addClass("on"); 
 
- 		}); 
- 		
- 		
- 		//==================== 대댓글 쓰기  ====================//
- 		$(document).on("click", ".reReWrite", function () {
-//  		$(".reReWrite").click(function(){
-			 	var a = $(this).parents('li').find('#comm_add'); 
-			 	var b = $(this).parents('li'); 
-			 	
-			 	var username = a.find('#username').val();
-				var community_num = a.find('#community_num').val();
-				var num = a.find('#num').val();
-				var contents = a.find('#contents').val();
-				var allData = { "username":username,"community_num":community_num,"num": num,"contents":contents};
-	    		$.ajax({
-	                type: "POST",
-	    			url: "CommReReWritePro.co",
-// 	    			processData: false,
-// 	                contentType: false,
-	                data: allData,
-	                success: function () {
-	                	a.find('#contents').val("");
-	                	b.find(".recomment_load").trigger("click");
-	                	b.find(".recomment_count").trigger("click");
-	                },
-	    			error: function(request,status,error){
-	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-	    		       }
-	    		})	    	
-	    }) 		
- 		
-	     		
- 		//==================== 대댓글 수정  ====================//
- 		$(document).on("click", ".rerereWrite", function () {
-		 	var a = $(this) 
-		 	var b = $(this).parents('li');
-		 
-		 	var username = a.siblings('#username').val();
-			var community_num = a.siblings('#community_num').val();
-			var num = a.siblings('#num').val();
-			var rePage = a.siblings('#rePage').val();
-			var contents = a.siblings('#rere_contents').val();
-			
-			var allData = { "username":username,"community_num":community_num,"num": num,"rePage": rePage,"contents":contents};
+	<!-- Footer -->
+	<footer class="bg3 p-t-75 p-b-32">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Categories
+					</h4>
 
-    		$.ajax({
-                type: "POST",
-    			url: "CommReModifyPro.co",
-//	    			processData: false,
-//	                contentType: false,
-                data: allData,
-                success: function () {
-                	a.siblings('#rere_contents').val("");
-                	b.find(".recomment_load").trigger("click");
-                	b.find(".recomment_count").trigger("click");
-                },
-    			error: function(request,status,error){
-    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-    		       }
-    		})
-	    	
-	    })
-	    
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Women
+							</a>
+						</li>
 
- 		//==================== 대댓글 삭제  ====================//
- 		$(document).on("click", ".rere_delete", function () {
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Men
+							</a>
+						</li>
 
- 		    if (confirm("정말 삭제하시겠습니까?") == true){    // 삭제 확인
- 		  	
-	 			var num = $(this).siblings('.rere_num').val();
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shoes
+							</a>
+						</li>
 
-	 			var community_num = <%=community_num%>;
-				var rePage = <%=request.getParameter("rePage")%>;
-				
-				var allData = {"community_num": community_num,"num": num,"rePage":rePage};
-				
-				var b = $(this).parents("li");
-		
-				$.ajax({
-		            type: "POST",
-					url: "CommReDeletePro.co",
-		// 			processData: false,
-		//          contentType: false,
-		            data: allData,
-		            success: function () {
-						b.find(".recomment_load").trigger("click");
-		            },
-					error: function(request,status,error){
-				        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-				       }
-				})
-				
- 		   	}else{   // 삭제 확인 안할경우
-		        return false;
-		    }
-			
-	 	}) // 삭제끝
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Watches
+							</a>
+						</li>
+					</ul>
+				</div>
 
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Help
+					</h4>
 
-	 	
-	 	//==================== 대댓글 카운트 구하기  ====================//
- 		$(document).on("click", ".recomment_count", function () {	
-			var a = $(this).parents('li'); 
-			var comment_num = a.find('.comment_num').val();
-			var num = a.find('.num').val();
-			  
-			var allData = { "comment_num": comment_num,"num": num};
-			
-	    	$.ajax({
-    			url: "CommReReCountProAction.co", // 요청 url
-                type: "POST", // post 방식
-                data: allData,
-                success: function (reReCount) {
-                	
-          		  	if(reReCount==0){
-        				  a.find('.recomment_load').removeClass("on");
-        			}else{
-        				  a.find("#replyCount").html("댓글수 : "+reReCount);
-        			}
-                	
-                },
-            error: function(request,status,error){
-		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		      	}
-	    	})
- 		});  
+					<ul>
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Track Order
+							</a>
+						</li>
 
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Returns 
+							</a>
+						</li>
 
- 		//==================== 상세 이미지 보기  ====================//
- 		$(document).on("click", ".image_view_load", function () {
- 				 var a = $(this).parents('li'); 
- 				 var content = a.find('.content_p').text();
- 				 var img = a.find('#img').val();
- 				 var output = ""; 
- 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
- 				 
- 				 $("#image_view_load").html(output); 
- 				 $(".fancybox").trigger("click");
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								Shipping
+							</a>
+						</li>
 
- 		});
- 			
-	 	
- 	}) //$(function()
- 		    
+						<li class="p-b-10">
+							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
+								FAQs
+							</a>
+						</li>
+					</ul>
+				</div>
 
-	//==================== 페이징  ====================//
-	function paging(listCount ,page ,limit){
-		var listCount = listCount;
-		var maxPage = Math.ceil(listCount / limit);
-		var startPage = Math.floor(page / 10) * 10 +1;
-		var endPage = startPage + 10 -1;
-		
-		if(endPage > maxPage){
-			endPage = maxPage
-		}
-		
-		return {
-			maxPage : maxPage,
-			startPage : startPage,
-			endPage : endPage
-		};
-	};
-	
-	
-	// 댓글많은순, 최신순 불러오기
-	$(document).ready(function(){
-		  $(document).on("click", ".popular", function () {	
-			  $('.newest').removeClass("active");
-			  $(this).addClass('active');
-			  getReplyCall();	  
-		  });
-	});
-	
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						GET IN TOUCH
+					</h4>
 
-	$(document).ready(function(){
-		  $(document).on("click", ".newest", function () {	
-			  $('.popular').removeClass("active");
-			  $(this).addClass('active');
-			  getReplyCall();	  
-		  });
-	});	
-		
-</script>
+					<p class="stext-107 cl7 size-201">
+						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+					</p>
+
+					<div class="p-t-27">
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-instagram"></i>
+						</a>
+
+						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
+							<i class="fa fa-pinterest-p"></i>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-sm-6 col-lg-3 p-b-50">
+					<h4 class="stext-301 cl0 p-b-30">
+						Newsletter
+					</h4>
+
+					<form>
+						<div class="wrap-input1 w-full p-b-4">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<div class="focus-input1 trans-04"></div>
+						</div>
+
+						<div class="p-t-18">
+							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
+								Subscribe
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="p-t-40">
+				<div class="flex-c-m flex-w p-b-18">
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+					</a>
+
+					<a href="#" class="m-all-1">
+						<img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+					</a>
+				</div>
+
+				<p class="stext-107 cl6 txt-center">
+					<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+				</p>
+			</div>
+		</div>
+	</footer>
 
 
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
 
-<script>
-
-
-
-function loginCheck() {
-	alert("회원전용입니다.");
-	return false;
-}
-
-//==================== 원댓글 수정창 열기  ====================//
-$(document).ready(function(){
-	  $(document).on("click", ".comment_modify", function () {	
-		  $('.comm_add').removeClass("on");
-		  var a = $(this).parents('li'); 
-		  
-		  if(a.find('.obj').hasClass("on")){
-			  a.find('.obj').removeClass("on");
-		  }else{
-			  a.find('.obj').addClass("on"); 
-		  }
-		  	  
-	  });
-});
-
-//==================== 원댓글 댓글쓰기창 열기  ====================//
-$(document).ready(function(){
-	$(document).on("click", ".comment_add", function () {	  
-		  $('.obj').removeClass("on");
-		  var a = $(this).parents('li');
-		  
-		  if(a.find('.comm_add').hasClass("on")){
-			  a.find('.comm_add').removeClass("on");
-		  }else{
-			  a.find('.comm_add').addClass("on"); 
-		  }
-		  
-	  });
-});
-
-//==================== 대댓글 수정창 열기  ====================//
-$(document).on("click", ".rerere_write_open", function () {
-	
- 		 var a = $(this).parents('li');
-
- 		 if(a.siblings('.re_wrt').hasClass("on")){
-			  a.siblings('.re_wrt').removeClass("on");
- 		 }else{
-			  a.siblings('.re_wrt').addClass("on"); 
-			  a.siblings('.re_wrt').find('#rere_contents').focus(); 
- 		 }	  
-})
-
-
- 
-	
-</script>
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-<script>
-$(function(){
-		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-		$("#bookmark").click(function(){
-			$.ajax({
-				url: "CommBook.co",
-                type: "POST",
-                data: {
-                    num: "<%=article.getNum()%>",
-                },
-                success: function () {
-			        bookmarkCount();
-                },
-			})
+<!--===============================================================================================-->	
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<script>
+		$(".js-select2").each(function(){
+			$(this).select2({
+				minimumResultsForSearch: 20,
+				dropdownParent: $(this).next('.dropDownSelect2')
+			});
 		})
-		
-		// 게시글 추천수
-	    function bookmarkCount() {
-			$.ajax({
-				url: "CommBookCount.co",
-                type: "POST",
-                data: {
-                    num: "<%=article.getNum()%>"
-				},
-				success : function(count) {
-					$(".bookmark_count").html(count);
-				},
+	</script>
+<!--===============================================================================================-->
+	<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+	<script>
+		$('.js-pscroll').each(function(){
+			$(this).css('position','relative');
+			$(this).css('overflow','hidden');
+			var ps = new PerfectScrollbar(this, {
+				wheelSpeed: 1,
+				scrollingThreshold: 1000,
+				wheelPropagation: false,
+			});
+
+			$(window).on('resize', function(){
+				ps.update();
 			})
-		}
-		;
-
-	})
-</script>
-
-<script type="text/javascript">
-
-//카카오톡으로 공유하기 
-
-Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
-function sendLink() {
-  Kakao.Link.createDefaultButton({
-  	container: '#kakao-link-btn',
-    objectType: 'feed',
-    content: {
-      title: '<%=article.getSubject() %>',
-      description: '게시글 공유',
-      imageUrl:
-        'upload/productUploadImg/<%=article.getImg() %>',
-      link: {
-        mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-        webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-      },
-    },
-    social: {
-      likeCount: 286,
-      commentCount: 45,
-      sharedCount: 845,
-    },
-    buttons: [
-      {
-        title: '웹으로 보기',
-        link: {
-          mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-          webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-        }
-      }]
-  })
-}
-</script>
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 
 <jsp:include page="../inc/footer.jsp" />
 </body>

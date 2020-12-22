@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.ProdQnaBean"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.HashSet"%>
@@ -20,6 +21,7 @@
    int listCount = pageInfo.getListCount();
    
    String basicCode = request.getParameter("basicCode"); 
+   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
@@ -37,19 +39,7 @@
 <link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
-<script src="js/bootstrap4-rating-input.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<style type="text/css">
-.rat {
-   margin: 150px auto;
-   font-size: 20px;
-}
-
-.mini_rat {
-   margin: 150px auto;
-   font-size: 15px;
-}
-</style>
 
 <!-- TAB기능 스타일 -->
 <style>
@@ -163,9 +153,7 @@ var productCode = "";
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='<%=basicCode%>' id='basicCode'  name='basicCode'>" +
-      "<input type='hidden' value='"+ mixopt+"' name='mixopt'>" +
-      
+      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
       // productCode, id="productCode숫자"
           "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
       // 옵션 이름, ( BK/M )
@@ -315,7 +303,7 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-                           
+                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -331,11 +319,10 @@ var productCode = "";
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[0] %>">
-<!-- 							<input type="hidden" name="size" value=""> -->
-<!-- 							<input type="hidden" name="color" value=""> -->
-<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
-<!-- 							<input type="hidden" name="cnt" value="0"> -->
+							<input type="hidden" name="size" value="">
+							<input type="hidden" name="color" value="">
+							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
+							<input type="hidden" name="cnt" value="0">
 							
 
                   </div>
@@ -501,106 +488,75 @@ var productCode = "";
             <div id="page02" class="cboth pdt100"></div>
             <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
             <jsp:include page="../inc/detail_tabmenu.jsp" />
-
-            <!-- BIN -->
-            <!-- ------------------------------상품리뷰---------------------------------------  -->
-            <div id="powerReview">
-               <div class="hd-t">
-                  <h2>POWER REVIEW</h2>
-               </div>
-               <div id="writePowerReview">
-                  <div class="PR15N01-write">
-                     <form name="prw_form" id="prw_form" method="post" autocomplete="off" enctype="multipart/form-data">
-                        <input type="hidden" name="basicCode" value="<%=basicCode%>">
-                        <p><strong>별점을 매겨주세요</strong></p>
-                        <!-- 별점 -->
-                        <div class="rat">
-                           <input type="number" name="starScore" id="rating1" class="rating text-warning" value="0" />
-                        </div>
-                        <!-- 별점 -->
-                        <textarea name="content" id="prw_content" placeholder="리뷰 내용을 입력해주세요" required></textarea>
-                        <div class="thumb-wrap"></div>
-                        <input type="file" name="prw_file" class="trick file-attach" id="prw_file"> 
-                        <input type="button" value="리뷰 등록" id="lnk-review" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
-                     </form>
-                  </div>
-               </div>
-               <div class="PR15N01-info">
-                  <dl class="score">
-                     <dt>5.0</dt>
-                     <dd>56개 리뷰 평점</dd>
-                  </dl>
-                  <div class="chart">
-                     <ul>
-                        <li><span class="tit">5 Stars</span> <span class="bar">
-                              <span class="abs" style="width: 95%"></span>
-                        </span> <span class="num">(53)</span></li>
-                        <li><span class="tit">4 Stars</span> <span class="bar">
-                              <span class="abs" style="width: 5%"></span>
-                        </span> <span class="num">(3)</span></li>
-                        <li><span class="tit">3 Stars</span> <span class="bar">
-                              <span class="abs" style="width: 0%"></span>
-                        </span> <span class="num">(0)</span></li>
-                        <li><span class="tit">2 Stars</span> <span class="bar">
-                              <span class="abs" style="width: 0%"></span>
-                        </span> <span class="num">(0)</span></li>
-                        <li><span class="tit">1 Stars</span> <span class="bar">
-                              <span class="abs" style="width: 0%"></span>
-                        </span> <span class="num">(0)</span></li>
-                     </ul>
-                  </div>
-                  <div class="photo">
-                     <ul>
-                        <li><a
-                           href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img
-                              src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg"
-                              alt=""></a>
-                        </li>
-                     </ul>
-                  </div>
-                  <p class="like">
-                     <strong>100%</strong>의 구매자들이 이 상품을 좋아합니다. (56명 중 56명)
-                  </p>
-               </div>
-               <div class="PR15N01-hd">
-                        <h2>
-                           프리미엄 상품평<span>(20개)</span>
-                        </h2>
-                        <ul class="sort">
-                           <li class="now" value="date"><a href="javascript:power_review_sort('date');">최신 순</a></li>
-                           <li value="score"><a href="javascript:power_review_sort('score');">평점 순</a></li>
-                           <li value="good"><a href="javascript:power_review_sort('good');">추천 순</a></li>
-                        </ul>
-                     </div>
-               <div class="tabs">
-                  <ul class="reviewTabs">
-                     <li class="tab signin active"><a href="#signin">포토리뷰(<span class="photoReview_count"></span>)</a></li>
-                     <li class="tab signup"><a href="#signup">일반리뷰(<span class="review_count"></span>)</a></li>
-                  </ul>
-               </div>
-               <div id="listPowerReview" class="MS_power_review_list">
-                  <div class="signup-cont"></div>
-                  <div class="signin-cont" style="display:none;"></div>
-               </div>
-               <!-- ------------------------------상품리뷰---------------------------------------  -->
-               <div id="updatePowerReview" class="MS_power_review_update"></div>
-               <div id="layerReplyModify" style="display: none">
-                  <div class="layer-wrap">
-                     <a class="close-layer" href="#layerReplyModify">닫기</a>
-                     <form name="pruc" id="pruc_form" action="/shop/power_review_comment.action.html" method="post" autocomplete="off">
-                        <div class="wrt"> <textarea name="update_comment"></textarea> </div>
-                     </form>
-                     <div class="ctr">
-                        <a class="modify" href="javascript:power_review_update_comment();">수정</a>
-                     </div>
-                  </div>
-                  <!-- .layer-wrap -->
-               </div>
-               <!-- #layerReplyModify -->
-            </div>
-            <!-- #powerReview-->
-            <p style="clear: both"></p>
-
+			<script src="js/bootstrap4-rating-input.js"></script>
+				<!-- BIN -->
+				<!-- ------------------------------상품리뷰---------------------------------------  -->
+				<div id="powerReview">
+					<div class="hd-t">
+						<h2>POWER REVIEW</h2>
+					</div>
+					<div id="writePowerReview">
+						<div class="PR15N01-write">
+							<form name="prw_form" id="prw_form" method="post" autocomplete="off" enctype="multipart/form-data">
+								<input type="hidden" name="basicCode" value="<%=basicCode%>">
+								<p><strong>별점을 매겨주세요</strong></p>
+								<!-- 별점 -->
+								<div class="rat">
+									<input type="number" name="starScore" id="rating1" class="rating text-warning" value="0" />
+								</div>
+								<!-- 별점 -->
+								<textarea name="content" id="prw_content" placeholder="리뷰 내용을 입력해주세요" required></textarea>
+								<div class="thumb-wrap"></div>
+								<input type="file" name="prw_file" class="trick file-attach" id="prw_file" > 
+								<input type="button" value="리뷰 등록" id="lnk-review" class="lnk-review" style="text-align: right; padding: 20px 50px; cursor: pointer;">
+							</form>
+						</div>
+					</div>
+					<div class="PR15N01-info">
+						<dl class="score">
+							<dt></dt>
+							<dd><span></span>개 리뷰 평점</dd>
+						</dl>
+						<div class="chart">
+							<ul>
+							</ul>
+						</div>
+						<div class="photo">
+							<ul>
+<!-- 								<li><a -->
+<!-- 									href="javascript:power_review_view_show('995649','00000', 0, 'photo');"><span></span><img -->
+<!-- 										src="http://board.makeshop.co.kr/board/special328/nasign_board8/square::201021181313.jpeg" -->
+<!-- 										alt=""></a> -->
+<!-- 								</li> -->
+							</ul>
+						</div>
+						<p class="like">
+						</p>
+					</div>
+					<div class="PR15N01-hd" id="viewPoint">
+								<h2>
+									프리미엄 상품평<span>(<span class="totalReview_count"></span>)</span>
+								</h2>
+								<ul class="sort">
+									<li class="now" value="date"><a href="javascript:getReplyCall();">최신 순</a></li>
+									<li value="score"><a href="javascript:getReplyCall('','1');">평점 순</a></li>
+									<li value="good"><a href="javascript:getReplyCall();">추천 순</a></li>
+								</ul>
+							</div>
+					<div class="tabs">
+						<ul class="reviewTabs">
+							<li class="tab signin active"><a href="#signin">포토리뷰(<span class="photoReview_count"></span>)</a></li>
+							<li class="tab signup"><a href="#signup">일반리뷰(<span class="review_count"></span>)</a></li>
+						</ul>
+					</div>
+					<div id="listPowerReview" class="MS_power_review_list">
+						<div class="signup-cont"></div>
+						<div class="signin-cont" style="display:none;"></div>
+					</div>
+					<!-- ------------------------------상품리뷰---------------------------------------  -->
+				</div>
+				<!-- #powerReview-->
+				<p style="clear: both"></p>
             <div class="cboth pdt100"></div>
             <div id="page03" class="cboth pdt100"></div>
             <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
@@ -656,7 +612,7 @@ var productCode = "";
                         </td>
                         <td>
                            <div class="tb-center">
-                           <%=qnaList.get(i).getQna_date()%>
+                           <%=sdf.format(qnaList.get(i).getQna_date())%>
                            </div>
                         </td>
                         <td>
@@ -672,8 +628,13 @@ var productCode = "";
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
-                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
+	                                <%if(qnaList.get(i).getMember_id().equals(member_id)){ %>
+	                                 <div class="pr_r_button">
+	                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
+	                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
+	                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+	                                 </div>
+	                                 <%} %>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
                                     <div class="comment_depth1">
@@ -681,12 +642,32 @@ var productCode = "";
                                           <tbody>
                                              <tr>
                                                 <td class="MS_cmt_detail">
-                                                   <span class="MS_cmt_date">답글란입니다</span> <br>
-                                                   <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span>
-                                                   <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span>
-                                                   <div class="MS_cmt_content MS_cmt_depth01">
-                                                      <%=qnaList.get(i).getQna_content() %>
-                                                   </div>
+<!--                                                    <span class="MS_cmt_date">답글란입니다</span> <br> -->
+<%--                                                    <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span> --%>
+<%--                                                    <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span> --%>
+<!--                                                    <div class="MS_cmt_content MS_cmt_depth01"> -->
+<%--                                                       <%=qnaList.get(i).getQna_content() %> --%>
+<!--                                                    </div> -->
+
+														<div class="comments">
+															<div class="comments__arrow_top"></div>
+															<div class="comment__inner">
+																<div class="comment__lpane"><%= qnaList.get(i).getUsername() %></div>
+																<div class="comment__rpane">
+																	<div class="comment__error_message"></div>
+																<div class="comment__message">
+																	<span class="comment__message_text"><%= qnaList.get(i).getQna_content() %></span>
+																</div>
+					    	                					<div class="pr_r_button">
+					    	                					<%if(member_id.equals("admin")){ %>
+							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
+									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+						    	                    			<%} %>
+					    	                					</div>
+		    	                							</div>
+		    	                						</div>
+		    	                					</div>
+		    	                			
                                                 </td>
                                              </tr>
                                           </tbody>
@@ -895,310 +876,548 @@ var productCode = "";
    </div>
 </section>
 <script type="text/javascript">
-   <%-- id세션값 없으면 로그인으로 이동해야함 (textarea, submit 클릭시) / yj --%>
-   // BIN 상품 리뷰 입력
-    $(function(){
-       var basicCode = '<%=basicCode%>';
-         var member_id = '<%=member_id%>'; 
-          $("#lnk-review").click(function(){
-             // 로그인 판별
-//                 alert("로그인을 하셔야합니다");
-                if($("#prw_content").val().trim() === ""){
-                   alert("리뷰를 입력하세요.");
-                   $("#prw_content").val("").focus();
-                }else{
-                     var form = $('#prw_form')[0];
-                     var data = new FormData(form);
-                   $.ajax({
-                         type: "POST",
-                      enctype: 'multipart/form-data',
-                      url: "ProdReviewWrite.po",
-                      processData: false,
-                         contentType: false,
-                         data: data,
-                         success: function () {
-                            alert("리뷰 등록 완료");
-                            $("#prw_content").val("");
-                            $("#prw_file").val("");
-                            $("#rating").val("rating-clear");
-                            getReply();
-                         },
-                      error: function(request,status,error){
-                           alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                          }
-                   }); // ajax 종료
-                }; // else end
-          });
-          // BIN 리뷰 리스트 호출
-          function getReply(page){
-             var limit = 10;
-             var loop = 1;
-             
-             // 처음 들어오거나 새로고침 시 기본설정
-             if(!page){
-                var page = 1;
-                loop = $('.reviewTabs > li').length; // tabs 수 만큼 반복
-                $("#powerReviewList").text(""); 
-             }else{
-                if($('.active').text()=="포토리뷰()"){
-                   var pic = 0;
-                   $("#signup-cont").text("");
-                }else{
-                   var pic = 1;
-                   $("#signin-cont").text(""); 
-                }
-             }
-             
-             $.ajax({
-                url: "ProdReviewList.po", // 요청 url
-                   type: "POST", // post 방식
-                   data: {
-                      basicCode : basicCode,
-                      pic : pic,
-                      page : page,
-                      limit : limit,
-                      loop : loop
-                   },
-                   success: function (jsonObject) { 
-                      jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
-                      var json = JSON.parse(jsonObject);
-                      
-                      // 포토리뷰, 일반리뷰 따로 가져오기 위해 2번 반복
-                      for (key in json){
-                         jsonReplace = json[key].replace(/\s{2,}/gi,"\\r\\n");
-                         var newJson = JSON.parse(jsonReplace);
-                         if(newJson.replyList!=null){
-                               
-                            var replyList = newJson.replyList; 
-                            var output = ""; 
-                            output += "";
-                            
-                            // 포토 또는 일반 전체 리뷰에 대한 반복문
-                            output += "<ul class='PR15N01-review-wrap'>";
-                            for (var i = 0; i < replyList.length; i++) {
-                               // 리뷰 하나에 대한 반복문   
-                                  for (var j = 0; j < replyList[i].length; j++) {
-                                   var reply = replyList[i][j];
-                                   if(j == 0){
-                                 output += "<li id='power_review_block"+reply.num+"' class='power-review-list-box'>"
-                                          +"<div id='modifyPowerReview'>"
-                                          +"<div id='PR15N01-modify'>"
-                                          +"<form name='prm_form' id='prm_form"+reply.num+"' method='post' enctype='multipart/form-data'>"
-                                             +"<dl class='desc'>"
-                                             +"<dt class='first'>작성자</dt>"
-                                                +"<dd>"+reply.id+"</dd>";
-                                    }else if(j == 1){
-                                       output +=      "<dt>작성일</dt><dd>"+reply.date+"</dd>"
-                                                   +"</dl>";
-                                    }else if(j == 2){
-                                       output +=      "<div class='hd-box'>"
-                                                       +"<div class='star-icon'>"
-                                                         +"<div class='rat'>"
-                                                            +"<input type='number' name='starScore' id ='rating1' class='rating text-warning' value='"+reply.starScore+"' disabled />"
-                                                         +"</div>"
-                                                      +"</div>"
-                                                    +"</div>";
-                                    }else if(j == 3){
-                                       output +=    "<div class='pr-options' style='display: none;'>"
-                                                   +"<dl><dt class='emp'>구매한 옵션</dt><dd class='emp'>컬러 : BLACK, 사이즈 : S</dd></dl>"
-                                                 +"</div>"
-                                                 +"<div class='content'>"
-                                                    +"<p class='content_p'>"
-                                                       +"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
-                                                       +"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
-                                                       +"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
-                                                    +"</p><div class='ctr'>"
-                                                  +"</div>";
-                                    }else if(j == 4 && reply.product_img){
-                                       output +=    "<div class='photo-list'>"
-                                                   +"<ul>"
-                                                      +"<li>"
-                                                         +"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');''>"
-                                                            +"<img src='upload/prodReviewUpload/"+reply.product_img +"'>"
-                                                         +"</a>"
-                                                         +"<div class='attach-preview'></div>"
-                                                      +"</li>"
-                                                   +"</ul>"
-                                                +"</div>";
-//                                        output += "<div class='reply'>"
-//                                                 +"<br>"
-//                                                 +"<span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span>"
-//                                                 +"<a class='yes' href='javascript:power_review_good("+reply.num+", 'N', 'shopdetail');''><span>0</span></a>"
-//                                                 +"<a class='no' href='javascript:power_review_bad("+reply.num+", 'N', 'shopdetail');''><span>0</span></a>"
-//                                               +"</div>";
-                                    }else if(reply.id == member_id && j == 5){
-                                       output +=      "<br>";
-                                       output +=      "<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
-                                       output +=      "<br>";
-                                       output +=      "<div id='button'>";
-                                       output +=         "<a href='javascript:prd_review("+reply.num+")'>삭제</a>";
-                                       output +=         "<a href='javascript:prm_modify("+reply.num+")'>수정</a>";
-                                       output +=         "<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-                                      }else if(member_id == 'admin' && j == 5){
-                                       output +=         "<a href='javascript:prd_review("+reply.num+")'>삭제</a>";
-                                       output +=         "<a href='javascript:prr_reply("+reply.num+")'>답글</a>";
-                                      }
-                            } // 리뷰 하나에 대한 for 문 => reveiwDetail
-                                       output +=      "</div>";
-                                     output +=    "<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
-                                     output +=    "<input type='hidden' name='prm_num' value='"+reply.num+"'>";
-                             output +=          "</form>";
-                             output +=       "</div>";
-                             output +=    "</div>";
-                             output += "</li>";
-                             output += "<div class='PR15N01-write prr_reply"+reply.num+"' style='visibility:hidden;'></div>";
-                         } // 리뷰 하나 하나에 대한 for 문
-                         output+="</ul>";
-                         // review paging
-                         var pageInfo = paging(newJson.listCount, page, limit);
-                         
-                         output+="<div class='paging'>";
-                                  if(page <= 1){
-                          output+=         "<input type='button' value='이전'> &nbsp;";
-                                  }else{
-                          output+=         "<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+page-1+"');''>&nbsp";
-                                  }
-                                  for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
-                                     if(i == page){
-                          output+=         "<a href='javascript:void(0);' class='now'>["+i+"]</a>&nbsp;";
-                                     }else{
-                          output+=         "<a href='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
-                                     }
-                                  }   
-                                  if(page >= pageInfo.maxPage){
-                          output+=         "<input type='button' value='다음'> &nbsp;";
-                                  }else{
-                          output+=         "<input type='button' value='다음' onclick='location.href='javascript:getReplyCall('"+page+1+"');''>&nbsp";
-                                  }
-                               +"</div>";
-                               
-                         // 새로고침 시
-                         if(loop > 1){
-                                if(key == 0){
-                                   $(".signup-cont").html(output);
-                                  $(".photoReview_count").html(newJson.listCount);
-                                }else if(key == 1){
-                                   $(".signin-cont").html(output);
-                                  $(".review_count").html(newJson.listCount);
-                                }
-                           // 포토 또는 일반리뷰 탭 선택 시
-                         }else{
-                            if(pic==0){
-                                   $(".signup-cont").html(output);
-                                  $(".photoReview_count").html(newJson.listCount);
-                            }else{
-                                   $(".signin-cont").html(output);
-                                  $(".review_count").html(newJson.listCount);
-                            }
-                         }
-                      } // if replyList != null end
-                     } // 첫 번째 key in for문
-                }, // success end
-              error: function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-             } // error end
-         }) // getReply ajax end
-      } // getReply end
-      getReplyCall = getReply;
-       getReply(); // 해당 페이지 실행 시 해당 함수 호출
-       
-       // paging
-       function paging(a,b,c){
-          var listCount = a;
-          var maxPage = Math.ceil(listCount / c);
-          var startPage = Math.floor(b / 10) * 10 +1;
-          var endPage = startPage + 10 -1;
-          
-          if(endPage > maxPage){
-             endPage = maxPage
-          }
-          
-          return {
-             maxPage : maxPage,
-             startPage : startPage,
-             endPage : endPage
-          };
-       }; // paging end
-       
-      $('.tabs .tab').click(function(){
-         if ($(this).hasClass('signin')) {
-            $('.tabs .tab').removeClass('active');
-            $(this).addClass('active');
-            $('.signin-cont').css('display','none');
-            $('.signup-cont').css('display','block');
-         }else if ($(this).hasClass('signup')) {
-            $('.tabs .tab').removeClass('active');
-            $(this).addClass('active');
-            $('.signup-cont').css('display','none');
-            $('.signin-cont').css('display','block');
-         }
-      }); // tabs click function end
-   });
-    function prm_modify(num){
-      $('#prm_form'+num+' :input').attr('disabled',false);
-      $('#prm_form'+num+' textarea').css('border','1px solid black');
-      $('#prm_form'+num+' #prm_file').prop('type','file');
-      $('#prm_form'+num+' #prm_submit').prop('type','button');
-   } // end prm_modify
-   function prm_modifySub(num){
-      var form = $('#prm_form'+num)[0];
-        var data = new FormData(form);
-      $.ajax({
+	var basicCode = '<%=basicCode%>';
+	var member_id = '<%=member_id%>';
+	//BIN 상품 리뷰 입력
+	$(function(){
+	    $(".PR15N01-write").click(function(){
+	    	// 로그인 판별
+			if(member_id=='null'){
+				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+					return;
+				}else{
+					location.href='MemberLoginForm.mo';
+				}
+			}
+		});		
+	    $("#lnk-review").click(function(){
+	    	if($('#rating1').val() == 0){
+	    		alert("별점을 입력하세요.");
+	    		$('.fa fa-star').data-val(1).focus();
+	    	}else if($("#prw_content").val().trim() === ""){
+		    		alert("리뷰를 입력하세요.");
+		    		$("#prw_content").val("").focus();
+		    	}else{
+		            var form = $('#prw_form')[0];
+		            var data = new FormData(form);
+		    		$.ajax({
+		                type: "POST",
+		    			enctype: 'multipart/form-data',
+		    			url: "ProdReviewWrite.po",
+		    			processData: false,
+		                contentType: false,
+		                data: data,
+		                success: function () {
+		                	alert("리뷰 등록 완료");
+		                	$("#prw_content").val("");
+		                	$("#prw_file").val("");
+		                	$('.fa-star').attr('class','fa fa-star-o');
+		                	getReply();
+		                },
+		    			error: function(request,status,error){
+		    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		    		       }
+		    		}); // ajax 종료
+		    	}; // else end
+	    });
+	    // BIN 리뷰 리스트 호출
+	    function getReply(page,sort){
+	    	var totalReview_count = 0;
+	    	var limit = 10;
+	    	var loop = 1;
+	    	// 리뷰 추천에 사용할 변수
+	    	var good = 0;
+	    	var bad = 1;
+	    	// 처음 들어오거나 새로고침 시 기본설정
+	    	if(!page){
+	    		var page = 1;
+	    		loop = $('.reviewTabs > li').length; // tabs 수 만큼 반복
+	    		$("#powerReviewList").text("");
+	    		// 상품 별점 계산 함수 호출
+	    		starScoreCount(basicCode);
+	    	}else{
+	    		// 0 일 때 포토리뷰
+		    	if($('.active').text()=="포토리뷰()"){
+		    		var pic = 0;
+		    		$("#signup-cont").text("");
+		    	// 1 일 때 일반리뷰
+		    	}else{
+		    		var pic = 1;
+		    		$("#signin-cont").text(""); 
+		    	}
+    		}
+	    	if(!sort){
+	    		var sort = 0;
+	    	}
+	    	$.ajax({
+    			url: "ProdReviewList.po", // 요청 url
+                type: "POST", // post 방식
+                data: {
+                	basicCode : basicCode,
+                	pic : pic,
+                	page : page,
+                	limit : limit,
+                	loop : loop,
+                	sort : sort
+                },
+                success: function (jsonObject) { 
+                	// jsonObject 에 다시 별점 부트스트랩 적용하기 위해 재선언
+                	$('head').append('<script src=\'js/bootstrap4-rating-input.js\'><\/script>');
+                	jsonObject = jsonObject.replace(/\n/gi,"\\r\\n");
+            		var json = JSON.parse(jsonObject);
+            		// 평점 옆 사진 초기화
+            		$('.photo ul').html("");
+            		// 포토리뷰, 일반리뷰 따로 가져오기 위해 2번 반복
+                	for (key in json){
+                		jsonReplace = json[key].replace(/\s{2,}/gi,"\\r\\n");
+                		var newJson = JSON.parse(jsonReplace);
+                		if(newJson.replyList!=null){
+	                			
+		                	var replyList = newJson.replyList;
+		                	var output = "";
+		                	output += "<ul class='PR15N01-review-wrap'>";
+		                	// 포토 또는 일반 전체 리뷰에 대한 반복문
+		                	for (var i = 0; i < replyList.length; i++) {
+		                		var isImg = false;
+		                		// 리뷰 하나에 대한 반복문	
+		   	                	for (var j = 0; j < replyList[i].length; j++) {
+		   	                		var reply = replyList[i][j];
+		    	                	
+		    	                	// 상품 리뷰 관리자 답글
+		    	                	if(replyList[i][0].id == 'admin'){
+		    	                		if(j==0){
+												output += "<li id='power_review_block"+reply.num+"' class='power-review-list-box'>"
+															+"<a href='javascript:showReply("+reply.num+");'><span style='color: orange;'>답글이 있습니다!</span></a><br><br>"
+															+"<form name='prm_form' id='prm_form"+reply.num+"' method='post' enctype='multipart/form-data' style='display:none;'>"
+															+"<div class='comments'>"
+															+"<div class='comments__arrow_top'></div>"
+															+"<div class='comment__inner'>"
+															+"<div class='comment__lpane'>"+reply.id+"</div>"
+															+"<div class='comment__rpane'>"
+															+"<div class='comment__error_message'></div>";
+		    	                		}else if(j == 3){
+												output +=	"<div class='comment__message'>"
+															+"<span class='comment__message_text'>"+reply.content+"</span>"
+															+"</div>";
+		    	                		}else if(j == 5){
+		    	                			output +=		"<button class='pr_r_button'>";
+			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
+			    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
+		    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
+		    	                			output +=		"</button>";
+		    	                		}
+		    	                	// 상품 리뷰
+		    	                	}else{
+			    	                	if(j == 0){
+												output += "<li id='power_review_block"+reply.num+"' class='power-review-list-box'>"
+															+"<form name='prm_form' id='prm_form"+reply.num+"' method='post' enctype='multipart/form-data'>";
+												output +=	"<div id='modifyPowerReview'>"
+															+"<div id='PR15N01-modify'>"
+																+"<dl class='desc'>"
+																+"<dt class='first'>작성자</dt>"
+																	+"<dd>"+reply.id+"</dd>";
+			    	                    }else if(j == 1){
+				    	                    output +=		"<dt>작성일</dt><dd>"+reply.date+"</dd>"
+				    	                    				+"</dl>";
+			    	                    }else if(j == 2){
+			    	                    	output +=		"<div class='hd-box'>"
+			    	                    			 			+"<div class='star-icon'>"
+	    	                    									+"<input type='number' name='starScore' class='rating' id='rating-readonly' data-clearable='remove' value='"+reply.starScore+"' data-readonly/>"
+	    	                    								+"</div>"
+    	                    						 		+"</div>";
+			    	                    }else if(j == 3){
+			    	                    	output += 	"<div class='pr-options' style='display: none;'>"
+			    	                    					+"<dl><dt class='emp'>구매한 옵션</dt><dd class='emp'>컬러 : BLACK, 사이즈 : S</dd></dl>"
+		    	                    				 	+"</div>"
+			    	                    			 	+"<div class='content'>"
+		    	                    				 		+"<p class='content_p'>"
+		    	                    				 			+"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
+			    	                    				 		+"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
+				    	                    			 		+"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
+				    	                    			 	+"</p><div class='ctr'>"
+			    	                    			 	 +"</div>";
+			    	                    }else if(j == 4 && reply.product_img){
+			    	                    	output += 	"<div class='photo-list'>"
+				    	                    				+"<ul>"
+				    	                    					+"<li>"
+				    	                    						+"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');''>"
+				    	                    							+"<img src='upload/prodReviewUpload/"+reply.product_img +"'>"
+				    	                    						+"</a>"
+				    	                    						+"<div class='attach-preview'></div>"
+			    	                    						+"</li>"
+		    	                    						+"</ul>"
+	    	                    						+"</div>";
+	    	                    						// 평점 옆 사진 추가 하는 코드
+	    	                    						var photoCount = 0;
+	    	                    						if(photoCount != 8){
+	    	                    							var photo = "<li><img src='upload/prodReviewUpload/"+reply.product_img +"'></li>";
+	    	                    							$('.photo ul').append(photo);
+	    	                    						}
+	    	                    			isImg = true;
+			    	                    }else if(j == 5){
+			    	                    	output += "<div class='reply'>"
+			    	                    				+"<span class='pr-txt'>이 리뷰가 도움이 되셨나요?</span>"
+		    	                    					+"<a class='good"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+good+");' >"
+		    	                    						+"<span class='imgRecG"+reply.num+"'>";
+		    	                    						
+		    	                    					// 아이디 값 기반으로 추천을 이미 눌렀을 시 나타나는 이미지 나눔
+		    	                    					if(reply.recG == 0){
+			    	                    	output +=			"<img src='images/icons/in-love_face_before.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}else{
+  	                    					output +=			"<img src='images/icons/in-love_face.png' alt='yes' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}
+   	                    					output +=		"</span>"
+   	                    									+"<span class='recCount'>"+reply.good+"</span></a>&nbsp"
+		    	                    						+"<a class='bad"+reply.num+"' href='javascript:power_review_rec("+reply.num+","+bad+");'>"
+		    	                    						+"<span class='imgRecB"+reply.num+"'>";
+		    	                    					if(reply.recB == 0){
+  	                    					output +=			"<img src='images/icons/angry_face_before.png' alt='no' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}else{
+  	                    					output +=			"<img src='images/icons/angry_face.png' alt='no' style='width:15px;height:15px;'>&nbsp";
+		    	                    					}
+		    	                    					
+  	                    					output += 		"</span>"
+  	                    								+"<span class='recCount'>"+reply.bad+"</span></a>&nbsp"
+	    	                    					 	+"</div>";
+				   	                 		if(reply.id == member_id){
+			    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
+				    	                    	output +=		"<button class='pr_button'>";
+				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
+				    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
+			    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
+				    	                    	output +=		"</button>";
+				    	                    }	
+				   	                 		if(member_id == 'admin'){
+				    	                    	output +=		"<button class='pr_button'>";
+				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
+				    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>답글</a>";
+				    	                    	output +=		"</button>";
+				   	                 		}
+		   	                		}
+		                		}
+	   	                	}// 리뷰 하나에 대한 for 문 => reveiwDetail
+	    	                    		output +=		"</div>";
+		                				output += 	"<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
+		                				output += 	"<input type='hidden' name='prm_num' value='"+reply.num+"'>";
+    	                	output += 			"</div>";
+    	                	output += 		"</div>";
+	                		output +=	"</form>";
+    	                	output += "</li>";
+    	                	output += "<div class='PR15N01-write prr_reply"+reply.num+"' style='display:none;'></div>";
+		   	                
+		   	            } // 리뷰 하나 하나에 대한 for 문
+            			output+="</ul>";
+            			// review paging
+            			var pageInfo = paging(newJson.listCount, page, limit);
+            			
+            			output+="<div class='paging'>";
+                					if(page <= 1){
+          				output+=			"<input type='button' value='이전'> &nbsp;";
+                					}else{
+          				output+=			"<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&nbsp";
+                					}
+            						for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
+            							if(i == page){
+          				output+=			"<a href='javascript:void(0);' class='now'>["+i+"]</a>&nbsp;";
+            							}else{
+          				output+=			"<a href='#powerReview' onclick='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
+            							}
+            						}	
+                					if(page >= pageInfo.maxPage){
+          				output+=			"<input type='button' value='다음'> &nbsp;";
+                					}else{
+          				output+=			"<input type='button' value='다음' onclick='location.href='javascript:getReplyCall('"+page+1+"');''>&nbsp";
+                					}
+            					+"</div>";
+            					
+            			// 새로고침 시
+            			if(loop > 1){
+		   	              	if(key == 0){
+			   	              	$(".signup-cont").html(output);
+			   	            	 $(".photoReview_count").html(newJson.listCount);
+		   	              	}else if(key == 1){
+			   	              	$(".signin-cont").html(output);
+			   	             	$(".review_count").html(newJson.listCount);
+		   	              	}
+            				totalReview_count += (newJson.listCount*1);
+		   	            // 포토 또는 일반리뷰 탭 선택 시
+            			}else{
+            				if(pic==0){
+			   	              	$(".signup-cont").html(output);
+			   	            	 $(".photoReview_count").html(newJson.listCount);
+        			    	}else{
+			   	              	$(".signin-cont").html(output);
+			   	             	$(".review_count").html(newJson.listCount);
+        			    	}
+            				totalReview_count += (newJson.listCount*1);
+            			}
+            		} // if replyList != null end
+           		} // 첫 번째 key in for문
+            	$(".totalReview_count").html(totalReview_count);
+      		}, // success end
+        	error: function(request,status,error){
+		      		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	    	} // error end
+		}) // getReply ajax end
+	} // getReply end
+	getReplyCall = getReply;
+	getReply(); // 해당 페이지 실행 시 해당 함수 호출
+// 	ProdReviewRecCount(); // 페이지 실행 시 호출
+	
+    // paging
+    function paging(a,b,c){
+    	var listCount = a;
+    	var maxPage = Math.ceil(listCount / c * 1);
+    	var startPage = Math.floor(b / 10) * 10 +1;
+    	var endPage = startPage + 10 -1;
+    	
+    	if(endPage > maxPage){
+    		endPage = maxPage
+    	}
+    	
+    	return {
+    		maxPage : maxPage,
+    		startPage : startPage,
+    		endPage : endPage
+    	};
+    }; // paging end
+    
+    // 리뷰 별점 별 카운트
+    function starScoreCount(a){
+    	$.ajax({
             type: "POST",
-         enctype: 'multipart/form-data',
-         url: "ProdReviewModify.po",
-         processData: false,
-            contentType: false,
-            data: data,
+    		url: "ProdReviewStar.po",
+            data: {
+            	basicCode : a
+            },
+            success: function (json) {
+            	var jsonParse = JSON.parse(json);
+            	var star = jsonParse.star[0];
+            	// 별점 총 갯수
+            	var total = jsonParse.total;
+           		// 별점 총 합
+           		var score = 0;
+           		// 별점 호감도 측정
+           		var starLike = 0;
+           		var starChart = "";
+           		
+            	for(key in star){
+            	if(key > 2){
+            		starLike += star[key]*1;
+            	}
+           		score += key*star[key]*1;
+            	starChart += "<li>"
+           						+"<span class='tit'>star"+key+"</span>"
+           							+"<span class='bar'>"
+										+"<span class='abs' style='width: "+100 / total * star[key] * 1+"%'></span>"
+									+"</span>"
+									+"<span class='num'>"+star[key]+"</span>"
+							+"</li>";
+            		
+            	}
+           		var like = "<strong>"+(starLike / total * 100).toFixed(1)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
+            		result = (score / total *1).toFixed(1);
+            		$('.like').html(like);
+            		$('.chart ul').html(starChart);
+            		$('.score dt').html(result);
+            		$('.score span').html(total);
+            	
+            },
+    		error: function(request,status,error){
+    	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    	       }
+    	}); // end ajax
+    }
+    
+    // 포토, 일반 리뷰 탭 기능
+	$('.tabs .tab').click(function(){
+		if ($(this).hasClass('signin')) {
+			$('.tabs .tab').removeClass('active');
+			$(this).addClass('active');
+			$('.signin-cont').css('display','none');
+			$('.signup-cont').css('display','block');
+		}else if ($(this).hasClass('signup')) {
+			$('.tabs .tab').removeClass('active');
+			$(this).addClass('active');
+			$('.signup-cont').css('display','none');
+			$('.signin-cont').css('display','block');
+		}
+	}); // tabs click function end
+	
+	// 최신순, 호감순, 추천순 정렬 기능 탭
+ 	$('.sort li').click(function(){
+		if (!$(this).hasClass(this)) {
+			$('.sort li').removeClass('now');
+			$(this).addClass('now');
+		}
+	}); // tabs click function end
+
+});
+
+	// 상품 리뷰 수정 폼 활성화
+	function prm_modify(num){
+			$('#prm_form'+num+' :input').attr('disabled',false);
+			$('#prm_form'+num+' textarea').css('border','1px solid black');
+			$('#prm_form'+num+' #prm_file').prop('type','file');
+			$('#prm_form'+num+' #prm_submit').prop('type','button');
+	} // end prm_modify
+
+// 상품 리뷰 수정 처리
+function prm_modifySub(num){
+	var form = $('#prm_form'+num)[0];
+    var data = new FormData(form);
+	$.ajax({
+        type: "POST",
+		enctype: 'multipart/form-data',
+		url: "ProdReviewModify.po",
+		processData: false,
+        contentType: false,
+        data: data,
+        success: function () {
+        	alert("리뷰 수정 완료");
+        	getReplyCall();
+        },
+		error: function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	       }
+	}); // end ajax
+} // end prm_modifySub
+
+// 상품 리뷰 답글 폼 끼워넣기
+function prr_reply(num,re_ref,isImg){
+	$(function(){
+		// reivew comment 폼 생성		
+		var newform = $('<form></form>');
+		newform.attr("name","prr_reply");
+		newform.attr("method","post");
+		newform.attr("action","");
+		// set attribute(input)
+		newform.append($('<textarea/>',{name: 'content', id: 'prr_content'}));
+		newform.append($('<input/>',{type: 'button', value: '전송', onclick: 'prr_replySub('+num+","+re_ref+","+isImg+')'}));
+		// append 
+		newform.appendTo('.prr_reply'+num);
+		$('.prr_reply'+num).css('visibility','visible');
+	});
+};
+
+// 상품 리뷰 답글 처리
+function prr_replySub(num,re_ref,isImg){
+	var basicCode = '<%=basicCode%>' ;
+	if($("#prr_content").val().trim() === ""){
+		alert("리뷰를 입력하세요.");
+		$("#prr_content").val("").focus();
+	}else{
+		$.ajax({
+            type: "POST",
+			url: "ProdReviewReply.po",
+            data: {
+            	content : $('#prr_content').val(),
+            	basicCode : basicCode,
+            	re_ref : re_ref,
+            	isImg : isImg
+            },
             success: function () {
                alert("리뷰 수정 완료");
                getReplyCall();
             },
-         error: function(request,status,error){
-              alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-             }
-      }); // end ajax
-   } // end prm_modifySub
-   function prr_reply(num){
-      $(function(){
-         // reivew 답글 폼 생성      
-         var newform = $('<form></form>');
-         newform.attr("name","prr_reply");
-         newform.attr("method","post");
-         newform.attr("action","");
-         // set attribute(input)
-         newform.append($('<textarea/>',{name: 'content'}));
-         newform.append($('<input/>',{type: 'file', name: 'file'}));
-         newform.append($('<input/>',{type: 'button', value: '전송', onclick: 'prr_replySub'}));
-         // append 
-         newform.appendTo('.prr_reply'+num);
-         $('.prr_reply'+num).css('visibility','visible');
-      });
-   };
-   function prr_replySub(){
-      alert(3);
-   }
-   function prd_review(num){
-       // 리뷰 삭제
-       if(!confirm("정말 삭제하시겠습니까?")){
-          return;
-       }else{
-             $.ajax({
-                   type: "POST",
-                url: "ProdReviewDelete.po",
-                   data: {
-                      num:  num
-                   },
-                   success: function () {
-                      alert("리뷰 삭제 완료");
-                      getReplyCall();
-                   },
-                error: function(request,status,error){
-                     alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                    }
-             })// end ajax
-             }
-       }
+			error: function(request,status,error){
+		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		       }
+		}); // ajax 종료
+	}; // else end
+}
+
+// 리뷰 삭제
+function prd_review(num){
+	// 예 -> 삭제, 아니오 -> 취소
+    if(!confirm("정말 삭제하시겠습니까?")){
+    	return;
+    }else{
+   		$.ajax({
+               type: "POST",
+   			url: "ProdReviewDelete.po",
+               data: {
+               	num:  num
+               },
+               success: function () {
+               	alert("리뷰 삭제 완료");
+               	getReplyCall();
+               },
+   			error: function(request,status,error){
+   		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+   		       }
+   		})// end ajax
+	 }
+}
+
+</script>
+<script type="text/javascript">
+// 상품 리뷰 추천
+	// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+	var member_id = '<%=member_id%>';
+	
+	function power_review_rec(num,recommand){
+		
+		if(member_id=='null'){
+			if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+				return;
+			}else{
+				location.href='MemberLoginForm.mo';
+			}
+		}else{
+			$.ajax({
+				url: "ProdReviewRec.po",
+	               type: "POST",
+	               data: {
+	                   num: num,
+	                   recommand : recommand
+	               },
+	               success: function (isRec) {
+            		   var goodAf ="in-love_face.png";
+            		   var goodBe ="in-love_face_before.png";
+            		   var badAf ="angry_face.png";
+            		   var badBe ="angry_face_before.png";
+            		   
+           			   // recommand = 0 -> good, 1 -> bad 
+            		   //isRec = 0 -> 리뷰 추천했을 때 이미지로 변경, 1 -> 리뷰 추천 취소했을 때 이미지로 변경
+            		   img = (recommand == 0 ? (isRec == 0 ? goodAf : goodBe) : (isRec == 0 ? badAf : badBe));
+            		   alt = (recommand == 0 ? 'yes' : 'no');
+           			   var imgResult = "<img src='images/icons/"+img+"' alt='"+alt+"' style='width:15px;height:15px;'>&nbsp";
+           			   
+	            	   if(recommand == 0){
+            			   $('.imgRecG'+num).html(imgResult);
+	            	   }else{
+            			   $('.imgRecB'+num).html(imgResult);
+	            	   }
+			        ProdReviewRecCount(num,recommand);
+	               },
+			})
+		}
+	}
+	// 리뷰 추천 수
+    function ProdReviewRecCount(num,rec) {
+        var rec = rec; // good, bad 판별 변수
+        if(rec == null){
+        }
+		$.ajax({
+			url: "ProdReviewRecCount.po",
+               type: "POST",
+               data: {
+                   num: num,
+                   recommand : rec
+               },
+               success: function (count) {
+            	   if(rec == 0){
+	               	$(".good"+num+" .recCount").html(count);
+            	   }else{
+	               	$(".bad"+num+" .recCount").html(count);
+            	   }
+               },
+		})
+    };
+//     setInterval(function(){
+//     	$('.rating-input').toggle();
+//     },100);
 </script>
 <script type="text/javascript">
 // qna 제목 클릭 시 내용 보여주기
@@ -1212,6 +1431,32 @@ function show_hide(){
       }
    });
 };
+// qna 비회원이 글 쓰려고 할 시 로그인 유도
+$(function(){
+	$('.btm_write').click(function(){
+		var member_id = '<%=member_id%>';
+		if(member_id == 'null'){
+			if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+				return false;
+			}else{
+				location.href="MemberLoginForm.mo";
+				return false;
+			}
+		}
+	});
+});
+
+//review 답글 클릭 시 보여주기
+function showReply(num){
+	$(function(){
+		var form = $('#prm_form'+num).css('display');
+		if(form == 'table-row' || form == 'inline' || form == 'block'){
+			$('#prm_form'+num).css('display','none');
+		}else {
+			$('#prm_form'+num).css('display','inline').focus();
+		}
+	});
+}
 </script>
 <script type="text/javascript">
    var _gaq = _gaq || [];
@@ -1279,6 +1524,7 @@ function show_hide(){
 			
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- 스크립트파일끝 -->
 
  <jsp:include page="/inc/footer.jsp" />

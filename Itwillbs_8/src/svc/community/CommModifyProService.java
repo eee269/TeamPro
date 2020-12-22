@@ -11,7 +11,7 @@ import vo.CommBean;
 public class CommModifyProService {
 
 	// --------------------------------isArticleWriter()------------------------------
-	public boolean isArticleWriter(int num, String pass) {
+	public boolean isArticleWriter(String pass, String member_id) {
 		// 글 수정 작업 전 작성자 확인을 위한 패스워드 비고
 		boolean isRightUser = false;
 		
@@ -23,7 +23,7 @@ public class CommModifyProService {
 		
 		// CommDAO 클래스의 isArticleBoardWriter() 메서드를 호출하여
 		// 적합한 사용자인지 판별
-		isRightUser = commDAO.isArticleCommWriter(num, pass);
+		isRightUser = commDAO.isArticleCommWriter(pass, member_id);
 		
 		close(con);
 		
