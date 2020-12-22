@@ -20,7 +20,7 @@ String id = (String) session.getAttribute("member_id");
 int community_num = Integer.parseInt(request.getParameter("num"));
 
 //날짜 => 원하는 모양을 변경 문자열 결과값
-SimpleDateFormat sdfYM = new SimpleDateFormat("yy-MMM", Locale.ENGLISH);
+SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.ENGLISH);
 SimpleDateFormat sdfD = new SimpleDateFormat("dd");
 SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 
@@ -182,10 +182,9 @@ font-weight: bold !important;
 						<h4 class="ltext-109 cl2 p-b-28">
 							<%=article.getSubject()%>
 						</h4>
-						<p class="stext-117 cl6 p-b-26 min-h-300px">
-							<%=article.getContent()%>
-							<%=article.getMember_id()%>
-						</p>
+						<div class="stext-117 cl6 p-b-26 min-h-300px">
+							<p><%=article.getContent()%></p>
+						</div>
 					</div>
 					<div class="flex-w flex-t p-t-16">
 						<span class="size-216 stext-116 cl8 p-t-4">
@@ -201,17 +200,34 @@ font-weight: bold !important;
 							</a>
 						</div>
 					</div>
-						<button class="flex-c-m stext-101 cl0 size-50 bg3 bor2 hov-btn3 p-lr-15 trans-04">
 					<%if(id!=null){
 						if(id.equals(article.getMember_id())){ %>
-							<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">삭제</a>
-							<input type="button" value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-							<input type="button" value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+							<div class="flex-w flex-c-m m-tb-10 float-r" >
+								<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									삭제
+									</div>
+								</a>
+								<a href="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									수정
+									</div>
+								</a>
 					<%	}
 					}%>
-							<input type="button" value="글목록" onclick="location.href='CommList.co?page=<%=nowPage%>'">
-							<input type="button" value="북마크" id="bookmark"/>
-						</button>
+								<a href="location.href='CommList.co?page=<%=nowPage%>'">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									글목록
+									</div>
+								</a>
+								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn" id="bookmark">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									북마크
+								</div>
+							</div>
 
 
 
@@ -1132,9 +1148,9 @@ $(function(){
 					$(".bookmark_count").html(count);
 				},
 			})
-		}
-		;
-
+		};
+		// 페이지 첫 로딩 시 호출
+		bookmarkCount();
 	})
 </script>
 

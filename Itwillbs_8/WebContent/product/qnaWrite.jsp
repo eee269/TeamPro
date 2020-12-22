@@ -73,13 +73,13 @@
 	                                            	value="<%=memberBean.getUsername() %>" readonly="readonly" style="background-color: #BDBDBD;"
 	                                            <%} %>
 	                                             /></div></td>
-	                                            <th><div>비밀번호</div></th>
+	                                            <!-- <th><div>비밀번호</div></th>
 	                                            <td>
                                                 	<div>
                                                     	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                    
                                                     	<font color="red">자동 잠금 기능</font>                                                                                                    
                                                    	</div>
-                                            	</td>
+                                            	</td> -->
                                         	</tr>
                                             <tr>
                                             	<th><div>제목</div></th>
@@ -90,24 +90,6 @@
                                                 </div>
 												</td>
                                         	</tr>
-<!--                                             <tr> -->
-<!--                                             	<th><div>주문자</div></th> -->
-<!--                                             	<td colspan="3"> -->
-<!--                                                 <div class="title"> -->
-<!-- 													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_customer' value='' /> -->
-<!-- 													<div class="title_select"></div> -->
-<!--                                                 </div> -->
-<!-- 												</td> -->
-<!--                                         	</tr> -->
-<!--                                             <tr> -->
-<!--                                             	<th><div>주문번호</div></th> -->
-<!--                                             	<td colspan="3"> -->
-<!--                                                 <div class="title"> -->
-<!-- 													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_orderNum' value='' /> -->
-<!-- 													<div class="title_select"></div> -->
-<!--                                                 </div> -->
-<!-- 												</td> -->
-<!--                                         	</tr> -->
                                         	<tr>
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
@@ -129,14 +111,20 @@
 								</fieldset>
                            		<!-- //게시판 글쓰기 -->
                             	<!-- 하단 버튼 -->
-                            	<dl class="bbs-link bbs-link-btm">
-                                	<dt></dt>
-                                	<dd>
-<!-- 	                                    <a href="#" class="CSSbuttonWhite" onclick="javascript:fileCheck.submit()">등록하기</a> -->
-										<input type="submit" value="전송하기">
-										<input type="button" value="목록으로" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
-	                                </dd>
-	                            </dl>
+                            	<div class="flex-w flex-c-m m-tb-10 float-r" >
+									<a href="javascript:submit">
+										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+											글등록
+										</div>
+									</a>
+									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
+										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+										글목록
+										</div>
+									</a>
+								</div>
 	                            <!-- //하단 버튼 -->
 							</form>
 						</div>

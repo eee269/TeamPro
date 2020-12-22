@@ -11,6 +11,14 @@ public class CommBean extends MemberBean{
 	private int readCount;
 	private Timestamp date;
 	private String img;
+	private int bookCount; // 북마크 갯수 체크 용으로 임시로 쓸 변수
+	
+	public int getBookCount() {
+		return bookCount;
+	}
+	public void setBookCount(int bookCount) {
+		this.bookCount = bookCount;
+	}
 	public int getNum() {
 		return num;
 	}

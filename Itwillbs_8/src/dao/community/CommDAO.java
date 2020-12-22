@@ -114,7 +114,11 @@ public class CommDAO {
 		int startRow = (page - 1) * limit; // 조회를 시작할 레코드(행) 번호 계산
 		
 		try {
-			String sql = "SELECT c.*, m.username FROM community c JOIN member m ON c.member_id = m.id ORDER BY date desc limit ?,?";
+			String sql = "SELECT c.*, m.username "
+					+ "FROM community c "
+					+ "JOIN member m "
+					+ "ON c.member_id = m.id "
+					+ "ORDER BY c.num desc limit ?,?";
 			ps = con.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, limit);
@@ -134,9 +138,13 @@ public class CommDAO {
 				article.setReadCount(rs.getInt(5));
 				article.setDate(rs.getTimestamp(6));
 				article.setImg(rs.getString(7));
-				
+				article.setBookCount(checkBookmark(rs.getInt(1), rs.getString("member_id")));
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
+				
+				
+				
+				
 				
 			}
 			
@@ -159,7 +167,11 @@ public class CommDAO {
 			ResultSet rs = null;
 			
 			try {
-				String sql = "SELECT c.*, m.username FROM community c JOIN member m ON c.member_id = m.id where c.member_id=? order by date desc";
+				String sql = "SELECT c.*, m.username "
+						+ "FROM community c JOIN member m "
+						+ "ON c.member_id = m.id "
+						+ "where c.member_id=? "
+						+ "order by date desc";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, member_id);
 				rs = ps.executeQuery();

@@ -115,14 +115,20 @@
 								</fieldset>
                            		<!-- //게시판 글쓰기 -->
                             	<!-- 하단 버튼 -->
-                            	<dl class="bbs-link bbs-link-btm">
-                                	<dt></dt>
-                                	<dd>
-<!-- 	                                    <a href="#" class="CSSbuttonWhite" onclick="submit()">등록하기</a> -->
-										<input type="submit" value="전송하기">
-										<input type="button" value="목록으로" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
-	                                </dd>
-	                            </dl>
+                            	<div class="flex-w flex-c-m m-tb-10 float-r" >
+									<a href="javascript:submit">
+										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+											수정완료
+										</div>
+									</a>
+									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
+										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+											글목록
+										</div>
+									</a>
+								</div>
 	                            <!-- //하단 버튼 -->
 							</form>
 						</div>
