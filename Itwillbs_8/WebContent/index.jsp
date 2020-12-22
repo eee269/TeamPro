@@ -281,4 +281,4 @@
 	</div>
 </section>
 
-<jsp:include page="/inc/footer_index.jsp" />
+<jsp:include page="/inc/footer.jsp" />
