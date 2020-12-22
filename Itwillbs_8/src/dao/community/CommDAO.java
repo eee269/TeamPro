@@ -104,7 +104,7 @@ public class CommDAO {
 	// --------------selectListCount()---------------
 	// --------------selectArticleList()---------------
 	// 게시물 목록 조회
-	public ArrayList<CommBean> selectArticleList(int page, int limit){
+	public ArrayList<CommBean> selectArticleList(int page, int limit, String keyword){
 		System.out.println("CommDAO - selectArticleList()~");
 		ArrayList<CommBean> articleList = null;
 		
@@ -115,13 +115,15 @@ public class CommDAO {
 		
 		try {
 			String sql = "SELECT c.*, m.username "
-					+ "FROM community c "
-					+ "JOIN member m "
-					+ "ON c.member_id = m.id "
-					+ "ORDER BY c.num desc limit ?,?";
+						+ "FROM community c "
+						+ "JOIN member m "
+						+ "ON c.member_id = m.id "
+						+ "WHERE c.subject like ?"
+						+ "ORDER BY c.num desc limit ?,?";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, limit);
+			ps.setString(1, "%"+keyword+"%");
+			ps.setInt(2, startRow);
+			ps.setInt(3, limit);
 			rs = ps.executeQuery();
 			
 			articleList = new ArrayList<CommBean>();

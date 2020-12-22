@@ -43,8 +43,8 @@
 
 				</div>
 
-				<div class="flex-w flex-c-m m-tb-10" id="commWrite">
-					<a href="CommWriteForm.co">
+				<div class="flex-w flex-c-m m-tb-10" >
+					<a href="CommWriteForm.co" id="commWrite">
 						<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 							글쓰기
@@ -60,13 +60,15 @@
 				
 				<!-- Search product -->
 				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-							<i class="zmdi zmdi-search"></i>
-						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>	
+					<form action="CommList.co" method="post" id="fr">
+						<div class="bor8 dis-flex p-l-15">
+<!-- 							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" onclick="javascript:submit()"> -->
+							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" onclick="commSubmit()">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" required="required">
+						</div>	
+					</form>
 				</div>
 			</div>
 
@@ -185,7 +187,11 @@
 			}
 		});
 	});
-	
+	// 게시글 검색
+	function commSubmit(){
+		$('#fr').submit();
+		window.location = window.location.pathname;
+	}
 </script>
 </body>
 </html>

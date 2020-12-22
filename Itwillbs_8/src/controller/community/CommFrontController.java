@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
-import action.community.CommBookCountAction;
 import action.community.CommBookAction;
+import action.community.CommBookCountAction;
 import action.community.CommDeleteProAction;
 import action.community.CommDetailAction;
 import action.community.CommListAction;
@@ -161,8 +161,8 @@ public class CommFrontController extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			// ---------------------------댓글 시작---------------------------
-		} else if (command.equals("/CommReWritePro.co")) {
+			// ---------------------------게시물 검색---------------------------
+		}else if (command.equals("/CommReWritePro.co")) {
 			// 댓글 쓰기
 			action = new CommReWriteProAction();
 			try {
