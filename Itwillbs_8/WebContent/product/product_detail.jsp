@@ -628,7 +628,7 @@ var productCode = "";
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
-	                                <%if(qnaList.get(i).getMember_id().equals(member_id)){ %>
+	                                <%if(member_id != null){if(qnaList.get(i).getMember_id().equals(member_id)){ %>
 	                                 <div class="pr_r_button">
 	                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
 	                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
@@ -680,7 +680,7 @@ var productCode = "";
                         </td>
                      </tr>
                   </tbody>
-                     <%}
+                     <%}}
                   }%>
                   </table>
                   <!-- qna pagin -->

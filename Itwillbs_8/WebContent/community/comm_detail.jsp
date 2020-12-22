@@ -8,7 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	CommBean article = (CommBean) request.getAttribute("article");
+CommBean article = (CommBean) request.getAttribute("article");
 String nowPage = request.getParameter("page");
 
 //==============댓글시작==============//
@@ -184,6 +184,7 @@ font-weight: bold !important;
 						</h4>
 						<p class="stext-117 cl6 p-b-26 min-h-300px">
 							<%=article.getContent()%>
+							<%=article.getMember_id()%>
 						</p>
 					</div>
 					<div class="flex-w flex-t p-t-16">
@@ -200,12 +201,17 @@ font-weight: bold !important;
 							</a>
 						</div>
 					</div>
-					<button class="flex-c-m stext-101 cl0 size-50 bg3 bor2 hov-btn3 p-lr-15 trans-04">
-						<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">삭제</a>
-						<input type="button" value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						<input type="button" value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						<input type="button" value="북마크" id="bookmark"/>
-					</button>
+						<button class="flex-c-m stext-101 cl0 size-50 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+					<%if(id!=null){
+						if(id.equals(article.getMember_id())){ %>
+							<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">삭제</a>
+							<input type="button" value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+							<input type="button" value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+					<%	}
+					}%>
+							<input type="button" value="글목록" onclick="location.href='CommList.co?page=<%=nowPage%>'">
+							<input type="button" value="북마크" id="bookmark"/>
+						</button>
 
 
 
@@ -1090,21 +1096,30 @@ $(document).on("click", ".rerere_write_open", function () {
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
 <script>
 $(function(){
-		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+		// 북마크버튼 클릭시(북마크 추가 또는 북마크 제거)
 		$("#bookmark").click(function(){
-			$.ajax({
-				url: "CommBook.co",
-                type: "POST",
-                data: {
-                    num: "<%=article.getNum()%>",
-                },
-                success: function () {
-			        bookmarkCount();
-                },
-			})
+			var id = '<%=id%>';
+			if(id=='null'){
+				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+					return;
+				}else{
+					location.href='MemberLoginForm.mo';
+				}
+			}else{
+				$.ajax({
+					url: "CommBook.co",
+	                type: "POST",
+	                data: {
+	                    num: "<%=article.getNum()%>",
+	                },
+	                success: function () {
+				        bookmarkCount();
+	                },
+				})
+			}
 		})
 		
-		// 게시글 추천수
+		// 게시글 북마크 수
 	    function bookmarkCount() {
 			var articleNum = '<%=article.getNum()%>';
 			$.ajax({
