@@ -4,9 +4,11 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import action.Action;
 import svc.community.CommDeleteProService;
+import svc.community.CommModifyProService;
 import vo.ActionForward;
 
 public class CommDeleteProAction implements Action {
@@ -17,10 +19,15 @@ public class CommDeleteProAction implements Action {
 		ActionForward forward = null;
 		String pass = request.getParameter("pass");
 		int num = Integer.parseInt(request.getParameter("num"));
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("member_id");
 		
+
+		CommModifyProService commModifyProService = new CommModifyProService();
 		CommDeleteProService commDeleteProService = new CommDeleteProService();
+		
 		// 비밀번호 맞는 지 검증
-		boolean check = commDeleteProService.isArticleWriter(num,pass);
+		boolean check = commModifyProService.isArticleWriter(member_id,pass);
 		
 		if(!check) {
 			// 틀렸을 경우

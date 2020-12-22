@@ -7,25 +7,7 @@ import java.sql.Connection;
 import dao.community.CommDAO;
 
 public class CommDeleteProService {
-
-	// --------------------------------isArticleWriter()------------------------------
-	public boolean isArticleWriter(int num, String pass) {
-		// 비밀번호 검증
-		boolean isArticleWriter = false;
-		
-		Connection con = getConnection();
-		
-		CommDAO commDAO = CommDAO.getInstance();
-		
-		commDAO.setConnection(con);
-		
-		isArticleWriter = commDAO.isArticleCommWriter(num,pass);
-		
-		close(con);
-		
-		return isArticleWriter;
-	}
-	// --------------------------------isArticleWriter()------------------------------
+	
 	// --------------------------------removeArticle()------------------------------
 	public boolean removeArticle(int num) {
 		// 글 삭제

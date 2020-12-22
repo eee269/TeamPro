@@ -10,10 +10,6 @@
 	
 %>
 <style>
-	.page-body{
-		width: 80%;
-		margin: 0 auto;
-	}
 	.width1260 {width:1260px;margin:0 auto;}
 	.sub_top_ban {width:100%; height:270px;  line-height:270px;}
 	.sub_top_ban.brand {background:#e2e2e0 url('images/sub_top_ban_cs.jpg') center center no-repeat;}
@@ -24,6 +20,7 @@
 <script type="text/javascript" src="http://oryany.co.kr//wcs.naver.net/wcslog.js"></script>
 
 <!-- 게시판 CSS -->
+<link type ="text/css" href="css/common.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="http://oryany.co.kr/shopimages/nasign/template/work/33865/board_write.nasign.css?t=202005111439" />
 <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
@@ -47,7 +44,7 @@
                         </div>
 						<dl class="prd-tinfo">
                             <dt>
-                                <img src="upload/prodQnaUpload/<%=productBean.getMain_img() %>" />
+                                <img src="upload/prodQnaUpload/<%=productBean.getMain_img() %>" onerror="this.src='images/icons/angry_face.png'" />
                             </dt>
                             <dd>
                                 <ul>
@@ -62,7 +59,7 @@
 								<input type="hidden" name="page" value="">
 								<input type="text" name="qna_num" value="<%=prodQnaBean.getQna_num()%>">
 								<fieldset>
-                                	<legend>일반게시판 쓰기</legend>
+                                	<legend>일반게시판 수정</legend>
                                 	<table summary="">
                                     	<colgroup>
 	                                        <col width="135" />
@@ -123,7 +120,7 @@
                                 	<dd>
 <!-- 	                                    <a href="#" class="CSSbuttonWhite" onclick="submit()">등록하기</a> -->
 										<input type="submit" value="전송하기">
-	                                    <a href="ProductDetail.po?basicCode=<%=basicCode %>" class="CSSbuttonWhite">목록보기</a>
+										<input type="button" value="목록으로" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
 	                                </dd>
 	                            </dl>
 	                            <!-- //하단 버튼 -->

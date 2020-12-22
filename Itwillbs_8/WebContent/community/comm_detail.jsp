@@ -1,4 +1,3 @@
-<%@page import="vo.MemberBean"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.CommReBean"%>
@@ -13,7 +12,6 @@ String nowPage = request.getParameter("page");
 //==============댓글시작==============//
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
-MemberBean member = (MemberBean) request.getAttribute("member");
 
 // String id = "dodo";
 String id = (String) session.getAttribute("member_id");
@@ -24,8 +22,6 @@ SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
-<!-- 카카오 SDK -->
-<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
@@ -177,11 +173,12 @@ h4.ltext-109 {
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
+		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Blog
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
+		</a> <span class="stext-109 cl4"> 8 Inspiring Ways to Wear Dresses
+			in the Winter </span>
 	</div>
 </div>
 <!-- Content page -->
@@ -191,7 +188,12 @@ h4.ltext-109 {
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<div class="wrap-pic-w how-pos5-parent">
-						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>">
+						<img src="communityUpload/<%=article.getImg()%>"
+							alt="<%=article.getImg()%>">
+						<div class="flex-col-c-m size-123 bg9 how-pos5">
+							<span class="ltext-107 cl2 txt-center"> 22 </span> <span
+								class="stext-109 cl3 txt-center"> Jan 2018 </span>
+						</div>
 					</div>
 					<div class="p-t-32">
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> <span>
@@ -215,9 +217,10 @@ h4.ltext-109 {
 						<span class="size-216 stext-116 cl8 p-t-4"> Tags </span>
 
 						<div class="flex-w size-217">
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Streetstyle </a>
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+							<a href="#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle </a> <a href="#"
+								class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
 								Crafts </a>
 						</div>
 					</div>
@@ -229,17 +232,10 @@ h4.ltext-109 {
 						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 						value="수정"
 						onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-						&nbsp;&nbsp;&nbsp;
 					<input type="button"
 						class="flex-c-m stext-101 cl0 size-125 bg3 bor2 hov-btn3 p-lr-15 trans-04"
 						value="북마크" id="bookmark"> <br>
-						
-                   <!-- 카카오톡으로 공유하기 기능 -->
-                   &nbsp;&nbsp;&nbsp;
-                   <a id="kakao-link-btn" href="javascript:sendLink()">
-  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="40px"/>
-				   </a>
-				<!-- // 카카오톡으로 공유하기 기능 -->
+
 
 
 					<!-- -----------------------------Comment----------------------------- -->
@@ -341,7 +337,7 @@ h4.ltext-109 {
 </section>
 <div id="image_view_load"></div>
 <a class="fancybox" href="#inline"></a>
-테테테테테
+
 <script>
 
 //==================== 원댓글 로딩  ====================//
@@ -497,6 +493,7 @@ $(function(){
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
     
 })	
+	
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
@@ -812,14 +809,8 @@ $(function(){
  				 var a = $(this).parents('li'); 
  				 var content = a.find('.content_p').text();
  				 var img = a.find('#img').val();
- 				 var name = a.find('.re_name').text();
- 				 var date = a.find('.re_date').text();
-//  				 alert(name);
  				 var output = ""; 
- 				 output += "<div id='inline' style='max-width:600px; display: none;'>"
- 				 +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
- 				 +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
- 				 +"<div class='popup-name-date' style='margin-top:40px;'><b>작성자</b> : "+name+" , <b>작성일</b> : "+date+"</div></div>"
+ 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
  				 
  				 $("#image_view_load").html(output); 
  				 $(".fancybox").trigger("click");
@@ -924,6 +915,7 @@ $(document).on("click", ".rerere_write_open", function () {
 })
 
 
+
  
 	
 </script>
@@ -946,11 +938,12 @@ $(function(){
 		
 		// 게시글 추천수
 	    function bookmarkCount() {
+			var articleNum = '<%=article.getNum()%>';
 			$.ajax({
 				url: "CommBookCount.co",
                 type: "POST",
                 data: {
-                    num: "<%=article.getNum()%>"
+                    num: articleNum
 				},
 				success : function(count) {
 					$(".bookmark_count").html(count);
@@ -960,42 +953,6 @@ $(function(){
 		;
 
 	})
-</script>
-
-<script type="text/javascript">
-
-//카카오톡으로 공유하기 
-
-Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
-function sendLink() {
-  Kakao.Link.createDefaultButton({
-  	container: '#kakao-link-btn',
-    objectType: 'feed',
-    content: {
-      title: '<%=article.getSubject() %>',
-      description: '게시글 공유',
-      imageUrl:
-        'upload/productUploadImg/<%=article.getImg() %>',
-      link: {
-        mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-        webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-      },
-    },
-    social: {
-      likeCount: 286,
-      commentCount: 45,
-      sharedCount: 845,
-    },
-    buttons: [
-      {
-        title: '웹으로 보기',
-        link: {
-          mobileWebUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-          webUrl: 'http://localhost:8080/Itwillbs_8/CommDetail.co?num=<%=article.getImg()%>',
-        }
-      }]
-  })
-}
 </script>
 
 <jsp:include page="../inc/footer.jsp" />

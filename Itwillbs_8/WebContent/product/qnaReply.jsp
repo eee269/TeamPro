@@ -24,6 +24,7 @@
 
 <!-- 게시판 CSS -->
 <link type="text/css" rel="stylesheet" href="http://oryany.co.kr/shopimages/nasign/template/work/33865/board_write.nasign.css?t=202005111439" />
+<link type ="text/css" href="css/common.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto:200,300,400,500,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic:400,700&display=swap" rel="stylesheet">
@@ -46,7 +47,7 @@
                         </div>
 						<dl class="prd-tinfo">
                             <dt>
-                                <img src="upload/prodQnaUpload/<%=productBean.getMain_img() %>" />
+                                <img src="upload/prodQnaUpload/<%=productBean.getMain_img() %>" onerror="this.src='images/icons/angry_face.png'" />
                             </dt>
                             <dd>
                                 <ul>
@@ -64,7 +65,7 @@
 								<input type="hidden" name="qna_re_seq" value="<%=prodQnaBean.getQna_re_seq()%>">
 								<input type="hidden" name="qna_re_lev" value="<%=prodQnaBean.getQna_re_lev()%>">
 								<fieldset>
-                                	<legend>일반게시판 쓰기</legend>
+								<legend>일반게시판 답글</legend>
                                 	<table summary="">
                                     	<colgroup>
 	                                        <col width="135" />
@@ -84,7 +85,7 @@
 	                                            <td>
                                                 	<div>
                                                     	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                    
-                                                    	<font color="red">자동 잠금 기능</font>                                                                                                    
+<!--                                                     	<font color="red">자동 잠금 기능</font>                                                                                                     -->
                                                    	</div>
                                             	</td>
                                         	</tr>
@@ -101,9 +102,7 @@
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
                                                 <div>
-                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' >
-                                                		<%=prodQnaBean.getQna_content() %>
- 													</textarea>
+                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' ><%=prodQnaBean.getQna_content() %></textarea>
  												</div>
 	                                            </td>
     	                                    </tr>
@@ -117,7 +116,7 @@
                                 	<dd>
 <!-- 	                                    <a href="#" class="CSSbuttonWhite" onclick="submit()">등록하기</a> -->
 										<input type="submit" value="전송하기">
-	                                    <a href="ProductDetail.po?basicCode=<%=basicCode %>" class="CSSbuttonWhite">목록보기</a>
+										<input type="button" value="목록으로" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
 	                                </dd>
 	                            </dl>
 	                            <!-- //하단 버튼 -->
