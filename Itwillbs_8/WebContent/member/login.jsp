@@ -390,9 +390,6 @@ margin-left:0px;}
 			} else if(count == 3) {
 				element.innerHTML = "사용 가능(보통)";
 				checkPasswdResult = true; // 전역변수 true 로 변경
-			} else if(count == 2) {
-				element.innerHTML = "사용 가능(위험)";
-				checkPasswdResult = true; // 전역변수 true 로 변경
 			} else {
 				element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 				checkPasswdResult = false; // 전역변수 false 로 변경
@@ -424,15 +421,33 @@ margin-left:0px;}
 		
 		var element = document.getElementById('checkPhoneResult');
 		
-		var regex = /^[0-9]*$/;
+// 		var regex = /^[0-9]*$/;
+		var regex = /^[0-9]{2,11}$/;
+		var rege= /^[0-9]{12,30}$/;
+		
+		
 		
 		if(regex.exec(phone)) { 
 			element.innerHTML = "사용 가능";
 			checkPhoneResult = true; 
-		} else { 
+		} else if(rege.exec(phone)){
+			element.innerHTML = "11자리 이하로 입력해주세요";
+			checkPhoneResult = false; 
+		} 
+		
+		else { 
 			element.innerHTML = "숫자만 입력하세요";
 			checkPhoneResult = false; 
 		}
+
+		
+// 		if(regex.exec(phone)) { 
+// 			element.innerHTML = "사용 가능";
+// 			checkPhoneResult = true; 
+// 		} else { 
+// 			element.innerHTML = "숫자만 입력하세요";
+// 			checkPhoneResult = false; 
+// 		}
 		
 	}
 	
@@ -495,12 +510,12 @@ margin-left:0px;}
 							placeholder="Your Password">
 						<label for="password">Password</label>
 						
-						<input type="checkbox" id="remember" class="checkbox" checked>
-						<label for="remember">Remember me</label>
+<!-- 						<input type="checkbox" id="remember" class="checkbox" checked> -->
+<!-- 						<label for="remember">Remember me</label> -->
 						
 						<div class="submit-wrap">
 							<input type="submit" value="Sign in" class="submit"> 
-							<a href="#" class="more">Forgot your password?</a>
+<!-- 							<a href="#" class="more">Forgot your password?</a> -->
 						</div>
 					</form>
 					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
