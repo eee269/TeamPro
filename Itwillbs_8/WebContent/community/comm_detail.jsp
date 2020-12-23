@@ -232,9 +232,6 @@ font-weight: bold !important;
 									북마크
 								</div>
 							</div>
-
-
-
 					<!-- -----------------------------Comment----------------------------- -->
 					<h2 class="comment_title">COMMENT</h2>
 					<div id="productDetail" style="padding-top: 20px;">

@@ -5,7 +5,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%
+	// test
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 	String member_id = (String)session.getAttribute("member_id");
 

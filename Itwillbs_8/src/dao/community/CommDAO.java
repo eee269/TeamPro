@@ -11,7 +11,7 @@ import vo.CommBean;
 import vo.CommReBean;
 
 import static db.JdbcUtil.*;
-
+// test
 public class CommDAO {
 	// --------------싱글톤 패턴 활용---------------
 	private CommDAO() {}
