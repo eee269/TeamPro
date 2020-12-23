@@ -70,11 +70,11 @@
 				</div>
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Newsletter
+						Our Domain
 					</h4>
 					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="email@example.com">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="Main.go">
 							<div class="focus-input1 trans-04"></div>
 						</div>
 						<div class="p-t-18">
