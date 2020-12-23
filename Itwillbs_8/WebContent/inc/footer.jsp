@@ -46,11 +46,6 @@
 								My Like
 							</a>
 						</li>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								FAQs
-							</a>
-						</li>
 					</ul>
 				</div>
 				<div class="col-sm-6 col-lg-3 p-b-50">
@@ -83,9 +78,6 @@
 							<div class="focus-input1 trans-04"></div>
 						</div>
 						<div class="p-t-18">
-							<button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-								Subscribe
-							</button>
 						</div>
 					</form>
 				</div>

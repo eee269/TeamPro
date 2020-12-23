@@ -208,7 +208,10 @@ public class CommDAO {
 			
 			try {
 				
-				String sql = "SELECT * FROM community WHERE num = ?";
+				String sql = "SELECT c.*, m.username "
+						+ "FROM community c JOIN member m "
+						+ "ON c.member_id = m.id "
+						+ "WHERE num = ?";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, num);
 				rs = ps.executeQuery();
@@ -223,6 +226,7 @@ public class CommDAO {
 					article.setDate(rs.getTimestamp("date"));
 					article.setImg(rs.getString("img"));
 					article.setReadCount(rs.getInt("readcount"));
+					article.setUsername(rs.getString("username"));
 					
 				}
 				
