@@ -25,6 +25,8 @@ public class DeleteMainorderService {
 			rollback(con);
 		}
 		
+		close(con);
+		
 		return isDelete;
 	}
 
