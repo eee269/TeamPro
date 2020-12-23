@@ -20,6 +20,11 @@ public class CommListAction implements Action {
 		
 		ActionForward forward = null;
 		
+		String keyword = request.getParameter("keyword");
+		if(keyword == null) {
+			keyword="";
+		}
+		System.out.println(keyword);
 		// 페이징 처리 위해 변수 선언
 		int page = 1; // 현재 페이지 번호 저장
 		int limit = 10; // 페이지 당 표시할 게시물 수
@@ -35,7 +40,7 @@ public class CommListAction implements Action {
 		
 		// 게시물 page ~ limit 갯수만큼 가져오기
 		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
-		articleList = commListService.getArticleList(page, limit);
+		articleList = commListService.getArticleList(page, limit, keyword);
 		
 		// 페이지 계산 작업
 		// 1. 전체 페이지 계산

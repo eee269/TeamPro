@@ -52,6 +52,7 @@ public class CommReListProAction implements Action {
 		for (int j = 0; j < commentList.size(); j++) {
 			
 			String username = commentList.get(j).getUsername();
+			String mem_id = commentList.get(j).getId();
 			String content = commentList.get(j).getContents();
 			int num = commentList.get(j).getNum();
 			community_num = commentList.get(j).getCommunity_num();
@@ -59,13 +60,16 @@ public class CommReListProAction implements Action {
 			int re_lev = commentList.get(j).getRe_lev();
 			int re_ref = commentList.get(j).getRe_ref();
 			String img = commentList.get(j).getImg();
+			String del = commentList.get(j).getDel();
 			
 			if(img == null) {
 				img = ""; // javascipt 에서 null 로 인식 시키기 위해 초기화
 			}
 			
 				
-			json += "[{\"username\":\""+username+"\"},";
+			json += "[{\"del\":\""+del+"\"},";
+			json += "{\"mem_id\":\"" + mem_id + "\"},";
+			json += "{\"username\":\"" + username + "\"},";
 			json += "{\"date\":\"" + date + "\"},";
 			json += "{\"content\":\"" + content + "\"},";
 			json += "{\"img\":\"" + img + "\"},";
