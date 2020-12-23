@@ -54,6 +54,10 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="css/util.css">
 <link rel="stylesheet" type="text/css" href="css/main.css">
+<link rel="stylesheet" type="text/css" href="css/header.css">
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/shopbrand.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_2.css" />
 <!--===============================================================================================-->
 
 <style>
@@ -147,9 +151,9 @@
 			<div class="wrap-menu-desktop how-shadow1">
 				<nav class="limiter-menu-desktop container">
 					<!-- Logo desktop -->
-					<a href="Main.go" class="logo"> <img
-						src="images/icons/logo-01.png" alt="IMG-LOGO">
-					</a>
+				<div class="main">
+				  <span><a href="Main.go">#OOTD</a></span>
+				</div>
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
 						<ul class="main-menu">

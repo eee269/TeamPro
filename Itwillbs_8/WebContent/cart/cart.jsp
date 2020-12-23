@@ -44,6 +44,11 @@ int cntSet = 0;
 	background-color: white;
 }
 
+#form {
+margin-left: 4%;
+margin-right: 4%;
+}
+
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
@@ -65,7 +70,7 @@ int cntSet = 0;
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> <span class="stext-109 cl4"> Shoping Cart </span>
 	</div>
@@ -87,7 +92,7 @@ int cntSet = 0;
 			</dd>
 		</dl>
 
-		<form action="CartDelete.ca" method="post" name="cartForm">
+		<form action="CartDelete.ca" method="post" name="cartForm" id="form">
 			<h2 class="tit-page">장바구니</h2>
 			<div class="page-body">
 				<div class="table-cart table-fill-prd">
@@ -286,7 +291,8 @@ int cntSet = 0;
 //----------------------------------tr 체크박스 선택 , 해제  및   tr 체크박스 선택시 총금액 계산-------------------------------------------------------------------
 // 체크박스 선택 전 전체선택 div 숨기기
 $('#whiteBu').hide();
-	
+$('.CSSbuttonBlack').hide()
+
 $("#allCheck").click(function(){
 	  // 전체 선택
       if($("#allCheck").prop("checked")){	// 맨위 체크박스가 체크되면  
@@ -445,10 +451,12 @@ $("#allCheck").click(function(){
 			// 체크선택이 안되면 삭제div 숨기고 , 체크박스가 1개 이상 체크 되면 삭제div 보이기 
 			//  tr 선택도 포함
 			var chLe = $(".checkSelect:checked").length;	// 체크된 체크박스 길이
-			if(chLe == 0){
-				$('#whiteBu').hide();	// 체크박스가 선택이 안됐을때 숨기기 
-			} else if(chLe >= 1){
-				$('#whiteBu').show(); // 체크박스가 선택이 됐을때 보이기 
+			if(chLe == 0){	// 체크박스가 선택이 안됐을때 숨기기 
+				$('#whiteBu').hide();
+				$('.CSSbuttonBlack').hide()
+			} else if(chLe >= 1){	// 체크박스가 선택이 됐을때 보이기 
+				$('#whiteBu').show(); 
+				$('.CSSbuttonBlack').show()
 			}
 			
 			});
@@ -490,6 +498,7 @@ $("#allCheck").click(function(){
 		// 주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수
 		  function multi_order(){
 		     $(".CSSbuttonBlack").click(function(){ 
+		    
 		        document.cartForm.setAttribute("action","Order.or");
 		         document.cartForm.submit();
 		   });

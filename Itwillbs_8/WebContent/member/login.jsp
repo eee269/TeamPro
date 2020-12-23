@@ -453,7 +453,7 @@ margin-left:0px;}
 		} else {
 			window.name="parentForm";
 			window.open("dupCheckForm.mo",
-					"chkForm", "width=500, height=300, resizable = no, scrollbars = no");
+					"chkForm", "width=500, height=380, resizable = no, scrollbars = no");
 			
 		}
 	}

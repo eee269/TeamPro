@@ -10,23 +10,18 @@
 					</h4>
 					<ul>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Women
+							<a href="ProductShop.po?type=X&xcode=CLOTHES" class="stext-107 cl7 hov-cl1 trans-04">
+								CLOTHES
 							</a>
 						</li>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Men
+							<a href="ProductShop.po?type=X&xcode=BAGS" class="stext-107 cl7 hov-cl1 trans-04">
+								BAGS
 							</a>
 						</li>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shoes
-							</a>
-						</li>
-						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Watches
+							<a href="ProductShop.po?type=X&xcode=SHOES" class="stext-107 cl7 hov-cl1 trans-04">
+								SHOES
 							</a>
 						</li>
 					</ul>
@@ -37,18 +32,18 @@
 					</h4>
 					<ul>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Track Order
+							<a href="MemberMypage.mo" class="stext-107 cl7 hov-cl1 trans-04">
+								My Page
 							</a>
 						</li>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Returns 
+							<a href="MyOrderList.or" class="stext-107 cl7 hov-cl1 trans-04">
+								My Order
 							</a>
 						</li>
 						<li class="p-b-10">
-							<a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-								Shipping
+							<a href="ProductMylikeList.po" class="stext-107 cl7 hov-cl1 trans-04">
+								My Like
 							</a>
 						</li>
 						<li class="p-b-10">
@@ -63,7 +58,7 @@
 						GET IN TOUCH
 					</h4>
 					<p class="stext-107 cl7 size-201">
-						Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on (+1) 96 716 6879
+						Any questions? Let us know in store at 7th floor,Samhan Golden Gate in Dongcheon-ro, Busanjin-gu 109 , or call us on  051-803-0909
 					</p>
 					<div class="p-t-27">
 						<a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
