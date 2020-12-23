@@ -34,22 +34,22 @@
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Community
+						최신순
 					</button>
 
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Daily
+						추천순
 					</button>
 
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10" >
-					<a href="CommWriteForm.co" id="commWrite">
+					<div id="commWrite">
 						<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 							글쓰기
 						</div>
-					</a>
+					</div>
 
 					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -97,6 +97,7 @@
 									<span class="stext-105 cl3">
 										<%=articleList.get(i).getUsername() %>
 									</span>
+									<span class="flex-r"><%=articleList.get(i).getReadCount() %></span>
 								</div>
 	
 								<div class="block2-txt-child2 flex-r p-t-3">
@@ -104,6 +105,8 @@
 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
 									</a>
 									<span class="bookCount<%=articleList.get(i).getNum() %>" style="margin: 0 2px;"><%=articleList.get(i).getBookCount() %></span>
+								</div>
+								<div class="block2-txt-child2 flex-r p-t-3">
 								</div>
 							</div>
 						</div>
@@ -184,6 +187,8 @@
 				}else{
 					location.href='MemberLoginForm.mo';
 				}
+			}else{
+				location.href='CommWriteForm.co';
 			}
 		});
 	});

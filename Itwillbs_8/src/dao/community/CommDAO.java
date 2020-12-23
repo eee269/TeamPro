@@ -59,7 +59,7 @@ public class CommDAO {
 			ps.setString(3, commBean.getSubject());
 			ps.setString(4, commBean.getContent());
 			ps.setInt(5, commBean.getReadCount());
-			ps.setString(7, commBean.getImg());
+			ps.setString(6, commBean.getImg());
 			insertCount = ps.executeUpdate();
 			
 		} catch (Exception e) {
