@@ -129,9 +129,9 @@ font-weight: bold !important;
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Community
+		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
 	</div>
@@ -207,13 +207,13 @@ font-weight: bold !important;
 							<div class="flex-w flex-c-m m-tb-10 float-r" >
 					<%if(id!=null){
 						if(id.equals(article.getMember_id())){ %>
-								<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+								<a href="CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									삭제
 									</div>
 								</a>
-								<a href="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+								<a href="CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									수정
@@ -221,7 +221,7 @@ font-weight: bold !important;
 								</a>
 					<%	}
 					}%>
-								<a href="location.href='CommList.co?page=<%=nowPage%>'">
+								<a href="CommList.co?page=<%=nowPage %>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									글목록
@@ -318,45 +318,45 @@ font-weight: bold !important;
 					</div>
 					<div class="col-md-4 col-lg-3 p-b-80">
 					<div class="side-menu">
-						<div>
-							<h4 class="mtext-112 cl2 p-b-33">
-								Categories
-							</h4>
+<!-- 						<div> -->
+<!-- 							<h4 class="mtext-112 cl2 p-b-33"> -->
+<!-- 								Categories -->
+<!-- 							</h4> -->
 
-							<ul>
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
-									</a>
-								</li>
+<!-- 							<ul> -->
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Fashion -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Beauty -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Street Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Life Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
-							</ul>
-						</div>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										DIY & Crafts -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
 
-						<div class="p-t-65">
+						<div class="size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
 								베스트 게시물
 							</h4>
@@ -381,7 +381,7 @@ font-weight: bold !important;
 								<%} %>
 							</ul>
 						</div>
-						<div class="p-t-65">
+						<div class="p-t-65 size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
 								베스트 상품
 							</h4>

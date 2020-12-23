@@ -59,7 +59,7 @@ public class CartDAO extends Exception {
 			cart.setMember_id(rs.getString("member_id"));
 			cart.setProduct_basicCode(rs.getString("product_basicCode"));
 			cart.setOpt_productCode(rs.getString("opt_productCode"));
-			cart.setMain_img(rs.getString("main_img"));
+//			cart.setMain_img(rs.getString("main_img"));
 
 			CartList.add(cart);
 			

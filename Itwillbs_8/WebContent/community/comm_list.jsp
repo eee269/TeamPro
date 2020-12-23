@@ -7,10 +7,8 @@
 	pageEncoding="UTF-8"%>
 	
 <%
-	// test
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 	String member_id = (String)session.getAttribute("member_id");
-
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
@@ -35,11 +33,15 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="javascript:commSort('new');">
 						최신순
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('readcount');">
+						조회순
+					</button>
+					
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('bookmark');">
 						추천순
 					</button>
 
@@ -82,7 +84,7 @@
 						<div class="block2">
 							<div class="block2-pic hov-img0">
 								<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
-									<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
+									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
 									<div class="flex-col-c-m size-123 bg9 how-pos5">
 										<span class="ltext-107 cl2 txt-center"> <%=sdfD.format(articleList.get(i).getDate()) %> </span> 
 										<span class="stext-109 cl3 txt-center"> <%=sdfYM.format(articleList.get(i).getDate()) %></span>
@@ -119,19 +121,19 @@
 			<%if(nowPage <= 1) {%>
 					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt; <!-- '<' 의 코드--></a>
 				<%}else {%>
-					<a href="location.href='CommList.bo?page=<%=nowPage - 1 %>'" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt;</a>
+					<a href="location.href='CommList.co?page=<%=nowPage - 1 %>'" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt;</a>
 				<%} %>
 				<%for(int i = startPage; i <= endPage; i++) { 
 					if(i == nowPage) { %>
 						<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><%=i %></a>
 					<%}else { %>
-						<a href="CommList.bo?page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2"><%=i %></a>
+						<a href="CommList.co?page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2"><%=i %></a>
 					<%} %>
 				<%} %>
 				<%if(nowPage >= maxPage) { %>
 					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt; <!-- '>' 의 코드 --></a>
 				<%}else { %>
-					<a href="location.href='CommList.bo?page=<%=nowPage + 1 %>'" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt;</a>
+					<a href="location.href='CommList.co?page=<%=nowPage + 1 %>'" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt;</a>
 				<%}%>
 			<!-- Pagination -->
 			</div>
@@ -199,6 +201,11 @@
 		$('#fr').submit();
 		window.location = window.location.pathname;
 	}
+	// 게시글 정렬
+	function commSort(sort){
+		location.href="CommList.co?sort="+sort;
+	}
+	
 </script>
 </body>
 </html>
