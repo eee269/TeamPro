@@ -45,6 +45,8 @@ public class AddrBookService {
 			rollback(con);
 		}
 		
+		close(con);
+		
 		return isRegistSuccess;
 	}
 
@@ -66,6 +68,8 @@ public class AddrBookService {
 		}else {
 			rollback(con);
 		}
+		
+		close(con);
 		
 		return isRemoveSuccess;
 	}

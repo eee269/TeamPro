@@ -41,90 +41,11 @@ $(document).ready(function() {
 
 <link type="text/css" rel="stylesheet" href="css/common.css" />
 <link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
-<style>
-.rerelist {
-	background-color: #e9e9e9;
-	padding: 15px !important;
-	margin-top: 10px !important;
-	margin-left: 30px !important;
-	border-radius: 15px;
-}
 
-.desc_re {
-	/* position: absolute; */
-	width: 160px;
-	float: right;
-}
-
-.content_re {
-	/* clear: both; */
-	overflow: hidden;
-	/* margin: 0px 220px 0 0; */
-	color: #89888e;
-	line-height: 1.5;
-	word-wrap: break-word;
-	/*     min-height: 75px; */
-	float: left;
-	width: 400px;
-}
-
-.desc_re dt:first-child {
-	border-top: 0;
-}
-
-.desc_re dt {
-	padding: 0px 0 0 5px;
-	color: #a8a8a8;
-	border-top: 1px solid #dadada;
-}
-
-.desc_re dd {
-	padding: 0 0 5px 5px !important;
-	color: #000;
-}
-
-/*대댓글*/
-#re_wrt {
-	display: none;
-	margin-top: 10px;
-}
-
-#re_wrt.on {
-	display: block;
-}
-
-#re_wrt #rere_contents {
-	margin-left: 12px;
-}
-
-#re_wrt .btn_comment {
-	/*     position: absolute; */
-	/*     top: 0; */
-	/*     right: 0; */
-	/*     height: 72px; */
-	line-height: 50px;
-	padding: 0 45px;
-	background: #f3f3f3;
-	border-left: 1px solid #dadada;
-	color: #818391;
-	font-weight: bold;
-	letter-spacing: -1px; *:;
-	height: 50px;
-}
-
-#powerReview .PR15N01-review-wrap>li .desc dt {
-	padding-top: 5px;
-}
-
-ul.arraymodeTab>.active a{
-font-weight: bold !important;
-}
-</style>
 
 <!-- breadcrumb -->
 <div class="container">
@@ -254,7 +175,7 @@ font-weight: bold !important;
 
 														<div class="pr-txtbox">
 															<textarea
-																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+																class="size-110 bor8 stext-102 cl2 p-tb-10"
 																id="reply_contents" name="reply_contents"></textarea>
 															<div class="thumb-wrap"></div>
 														</div>
@@ -268,11 +189,11 @@ font-weight: bold !important;
 															<%
 																if (id != null) {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write">
+																class="review_btn review_write">
 															<%
 																} else {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write"
+																class="review_btn"
 																onclick="return loginCheck()">
 															<%
 																}
@@ -479,41 +400,57 @@ $(function(){
 	                    var coReply = coReplyList[i][j];
 	                    
 	                    if(j == 0){
-	                    	var core_username = coReply.username;
-	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'><dt class='first'>작성자</dt><dd>"+core_username+"</dd>";
+	                    	var core_del = coReply.del;
 	                    }else if(j == 1){
-	                    	output += "<dt>작성일</dt><dd>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
-								
+	                    	var core_mem_id = coReply.mem_id;
 	                    }else if(j == 2){
-	                    	var core_content = coReply.content;
-	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-	                  
+	                    	var core_username = coReply.username;
+	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'>"	                    		                    	
+	                    		if(core_del == "N"){
+		                    		output += "<dt class='first'>작성자</dt><dd class='re_name'>"+core_mem_id+"</dd>";
+			                    }else{
+			                    	output += "<dt class='first'>작성자</dt><dd class='re_name'><span class='del'>-</span></dd>"
+		 	                    }  				
 	                    }else if(j == 3){
+	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";	
+	                    }else if(j == 4){
+	                    	var core_content = coReply.content;
+// 	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
+
+	                    	if(core_del == "N"){
+	                    		output += "<div class='content'><p class='content_p'>"+coReply.content;
+		                    }else{
+		                    	output += "<div class='content'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span>"
+	 	                    }
+	                    }else if(j == 5){
 	                    	var img = coReply.img;
 	                    	if(img != ""){
 	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
 	                    	}
 	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
-	                    }else if(j == 4){	
+	                    }else if(j == 6){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 5){		
+	                    }else if(j == 7){		
 	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
 	                    	output += "<div id='replyCount'></div>";
 	                    	
 	                    	output += "<input type='button' value='답댓글 열기' class='bu_gray_p recomment_load on'> ";
 	                    	output += "<input type='button' value='답댓글 닫기' class='bu_gray_p recomment_close'> ";
-	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";
-	                    	
-	                    	if(core_username != "<span class='del'>-</span>"){
-	                    	output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
-	                    	}
-	                    	
-	                    	if(core_username == id){
-	                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
-	                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
-	                    	}
-	                    	
+	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";                    	
+                    		if(core_del == "N"){
+                    			if(id != "null"){
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
+                    			}else{
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s' onclick='return loginCheck()'>";
+                    			}
+		                    }                 		
+                    		if(core_del == "N"){
+		                    	if(core_username == id){
+		                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
+		                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
+		                    	}
+                    		}                  		
 	                    	output += "<div id='obj' class='obj reply-wrap'>";
 	                    	output += "<form name='comment' id='comment' action='CommReModifyPro.co' method='post' style='margin-top:0px !important; padding-top:0px !important;'>";
 	                    	output += "	<input type='hidden' id='username' name='username' value='"+core_username+"'>";
@@ -536,13 +473,11 @@ $(function(){
 	                    	output += "		<input type='button' value='입력' class='btn_comment reReWrite'>";
 	                    	output += "	</div>";
 	                    	output += "</form>	";	
-	                    	output += "</div><div id='replyList'></div></li>";
-	                    	
-	                    } //if문	                    
-	        		};//for문  	        		
+	                    	output += "</div><div id='replyList'></div></li>";                    	
+	                    } //if문	                      
+		        		};//for문  	        		
             	};//for문
-            	
-            	
+            	            	
     			var pageInfo = paging(obj.listCount, page, limit);
     			output+="<div class='paging'>";
         					if(page <= 1){
@@ -576,13 +511,12 @@ $(function(){
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
     
 })	
-	
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
 		    $(".review_write").click(function(){
 			    	if($("#reply_contents").val().trim() === ""){
-			    		alert("리뷰를 입력하세요.");
+			    		alert("댓글을 입력하세요.");
 			    		$("#reply_contents").val("").focus();
 			    	}else{
 			            var form = $('#comm_re_form')[0];
@@ -691,26 +625,39 @@ $(function(){
    	                for (var j = 0; j < replyList[i].length; j++) {
     	                    var reply = replyList[i][j];
     	                    if(j == 0){
-    	                    	var reply_contents = reply.contents;
-    	                    	output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	var reply_del = reply.del;
     	                    }else if(j == 1){
-    	                    	var re_name = reply.name;
-    	                    	output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
+    	                    	var reply_contents = reply.contents;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	}else{
+    	                    		output += "<ul class='rerelist'><li class='content_re'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span></li>";
+    	                    	}
+    	                    	
     	                    }else if(j == 2){
+    	                    	var reply_mem_id = reply.mem_id;
+   	                		}else if(j == 3){
+    	                    	var re_name = reply.name;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply_mem_id+"</dd>";
+    	                    	}else{
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd><span class='del'>-</span></dd>";
+    	                    	}
     	                    	
-    	                    	
+    	                    }else if(j == 4){    	    	                    	
     	                    	output += "<dt>작성일 </dt><dd>"+moment(reply.date).format("YY-MM-DD ")+"</dd></dl></li><div style='clear: both;'></div>";
-    	                    }else if(j == 3){
+    	                    }else if(j == 5){
 	    	                   
-    	                    	if(id!=null){
-									if(re_name != id){
-									output += "</ul>"
-	    	                    	}else{
-									
-	    	                    	output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
+    	                    	if(id!="null"){
+									if(reply_del=="Y"){
+										output += "</ul>"
+	    	                    	}else if(id == re_name){			
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
-	    	                    	output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    	output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
+	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    	}else{
+	    	                    		output += "</ul>";
 	    	                    	}
 	    	                    }else{
 									output += "</ul>";   	                    		    	                    	
@@ -751,10 +698,14 @@ $(function(){
  		
  		//==================== 대댓글 쓰기  ====================//
  		$(document).on("click", ".reReWrite", function () {
-//  		$(".reReWrite").click(function(){
-			 	var a = $(this).parents('li').find('#comm_add'); 
-			 	var b = $(this).parents('li'); 
-			 	
+ 			var a = $(this).parents('li').find('#comm_add'); 
+		 	var b = $(this).parents('li'); 
+ 			
+		 	if(a.find("#contents").val() == ""){
+	    		alert("대댓글을 입력하세요.");
+	    		a.find("#contents").focus();
+	    	}else{
+	    		
 			 	var username = a.find('#username').val();
 				var community_num = a.find('#community_num').val();
 				var num = a.find('#num').val();
@@ -774,7 +725,8 @@ $(function(){
 	    			error: function(request,status,error){
 	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	    		       }
-	    		})	    	
+	    		})
+	    	}	
 	    }) 		
  		
 	     		
@@ -929,7 +881,6 @@ $(function(){
 	});	
 		
 </script>
-
 
 
 <script>

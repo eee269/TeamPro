@@ -153,7 +153,8 @@ var productCode = "";
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
+      var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
+      "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
       // productCode, id="productCode숫자"
           "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
       // 옵션 이름, ( BK/M )
@@ -319,10 +320,10 @@ var productCode = "";
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name="size" value="">
-							<input type="hidden" name="color" value="">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="0">
+<!-- 							<input type="hidden" name="size" value=""> -->
+<!-- 							<input type="hidden" name="color" value=""> -->
+<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
+<!-- 							<input type="hidden" name="cnt" value="0"> -->
 							
 
                   </div>

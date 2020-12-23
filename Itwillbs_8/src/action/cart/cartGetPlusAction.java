@@ -28,7 +28,7 @@ public class cartGetPlusAction implements Action {
 		
 		String member_id = (String) session.getAttribute("member_id"); 	// 아이디
 
-		if (member_id == null) {
+		if (member_id == null) { // 아이디가 없으면
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -36,8 +36,9 @@ public class cartGetPlusAction implements Action {
 			out.println("</script>");
 			forward = new ActionForward();
 			forward.setPath("MemberLoginForm.mo");
-		}
-		
+			
+			
+		} //else { // 아이디가 있으면
 		
 		String product_name = request.getParameter("name");	// 상품이름
 		int price = Integer.parseInt(request.getParameter("price"));  //가격
@@ -55,7 +56,8 @@ public class cartGetPlusAction implements Action {
 		
 
 		
-		String[] product_basicCode = request.getParameterValues("basicCode");  // basicCode코드
+		String product_basicCode = request.getParameter("basicCode");  // basicCode코드
+		product_basicCode =  String.format("%04d", Integer.parseInt(product_basicCode))+"";
 		String[] opt_productCode = new String[length];
 		String[] s_cnt = request.getParameterValues("num-product");
 		
@@ -66,23 +68,22 @@ public class cartGetPlusAction implements Action {
 		for(int i=0; i<length; i++) {
 			color[i] = color[i].trim(); 	// 색 공백제거
 			size[i] = size[i].trim();  	// 사이즈 공백제거
-			opt_productCode[i] = product_basicCode[i].toString() + color[i].toString() + size[i].toString();  // productCode코드
+			opt_productCode[i] = product_basicCode + color[i].toString() + size[i].toString();  // productCode코드
 			opt_productCode[i] =  opt_productCode[i].replace(" ", ""); 	// productCode코드 공백제거
 			cnt[i] = Integer.parseInt(s_cnt[i]);
 			
 			System.out.println("color[i]" + color[i] + "\nsize[i] " + size[i] + "\nopt_productCode[i] " + opt_productCode[i] + "\ncnt[i] " + cnt[i]);
 			
 			 ca = new Cart();
-			 ca.setCnt(cnt[i] + ca.getCnt());
-			 ca.setProduct_name(product_name);
-			 ca.setPrice(price);
-			 ca.setColor(color[i].toString());
-			 ca.setSize(size[i]);
+			 System.out.println("ca.getCnt() : " + ca.getCnt());
 			 ca.setMember_id(member_id);
-			 ca.setProduct_basicCode(product_basicCode[i]);
+			 ca.setColor(color[i].toString());
 			 ca.setOpt_productCode(opt_productCode[i].toString());
-			 ca.setMain_img(main_img);
-			 
+			 ca.setPrice(price);
+			 ca.setProduct_name(product_name);
+			 ca.setSize(size[i]);
+			 ca.setProduct_basicCode(product_basicCode);
+			 ca.setCnt(cnt[i] + ca.getCnt());
 			// 			cartUpAction -> CartPlusService -> CartDAO.cartPlus
 			//--------------------------------수정하기--------------------------------------
 			 System.out.println("---------------------------------");
@@ -117,6 +118,7 @@ public class cartGetPlusAction implements Action {
 		
 		
 		return forward;
-	}
+		}
+//	}
 
 }

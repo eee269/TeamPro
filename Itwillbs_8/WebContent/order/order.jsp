@@ -266,7 +266,7 @@ function regist_defaultAddr(test) {
 		 <div class="thumb">
 		<a href=""><img
 		src="<%=cartList.get(i).getMain_img()%>"
-		alt="상품 섬네일" title="상품 섬네일" width="1"></a>
+		alt="상품 섬네일" title="상품 섬네일" width="1" onerror="this.style.display='none'"></a>
 		</div>
 		</div></td>
 		

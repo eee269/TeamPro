@@ -1,6 +1,6 @@
 <%@page import="javax.websocket.Session"%>
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
@@ -11,96 +11,138 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>»óÇ°¾÷·Îµå</title>
+<meta charset="utf-8">
+<title>ìƒí’ˆì—…ë¡œë“œ</title>
 <%
-// ¼¼¼Ç ÆÇº°
-
+// ì„¸ì…˜ íŒë³„
+	String member_id = (String)session.getAttribute("member_id");
+	if(member_id == null) {
+		%>
+		<script>
+			alert("ë¡œê·¸ì¸ì´ í•„ìš”í•©ë‹ˆë‹¤.");
+			location.href="MemberLoginForm.mo";
+		</script>
+		<%
+	} else if(!member_id.equals("admin")) {
+		%>
+		<script>
+			alert("ì ‘ê·¼ ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤.");
+			location.href="MemberLoginForm.mo";
+		</script>
+		<%
+	}
 
 %>
 <script type="text/javascript">
 
-// 1. ´ëºĞ·ù ¼±ÅÃ½Ã ¼ÒºĞ·ù visibility
+// 1. ëŒ€ë¶„ë¥˜ ì„ íƒì‹œ ì†Œë¶„ë¥˜ visibility
 
 function ncode(val) {
-	if(val == "CLOTHES") {
-		// ¼ÒºĞ·ù radio º¸¿©ÁÖ±â / °¨Ãß±â
-		$('div#clothncode').css('visibility', 'visible');
-		$('div#bagncode').css('visibility', 'hidden');
-		$('div#shoencode').css('visibility', 'hidden');
+	switch(val) {
+	case "CLOTHES":
+		// ì†Œë¶„ë¥˜ radio ë³´ì—¬ì£¼ê¸° / ê°ì¶”ê¸°
+		$('div#clothncode').css('display', 'inline');
+		$('div#bagncode').css('display', 'none');
+		$('div#shoencode').css('display', 'none');
+		break;
+	case "BAGS":
+		// ì†Œë¶„ë¥˜ radio ë³´ì—¬ì£¼ê¸° / ê°ì¶”ê¸°
+		$('div#clothncode').css('display', 'none');
+		$('div#bagncode').css('display', 'inline');
+		$('div#shoencode').css('display', 'none');
+		break;
+	default:
+		// ì†Œë¶„ë¥˜ radio ë³´ì—¬ì£¼ê¸° / ê°ì¶”ê¸°
+		$('div#clothncode').css('display', 'none');
+		$('div#bagncode').css('display', 'none');
+		$('div#shoencode').css('display', 'inline');
 		
-		// º¸¿©Áö´Â ¼ÒºĞ·ù radio ÇÊ¼öÇ×¸ñ ¼³Á¤
-		$('input:radio[name=clothes]').attr('required', true);
-		$('input:radio[name=bags]').attr('required', false);
-		$('input:radio[name=shoes]').attr('required', false);
-		
-		// Ç×¸ñº° »çÀÌÁî º¸¿©ÁÖ±â / °¨Ãß±â
-		$('div#clothsize').css('visibility', 'visible');
-		$('div#bagsize').css('visibility', 'hidden');
-		$('div#shoesize').css('visibility', 'hidden');
-		
-		// Ã¼Å©µÈ Ç×¸ñ ÃÊ±âÈ­
-		$('input[type=checkbox]').prop('checked',false);
-	} else if(val == "BAGS") {
-		$('div#clothncode').css('visibility', 'hidden');
-		$('div#bagncode').css('visibility', 'visible');
-		$('div#shoencode').css('visibility', 'hidden');
-		
-		// º¸¿©Áö´Â ¼ÒºĞ·ù radio ÇÊ¼öÇ×¸ñ ¼³Á¤
-		$('input:radio[name=clothes]').attr('required', false);
-		$('input:radio[name=bags]').attr('required', true);
-		$('input:radio[name=shoes]').attr('required', false);
-		
-		$('div#clothsize').css('visibility', 'hidden');
-		$('div#bagsize').css('visibility', 'visible');
-		$('div#shoesize').css('visibility', 'hidden');
-		
-		$('input[type=checkbox]').prop('checked',false);
-	} else if(val == "SHOES") {
-		$('div#clothncode').css('visibility', 'hidden');
-		$('div#bagncode').css('visibility', 'hidden');
-		$('div#shoencode').css('visibility', 'visible');
-		
-		// º¸¿©Áö´Â ¼ÒºĞ·ù radio ÇÊ¼öÇ×¸ñ ¼³Á¤
-		$('input:radio[name=clothes]').attr('required', false);
-		$('input:radio[name=bags]').attr('required', false);
-		$('input:radio[name=shoes]').attr('required', true);
-		
-		$('div#clothsize').css('visibility', 'hidden');
-		$('div#bagsize').css('visibility', 'hidden');
-		$('div#shoesize').css('visibility', 'visible');
-		
-		$('input[type=checkbox]').prop('checked',false);
 	}
-	
 }
+
+// ì†Œë¶„ë¥˜ ì„ íƒì‹œ ìƒ‰ìƒ, ì‚¬ì´ì¦ˆ checkbox ë‚˜íƒ€ë‚´ê¸°
+function radio() {
+	$('div#radioColor').css('display', 'inline');
+	
+	var val = $('input:radio[name=xcode]:checked').val();
+	switch(val) {
+		case "CLOTHES":
+			$('div#clothsize').css('display', 'inline');
+			$('div#bagsize').css('display', 'none');
+			$('div#shoesize').css('display', 'none');
+			break;
+		case "BAGS":
+			$('div#clothsize').css('display', 'none');
+			$('div#bagsize').css('display', 'inline');
+			$('div#shoesize').css('display', 'none');
+			break;
+		case "SHOES":
+			$('div#clothsize').css('display', 'none');
+			$('div#bagsize').css('display', 'none');
+			$('div#shoesize').css('display', 'inline');
+			break;
+		default:
+			$('div#clothsize').css('display', 'none');
+			$('div#bagsize').css('display', 'none');
+			$('div#shoesize').css('display', 'none');
+	}
+}
+
+
+var color = [];
+var size = [];
+
 $(function() {
-	$('input:checkbox[name=goods_color]').click(function() {
-		var color = this.value;
-		$('input:checkbox[name=goods_size]').click(function() {
-			var size = this.value;
-			$('div#goods_stock').append("<span>" + color + "/" + size + "</span>&nbsp;&nbsp;&nbsp;" + 
-					"<input type='text' name='" +  color + "/" + size + "' id='" +  color + "/" + size + "' "+
-						"style='border-bottom: 0.3px solid lightgray; width: 100px'  required='required'><br>");
-		});
-	});	
+	// ì˜µì…˜ ì„ íƒ ì™„ë£Œ ë²„íŠ¼ í´ë¦­ ì‹œ ìˆ˜ëŸ‰ ë‚˜íƒ€ë‚´ê¸°
+	$('.optbtn').click(function() {
+		var colorcnt = $('input:checkbox[name=goods_color]:checked').length;
+		var sizecnt = $('input:checkbox[name=goods_size]:checked').length;
+		alert(colorcnt + ", " + sizecnt);
+		
+		if(colorcnt != 0 && sizecnt != 0) {
+			$('input:checkbox[name=goods_color]:checked').each(function() {
+				color.push($(this).val());
+			})
+			
+			$('input:checkbox[name=goods_size]:checked').each(function() {
+				size.push($(this).val());
+			})
+			
+			
+			// ì›ë˜ ë‹¬ë ¤ ìˆëŠ” ìˆ˜ëŸ‰ ì…ë ¥ì°½ ì—†ì• ê¸°
+			$('div#goods_stock *').remove();
+			
+			// ì„ íƒí•œ ì˜µì…˜ì˜ ìˆ˜ëŸ‰ ì…ë ¥ì°½ ë„£ê¸°
+			for(var i=0; i<colorcnt; i++) {
+				for(var j=0; j<sizecnt; j++) {
+					$('div#goods_stock').append(
+							"<span>" + color[i] + "/" + size[j] + "</span>&nbsp;&nbsp;&nbsp;" + 
+							"<input type='text' name='" +  color[i] + "/" + size[j] + "' id='" +  color[i] + "/" + size[j] + "' "+
+							"style='border-bottom: 0.3px solid lightgray; width: 100px'  required='required'><br>");
+				}
+			}
+		} else if(colorcnt == 0) {
+			alert("ìƒ‰ìƒì„ ì„ íƒí•˜ì„¸ìš”");
+			return ;
+		} else if(sizecnt == 0){
+			alert("ì‚¬ì´ì¦ˆë¥¼ ì„ íƒí•˜ì„¸ìš”");
+			return ;
+		}
+		
+	});
+	
 })
 
-
-
-// checkbox ¼±ÅÃÇÑ °ª ³Ñ°ÜÁÖ±â
+// checkbox ì„ íƒí•œ ê°’ ë„˜ê²¨ì£¼ê¸°
 function checkboxswift() {
-	var colorLength = $('input:checkbox[name=goods_color]:checked').length;
-	var sizeLength = $('input:checkbox[name=goods_size]:checked').length;
-	
-	if(colorLength == 0) {
-		alert("»ö»óÀ» ¼±ÅÃÇÏ¼¼¿ä");
-		return ;
-	} else if(sizeLength == 0){
-		alert("»çÀÌÁî¸¦ ¼±ÅÃÇÏ¼¼¿ä");
-		return ;
+	for(var i=0; i<colorcnt; i++) {
+		for(var j=0; j<sizecnt; j++) {
+			console.log($('input#' + color[i] + '/' + size[j] + ']').val());
+			if($('input#' + color[i] + '/' + size[j] + ']').val() == null) {
+				$('input#' + color[i] + '/' + size[j] + ']').remove();
+			}
+		}
 	}
-	
 	
 	$('#productUpload').submit();
 }
@@ -116,27 +158,27 @@ function checkboxswift() {
 		<table
 			style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
 			<tr>
-				<th>½æ³×ÀÏ ÀÌ¹ÌÁö</th>
-				<th colspan="2">»óÇ° ¼¼ºÎ»çÇ×</th>
+				<th>ì¸ë„¤ì¼ ì´ë¯¸ì§€</th>
+				<th colspan="2">ìƒí’ˆ ì„¸ë¶€ì‚¬í•­</th>
 			</tr>
 			<tr>
 				<td><input type="file" name="mfile1" id="mfile1"
 					style="padding: 10px 25px;" required="required"></td>
-				<td><b>»óÇ°ÀÌ¸§</b></td>
+				<td><b>ìƒí’ˆì´ë¦„</b></td>
 				<td><input type="text" id="goods_name" name="goods_name"
 					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
 				<td><input type="file" name="mfile2" id="mfile2"
 					style="padding: 10px 25px;"></td>
-				<td><b>°¡ °İ</b></td>
+				<td><b>ê°€ ê²©</b></td>
 				<td><input type="text" id="goods_price" name="goods_price"
 					style="border-bottom: 0.3px solid lightgray; width: 400px" required="required"></td>
 			</tr>
 			<tr>
 				<td><input type="file" name="mfile3" id="mfile3"
 					style="padding: 10px 25px;"></td>
-				<td><b>´ëºĞ·ù</b></td>
+				<td><b>ëŒ€ë¶„ë¥˜</b></td>
 				<td>
 					<input type="radio" name="xcode" value="CLOTHES" style="width: 100px" onchange="ncode(this.value)" required="required"><span>Clothes</span>
 					<input type="radio" name="xcode" value="BAGS" style="width: 100px" onchange="ncode(this.value)"><span>Bags</span>
@@ -144,83 +186,85 @@ function checkboxswift() {
 				</td>
 			</tr>
 			<tr>
-				<th>¼¼ºÎ ¼³¸í ÀÌ¹ÌÁö</th>
-				<td><b>¼ÒºĞ·ù</b></td>
+				<th>ì„¸ë¶€ ì„¤ëª… ì´ë¯¸ì§€</th>
+				<td><b>ì†Œë¶„ë¥˜</b></td>
 				<td>
-					<div id="clothncode" style="visibility: hidden; padding: 5px">
-						<input type="radio" name="clothes" value="TOP" style="width:80px"> <span>Top</span>
-						<input type="radio" name="clothes" value="BOTTOM" style="width:80px"> <span>Bottom</span>
-						<input type="radio" name="clothes" value="DRESS" style="width:80px"> <span>Dress</span>
-						<input type="radio" name="clothes" value="OUTER" style="width:80px"> <span>Outer</span>
+					<div id="clothncode" style="display: none; padding: 5px">
+						<input type="radio" name="clothes" value="TOP" style="width:80px" onchange="radio()"> <span>Top</span>
+						<input type="radio" name="clothes" value="BOTTOM" style="width:80px" onchange="radio()"> <span>Bottom</span>
+						<input type="radio" name="clothes" value="DRESS" style="width:80px" onchange="radio()"> <span>Dress</span>
+						<input type="radio" name="clothes" value="OUTER" style="width:80px" onchange="radio()"> <span>Outer</span>
 					</div>
-					<div id="bagncode" style="visibility: hidden; padding: 5px">
-						<input type="radio" name="bag" value="CROSS" style="width:80px"> <span>Cross</span>
-						<input type="radio" name="bag" value="BUCKET" style="width:80px"> <span>Bucket</span>
-						<input type="radio" name="bag" value="SHOULDER" style="width:80px"> <span>Shoulder</span>
-						<input type="radio" name="bag" value="TOTE" style="width:80px"> <span>Tote</span><br>
-						<input type="radio" name="bag" value="CLUTCH" style="width:80px"> <span>Clutch</span>
-						<input type="radio" name="bag" value="SHOPPER" style="width:80px"> <span>Shopper</span>
-						<input type="radio" name="bag" value="BACKPACK" style="width:80px"> <span>Backpack</span>
+					<div id="bagncode" style="display: none; padding: 5px">
+						<input type="radio" name="bag" value="CROSS" style="width:80px" onchange="radio()"> <span>Cross</span>
+						<input type="radio" name="bag" value="BUCKET" style="width:80px" onchange="radio()"> <span>Bucket</span>
+						<input type="radio" name="bag" value="SHOULDER" style="width:80px" onchange="radio()"> <span>Shoulder</span>
+						<input type="radio" name="bag" value="TOTE" style="width:80px" onchange="radio()"> <span>Tote</span><br>
+						<input type="radio" name="bag" value="CLUTCH" style="width:80px" onchange="radio()"> <span>Clutch</span>
+						<input type="radio" name="bag" value="SHOPPER" style="width:80px" onchange="radio()"> <span>Shopper</span>
+						<input type="radio" name="bag" value="BACKPACK" style="width:80px" onchange="radio()"> <span>Backpack</span>
 					</div>
-					<div id="shoencode" style="visibility: hidden; padding: 5px">
-						<input type="radio" name="shoes" value="SNEAKERS" style="width:100px"> <span>Sneakers</span>
-						<input type="radio" name="shoes" value="BOOTS" style="width:100px"> <span>Boots</span>
-						<input type="radio" name="shoes" value="LOAFERS" style="width:100px"> <span>Loafers</span><br>
-						<input type="radio" name="shoes" value="SANDALS" style="width:100px"> <span>Sandals</span>
-						<input type="radio" name="shoes" value="SLIPPER" style="width:100px"> <span>Slipper</span>
+					<div id="shoencode" style="display: none; padding: 5px">
+						<input type="radio" name="shoes" value="SNEAKERS" style="width:100px" onchange="radio()"> <span>Sneakers</span>
+						<input type="radio" name="shoes" value="BOOTS" style="width:100px" onchange="radio()"> <span>Boots</span>
+						<input type="radio" name="shoes" value="LOAFERS" style="width:100px" onchange="radio()"> <span>Loafers</span><br>
+						<input type="radio" name="shoes" value="SANDALS" style="width:100px" onchange="radio()"> <span>Sandals</span>
+						<input type="radio" name="shoes" value="SLIPPER" style="width:100px" onchange="radio()"> <span>Slipper</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td><input type="file" name="sfile1" id="sfile1" style="padding: 10px 25px;" required="required"></td>
-				<td><b>»ö»ó</b></td>
+				<td><b>ìƒ‰ìƒ</b></td>
 				<td>
-					<input type="checkbox" name="goods_color" value="BK" style="width: 100px"><span>Black</span>
-					<input type="checkbox" name="goods_color" value="WH" style="width: 100px"><span>White</span>
-					<input type="checkbox" name="goods_color" value="GR" style="width: 100px"><span>Gray</span><br>
-					<input type="checkbox" name="goods_color" value="RD" style="width: 100px"><span>Red</span>
-					<input type="checkbox" name="goods_color" value="BL" style="width: 100px"><span>Blue</span>
-					<input type="checkbox" name="goods_color" value="PK" style="width: 100px"><span>Pink</span>
+					<div id="radioColor" style="display: none;">
+						<input type="checkbox" name="goods_color" value="BK" style="width: 100px"><span>Black</span>
+						<input type="checkbox" name="goods_color" value="WH" style="width: 100px"><span>White</span>
+						<input type="checkbox" name="goods_color" value="GR" style="width: 100px"><span>Gray</span><br>
+						<input type="checkbox" name="goods_color" value="RD" style="width: 100px"><span>Red</span>
+						<input type="checkbox" name="goods_color" value="BL" style="width: 100px"><span>Blue</span>
+						<input type="checkbox" name="goods_color" value="PK" style="width: 100px"><span>Pink</span>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<td><input type="file" name="sfile2" id="sfile2"
 					style="padding: 10px 25px;"></td>
-				<td><b>»çÀÌÁî</b></td>
+				<td><b>ì‚¬ì´ì¦ˆ</b></td>
 				<td>
-					<div id="clothsize" style="visibility: hidden">
+					<div id="clothsize" style="display: none">
 						<input type="checkbox" name="goods_size" value="S" style="width: 100px"><span>S</span>
 						<input type="checkbox" name="goods_size" value="M" style="width: 100px"><span>M</span>
 						<input type="checkbox" name="goods_size" value="L" style="width: 100px"><span>L</span>
-						<input type="checkbox" name="goods_size" value="XL" style="width: 100px"><span>XL</span>
+						<input type="checkbox" name="goods_size" value="XL" style="width: 100px"><span>XL</span><br>
+						<input type="button" class="optbtn" value="ì˜µì…˜ ì„ íƒ ì™„ë£Œ">
 					</div>
-					<div id="bagsize" style="visibility: hidden">
-						<input type="checkbox" name="goods_size" value="FR" style="width: 100px"><span>Free</span>
+					<div id="bagsize" style="display: none">
+						<input type="checkbox" name="goods_size" value="FR" style="width: 100px"><span>Free</span><br>
+						<input type="button" class="optbtn" value="ì˜µì…˜ ì„ íƒ ì™„ë£Œ">
 					</div>
-					<div id="shoesize" style="visibility: hidden">
+					<div id="shoesize" style="display: none">
 						<input type="checkbox" name="goods_size" value="230" style="width: 100px"><span>230</span>
 						<input type="checkbox" name="goods_size" value="240" style="width: 100px"><span>240</span>
 						<input type="checkbox" name="goods_size" value="250" style="width: 100px"><span>250</span><br>
 						<input type="checkbox" name="goods_size" value="260" style="width: 100px"><span>260</span>
 						<input type="checkbox" name="goods_size" value="270" style="width: 100px"><span>270</span>
-						<input type="checkbox" name="goods_size" value="280" style="width: 100px"><span>280</span>
+						<input type="checkbox" name="goods_size" value="280" style="width: 100px"><span>280</span><br>
+						<input type="button" class="optbtn" value="ì˜µì…˜ ì„ íƒ ì™„ë£Œ">
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<td><input type="file" name="sfile3" id="sfile3"
 					style="padding: 10px 25px;"></td>
-				<td>»óÇ° ¼ö·®</td>
+				<td>ìƒí’ˆ ìˆ˜ëŸ‰</td>
 				<td>
-				<div id="goods_stock">
-<!-- 				<span>color/size</span> -->
-<!-- 				<input type="text" name="" id="" -->
-<!-- 				style="border-bottom: 0.3px solid lightgray; width: 200px"  required="required"> -->
-				</div>
+					<div id="goods_stock">
+					</div>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3"><input type="submit" value="»óÇ° µî·Ï" style="padding:10px 25px; text-align: right;"></td>
+				<td colspan="3"><input type="submit" value="ìƒí’ˆ ë“±ë¡" style="padding:10px 25px; text-align: right;"></td>
 			</tr>
 		</table>
 			<br>

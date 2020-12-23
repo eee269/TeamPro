@@ -12,39 +12,25 @@ import dao.order.OrderDAO;
 import vo.MemberBean;
 
 import static db.JdbcUtil.*;
-public class CopyDataService implements IntefaceSVC {
+
+public class CopyDataService {
 
 	public ArrayList<JSONArray> CopyData(String member_id) {
 		System.out.println("CopyDataService - CopyData()!");
-//		Connection con = getConnection();
-//		OrderDAO orderDAO = OrderDAO.getInstance();
-//		orderDAO.setConnection(con);
-//		JSONArray mb = orderDAO.getData(member_id);
-//		close(con);
-		ArrayList<JSONArray> mb =  process(member_id);
+		
+		ArrayList<JSONArray> mb = null;
+		
+		Connection con = getConnection();
+		
+		OrderDAO orderDAO = OrderDAO.getInstance();
+		
+		orderDAO.setConnection(con);
+		
+		mb = orderDAO.getData(member_id);
+
+		close(con);
 		
 		return mb;
 	}
 
-	@Override
-	public ArrayList<JSONArray> process(String member_id) {
-		System.out.println("interfaceSVC - process");
-		Connection con = getConnection();
-		OrderDAO orderDAO = OrderDAO.getInstance();
-		orderDAO.setConnection(con);
-		ArrayList<JSONArray> mb = orderDAO.getData(member_id);
-
-		return mb;
-	}
-
 }
-interface IntefaceSVC {
-
-
-	public abstract ArrayList<JSONArray> process(String member_id);
-
-
-} 
-
-
-

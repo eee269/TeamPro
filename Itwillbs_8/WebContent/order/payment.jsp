@@ -12,7 +12,6 @@ String buyer_postcode = request.getParameter("postcode");
 String imp_uid = request.getParameter("imp_uid");
 String merchant_uid = request.getParameter("merchant_uid");
 String status = request.getParameter("status");
-// int num = Integer.parseInt(request.getParameter("num"));
 String[] nums = request.getParameterValues("num");
 int amount = Integer.parseInt(request.getParameter("amount"));
 %>
@@ -84,8 +83,6 @@ $(function(){
 	    $("#buyer_addr").attr('value','<%=buyer_addr%>');
 			$("#paid_amount").attr('value', rsp.paid_amount);
 			$("#status").attr('value', rsp.status);
-			// 	    alert($("#imp_uid").val());
-			// 	    alert($("#paid_amount").val());
 			$(".imp_uid").text($("#imp_uid").val());
 			$(".buyer_name").text($("#buyer_name").val());
 			$(".buyer_tel").text($("#buyer_tel").val());
@@ -94,15 +91,13 @@ $(function(){
 			$(".paid_amount").text($("#paid_amount").val());
 
 			if ($('#status').val() == "paid") {
-				// 			  document.paymentForm.setAttribute("action","OrderPro.or");
-				$('img').attr("src",'order/payment_success.jpg')
+				$('.fail').attr("src",'order/payment_success.jpg')
 				document.paymentForm.submit();
 			} else {
 				$('.page-body').show();
 				$('.paybutton').show();
-				$('img').attr("src",'order/payment_fail.jpg')
-				$('img').show();
-				// 			$('table').hide();
+				$('.fail').attr("src",'order/payment_fail.jpg')
+				$('.fail').show();
 			}
 		});
 	});
@@ -125,7 +120,6 @@ $(function(){
 	}
 	// 버튼 클릭 시 이동하는 경로 지정하는 함수 끝
 </script>
-<body>
 	<div id="contentWrapper">
 		<div id="contentWrap">
 
@@ -143,7 +137,7 @@ $(function(){
 						<fieldset>
 							<legend>주문 결과</legend>
 							<div class="tbl-order">
-								<img alt="" src="" class="fail">
+								<img alt="" src="" class="fail" onerror="this.style.display='none'">
 							</div>
 							<form action="OrderPro.or" method="post" name="paymentForm">
 								<input type="hidden" value="" id="imp_uid" name="imp_uid">
@@ -164,8 +158,8 @@ $(function(){
 								<%}	%>
 								<div id="paybutton">
 									<a class="CSSbuttonWhite" onclick="move(this)" id="goList">내
-										주문 목록 보기</a> &nbsp &nbsp <a class="CSSbuttonWhite"
-										onclick="move(this)" id="goCart">장바구니로 이동</a> &nbsp &nbsp <a
+										주문 목록 보기</a> &nbsp; &nbsp; <a class="CSSbuttonWhite"
+										onclick="move(this)" id="goCart">장바구니로 이동</a> &nbsp; &nbsp; <a
 										class="CSSbuttonWhite" onclick="move(this)" id="goMain">메인으로
 										이동</a>
 								</div>
@@ -178,7 +172,5 @@ $(function(){
 			<!-- #order -->
 		</div>
 		<!-- #content -->
-	</div>
-	<!-- #contentWrap -->
 	</div>
 	<jsp:include page="../inc/footer.jsp" />

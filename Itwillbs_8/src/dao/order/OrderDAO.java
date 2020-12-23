@@ -2,7 +2,6 @@ package dao.order;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +14,6 @@ import vo.OrderBean;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 
 import static db.JdbcUtil.*;
 
@@ -385,7 +383,6 @@ public class OrderDAO {
 
 	public Cart selectCart(int num) {
 		System.out.println("orderDAO - selectCart()!");
-//		ArrayList<Cart> cartList = null;
 		Cart cart = null;
 		
 		PreparedStatement p = null;
@@ -397,7 +394,6 @@ public class OrderDAO {
 			p.setInt(1,num);
 			rs = p.executeQuery();
 			
-//			cartList = new ArrayList<Cart>();
 			cart = new Cart();
 			while(rs.next()) {
 				cart.setNum(rs.getInt(1));
@@ -410,7 +406,6 @@ public class OrderDAO {
 				cart.setProduct_basicCode(rs.getString(8));
 				cart.setOpt_productCode(rs.getString(9));
 
-//				cartList.add(c);
 			}
 			
 			System.out.println("DAO : "+cart.getNum());
@@ -432,7 +427,6 @@ public class OrderDAO {
 			close(p);
 		}
 		
-//		return cartList;
 		return cart;
 	}
 
