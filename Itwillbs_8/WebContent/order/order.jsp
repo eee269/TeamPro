@@ -131,24 +131,29 @@ function Addr(test) {
 	$(document).ready(function(){
 		
 		var addrType = document.getElementById(test.getAttribute('id')).getAttribute('id');
+		var name = $('input[name=place]').val();
+		
 		
 		if(addrType=="defaultAddr"){
 			$.getJSON('DefaultAddr.ad?addrType='+addrType,function(rdata){
 				$.each(rdata, function(index,item){
 					$('#postcode').attr('value',item.postcode),
-					$('#address').attr('value',item.address)
+					$('#address').attr('value',item.address),
+					$('#detailAddress').attr('value',item.detailAddress)
 				});
 			});
 		}else if(addrType == 'recentAddr'){
 			$.getJSON('RecentAddr.ad?addrType='+addrType,function(rdata){
 				$.each(rdata, function(index,item){
 					$('#postcode').attr('value',item.postcode),
-					$('#address').attr('value',item.address)
+					$('#address').attr('value',item.address),
+					$('#detailAddress').attr('value',item.detailAddress)
 				});
 			});
 		}else {
 			$('#postcode').attr('value',""),
 			$('#address').attr('value',"")
+			$('#detailAddress').attr('value',"")
 		
 		}
 			
@@ -164,7 +169,8 @@ function regist_defaultAddr(test) {
 				type:'POST',
 				data:{
 					postcode:$('#postcode').val(),
-					address:$('#address').val()
+					address:$('#address').val(),
+					detailAddress:$('#detailAddress').val()
 				},
 				success:function(data){
 					alert("해당 배송지를 기본 배송지로 설정했습니다.");
@@ -247,15 +253,6 @@ function regist_defaultAddr(test) {
 								<input type="hidden" name="num" id="num" value="<%=cartList.get(i).getNum()%>"> 
 								<input type="hidden" name="amount" id="num" value="<%=total_price%>">
 		<%
-// 		out.println("Order페이지에서"+cartList.get(i).getNum());
-// 		out.println("Order페이지에서"+cartList.get(i).getCnt());
-// 		out.println("Order페이지에서"+cartList.get(i).getProduct_name());
-// 		out.println("Order페이지에서"+cartList.get(i).getPrice());
-// 		out.println("Order페이지에서"+cartList.get(i).getColor());
-// 		out.println("Order페이지에서"+cartList.get(i).getSize());
-// 		out.println("Order페이지에서"+cartList.get(i).getMember_id());
-// 		out.println("Order페이지에서"+cartList.get(i).getProduct_basicCode());
-// 		out.println("Order페이지에서"+cartList.get(i).getOpt_productCode());
 	
 %>
 	<tr>
@@ -408,7 +405,7 @@ function regist_defaultAddr(test) {
 																name="address" id="address" placeholder="주소"
 																class="MS_input_txt w240" /> <input type="text"
 																name="detailAddress" id="detailAddress"
-																placeholder="상세주소" class="MS_input_txt w240" /> <input
+																placeholder="상세주소" class="MS_input_txt w240" />  <input
 																type="text" name="extraAddress" id="extraAddress"
 																placeholder="참고항목" style="display: none;" />
 														</p>
@@ -501,7 +498,7 @@ function regist_defaultAddr(test) {
 											<td>
 												<ul class="pay-method">
 													<li><input type="radio" class="chk-rdo"
-														name="pay_method" value="card" checked="checked">
+														name="pay_method" value="card" checked="checked" >
 														신용카드 <em><span class="op-card-dc-price fc-red"></span></em>
 													</li>
 													<li><input type="radio" class="chk-rdo"
@@ -512,18 +509,18 @@ function regist_defaultAddr(test) {
 														name="pay_method" value="phone">
 														휴대폰소액결제 <em><span class="op-card-dc-price fc-red"></span></em>
 													</li>
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="vbank" checked="checked"> -->
-<!-- 														가상계좌 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="cultureland" checked="checked"> -->
-<!-- 														문화상품권 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
-<!-- 													<li><input type="radio" class="chk-rdo" -->
-<!-- 														name="pay_method" value="booknlife" checked="checked"> -->
-<!-- 														도서문화상품권 <em><span class="op-card-dc-price fc-red"></span></em> -->
-<!-- 													</li> -->
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="vbank" >
+														가상계좌(무통장입금) <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="cultureland" >
+														문화상품권 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
+													<li><input type="radio" class="chk-rdo"
+														name="pay_method" value="booknlife" >
+														도서문화상품권 <em><span class="op-card-dc-price fc-red"></span></em>
+													</li>
 												</ul>
 											</td>
 										</tr>

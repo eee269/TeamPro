@@ -148,14 +148,13 @@ var productCode = "";
       var optcol=document.createElement('li');
       // optcol id 설정 -> 이런모양( <li id="optcol1"> )
       var id = "optcol"+resultcount;
-      optcol.id = id;
+      optcol.id = id; 
 
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-      var html = "<input type='hidden' value='" + productCode + "' id='productCode" + resultcount + "' class='pro' name='cartHd'>" +  
-      // productCode, id="productCode숫자"
-          "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
+    var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
+      "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
       // 옵션 이름, ( BK/M )
           "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
           "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +

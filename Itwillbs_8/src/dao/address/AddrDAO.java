@@ -48,8 +48,9 @@ public class AddrDAO {
 				addr.setLocation(rs.getString(2));
 				addr.setPostcode(rs.getString(3));
 				addr.setAddress(rs.getString(4));
-				addr.setMember_id(rs.getString(5));
-				addr.setType(rs.getString(6));
+				addr.setDetailAddress(rs.getString(5));
+				addr.setMember_id(rs.getString(6));
+				addr.setType(rs.getString(7));
 				
 				addrList.add(addr);
 			}
@@ -88,8 +89,9 @@ public class AddrDAO {
 				addr.put("location", rs.getString(2));
 				addr.put("postcode", rs.getString(3));
 				addr.put("address", rs.getString(4));
-				addr.put("member_id", rs.getString(5));
-				addr.put("addrType",rs.getString(6));
+				addr.put("detailAddress", rs.getString(5));
+				addr.put("member_id", rs.getString(6));
+				addr.put("addrType",rs.getString(7));
 				
 //				addr.setNum(rs.getInt(1));
 //				addr.setLocation(rs.getString(2));
@@ -146,21 +148,22 @@ public class AddrDAO {
 		return recentAddr;
 	}
 
-	public int insertDefaultAddr(String member_id, String postcode, String address) {
+	public int insertDefaultAddr(String member_id, String postcode, String address, String detailAddress) {
 		System.out.println("AddrDAO - insertDefaultAddr()");
 		int insertCount = 0;
 		
 		PreparedStatement p = null;
 
 		try {
-			String sql = "insert into memberaddress values(?,?,?,?,?,?)";
+			String sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setInt(1, 0);
 			p.setString(2, null);
 			p.setString(3, postcode);
 			p.setString(4, address);
-			p.setString(5, member_id);
-			p.setNString(6, "defaultAddr");
+			p.setNString(5, detailAddress);
+			p.setString(6, member_id);
+			p.setNString(7, "defaultAddr");
 			
 			insertCount = p.executeUpdate();
 			
@@ -181,14 +184,15 @@ public class AddrDAO {
 		PreparedStatement p = null;
 		
 		try {
-			String sql = "insert into memberaddress values(?,?,?,?,?,?)";
+			String sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setInt(1, addr.getNum());
 			p.setString(2, addr.getLocation());
 			p.setString(3, addr.getPostcode());
 			p.setString(4, addr.getAddress());
-			p.setString(5, addr.getMember_id());
-			p.setString(6, addr.getType());
+			p.setString(5, addr.getDetailAddress());
+			p.setString(6, addr.getMember_id());
+			p.setString(7, addr.getType());
 			
 			insertCount = p.executeUpdate();
 		} catch (SQLException e) {

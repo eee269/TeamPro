@@ -29,6 +29,7 @@ public class RegistDestinationAction implements Action {
 		addr.setLocation(request.getParameter("location"));
 		addr.setPostcode(request.getParameter("postcode"));
 		addr.setAddress(request.getParameter("address"));
+		addr.setDetailAddress(request.getParameter("detailAddress"));
 		addr.setMember_id(member_id);
 		addr.setType("");
 		

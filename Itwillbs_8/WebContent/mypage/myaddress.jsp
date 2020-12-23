@@ -174,7 +174,7 @@ if(addrBook.size() == 0) {
 									<td><div class="tb-center"><%=addrBook.get(i).getPostcode()%></div></td>
 									<td>
 										<div class="tb-center">
-											<%=addrBook.get(i).getAddress()%>
+											<%=addrBook.get(i).getAddress()+" "+addrBook.get(i).getDetailAddress()%>
 										</div>
 									</td>
 									<td>

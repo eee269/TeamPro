@@ -62,7 +62,7 @@ public class AddrService {
 		return recentAddr;
 	}
 
-	public boolean RegistDefaultAddr(String member_id, String postcode, String address) {
+	public boolean RegistDefaultAddr(String member_id, String postcode, String address, String detailAddress) {
 		System.out.println("AddrService - RegistDefaultAddr()");
 		boolean isRegistSuccess = false;
 		
@@ -72,7 +72,7 @@ public class AddrService {
 		
 		addrDAO.setConnection(con);
 		
-		int insertCount = addrDAO.insertDefaultAddr(member_id, postcode, address);
+		int insertCount = addrDAO.insertDefaultAddr(member_id, postcode, address, detailAddress);
 		
 		if(insertCount > 0) {
 			commit(con);

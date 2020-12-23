@@ -116,7 +116,7 @@ String member_id = (String) session.getAttribute("member_id");
 									<td><div class="tb-left"><%=addrBook.get(i).getPostcode()%></div></td>
 									<td>
 										<div class="tb-center">
-											<%=addrBook.get(i).getAddress()%>
+											<%=addrBook.get(i).getAddress()+" "+addrBook.get(i).getDetailAddress()%>
 										</div>
 									</td>
 									<td>
@@ -203,8 +203,6 @@ String member_id = (String) session.getAttribute("member_id");
 				
 				var postcode = td.eq(2).text().trim();
 				var address = td.eq(3).text().trim();
-				alert(postcode);
-				alert(address);
 				$(opener.document).find("#postcode").val(postcode);
 				$(opener.document).find("#address").val(address);
 				
