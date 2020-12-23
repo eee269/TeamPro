@@ -1,5 +1,15 @@
+<%@page import="vo.MemberBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+// String id=(String)request.getAttribute("id");
+String id=request.getParameter("id");
+// String id=(String)session.getAttribute("id");
+String name=request.getParameter("name");
+
+
+
+%>
 <jsp:include page="../inc/header.jsp"/>
 
 <style>
@@ -25,98 +35,20 @@ body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Ro
 .join-footer .cbtn.form{width:228px;height:58px;line-height:58px;font-size:16px;margin:0 5px;}
 
 </style>
-	<!-- Cart -->
-	<div class="wrap-header-cart js-panel-cart">
-		<div class="s-full js-hide-cart"></div>
-
-		<div class="header-cart flex-col-l p-l-65 p-r-25">
-			<div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-				<div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-					<i class="zmdi zmdi-close"></i>
-				</div>
-			</div>
-			
-			<div class="header-cart-content flex-w js-pscroll">
-				<ul class="header-cart-wrapitem w-full">
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								White Shirt Pleat
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
-				</ul>
-				
-				<div class="w-full">
-					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
-					</div>
-
-					<div class="header-cart-buttons flex-w w-full">
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-							View Cart
-						</a>
-
-						<a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-							Check Out
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
+<script type="text/javascript">
+function pValue(){
+	document.getElementById("userId").value = opener.document.fr.id.value;
+}
+</script>
 
 
 
 
 	<!-- Content page -->
+	
+	<body  onload="pValue()">
 	<section class="bg0 p-t-75 p-b-120">
-		<div class="container">
+		<div class="container" >
 
 
 
@@ -127,20 +59,23 @@ body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Ro
 							<img src="//image.makeshop.co.kr/makeshop/d3/basic_simple/member/member_join_complete.png" alt="회원가입이 완료되었습니다.">
 						</div>
 						<h1 class="tit-join-complete">회원가입 완료</h1>
-						<div class="complete-box">
+						<div class="complete-box" >
 							<dl>
-								<dt>정수진의 회원가입이 성공적으로 이루어졌습니다.</dt>
+								<dt>
+<%-- 								<%= id%>님의  --%>
+								회원가입이 성공적으로 이루어졌습니다.</dt>
 								<dd>
 									<p>
-										(주)내자인과 함께 즐거운 쇼핑 되세요!<br>										
-																				정수진님의 축하적립금은 <span class="join-point">5000원</span> 입니다.<br>
+										SHOP OOTD 함께 즐거운 쇼핑 되세요!<br>										
+<%-- 											<%= name %>님의  --%>
+											축하적립금은 <span class="join-point">5000원</span> 입니다.<br>
 																													</p>
 								</dd>
 							</dl>
 							
 							<div class="btnArea join-footer">
 								<div class="center">									
-									<a href="index.jsp" class="cbtn form">메인화면</a>
+									<a href="Main.go" class="cbtn form">메인화면</a>
 								</div>
 							</div>
 						</div>
@@ -155,5 +90,5 @@ body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Ro
 
 		</div>
 	</section>	
-
+</body>
 <jsp:include page="../inc/footer.jsp"/>
