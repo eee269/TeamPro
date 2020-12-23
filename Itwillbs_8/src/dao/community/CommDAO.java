@@ -222,7 +222,7 @@ public class CommDAO {
 			
 			try {
 				
-				String sql = "SELECT c.*, m.username "
+				String sql = "SELECT c.*, m.username, m.img "
 						+ "FROM community c JOIN member m "
 						+ "ON c.member_id = m.id "
 						+ "WHERE num = ?";
@@ -238,10 +238,10 @@ public class CommDAO {
 					article.setSubject(rs.getString("subject"));
 					article.setContent(rs.getString("content"));
 					article.setDate(rs.getTimestamp("date"));
-					article.setImg(rs.getString("img"));
+					article.setImg(rs.getString("c.img"));
 					article.setReadCount(rs.getInt("readcount"));
 					article.setUsername(rs.getString("username"));
-					
+					article.setM_img(rs.getString("m.img"));
 				}
 				
 			} catch (Exception e) {

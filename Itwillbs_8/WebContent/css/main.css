@@ -2663,6 +2663,9 @@ input.num-product::-webkit-inner-spin-button {
 .size-214 {
   width: 90px;
 }
+.size-214 img{
+  width: 90px;
+}
 
 .size-215 {
   width: calc(100% - 110px);

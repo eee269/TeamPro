@@ -12,7 +12,15 @@ public class CommBean extends MemberBean{
 	private Timestamp date;
 	private String img;
 	private int bookCount; // 북마크 갯수 체크 용으로 임시로 쓸 변수
+	private String m_img; // 유저 이미지 담을 임시 객체
 	
+	
+	public String getM_img() {
+		return m_img;
+	}
+	public void setM_img(String m_img) {
+		this.m_img = m_img;
+	}
 	public int getBookCount() {
 		return bookCount;
 	}

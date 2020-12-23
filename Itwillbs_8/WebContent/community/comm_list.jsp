@@ -20,9 +20,9 @@
 	SimpleDateFormat sdfD = new SimpleDateFormat("dd");
 	SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
-<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="/inc/header.jsp"/>
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
+<jsp:include page="/quickMenu.jsp" />
 <!-- Title page -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92"
    style="background-image: url('images/bg-02.jpg');">
@@ -134,7 +134,7 @@
 	</div>
 <!-- ---------------------------Content page--------------------------- -->
 
-<jsp:include page="../inc/footer.jsp" />
+<jsp:include page="/inc/footer.jsp" />
 <script>
 		// 북마크버튼 클릭시(북마크 추가 또는 북마크 제거)
 		function checkBook(num){
