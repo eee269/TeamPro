@@ -132,8 +132,8 @@
 			%>
 			<ul>
 				<li>
-					<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>" class="hov-img0 how-pos5-parent">
-						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG"/>
+					<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
+						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
 						<div class="flex-col-c-m size-123 bg9 how-pos5">
 							<span class="ltext-107 cl2 txt-center"> 22 </span> 
 							<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getDate() %></span>
@@ -172,13 +172,13 @@
 <!-- 				</li> -->
 <!-- 			</ul> -->
 			<%}%>
-			<div class="bor17 of-hidden pos-relative float-r" >
-				<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-				<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-					<i class="zmdi zmdi-search"></i>
-				</button>
-			</div>
 			<div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
+				<div class="bor17 of-hidden pos-relative float-r" >
+					<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+					<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
+						<i class="zmdi zmdi-search"></i>
+					</button>
+				</div>
 				<a href="CommWriteForm.co">글쓰기</a> <br>
 				<%if(nowPage <= 1) {%>
 					<input type="button" value="이전">&nbsp;

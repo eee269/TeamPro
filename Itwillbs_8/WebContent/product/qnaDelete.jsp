@@ -27,24 +27,55 @@
 
 <div id="wrap">
     <div id="contentWrapper">
-	<!-- CS CENTER 상단공통배너 : 가상태그 -->
-	<!-- CS CENTER 상단 -->
-	<div class="cboth sub_top_ban brand">
-		<div class="width1260 sub_top_text">CS CENTER</div>
-	</div>
-        <div id="contentWrap">
-             <div id="content">
-                <div id="bbsData">
-                
-                
-                
-                
-                
-                </div><!-- #bbsData -->
-            </div><!-- #content -->
-        </div><!-- #contentWrap -->
-    </div><!-- #contentWrapper-->
-    <hr />
+		<!-- CS CENTER 상단공통배너 : 가상태그 -->
+		<!-- CS CENTER 상단 -->
+		<div class="cboth sub_top_ban brand">
+			<div class="width1260 sub_top_text">CS CENTER</div>
+		</div>
+		<div id="contentWrap">
+			<div id="content">
+				<div id="bbsData">
+					<!-- 상단위치표시 -->
+					<dl class="loc-navi"><dd><a href="/">HOME</a> &gt; CS CENTER &gt; Q&A</dd></dl>
+					<!-- .bbs-hd -->
+					<div class="bbs-tit">
+						<h3>Q&A</h3>
+					</div>
+					<div class="bbs-table-pwd">
+						<form name="form1" action="board.html" method="post" autocomplete="off" >   
+							<input type="hidden" name="code" value="nasign" />
+							<input type="hidden" name="qna_num" value="" />
+							<input type="hidden" name="type" value="v" />                       
+							<!-- 비밀번호 입력 -->
+							<fieldset>
+								<legend>비밀번호 찾기</legend>
+								<table summary="비밀번호찾기테이블">
+									<caption>비밀번호 찾기</caption>
+									<colgroup>
+										<col width="112" />
+										<col width="*" />
+									</colgroup>
+									<tbody>
+										<tr>
+											<th><div>PASSWORD</div></th>
+											<td><div><input id="bp_input_passwd" type="password"  class="MS_input_txt" name="passwd" /></div></td>
+										</tr>
+									</tbody>
+								</table>
+							</fieldset>
+						</div>
+						<!-- //비밀번호 입력 -->
+						<div class="bbs-link pwd-link">
+							<a href="javascript:document.form1.submit();" class="CSSbuttonBlack">확인</a>
+							<a href="javascript:history.go(-1);" class="CSSbuttonWhite">취소하기</a>
+							<a href="/board/board.html?code=nasign&page=1&board_cate=" class="CSSbuttonWhite">목록보기</a>
+						</div>
+					</form>          
+				</div><!-- #bbsData -->
+			</div><!-- #content -->
+		</div><!-- #contentWrap -->
+	</div><!-- #contentWrapper-->
+<hr />
 </div>
 <script type="text/javascript">
 function doCenter(_parent, _target, _obj) {
