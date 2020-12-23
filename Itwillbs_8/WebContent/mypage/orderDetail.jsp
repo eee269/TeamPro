@@ -71,6 +71,7 @@ System.out.println("orderDetail.jsp - detailorderList.size(): " + detailorderLis
 					<div class="lnb">
 						<ul>
 							<li class="first"><a href="MemberModifyForm.mo">회원정보변경</a></li>
+							<li><a href="MyAddress.ad">배송지 관리</a></li>
 							<li><a href="MemberDeleteForm.mo">회원탈퇴신청</a></li>
 						</ul>
 					</div>

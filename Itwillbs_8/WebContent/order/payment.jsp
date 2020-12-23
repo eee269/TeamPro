@@ -137,7 +137,7 @@ $(function(){
 						<fieldset>
 							<legend>주문 결과</legend>
 							<div class="tbl-order">
-								<img alt="" src="" class="fail">
+								<img alt="" src="" class="fail" onerror="this.style.display='none'">
 							</div>
 							<form action="OrderPro.or" method="post" name="paymentForm">
 								<input type="hidden" value="" id="imp_uid" name="imp_uid">

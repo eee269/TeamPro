@@ -13,6 +13,7 @@ import action.Action;
 import action.address.AddrAction;
 import action.address.AddrBookAction;
 import action.address.DefaultAddrAction;
+import action.address.MyAddressListAction;
 import action.address.RecentAddrAction;
 import action.address.RegistDefaultAddrAction;
 import action.address.RegistDestinationAction;
@@ -104,6 +105,16 @@ public class AddressController extends HttpServlet{
 				forward = action.execute(request, response);
 			} catch (Exception e) {
 				System.out.println("RemoveDestinationAction()으로 포워딩 중 오류 - "+e.getMessage());
+				e.printStackTrace();
+			}
+		} else if(command.equals("/MyAddress.ad")) {
+			System.out.println("MyAddress.ad 포워딩");
+			action = new MyAddressListAction();
+			try {
+				System.out.println("MyAddressListAction()으로 포워딩");
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				System.out.println("MyAddressListAction()으로 포워딩 중 오류 - "+e.getMessage());
 				e.printStackTrace();
 			}
 		}
