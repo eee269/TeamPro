@@ -27,7 +27,7 @@
 
 .sm_right_bn {
 	position: absolute;
-	margin-top: 320px;
+	margin-top: 400px;
 	left: -36px;
 }
 

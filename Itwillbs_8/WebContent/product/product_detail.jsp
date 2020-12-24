@@ -318,10 +318,10 @@ var productCode = "";
 						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
 							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
 							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-							<input type="hidden" name="size" value="">
-							<input type="hidden" name="color" value="">
-							<input type="hidden" name="product_basicCode" value="<%=basicCode%>">
-							<input type="hidden" name="cnt" value="0">
+<!-- 							<input type="hidden" name="size" value=""> -->
+<!-- 							<input type="hidden" name="color" value=""> -->
+<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
+<!-- 							<input type="hidden" name="cnt" value="0"> -->
 							
 
                   </div>

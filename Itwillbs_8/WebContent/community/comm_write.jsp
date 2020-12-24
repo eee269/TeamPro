@@ -3,7 +3,6 @@
     pageEncoding="UTF-8"%>
 <%
    	String member_id = (String)session.getAttribute("member_id");
-	
 	if(member_id == null){
 		%>
 		<script>

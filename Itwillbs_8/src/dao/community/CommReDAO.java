@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.CommReBean;
+import vo.MemberBean;
 
 import static db.JdbcUtil.*;
 
@@ -50,7 +51,7 @@ public class CommReDAO {
 				num=rs.getInt(1)+1; // 새 글 번호 만들기
 			}
 			
-			sql = "INSERT INTO community_reply(username,contents,num,community_num,date,re_lev,re_ref,img) VALUES(?,?,?,?,?,?,?,?)";
+			sql = "INSERT INTO community_reply(member_id,contents,num,community_num,date,re_lev,re_ref,img,del) VALUES(?,?,?,?,?,?,?,?,'N')";
 			pstmt = con.prepareStatement(sql);
 			//CommReBean 객체로부터 데이터를 꺼내서 쿼리문 ? 대체
 			pstmt.setString(1, crb.getUsername());
@@ -61,6 +62,7 @@ public class CommReDAO {
 			pstmt.setInt(6, crb.getRe_lev());
 			pstmt.setInt(7, num); //참조글 번호(새 글이므로 자신이 참조글이 됨)
 			pstmt.setString(8, crb.getImg());
+
 			
 			insertCount = pstmt.executeUpdate();
 		
@@ -94,10 +96,10 @@ public class CommReDAO {
 
 		try {			
 			if(arraymode == 0) {
-				sql=" SELECT * FROM community_reply as p INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as c "
-						+ "on p.num = c.re_ref where community_num=? and re_lev=0 Order by c.ct desc limit ?,?";
+				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id=m.id INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as y on c.num = y.re_ref where community_num=? and re_lev=0 Order by y.ct desc limit ?,?";				
 			}else if(arraymode == 1) {
-				sql="SELECT * FROM community_reply WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
+				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
+				
 			}
 			
 			pstmt=con.prepareStatement(sql);
@@ -112,7 +114,7 @@ public class CommReDAO {
 
 			while(rs.next()) {
 				CommReBean crb = new CommReBean();
-				crb.setUsername(rs.getString("username"));
+				crb.setUsername(rs.getString("member_id"));
 				crb.setContents(rs.getString("contents"));
 				crb.setNum(rs.getInt("num"));
 				crb.setCommunity_num(rs.getInt("community_num"));
@@ -120,8 +122,12 @@ public class CommReDAO {
 				crb.setRe_lev(rs.getInt("re_lev"));
 				crb.setRe_ref(rs.getInt("re_ref"));
 				crb.setImg(rs.getString("img"));
+				crb.setDel(rs.getString("del"));
+				crb.setId(rs.getString("username"));
 				
 				commentList.add(crb);
+
+				
 			}	
 			
 		} catch (SQLException e) {
@@ -190,7 +196,7 @@ public class CommReDAO {
 				num=1;
 			}
 			
-			sql = "INSERT INTO community_reply(username,contents,num,community_num,date,re_lev,re_ref) VALUES(?,?,?,?,?,?,?)";
+			sql = "INSERT INTO community_reply(member_id,contents,num,community_num,date,re_lev,re_ref,del) VALUES(?,?,?,?,?,?,?,'N')";
 			pstmt = con.prepareStatement(sql);
 			//CommReBean 객체로부터 데이터를 꺼내서 쿼리문 ? 대체
 			pstmt.setString(1, crb.getUsername());
@@ -217,7 +223,6 @@ public class CommReDAO {
 		return insertCount;
 	}
 
-
 	
 	
 	public int deleteComment(int num, int community_num) {
@@ -228,13 +233,11 @@ public class CommReDAO {
 	
 		try {
 //			String sql = "DELETE FROM community_reply WHERE num=? and community_num=?";
-			String sql = "UPDATE community_reply SET contents=?,username=? where num=? and community_num=?";
+			String sql = "UPDATE community_reply SET del='Y' where num=? and community_num=?";
 			pstmt = con.prepareStatement(sql);
-			//BoardBean 객체로부터 데이터를 꺼내서 쿼리문 ? 대체
-			pstmt.setString(1, "<span class='del'>작성자에 의해 삭제된 댓글입니다.</span>");
-			pstmt.setString(2, "<span class='del'>-</span>");
-			pstmt.setInt(3, num);
-			pstmt.setInt(4, community_num);
+			
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, community_num);
 			deleteCount = pstmt.executeUpdate();
 
 			
@@ -306,7 +309,8 @@ public class CommReDAO {
 
 		try {
 			
-			String sql="SELECT * FROM community_reply WHERE community_num=? and re_ref=? and re_lev=1 ORDER BY re_ref,num";
+//			String sql="SELECT * FROM community_reply WHERE community_num=? and re_ref=? and re_lev=1 ORDER BY re_ref,num";
+			String sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id WHERE community_num=? and re_ref=? and re_lev=1 ORDER BY re_ref,num";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, community_num);
 			pstmt.setInt(2, re_ref);
@@ -318,13 +322,15 @@ public class CommReDAO {
 	
 			while(rs.next()) {
 				CommReBean crb = new CommReBean();
-				crb.setUsername(rs.getString("username"));
+				crb.setUsername(rs.getString("member_id"));
 				crb.setContents(rs.getString("contents"));
 				crb.setNum(rs.getInt("num"));
 				crb.setCommunity_num(rs.getInt("community_num"));
 				crb.setDate(rs.getTimestamp("date"));
 				crb.setRe_lev(rs.getInt("re_lev"));
 				crb.setRe_ref(rs.getInt("re_ref"));
+				crb.setDel(rs.getString("del"));
+				crb.setId(rs.getString("username"));
 								
 				commentReList.add(crb);
 			}	

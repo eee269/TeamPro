@@ -37,7 +37,7 @@ public class CommListService {
 	// -------------------getListCount()-------------------
 	// -------------------getArticleList()-------------------
 	// 게시물 목록 가져오기 작업 요청 수행
-	public ArrayList<CommBean> getArticleList(int page, int limit)throws Exception{
+	public ArrayList<CommBean> getArticleList(int page, int limit, String keyword)throws Exception{
 		System.out.println("CommListService - getArticleList()");
 		ArrayList<CommBean> articleList = null;
 		
@@ -51,7 +51,7 @@ public class CommListService {
 		commDAO.setConnection(con);
 		
 		// 4.
-		articleList = commDAO.selectArticleList(page, limit);
+		articleList = commDAO.selectArticleList(page, limit, keyword);
 		
 		// 5(공통).
 		close(con);

@@ -28,7 +28,7 @@ public class cartGetPlusAction implements Action {
 		
 		String member_id = (String) session.getAttribute("member_id"); 	// 아이디
 
-		if (member_id == null) {
+		if (member_id == null) { // 아이디가 없으면
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
@@ -36,8 +36,9 @@ public class cartGetPlusAction implements Action {
 			out.println("</script>");
 			forward = new ActionForward();
 			forward.setPath("MemberLoginForm.mo");
-		}
-		
+			
+			
+		} //else { // 아이디가 있으면
 		
 		String product_name = request.getParameter("name");	// 상품이름
 		int price = Integer.parseInt(request.getParameter("price"));  //가격
@@ -117,6 +118,7 @@ public class cartGetPlusAction implements Action {
 		
 		
 		return forward;
-	}
+		}
+//	}
 
 }
