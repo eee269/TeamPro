@@ -8,10 +8,15 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
+<!-- 구글 로그인 SDK -->
 <meta name="google-signin-client_id" content="596863305253-u2jonmh14n7oeqved945l06t77d8fgqp.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 
-<script type="text/javascript" src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.0.js" charset="utf-8"></script>
+<!-- 네이버 로그인 SDK -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+<!-- 카카오 로그인 SDK -->
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
 <style rel="stylesheet">
 
@@ -329,6 +334,13 @@ margin-left:0px;}
 .tc{
 	color: red;
 }
+
+#loginApi {
+	display: flex;
+}
+#loginApi > div {
+	flex: 1;
+}
 </style>
 <script type="text/javascript">
 	var checkIdResult = false, checkPasswdResult = false; 
@@ -478,6 +490,44 @@ margin-left:0px;}
 	}
 	
 </script>
+
+<script type="text/javascript">
+// 로그인 API script
+
+        // 구글 로그인 API
+        function onSignIn() {
+              var profile = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+              id = profile.getId();
+              username = profile.getName();
+              img = profile.getImageUrl();
+              email = profile.getEmail();
+             alert('로그인 완료');
+              
+              post_to_url( "MemberGoogleKakaoLogin.mo",
+                        {'id': id, 'username': username, 'email': email, 'img': img});
+        }
+    // 구글, 카카오 로그인 API
+        function post_to_url(path, params, method='post') {
+          
+          const form = document.createElement('form');
+          form.method = method;
+          form.action = path;
+          
+          for(const key in params) {
+              if(params.hasOwnProperty(key)) {
+                  const hiddenField = document.createElement('input');
+                  hiddenField.type = 'hidden';
+                  hiddenField.name = key;
+                  hiddenField.value = params[key];
+                  form.appendChild(hiddenField);
+                }
+              }
+              document.body.appendChild(form);
+              form.submit();
+        }
+
+</script>
+
 <%
 	// session 객체에 저장된 id 값이 존재할 경우
 	// "잘못된 접근입니다." 출력 후 메인페이지로 이동
@@ -518,23 +568,19 @@ margin-left:0px;}
 <!-- 							<a href="#" class="more">Forgot your password?</a> -->
 						</div>
 					</form>
-					<!-- //네이버아이디로로그인 버튼 노출 영역 -->
-					<!-- 구글 로그인 버튼 노출 영역 -->
-					<div class="g-signin2" data-onsuccess="onSignIn"></div>
-					<!-- //구글 로그인 버튼 노출 영역 -->
-					<%
-    String clientId = "jjXgPjWf7pqDUU6YqA_B";//애플리케이션 클라이언트 아이디값
-    String redirectURI = URLEncoder.encode("http://localhost:8090/Itwillbs_8/member/naver_callback.jsp", "UTF-8");
-    SecureRandom random = new SecureRandom();
-    String state = new BigInteger(130, random).toString();
-    String apiURL = "https://nid.naver.com/oauth2.0/authorize?response_type=code";
-    apiURL += "&client_id=" + clientId;
-    apiURL += "&redirect_uri=" + redirectURI;
-    apiURL += "&state=" + state;
-    session.setAttribute("state", state);
- %>
-					<!-- 네이버아이디로로그인 버튼 노출 영역 -->
-					<a href="<%=apiURL%>"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+					
+<!-- 					로그인 API -->
+					<div id="loginApi">
+						<!-- 구글 로그인 버튼 노출 영역 -->
+						<div class="g-signin2" onclick='onSignIn()'></div>
+						<!-- //구글 로그인 버튼 노출 영역 -->
+						<div id="naver_id_login"></div>
+                      	<!-- //네이버아이디로로그인 버튼 노출 영역 -->
+                      <!-- 카카오 로그인 버튼 노출 영역 -->
+                    	<a id="kakao-login-btn"></a>
+                    	<!-- //카카오 로그인 버튼 노출 영역 -->
+					</div>
+					
 				</div>
 				<div class="signup-cont cont">
 					<form action="MemberJoinPro.mo" method="post" enctype="multipart/form-data"
@@ -635,27 +681,65 @@ margin-left:0px;}
 
 		}
 		
-
-		// 구글 로그인 API
-		function onSignIn(googleUser) {
-			  var profile = googleUser.getBasicProfile();
-			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-			  console.log('Name: ' + profile.getName());
-			  console.log('Image URL: ' + profile.getImageUrl());
-			  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-			}
-		
 		// 네이버 로그인 API
-		var naverLogin = new naver.LoginWithNaverId(
-			{
-				clientId: "jjXgPjWf7pqDUU6YqA_B",
-				callbackUrl: "http://localhost:8090/Itwillbs_8/member/naver_callback.jsp",
-				isPopup: true,
-				loginButton: {color: "green", type: 1, height: 60} 
-			}
-		);
-		/* 설정정보를 초기화하고 연동을 준비 */
-		naverLogin.init();
+		  var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8080/Itwillbs_8/member/naver_callback.jsp");
+          var state = naver_id_login.getUniqState();
+          naver_id_login.setButton("white", 2,40);
+          naver_id_login.setDomain("http://localhost:8090/Itwillbs_8/MemberLoginForm.mo#");
+          naver_id_login.setState(state);
+          naver_id_login.init_naver_id_login();
+    
+          
+          // 카카오 로그인 API
+          // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+          Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+          // SDK 초기화 여부를 판단합니다.
+        Kakao.isInitialized();
+//           function loginWithKakao() {
+//             Kakao.Auth.login({
+//               success: function(authObj) {
+//                 alert(JSON.stringify(authObj))
+//               },
+//               fail: function(err) {
+//                 alert(JSON.stringify(err))
+//               },
+//             })
+//           }
+Kakao.Auth.createLoginButton({
+    container: '#kakao-login-btn',
+    success: function(authObj) {
+      Kakao.API.request({
+        url: '/v2/user/me',
+        success: function(res) {
+            console.log(res.id);
+            console.log(res.kakao_account['email']);
+            console.log(res.properties['nickname']);
+            console.log(res.properties['profile_image']);
+            
+            
+            var id = res.id;
+            var email = res.kakao_account['email'];
+            var username = res.properties['nickname'];
+            var img = res.properties['profile_image']
+            
+            post_to_url( "MemberGoogleKakaoLogin.mo",
+                      {'id': id, 'username': username, 'email': email, 'img': img});
+            
+        },
+        fail: function(error) {
+          alert(
+            'login success, but failed to request user information: ' +
+              JSON.stringify(error)
+          )
+        },
+      })
+    },
+    fail: function(err) {
+      alert('failed to login: ' + JSON.stringify(err))
+    },
+  })
+          
+          
 	</script>
 </body>
 
