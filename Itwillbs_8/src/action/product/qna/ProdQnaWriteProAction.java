@@ -39,7 +39,7 @@ public class ProdQnaWriteProAction implements Action {
 				);
 		
 		// 입력 받은 데이터 저장
-		String qna_pass = multi.getParameter("qna_pass");
+		String qna_pass = "1234";
 		String qna_subject = multi.getParameter("qna_subject");
 		String qna_content = multi.getParameter("qna_content");
 		String qna_file = multi.getOriginalFileName("qna_file");

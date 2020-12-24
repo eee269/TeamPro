@@ -23,10 +23,9 @@ public class MainSelectAction implements Action {
 		
 		ActionForward forward = null;
 		String id =(String)session.getAttribute("member_id");
-		
 		// 게시글 받아오기
 		CommListService commListService = new CommListService();
-		ArrayList<CommBean> commList = commListService.getArticleList(1, 4, "");
+		ArrayList<CommBean> commList = commListService.getArticleList(1, 4, "", "new");
 		request.setAttribute("commList", commList);
 		
 		

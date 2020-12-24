@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import action.Action;
+import svc.member.MemberPassService;
 import svc.product.qna.ProdQnaService;
 import vo.ActionForward;
 
@@ -20,12 +21,15 @@ public class ProdQnaDeleteAction implements Action {
 		// 로그인 시 세션 및 입력 정보 가져오기
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("member_id");
-		String qna_pass = request.getParameter("qna_pass");
+		String pass = request.getParameter("qna_pass");
 		int qna_num = Integer.parseInt(request.getParameter("qna_num")); 
+		
+		MemberPassService memberPassService = new MemberPassService();
+		boolean isRightUser = memberPassService.passMember(member_id, pass);
 		
 		// 입력된 비밀번호 검증
 		ProdQnaService prodQnaService = new ProdQnaService();
-		boolean isRightUser = prodQnaService.checkQna(qna_num, qna_pass, member_id);
+//		boolean isRightUser = prodQnaService.checkQna(qna_num, qna_pass, member_id);
 		if(!isRightUser) {
 			// 틀리면 오류
 			response.setContentType("text/html; charset=UTF-8");
@@ -52,13 +56,6 @@ public class ProdQnaDeleteAction implements Action {
 				forward.setRedirect(true);
 			}
 		}
-		
-		
-		
-		
-		
-		
-		
 		return forward;
 	}
 

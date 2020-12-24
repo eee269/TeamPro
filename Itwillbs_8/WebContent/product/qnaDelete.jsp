@@ -42,10 +42,9 @@
 						<h3>Q&A</h3>
 					</div>
 					<div class="bbs-table-pwd">
-						<form name="form1" action="board.html" method="post" autocomplete="off" >   
-							<input type="hidden" name="code" value="nasign" />
-							<input type="hidden" name="qna_num" value="" />
-							<input type="hidden" name="type" value="v" />                       
+						<form name="form1" action="ProdQnaDelete.po" method="post" autocomplete="off" >   
+							<input type="hidden" name="basicCode" value="<%=request.getParameter("basicCode") %>" />
+							<input type="hidden" name="qna_num" value="<%=request.getParameter("qna_num") %>" />
 							<!-- 비밀번호 입력 -->
 							<fieldset>
 								<legend>비밀번호 찾기</legend>
@@ -58,19 +57,19 @@
 									<tbody>
 										<tr>
 											<th><div>PASSWORD</div></th>
-											<td><div><input id="bp_input_passwd" type="password"  class="MS_input_txt" name="passwd" /></div></td>
+											<td><div><input id="bp_input_passwd" type="password"  class="MS_input_txt" name="qna_pass" /></div></td>
 										</tr>
 									</tbody>
 								</table>
 							</fieldset>
-						</div>
 						<!-- //비밀번호 입력 -->
 						<div class="bbs-link pwd-link">
 							<a href="javascript:document.form1.submit();" class="CSSbuttonBlack">확인</a>
 							<a href="javascript:history.go(-1);" class="CSSbuttonWhite">취소하기</a>
 							<a href="/board/board.html?code=nasign&page=1&board_cate=" class="CSSbuttonWhite">목록보기</a>
 						</div>
-					</form>          
+						</form>          
+					</div>
 				</div><!-- #bbsData -->
 			</div><!-- #content -->
 		</div><!-- #contentWrap -->

@@ -24,6 +24,7 @@ import action.community.CommReReCountProAction;
 import action.community.CommReReListProAction;
 import action.community.CommReReWriteProAction;
 import action.community.CommReWriteProAction;
+import action.community.CommWriteFormAction;
 import action.community.CommWriteProAction;
 import action.community.MybookmarkListAction;
 import action.community.MycommListAction;
@@ -56,11 +57,18 @@ public class CommFrontController extends HttpServlet {
 			 * qna_board_write.jsp
 			 */
 			// 1. ActionForward 객체 생성(변수는 이미 선언되어 있음)
-			forward = new ActionForward();
+//			forward = new ActionForward();
 			// 2. 포워딩 경로 설정
-			forward.setPath("/community/comm_write.jsp");
+//			forward.setPath("/community/comm_write.jsp");
 			// 3. 포워딩 방식 설정(Dispatcher 방식)
 //					forward.setRedirect(false); // 기본값이 false 이므로 설정 생략 가능
+			action = new CommWriteFormAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 		} else if (command.equals("/CommWritePro.co")) { // BoardWritePro.bo 서블릿 요청에 대한 처리
 			// 1. BoardWriteProAction 클래스 객체 생성
 			// => Action 클래스는 Action 인터페이스를 구현하므로 다형성 활용 가능
