@@ -465,13 +465,13 @@ public class CommDAO {
 					while(rs2.next()) {
 						CommBean article = new CommBean();
 						
-						article.setNum(rs.getInt("num"));
-						article.setMember_id(rs.getString("member_id"));
-						article.setSubject(rs.getString("subject"));
-						article.setContent(rs.getString("content"));
-						article.setDate(rs.getTimestamp("date"));
-						article.setImg(rs.getString("img"));
-						article.setReadCount(rs.getInt("readcount"));
+						article.setNum(rs2.getInt("num"));
+						article.setMember_id(rs2.getString("member_id"));
+						article.setSubject(rs2.getString("subject"));
+						article.setContent(rs2.getString("content"));
+						article.setDate(rs2.getTimestamp("date"));
+						article.setImg(rs2.getString("img"));
+						article.setReadCount(rs2.getInt("readcount"));
 						
 						list.add(article);
 					}
