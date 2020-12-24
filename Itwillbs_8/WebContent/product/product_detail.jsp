@@ -292,7 +292,7 @@ var productCode = "";
 
                   <div class="slick3 gallery-lb">
                   <%for(int i=0; i<main.length; i++){%>
-                  
+                                                    
 <%-- 							<%=productDetailList.get(0).getName() %> --%>
 <%-- 							<%=productDetailList.get(0).getPrice()%> --%>
 <%-- 							<%=productSizeList.get(i).getSize()%> --%>

@@ -54,8 +54,6 @@ public class cartGetPlusAction implements Action {
 			color[i] = mixopt[i].split("/")[1];
 		}
 		
-
-		
 		String product_basicCode = request.getParameter("basicCode");  // basicCode코드
 		product_basicCode =  String.format("%04d", Integer.parseInt(product_basicCode))+"";
 		String[] opt_productCode = new String[length];

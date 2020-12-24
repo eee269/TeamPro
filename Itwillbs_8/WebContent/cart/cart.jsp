@@ -45,17 +45,19 @@ int cntSet = 0;
 }
 
 #form {
-margin-left: 4%;
-margin-right: 4%;
+	margin-left: 4%;
+	margin-right: 4%;
+}
+#bigfont{
+	font-size: 20px;
 }
 
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
 <script type="text/javascript">
-  $(document).ready(function(){
 
-  }
+
   </script>
 
 
@@ -172,10 +174,10 @@ margin-right: 4%;
 									</div>
 								</td>
 								<td>
-									<div class="tb-left">
-										<a href="" class="tb-bold"><%=cartList.get(i).getProduct_name()%></a>
+									<div class="tb-left"> 
+										<a class="tb-bold" id="bigfont" href="ProductDetail.po?basicCode=<%=cartList.get(i).getProduct_basicCode() %>"><%=cartList.get(i).getProduct_name()%></a>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">색상 : <%=cartList.get(i).getColor()%></span></span>
+											<span class="tb-dl"><span class="opt_dd" id="opt_co" >색상 : <%=cartList.get(i).getColor()%></span></span>
 										</div>
 										<div id="3360797_1" class="tb-opt">
 											<span class="tb-dl"><span class="opt_dd">사이즈 :
@@ -225,9 +227,6 @@ margin-right: 4%;
 									</div>
 								</td>
 								
-								
-								
-								
 									<!-- ------------------------------------------------------------체크박스--------------------------------------------- -->
 									
 									
@@ -237,14 +236,6 @@ margin-right: 4%;
 									
 									<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 									
-									
-									
-									
-									
-									
-									<input	type="hidden" name="basket_item" value="{&quot;uid&quot;:&quot;3360797&quot;,&quot;cart_id&quot;:&quot;1&quot;,&quot;cart_type&quot;:&quot;NORMAL&quot;,&quot;pack_uid&quot;:&quot;&quot;,&quot;use_tax&quot;:&quot;N&quot;}">
-									<input type="hidden" name="extra_item"
-									value="{&quot;extra_require_uid&quot;:null,&quot;extra_require&quot;:null,&quot;extra_main_brandname&quot;:&quot;&quot;}"></td>
 							</tr>
 							<%
 								cartNo--;
@@ -504,8 +495,10 @@ $("#allCheck").click(function(){
 		   });
 		  }
 		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
-
-	
+			
+			
+			
+			 
 		 
 </script>
 
