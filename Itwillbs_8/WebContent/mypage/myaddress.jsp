@@ -85,7 +85,7 @@ String member_id = (String) session.getAttribute("member_id");
 	<div id="contentWrap">
 
 		<div id="aside">
-			<h2 class="aside-tit">MY ORDER</h2>
+			<h2 class="aside-tit">MY ADDRESS</h2>
 			<div class="lnb-wrap">
 				<div class="lnb-bx">
 					<h2 class="txt txt1">SHOPPING INFO</h2>

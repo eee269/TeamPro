@@ -2,7 +2,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../inc/header.jsp" />
 <%
 	ArrayList<AddrBean> addrBook = (ArrayList<AddrBean>) request.getAttribute("addrBook");
 String member_id = (String) session.getAttribute("member_id");
@@ -69,7 +68,7 @@ String member_id = (String) session.getAttribute("member_id");
 }
 </style>
 
-<link type="text/css" rel="stylesheet" href="../css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
 <link type="text/css" rel="stylesheet" href="css/mp_main.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_2.css" />
@@ -87,18 +86,18 @@ String member_id = (String) session.getAttribute("member_id");
 					<div class="tbl">
 						<table class="addrbook-list" border="1">
 							<colgroup>
-								<col width="80">
-								<col width="170">
-								<col width="170">
-								<col width="250">
-								<col width="110">
+								<col width="10">
+								<col width="30">
+								<col width="30">
+								<col width="60">
+								<col width="70">
 							</colgroup>
 							<thead>
 								<th><div class="tb-center">&nbsp;</div></th>
 								<th><div class="tb-center">배송지명</div></th>
 								<th><div class="tb-center">우편번호</div></th>
 								<th><div class="tb-center">주소</div></th>
-								<th><div class="tb-center">관리</div></th>
+								<th style="display: none;">크기맞추기</th>
 							</thead>
 							<tbody>
 								<%
@@ -113,17 +112,10 @@ String member_id = (String) session.getAttribute("member_id");
 									<td>
 										<div class="tb-center"><%=addrBook.get(i).getLocation()%></div>
 									</td>
-									<td><div class="tb-left"><%=addrBook.get(i).getPostcode()%></div></td>
+									<td><div class="tb-center"><%=addrBook.get(i).getPostcode()%></div></td>
 									<td>
 										<div class="tb-center">
-											<%=addrBook.get(i).getAddress()+" "+addrBook.get(i).getDetailAddress()%>
-										</div>
-									</td>
-									<td>
-										<div class="tb-center">
-											<a onclick="javascript:del_addrbook();"
-												class="CSSbuttonWhite"
-												style="width: 46px; height: 40px; text-align: center;">삭제</a>
+											<%=addrBook.get(i).getAddress().concat("_"+addrBook.get(i).getDetailAddress())%>
 										</div>
 									</td>
 									<%
@@ -202,9 +194,13 @@ String member_id = (String) session.getAttribute("member_id");
 				var td = tr.children();
 				
 				var postcode = td.eq(2).text().trim();
-				var address = td.eq(3).text().trim();
+				var addr = td.eq(3).text().trim();
+				var index = addr.indexOf("_");
+				var address = addr.substr(0,index);
+				var detailAddress = addr.substr(index+1);
 				$(opener.document).find("#postcode").val(postcode);
 				$(opener.document).find("#address").val(address);
+				$(opener.document).find("#detailAddress").val(detailAddress);
 				
 				window.close();
 			});
@@ -214,4 +210,3 @@ String member_id = (String) session.getAttribute("member_id");
 	}
 // 선택한 배송지를 오더 페이지로 가져가기 위한 함수 끝
 </script>
-<jsp:include page="../inc/footer.jsp" />
