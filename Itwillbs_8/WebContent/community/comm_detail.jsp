@@ -422,12 +422,16 @@ $(function(){
 	                    }else if(j == 5){
 	                    	var img = coReply.img;
 	                    	var none = '"none"';
-	                    	if(img != ""){
-	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'>"
-	                    			+"<a class='image_view_load'>"
-	                    			+"<img src='upload/commReUpload/"+img+"' onerror='this.style.display="+none+";'></a>";
-	                    	}
-	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	                    	if(core_del == "N"){
+		                    	if(img != ""){
+			                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'>"
+			                    			+"<a class='image_view_load'>"
+			                    			+"<img src='upload/commReUpload/"+img+"' onerror='this.style.display="+none+";'></a>";
+			                    	}
+			                    output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+		                    }else{
+	                    		output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	 	                    }             	
 	                    }else if(j == 6){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
