@@ -128,7 +128,6 @@ a:hover{
 <link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
-
 <script type="text/javascript">
    // option으로 선택한 값 받아와서 임시 저장
    
@@ -187,7 +186,6 @@ var productCode = "";
       // optcol id 설정 -> 이런모양( <li id="optcol1"> )
       var id = "optcol"+resultcount;
       optcol.id = id;
-
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
@@ -205,7 +203,6 @@ var productCode = "";
           "<input class='mtext-104 cl3 txt-center num-product' type='number' id='optnum" + resultcount + "' name='num-product'  value='1'>" + 
           "<span class='btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m' id='optplus" + resultcount + "' onclick='cntPlus(this.id)'>" + 
           "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>";
-
       $('#'+id).append(html);
       
       // cnt 값 보내기
@@ -214,7 +211,6 @@ var productCode = "";
       calculatePrice('optnum'+resultcount);
       
    }
-
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
    // 수량의 id를 넘겨 받고
    function calculatePrice(id) {
@@ -232,10 +228,8 @@ var productCode = "";
       } else {
          $('#total').css('display', 'block');
       }
-
       $('#total span').text(totalprice + '원');
    }
-
    // 상품개수증가
    function cntPlus(id) {
       var numid = id.replace("plus", "num")
@@ -256,7 +250,6 @@ var productCode = "";
       // optminus1 에서 minus를 num으로 고쳐서 optnum1으로 고침, optnum1은 상품 갯수 id
       var cnt = Number($('#'+numid).val());
       // optnum1에 있는 value 값을 받아와서 cnt에 저장
-
       if(cnt > 1) {
          cnt -= 1;
          $('#'+numid).attr('value', cnt);
@@ -265,13 +258,11 @@ var productCode = "";
          $("#slick-slide06").attr('value', cnt);
 //          var ca_cnt = $("#slick-slide05").val(cnt);
        
-
       }
       // 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
       
       calculatePrice(numid);
    }
-
    // 선택옵션삭제
    function optDelete(id) {
       $(id).remove();
@@ -282,7 +273,6 @@ var productCode = "";
 //    var a = $('#mtext-104 cl3 txt-center num-product').val();
 //    alert(input);
 	
-
    // 옵션 관련 스크립트 끝
 </script>
 
@@ -294,7 +284,6 @@ var productCode = "";
     ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
    ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
     
-
     String[] main = productDetailList.get(0).getMain_img().split("/");
     String[] sub = productDetailList.get(0).getSub_img().split("/");
     
@@ -318,16 +307,40 @@ var productCode = "";
 
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
-   <div class="container">
-      <!-- 폼 -->
-   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
-      <!-- 폼 -->
-      <div class="row">
-         <div class="col-md-6 col-lg-7 p-b-30">
-            <div class="p-l-25 p-r-30 p-lr-0-lg">
-               <div class="wrap-slick3 flex-sb flex-w">
-                  <div class="wrap-slick3-dots"></div>
-                  <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+	<div class="container">
+		<!-- 폼 -->
+		<form action="cartGetPlusAction.ca" method="post" name="cartUp">
+			<!-- 폼 -->
+			<div class="row">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w">
+							<div class="wrap-slick3-dots"></div>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+
+							<div class="slick3 gallery-lb">
+								<%for(int i=0; i<main.length; i++){%>
+
+								<%-- 							<%=productDetailList.get(0).getName() %> --%>
+								<%-- 							<%=productDetailList.get(0).getPrice()%> --%>
+								<%-- 							<%=productSizeList.get(i).getSize()%> --%>
+								<%-- 							<%=productColorList.get(i).getColor() %> --%>
+								<%-- 							<%=basicCode%> --%>
+								<!-- 	------------------------------------------------     -->
+
+								<div class="item-slick3"
+									data-thumb="upload/productUploadImg/<%=main[i] %>">
+									<div class="wrap-pic-w pos-relative">
+										<img src="upload/productUploadImg/<%=main[i] %>"
+											alt="IMG-PRODUCT"> <input type="hidden" name="main_img"
+											value="upload/productUploadImg/<%=main[i] %>"> <a
+											class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+											href="product/uploadImg/<%=main[i] %>"> <i
+											class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+								<%}%>
 
 								<!-- ----수정하기 --- -->
 								<!-- 						             	 20.12.19. yj 바뀜! -->
@@ -342,10 +355,10 @@ var productCode = "";
 								<!-- 							<input type="hidden" name="cnt" value="0"> -->
 
 
-                  </div>
-               </div>
-            </div>
-         </div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
