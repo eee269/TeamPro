@@ -275,26 +275,27 @@ public class ProdReviewDAO {
 	}
 	// -------------------updateReview()-----------------------
 	// -------------------getStarScoreCount()-----------------------
-	public ArrayList<Integer> getStarScoreCount(String basicCode) {
+	public int getStarScoreCount(String basicCode, int score) {
 		ArrayList<Integer> starScore = new ArrayList<Integer>();
+		int star = 0;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
 		try {
 			String sql = "";
-			for(int i=1; i<6; i++) {
+//			for(int i=1; i<6; i++) {
 				sql = "SELECT count(starScore) FROM product_review WHERE product_basicCode =? AND starScore = ?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, basicCode);
-				ps.setInt(2, i);
+				ps.setInt(2, score);
 				rs = ps.executeQuery();
 				
 				if(rs.next()) {
-					int star = rs.getInt(1);
-					starScore.add(star);
+					star = rs.getInt(1);
+//					starScore.add(star);
 				}
 				
-			}
+//			}
 		} catch (SQLException e) {
 			System.out.println("ProdReviewDAO - getStarScoreCount : "+e.getMessage());
 			e.printStackTrace();
@@ -303,7 +304,7 @@ public class ProdReviewDAO {
 			close(ps);
 		}
 		
-		return starScore;
+		return star;
 	}
 	// -------------------getStarScoreCount()-----------------------
 	// -------------------checkReviewRec()-----------------------

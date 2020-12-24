@@ -1087,7 +1087,7 @@ var productCode = "";
 			    	                    	output += 	"<div class='photo-list'>"
 				    	                    				+"<ul>"
 				    	                    					+"<li>"
-				    	                    						+"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');''>"
+				    	                    						+"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');'>"
 				    	                    							+"<img src='upload/prodReviewUpload/"+reply.product_img +"'>"
 				    	                    						+"</a>"
 				    	                    						+"<div class='attach-preview'></div>"

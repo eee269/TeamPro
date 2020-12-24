@@ -37,15 +37,15 @@
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="javascript:commSort('new');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " id="new" onclick="javascript:commSort('new');">
 						최신순
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('readcount');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="readcount" onclick="javascript:commSort('readcount');">
 						조회순
 					</button>
 					
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('bookmark');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="bookmark" onclick="javascript:commSort('bookmark');">
 						추천순
 					</button>
 
@@ -211,6 +211,17 @@
 		location.href="CommList.co?sort="+sort;
 	}
 	
+</script>
+<script>
+	function nowSort(){
+		// 최신순, 조회순, 추천순 탭에 이벤트 처리
+		var sort = '<%=request.getParameter("sort") %>'
+		if(sort === 'null'){
+			sort = "new";
+		}
+		$('#'+sort).addClass('how-active1');
+	}
+	nowSort();
 </script>
 </body>
 </html>
