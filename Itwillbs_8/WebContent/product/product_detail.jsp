@@ -420,7 +420,7 @@ var productCode = "";
 							</div>
 
 
-							<!-- 예진아 여기 수정 3. 시작  -->
+							
 							<%-- 선택한 옵션 블럭 --%>
 							<ul id="show-option">
 								<%-- 한 옵션이 들어가는 li--%>
@@ -441,7 +441,7 @@ var productCode = "";
 										name="cartSubmit">
 								</div>
 							</div>
-							<!-- 예진아 여기 수정 3. 끝  -->
+							
 
 						</div>
 						<!-- p-t-33 끝 -->

@@ -28,7 +28,6 @@ SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
-
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css"
@@ -214,7 +213,7 @@ $(document).ready(function() {
 
 
 										<ul class="arraymodeTab">
-											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a> | </li>
 											<li class="arraymode newest"><a href="#newest">최신순</a></li>
 										</ul>
 
@@ -415,8 +414,6 @@ $(function(){
 	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";	
 	                    }else if(j == 4){
 	                    	var core_content = coReply.content;
-// 	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-
 	                    	if(core_del == "N"){
 	                    		output += "<div class='content'><p class='content_p'>"+coReply.content;
 		                    }else{
@@ -424,8 +421,11 @@ $(function(){
 	 	                    }
 	                    }else if(j == 5){
 	                    	var img = coReply.img;
+	                    	var none = '"none"';
 	                    	if(img != ""){
-	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
+	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'>"
+	                    			+"<a class='image_view_load'>"
+	                    			+"<img src='upload/commReUpload/"+img+"' onerror='this.style.display="+none+";'></a>";
 	                    	}
 	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
 	                    }else if(j == 6){	
@@ -652,10 +652,15 @@ $(function(){
 									if(reply_del=="Y"){
 										output += "</ul>"
 	    	                    	}else if(id == re_name){			
-	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'>"
+	    	                    				   +"<input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'>"
+	    	                    				   +"<input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
-	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'>"
+	    	                    		           +"<input type='hidden' name='community_num' id='community_num' value='"+num+"'>"
+	    	                    		           +"<input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
+	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"
+	    	                    		           +reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
 	    	                    	}else{
 	    	                    		output += "</ul>";
 	    	                    	}
@@ -827,12 +832,18 @@ $(function(){
 
 
  		//==================== 상세 이미지 보기  ====================//
- 		$(document).on("click", ".image_view_load", function () {
+ 		$(document).on("click", ".image_view_load", function () {				 
  				 var a = $(this).parents('li'); 
  				 var content = a.find('.content_p').text();
  				 var img = a.find('#img').val();
+ 				 var name = a.find('.re_name').text();
+ 				 var date = a.find('.re_date').text();
+ 				 
  				 var output = ""; 
- 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
+ 				output += "<div id='inline' style='max-width:600px; display: none;'>"
+ 	 					  +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
+ 	 					  +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+ 	 					  +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
  				 
  				 $("#image_view_load").html(output); 
  				 $(".fancybox").trigger("click");

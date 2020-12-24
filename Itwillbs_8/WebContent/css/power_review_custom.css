@@ -2350,13 +2350,20 @@ display: inline-block;
 }
 
 .arraymode a{
-font-size: 12px; 
+font-size: 13px; 
 }
 
 span.del {
 	font-style: italic !important;
 	color: #a0a0a0 !important;
 	margin-bottom: 20px !important;
+}
+
+ul.PR15N01-review-wrap img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  padding-bottom:10px;
 }
 
 /* ProdReviewComments */
