@@ -703,15 +703,15 @@ $(function(){
  		
  		//==================== 대댓글 쓰기  ====================//
  		$(document).on("click", ".reReWrite", function () {
+ 			var id = "<%=id%>";
  			var a = $(this).parents('li').find('#comm_add'); 
 		 	var b = $(this).parents('li'); 
  			
 		 	if(a.find("#contents").val() == ""){
 	    		alert("대댓글을 입력하세요.");
 	    		a.find("#contents").focus();
-	    	}else{
-	    		
-			 	var username = a.find('#username').val();
+	    	}else{	    		
+			 	var username = id;
 				var community_num = a.find('#community_num').val();
 				var num = a.find('#num').val();
 				var contents = a.find('#contents').val();
