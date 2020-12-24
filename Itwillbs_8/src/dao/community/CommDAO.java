@@ -189,11 +189,10 @@ public class CommDAO {
 				ps.setString(1, member_id);
 				rs = ps.executeQuery();
 				
-				if(rs.next()) {
+				articleList = new ArrayList<CommBean>();
+				while(rs.next()) {
 					
-					articleList = new ArrayList<CommBean>();
 					
-					while(rs.next()) {
 						// 1개 게시물 정보를 저장할 CommBean 객체 생성 및 데이터 저장
 						CommBean article = new CommBean();
 						
@@ -209,7 +208,6 @@ public class CommDAO {
 						
 						// 1개 게시물을 전체 게시물 저장 객체에 추가
 						articleList.add(article);
-					}
 				}
 			} catch (SQLException e) {
 				System.out.println("selectArticleList() 오류 "+e.getMessage());
