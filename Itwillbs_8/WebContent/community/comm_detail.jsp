@@ -213,7 +213,7 @@ $(document).ready(function() {
 
 
 										<ul class="arraymodeTab">
-											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a> | </li>
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>|
 											<li class="arraymode newest"><a href="#newest">최신순</a></li>
 										</ul>
 
@@ -840,7 +840,7 @@ $(function(){
  				 var date = a.find('.re_date').text();
  				 
  				 var output = ""; 
- 				output += "<div id='inline' style='max-width:600px; display: none;'>"
+ 				 output += "<div id='inline' style='max-width:600px; display: none;'>"
  	 					  +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
  	 					  +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
  	 					  +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
