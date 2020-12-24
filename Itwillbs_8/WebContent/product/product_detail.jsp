@@ -1050,11 +1050,8 @@ var productCode = "";
 																		+"삭제"
 																+"</div>"
 							                                 +"</a>"
-// 						                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
-// 																	+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
-				    	                    						+"<input type='hidden' id='prm_submit' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn' "
-				    	                    						+"value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
-// 																+"</div>"
+			    	                    						+"<input type='hidden' id='prm_submit' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' "
+			    	                    						+"value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
 														+"</div>";
 		    	                					}
 		    	                	}else{
@@ -1144,10 +1141,8 @@ var productCode = "";
 																			+"삭제"
 																	+"</div>"
 								                                 +"</a>"
-							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
-																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
-										                                +"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
-																	+"</div>"
+																	+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+									                                +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
 															+"</div>";
 				    	                    }	
 				   	                 		if(member_id == 'admin'){
@@ -1283,14 +1278,19 @@ var productCode = "";
             	starChart += "<li>"
            						+"<span class='tit'>star"+key+"</span>"
            							+"<span class='bar'>"
-										+"<span class='abs' style='width: "+100 / total * star[key] * 1+"%'></span>"
+										+"<span class='abs' style='width: "+(total != 0 ? (100 / total * star[key] * 1) : 0)+"%'></span>"
 									+"</span>"
 									+"<span class='num'>"+star[key]+"</span>"
 							+"</li>";
             		
             	}
-           		var like = "<strong>"+(starLike / total * 100).toFixed(1)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
-            		result = (score / total *1).toFixed(1);
+           		var like = "<strong>"+ (total != 0 ? (starLike / total * 100).toFixed(1):0)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
+            		if(total == 0){
+						result = 0;            			
+            		}else{
+	           			result = (score / total *1).toFixed(1);
+            		}
+            		
             		$('.like').html(like);
             		$('.chart ul').html(starChart);
             		$('.score dt').html(result);
@@ -1531,6 +1531,27 @@ function showReply(num){
 		}
 	});
 }
+</script>
+<script>
+	// tabmenu 수량 호출
+	function getCount(){
+		var basicCode = "<%=basicCode%>";
+		$.ajax({
+			url: "ProdGetCount.po",
+               type: "POST",
+               data: {
+                   basicCode: basicCode
+               },
+               success: function (json) {
+            	   var count = JSON.parse(json);
+            	   for(key in count){
+						$(".count"+key).html(count[key]);
+            	   }
+            	   
+               },
+		})
+	};
+	getCount();
 </script>
 <script type="text/javascript">
    var _gaq = _gaq || [];

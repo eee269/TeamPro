@@ -128,6 +128,8 @@ public class ProdReviewDAO {
 				sql = "SELECT count(num) FROM product_review where product_basicCode=? and product_img IS NOT NULL and re_lev = 0";
 			}else if(pic == 1){
 				sql = "SELECT count(num) FROM product_review where product_basicCode=? and product_img IS NULL and re_lev = 0";
+			}else {
+				sql = "SELECT count(num) FROM product_review where product_basicCode=? and re_lev = 0";
 			}
 			ps = con.prepareStatement(sql);
 			ps.setString(1, basicCode);

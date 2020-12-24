@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProdGetCountAction;
 import action.product.ProductCartLikeAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
@@ -293,6 +294,16 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// --------------------상품 reveiw, qna 개수 가져오기--------------------
+		else if (command.equals("/ProdGetCount.po")) {
+			System.out.println("ProdGetCount.po 포워딩");
+			action = new ProdGetCountAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		// -------------------마이페이지 > 내가 찜한 상품 보기-------------
 		else if (command.equals("/ProductMylikeList.po")) {
 			System.out.println("ProductMylikeList.po 포워딩");
