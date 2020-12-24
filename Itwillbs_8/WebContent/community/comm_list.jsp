@@ -5,6 +5,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+	.sub_top_ban {width:100%; height:270px;  line-height:270px;}
+	.sub_top_ban.brand {background:#e2e2e0 url('images/sub_top_ban_comm.jpg') center center no-repeat;}
+	.sub_top_text {font-family:Roboto Condensed,Nanum Gothic,sans-serif; font-size:28px; letter-spacing:7px; text-align:right;color:#000;}
+</style>	
 	
 <%
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
@@ -24,10 +29,9 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92"
-   style="background-image: url('images/bg-02.jpg');">
-   <h2 class="ltext-105 cl0 txt-center">Community</h2>
-</section>
+<div class="cboth sub_top_ban brand">
+	<div class="width1260 sub_top_text">CS CENTER</div>
+</div>
 <!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">

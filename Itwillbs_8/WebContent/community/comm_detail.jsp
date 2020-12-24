@@ -65,7 +65,7 @@ $(document).ready(function() {
 				<div class="p-r-45 p-r-0-lg">
 					<!-- 게시물 썸네일 -->
 					<div class="how-pos5-parent">
-						<img src="communityUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.src='images/icons/angry_face.png'">
+						<img src="upload/communityUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.src='images/icons/angry_face.png'">
 						<div class="flex-col-c-m size-123 bg9 how-pos5">
 							<span class="ltext-107 cl2 txt-center">
 								 <%=sdfD.format(article.getDate()) %> 

@@ -15,6 +15,12 @@
 		<%
 	} 
 %>
+<style>
+.container-menu-desktop{
+	z-index: 1000;
+}
+
+</style>
 <link rel="stylesheet" type="text/css" href="css/comm_write.css">
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->

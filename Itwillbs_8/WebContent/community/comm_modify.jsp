@@ -49,11 +49,11 @@
 						<span>썸네일</span>
 						<div id="image_container" class="mg-b-5" style="width:60px; height:60px; border: 1px solid black;"></div>
 						<label>현재 파일 :<img src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" style="width:50px;height: 50px;"></label><br>
-						<input type="file" name="img" id="img" value="<%=article.getImg() %>"><br>
+						<input type="file" name="img" id="img" value="<%=article.getImg() %>" required="required"><br>
     					<label>제목 : </label>
-     					<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>" class="MS_input_txt input_style2"><br>
+     					<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>" class="MS_input_txt input_style2" required="required"><br>
     					<label>비밀번호 확인 : </label>
-    					<input type="password" id="pass" name="pass" class="MS_input_txt input_style2"><br>
+    					<input type="password" id="pass" name="pass" class="MS_input_txt input_style2" required="required"><br>
 						<textarea id ="summernote" name="content" ><%=article.getContent() %></textarea><br>
 						<div class="flex-w flex-c-m m-tb-10 float-r" >
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
