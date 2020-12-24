@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="../inc/header.jsp" />
+<jsp:include page="/inc/header.jsp" />
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
+<jsp:include page="/quickMenu.jsp" />
 
 <!-- breadcrumb -->
 <div class="container">
@@ -13,10 +13,10 @@
 	</div>
 </div>
 
-<link type="text/css" rel="stylesheet" href="../css/common.css" />
-<link type="text/css" rel="stylesheet" href="../css/mp_main.css" />
-<link type="text/css" rel="stylesheet" href="../css/header.css" />
-<link type="text/css" rel="stylesheet" href="../css/menu_2.css" />
+<link type="text/css" rel="stylesheet" href="css/common.css" />
+<link type="text/css" rel="stylesheet" href="css/mp_main.css" />
+<link type="text/css" rel="stylesheet" href="css/header.css" />
+<link type="text/css" rel="stylesheet" href="css/menu_2.css" />
 <!-- Shoping Cart -->
 
 
@@ -447,4 +447,4 @@
 
 
 
-	<jsp:include page="../inc/footer.jsp" />
+	<jsp:include page="/inc/footer.jsp" />

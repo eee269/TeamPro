@@ -69,24 +69,21 @@
 						
 <!-- 						북마크				 -->
 						<div class="block2-txt-child2 flex-r p-t-3">
-<%-- 							<%if(member_id != null){ %> --%>
-<%-- 							<button class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <% --%>
-<!--  								if(likeBaiscCodeList.contains(newList.get(i).getBasicCode())){ -->
-<%-- 								%>js-addedwish-b2<% --%>
-<!-- 	 								}else{ -->
-<%-- 									%>js-addedwish-b1<% --%>
-<%-- 									}%>"  --%>
-<%-- 								value="<%=likeCheck%>"> --%>
-<!-- 								<img class="icon-heart1 dis-block trans-04" -->
-<!-- 								src="images/icons/icon-heart-01.png" alt="ICON">  -->
-<!-- 								<img class="icon-heart2 dis-block trans-04 ab-t-l" -->
-<!-- 								src="images/icons/icon-heart-02.png" alt="ICON"> -->
-<!-- 							</button> -->
-<%-- 							<%}else{ %> --%>
-							<a href="#" class="not_member">
-								<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+							<% if(member_id != null) {%>
+							<!-- 비워진 북마크 -->
+							<a href="javascript:checkBook(<%=article.getNum()%>)">
+								<img src="https://img.icons8.com/material-outlined/24/000000/bookmark-ribbon.png"/>
 							</a>
-<%-- 							<%} %> --%>
+							<% } else { %>
+							
+<!-- 							<img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon--v1.png"/> -->
+							
+							<a href="#" class="not_member">
+								<img src="https://img.icons8.com/fluent-systems-regular/24/000000/bookmark-ribbon.png"/>
+							</a>
+							
+							<% } %>
+
 						</div>
 					</div>
 				</div>
@@ -280,5 +277,20 @@
 		</div>
 	</div>
 </section>
+
+<script type="text/javascript">
+function checkBook(num) {
+	$.ajax({
+		url: "CommBook.co",
+		type: "POST",
+		data: {
+			num:num
+		},
+		success: function(data) {
+			alert("북마크 설정 완료");
+		}
+	})
+}
+</script>
 
 <jsp:include page="/inc/footer.jsp" />
