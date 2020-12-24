@@ -656,7 +656,7 @@ $(function(){
 									if(reply_del=="Y"){
 										output += "</ul>"
 	    	                    	}else if(id == re_name){			
-	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'>"
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> "
 	    	                    				   +"<input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'>"
 	    	                    				   +"<input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
