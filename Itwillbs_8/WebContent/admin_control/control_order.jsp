@@ -112,7 +112,7 @@ function changeStatus(code, id) {
 					<option value="결제완료">결제완료</option>
 					<option value="상품준비중">상품준비중</option>
 					<option value="배송중">배송중</option>
-					<option value="배소완료" selected="selected">배송완료</option>
+					<option value="배송완료" selected="selected">배송완료</option>
 					<%
 					break;
 				default:
@@ -120,7 +120,7 @@ function changeStatus(code, id) {
 					<option value="결제완료" selected="selected">결제완료</option>
 					<option value="상품준비중">상품준비중</option>
 					<option value="배송중">배송중</option>
-					<option value="배소완료">배송완료</option>
+					<option value="배송완료">배송완료</option>
 					<%
 				}
 			
