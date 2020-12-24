@@ -5,6 +5,7 @@ public class AddrBean {
 	private String location;
 	private String postcode;
 	private String address;
+	private String detailAddress;
 	private String member_id;
 	private String type;
 	
@@ -20,6 +21,9 @@ public class AddrBean {
 	public String getAddress() {
 		return address;
 	}
+	public String getDetailAddress() {
+		return detailAddress;
+	}
 	public String getMember_id() {
 		return member_id;
 	}
@@ -31,6 +35,9 @@ public class AddrBean {
 	}
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+	public void setDetailAddress(String detailAddress) {
+		this.detailAddress = detailAddress;
 	}
 	public void setAddress(String address) {
 		this.address = address;
