@@ -651,7 +651,7 @@ var productCode = "";
                         </td>
                         <td>
                            <div class="tb-center">
-                              <span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
+                              <span id="qna_board_showhits1" class="qnahit"><%=qnaList.get(i).getQna_readcount()%></span>
                            </div>
                         </td>
                      </tr>
@@ -1465,6 +1465,9 @@ function prd_review(num){
 	            	   }
 			        ProdReviewRecCount(num,recommand);
 	               },
+	               error: function(request,status,error){
+	      		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	      		       }
 			})
 		}
 	}
@@ -1487,6 +1490,9 @@ function prd_review(num){
 	               	$(".bad"+num+" .recCount").html(count);
             	   }
                },
+               error: function(request,status,error){
+      		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      		       }
 		})
     };
 //     setInterval(function(){
@@ -1497,7 +1503,27 @@ function prd_review(num){
 $(function(){
 	// qna 제목 클릭 시 내용 보여주기
 	$('.nbg').click(function(){
+		
+		if($(this).next().css('display')=='none'){
+			var num = $(this).find('.qnanum').text();
+         	var hit = $(this).find('#qna_board_showhits1');
+			// 조회수 증가
+			$.ajax({
+				url: "ProdQnaUpReadcount.po",
+	               type: "POST",
+	               data: {
+	                   num: num
+	               },
+	               success: function (count) {
+	            	   $(hit).html(count);
+	               },
+	               error: function(request,status,error){
+	      		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      		       }
+			})
+		}
 		$(this).next().toggle();
+		
 	});
 	
 });

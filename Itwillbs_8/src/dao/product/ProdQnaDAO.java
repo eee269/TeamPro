@@ -439,4 +439,50 @@ public class ProdQnaDAO {
 			
 			return list;
 		}
+		// -------------------qnaUpReadcount()-----------------------
+		public int qnaUpReadcount(int num) {
+			// qna 조회수 업데이트
+			int updateCount = 0;
+			PreparedStatement ps = null;
+			try {
+				String sql = "UPDATE product_qna SET qna_readcount = qna_readcount+1 WHERE qna_num = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
+				updateCount = ps.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("ProdQnaDAO - qnaUpReadcount : "+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				close(ps);
+			}
+			
+			return updateCount;
+		}
+		// -------------------qnaUpReadcount()-----------------------
+		// -------------------qnaGetReadcount()-----------------------
+		public int qnaGetReadcount(int num) {
+			// qna 조회수 가져오기
+			int count = 0;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				String sql = "SELECT qna_readcount FROM product_qna WHERE qna_num = ?";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, num);
+				rs = ps.executeQuery();
+						
+				if(rs.next()) {
+					count = rs.getInt(1);
+				}
+			} catch (SQLException e) {
+				System.out.println("ProdQnaDAO - qnaUpReadcount : "+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(ps);
+			}
+			
+			return count;
+		}
+		// -------------------qnaGetReadcount()-----------------------
 }
