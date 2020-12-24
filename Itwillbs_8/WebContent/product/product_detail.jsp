@@ -1493,18 +1493,16 @@ function prd_review(num){
 //     	$('.rating-input').toggle();
 //     },100);
 </script>
+<script>
+$(function(){
+	// qna 제목 클릭 시 내용 보여주기
+	$('.nbg').click(function(){
+		$(this).next().toggle();
+	});
+	
+});
+</script>
 <script type="text/javascript">
-// qna 제목 클릭 시 내용 보여주기
-function show_hide(){
-   $(function(){
-      var content = $('.MS_qna_content_box').css('display');
-      if(content == 'table-row' || content == 'block'){
-         $('.MS_qna_content_box').css('display','none');
-      }else {
-         $('.MS_qna_content_box').css('display','table-row').focus();
-      }
-   });
-};
 // qna 비회원이 글 쓰려고 할 시 로그인 유도
 $(function(){
 	$('.btm_write').click(function(){
