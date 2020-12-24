@@ -112,12 +112,8 @@
                            		<!-- //게시판 글쓰기 -->
                             	<!-- 하단 버튼 -->
                             	<div class="flex-w flex-c-m m-tb-10 float-r" >
-									<a href="javascript:submit">
-										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
-										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-											글등록
-										</div>
-									</a>
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									<input type="submit" value="글등록" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
 									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
 										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>

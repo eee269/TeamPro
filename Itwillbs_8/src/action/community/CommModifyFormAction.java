@@ -1,10 +1,13 @@
 package action.community;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import action.Action;
 import svc.community.CommDetailService;
+import svc.community.CommListService;
 import vo.ActionForward;
 import vo.CommBean;
 
@@ -23,8 +26,12 @@ public class CommModifyFormAction implements Action {
 		// => 파라미터 : 글번호(num), 리턴타입 : CommBean(article)
 		CommDetailService boardDetailService = new CommDetailService();
 		CommBean article = boardDetailService.getArticle(num);
+		// 글 상세페이지에 베스트 글 가져오기
+		CommListService commListService = new CommListService();
+		ArrayList<CommBean> articleList =  commListService.getArticleList(1, 3, "", "readcount");
 		
 		request.setAttribute("article", article);
+		request.setAttribute("articleList",articleList);
 		
 		// => Dispatcher 방식
 		forward = new ActionForward();

@@ -2606,6 +2606,11 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
+.size-126 {
+  width: 40px;
+  height: 25px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
 .size-201 {
@@ -2697,6 +2702,9 @@ input.num-product::-webkit-inner-spin-button {
 
 .size-303 {
   height: 390px;
+}
+.size-304 {
+  height: 500px;
 }
 
 

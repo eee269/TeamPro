@@ -78,9 +78,47 @@
 }
 
 #powerReview .tabs .tab.active {
-   border-bottom: 1px solid #263238;
+	border-bottom: 1px solid #263238;
+}
+/*====================옵션 css====================*/
+.wrap-num-product {
+	width: auto;
+	height: 25px;
+	border: 1px solid #e6e6e6;
+	border-radius: 3px;
+	overflow: hidden;
 }
 
+.btn-num-product-up, .btn-num-product-down {
+	width: 25px;
+	height: auto;
+	cursor: pointer;
+}
+
+.btn-num-product-up, .btn-num-product-down {
+	width: 25px;
+	height: auto;
+	cursor: pointer;
+}
+
+.num-product {
+	width: 30px;
+	height: 100%;
+	border-left: 1px solid #e6e6e6;
+	border-right: 1px solid #e6e6e6;
+	background-color: #f7f7f7;
+}
+
+#show-option>li {
+	margin: 10px 0px 20px 0px;
+}
+a:hover{
+	text-decoration: none;
+}
+#show-option>li:last-child {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+}
 </style>
 
 <!-- 끝 -->
@@ -90,7 +128,6 @@
 <link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
 <link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
-
 <script type="text/javascript">
    // option으로 선택한 값 받아와서 임시 저장
    
@@ -149,22 +186,21 @@ var productCode = "";
       // optcol id 설정 -> 이런모양( <li id="optcol1"> )
       var id = "optcol"+resultcount;
       optcol.id = id; 
-
       // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
     var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
       "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
       // 옵션 이름, ( BK/M )
-          "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
-          "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +
+          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
+          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div>"+
+          "<div class='size-204 flex-w flex-m respon6-next'>" + 
+          "<div class='wrap-num-product flex-w' id='itemcnt" + resultcount + "'>" +
           "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
           "<i class='fs-16 zmdi zmdi-minus'></i></span>" + 
           "<input class='mtext-104 cl3 txt-center num-product' type='number' id='optnum" + resultcount + "' name='num-product'  value='1'>" + 
           "<span class='btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m' id='optplus" + resultcount + "' onclick='cntPlus(this.id)'>" + 
-          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>" + 
-          "<div><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
-          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div>";
+          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>";
       $('#'+id).append(html);
       
       // cnt 값 보내기
@@ -173,7 +209,6 @@ var productCode = "";
       calculatePrice('optnum'+resultcount);
       
    }
-
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
    // 수량의 id를 넘겨 받고
    function calculatePrice(id) {
@@ -191,10 +226,8 @@ var productCode = "";
       } else {
          $('#total').css('display', 'block');
       }
-
       $('#total span').text(totalprice + '원');
    }
-
    // 상품개수증가
    function cntPlus(id) {
       var numid = id.replace("plus", "num")
@@ -215,7 +248,6 @@ var productCode = "";
       // optminus1 에서 minus를 num으로 고쳐서 optnum1으로 고침, optnum1은 상품 갯수 id
       var cnt = Number($('#'+numid).val());
       // optnum1에 있는 value 값을 받아와서 cnt에 저장
-
       if(cnt > 1) {
          cnt -= 1;
          $('#'+numid).attr('value', cnt);
@@ -224,13 +256,11 @@ var productCode = "";
          $("#slick-slide06").attr('value', cnt);
 //          var ca_cnt = $("#slick-slide05").val(cnt);
        
-
       }
       // 갯수가 1보다 크면 감소 1과 같거나 작으면 아무것도 안함
       
       calculatePrice(numid);
    }
-
    // 선택옵션삭제
    function optDelete(id) {
       $(id).remove();
@@ -241,7 +271,6 @@ var productCode = "";
 //    var a = $('#mtext-104 cl3 txt-center num-product').val();
 //    alert(input);
 	
-
    // 옵션 관련 스크립트 끝
 </script>
 
@@ -253,7 +282,6 @@ var productCode = "";
     ArrayList<ProductOptionBean> productSizeList =(ArrayList<ProductOptionBean>)request.getAttribute("productSizeList");
    ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
     
-
     String[] main = productDetailList.get(0).getMain_img().split("/");
     String[] sub = productDetailList.get(0).getSub_img().split("/");
     
@@ -277,217 +305,222 @@ var productCode = "";
 
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
-   <div class="container">
-      <!-- 폼 -->
-   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
-      <!-- 폼 -->
-      <div class="row">
-         <div class="col-md-6 col-lg-7 p-b-30">
-            <div class="p-l-25 p-r-30 p-lr-0-lg">
-               <div class="wrap-slick3 flex-sb flex-w">
-                  <div class="wrap-slick3-dots"></div>
-                  <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+	<div class="container">
+		<!-- 폼 -->
+		<form action="cartGetPlusAction.ca" method="post" name="cartUp">
+			<!-- 폼 -->
+			<div class="row">
+				<div class="col-md-6 col-lg-7 p-b-30">
+					<div class="p-l-25 p-r-30 p-lr-0-lg">
+						<div class="wrap-slick3 flex-sb flex-w">
+							<div class="wrap-slick3-dots"></div>
+							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                  <div class="slick3 gallery-lb">
-                  <%for(int i=0; i<main.length; i++){%>
-                  
-<%-- 							<%=productDetailList.get(0).getName() %> --%>
-<%-- 							<%=productDetailList.get(0).getPrice()%> --%>
-<%-- 							<%=productSizeList.get(i).getSize()%> --%>
-<%-- 							<%=productColorList.get(i).getColor() %> --%>
-<%-- 							<%=basicCode%> --%>
-						<!-- 	------------------------------------------------     -->
-						
-                     <div class="item-slick3"
-                        data-thumb="upload/productUploadImg/<%=main[i] %>">
-                        <div class="wrap-pic-w pos-relative">
-                           <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-                           <input type="hidden" name = "main_img" value="upload/productUploadImg/<%=main[i] %>">
+							<div class="slick3 gallery-lb">
+								<%for(int i=0; i<main.length; i++){%>
 
-                           <a
-                              class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                              href="product/uploadImg/<%=main[i] %>"> <i
-                              class="fa fa-expand"></i>
-                           </a>
-                        </div>
-                     </div>
-                  <%}%>
-                  
-						             	<!-- ----수정하기 --- -->
-<!-- 						             	 20.12.19. yj 바뀜! -->
-						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
-							<input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
-							<input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
-<!-- 							<input type="hidden" name="size" value=""> -->
-<!-- 							<input type="hidden" name="color" value=""> -->
-<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
-<!-- 							<input type="hidden" name="cnt" value="0"> -->
+								<%-- 							<%=productDetailList.get(0).getName() %> --%>
+								<%-- 							<%=productDetailList.get(0).getPrice()%> --%>
+								<%-- 							<%=productSizeList.get(i).getSize()%> --%>
+								<%-- 							<%=productColorList.get(i).getColor() %> --%>
+								<%-- 							<%=basicCode%> --%>
+								<!-- 	------------------------------------------------     -->
+
+								<div class="item-slick3"
+									data-thumb="upload/productUploadImg/<%=main[i] %>">
+									<div class="wrap-pic-w pos-relative">
+										<img src="upload/productUploadImg/<%=main[i] %>"
+											alt="IMG-PRODUCT"> <input type="hidden" name="main_img"
+											value="upload/productUploadImg/<%=main[i] %>"> <a
+											class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+											href="product/uploadImg/<%=main[i] %>"> <i
+											class="fa fa-expand"></i>
+										</a>
+									</div>
+								</div>
+								<%}%>
+
+								<!-- ----수정하기 --- -->
+								<!-- 						             	 20.12.19. yj 바뀜! -->
+								<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
+								<input type="hidden" name="name"
+									value="<%=productDetailList.get(0).getName() %>"> <input
+									type="hidden" name="price"
+									value="<%=productDetailList.get(0).getPrice()%>">
+								<!-- 							<input type="hidden" name="size" value=""> -->
+								<!-- 							<input type="hidden" name="color" value=""> -->
+								<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
+								<!-- 							<input type="hidden" name="cnt" value="0"> -->
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6 col-lg-5 p-b-30">
+					<div class="p-r-50 p-t-5 p-lr-0-lg">
+						<!-- 상품코드 -->
+						<input type="hidden" id="item-code" value="code,,">
+						<!-- 상품명 -->
+						<h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
+						</h4>
+						<!-- 상품가격 -->
+						<span class="mtext-106 cl2" id="item-price"><%=priceFormat.format(productDetailList.get(0).getPrice())%>원</span>
+
+						<!--                <p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros -->
+						<!--                   pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare -->
+						<!--                   feugiat.</p> -->
+
+						<!-- 상품 옵션 -->
+						<div class="p-t-33" id="select-opt">
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">Size</div>
+
+								<div class="size-204 respon6-next rs1-select2 bor8 bg0">
+									<select class="js-select2" id="opt1" name="time"
+										onchange="submix(this.id, this.value)">
+										<option value="" selected>Choose an option</option>
+										<%for(int i=0; i<productSizeList.size(); i++){%>
+										<option value="<%=productSizeList.get(i).getSize()%>"><%=productSizeList.get(i).getSize() %></option>
+										<% }%>
+									</select>
+									<div class="dropDownSelect2"></div>
+								</div>
+							</div>
+
+							<div class="flex-w flex-r-m p-b-10">
+								<div class="size-203 flex-c-m respon6">Color</div>
+
+								<div class="size-204 respon6-next rs1-select2 bor8 bg0">
+									<select class="js-select2" id="opt2" name="time"
+										onchange="submix(this.id, this.value)">
+										<option value="" selected>Choose an option</option>
+										<%for(int i=0; i<productColorList.size(); i++){%>
+										<option value="<%=productColorList.get(i).getColor()%>"><%=productColorList.get(i).getColor() %></option>
+										<% }%>
+									</select>
+									<div class="dropDownSelect2"></div>
+								</div>
+							</div>
+
+
+							
+							<%-- 선택한 옵션 블럭 --%>
+							<ul id="show-option">
+								<%-- 한 옵션이 들어가는 li--%>
+								<%-- 한 옵션이 들어가는 li 끝 --%>
+							</ul>
+
+							<div class="price" class="size-203 flex-c-m respon6 " id="total"
+								style="text-align: right; font-size: 18px; font-weight: bold;">
+								<span></span>
+							</div>
+
+							<div class="flex-w flex-r-m p-b-10"
+								style="text-align: right; width: 570px; padding: 10px 30px;">
+								<div class="size-204 flex-w flex-m respon6-next">
+									<br>
+									<input type="submit" value="Add to cart"
+										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+										name="cartSubmit">
+								</div>
+							</div>
 							
 
-                  </div>
-               </div>
-            </div>
-         </div>
+						</div>
+						<!-- p-t-33 끝 -->
 
-         <div class="col-md-6 col-lg-5 p-b-30">
-            <div class="p-r-50 p-t-5 p-lr-0-lg">
-            <!-- 상품코드 -->
-            <input type="hidden" id="item-code" value="code,,">
-            <!-- 상품명 -->
-               <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
-                  </h4>
-            <!-- 상품가격 -->
-               <span class="mtext-106 cl2" id="item-price"><%=priceFormat.format(productDetailList.get(0).getPrice())%>원</span>
+						<%-- 좋아요 + 각종 공유 / yj --%>
+						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+							<div class="flex-m bor9 p-r-10 m-r-11">
+								<%if(member_id !=null){%>
 
-<!--                <p class="stext-102 cl3 p-t-23">Nulla eget sem vitae eros -->
-<!--                   pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare -->
-<!--                   feugiat.</p> -->
+								<button
+									class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productDetailList.get(0).getBasicCode())){%> js-addedwish-b2 <%}else{%>js-addedwish-b1<%}%>"
+									value="<%=likeCheck%>">
+									<img class="icon-heart1 dis-block trans-04"
+										src="images/icons/icon-heart-01.png" alt="ICON"> <img
+										class="icon-heart2 dis-block trans-04 ab-t-l"
+										src="images/icons/icon-heart-02.png" alt="ICON">
+								</button>
+								<% }else{%>
+								<a href="#" class="not_member"> <img
+									class="icon-heart1 dis-block trans-04"
+									src="images/icons/icon-heart-01.png" alt="ICON">
+								</a>
+								<% } %>
+								<!-- 카카오톡으로 공유하기 기능 -->
+								&nbsp;&nbsp;&nbsp; <a id="kakao-link-btn"
+									href="javascript:sendLink()"> <img
+									src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png"
+									width="20px" />
+								</a>
+							</div>
 
-               <!-- 상품 옵션 -->
-               <div class="p-t-33" id="select-opt">
-                  <div class="flex-w flex-r-m p-b-10">
-                     <div class="size-203 flex-c-m respon6">Size</div>
+							<a href="#"
+								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+								data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
+							</a> <a href="#"
+								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+								data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
+							</a> <a href="#"
+								class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+								data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
 
-                     <div class="size-204 respon6-next rs1-select2 bor8 bg0">
-                        <select class="js-select2" id="opt1" name="time"
-                           onchange="submix(this.id, this.value)">
-                           <option value="" selected>Choose an option</option>
-                           <%for(int i=0; i<productSizeList.size(); i++){%>
-                              <option value="<%=productSizeList.get(i).getSize()%>"><%=productSizeList.get(i).getSize() %></option>
-                           <% }%>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                     </div>
-                  </div>
+			<!--    폼 끝 -->
+		</form>
 
-                  <div class="flex-w flex-r-m p-b-10">
-                     <div class="size-203 flex-c-m respon6">Color</div>
+		<!-- 상세정보 시작 -->
+		<div id="productDetail">
+			<div class="cboth width1260">
 
-                     <div class="size-204 respon6-next rs1-select2 bor8 bg0">
-                        <select class="js-select2" id="opt2" name="time"
-                           onchange="submix(this.id, this.value)">
-                           <option value="" selected>Choose an option</option>
-                           <%for(int i=0; i<productColorList.size(); i++){%>
-                              <option value="<%=productColorList.get(i).getColor()%>"><%=productColorList.get(i).getColor() %></option>
-                           <% }%>
-                        </select>
-                        <div class="dropDownSelect2"></div>
-                     </div>
-                  </div>
+				<div id="page01" class="cboth pdt100"></div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
+				<div class="prd-detail">
+					<form name="allbasket" method="post" action="/shop/basket.html">
 
+						<!-- //item-wrap -->
+						<div class="related-allbasket none">
+							<a href="javascript:send_multi('3', '', 'relation', 'YES')">ADD
+								TO CART</a>
+						</div>
+					</form>
 
-                  <div class="flex-w flex-r-m p-b-10"
-                     style="text-align: right; width: 570px; padding: 10px 30px;">
+					<div id="videotalk_area"></div>
+					<!-- [OPENEDITOR] -->
+					<table width="750" align="center" border="0" cellspacing="0"
+						cellpadding="0">
+						<tbody>
+							<tr>
+								<td align="center">
+									<%for(int i=0; i<sub.length; i++){%> <img
+									src="upload/productUploadImg/<%=sub[i] %>" imgborder="0"><br>
+									<% }%>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
-                     <%-- 선택한 옵션 블럭 --%>
-                     <ul id="show-option" style="width: 500px;">
-                        <%-- 한 옵션이 들어가는 li--%>
-                        <%-- 한 옵션이 들어가는 li 끝 --%>
-                     </ul>
+					&gt;
+					<!-- 몰티비 플레이어 노출 위치 -->
+					<div id="malltb_video_player"
+						style="margin-top: 10px; margin-bottom: 10px; text-align: center; display: none;"></div>
 
+				</div>
 
-
-                     <div class="size-204 flex-w flex-m respon6-next">
-                        <div class="price" class="size-203 flex-c-m respon6 " id="total">
-                           <span></span>
-                        </div>
-                        <br>
-                        <input type="submit" value="Add to cart"
-                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="cartSubmit">
-                     </div>
-                     
-                  </div>
-               </div>
-
-               <%-- 좋아요 + 각종 공유 / yj --%>
-               <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                  <div class="flex-m bor9 p-r-10 m-r-11">
-                  <%if(member_id !=null){%>
-                     
-                     <button 
-                        class="btn-addwish-b2 dis-block pos-relative js-addwish-b2 <%if(likeBaiscCodeList.contains(productDetailList.get(0).getBasicCode())){%> js-addedwish-b2 <%}else{%>js-addedwish-b1<%}%>" value="<%=likeCheck%>">
-                        <img class="icon-heart1 dis-block trans-04"
-                        src="images/icons/icon-heart-01.png" alt="ICON"> 
-                        <img class="icon-heart2 dis-block trans-04 ab-t-l"
-                        src="images/icons/icon-heart-02.png" alt="ICON">
-                     </button>
-                  <% }else{%>
-                     <a href="#"
-                        class="not_member">
-                        <img class="icon-heart1 dis-block trans-04"
-                        src="images/icons/icon-heart-01.png" alt="ICON">
-                     </a>
-                   <% } %>
-                   <!-- 카카오톡으로 공유하기 기능 -->
-                   &nbsp;&nbsp;&nbsp;
-                   <a id="kakao-link-btn" href="javascript:sendLink()">
-  					<img src="https://developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_medium.png" width="20px"/>
-				   </a>
-                  </div>
-
-                  <a href="#"
-                     class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                     data-tooltip="Facebook"> <i class="fa fa-facebook"></i>
-                  </a> <a href="#"
-                     class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                     data-tooltip="Twitter"> <i class="fa fa-twitter"></i>
-                  </a> <a href="#"
-                     class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                     data-tooltip="Google Plus"> <i class="fa fa-google-plus"></i>
-                  </a>
-               </div>
-            </div>
-         </div>
-      </div>
-
-<!--    폼 끝 -->
-      </form>
-      
-      <!-- 상세정보 시작 -->
-      <div id="productDetail">
-         <div class="cboth width1260">
-
-            <div id="page01" class="cboth pdt100"></div>
-            <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
-            <jsp:include page="../inc/detail_tabmenu.jsp" />
-            <div class="prd-detail">
-               <form name="allbasket" method="post" action="/shop/basket.html">
-
-                  <!-- //item-wrap -->
-                  <div class="related-allbasket none">
-                     <a href="javascript:send_multi('3', '', 'relation', 'YES')">ADD
-                        TO CART</a>
-                  </div>
-               </form>
-
-               <div id="videotalk_area"></div>
-               <!-- [OPENEDITOR] -->
-               <table width="750" align="center" border="0" cellspacing="0"
-                  cellpadding="0">
-                  <tbody>
-                     <tr>
-                        <td align="center">
-                        <%for(int i=0; i<sub.length; i++){%>
-                        <img src="upload/productUploadImg/<%=sub[i] %>" imgborder="0"><br> 
-                        <% }%>
-                        </td>
-                     </tr>
-                  </tbody>
-               </table>
-
-               &gt;
-               <!-- 몰티비 플레이어 노출 위치 -->
-               <div id="malltb_video_player"
-                  style="margin-top: 10px; margin-bottom: 10px; text-align: center; display: none;"></div>
-
-            </div>
-
-            <a name="reviewboard"></a>
-            <div class="cboth pdt100"></div>
-            <div id="page02" class="cboth pdt100"></div>
-            <!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
-            <jsp:include page="../inc/detail_tabmenu.jsp" />
-			<script src="js/bootstrap4-rating-input.js"></script>
+				<a name="reviewboard"></a>
+				<div class="cboth pdt100"></div>
+				<div id="page02" class="cboth pdt100"></div>
+				<!-- 중복되는 탭 메뉴 include 로 뺌 -BIN- -->
+				<jsp:include page="../inc/detail_tabmenu.jsp" />
+				<script src="js/bootstrap4-rating-input.js"></script>
 				<!-- BIN -->
 				<!-- ------------------------------상품리뷰---------------------------------------  -->
 				<div id="powerReview">
@@ -601,7 +634,7 @@ var productCode = "";
                         <td>
                            <div class="tb-left reply_depth0">
                               <span><a href="javascript:void(0)" onclick = "show_hide(this); return false;"><%=qnaList.get(i).getQna_subject()%></a></span>
-                              <span style="font-size: 8pt;">(1)</span>
+                              <span style="font-size: 8pt;"></span>
                            </div>
                         </td>
                         <td>
@@ -628,11 +661,26 @@ var productCode = "";
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
 	                                <%if(member_id != null){if(qnaList.get(i).getMember_id().equals(member_id)){ %>
-	                                 <div class="pr_r_button">
-	                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-	                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
-	                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
-	                                 </div>
+		                                <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+			                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+														수정
+												</div>
+			                                 </a>
+			                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+														답글
+												</div>
+			                                 </a>
+			                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+														삭제
+												</div>
+			                                 </a>
+										</div>
 	                                 <%} %>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
@@ -659,8 +707,20 @@ var productCode = "";
 																</div>
 					    	                					<div class="pr_r_button">
 					    	                					<%if(member_id.equals("admin")){ %>
-							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+					    	                					<div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 								<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+																			<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+																			수정
+																		</div>
+							    	                    			</a>
+									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 								<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+																			<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+																			삭제
+																		</div>
+									                                </a>
+																</div>
 						    	                    			<%} %>
 					    	                					</div>
 		    	                							</div>
@@ -682,54 +742,30 @@ var productCode = "";
                      <%}}
                   }%>
                   </table>
-                  <!-- qna pagin -->
-                  <div class="list-btm">
-                     <div class="paging-wrap">
-                        <div class="paging">
-                           <%
-                              if (nowPage <= 1) {
-                           %>
-                              <input type="button" value="이전">&nbsp;
-                           <%
-                              } else {
-                           %>
-                              <input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>'">&nbsp;
-                           <%
-                              }
-                           %>
-                              <%
-                                 for (int i = startPage; i <= endPage; i++) {
-                                 if (i == nowPage) {
-                              %>
-                                    [<%=i%>]&nbsp;
-                                 <%
-                                    } else {
-                                 %>
-                                    <a href="ProductDetail.po?basicCode=<%=basicCode%>"  class="now">[<%=i%>]</a>&nbsp;
-                                 <%
-                                    }
-                                 %>
-                           <%
-                              }
-                           %>
-                           <%
-                              if (nowPage >= maxPage) {
-                           %>
-                              <input type="button" value="다음">
-                           <%
-                              } else {
-                           %>
-                              <input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>'">
-                           <%
-                              }
-                           %>
-                        </div>
-                     </div>
-                     <div class="btm_write">
-                        <a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
-                     </div>
-                  </div>
+                  <div class="flex-w w-full p-t-10 m-lr--7 flex-c">
+				<%if(nowPage <= 1) {%>
+					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt; <!-- '<' 의 코드--></a>
+				<%}else {%>
+					<a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt;</a>
+				<%} %>
+				<%for(int i = startPage; i <= endPage; i++) { 
+					if(i == nowPage) { %>
+						<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><%=i %></a>
+					<%}else { %>
+						<a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2"><%=i %></a>
+					<%} %>
+				<%} %>
+				<%if(nowPage >= maxPage) { %>
+					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt; <!-- '>' 의 코드 --></a>
+				<%}else { %>
+					<a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt;</a>
+				<%}%>
+			</div>
+			<!-- Pagination -->
+               <div class="btm_write">
+                  <a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
                </div>
+            </div>
                <!-- qna pagin -->
                <!-- qna 리스트 끝 -BIN- -->
 
@@ -999,13 +1035,26 @@ var productCode = "";
 															+"<span class='comment__message_text'>"+reply.content+"</span>"
 															+"</div>";
 		    	                		}else if(j == 5){
-		    	                			output +=		"<button class='pr_r_button'>";
-			    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-			    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
-		    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-		    	                			output +=		"</button>";
-		    	                		}
-		    	                	// 상품 리뷰
+						    	              output +=		"<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >";
+							                                 +"<a href='javascript:prm_modify("+reply.num+")'>"
+						                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																	+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																		+"수정"
+																+"</div>"
+							                                 +"</a>"
+							                                 +"<a href='javascript:prd_review("+reply.num+")'>"
+						                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																	+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																		+"삭제"
+																+"</div>"
+							                                 +"</a>"
+// 						                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+// 																	+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+				    	                    						+"<input type='hidden' id='prm_submit' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn' "
+				    	                    						+"value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
+// 																+"</div>"
+														+"</div>";
+		    	                					}
 		    	                	}else{
 			    	                	if(j == 0){
 												output += "<li id='power_review_block"+reply.num+"' class='power-review-list-box'>"
@@ -1080,20 +1129,44 @@ var productCode = "";
 	    	                    					 	+"</div>";
 				   	                 		if(reply.id == member_id){
 			    	                    		output +=		"<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
-				    	                    	output +=		"<button class='pr_button'>";
-				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-				    	                    	output +=			"<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
-			    	                    		output +=			"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-				    	                    	output +=		"</button>";
+			    	                    		 output +=		"<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
+								                                 +"<a href='javascript:prm_modify("+reply.num+")'>"
+							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																			+"수정"
+																	+"</div>"
+								                                 +"</a>"
+								                                 +"<a href='javascript:prd_review("+reply.num+")'>"
+							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																			+"삭제"
+																	+"</div>"
+								                                 +"</a>"
+							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+										                                +"<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
+																	+"</div>"
+															+"</div>";
 				    	                    }	
 				   	                 		if(member_id == 'admin'){
-				    	                    	output +=		"<button class='pr_button'>";
-				    	                    	output +=			"<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-				    	                    	output +=			"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>답글</a>";
-				    	                    	output +=		"</button>";
+			    	                    		 output +=		"<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
+								                                 +"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>"
+							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																			+"답글"
+																	+"</div>"
+								                                 +"</a>"
+								                                 +"<a href='javascript:prd_review("+reply.num+")'>"
+							                                 		+"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+																		+"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+																			+"삭제"
+																	+"</div>"
+								                                 +"</a>"
+															+"</div>";
+				   	                 			}
 				   	                 		}
 		   	                		}
-		                		}
+		                		
 	   	                	}// 리뷰 하나에 대한 for 문 => reveiwDetail
 	    	                    		output +=		"</div>";
 		                				output += 	"<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
@@ -1109,23 +1182,23 @@ var productCode = "";
             			// review paging
             			var pageInfo = paging(newJson.listCount, page, limit);
             			
-            			output+="<div class='paging'>";
+            			output+="<div class='flex-w w-full p-t-10 m-lr--7 flex-c'>";
                 					if(page <= 1){
-          				output+=			"<input type='button' value='이전'> &nbsp;";
+          				output+=			"<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'>&lt;</a>";
                 					}else{
-          				output+=			"<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&nbsp";
+          				output+=			"<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&lt;</a>";
                 					}
             						for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
             							if(i == page){
-          				output+=			"<a href='javascript:void(0);' class='now'>["+i+"]</a>&nbsp;";
+          				output+=			"<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1'>"+i+"</a>";
             							}else{
-          				output+=			"<a href='#powerReview' onclick='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
+          				output+=			"<a href='#powerReview' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2' onclick='javascript:getReplyCall("+i+");'>"+i+"</a>";
             							}
             						}	
                 					if(page >= pageInfo.maxPage){
-          				output+=			"<input type='button' value='다음'> &nbsp;";
+          				output+=			"<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'>&gt;</a>";
                 					}else{
-          				output+=			"<input type='button' value='다음' onclick='location.href='javascript:getReplyCall('"+page+1+"');''>&nbsp";
+          				output+=			"<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'onclick='location.href='javascript:getReplyCall('"+(page+1)+"');''>&gt;</a>";
                 					}
             					+"</div>";
             					

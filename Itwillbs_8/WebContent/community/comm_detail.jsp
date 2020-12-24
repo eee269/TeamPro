@@ -28,7 +28,6 @@ SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="../inc/header.jsp" />
 
-
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css"
@@ -50,9 +49,9 @@ $(document).ready(function() {
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Community
+		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
 	</div>
@@ -128,13 +127,13 @@ $(document).ready(function() {
 							<div class="flex-w flex-c-m m-tb-10 float-r" >
 					<%if(id!=null){
 						if(id.equals(article.getMember_id())){ %>
-								<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+								<a href="CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									삭제
 									</div>
 								</a>
-								<a href="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+								<a href="CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									수정
@@ -142,7 +141,7 @@ $(document).ready(function() {
 								</a>
 					<%	}
 					}%>
-								<a href="location.href='CommList.co?page=<%=nowPage%>'">
+								<a href="CommList.co?page=<%=nowPage %>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									글목록
@@ -214,7 +213,7 @@ $(document).ready(function() {
 
 
 										<ul class="arraymodeTab">
-											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>|
 											<li class="arraymode newest"><a href="#newest">최신순</a></li>
 										</ul>
 
@@ -239,45 +238,45 @@ $(document).ready(function() {
 					</div>
 					<div class="col-md-4 col-lg-3 p-b-80">
 					<div class="side-menu">
-						<div>
-							<h4 class="mtext-112 cl2 p-b-33">
-								Categories
-							</h4>
+<!-- 						<div> -->
+<!-- 							<h4 class="mtext-112 cl2 p-b-33"> -->
+<!-- 								Categories -->
+<!-- 							</h4> -->
 
-							<ul>
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
-									</a>
-								</li>
+<!-- 							<ul> -->
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Fashion -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Beauty -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Street Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
-									</a>
-								</li>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Life Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
-							</ul>
-						</div>
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										DIY & Crafts -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
 
-						<div class="p-t-65">
+						<div class="size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
 								베스트 게시물
 							</h4>
@@ -302,7 +301,7 @@ $(document).ready(function() {
 								<%} %>
 							</ul>
 						</div>
-						<div class="p-t-65">
+						<div class="p-t-65 size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
 								베스트 상품
 							</h4>
@@ -415,8 +414,6 @@ $(function(){
 	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";	
 	                    }else if(j == 4){
 	                    	var core_content = coReply.content;
-// 	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-
 	                    	if(core_del == "N"){
 	                    		output += "<div class='content'><p class='content_p'>"+coReply.content;
 		                    }else{
@@ -424,10 +421,17 @@ $(function(){
 	 	                    }
 	                    }else if(j == 5){
 	                    	var img = coReply.img;
-	                    	if(img != ""){
-	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
-	                    	}
-	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	                    	var none = '"none"';
+	                    	if(core_del == "N"){
+		                    	if(img != ""){
+			                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'>"
+			                    			+"<a class='image_view_load'>"
+			                    			+"<img src='upload/commReUpload/"+img+"' onerror='this.style.display="+none+";'></a>";
+			                    	}
+			                    output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+		                    }else{
+	                    		output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	 	                    }             	
 	                    }else if(j == 6){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
@@ -652,10 +656,15 @@ $(function(){
 									if(reply_del=="Y"){
 										output += "</ul>"
 	    	                    	}else if(id == re_name){			
-	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'>"
+	    	                    				   +"<input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'>"
+	    	                    				   +"<input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
-	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'>"
+	    	                    		           +"<input type='hidden' name='community_num' id='community_num' value='"+num+"'>"
+	    	                    		           +"<input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
+	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"
+	    	                    		           +reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
 	    	                    	}else{
 	    	                    		output += "</ul>";
 	    	                    	}
@@ -698,15 +707,15 @@ $(function(){
  		
  		//==================== 대댓글 쓰기  ====================//
  		$(document).on("click", ".reReWrite", function () {
+ 			var id = "<%=id%>";
  			var a = $(this).parents('li').find('#comm_add'); 
 		 	var b = $(this).parents('li'); 
  			
 		 	if(a.find("#contents").val() == ""){
 	    		alert("대댓글을 입력하세요.");
 	    		a.find("#contents").focus();
-	    	}else{
-	    		
-			 	var username = a.find('#username').val();
+	    	}else{	    		
+			 	var username = id;
 				var community_num = a.find('#community_num').val();
 				var num = a.find('#num').val();
 				var contents = a.find('#contents').val();
@@ -827,12 +836,18 @@ $(function(){
 
 
  		//==================== 상세 이미지 보기  ====================//
- 		$(document).on("click", ".image_view_load", function () {
+ 		$(document).on("click", ".image_view_load", function () {				 
  				 var a = $(this).parents('li'); 
  				 var content = a.find('.content_p').text();
  				 var img = a.find('#img').val();
+ 				 var name = a.find('.re_name').text();
+ 				 var date = a.find('.re_date').text();
+ 				 
  				 var output = ""; 
- 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
+ 				 output += "<div id='inline' style='max-width:600px; display: none;'>"
+ 	 					  +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
+ 	 					  +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+ 	 					  +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
  				 
  				 $("#image_view_load").html(output); 
  				 $(".fancybox").trigger("click");

@@ -96,8 +96,7 @@
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
                                                 <div>
-                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' >
-                                                		<%=prodQnaBean.getQna_content() %>
+                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' ><%=prodQnaBean.getQna_content() %>
                                                 	</textarea>
  												</div>
 	                                            </td>
