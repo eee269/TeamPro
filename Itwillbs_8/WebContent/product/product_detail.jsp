@@ -44,13 +44,11 @@
 <!-- TAB기능 스타일 -->
 <style>
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
-
 #powerReview .tabs {
    width: 100%;
    margin-bottom: 29px;
    border-bottom: 1px solid #d9d9d9;
 }
-
 #powerReview .tabs .tab {
    display: inline-block;
    margin-bottom: -1px;
@@ -64,7 +62,6 @@
    user-select: none;
    transition: all 0.1s ease-in-out;
 }
-
 #powerReview .tabs .tab a {
    font-size: 11px;
    text-decoration: none;
@@ -72,11 +69,9 @@
    color: #d9d9d9;
    transition: all 0.1s ease-in-out;
 }
-
 #powerReview .tabs .tab.active a, body .container .tabs .tab:hover a {
    color: #263238;
 }
-
 #powerReview .tabs .tab.active {
 	border-bottom: 1px solid #263238;
 }
@@ -88,19 +83,16 @@
 	border-radius: 3px;
 	overflow: hidden;
 }
-
 .btn-num-product-up, .btn-num-product-down {
 	width: 25px;
 	height: auto;
 	cursor: pointer;
 }
-
 .btn-num-product-up, .btn-num-product-down {
 	width: 25px;
 	height: auto;
 	cursor: pointer;
 }
-
 .num-product {
 	width: 30px;
 	height: 100%;
@@ -108,7 +100,6 @@
 	border-right: 1px solid #e6e6e6;
 	background-color: #f7f7f7;
 }
-
 #show-option>li {
 	margin: 10px 0px 20px 0px;
 }
@@ -407,7 +398,7 @@ var productCode = "";
 							</div>
 
 
-							
+							<!-- 예진아 여기 수정 3. 시작  -->
 							<%-- 선택한 옵션 블럭 --%>
 							<ul id="show-option">
 								<%-- 한 옵션이 들어가는 li--%>
@@ -428,7 +419,7 @@ var productCode = "";
 										name="cartSubmit">
 								</div>
 							</div>
-							
+							<!-- 예진아 여기 수정 3. 끝  -->
 
 						</div>
 						<!-- p-t-33 끝 -->
@@ -663,17 +654,11 @@ var productCode = "";
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
 	                                <%if(member_id != null){if(qnaList.get(i).getMember_id().equals(member_id)){ %>
-		                                <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+		                                 <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
 			                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
 		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 														수정
-												</div>
-			                                 </a>
-			                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
-		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
-													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-														답글
 												</div>
 			                                 </a>
 			                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
@@ -682,8 +667,24 @@ var productCode = "";
 														삭제
 												</div>
 			                                 </a>
+			                                </div>
+			                                 <%} else if(member_id.equals("admin")){ %>
+			                                 <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+			                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+														삭제
+												</div>
+			                                 </a>
+				                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 		<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+													<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+														답글
+												</div>
+			                                 </a>
 										</div>
-	                                 <%} %>
+			                                 <%}
+	                                	}%>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
                                     <div class="comment_depth1">
@@ -691,13 +692,6 @@ var productCode = "";
                                           <tbody>
                                              <tr>
                                                 <td class="MS_cmt_detail">
-<!--                                                    <span class="MS_cmt_date">답글란입니다</span> <br> -->
-<%--                                                    <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span> --%>
-<%--                                                    <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span> --%>
-<!--                                                    <div class="MS_cmt_content MS_cmt_depth01"> -->
-<%--                                                       <%=qnaList.get(i).getQna_content() %> --%>
-<!--                                                    </div> -->
-
 														<div class="comments">
 															<div class="comments__arrow_top"></div>
 															<div class="comment__inner">
@@ -707,8 +701,7 @@ var productCode = "";
 																<div class="comment__message">
 																	<span class="comment__message_text"><%= qnaList.get(i).getQna_content() %></span>
 																</div>
-					    	                					<div class="pr_r_button">
-					    	                					<%if(member_id.equals("admin")){ %>
+					    	                					<%if(member_id != null && member_id.equals("admin")){ %>
 					    	                					<div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
 							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
 		                                 								<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
@@ -724,7 +717,6 @@ var productCode = "";
 									                                </a>
 																</div>
 						    	                    			<%} %>
-					    	                					</div>
 		    	                							</div>
 		    	                						</div>
 		    	                					</div>
@@ -741,10 +733,10 @@ var productCode = "";
                         </td>
                      </tr>
                   </tbody>
-                     <%}}
+                     <%}
                   }%>
                   </table>
-                  <div class="flex-w w-full p-t-10 m-lr--7 flex-c">
+                 <div class="flex-w w-full p-t-10 m-lr--7 flex-c">
 				<%if(nowPage <= 1) {%>
 					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt; <!-- '<' 의 코드--></a>
 				<%}else {%>
@@ -1087,7 +1079,7 @@ var productCode = "";
 			    	                    	output += 	"<div class='photo-list'>"
 				    	                    				+"<ul>"
 				    	                    					+"<li>"
-				    	                    						+"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');'>"
+				    	                    						+"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');''>"
 				    	                    							+"<img src='upload/prodReviewUpload/"+reply.product_img +"'>"
 				    	                    						+"</a>"
 				    	                    						+"<div class='attach-preview'></div>"

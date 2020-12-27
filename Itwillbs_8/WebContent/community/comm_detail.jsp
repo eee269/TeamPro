@@ -74,12 +74,16 @@ $(document).ready(function() {
 							</span>
 						</div>
 					</div>
-					<!-- 게시물 썸네일 -->
-					
 					<div class="p-t-32">
+						<!-- 제목-->
+						<h4 class="ltext-109 cl2 p-b-28">
+							<%=article.getSubject()%>
+						</h4>
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> 
+							<!-- 게시물 썸네일 -->
 							<span class="m-b-30 m-r-8">
-								<span class="cl4 size-214"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"></span> 
+								<span class="cl4 size-214"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
+								onerror="this.src='images/icons/in-love_face.png'"></span> 
 							</span> 
 							<span>
 								<span class="cl4">By</span> <%=article.getUsername()%> 
@@ -102,10 +106,6 @@ $(document).ready(function() {
 								<span class="cl12 m-l-4 m-r-6">|</span>
 							</span> 
 						</span>
-						<!-- 제목, 내용 -->
-						<h4 class="ltext-109 cl2 p-b-28">
-							<%=article.getSubject()%>
-						</h4>
 						<div class="stext-117 cl6 p-b-26 min-h-300px">
 							<p><%=article.getContent()%></p>
 						</div>

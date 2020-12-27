@@ -2128,6 +2128,13 @@ input.num-product::-webkit-inner-spin-button {
   width: 30px;
 }
 
+.block2-txt-child3 {
+  width: 52px;
+  position: absolute;
+  top: 325px;
+  left: 216px;
+}
+
 .btn-addwish-b2 .icon-heart2 {
   opacity: 0;
 }
@@ -3025,7 +3032,18 @@ input.num-product::-webkit-inner-spin-button {
   top: 15px;
   left: 10px;
 }
-
+#how-pos6 {
+  position: absolute;
+  top: 200px;
+  left: 200px;
+}
+#how-pos6 img {
+	width:70px;
+	height:70px;
+}
+#how-pos6 img:hover {
+	cursor: pointer;
+}
 
 
 /*---------------------------------------------*/

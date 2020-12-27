@@ -95,26 +95,24 @@
 									</div>
 								</a>
 							</div>
+							<div id="how-pos6" class="bookimg<%=articleList.get(i).getNum() %>" onclick="checkBook(<%=articleList.get(i).getNum() %>)">
+								<img src="images/icons/angry_face_before.png" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
+							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										<%=articleList.get(i).getSubject() %>
+										<%=articleList.get(i).getNum() %>
 									</a>
 	
 									<span class="stext-105 cl3">
 										<%=articleList.get(i).getUsername() %>
 									</span>
-									<span class="flex-r"><%=articleList.get(i).getReadCount() %></span>
+									<span class="flex-r">조회수 <%=articleList.get(i).getReadCount()%></span>
 								</div>
-	
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="javascript:void(0);" class="dis-block pos-relative" onclick="javascript:checkBook(<%=articleList.get(i).getNum()%>)">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									</a>
-									<span class="bookCount<%=articleList.get(i).getNum() %>" style="margin: 0 2px;"><%=articleList.get(i).getBookCount() %></span>
-								</div>
-								<div class="block2-txt-child2 flex-r p-t-3">
+								<div class="block2-txt-child3 flex-r p-t-3">
+									<span class="bookCount<%=articleList.get(i).getNum()%>" style="margin: 0 2px;">북마크 <%=articleList.get(i).getBookCount()%></span>
 								</div>
 							</div>
 						</div>
@@ -165,9 +163,17 @@
 	                    num: num,
 	                },
 	                success: function () {
+	                	var path = $('.bookimg'+num).children("img");
+	                	path.attr("src",function(index,attr){
+	                		if(attr.match('angry')){
+	                			return attr.replace("angry","in-love");
+	                		}else{
+	                			return attr.replace("in-love","angry");
+	                		}
+	                	});
 				        bookmarkCount(num);
 	                },
-				})
+				});
 			}
 		}
 		// 게시글 북마크 수
@@ -179,11 +185,21 @@
                 data: {
                     num: articleNum
 				},
-				success : function(count) {
-					$(".bookCount"+num).html(count);
+				success : function(json) {
+					var img = "images/icons/in-love_face.png";
+					var jsonP = JSON.parse(json);
+					var book = "북마크 "+jsonP.total;
+					if(!num){
+						for(key in jsonP.list){
+							var num = jsonP.list[key][key];
+							$(".bookimg"+num).children().attr("src",img);
+						}
+					}
+					$(".bookCount"+articleNum).html(book);
 				},
 			})
 		};
+		bookmarkCount();
 </script>
 <script type="text/javascript">
 	// 비회원 글쓰기 클릭 시 로그인 유도 

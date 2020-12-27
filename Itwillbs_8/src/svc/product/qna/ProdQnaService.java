@@ -36,18 +36,6 @@ public class ProdQnaService {
 		
 		return isSuccess;
 	}
-	// qna 비밀번호 검증
-	public boolean checkQna(int qna_num, String qna_pass, String member_id)throws QnaException {
-		System.out.println("ProdQnaService - checkQna");
-		Connection con = getConnection();
-		ProdQnaDAO instance = ProdQnaDAO.getInstance();
-		instance.setConnection(con);
-		
-		boolean isRightUser = instance.checkQna(qna_num, qna_pass, member_id);
-		
-		close(con);
-		return isRightUser;
-	}
 	// qna 삭제
 	public boolean deleteQna(int qna_num) {
 		System.out.println("ProdQnaService - deleteQna");

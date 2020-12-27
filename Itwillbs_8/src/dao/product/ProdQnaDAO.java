@@ -50,19 +50,18 @@ public class ProdQnaDAO {
 					num = rs.getInt(1) + 1;
 				}
 				
-				sql = "INSERT INTO product_qna VALUES(?,?,?,?,?,?,?,?,now(),?,?,?)";
+				sql = "INSERT INTO product_qna VALUES(?,?,?,?,?,?,?,now(),?,?,?)";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, num);
-				ps.setString(2, prodQnaBean.getQna_pass());
-				ps.setString(3, prodQnaBean.getQna_subject());
-				ps.setString(4, prodQnaBean.getQna_content());
-				ps.setInt(5, 0);
-				ps.setString(6, prodQnaBean.getQna_file());
-				ps.setInt(7, num);
-				ps.setInt(8, prodQnaBean.getQna_re_lev());
-				ps.setString(9, prodQnaBean.getProduct_basicCode());
-				ps.setString(10, prodQnaBean.getMember_id());
-				ps.setInt(11, prodQnaBean.getQna_re_seq());
+				ps.setString(2, prodQnaBean.getQna_subject());
+				ps.setString(3, prodQnaBean.getQna_content());
+				ps.setInt(4, 0);
+				ps.setString(5, prodQnaBean.getQna_file());
+				ps.setInt(6, num);
+				ps.setInt(7, prodQnaBean.getQna_re_lev());
+				ps.setString(8, prodQnaBean.getProduct_basicCode());
+				ps.setString(9, prodQnaBean.getMember_id());
+				ps.setInt(10, prodQnaBean.getQna_re_seq());
 				System.out.println(prodQnaBean.toString());
 				insertCount = ps.executeUpdate();
 			} catch (SQLException e) {
@@ -76,42 +75,6 @@ public class ProdQnaDAO {
 			return insertCount;
 		}
 		// -------------------insertQna()-----------------------
-		// -------------------checkQna()-----------------------
-		// qna 비밀번호 맞는지 검증
-		public boolean checkQna(int qna_num, String qna_pass, String member_id)throws QnaException {
-			boolean isRightUser = false;
-			PreparedStatement ps = null;
-			ResultSet rs = null;
-			
-			try {
-				String sql = "SELECT qna_pass FROM product_qna WHERE qna_num=? AND member_id=?";
-				ps = con.prepareStatement(sql);
-				ps.setInt(1, qna_num);
-				ps.setString(2, member_id);
-				rs = ps.executeQuery();
-				System.out.println(qna_pass);
-				System.out.println(qna_num);
-				System.out.println(member_id);
-				if(rs.next()) {
-					if(rs.getString("qna_pass").equals(qna_pass)) {
-						isRightUser = true;
-					}else {
-						throw new QnaException("패스워드 틀림");
-					}
-				}else {
-					throw new QnaException("아이디 없음");
-				}
-				
-			} catch (SQLException e) {
-				System.out.println("ProdQnaDAO - checkQna : "+e.getMessage());
-				e.printStackTrace();
-			}finally {
-				close(rs);
-				close(ps);
-			}
-			return isRightUser;
-		}
-		// -------------------checkQna()-----------------------
 		// -------------------deleteQna()-----------------------
 		// qna 삭제
 		public int deleteQna(int qna_num) {
@@ -174,7 +137,7 @@ public class ProdQnaDAO {
 						+ "FROM product_qna q JOIN member m "
 						+ "ON q.member_id = m.id "
 						+ "WHERE product_basicCode=? "
-						+ "ORDER BY qna_re_seq ASC, qna_re_ref desc limit ?,?";
+						+ "ORDER BY qna_re_ref desc , qna_re_seq limit ?,?";
 				ps = con.prepareStatement(sql);
 				ps.setString(1, basicCode);
 				ps.setInt(2, startRow);
@@ -186,18 +149,17 @@ public class ProdQnaDAO {
 				while(rs.next()) {
 					ProdQnaBean qna = new ProdQnaBean();
 					qna.setQna_num((rs.getInt(1)));
-					qna.setQna_pass((rs.getString(2)));
-					qna.setQna_subject((rs.getString(3)));
-					qna.setQna_content((rs.getString(4)));
-					qna.setQna_readcount((rs.getInt(5)));
-					qna.setQna_file((rs.getString(6)));
-					qna.setQna_re_ref((rs.getInt(7)));
-					qna.setQna_re_lev((rs.getInt(8)));
-					qna.setQna_date(rs.getTimestamp(9));
-					qna.setProduct_basicCode((rs.getString(10)));
-					qna.setMember_id((rs.getString(11)));
-					qna.setQna_re_seq((rs.getInt(12)));
-					qna.setUsername((rs.getString(13)));
+					qna.setQna_subject((rs.getString(2)));
+					qna.setQna_content((rs.getString(3)));
+					qna.setQna_readcount((rs.getInt(4)));
+					qna.setQna_file((rs.getString(5)));
+					qna.setQna_re_ref((rs.getInt(6)));
+					qna.setQna_re_lev((rs.getInt(7)));
+					qna.setQna_date(rs.getTimestamp(8));
+					qna.setProduct_basicCode((rs.getString(9)));
+					qna.setMember_id((rs.getString(10)));
+					qna.setQna_re_seq((rs.getInt(11)));
+					qna.setUsername((rs.getString(12)));
 					
 					qnaList.add(qna);
 				}
@@ -302,19 +264,18 @@ public class ProdQnaDAO {
 				qna_re_lev += 1;
 				qna_re_seq += 1;
 				
-				sql = "INSERT INTO product_qna VALUES(?,?,?,?,?,?,?,?,now(),?,?,?)";
+				sql = "INSERT INTO product_qna VALUES(?,?,?,?,?,?,?,now(),?,?,?)";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, num);
-				ps.setString(2, qna.getQna_pass());
-				ps.setString(3, qna.getQna_subject());
-				ps.setString(4, qna.getQna_content());
-				ps.setInt(5, 0);
-				ps.setString(6, ""); // 파일업로드 생략
-				ps.setInt(7, qna_re_ref);
-				ps.setInt(8, qna_re_lev);
-				ps.setString(9, qna.getProduct_basicCode());
-				ps.setString(10, qna.getMember_id());
-				ps.setInt(11, qna_re_seq);
+				ps.setString(2, qna.getQna_subject());
+				ps.setString(3, qna.getQna_content());
+				ps.setInt(4, 0);
+				ps.setString(5, ""); // 파일업로드 생략
+				ps.setInt(6, qna_re_ref);
+				ps.setInt(7, qna_re_lev);
+				ps.setString(8, qna.getProduct_basicCode());
+				ps.setString(9, qna.getMember_id());
+				ps.setInt(10, qna_re_seq);
 				insertCount = ps.executeUpdate();
 				
 			} catch (SQLException e) {
@@ -385,17 +346,16 @@ public class ProdQnaDAO {
 					ProdQnaBean qna = new ProdQnaBean();
 					
 					qna.setQna_num((rs.getInt(1)));
-					qna.setQna_pass((rs.getString(2)));
-					qna.setQna_subject((rs.getString(3)));
-					qna.setQna_content((rs.getString(4)));
-					qna.setQna_readcount((rs.getInt(5)));
-					qna.setQna_file((rs.getString(6)));
-					qna.setQna_re_ref((rs.getInt(7)));
-					qna.setQna_re_lev((rs.getInt(8)));
-					qna.setQna_date(rs.getTimestamp(9));
-					qna.setProduct_basicCode((rs.getString(10)));
-					qna.setMember_id((rs.getString(11)));
-					qna.setUsername((rs.getString(12)));
+					qna.setQna_subject((rs.getString(2)));
+					qna.setQna_content((rs.getString(3)));
+					qna.setQna_readcount((rs.getInt(4)));
+					qna.setQna_file((rs.getString(5)));
+					qna.setQna_re_ref((rs.getInt(6)));
+					qna.setQna_re_lev((rs.getInt(7)));
+					qna.setQna_date(rs.getTimestamp(8));
+					qna.setProduct_basicCode((rs.getString(9)));
+					qna.setMember_id((rs.getString(10)));
+					qna.setUsername((rs.getString(11)));
 					
 					list.add(qna);
 				}
