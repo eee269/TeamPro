@@ -298,16 +298,15 @@ var productCode = "";
 
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
-	<div class="container">
-		<!-- 폼 -->
-		<form action="cartGetPlusAction.ca" method="post" name="cartUp">
-			<!-- 폼 -->
-			<div class="row">
-				<div class="col-md-6 col-lg-7 p-b-30">
-					<div class="p-l-25 p-r-30 p-lr-0-lg">
-						<div class="wrap-slick3 flex-sb flex-w">
-							<div class="wrap-slick3-dots"></div>
-							<div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+   <div class="container">
+      <!-- 폼 -->
+      <!-- 폼 -->
+      <div class="row">
+         <div class="col-md-6 col-lg-7 p-b-30">
+            <div class="p-l-25 p-r-30 p-lr-0-lg">
+               <div class="wrap-slick3 flex-sb flex-w">
+                  <div class="wrap-slick3-dots"></div>
+                  <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
 							<div class="slick3 gallery-lb">
 								<%for(int i=0; i<main.length; i++){%>
@@ -336,15 +335,10 @@ var productCode = "";
 								<!-- ----수정하기 --- -->
 								<!-- 						             	 20.12.19. yj 바뀜! -->
 								<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
-								<input type="hidden" name="name"
-									value="<%=productDetailList.get(0).getName() %>"> <input
-									type="hidden" name="price"
-									value="<%=productDetailList.get(0).getPrice()%>">
 								<!-- 							<input type="hidden" name="size" value=""> -->
 								<!-- 							<input type="hidden" name="color" value=""> -->
 								<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
 								<!-- 							<input type="hidden" name="cnt" value="0"> -->
-
 
 							</div>
 						</div>
@@ -650,6 +644,7 @@ var productCode = "";
                         <td colspan="6">
                            <div class="tb-left">
                               <div class="qna_board_content">
+                              	<img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 50px; max-width: 50px;">
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
@@ -1054,9 +1049,9 @@ var productCode = "";
 															+"<div id='PR15N01-modify'>"
 																+"<dl class='desc'>"
 																+"<dt class='first'>작성자</dt>"
-																	+"<dd>"+reply.id+"</dd>";
+																	+"<dd class='re_name'>"+reply.id+"</dd>";
 			    	                    }else if(j == 1){
-				    	                    output +=		"<dt>작성일</dt><dd>"+reply.date+"</dd>"
+				    	                    output +=		"<dt>작성일</dt><dd class='re_date'>"+reply.date+"</dd>"
 				    	                    				+"</dl>";
 			    	                    }else if(j == 2){
 			    	                    	output +=		"<div class='hd-box'>"
@@ -1071,7 +1066,7 @@ var productCode = "";
 			    	                    			 	+"<div class='content'>"
 		    	                    				 		+"<p class='content_p'>"
 		    	                    				 			+"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
-			    	                    				 		+"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
+			    	                    				 		+"<textarea name='content'class='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
 				    	                    			 		+"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
 				    	                    			 	+"</p><div class='ctr'>"
 			    	                    			 	 +"</div>";
@@ -1317,6 +1312,27 @@ var productCode = "";
 			$(this).addClass('now');
 		}
 	}); // tabs click function end
+	
+ 	//==================== 상세 이미지 보기  ====================//
+// 		$(document).on("click", ".photo-list", function () {
+		function power_review_view_show(){
+			
+				 var a = $(this).parents('li'); 
+				 var content = a.find('.content').text();
+				 var img = a.find('#img').val();
+				 var name = a.find('.re_name').text();
+				 var date = a.find('.re_date').text();
+				 
+				 var output = ""; 
+				 output += "<div id='inline' style='max-width:600px; display: none;'>"
+	 					  +"<div class='popup-img'><img src='upload/prodReviewUpload/"+img+"' width='100%' height='auto'></div>"
+	 					  +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+	 					  +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
+				 
+				 $("#image_view_load").html(output); 
+				 $(".fancybox").trigger("click");
+		}
+// 		});
 
 });
 
@@ -1633,6 +1649,15 @@ function showReply(num){
 	  }
 		
 			
+</script>
+<script type="text/javascript"
+   src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css"
+   href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+$(document).ready(function() {
+    $('.fancybox').fancybox();
+});
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
