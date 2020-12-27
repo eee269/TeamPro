@@ -50,15 +50,23 @@
 					<!-- 글쓰기 폼 -->
 					<form action="CommModifyPro.co" method="post" enctype="multipart/form-data">
 	                	<input type="hidden" id="num" name="num" value="<%=article.getNum()%>">
-						<span>썸네일</span>
-						<div id="image_container" class="mg-b-5" style="width:60px; height:60px; border: 1px solid black;"></div>
-						<label>현재 파일 :<img src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" style="width:50px;height: 50px;"></label><br>
-						<input type="file" name="img" id="img" value="<%=article.getImg() %>" required="required"><br>
-    					<label>제목 : </label>
-     					<input type="text" id="subject" name="subject" value="<%=article.getSubject() %>" class="MS_input_txt input_style2" required="required"><br>
-    					<label>비밀번호 확인 : </label>
-    					<input type="password" id="pass" name="pass" class="MS_input_txt input_style2" required="required"><br>
-						<textarea id ="summernote" name="content" ><%=article.getContent() %></textarea><br>
+	                	<div style="width: 100%; height:300px; border: 1px solid; text-align: center;">
+		               	 	<img id="blah" src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" style="height:300px;" onerror="this.style.visibility='hidden'"/>
+						</div>
+						<br>
+						<input type="file" name="img" id="imgInput" value="<%=article.getImg() %>" required="required">
+						<br>
+						<br>
+						<input id='bw_input_subject' class="MS_input_txt input_style2" type='text' name='subject' value='<%=article.getSubject() %>' required="required"
+						style="width:100%; height:40px; border-bottom: 1px solid;" placeholder="제목"/>
+						<br>
+						<br>
+						<input id='bw_input_subject' class="MS_input_txt input_style2" type='password' name='pass' value='' required="required"
+						style="width:100%; height:40px; border-bottom: 1px solid;" placeholder="비밀번호"/>
+						<br>
+						<br>
+						<textarea id ="summernote" name="content" class="MS_input_txt" style='font-family:굴림체;' required="required"><%=article.getContent() %></textarea><br>
+						<br>
 						<div class="flex-w flex-c-m m-tb-10 float-r" >
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 							<input type="submit" value="수정" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
@@ -75,44 +83,6 @@
 			</div>
 			<div class="col-md-4 col-lg-3 p-b-80">
 					<div class="side-menu">
-<!-- 						<div> -->
-<!-- 							<h4 class="mtext-112 cl2 p-b-33"> -->
-<!-- 								Categories -->
-<!-- 							</h4> -->
-
-<!-- 							<ul> -->
-<!-- 								<li class="bor18"> -->
-<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
-<!-- 										Fashion -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-
-<!-- 								<li class="bor18"> -->
-<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
-<!-- 										Beauty -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-
-<!-- 								<li class="bor18"> -->
-<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
-<!-- 										Street Style -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-
-<!-- 								<li class="bor18"> -->
-<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
-<!-- 										Life Style -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-
-<!-- 								<li class="bor18"> -->
-<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
-<!-- 										DIY & Crafts -->
-<!-- 									</a> -->
-<!-- 								</li> -->
-<!-- 							</ul> -->
-<!-- 						</div> -->
-
 						<div class="size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
 								베스트 게시물
