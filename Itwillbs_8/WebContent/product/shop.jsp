@@ -212,7 +212,6 @@ $( document ).ready(function () {
 
 <!-- 끝 -->
 <!-- 베스트Product 시작-->
-<div><a href="ProductUpload.po">상품등록페이지이동(임시)</a></div>
 <div class="item-wrap best-item">
 	<div class="sub_recommend_title">BEST PRODUCTS</div>
 	<div class="item-cont">
