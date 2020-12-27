@@ -261,8 +261,8 @@
 							alt="" />
 						<div class="social-icons style-2">
 							<a href="https://github.com/<%=github[i]%>" target="blank" class="fa fa-github"></a>
-							<a href="#" class="fa fa-instagram"></a>
-							<a href="#" class="fa fa-facebook"></a>
+							<a href="" class="fa fa-instagram"></a>
+							<a href="" class="fa fa-facebook"></a>
 						</div>
 					</div>
 					<div class="team-bio">

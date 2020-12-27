@@ -218,12 +218,12 @@ function checkboxswift() {
 				<td><b>색상</b></td>
 				<td>
 					<div id="radioColor" style="display: none;">
-						<input type="checkbox" name="goods_color" value="BK" style="width: 100px"><span>Black</span>
-						<input type="checkbox" name="goods_color" value="WH" style="width: 100px"><span>White</span>
-						<input type="checkbox" name="goods_color" value="GR" style="width: 100px"><span>Gray</span><br>
-						<input type="checkbox" name="goods_color" value="RD" style="width: 100px"><span>Red</span>
-						<input type="checkbox" name="goods_color" value="BL" style="width: 100px"><span>Blue</span>
-						<input type="checkbox" name="goods_color" value="PK" style="width: 100px"><span>Pink</span>
+						<input type="checkbox" name="goods_color" value="BLACK" style="width: 100px"><span>Black</span>
+						<input type="checkbox" name="goods_color" value="WHITE" style="width: 100px"><span>White</span>
+						<input type="checkbox" name="goods_color" value="GREEN" style="width: 100px"><span>Gray</span><br>
+						<input type="checkbox" name="goods_color" value="RED" style="width: 100px"><span>Red</span>
+						<input type="checkbox" name="goods_color" value="BLUE" style="width: 100px"><span>Blue</span>
+						<input type="checkbox" name="goods_color" value="PINK" style="width: 100px"><span>Pink</span>
 					</div>
 				</td>
 			</tr>
