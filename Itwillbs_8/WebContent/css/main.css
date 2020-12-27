@@ -2103,6 +2103,10 @@ input.num-product::-webkit-inner-spin-button {
 .block2-pic {
   position: relative;
 }
+.block2-pic img{
+  width: 300px;
+  height: 300px;
+}
 
 .block2-btn {
   position: absolute;
@@ -3034,7 +3038,7 @@ input.num-product::-webkit-inner-spin-button {
 }
 #how-pos6 {
   position: absolute;
-  top: 250px;
+  top: 264px;
   left: 250px;
 }
 #how-pos6 img {

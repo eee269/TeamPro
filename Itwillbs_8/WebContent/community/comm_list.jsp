@@ -21,8 +21,6 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
-	SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.KOREAN);
-	SimpleDateFormat sdfD = new SimpleDateFormat("dd");
 	SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="/inc/header.jsp"/>
@@ -97,14 +95,14 @@
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										<%=articleList.get(i).getSubject() %>
 									</a>
-									<div class="stext-105 cl3">
+									<div class="stext-105 cl3 w-full">
 										<span>
 											<%=articleList.get(i).getUsername() %>
 										</span>
-										<span class="m-l-120">
+										<span class="float-r">
 											<%=sdfYMD.format(articleList.get(i).getDate()) %>
 										</span>
 									</div>

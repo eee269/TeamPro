@@ -101,30 +101,30 @@ $(document).ready(function() {
 							
 							<span> 
 								<%=sdfYMD.format(article.getDate()) %>
-								<span class="cl12 m-l-4 m-r-6">|</span>
+<!-- 								<span class="cl12 m-l-4 m-r-6">|</span> -->
 							</span> 
-							<span>
-								StreetStyle, Fashion, Couple 
-							</span> 
+<!-- 							<span> -->
+<!-- 								StreetStyle, Fashion, Couple  -->
+<!-- 							</span>  -->
 						</span>
 						<div class="stext-117 cl6 p-b-26 min-h-300px">
 							<p><%=article.getContent()%></p>
 						</div>
 					</div>
-					<div class="flex-w flex-t p-t-16">
-						<span class="size-216 stext-116 cl8 p-t-4">
-							Tags 
-						</span>
+<!-- 					<div class="flex-w flex-t p-t-16"> -->
+<!-- 						<span class="size-216 stext-116 cl8 p-t-4"> -->
+<!-- 							Tags  -->
+<!-- 						</span> -->
 
-						<div class="flex-w size-217">
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Streetstyle 
-							</a> 
-							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-								Crafts 
-							</a>
-						</div>
-					</div>
+<!-- 						<div class="flex-w size-217"> -->
+<!-- 							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 								Streetstyle  -->
+<!-- 							</a>  -->
+<!-- 							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 								Crafts  -->
+<!-- 							</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 							<div class="flex-w flex-c-m m-tb-10 float-r" >
 					<%if(id!=null){
 						if(id.equals(article.getMember_id())){ %>
@@ -329,33 +329,33 @@ $(document).ready(function() {
 								<%} %>
 							</ul>
 						</div>
-						<div class="p-t-50">
-							<h4 class="mtext-112 cl2 p-b-27">
-								Tags
-							</h4>
+<!-- 						<div class="p-t-50"> -->
+<!-- 							<h4 class="mtext-112 cl2 p-b-27"> -->
+<!-- 								Tags -->
+<!-- 							</h4> -->
 
-							<div class="flex-w m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
-								</a>
+<!-- 							<div class="flex-w m-r--5"> -->
+<!-- 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 									Fashion -->
+<!-- 								</a> -->
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
+<!-- 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 									Lifestyle -->
+<!-- 								</a> -->
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
-								</a>
+<!-- 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 									Denim -->
+<!-- 								</a> -->
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
+<!-- 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 									Streetstyle -->
+<!-- 								</a> -->
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
-						</div>
+<!-- 								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5"> -->
+<!-- 									Crafts -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
 					</div>
 				</div>
 				</div>
