@@ -88,31 +88,30 @@
 						<div class="block2">
 							<div class="block2-pic hov-img0">
 								<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
-									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
-									<div class="flex-col-c-m size-123 bg9 how-pos5">
-										<span class="ltext-107 cl2 txt-center"> <%=sdfD.format(articleList.get(i).getDate()) %> </span> 
-										<span class="stext-109 cl3 txt-center"> <%=sdfYM.format(articleList.get(i).getDate()) %></span>
-									</div>
+									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.style.display='none'"/>
 								</a>
 							</div>
 							<div id="how-pos6" class="bookimg<%=articleList.get(i).getNum() %>" onclick="checkBook(<%=articleList.get(i).getNum() %>)">
-								<img src="images/icons/angry_face_before.png" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
+								<img src="images/icons/bookmark_before.png" onerror="this.style.display='none'"/>
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										<%=articleList.get(i).getSubject() %>
-										<%=articleList.get(i).getNum() %>
 									</a>
-	
-									<span class="stext-105 cl3">
-										<%=articleList.get(i).getUsername() %>
-									</span>
-									<span class="flex-r">조회수 <%=articleList.get(i).getReadCount()%></span>
-								</div>
-								<div class="block2-txt-child3 flex-r p-t-3">
-									<span class="bookCount<%=articleList.get(i).getNum()%>" style="margin: 0 2px;">북마크 <%=articleList.get(i).getBookCount()%></span>
+									<div class="stext-105 cl3">
+										<span>
+											<%=articleList.get(i).getUsername() %>
+										</span>
+										<span class="m-l-120">
+											<%=sdfYMD.format(articleList.get(i).getDate()) %>
+										</span>
+									</div>
+									<div class="stext-105 cl3">
+										<span>조회수 <%=articleList.get(i).getReadCount()%> &#183;</span>
+										<span class="bookCount<%=articleList.get(i).getNum()%>">북마크 <%=articleList.get(i).getBookCount()%></span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -165,10 +164,10 @@
 	                success: function () {
 	                	var path = $('.bookimg'+num).children("img");
 	                	path.attr("src",function(index,attr){
-	                		if(attr.match('angry')){
-	                			return attr.replace("angry","in-love");
+	                		if(attr.match('before')){
+	                			return attr.replace("before","after");
 	                		}else{
-	                			return attr.replace("in-love","angry");
+	                			return attr.replace("after","before");
 	                		}
 	                	});
 				        bookmarkCount(num);
@@ -186,7 +185,7 @@
                     num: articleNum
 				},
 				success : function(json) {
-					var img = "images/icons/in-love_face.png";
+					var img = "images/icons/bookmark_after.png";
 					var jsonP = JSON.parse(json);
 					var book = "북마크 "+jsonP.total;
 					if(!num){

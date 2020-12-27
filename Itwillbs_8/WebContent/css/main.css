@@ -3034,15 +3034,38 @@ input.num-product::-webkit-inner-spin-button {
 }
 #how-pos6 {
   position: absolute;
-  top: 200px;
-  left: 200px;
+  top: 250px;
+  left: 250px;
 }
 #how-pos6 img {
-	width:70px;
-	height:70px;
+	width:30px;
+	height:30px;
 }
 #how-pos6 img:hover {
 	cursor: pointer;
+	filter: opacity(0.5);
+	drop-shadow: (0 0 0 gray);
+}
+#how-pos7 {
+  border-radius:20px;
+  border:1px solid #CCCCCC;
+  min-width:70px;
+  min-height:100px;
+  position: fixed;
+  left: 70px;
+  text-align: center;
+}
+#how-pos7 div{
+	padding : 10px 0;
+}
+#how-pos7 img {
+	width:30px;
+	height:30px;
+}
+#how-pos7 img:hover {
+	cursor: pointer;
+	filter: opacity(0.5);
+	drop-shadow: (0 0 0 gray);
 }
 
 

@@ -1,3 +1,5 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="vo.ProductBean"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -11,6 +13,9 @@
 CommBean article = (CommBean) request.getAttribute("article");
 ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 String nowPage = request.getParameter("page");
+
+ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
+DecimalFormat priceFormat = new DecimalFormat("###,###");
 
 //==============댓글시작==============//
 // 전달받은 request 객체로부터 데이터 가져오기
@@ -60,19 +65,23 @@ $(document).ready(function() {
 <section class="bg0 p-t-52 p-b-20">
 	<div class="container">
 		<div class="row">
+			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
+			<div class="size-301" id="how-pos7">
+				<div class="bookimg" id="bookmark" onclick="checkBook()">
+					<img src="images/icons/bookmark_before.png" onerror="this.style.display='none'"/>
+					<span class ="cl12 m-l-4 m-r-6 bookmark_count"></span>
+				</div>
+				<div class="bubbleimg">
+					<img src="images/icons/bubble_before.png" onerror="this.style.display='none'"/>
+					<span class="cl12 m-l-4 m-r-6">0</span>
+				</div>
+			</div>
+			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<!-- 게시물 썸네일 -->
 					<div class="how-pos5-parent">
-						<img src="upload/communityUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.src='images/icons/angry_face.png'">
-						<div class="flex-col-c-m size-123 bg9 how-pos5">
-							<span class="ltext-107 cl2 txt-center">
-								 <%=sdfD.format(article.getDate()) %> 
-							</span> 
-							<span class="stext-109 cl3 txt-center"> 
-								<%=sdfYM.format(article.getDate()) %> 
-							</span>
-						</div>
+						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.style.display='none'">
 					</div>
 					<div class="p-t-32">
 						<!-- 제목-->
@@ -96,14 +105,6 @@ $(document).ready(function() {
 							</span> 
 							<span>
 								StreetStyle, Fashion, Couple 
-								<span class="cl12 m-l-4 m-r-6">|</span>
-							</span> 
-							<span>
-								댓글 갯수
-								<span class="cl12 m-l-4 m-r-6">|</span>
-							</span> 
-							<span class = "bookmark_count">
-								<span class="cl12 m-l-4 m-r-6">|</span>
 							</span> 
 						</span>
 						<div class="stext-117 cl6 p-b-26 min-h-300px">
@@ -147,10 +148,10 @@ $(document).ready(function() {
 									글목록
 									</div>
 								</a>
-								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn" id="bookmark">
-									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-									북마크
-								</div>
+<!-- 								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn" id="bookmark"> -->
+<!-- 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i> -->
+<!-- 									북마크 -->
+<!-- 								</div> -->
 							</div>
 					<!-- -----------------------------Comment----------------------------- -->
 					<h2 class="comment_title">COMMENT</h2>
@@ -307,19 +308,21 @@ $(document).ready(function() {
 							</h4>
 
 							<ul>
-								<%for(CommBean cb : articleList){ %>
+								<%for(int i=0; i<(bestList.size() < 4 ? bestList.size() : 4); i++){
+									String[] main = bestList.get(i).getMain_img().split("/");
+								
+								%>
 									<li class="flex-w flex-t p-b-30">
 										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
+											<img src="upload/productUploadImg/<%=main[0]%>" alt="PRODUCT">
 										</a>
 	
 										<div class="size-215 flex-col-t p-t-8">
 											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-												<%=cb.getSubject() %>
+												<%=bestList.get(i).getName() %>
 											</a>
-	
 											<span class="stext-116 cl6 p-t-20">
-												<%=cb.getUsername() %>
+												<%=priceFormat.format(bestList.get(i).getPrice())%>
 											</span>
 										</div>
 									</li>
@@ -974,6 +977,14 @@ $(function(){
 	                    num: "<%=article.getNum()%>",
 	                },
 	                success: function () {
+	                	var path = $('.bookimg').children("img");
+	                	path.attr("src",function(index,attr){
+	                		if(attr.match('before')){
+	                			return attr.replace("before","after");
+	                		}else{
+	                			return attr.replace("after","before");
+	                		}
+	                	});
 				        bookmarkCount();
 	                },
 				})
@@ -989,8 +1000,15 @@ $(function(){
                 data: {
                     num: articleNum
 				},
-				success : function(count) {
-					$(".bookmark_count").html(count);
+				success : function(json) {
+					var img = "images/icons/bookmark_after.png";
+					var jsonP = JSON.parse(json);
+					var book = jsonP.total;
+					// 이미 북마크 눌렀을 시 이미지 변경
+					if(jsonP.has == 1){
+						$(".bookimg").children().attr("src",img);
+					}
+					$(".bookmark_count").html(book);
 				},
 			})
 		};

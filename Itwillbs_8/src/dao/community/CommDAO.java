@@ -390,6 +390,7 @@ public class CommDAO {
 			return checkCount;
 		}
 		// -------------------------- checkBookmark() --------------------------------
+		// -------------------------- hasBook() --------------------------------
 		public ArrayList<Integer> hasBook(String member_id) {
 			ArrayList<Integer> bookList = null;
 			PreparedStatement ps = null;
@@ -409,10 +410,14 @@ public class CommDAO {
 			} catch (SQLException e) {
 				System.out.println("CommDAO - CountBook : "+e.getMessage());
 				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(ps);
 			}
 			
 			return bookList;
 		}
+		// -------------------------- hasBook() --------------------------------
 		// -------------------------- updateBookmark() --------------------------------
 		public int updateBookmark(int num, String id) {
 			int updateCount = 0;

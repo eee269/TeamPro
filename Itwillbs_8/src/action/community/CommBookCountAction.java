@@ -26,10 +26,13 @@ public class CommBookCountAction implements Action {
 		HttpSession session = request.getSession();
 		String member_id = (String)session.getAttribute("member_id");
 		
+		CommBookService commBookService = new CommBookService();
 		CommBookCountService commBookCountService = new CommBookCountService();
 		
 		// 게시글 북마크 갯수 카운트
 		int count = commBookCountService.CountBook(num);
+		// 북마크 했는지 유무 검증
+		int has = 0;
 		
 		String json = "{\"total\":\""+count+"\"";
 		
@@ -41,13 +44,15 @@ public class CommBookCountAction implements Action {
 				json += ",\"list\":[";
 				
 				for(int i = 0; i < bookList.size(); i++) {
-					System.out.println(bookList.size());
 					json += "{\""+i+"\":\""+bookList.get(i)+"\"}";
 					if(i != bookList.size()-1) {
 						json += ",";
 					}
 				}
 				json += "]";
+			}else {
+				has = commBookService.checkBook(num, member_id);
+				json += ",\"has\":\""+has+"\"";
 			}
 		}
 		
