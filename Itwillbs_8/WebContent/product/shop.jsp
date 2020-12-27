@@ -172,7 +172,7 @@
 <!-- more버튼 스크립트 -->
 <script type="text/javascript">
 $( document ).ready(function () {
-	  $(".moreBox").slice(0, 8).show();
+	  $(".moreBox").slice(0, 16).show();
 	    if ($(".blogBox:hidden").length != 0) {
 	      $("#loadMore").show();
 	    } 
