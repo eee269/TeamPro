@@ -124,15 +124,16 @@ public class ProdReviewListService {
 	}
 	// ------------------------CountReviewRec()----------------------
 	// ------------------------getStarScoreCount()----------------------
-	public ArrayList<Integer> getStarScoreCount(String basicCode) {
+	public int getStarScoreCount(String basicCode, int score) {
 		Connection con = getConnection();
 		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
 		prodReviewDAO.setConnection(con);
 		
 		// 별점 별 갯수 가져오기
-		ArrayList<Integer> starCount = prodReviewDAO.getStarScoreCount(basicCode);
+//		ArrayList<Integer> starCount 
+		int star = prodReviewDAO.getStarScoreCount(basicCode, score);
 		close(con);
-		return starCount;
+		return star;
 	}
 	// ------------------------getStarScoreCount()----------------------
 

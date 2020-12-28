@@ -81,13 +81,13 @@
 	                                            	value="<%=prodQnaBean.getUsername() %>" readonly="readonly" style="background-color: #BDBDBD;"
 	                                            <%} %>
 	                                             /></div></td>
-	                                            <th><div>비밀번호</div></th>
-	                                            <td>
-                                                	<div>
-                                                    	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                    
-<!--                                                     	<font color="red">자동 잠금 기능</font>                                                                                                     -->
-                                                   	</div>
-                                            	</td>
+<!-- 	                                            <th><div>비밀번호</div></th> -->
+<!-- 	                                            <td> -->
+<!--                                                 	<div> -->
+<!--                                                     	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                     -->
+<!-- <!--                                                     	<font color="red">자동 잠금 기능</font>                                                                                                     --> -->
+<!--                                                    	</div> -->
+<!--                                             	</td> -->
                                         	</tr>
                                             <tr>
                                             	<th><div>제목</div></th>
@@ -102,9 +102,7 @@
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
                                                 <div>
-                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' ><%=prodQnaBean.getQna_content() %>
-                                                	------------- 원본 글 내용 -------------
-                                                	</textarea>
+                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' ></textarea>
  												</div>
 	                                            </td>
     	                                    </tr>
@@ -114,12 +112,8 @@
                            		<!-- //게시판 글쓰기 -->
                             	<!-- 하단 버튼 -->
                             	<div class="flex-w flex-c-m m-tb-10 float-r" >
-									<a href="javascript:submit">
-										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
-										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-											글저장
-										</div>
-									</a>
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									<input type="submit" value="글등록" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
 									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
 										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>

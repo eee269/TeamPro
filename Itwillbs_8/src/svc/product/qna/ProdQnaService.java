@@ -36,19 +36,6 @@ public class ProdQnaService {
 		
 		return isSuccess;
 	}
-	// qna 비밀번호 검증
-	public boolean checkQna(int qna_num, String qna_pass, String member_id)throws QnaException {
-		System.out.println("ProdQnaService - checkQna");
-		Connection con = getConnection();
-		ProdQnaDAO instance = ProdQnaDAO.getInstance();
-		instance.setConnection(con);
-		
-		boolean isRightUser = instance.checkQna(qna_num, qna_pass, member_id);
-		
-		close(con);
-		return isRightUser;
-	}
-	// qna 비밀글 일 경우, 비밀번호 검증
 	// qna 삭제
 	public boolean deleteQna(int qna_num) {
 		System.out.println("ProdQnaService - deleteQna");
@@ -163,6 +150,8 @@ public class ProdQnaService {
 		
 		ProdQnaBean prodQnaBean = prodQnaDAO.getQna(qna_num);
 		
+		close(con);
+		
 		return prodQnaBean;
 	}
 	// ProductDeleteAction에서 쓸 qna file정보
@@ -177,6 +166,27 @@ public class ProdQnaService {
 		close(con);
 		
 		return list;
+	}
+	// qna 조회수 업데이트
+	public int qnaUpReadcount(int num) {
+		Connection con = getConnection();
+		ProdQnaDAO prodQnaDAO = ProdQnaDAO.getInstance();
+		prodQnaDAO.setConnection(con);
+		int count = 0;
+		// 조회수 +1
+		int updateCount = prodQnaDAO.qnaUpReadcount(num);
+		
+		// 업데이트 성공 시 조회수 가져오기
+		if(updateCount > 0) {
+			count = prodQnaDAO.qnaGetReadcount(num);
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return count;
 	}
 
 	

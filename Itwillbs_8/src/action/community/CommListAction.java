@@ -32,7 +32,7 @@ public class CommListAction implements Action {
 		
 		// 페이징 처리 위해 변수 선언
 		int page = 1; // 현재 페이지 번호 저장
-		int limit = 10; // 페이지 당 표시할 게시물 수
+		int limit = 20; // 페이지 당 표시할 게시물 수
 		
 		// request 객체로부터 null 이 아닌 "page" 파라미터 전달 시 해당 변수에 값 저장
 		if(request.getParameter("page") != null) {
