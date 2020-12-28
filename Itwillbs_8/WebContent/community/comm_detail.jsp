@@ -80,7 +80,7 @@ $(document).ready(function() {
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<!-- 게시물 썸네일 -->
-					<div class="how-pos5-parent">
+					<div class="how-pos6-parent">
 						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.style.display='none'">
 					</div>
 					<div class="p-t-32">
@@ -90,8 +90,8 @@ $(document).ready(function() {
 						</h4>
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> 
 							<!-- 게시물 썸네일 -->
-							<span class="m-b-30 m-r-8">
-								<span class="cl4 size-214 mProfile"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
+							<span class="m-b-49 mProfile">
+								<span class="cl4"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
 								onerror="this.src='images/noProfile.png'"></span> 
 							</span> 
 							<span>
@@ -969,11 +969,22 @@ $(function(){
 		$("#bookmark").click(function(){
 			var id = '<%=id%>';
 			if(id=='null'){
-				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
-					return;
-				}else{
-					location.href='MemberLoginForm.mo';
-				}
+// 				swal({title:"٩(๑`^´๑)۶",
+// 					  text : "로그인이 필요한 서비스입니다!",
+// 					  type : "warning",
+// 					  showCancelButton : true,
+// 					  confirmButtonClass : "btn-danger",
+// 					  confirmButtonText : "로그인!",
+// 					  cancelButtonText : "아니오!",
+// 					  closeOnConfirm : false,
+// 					  closeOnCancel : true
+// 					},function(isConfirm){
+						if(!isConfirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+							return;
+						}else{
+							location.href='MemberLoginForm.mo';
+						}
+// 					});
 			}else{
 				$.ajax({
 					url: "CommBook.co",
@@ -985,8 +996,10 @@ $(function(){
 	                	var path = $('.bookimg').children("img");
 	                	path.attr("src",function(index,attr){
 	                		if(attr.match('beforeG')){
+	                			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
 	                			return attr.replace("beforeG","afterG");
 	                		}else{
+	                			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
 	                			return attr.replace("afterG","beforeG");
 	                		}
 	                	});
@@ -1006,7 +1019,7 @@ $(function(){
                     num: articleNum
 				},
 				success : function(json) {
-					var img = "images/icons/bookmark_after.png";
+					var img = "images/icons/bookmark_afterG.png";
 					var jsonP = JSON.parse(json);
 					var book = jsonP.total;
 					// 이미 북마크 눌렀을 시 이미지 변경

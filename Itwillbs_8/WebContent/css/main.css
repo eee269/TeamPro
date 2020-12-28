@@ -3030,6 +3030,13 @@ input.num-product::-webkit-inner-spin-button {
 .how-pos5-parent {
   position: relative;
 }
+.how-pos6-parent {
+  position: relative;
+}
+.how-pos6-parent img{
+  width: 80%;
+  height: 80%;
+}
 
 .how-pos5 {
   position: absolute;

@@ -163,8 +163,10 @@
 	                	var path = $('.bookimg'+num).children("img");
 	                	path.attr("src",function(index,attr){
 	                		if(attr.match('before')){
+	                			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
 	                			return attr.replace("before","after");
 	                		}else{
+	                			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
 	                			return attr.replace("after","before");
 	                		}
 	                	});
