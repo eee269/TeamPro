@@ -28,7 +28,7 @@ int community_num = Integer.parseInt(request.getParameter("num"));
 //날짜 => 원하는 모양을 변경 문자열 결과값
 SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.ENGLISH);
 SimpleDateFormat sdfD = new SimpleDateFormat("dd");
-SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
+SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd HH:mm");
 
 %>
 <jsp:include page="../inc/header.jsp" />
@@ -68,7 +68,7 @@ $(document).ready(function() {
 			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="size-301" id="how-pos7">
 				<div class="bookimg" id="bookmark" onclick="checkBook()">
-					<img src="images/icons/bookmark_before.png" onerror="this.style.display='none'"/>
+					<img src="images/icons/bookmark_beforeG.png" onerror="this.style.display='none'"/>
 					<span class ="cl12 m-l-4 m-r-6 bookmark_count"></span>
 				</div>
 				<div class="bubbleimg">
@@ -91,8 +91,8 @@ $(document).ready(function() {
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> 
 							<!-- 게시물 썸네일 -->
 							<span class="m-b-30 m-r-8">
-								<span class="cl4 size-214"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
-								onerror="this.src='images/icons/in-love_face.png'"></span> 
+								<span class="cl4 size-214 mProfile"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
+								onerror="this.src='images/noProfile.png'"></span> 
 							</span> 
 							<span>
 								<span class="cl4">By</span> <%=article.getUsername()%> 
@@ -101,7 +101,12 @@ $(document).ready(function() {
 							
 							<span> 
 								<%=sdfYMD.format(article.getDate()) %>
-<!-- 								<span class="cl12 m-l-4 m-r-6">|</span> -->
+								<span class="cl12 m-l-4 m-r-6">|</span>
+							</span>
+							 
+							<span>
+								<span class="cl4">조회수</span> <%=article.getReadCount()%> 
+								<span class="cl12 m-l-4 m-r-6">|</span>
 							</span> 
 <!-- 							<span> -->
 <!-- 								StreetStyle, Fashion, Couple  -->
@@ -979,10 +984,10 @@ $(function(){
 	                success: function () {
 	                	var path = $('.bookimg').children("img");
 	                	path.attr("src",function(index,attr){
-	                		if(attr.match('before')){
-	                			return attr.replace("before","after");
+	                		if(attr.match('beforeG')){
+	                			return attr.replace("beforeG","afterG");
 	                		}else{
-	                			return attr.replace("after","before");
+	                			return attr.replace("afterG","beforeG");
 	                		}
 	                	});
 				        bookmarkCount();
