@@ -81,17 +81,6 @@
    border-bottom: 1px solid #263238;
 }
 
-#show-option>li {
-    margin: 10px 0px 20px 0px;
-}
-a:hover{
-    text-decoration: none;
-}
-#show-option>li:last-child {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc;
-}
-
 /*====================옵션 css====================*/
 .wrap-num-product {
 	width: auto;
@@ -214,12 +203,11 @@ var productCode = "";
 //       alert(mixopt);
       var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
       "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
-      // 옵션 이름
+      // productCode, id="productCode숫자"
           "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
-      // 옵션 삭제 아이콘
+      // 옵션 이름, ( BK/M )
           "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
           "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
-          // 옵션 수량 선택
           "<div class='size-204 flex-w flex-m respon6-next'>" + 
           "<div class='wrap-num-product flex-w' id='itemcnt" + resultcount + "'>" +
           "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
@@ -676,7 +664,7 @@ var productCode = "";
                         </td>
                         <td>
                            <div class="tb-center">
-                              <span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
+							<span id="qna_board_showhits1" class="qnahit"><%=qnaList.get(i).getQna_readcount()%></span>
                            </div>
                         </td>
                      </tr>
@@ -684,16 +672,41 @@ var productCode = "";
                         <td colspan="6">
                            <div class="tb-left">
                               <div class="qna_board_content">
+								<img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 50px; max-width: 50px;">
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
 	                                <%if(member_id != null){if(qnaList.get(i).getMember_id().equals(member_id)){ %>
-	                                 <div class="pr_r_button">
-	                                 <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-	                                 <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
-	                                 <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
-	                                 </div>
-	                                 <%} %>
+									<div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+                                    	<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                        	<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                            	<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                	수정
+                                            </div>
+                                        </a>
+	                                    <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                            <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                                <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                    삭제
+                                            </div>
+                                        </a>
+                                   </div>
+                                   <%} else if(member_id.equals("admin")){ %>
+                                   <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+                                        <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                            <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                            	<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                	삭제
+                                           	</div>
+                                       	</a>
+                                      	<a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                        	<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                            	<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                	답글
+                                            </div>
+                                        </a>
+                            	  </div>
+	                             <%} %>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
                                     <div class="comment_depth1">
@@ -701,13 +714,6 @@ var productCode = "";
                                           <tbody>
                                              <tr>
                                                 <td class="MS_cmt_detail">
-<!--                                                    <span class="MS_cmt_date">답글란입니다</span> <br> -->
-<%--                                                    <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span> --%>
-<%--                                                    <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span> --%>
-<!--                                                    <div class="MS_cmt_content MS_cmt_depth01"> -->
-<%--                                                       <%=qnaList.get(i).getQna_content() %> --%>
-<!--                                                    </div> -->
-
 														<div class="comments">
 															<div class="comments__arrow_top"></div>
 															<div class="comment__inner">
@@ -717,12 +723,22 @@ var productCode = "";
 																<div class="comment__message">
 																	<span class="comment__message_text"><%= qnaList.get(i).getQna_content() %></span>
 																</div>
-					    	                					<div class="pr_r_button">
-					    	                					<%if(member_id.equals("admin")){ %>
-							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+																<%if(member_id != null && member_id.equals("admin")){ %>
+					    	                					<div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+							    	                    			<a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 								<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+																			<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+																			수정
+																		</div>
+							    	                    			</a>
+									                                <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+		                                 								<div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+																			<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+																			삭제
+																		</div>
+									                                </a>
+																</div>
 						    	                    			<%} %>
-					    	                					</div>
 		    	                							</div>
 		    	                						</div>
 		    	                					</div>
@@ -739,7 +755,7 @@ var productCode = "";
                         </td>
                      </tr>
                   </tbody>
-                     <%}}
+                     <%}
                   }%>
                   </table>
                   <!-- qna pagin -->
@@ -1268,14 +1284,19 @@ var productCode = "";
             	starChart += "<li>"
            						+"<span class='tit'>star"+key+"</span>"
            							+"<span class='bar'>"
-										+"<span class='abs' style='width: "+100 / total * star[key] * 1+"%'></span>"
+                                    +"<span class='abs' style='width: "+(total != 0 ? (100 / total * star[key] * 1) : 0)+"%'></span>"
 									+"</span>"
 									+"<span class='num'>"+star[key]+"</span>"
 							+"</li>";
             		
             	}
-           		var like = "<strong>"+(starLike / total * 100).toFixed(1)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
-            		result = (score / total *1).toFixed(1);
+                var like = "<strong>"+ (total != 0 ? (starLike / total * 100).toFixed(1):0)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
+                if(total == 0){
+                    result = 0;                        
+                }else{
+                       result = (score / total *1).toFixed(1);
+                }
+                
             		$('.like').html(like);
             		$('.chart ul').html(starChart);
             		$('.score dt').html(result);
@@ -1310,6 +1331,27 @@ var productCode = "";
 			$(this).addClass('now');
 		}
 	}); // tabs click function end
+    
+    //==================== 상세 이미지 보기  ====================//
+//        $(document).on("click", ".photo-list", function () {
+       function power_review_view_show(){
+           
+                var a = $(this).parents('li'); 
+                var content = a.find('.content').text();
+                var img = a.find('#img').val();
+                var name = a.find('.re_name').text();
+                var date = a.find('.re_date').text();
+                
+                var output = ""; 
+                output += "<div id='inline' style='max-width:600px; display: none;'>"
+                          +"<div class='popup-img'><img src='upload/prodReviewUpload/"+img+"' width='100%' height='auto'></div>"
+                          +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+                          +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
+                
+                $("#image_view_load").html(output); 
+                $(".fancybox").trigger("click");
+       }
+//        });
 
 });
 
@@ -1450,6 +1492,9 @@ function prd_review(num){
 	            	   }
 			        ProdReviewRecCount(num,recommand);
 	               },
+	               error: function(request,status,error){
+	               		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	               }
 			})
 		}
 	}
@@ -1478,18 +1523,36 @@ function prd_review(num){
 //     	$('.rating-input').toggle();
 //     },100);
 </script>
+<script>
+$(function(){
+    // qna 제목 클릭 시 내용 보여주기
+    $('.nbg').click(function(){
+        
+        if($(this).next().css('display')=='none'){
+            var num = $(this).find('.qnanum').text();
+             var hit = $(this).find('#qna_board_showhits1');
+            // 조회수 증가
+            $.ajax({
+                url: "ProdQnaUpReadcount.po",
+                   type: "POST",
+                   data: {
+                       num: num
+                   },
+                   success: function (count) {
+                       $(hit).html(count);
+                   },
+                   error: function(request,status,error){
+                       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                   }
+            })
+        }
+        $(this).next().toggle();
+        
+    });
+    
+});
+</script>
 <script type="text/javascript">
-// qna 제목 클릭 시 내용 보여주기
-function show_hide(){
-   $(function(){
-      var content = $('.MS_qna_content_box').css('display');
-      if(content == 'table-row' || content == 'block'){
-         $('.MS_qna_content_box').css('display','none');
-      }else {
-         $('.MS_qna_content_box').css('display','table-row').focus();
-      }
-   });
-};
 // qna 비회원이 글 쓰려고 할 시 로그인 유도
 $(function(){
 	$('.btm_write').click(function(){
@@ -1516,6 +1579,27 @@ function showReply(num){
 		}
 	});
 }
+</script>
+<script>
+    // tabmenu 수량 호출
+    function getCount(){
+        var basicCode = "<%=basicCode%>";
+        $.ajax({
+            url: "ProdGetCount.po",
+               type: "POST",
+               data: {
+                   basicCode: basicCode
+               },
+               success: function (json) {
+                   var count = JSON.parse(json);
+                   for(key in count){
+                        $(".count"+key).html(count[key]);
+                   }
+                   
+               },
+        })
+    };
+    getCount();
 </script>
 <script type="text/javascript">
    var _gaq = _gaq || [];
@@ -1575,11 +1659,19 @@ function showReply(num){
 	          link: {
 	            mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
 	            webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
-	          }
+	          },
 	        }]
 	    })
-	  }
-		
+	  };
+   </script>
+   <script type="text/javascript"
+      src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+   <link rel="stylesheet" type="text/css"
+      href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+   <script type="text/javascript">
+   $(document).ready(function() {
+       $('.fancybox').fancybox();
+   });
 			
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
