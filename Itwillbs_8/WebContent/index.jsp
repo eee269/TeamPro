@@ -157,15 +157,25 @@
 <!-- 이벤트 배너 2개 -->
 <div class="event_ban_area">
 	<ul>
-		<!--  			좌측 첫번째 배너  -->
-		<li class="fleft"><a href="/shop/shopdetail.html?branduid=30"><img
-				src="http://nasign.cafe24.com/mall/main/event_ban01.jpg"></a></li>
-
-		<!-- 			우측 두번째 배너  -->
-		<li class="fright"><a
-			href="/shop/shopdetail.html?branduid=3360163"><img
-				src="http://nasign.cafe24.com/mall/main/event_ban02.jpg"></a></li>
-
+		<li><a href="ProductShop.po?type=X&xcode=CLOTHES">
+			<img src="https://img.icons8.com/cotton/64/000000/hanger--v1.png"/><br>
+			<span>CLOTHES</span>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=BAGS">
+			<img src="https://img.icons8.com/ios/64/000000/bag-back-view.png"/><br>
+			<span>BAGS</span>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=SHOES">
+			<img src="https://img.icons8.com/ios/64/000000/sneakers.png"/><br>
+			<span>SHOES</span>
+		</a></li>
+		
+		<li><a href="CommList.co">
+			<img src="https://img.icons8.com/ios/64/000000/clipboard.png"/><br>
+			<span>COMMUNITY</span>
+		</a></li>
 	</ul>
 </div>
 <div class="cboth"></div>
