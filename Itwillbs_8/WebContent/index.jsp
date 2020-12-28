@@ -13,6 +13,23 @@
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <link type="text/css" rel="stylesheet" href="css/team.css" />
 
+
+<style>
+.event_ban_area > ul {
+	position: flex;
+}
+.event_ban_area ul > li {
+	display: inline-block;
+  	align-items: center;
+  	width: 20%;
+  	height: 200px;
+  	margin: 50px 20px;
+}
+.event_ban_area ul > li img {
+	padding: 50px 0;
+}
+</style>
+
 <%
 	String member_id =(String)session.getAttribute("member_id");
 	ArrayList<ProductBean> newList =(ArrayList<ProductBean>)request.getAttribute("newList");
