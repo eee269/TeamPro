@@ -768,6 +768,7 @@ var productCode = "";
                      </tr>
                   </tbody>
                      <%}
+	                }
                   }%>
                   </table>
                   <!-- qna pagin -->
