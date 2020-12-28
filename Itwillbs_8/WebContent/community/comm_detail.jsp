@@ -18,6 +18,9 @@ ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("
 DecimalFormat priceFormat = new DecimalFormat("###,###");
 
 //==============댓글시작==============//
+// 댓글 총갯수 가져오기
+// int reListCount = (int)request.getAttribute("reListCount");
+
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
 
@@ -32,7 +35,11 @@ SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd HH:mm");
 
 %>
 <jsp:include page="../inc/header.jsp" />
-
+<style>
+.paging a {
+    padding: 0 2px !important;
+}
+</style>
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css"
@@ -160,6 +167,7 @@ $(document).ready(function() {
 							</div>
 					<!-- -----------------------------Comment----------------------------- -->
 					<h2 class="comment_title">COMMENT</h2>
+					<p style="padding-top: 20px;">댓글 총갯수 : <span class="reCount"></span>개</p>
 					<div id="productDetail" style="padding-top: 20px;">
 						<div class="page-body">
 							<div class="cboth">
@@ -513,6 +521,7 @@ $(function(){
      	
 	              	$(".PR15N01-review-wrap").html(output);
 	                $(".recomment_count").trigger('click');
+	                getReCount();
             },
         	error: function(request,status,error){
 	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -521,8 +530,31 @@ $(function(){
     }
     getReplyCall = getCommReply;
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
+   
+
     
 })	
+
+//==================== 총댓글수 가져오기  ====================//
+    function getReCount(){
+	    var num = "<%=community_num%>";
+	    var allData = {"num": num};
+
+    	$.ajax({
+			url: "CommReCountProAction.co", // 요청 url
+            type: "POST", // post 방식
+            data: allData,
+            success: function (reCount) {
+            	$(".reCount").html(reCount);
+            	
+            },
+        error: function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	      	}
+    	})
+    };
+
+
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
@@ -547,6 +579,7 @@ $(function(){
 			                	$('.popular').removeClass("active");
 			      			  	$('.newest').addClass('active');
 			                	getReplyCall();
+			                	getReCount();
 			                },
 			    			error: function(request,status,error){
 			    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -814,6 +847,7 @@ $(function(){
 	 	}) // 삭제끝
 
 
+ 		
 	 	
 	 	//==================== 대댓글 카운트 구하기  ====================//
  		$(document).on("click", ".recomment_count", function () {	
