@@ -5,6 +5,7 @@
 
 <%
 	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
+Cart ca = new Cart();
 int coin = 0;
 int cartNo = cartList.size();
 int num = 0;
@@ -164,8 +165,8 @@ int cntSet = 0;
 								<td>
 									<div class="tb-center">
 										<div class="thumb">
-											<a href="" id = "imga"><img
-												src="upload/productUploadImg/<%=cartList.get(0).getMain_img()%>"
+											<a href="ProductDetail.po?basicCode=<%=cartList.get(i).getProduct_basicCode() %>" id = "imga">
+												<img src="upload/productUploadImg/<%=cartList.get(i).getMain_img() %>"
 												alt="상품 섬네일" title="상품 섬네일" width="1" class="imgss" style="height: 100%;"></a>
 										</div>
 									</div>

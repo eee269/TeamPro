@@ -22,7 +22,6 @@ public class cartGetPlusAction implements Action {
 		System.out.println("Action - cartGetPlusAction");
 		HttpSession session = request.getSession();
 		ActionForward forward = null;
-		Cart ca = new Cart();
 		boolean isPlusSuccess = false;
 		boolean isCartUpSuccess	= false;
 		
@@ -53,9 +52,9 @@ public class cartGetPlusAction implements Action {
 			color[i] = mixopt[i].split("/")[1];
 		}
 		
-		String main_img = request.getParameter("img_main");
-		System.out.println("main_imgs : " + main_img);
-
+		String main_img = request.getParameter("IMG-PRODUCT");	
+		System.out.println("main_img : " +  main_img);
+		
 		String product_basicCode = request.getParameter("basicCode");  // basicCode코드
 		product_basicCode =  String.format("%04d", Integer.parseInt(product_basicCode))+"";
 		String[] opt_productCode = new String[length];
@@ -73,7 +72,7 @@ public class cartGetPlusAction implements Action {
 			
 			System.out.println("color[i]" + color[i] + "\nsize[i] " + size[i] + "\nopt_productCode[i] " + opt_productCode[i] + "\ncnt[i] " + cnt[i]);
 			
-			 ca = new Cart();
+			 Cart ca = new Cart();
 			 System.out.println("ca.getCnt() : " + ca.getCnt());
 			 ca.setCnt(cnt[i] + ca.getCnt());
 			 ca.setProduct_name(product_name);

@@ -370,7 +370,7 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-
+							
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                               href="product/uploadImg/<%=main[i] %>"> <i
@@ -379,7 +379,6 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
-                   <input type="hidden" name = "img_main" value="upload/productUploadImg/<%=main[0] %>">
                   <%=main[0] %>
                   </div>
                </div>
@@ -393,6 +392,8 @@ var productCode = "";
             <input type="hidden" id="item-code" value="code,,">
             <input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
          <input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
+         <input type="hidden" name="IMG-PRODUCT" value="<%=main[0] %>">
+         
             <!-- 상품명 -->
                <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
                   </h4>
