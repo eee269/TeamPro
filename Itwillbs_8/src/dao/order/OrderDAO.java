@@ -321,10 +321,8 @@ public class OrderDAO {
 			if(rs.next()) {
 				num1 =  rs.getInt(1)+1;
 			}
-			System.out.println("num1 = " +num1);
 			for(String str : nums) {
 			sql = "select * from cart where num = ?";
-			System.out.println("num : " +Integer.parseInt(str));
 			p = con.prepareStatement(sql);
 			p.setInt(1, Integer.parseInt(str));
 			rs = p.executeQuery();
@@ -401,21 +399,11 @@ public class OrderDAO {
 				cart.setColor(rs.getString(5));
 				cart.setSize(rs.getString(6));
 				cart.setMember_id(rs.getString(7));
-				cart.setProduct_basicCode(rs.getString(8));
-				cart.setOpt_productCode(rs.getString(9));
+				cart.setMain_img(rs.getString(8));
+				cart.setProduct_basicCode(rs.getString(9));
+				cart.setOpt_productCode(rs.getString(10));
 
 			}
-			
-			System.out.println("DAO : "+cart.getNum());
-			System.out.println("DAO : "+cart.getCnt());
-			System.out.println("DAO : "+cart.getProduct_name());
-			System.out.println("DAO : "+cart.getPrice());
-			System.out.println("DAO : "+cart.getColor());
-			System.out.println("DAO : "+cart.getSize());
-			System.out.println("DAO : "+cart.getMember_id());
-			System.out.println("DAO : "+cart.getProduct_basicCode());
-			System.out.println("DAO : "+cart.getOpt_productCode());
-			
 			
 		} catch (Exception e) {
 			System.out.println("selectCart() 오류! - "+e.getMessage());
