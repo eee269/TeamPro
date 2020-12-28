@@ -4,8 +4,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
-
+	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 int coin = 0;
 int cartNo = cartList.size();
 int num = 0;
@@ -51,6 +50,7 @@ int cntSet = 0;
 #bigfont{
 	font-size: 20px;
 }
+#content img {max-width:1300px; height:100%;}
 
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
@@ -89,9 +89,6 @@ int cntSet = 0;
 	<div id="cartWrap">
 		<dl class="loc-navi">
 			<dt class="blind">현재 위치</dt>
-			<dd>
-				<a href="/">HOME</a> &gt; CART
-			</dd>
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm" id="form">
@@ -167,9 +164,9 @@ int cntSet = 0;
 								<td>
 									<div class="tb-center">
 										<div class="thumb">
-											<a href=""><img
-												src="<%=cartList.get(i).getMain_img() %>"
-												alt="상품 섬네일" title="상품 섬네일" width="1"></a>
+											<a href="" id = "imga"><img
+												src="upload/productUploadImg/<%=cartList.get(0).getMain_img()%>"
+												alt="상품 섬네일" title="상품 섬네일" width="1" class="imgss" style="height: 100%;"></a>
 										</div>
 									</div>
 								</td>
@@ -177,7 +174,7 @@ int cntSet = 0;
 									<div class="tb-left"> 
 										<a class="tb-bold" id="bigfont" href="ProductDetail.po?basicCode=<%=cartList.get(i).getProduct_basicCode() %>"><%=cartList.get(i).getProduct_name()%></a>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd" id="opt_co" >색상 : <%=cartList.get(i).getColor()%></span></span>
+											<span class="tb-dl" id="opt_td"><span class="opt_dd" id="opt_co" >색상 : <%=cartList.get(i).getColor()%></span></span>
 										</div>
 										<div id="3360797_1" class="tb-opt">
 											<span class="tb-dl"><span class="opt_dd">사이즈 :
@@ -193,8 +190,6 @@ int cntSet = 0;
 							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-"  style="cursor:pointer" >
 							<input type="text" id="btn-num<%=i%>" name="amount"	 value="<%=cartList.get(i).getCnt() %>" class="txt-spin"> 
 								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" style="cursor:pointer" value="+">
-<!-- 											</span> -->
-<!-- 										</div> -->
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
 									</div> <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
 
@@ -496,9 +491,14 @@ $("#allCheck").click(function(){
 		  }
 		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
 			
+// 		$(function() {
 			
-			
-			 
+// 		});
+		
+
+
+
+
 		 
 </script>
 

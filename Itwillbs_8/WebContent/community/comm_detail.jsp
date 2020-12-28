@@ -9,6 +9,7 @@
 	pageEncoding="UTF-8"%>
 <%
 CommBean article = (CommBean) request.getAttribute("article");
+ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 String nowPage = request.getParameter("page");
 
 //==============댓글시작==============//
@@ -20,13 +21,12 @@ String id = (String) session.getAttribute("member_id");
 int community_num = Integer.parseInt(request.getParameter("num"));
 
 //날짜 => 원하는 모양을 변경 문자열 결과값
-SimpleDateFormat sdfYM = new SimpleDateFormat("yy-MMM", Locale.ENGLISH);
+SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.ENGLISH);
 SimpleDateFormat sdfD = new SimpleDateFormat("dd");
 SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 
 %>
 <jsp:include page="../inc/header.jsp" />
-
 
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
@@ -40,97 +40,18 @@ $(document).ready(function() {
 
 <link type="text/css" rel="stylesheet" href="css/common.css" />
 <link type="text/css" rel="stylesheet" href="css/shopdetail.css" />
-<link type="text/css" rel="stylesheet" href="css/header.css" />
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <link type="text/css" rel="stylesheet" href="css/power_review_custom.css" />
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
-<style>
-.rerelist {
-	background-color: #e9e9e9;
-	padding: 15px !important;
-	margin-top: 10px !important;
-	margin-left: 30px !important;
-	border-radius: 15px;
-}
 
-.desc_re {
-	/* position: absolute; */
-	width: 160px;
-	float: right;
-}
-
-.content_re {
-	/* clear: both; */
-	overflow: hidden;
-	/* margin: 0px 220px 0 0; */
-	color: #89888e;
-	line-height: 1.5;
-	word-wrap: break-word;
-	/*     min-height: 75px; */
-	float: left;
-	width: 400px;
-}
-
-.desc_re dt:first-child {
-	border-top: 0;
-}
-
-.desc_re dt {
-	padding: 0px 0 0 5px;
-	color: #a8a8a8;
-	border-top: 1px solid #dadada;
-}
-
-.desc_re dd {
-	padding: 0 0 5px 5px !important;
-	color: #000;
-}
-
-/*대댓글*/
-#re_wrt {
-	display: none;
-	margin-top: 10px;
-}
-
-#re_wrt.on {
-	display: block;
-}
-
-#re_wrt #rere_contents {
-	margin-left: 12px;
-}
-
-#re_wrt .btn_comment {
-	/*     position: absolute; */
-	/*     top: 0; */
-	/*     right: 0; */
-	/*     height: 72px; */
-	line-height: 50px;
-	padding: 0 45px;
-	background: #f3f3f3;
-	border-left: 1px solid #dadada;
-	color: #818391;
-	font-weight: bold;
-	letter-spacing: -1px; *:;
-	height: 50px;
-}
-
-#powerReview .PR15N01-review-wrap>li .desc dt {
-	padding-top: 5px;
-}
-
-ul.arraymodeTab>.active a{
-font-weight: bold !important;
-}
-</style>
 
 <!-- breadcrumb -->
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
-		<a href="index.html" class="stext-109 cl8 hov-cl1 trans-04"> Home
+		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
-		</a> <a href="blog.html" class="stext-109 cl8 hov-cl1 trans-04"> Community
+		</a> <a href="CommList.co" class="stext-109 cl8 hov-cl1 trans-04"> Community
 			<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
 		</a> <span class="stext-109 cl4"> <%=article.getSubject() %> </span>
 	</div>
@@ -157,6 +78,9 @@ font-weight: bold !important;
 					
 					<div class="p-t-32">
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> 
+							<span class="m-b-30 m-r-8">
+								<span class="cl4 size-214"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"></span> 
+							</span> 
 							<span>
 								<span class="cl4">By</span> <%=article.getUsername()%> 
 								<span class="cl12 m-l-4 m-r-6">|</span>
@@ -182,10 +106,9 @@ font-weight: bold !important;
 						<h4 class="ltext-109 cl2 p-b-28">
 							<%=article.getSubject()%>
 						</h4>
-						<p class="stext-117 cl6 p-b-26 min-h-300px">
-							<%=article.getContent()%>
-							<%=article.getMember_id()%>
-						</p>
+						<div class="stext-117 cl6 p-b-26 min-h-300px">
+							<p><%=article.getContent()%></p>
+						</div>
 					</div>
 					<div class="flex-w flex-t p-t-16">
 						<span class="size-216 stext-116 cl8 p-t-4">
@@ -201,20 +124,34 @@ font-weight: bold !important;
 							</a>
 						</div>
 					</div>
-						<button class="flex-c-m stext-101 cl0 size-50 bg3 bor2 hov-btn3 p-lr-15 trans-04">
+							<div class="flex-w flex-c-m m-tb-10 float-r" >
 					<%if(id!=null){
 						if(id.equals(article.getMember_id())){ %>
-							<a href="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">삭제</a>
-							<input type="button" value="삭제" onclick="location.href='CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
-							<input type="button" value="수정" onclick="location.href='CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>'">
+								<a href="CommDeleteForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									삭제
+									</div>
+								</a>
+								<a href="CommModifyForm.co?num=<%=article.getNum()%>&page=<%=nowPage%>">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									수정
+									</div>
+								</a>
 					<%	}
 					}%>
-							<input type="button" value="글목록" onclick="location.href='CommList.co?page=<%=nowPage%>'">
-							<input type="button" value="북마크" id="bookmark"/>
-						</button>
-
-
-
+								<a href="CommList.co?page=<%=nowPage %>">
+									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									글목록
+									</div>
+								</a>
+								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn" id="bookmark">
+									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+									북마크
+								</div>
+							</div>
 					<!-- -----------------------------Comment----------------------------- -->
 					<h2 class="comment_title">COMMENT</h2>
 					<div id="productDetail" style="padding-top: 20px;">
@@ -237,7 +174,7 @@ font-weight: bold !important;
 
 														<div class="pr-txtbox">
 															<textarea
-																class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10"
+																class="size-110 bor8 stext-102 cl2 p-tb-10"
 																id="reply_contents" name="reply_contents"></textarea>
 															<div class="thumb-wrap"></div>
 														</div>
@@ -251,11 +188,11 @@ font-weight: bold !important;
 															<%
 																if (id != null) {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write">
+																class="review_btn review_write">
 															<%
 																} else {
 															%><input type="button" value="댓글등록"
-																class="lnk-review review_write"
+																class="review_btn"
 																onclick="return loginCheck()">
 															<%
 																}
@@ -276,16 +213,12 @@ font-weight: bold !important;
 
 
 										<ul class="arraymodeTab">
-											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>
+											<li class="arraymode popular active"><a href="#popular">답댓글많은순</a></li>|
 											<li class="arraymode newest"><a href="#newest">최신순</a></li>
 										</ul>
 
 
 										<ul class="PR15N01-review-wrap"></ul>
-
-
-
-
 
 										<!-- .PR15N01-review-wrap -->
 
@@ -305,212 +238,94 @@ font-weight: bold !important;
 					</div>
 					<div class="col-md-4 col-lg-3 p-b-80">
 					<div class="side-menu">
-						<div class="bor17 of-hidden pos-relative">
-							<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
+<!-- 						<div> -->
+<!-- 							<h4 class="mtext-112 cl2 p-b-33"> -->
+<!-- 								Categories -->
+<!-- 							</h4> -->
 
-							<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-								<i class="zmdi zmdi-search"></i>
-							</button>
-						</div>
+<!-- 							<ul> -->
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Fashion -->
+<!-- 									</a> -->
+<!-- 								</li> -->
 
-						<div class="p-t-55">
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Beauty -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Street Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										Life Style -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+
+<!-- 								<li class="bor18"> -->
+<!-- 									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4"> -->
+<!-- 										DIY & Crafts -->
+<!-- 									</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+
+						<div class="size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
-								Categories
+								베스트 게시물
 							</h4>
 
 							<ul>
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Fashion
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Beauty
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Street Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										Life Style
-									</a>
-								</li>
-
-								<li class="bor18">
-									<a href="#" class="dis-block stext-115 cl6 hov-cl1 trans-04 p-tb-8 p-lr-4">
-										DIY & Crafts
-									</a>
-								</li>
+								<%for(CommBean cb : articleList){ %>
+									<li class="flex-w flex-t p-b-30">
+										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
+										</a>
+	
+										<div class="size-215 flex-col-t p-t-8">
+											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+												<%=cb.getSubject() %>
+											</a>
+	
+											<span class="stext-116 cl6 p-t-20">
+												<%=cb.getUsername() %>
+											</span>
+										</div>
+									</li>
+								<%} %>
 							</ul>
 						</div>
-
-						<div class="p-t-65">
+						<div class="p-t-65 size-304">
 							<h4 class="mtext-112 cl2 p-b-33">
-								Featured Products
+								베스트 상품
 							</h4>
 
 							<ul>
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-01.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											White Shirt With Pleat Detail Back
+								<%for(CommBean cb : articleList){ %>
+									<li class="flex-w flex-t p-b-30">
+										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
 										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-02.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-w flex-t p-b-30">
-									<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
-										<img src="images/product-min-03.jpg" alt="PRODUCT">
-									</a>
-
-									<div class="size-215 flex-col-t p-t-8">
-										<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="stext-116 cl6 p-t-20">
-											$17.00
-										</span>
-									</div>
-								</li>
+	
+										<div class="size-215 flex-col-t p-t-8">
+											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+												<%=cb.getSubject() %>
+											</a>
+	
+											<span class="stext-116 cl6 p-t-20">
+												<%=cb.getUsername() %>
+											</span>
+										</div>
+									</li>
+								<%} %>
 							</ul>
 						</div>
-
-						<div class="p-t-55">
-							<h4 class="mtext-112 cl2 p-b-20">
-								Archive
-							</h4>
-
-							<ul>
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											July 2018
-										</span>
-
-										<span>
-											(9)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											June 2018
-										</span>
-
-										<span>
-											(39)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											May 2018
-										</span>
-
-										<span>
-											(29)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											April  2018
-										</span>
-
-										<span>
-											(35)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											March 2018
-										</span>
-
-										<span>
-											(22)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											February 2018
-										</span>
-
-										<span>
-											(32)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											January 2018
-										</span>
-
-										<span>
-											(21)
-										</span>
-									</a>
-								</li>
-
-								<li class="p-b-7">
-									<a href="#" class="flex-w flex-sb-m stext-115 cl6 hov-cl1 trans-04 p-tb-2">
-										<span>
-											December 2017
-										</span>
-
-										<span>
-											(26)
-										</span>
-									</a>
-								</li>
-							</ul>
-						</div>
-
 						<div class="p-t-50">
 							<h4 class="mtext-112 cl2 p-b-27">
 								Tags
@@ -584,41 +399,62 @@ $(function(){
 	                    var coReply = coReplyList[i][j];
 	                    
 	                    if(j == 0){
-	                    	var core_username = coReply.username;
-	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'><dt class='first'>작성자</dt><dd>"+core_username+"</dd>";
+	                    	var core_del = coReply.del;
 	                    }else if(j == 1){
-	                    	output += "<dt>작성일</dt><dd>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";
-								
+	                    	var core_mem_id = coReply.mem_id;
 	                    }else if(j == 2){
-	                    	var core_content = coReply.content;
-	                    	output += "<div class='content'><p class='content_p'>"+coReply.content;
-	                  
+	                    	var core_username = coReply.username;
+	                    	output += "<li id='power_review_block995511' class='power-review-list-box'><dl class='desc'>"	                    		                    	
+	                    		if(core_del == "N"){
+		                    		output += "<dt class='first'>작성자</dt><dd class='re_name'>"+core_mem_id+"</dd>";
+			                    }else{
+			                    	output += "<dt class='first'>작성자</dt><dd class='re_name'><span class='del'>-</span></dd>"
+		 	                    }  				
 	                    }else if(j == 3){
+	                    	output += "<dt>작성일</dt><dd class='re_date'>"+moment(coReply.date).format("YY-MM-DD ")+"</dd></dl>";	
+	                    }else if(j == 4){
+	                    	var core_content = coReply.content;
+	                    	if(core_del == "N"){
+	                    		output += "<div class='content'><p class='content_p'>"+coReply.content;
+		                    }else{
+		                    	output += "<div class='content'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span>"
+	 	                    }
+	                    }else if(j == 5){
 	                    	var img = coReply.img;
-	                    	if(img != ""){
-	                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'><a class='image_view_load'><img src='upload/commReUpload/"+img+"' width='150px' style='padding-bottom:10px;'></a>";
-	                    	}
-	                    	output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
-	                    }else if(j == 4){	
+	                    	var none = '"none"';
+	                    	if(core_del == "N"){
+		                    	if(img != ""){
+			                    	output += "<br><br><input type='hidden' id='img' value='"+img+"'>"
+			                    			+"<a class='image_view_load'>"
+			                    			+"<img src='upload/commReUpload/"+img+"' onerror='this.style.display="+none+";'></a>";
+			                    	}
+			                    output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+		                    }else{
+	                    		output += "</p><div class'ctr'></div></div><div style='clear: both;'></div>";
+	 	                    }             	
+	                    }else if(j == 6){	
 	                    	var core_num = coReply.num;
 	                    	output += "<input type='hidden' class='comment_num' value='"+core_num+"'>";
-	                    }else if(j == 5){		
+	                    }else if(j == 7){		
 	                    	output += "<input type='hidden' class='num' value='"+community_num+"'>";
 	                    	output += "<div id='replyCount'></div>";
 	                    	
 	                    	output += "<input type='button' value='답댓글 열기' class='bu_gray_p recomment_load on'> ";
 	                    	output += "<input type='button' value='답댓글 닫기' class='bu_gray_p recomment_close'> ";
-	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";
-	                    	
-	                    	if(core_username != "<span class='del'>-</span>"){
-	                    	output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
-	                    	}
-	                    	
-	                    	if(core_username == id){
-	                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
-	                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
-	                    	}
-	                    	
+	                    	output += "<input type='hidden' value='카운트' class='bu_gray_s recomment_count'> ";                    	
+                    		if(core_del == "N"){
+                    			if(id != "null"){
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s comment_add'> ";
+                    			}else{
+                    				output += "<input type='button' value='답댓글 쓰기' class='bu_gray_s' onclick='return loginCheck()'>";
+                    			}
+		                    }                 		
+                    		if(core_del == "N"){
+		                    	if(core_username == id){
+		                    	output += "<input type='button' value='수정' class='bu_gray_s comment_modify'> ";	
+		                    	output += "<input type='button' value='삭제' class='bu_gray_s comment_delete'> ";
+		                    	}
+                    		}                  		
 	                    	output += "<div id='obj' class='obj reply-wrap'>";
 	                    	output += "<form name='comment' id='comment' action='CommReModifyPro.co' method='post' style='margin-top:0px !important; padding-top:0px !important;'>";
 	                    	output += "	<input type='hidden' id='username' name='username' value='"+core_username+"'>";
@@ -641,13 +477,11 @@ $(function(){
 	                    	output += "		<input type='button' value='입력' class='btn_comment reReWrite'>";
 	                    	output += "	</div>";
 	                    	output += "</form>	";	
-	                    	output += "</div><div id='replyList'></div></li>";
-	                    	
-	                    } //if문	                    
-	        		};//for문  	        		
+	                    	output += "</div><div id='replyList'></div></li>";                    	
+	                    } //if문	                      
+		        		};//for문  	        		
             	};//for문
-            	
-            	
+            	            	
     			var pageInfo = paging(obj.listCount, page, limit);
     			output+="<div class='paging'>";
         					if(page <= 1){
@@ -681,13 +515,12 @@ $(function(){
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
     
 })	
-	
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
 		    $(".review_write").click(function(){
 			    	if($("#reply_contents").val().trim() === ""){
-			    		alert("리뷰를 입력하세요.");
+			    		alert("댓글을 입력하세요.");
 			    		$("#reply_contents").val("").focus();
 			    	}else{
 			            var form = $('#comm_re_form')[0];
@@ -796,26 +629,44 @@ $(function(){
    	                for (var j = 0; j < replyList[i].length; j++) {
     	                    var reply = replyList[i][j];
     	                    if(j == 0){
-    	                    	var reply_contents = reply.contents;
-    	                    	output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	var reply_del = reply.del;
     	                    }else if(j == 1){
-    	                    	var re_name = reply.name;
-    	                    	output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply.name+"</dd>";
+    	                    	var reply_contents = reply.contents;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<ul class='rerelist'><li class='content_re'>"+reply.contents+"</li>";
+    	                    	}else{
+    	                    		output += "<ul class='rerelist'><li class='content_re'><span class='del'>작성자에 의해 삭제된 댓글입니다.</span></li>";
+    	                    	}
+    	                    	
     	                    }else if(j == 2){
+    	                    	var reply_mem_id = reply.mem_id;
+   	                		}else if(j == 3){
+    	                    	var re_name = reply.name;
+    	                    	if(reply_del=="N"){
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd>"+reply_mem_id+"</dd>";
+    	                    	}else{
+    	                    		output += "<li class='desc_re'><dl><dt>작성자</dt><dd><span class='del'>-</span></dd>";
+    	                    	}
     	                    	
-    	                    	
+    	                    }else if(j == 4){    	    	                    	
     	                    	output += "<dt>작성일 </dt><dd>"+moment(reply.date).format("YY-MM-DD ")+"</dd></dl></li><div style='clear: both;'></div>";
-    	                    }else if(j == 3){
+    	                    }else if(j == 5){
 	    	                   
-    	                    	if(id!=null){
-									if(re_name != id){
-									output += "</ul>"
-	    	                    	}else{
-									
-	    	                    	output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'> <input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'><input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
+    	                    	if(id!="null"){
+									if(reply_del=="Y"){
+										output += "</ul>"
+	    	                    	}else if(id == re_name){			
+	    	                    		output += "<li><input type='button' value='수정' class='bu_gray_s rerere_write_open'>"
+	    	                    				   +"<input type='hidden' class='rere_num' value='"+reply.comm_re_num+"'>"
+	    	                    				   +"<input type='button' value='삭제' class='bu_gray_s rere_delete'></li>";
 	    	                    	
-	    	                    	output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'><input type='hidden' name='community_num' id='community_num' value='"+num+"'><input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
-	    	                    	output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"+reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    		output += "<div id='re_wrt' class='re_wrt'><input type='hidden' name='username' id='username' value='"+re_name+"'>"
+	    	                    		           +"<input type='hidden' name='community_num' id='community_num' value='"+num+"'>"
+	    	                    		           +"<input type='hidden' name='num' id='num' value='"+reply.comm_re_num+"'>";
+	    	                    		output += "<textarea name='rere_contents' id='rere_contents' class='rere_contents' autofocus='' onfocus='this.setSelectionRange(this.value.length,this.value.length);'>"
+	    	                    		           +reply_contents+"</textarea><input type='button' value='수정' class='btn_comment rerereWrite'></div></ul>";
+	    	                    	}else{
+	    	                    		output += "</ul>";
 	    	                    	}
 	    	                    }else{
 									output += "</ul>";   	                    		    	                    	
@@ -856,11 +707,15 @@ $(function(){
  		
  		//==================== 대댓글 쓰기  ====================//
  		$(document).on("click", ".reReWrite", function () {
-//  		$(".reReWrite").click(function(){
-			 	var a = $(this).parents('li').find('#comm_add'); 
-			 	var b = $(this).parents('li'); 
-			 	
-			 	var username = a.find('#username').val();
+ 			var id = "<%=id%>";
+ 			var a = $(this).parents('li').find('#comm_add'); 
+		 	var b = $(this).parents('li'); 
+ 			
+		 	if(a.find("#contents").val() == ""){
+	    		alert("대댓글을 입력하세요.");
+	    		a.find("#contents").focus();
+	    	}else{	    		
+			 	var username = id;
 				var community_num = a.find('#community_num').val();
 				var num = a.find('#num').val();
 				var contents = a.find('#contents').val();
@@ -879,7 +734,8 @@ $(function(){
 	    			error: function(request,status,error){
 	    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	    		       }
-	    		})	    	
+	    		})
+	    	}	
 	    }) 		
  		
 	     		
@@ -980,12 +836,18 @@ $(function(){
 
 
  		//==================== 상세 이미지 보기  ====================//
- 		$(document).on("click", ".image_view_load", function () {
+ 		$(document).on("click", ".image_view_load", function () {				 
  				 var a = $(this).parents('li'); 
  				 var content = a.find('.content_p').text();
  				 var img = a.find('#img').val();
+ 				 var name = a.find('.re_name').text();
+ 				 var date = a.find('.re_date').text();
+ 				 
  				 var output = ""; 
- 				 output += "<DIV id='inline' style='max-width:600px; display: none;'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'><br><br>"+content+"</DIV>"; 
+ 				 output += "<div id='inline' style='max-width:600px; display: none;'>"
+ 	 					  +"<div class='popup-img'><img src='upload/commReUpload/"+img+"' width='100%' height='auto'></div>"
+ 	 					  +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+ 	 					  +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
  				 
  				 $("#image_view_load").html(output); 
  				 $(".fancybox").trigger("click");
@@ -1034,7 +896,6 @@ $(function(){
 	});	
 		
 </script>
-
 
 
 <script>
@@ -1132,9 +993,9 @@ $(function(){
 					$(".bookmark_count").html(count);
 				},
 			})
-		}
-		;
-
+		};
+		// 페이지 첫 로딩 시 호출
+		bookmarkCount();
 	})
 </script>
 

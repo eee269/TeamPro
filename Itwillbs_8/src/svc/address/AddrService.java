@@ -81,6 +81,8 @@ public class AddrService {
 			rollback(con);
 		}
 		
+		close(con);
+		
 		return isRegistSuccess;
 	}
 

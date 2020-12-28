@@ -1,208 +1,212 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.PageInfo"%>
 <%@page import="vo.CommBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
+	String member_id = (String)session.getAttribute("member_id");
 	PageInfo pageInfo = (PageInfo)request.getAttribute("pageInfo");
 	int nowPage = pageInfo.getPage();
 	int maxPage = pageInfo.getMaxPage();
 	int startPage = pageInfo.getStartPage();
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
+	
+	SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.KOREAN);
+	SimpleDateFormat sdfD = new SimpleDateFormat("dd");
+	SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
-<jsp:include page="../inc/header.jsp"/>
+<jsp:include page="/inc/header.jsp"/>
 <!-- QuickMenu -->
-<jsp:include page="../quickMenu.jsp" />
-
-<style>
-.fixed-img-collist {
-   padding: 0px 0px 40px;
-}
-
-.fixed-img-collist ul {
-   margin-right: -15px;
-}
-
-.fixed-img-collist ul li {
-   float: left;
-   margin: 0 0 40px 40px;
-   width: 392px;
-   padding: 15px;
-}
-
-.fixed-img-collist ul li:first-child {
-   margin-left: 0px;
-}
-
-.fixed-img-collist ul li a {
-   display: block;
-   width: 100%
-}
-
-.fixed-img-collist ul li span {
-   display: block;
-   height: 100%;
-   overflow: hidden;
-}
-
-.fixed-img-collist ul li span img {
-   width: 100%;
-   font-size: 0px;
-}
-
-.fixed-img-collist .inner {
-   padding: 20px 30px 30px;
-}
-
-.fixed-img-collist .list_date_area {
-   height: 30px;
-   line-height: 30px;
-}
-
-.fixed-img-collist .list_date_area .new_name {
-   font-size: 12px;
-   font-weight: 700;
-   letter-spacing: -0.5px;
-   color: #d5b153;
-}
-
-.fixed-img-collist .list_date_area .date {
-   font-size: 12px;
-   color: #b4b4b4;
-}
-
-.fixed-img-collist .subject {
-   color: #222;
-   font-size: 16px;
-   letter-spacing: -0.5px;
-   padding: 0px 0px 10px;
-   text-align: center;
-}
-
-.fixed-img-collist ul li p {
-   font-size: 14px;
-   color: #999999;
-   width: 100%;
-   letter-spacing: -0.25px;
-   overflow: hidden;
-   line-height: 2;
-   text-align: center;
-   font-weight: normal;
-}
-
-/* noimage */
-.fixed-img-collist ul li a span.noimg {
-   display: block;
-   width: 600px;
-   height: 100%;
-   text-align: center;
-   font-size: 18px;
-   color: #f2f2f2;
-   font-weight: bold;
-   line-height: 254px;
-   border: 1px solid #e9e9e9
-}
-
-
-/* ê²ìì°½ ìì  */
-.bor17 {
-	right: 30%
-}
-
-
-</style>
-
-
+<jsp:include page="/quickMenu.jsp" />
 <!-- Title page -->
 <section class="bg-img1 txt-center p-lr-15 p-tb-92"
    style="background-image: url('images/bg-02.jpg');">
    <h2 class="ltext-105 cl0 txt-center">Community</h2>
 </section>
+<!-- Product -->
+	<div class="bg0 m-t-23 p-b-140">
+		<div class="container">
+			<div class="flex-w flex-sb-m p-b-52">
+				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="javascript:commSort('new');">
+						최신순
+					</button>
 
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('readcount');">
+						조회순
+					</button>
+					
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('bookmark');">
+						추천순
+					</button>
+
+				</div>
+
+				<div class="flex-w flex-c-m m-tb-10" >
+					<div id="commWrite">
+						<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+							글쓰기
+						</div>
+					</div>
+
+					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+							검색
+					</div>
+				</div>
+				
+				<!-- Search product -->
+				<div class="dis-none panel-search w-full p-t-10 p-b-15">
+					<form action="CommList.co" method="post" id="fr">
+						<div class="bor8 dis-flex p-l-15">
+<!-- 							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" onclick="javascript:submit()"> -->
+							<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" onclick="commSubmit()">
+								<i class="zmdi zmdi-search"></i>
+							</button>
+							<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="keyword" id="keyword" placeholder="검색어를 입력하세요" required="required">
+						</div>	
+					</form>
+				</div>
+			</div>
 
 <!-- ---------------------------Content page--------------------------- -->
-<section class="bg0 p-t-62 p-b-60">
-	<div class="container">
-		<div class="fixed-img-collist">
-<!--       		<div class="row isotope-grid"> -->
-			<%
-			for(int i  = 0 ; i < articleList.size(); i++) {
-			%>
-			<ul>
-				<li>
-					<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
-						<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
-						<div class="flex-col-c-m size-123 bg9 how-pos5">
-							<span class="ltext-107 cl2 txt-center"> 22 </span> 
-							<span class="stext-109 cl3 txt-center"> <%=articleList.get(i).getDate() %></span>
+			<div class="row isotope-grid">
+				<%for(int i  = 0 ; i < articleList.size(); i++) { %>
+					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+						<!-- Block2 -->
+						<div class="block2">
+							<div class="block2-pic hov-img0">
+								<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
+									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
+									<div class="flex-col-c-m size-123 bg9 how-pos5">
+										<span class="ltext-107 cl2 txt-center"> <%=sdfD.format(articleList.get(i).getDate()) %> </span> 
+										<span class="stext-109 cl3 txt-center"> <%=sdfYM.format(articleList.get(i).getDate()) %></span>
+									</div>
+								</a>
+							</div>
+	
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<%=articleList.get(i).getSubject() %>
+									</a>
+	
+									<span class="stext-105 cl3">
+										<%=articleList.get(i).getUsername() %>
+									</span>
+									<span class="flex-r"><%=articleList.get(i).getReadCount() %></span>
+								</div>
+	
+								<div class="block2-txt-child2 flex-r p-t-3">
+									<a href="javascript:void(0);" class="dis-block pos-relative" onclick="javascript:checkBook(<%=articleList.get(i).getNum()%>)">
+										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+									</a>
+									<span class="bookCount<%=articleList.get(i).getNum() %>" style="margin: 0 2px;"><%=articleList.get(i).getBookCount() %></span>
+								</div>
+								<div class="block2-txt-child2 flex-r p-t-3">
+								</div>
+							</div>
 						</div>
-					</a>
-					<%=articleList.get(i).getSubject() %>
-				</li>
-			</ul>
-				
-<!-- 			<ul> -->
-<!-- 	      		<li> -->
-<%-- 	      			<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>"> --%>
-<!-- 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women"> -->
-<%-- 						<%=articleList.get(i).getSubject() %> --%>
-<!-- 						<div class="block2"> -->
-<!-- 							<div class="block2-pic hov-img0"> -->
-<%-- 								<img src="communityUpload/<%=articleList.get(i).getImg() %>" alt="<%=articleList.get(i).getImg()%>"> --%>
-<!-- 							</div> -->
-<!-- 							<div class="block2-txt flex-w flex-t p-t-14"> -->
-<!-- 								<div class="block2-txt-child1 flex-col-l "> -->
-<%-- 										<%=articleList.get(i).getUsername() %> --%>
-<!-- 									<span class="stext-105 cl3"> -->
-<%-- 										<%=articleList.get(i).getDate() %> --%>
-<!-- 									</span> -->
-<!-- 								</div> -->
-<!-- 								<div class="block2-txt-child2 flex-r p-t-3"> -->
-<!-- 									<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2"> -->
-<!-- 										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"> -->
-<!-- 										<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"> -->
-<!-- 									</a> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</a> -->
-<!-- 				</li> -->
-<!-- 			</ul> -->
-			<%}%>
-			<div class="flex-r-m flex-w w-full p-t-10 m-lr--7">
-				<div class="bor17 of-hidden pos-relative float-r" >
-					<input class="stext-103 cl2 plh4 size-116 p-l-28 p-r-55" type="text" name="search" placeholder="Search">
-					<button class="flex-c-m size-122 ab-t-r fs-18 cl4 hov-cl1 trans-04">
-						<i class="zmdi zmdi-search"></i>
-					</button>
-				</div>
-				<a href="CommWriteForm.co">글쓰기</a> <br>
-				<%if(nowPage <= 1) {%>
-					<input type="button" value="이전">&nbsp;
+					</div>
+				<%} %>	
+			</div>
+			<!-- paging -->
+			<div class="flex-w w-full p-t-10 m-lr--7 flex-c">
+			<%if(nowPage <= 1) {%>
+					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt; <!-- '<' 의 코드--></a>
 				<%}else {%>
-					<input type="button" value="이전" onclick="location.href='CommList.bo?page=<%=nowPage - 1 %>'">&nbsp;
+					<a href="CommList.co?page=<%=nowPage - 1 %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt;</a>
 				<%} %>
 				<%for(int i = startPage; i <= endPage; i++) { 
 					if(i == nowPage) { %>
-						[<%=i %>]&nbsp;
+						<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><%=i %></a>
 					<%}else { %>
-						<a href="CommList.bo?page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1">[<%=i %>]</a>&nbsp;
+						<a href="CommList.co?page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2"><%=i %></a>
 					<%} %>
 				<%} %>
 				<%if(nowPage >= maxPage) { %>
-					<input type="button" value="다음">
+					<a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt; <!-- '>' 의 코드 --></a>
 				<%}else { %>
-					<input type="button" value="다음" onclick="location.href='CommList.bo?page=<%=nowPage + 1 %>'">
+					<a href="CommList.co?page=<%=nowPage + 1 %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt;</a>
 				<%}%>
-				<span id="SPACE_PAGE" style="width: 115px;"></span>
+			<!-- Pagination -->
 			</div>
 		</div>
 	</div>
-</section>
 <!-- ---------------------------Content page--------------------------- -->
-<jsp:include page="../inc/footer.jsp" />
+
+<jsp:include page="/inc/footer.jsp" />
+<script>
+		// 북마크버튼 클릭시(북마크 추가 또는 북마크 제거)
+		function checkBook(num){
+			var member_id = '<%=member_id%>';
+			if(member_id=='null'){
+				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+					return;
+				}else{
+					location.href='MemberLoginForm.mo';
+				}
+			}else{
+				$.ajax({
+					url: "CommBook.co",
+	                type: "POST",
+	                data: {
+	                    num: num,
+	                },
+	                success: function () {
+				        bookmarkCount(num);
+	                },
+				})
+			}
+		}
+		// 게시글 북마크 수
+	    function bookmarkCount(num) {
+			var articleNum = num;
+			$.ajax({
+				url: "CommBookCount.co",
+                type: "POST",
+                data: {
+                    num: articleNum
+				},
+				success : function(count) {
+					$(".bookCount"+num).html(count);
+				},
+			})
+		};
+</script>
+<script type="text/javascript">
+	// 비회원 글쓰기 클릭 시 로그인 유도 
+	$(function(){
+		$('#commWrite').click(function(){
+			var member_id = "<%=member_id%>";
+			if(member_id == 'null'){
+				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+					return false;
+				}else{
+					location.href='MemberLoginForm.mo';
+				}
+			}else{
+				location.href='CommWriteForm.co';
+			}
+		});
+	});
+	// 게시글 검색
+	function commSubmit(){
+		$('#fr').submit();
+		window.location = window.location.pathname;
+	}
+	// 게시글 정렬
+	function commSort(sort){
+		location.href="CommList.co?sort="+sort;
+	}
+	
+</script>
 </body>
 </html>

@@ -48,7 +48,7 @@ public class CopyDataAction implements Action {
 		} else {
 			forward = new ActionForward();
 			forward.setPath("order/orderPro.jsp");
-			
+			request.setAttribute("mb", mb);
 		}
 		}
 		return forward;

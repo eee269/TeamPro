@@ -2,7 +2,7 @@ package vo;
 
 import java.sql.Timestamp;
 
-public class CommReBean {
+public class CommReBean extends MemberBean{
 	private int num;
 	private String contents;
 	private String username;
@@ -11,6 +11,7 @@ public class CommReBean {
 	private int re_lev;
 	private int community_num;
 	private String img;
+	private String del;
 
 	public int getNum() {
 		return num;
@@ -60,5 +61,10 @@ public class CommReBean {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	
+	public String getDel() {
+		return del;
+	}
+	public void setDel(String del) {
+		this.del = del;
+	}	
 }

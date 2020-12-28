@@ -1734,13 +1734,36 @@ button.mfp-close {
 }
 
 .show-search::after,
-.show-filter::after {
+.show-filter::after{
   content: "";
   position: absolute;
   display: block;
 
   width: 14px;
   height: 14px;
+  background-color: #f2f2f2;
+  border-left: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  
+  transform-origin: center center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+
+  left: calc(50% - 7px);
+  bottom: -8px;
+
+  -webkit-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  transition: all 0.4s;
+}
+.show-btn::after {
+  position: absolute;
+  display: block;
+
   background-color: #f2f2f2;
   border-left: 1px solid #e7e7e7;
   border-bottom: 1px solid #e7e7e7;
@@ -2583,6 +2606,11 @@ input.num-product::-webkit-inner-spin-button {
   height: 40px;
 }
 
+.size-126 {
+  width: 40px;
+  height: 25px;
+}
+
 /*//////////////////////////////////////////////////////////////////
 [ Width ]*/
 .size-201 {
@@ -2640,6 +2668,9 @@ input.num-product::-webkit-inner-spin-button {
 .size-214 {
   width: 90px;
 }
+.size-214 img{
+  width: 90px;
+}
 
 .size-215 {
   width: calc(100% - 110px);
@@ -2671,6 +2702,9 @@ input.num-product::-webkit-inner-spin-button {
 
 .size-303 {
   height: 390px;
+}
+.size-304 {
+  height: 500px;
 }
 
 

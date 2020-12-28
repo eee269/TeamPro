@@ -266,6 +266,8 @@ public class ProdReviewDAO {
 		} catch (SQLException e) {
 			System.out.println("ProdReviewDAO - updateReview : "+e.getMessage());
 			e.printStackTrace();
+		}finally {
+			close(ps);
 		}
 		return updateCount;
 	}

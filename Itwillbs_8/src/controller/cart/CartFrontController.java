@@ -46,9 +46,7 @@ public class CartFrontController extends HttpServlet {
 				System.out.println("List컨트롤러 에러 : " + e.getMessage());
 				e.printStackTrace();
 		
-			} finally {
-				
-			}
+			} 
 			// 지우기
 		} else if(command.equals("/CartDelete.ca")) {
 			System.out.println("컨트롤러 - CartDelete");

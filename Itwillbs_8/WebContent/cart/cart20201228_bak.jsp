@@ -4,8 +4,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
-	ArrayList<Cart> cartList = (ArrayList<Cart>) request.getAttribute("cartList");
-
+	ArrayList<Cart> cartList = (ArrayList<Cart>)request.getAttribute("cartList");
 int coin = 0;
 int cartNo = cartList.size();
 int num = 0;
@@ -45,17 +44,20 @@ int cntSet = 0;
 }
 
 #form {
-margin-left: 4%;
-margin-right: 4%;
+	margin-left: 4%;
+	margin-right: 4%;
 }
+#bigfont{
+	font-size: 20px;
+}
+#content img {max-width:1300px; height:100%;}
 
 </style>
 <script type="text/javascript" src=js/bootstrap4-rating-input.js></script>
 <script type="text/javascript" src=js/jquery-3.5.1.js></script>
 <script type="text/javascript">
-  $(document).ready(function(){
 
-  }
+
   </script>
 
 
@@ -87,9 +89,6 @@ margin-right: 4%;
 	<div id="cartWrap">
 		<dl class="loc-navi">
 			<dt class="blind">현재 위치</dt>
-			<dd>
-				<a href="/">HOME</a> &gt; CART
-			</dd>
 		</dl>
 
 		<form action="CartDelete.ca" method="post" name="cartForm" id="form">
@@ -155,24 +154,27 @@ margin-right: 4%;
 
 
 								<td><div class="tb-center">
+
 										<%=cartNo%>
 
+
 									</div></td>
+
 
 								<td>
 									<div class="tb-center">
 										<div class="thumb">
-											<a href=""><img
-												src="<%=cartList.get(i).getMain_img() %>"
-												alt="상품 섬네일" title="상품 섬네일" width="1"></a>
+											<a href="" id = "imga"><img
+												src="upload/productUploadImg/<%=cartList.get(0).getMain_img()%>"
+												alt="상품 섬네일" title="상품 섬네일" width="1" class="imgss" style="height: 100%;"></a>
 										</div>
 									</div>
 								</td>
 								<td>
-									<div class="tb-left">
-										<a href="" class="tb-bold"><%=cartList.get(i).getProduct_name()%></a>
+									<div class="tb-left"> 
+										<a class="tb-bold" id="bigfont" href="ProductDetail.po?basicCode=<%=cartList.get(i).getProduct_basicCode() %>"><%=cartList.get(i).getProduct_name()%></a>
 										<div id="3360797_1" class="tb-opt">
-											<span class="tb-dl"><span class="opt_dd">색상 : <%=cartList.get(i).getColor()%></span></span>
+											<span class="tb-dl" id="opt_td"><span class="opt_dd" id="opt_co" >색상 : <%=cartList.get(i).getColor()%></span></span>
 										</div>
 										<div id="3360797_1" class="tb-opt">
 											<span class="tb-dl"><span class="opt_dd">사이즈 :
@@ -188,11 +190,11 @@ margin-right: 4%;
 							<input type="button" id="btn-down<%=i%>" class="btn-dw"	onclick="cntDown(this.id)" value="-"  style="cursor:pointer" >
 							<input type="text" id="btn-num<%=i%>" name="amount"	 value="<%=cartList.get(i).getCnt() %>" class="txt-spin"> 
 								<input type="button" id="btn-up<%=i%>" class="btn-up" onclick="cntUp(this.id)" style="cursor:pointer" value="+">
-<!-- 											</span> -->
-<!-- 										</div> -->
 										<a class="CSSbuttonWhite btn_option" id="btn-Save<%=i %>" onclick="cntUpdate(<%=cartList.get(i).getNum()%>, this.id)" >EDIT</a>
 									</div> <!-- ----------------------------------------------------------------------------------------------------------------------------------- -->
 
+
+							
 								</td>
 								<td><div class="tb-center "><span class="back"><b><%=cartList.get(i).getPrice()%></b></span>원</div></td>
 								<td><div class="tb-center tb-bold tb-price">
@@ -219,6 +221,7 @@ margin-right: 4%;
 											class="CSSbuttonWhite btn_select">DELETE</a></span>
 									</div>
 								</td>
+								
 									<!-- ------------------------------------------------------------체크박스--------------------------------------------- -->
 									
 									
@@ -228,9 +231,6 @@ margin-right: 4%;
 									
 									<!-- ---------------------------------------------------------------------------------------------------------------------- -->
 									
-									<input	type="hidden" name="basket_item" value="{&quot;uid&quot;:&quot;3360797&quot;,&quot;cart_id&quot;:&quot;1&quot;,&quot;cart_type&quot;:&quot;NORMAL&quot;,&quot;pack_uid&quot;:&quot;&quot;,&quot;use_tax&quot;:&quot;N&quot;}">
-									<input type="hidden" name="extra_item"
-									value="{&quot;extra_require_uid&quot;:null,&quot;extra_require&quot;:null,&quot;extra_main_brandname&quot;:&quot;&quot;}"></td>
 							</tr>
 							<%
 								cartNo--;
@@ -437,10 +437,10 @@ $("#allCheck").click(function(){
 			// 체크선택이 안되면 삭제div 숨기고 , 체크박스가 1개 이상 체크 되면 삭제div 보이기 
 			//  tr 선택도 포함
 			var chLe = $(".checkSelect:checked").length;	// 체크된 체크박스 길이
-			if(chLe == 0){	// 체크박스가 선택이 X => 숨기기 
+			if(chLe == 0){	// 체크박스가 선택이 안됐을때 숨기기 
 				$('#whiteBu').hide();
 				$('.CSSbuttonBlack').hide()
-			} else if(chLe >= 1){	// 체크박스가 O => 선택 보이기 
+			} else if(chLe >= 1){	// 체크박스가 선택이 됐을때 보이기 
 				$('#whiteBu').show(); 
 				$('.CSSbuttonBlack').show()
 			}
@@ -490,8 +490,15 @@ $("#allCheck").click(function(){
 		   });
 		  }
 		//주문하기 버튼 클릭 시 'Order.Or'로 포워딩하기 위한 함수 끝
+			
+// 		$(function() {
+			
+// 		});
+		
 
-	
+
+
+
 		 
 </script>
 
