@@ -106,10 +106,34 @@
 </section>
 
 
+<div class="event_ban_area">
+	<ul>
+		<li><a href="ProductShop.po?type=X&xcode=CLOTHES">
+			<img src="https://img.icons8.com/cotton/64/000000/hanger--v1.png"/><br>
+			<b>CLOTHES</b>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=BAGS">
+			<img src="https://img.icons8.com/ios/64/000000/bag-back-view.png"/><br>
+			<b>BAGS</b>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=SHOES">
+			<img src="https://img.icons8.com/ios/64/000000/sneakers.png"/><br>
+			<b>SHOES</b>
+		</a></li>
+		
+		<li><a href="CommList.co">
+			<img src="https://img.icons8.com/ios/64/000000/clipboard.png"/><br>
+			<b>COMMUNITY</b>
+		</a></li>
+	</ul>
+</div>
+<div class="cboth"></div>
 
 
 
-<!-- 베스트 -->
+
 <section class="bg0 p-t-23">
 	<div class="container">
 		<div class="main_pro_title_area cboth ">
@@ -171,31 +195,7 @@
 	
 </section>
 
-<!-- 이벤트 배너 2개 -->
-<div class="event_ban_area">
-	<ul>
-		<li><a href="ProductShop.po?type=X&xcode=CLOTHES">
-			<img src="https://img.icons8.com/cotton/64/000000/hanger--v1.png"/><br>
-			<span>CLOTHES</span>
-		</a></li>
-		
-		<li><a href="ProductShop.po?type=X&xcode=BAGS">
-			<img src="https://img.icons8.com/ios/64/000000/bag-back-view.png"/><br>
-			<span>BAGS</span>
-		</a></li>
-		
-		<li><a href="ProductShop.po?type=X&xcode=SHOES">
-			<img src="https://img.icons8.com/ios/64/000000/sneakers.png"/><br>
-			<span>SHOES</span>
-		</a></li>
-		
-		<li><a href="CommList.co">
-			<img src="https://img.icons8.com/ios/64/000000/clipboard.png"/><br>
-			<span>COMMUNITY</span>
-		</a></li>
-	</ul>
-</div>
-<div class="cboth"></div>
+
 
 <section class="bg0 p-t-23">
 	<div class="container">
