@@ -337,8 +337,8 @@ public class OrderDAO {
 				int cnt =  rs.getInt(2);
 				String color = rs.getString(5);
 				String size = rs.getString(6);
-				String opt_productCode = rs.getString(9);
-				String main_img = rs.getString(10);
+				String opt_productCode = rs.getString(10);
+				String main_img = rs.getString(8);
 				sql = "select * from mainorder where code = ?";
 				p = con.prepareStatement(sql);
 				p.setNString(1, code);
@@ -349,7 +349,7 @@ public class OrderDAO {
 					sql = "insert into detailorder values(?,?,?,?,?,?,?,?,?,?,?)";
 					p = con.prepareStatement(sql);
 					p.setInt(1, num1);
-					p.setNString(2, name);
+					p.setString(2, name);
 					p.setString(3, main_img);
 					p.setInt(4, price);
 					p.setInt(5, cnt);
@@ -361,8 +361,6 @@ public class OrderDAO {
 					p.setInt(11, seq);
 					num1+=1;
 					seq++;
-					
-					
 					
 					insertCount = p.executeUpdate();
 				}

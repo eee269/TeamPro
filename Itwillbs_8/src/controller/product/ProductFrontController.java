@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import action.product.ControlProductListAction;
 import action.product.OptionDeleteAction;
+import action.product.ProdGetCountAction;
 import action.product.ProductCartLikeAction;
 import action.product.ProductDeleteAction;
 import action.product.ProductDetailAction;
@@ -26,6 +27,7 @@ import action.product.qna.ProdQnaModifyFormAction;
 import action.product.qna.ProdQnaModifyProAction;
 import action.product.qna.ProdQnaReplyFormAction;
 import action.product.qna.ProdQnaReplyProAction;
+import action.product.qna.ProdQnaUpReadcountAction;
 import action.product.qna.ProdQnaWriteFormAction;
 import action.product.qna.ProdQnaWriteProAction;
 import action.product.qna.ProductMyqnaListAction;
@@ -293,6 +295,26 @@ public class ProductFrontController extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
+		// --------------------상품 qna 조회수 업데이트 가져오기--------------------
+		else if (command.equals("/ProdQnaUpReadcount.po")) {
+			System.out.println("ProdQnaUpReadcount.po 포워딩");
+			action = new ProdQnaUpReadcountAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
+		// --------------------상품 reveiw, qna 개수 가져오기--------------------
+		else if (command.equals("/ProdGetCount.po")) {
+			System.out.println("ProdGetCount.po 포워딩");
+			action = new ProdGetCountAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} 
 		// -------------------마이페이지 > 내가 찜한 상품 보기-------------
 		else if (command.equals("/ProductMylikeList.po")) {
 			System.out.println("ProductMylikeList.po 포워딩");

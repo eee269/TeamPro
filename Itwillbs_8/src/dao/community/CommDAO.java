@@ -104,7 +104,6 @@ public class CommDAO {
 	// --------------selectArticleList()---------------
 	// 게시물 목록 조회
 	public ArrayList<CommBean> selectArticleList(int page, int limit, String keyword, String sort){
-		System.out.println("CommDAO - selectArticleList()~");
 		ArrayList<CommBean> articleList = null;
 		
 		PreparedStatement ps = null;
@@ -115,16 +114,20 @@ public class CommDAO {
 		try {
 			String sql = "";
 			if(sort.equals("new")) {
-				sql = "SELECT c.*, m.username "
-						+ "FROM community c JOIN member m "
-						+ "ON c.member_id = m.id "
-						+ "WHERE c.subject like ? "
+				sql = "SELECT c.*, m.username, count(b.community_num) as bookmark "
+						+ "FROM community c LEFT JOIN member m "
+						+ "ON c.member_id = m.id LEFT JOIN bookmark b "
+						+ "ON c.num = b.community_num "
+						+ "GROUP BY c.num "
+						+ "HAVING c.subject like ? "
 						+ "ORDER BY c.num desc limit ?,?";
 			}else if(sort.equals("readcount")) {
-				sql = "SELECT c.*, m.username "
-						+ "FROM community c JOIN member m "
-						+ "ON c.member_id = m.id "
-						+ "WHERE c.subject like ? "
+				sql = "SELECT c.*, m.username, count(b.community_num) as bookmark "
+						+ "FROM community c LEFT JOIN member m "
+						+ "ON c.member_id = m.id LEFT JOIN bookmark b "
+						+ "ON c.num = b.community_num "
+						+ "GROUP BY c.num "
+						+ "HAVING c.subject like ? "
 						+ "ORDER BY c.readcount desc limit ?,?";
 			}else if(sort.equals("bookmark")) {
 				sql = "SELECT c.*, m.username, count(b.community_num) as bookmark "
@@ -148,14 +151,13 @@ public class CommDAO {
 				
 				// 비밀번호는 제외
 				article.setNum(rs.getInt(1));
-				System.out.println(rs.getInt(1));
 				article.setUsername((rs.getString("m.username")));
 				article.setSubject(rs.getString(3));
 				article.setContent(rs.getString(4));
 				article.setReadCount(rs.getInt(5));
 				article.setDate(rs.getTimestamp(6));
 				article.setImg(rs.getString(7));
-				article.setBookCount(checkBookmark(rs.getInt(1), rs.getString("member_id")));
+				article.setBookCount(rs.getInt("bookmark"));
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
 				
@@ -388,6 +390,34 @@ public class CommDAO {
 			return checkCount;
 		}
 		// -------------------------- checkBookmark() --------------------------------
+		// -------------------------- hasBook() --------------------------------
+		public ArrayList<Integer> hasBook(String member_id) {
+			ArrayList<Integer> bookList = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+			try {
+				String sql ="SELECT community_num FROM bookmark WHERE member_id = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, member_id);
+				rs = ps.executeQuery();
+				
+				bookList = new ArrayList<Integer>();
+				while(rs.next()) {
+					// 로그인 한 아이디로 북마크한 게시물 번호들 가져오기
+					bookList.add(rs.getInt(1));
+				}
+				
+			} catch (SQLException e) {
+				System.out.println("CommDAO - CountBook : "+e.getMessage());
+				e.printStackTrace();
+			}finally {
+				close(rs);
+				close(ps);
+			}
+			
+			return bookList;
+		}
+		// -------------------------- hasBook() --------------------------------
 		// -------------------------- updateBookmark() --------------------------------
 		public int updateBookmark(int num, String id) {
 			int updateCount = 0;
@@ -475,13 +505,13 @@ public class CommDAO {
 					while(rs2.next()) {
 						CommBean article = new CommBean();
 						
-						article.setNum(rs.getInt("num"));
-						article.setMember_id(rs.getString("member_id"));
-						article.setSubject(rs.getString("subject"));
-						article.setContent(rs.getString("content"));
-						article.setDate(rs.getTimestamp("date"));
-						article.setImg(rs.getString("img"));
-						article.setReadCount(rs.getInt("readcount"));
+						article.setNum(rs2.getInt("num"));
+						article.setMember_id(rs2.getString("member_id"));
+						article.setSubject(rs2.getString("subject"));
+						article.setContent(rs2.getString("content"));
+						article.setDate(rs2.getTimestamp("date"));
+						article.setImg(rs2.getString("img"));
+						article.setReadCount(rs2.getInt("readcount"));
 						
 						list.add(article);
 					}
@@ -496,6 +526,7 @@ public class CommDAO {
 			
 			return list;
 		}
+		
 		
 	
 }

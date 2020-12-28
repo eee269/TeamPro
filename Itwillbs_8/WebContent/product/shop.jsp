@@ -172,7 +172,7 @@
 <!-- more버튼 스크립트 -->
 <script type="text/javascript">
 $( document ).ready(function () {
-	  $(".moreBox").slice(0, 8).show();
+	  $(".moreBox").slice(0, 16).show();
 	    if ($(".blogBox:hidden").length != 0) {
 	      $("#loadMore").show();
 	    } 
@@ -212,7 +212,6 @@ $( document ).ready(function () {
 
 <!-- 끝 -->
 <!-- 베스트Product 시작-->
-<div><a href="ProductUpload.po">상품등록페이지이동(임시)</a></div>
 <div class="item-wrap best-item">
 	<div class="sub_recommend_title">BEST PRODUCTS</div>
 	<div class="item-cont">

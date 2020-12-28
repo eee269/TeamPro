@@ -122,7 +122,10 @@
 			<!-- Topbar -->
 			<div class="top-bar">
 				<div class="content-topbar flex-sb-m h-full container">
-					<div class="left-top-bar">환영합니다! 이런거? 아니면 30,000 이상 무료배송!</div>
+					<div class="left-top-bar">
+						<b>SHOP OOTD</b> 에 오신 것을 환영합니다 \(@^0^@)/ &nbsp;&nbsp;&nbsp;&nbsp;
+						30,000 원 이상 무료배송!!
+					</div>
 					<div class="right-top-bar flex-w h-full">
 						<%
 							if (member_id == null) {

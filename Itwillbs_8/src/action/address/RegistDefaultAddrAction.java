@@ -32,10 +32,11 @@ public class RegistDefaultAddrAction implements Action {
 		} else {
 			String postcode = request.getParameter("postcode");
 			String address = request.getParameter("address");
+			String detailAddress = request.getParameter("detailAddress");
 			
 			AddrService addrService = new AddrService();
 			
-			boolean isRegistSuccess = addrService.RegistDefaultAddr(member_id,postcode,address);
+			boolean isRegistSuccess = addrService.RegistDefaultAddr(member_id,postcode,address,detailAddress);
 			
 			if(isRegistSuccess) {
 				out.println("<script>");
