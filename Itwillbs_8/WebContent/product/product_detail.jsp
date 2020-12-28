@@ -770,7 +770,7 @@ var productCode = "";
                   </tbody>
                      <%}
 	                }
-                  }%>
+                  %>
                   </table>
                  <div class="flex-w w-full p-t-10 m-lr--7 flex-c">
 				<%if(nowPage <= 1) {%>
