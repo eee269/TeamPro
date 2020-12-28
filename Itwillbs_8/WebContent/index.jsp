@@ -1,3 +1,4 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="vo.CommBean"%>
 <%@page import="vo.ProductBean"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -12,28 +13,13 @@
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <link type="text/css" rel="stylesheet" href="css/team.css" />
 
-<style>
-.event_ban_area > ul {
-	position: flex;
-}
-.event_ban_area ul > li {
-	display: inline-block;
-  	align-items: center;
-  	width: 20%;
-  	height: 200px;
-  	margin: 50px 20px;
-}
-.event_ban_area ul > li img {
-	padding: 30px 0;
-}
-</style>
-
 <%
 	String member_id =(String)session.getAttribute("member_id");
 	ArrayList<ProductBean> newList =(ArrayList<ProductBean>)request.getAttribute("newList");
 	ArrayList<ProductBean> productList = (ArrayList<ProductBean>)request.getAttribute("productList");
 	ArrayList<String> likeBaiscCodeList = (ArrayList<String>)request.getAttribute("likeBasicCodeList");
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
+	SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 	
 	ArrayList<CommBean> commList = (ArrayList) request.getAttribute("commList");
 %>
@@ -63,47 +49,39 @@
 		for(int i=0; i<commList.size(); i++){
 			CommBean article = commList.get(i);
 			%>
-			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item blogBox moreBox">
-				<div class="block2">
-					<div class="block2-pic hov-img0">
-<!-- 						main_1.css에 block2-pic클래스의 img width, height 300px로 지정해놨음 -->
-						<a href="CommDetail.co?num=<%=article.getNum() %>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"> 
-							<img src="upload/commUpload/<%=article.getImg() %>" alt="IMG-PRODUCT"
-								onerror="this.style.display='none'" width="300px" height="300px">
-						</a> 
-					</div>
-
-					<div class="block2-txt flex-w flex-t p-t-14">
-						<div class="block2-txt-child1 flex-col-l ">
-							<a href="CommDetail.co?num=" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-								<%=article.getSubject() %></a>
-							<span class="stext-105 cl3">
-								<%=article.getUsername() %><br><%=article.getDate() %>
-							</span>
-						</div>
-						
-						
-<!-- 						북마크				 -->
-						<div class="block2-txt-child2 flex-r p-t-3">
-							<% if(member_id != null) {%>
-							<!-- 비워진 북마크 -->
-							<a href="javascript:checkBook(<%=article.getNum()%>)">
-								<img src="https://img.icons8.com/material-outlined/24/000000/bookmark-ribbon.png"/>
-							</a>
-							<% } else { %>
-							
-<!-- 							<img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon--v1.png"/> -->
-							
-							<a href="#" class="not_member">
-								<img src="https://img.icons8.com/fluent-systems-regular/24/000000/bookmark-ribbon.png"/>
-							</a>
-							
-							<% } %>
-
+			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
+						<!-- Block2 -->
+						<div class="block2">
+							<div class="block2-pic hov-img0">
+								<a href="CommDetail.co?num=<%=article.getNum() %>" class="hov-img0 how-pos5-parent">
+									<img src="upload/commUpload/<%=article.getImg() %>" alt="IMG-BLOG" onerror="this.style.display='none'"/>
+								</a>
+							</div>
+							<div id="how-pos6" class="bookimg<%=article.getNum() %>" onclick="checkBook(<%=article.getNum() %>)">
+								<img src="images/icons/bookmark_before.png" onerror="this.style.display='none'"/>
+							</div>
+	
+							<div class="block2-txt flex-w flex-t p-t-14">
+								<div class="block2-txt-child1 flex-col-l ">
+									<a href="CommDetail.co?num=<%=article.getNum() %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+										<%=article.getSubject() %>
+									</a>
+									<div class="stext-105 cl3 w-full">
+										<span>
+											<%=article.getUsername() %>
+										</span>
+										<span class="float-r">
+											<%=sdfYMD.format(article.getDate()) %>
+										</span>
+									</div>
+									<div class="stext-105 cl3">
+										<span>조회수 <%=article.getReadCount()%> &#183;</span>
+										<span class="bookCount<%=article.getNum()%>">북마크 <%=article.getBookCount()%></span>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
 		<% }%>
 		</div>
 	</div>
@@ -305,18 +283,60 @@
 </section>
 
 <script type="text/javascript">
-function checkBook(num) {
-	$.ajax({
-		url: "CommBook.co",
-		type: "POST",
-		data: {
-			num:num
-		},
-		success: function(data) {
-			alert("북마크 설정 완료");
+// 북마크버튼 클릭시(북마크 추가 또는 북마크 제거)
+function checkBook(num){
+	var member_id = '<%=member_id%>';
+	if(member_id=='null'){
+		if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+			return;
+		}else{
+			location.href='MemberLoginForm.mo';
 		}
-	})
+	}else{
+		$.ajax({
+			url: "CommBook.co",
+            type: "POST",
+            data: {
+                num: num,
+            },
+            success: function () {
+            	var path = $('.bookimg'+num).children("img");
+            	path.attr("src",function(index,attr){
+            		if(attr.match('before')){
+            			return attr.replace("before","after");
+            		}else{
+            			return attr.replace("after","before");
+            		}
+            	});
+		        bookmarkCount(num);
+            },
+		});
+	}
 }
+// 게시글 북마크 수
+function bookmarkCount(num) {
+	var articleNum = num;
+	$.ajax({
+		url: "CommBookCount.co",
+        type: "POST",
+        data: {
+            num: articleNum
+		},
+		success : function(json) {
+			var img = "images/icons/bookmark_after.png";
+			var jsonP = JSON.parse(json);
+			var book = "북마크 "+jsonP.total;
+			if(!num){
+				for(key in jsonP.list){
+					var num = jsonP.list[key][key];
+					$(".bookimg"+num).children().attr("src",img);
+				}
+			}
+			$(".bookCount"+articleNum).html(book);
+		},
+	})
+};
+bookmarkCount();
 </script>
 
 <jsp:include page="/inc/footer.jsp" />

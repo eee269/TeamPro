@@ -5,6 +5,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<style>
+	.sub_top_ban {width:100%; height:270px;  line-height:270px;}
+	.sub_top_ban.brand {background:#e2e2e0 url('images/sub_top_ban_comm.jpg') center center no-repeat;}
+	.sub_top_text {font-family:Roboto Condensed,Nanum Gothic,sans-serif; font-size:28px; letter-spacing:7px; text-align:right;color:#000;}
+</style>	
 	
 <%
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
@@ -16,32 +21,29 @@
 	int endPage = pageInfo.getEndPage();
 	int listCount = pageInfo.getListCount();
 	
-	SimpleDateFormat sdfYM = new SimpleDateFormat("MMM-yyyy", Locale.KOREAN);
-	SimpleDateFormat sdfD = new SimpleDateFormat("dd");
 	SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd");
 %>
 <jsp:include page="/inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 <!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92"
-   style="background-image: url('images/bg-02.jpg');">
-   <h2 class="ltext-105 cl0 txt-center">Community</h2>
-</section>
+<div class="cboth sub_top_ban brand">
+	<div class="width1260 sub_top_text">CS CENTER</div>
+</div>
 <!-- Product -->
 	<div class="bg0 m-t-23 p-b-140">
 		<div class="container">
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" onclick="javascript:commSort('new');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 " id="new" onclick="javascript:commSort('new');">
 						최신순
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('readcount');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="readcount" onclick="javascript:commSort('readcount');">
 						조회순
 					</button>
 					
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" onclick="javascript:commSort('bookmark');">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="bookmark" onclick="javascript:commSort('bookmark');">
 						추천순
 					</button>
 
@@ -84,33 +86,30 @@
 						<div class="block2">
 							<div class="block2-pic hov-img0">
 								<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>" class="hov-img0 how-pos5-parent">
-									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.src='images/icons/angry_face.png'"/>
-									<div class="flex-col-c-m size-123 bg9 how-pos5">
-										<span class="ltext-107 cl2 txt-center"> <%=sdfD.format(articleList.get(i).getDate()) %> </span> 
-										<span class="stext-109 cl3 txt-center"> <%=sdfYM.format(articleList.get(i).getDate()) %></span>
-									</div>
+									<img src="upload/commUpload/<%=articleList.get(i).getImg() %>" alt="IMG-BLOG" onerror="this.style.display='none'"/>
 								</a>
+							</div>
+							<div id="how-pos6" class="bookimg<%=articleList.get(i).getNum() %>" onclick="checkBook(<%=articleList.get(i).getNum() %>)">
+								<img src="images/icons/bookmark_before.png" onerror="this.style.display='none'"/>
 							</div>
 	
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										<%=articleList.get(i).getSubject() %>
 									</a>
-	
-									<span class="stext-105 cl3">
-										<%=articleList.get(i).getUsername() %>
-									</span>
-									<span class="flex-r"><%=articleList.get(i).getReadCount() %></span>
-								</div>
-	
-								<div class="block2-txt-child2 flex-r p-t-3">
-									<a href="javascript:void(0);" class="dis-block pos-relative" onclick="javascript:checkBook(<%=articleList.get(i).getNum()%>)">
-										<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
-									</a>
-									<span class="bookCount<%=articleList.get(i).getNum() %>" style="margin: 0 2px;"><%=articleList.get(i).getBookCount() %></span>
-								</div>
-								<div class="block2-txt-child2 flex-r p-t-3">
+									<div class="stext-105 cl3 w-full">
+										<span>
+											<%=articleList.get(i).getUsername() %>
+										</span>
+										<span class="float-r">
+											<%=sdfYMD.format(articleList.get(i).getDate()) %>
+										</span>
+									</div>
+									<div class="stext-105 cl3">
+										<span>조회수 <%=articleList.get(i).getReadCount()%> &#183;</span>
+										<span class="bookCount<%=articleList.get(i).getNum()%>">북마크 <%=articleList.get(i).getBookCount()%></span>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -161,9 +160,17 @@
 	                    num: num,
 	                },
 	                success: function () {
+	                	var path = $('.bookimg'+num).children("img");
+	                	path.attr("src",function(index,attr){
+	                		if(attr.match('before')){
+	                			return attr.replace("before","after");
+	                		}else{
+	                			return attr.replace("after","before");
+	                		}
+	                	});
 				        bookmarkCount(num);
 	                },
-				})
+				});
 			}
 		}
 		// 게시글 북마크 수
@@ -175,11 +182,21 @@
                 data: {
                     num: articleNum
 				},
-				success : function(count) {
-					$(".bookCount"+num).html(count);
+				success : function(json) {
+					var img = "images/icons/bookmark_after.png";
+					var jsonP = JSON.parse(json);
+					var book = "북마크 "+jsonP.total;
+					if(!num){
+						for(key in jsonP.list){
+							var num = jsonP.list[key][key];
+							$(".bookimg"+num).children().attr("src",img);
+						}
+					}
+					$(".bookCount"+articleNum).html(book);
 				},
 			})
 		};
+		bookmarkCount();
 </script>
 <script type="text/javascript">
 	// 비회원 글쓰기 클릭 시 로그인 유도 
@@ -207,6 +224,17 @@
 		location.href="CommList.co?sort="+sort;
 	}
 	
+</script>
+<script>
+	function nowSort(){
+		// 최신순, 조회순, 추천순 탭에 이벤트 처리
+		var sort = '<%=request.getParameter("sort") %>'
+		if(sort === 'null'){
+			sort = "new";
+		}
+		$('#'+sort).addClass('how-active1');
+	}
+	nowSort();
 </script>
 </body>
 </html>
