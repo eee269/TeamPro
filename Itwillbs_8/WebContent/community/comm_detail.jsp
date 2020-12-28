@@ -78,10 +78,12 @@ $(document).ready(function() {
 					<img src="images/icons/bookmark_beforeG.png" onerror="this.style.display='none'"/>
 					<span class ="cl12 m-l-4 m-r-6 bookmark_count"></span>
 				</div>
-				<div class="bubbleimg">
-					<img src="images/icons/bubble_before.png" onerror="this.style.display='none'"/>
-					<span class="cl12 m-l-4 m-r-6">0</span>
-				</div>
+<!-- 				<a href="#comment_view"> -->
+					<div class="bubbleimg">
+						<img src="images/icons/bubble_before.png" onerror="this.style.display='none'"/>
+						<span class="cl12 m-l-4 m-r-6 reCount">0</span>
+					</div>
+<!-- 				</a> -->
 			</div>
 			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="col-md-8 col-lg-9 p-b-80">
@@ -166,7 +168,7 @@ $(document).ready(function() {
 <!-- 								</div> -->
 							</div>
 					<!-- -----------------------------Comment----------------------------- -->
-					<h2 class="comment_title">COMMENT</h2>
+					<h2 class="comment_title" id="comment_view">COMMENT</h2>
 					<p style="padding-top: 20px;">댓글 총갯수 : <span class="reCount"></span>개</p>
 					<div id="productDetail" style="padding-top: 20px;">
 						<div class="page-body">
@@ -1068,7 +1070,21 @@ $(function(){
 		bookmarkCount();
 	})
 </script>
-
+<script type="text/javascript">
+	var id = '<%=id%>';
+	$('.bubbleimg').click(function(){
+		if(id=='null'){
+			if(!confirm("로그인을 하셔야 합니다. 로그인 하시겠습니까?")){
+				return false;
+			}else{
+				location.href="MemberLoginForm.mo";
+			}
+		}else{
+			location.href="#comment_view";		
+		}
+	});
+	
+</script>
 <jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

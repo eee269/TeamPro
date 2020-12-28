@@ -76,11 +76,11 @@ public class ProdReviewListAction implements Action {
 				for(int k =0; k < 2; k++) {
 					if(k == 0) {
 						// good 전체 개수, 해당 아이디로 추천 했는지 판별
-						recommendG = prodReviewListService.checkReviewRec(num, id, recommendG);
+						recommendG = prodReviewListService.checkReviewRec(num, member_id, recommendG);
 						good = prodReviewListService.CountReviewRec(num, k);
 					}else {
 						// bad 전체 개수, 해당 아이디로 추천 했는지 판별
-						recommendB = prodReviewListService.checkReviewRec(num, id, recommendB);
+						recommendB = prodReviewListService.checkReviewRec(num, member_id, recommendB);
 						bad = prodReviewListService.CountReviewRec(num, k);
 					}
 				}
