@@ -57,9 +57,9 @@ public class CartDAO extends Exception {
 			cart.setColor(rs.getString("color"));
 			cart.setSize(rs.getString("size"));
 			cart.setMember_id(rs.getString("member_id"));
+			cart.setMain_img(rs.getString("main_img"));
 			cart.setProduct_basicCode(rs.getString("product_basicCode"));
 			cart.setOpt_productCode(rs.getString("opt_productCode"));
-//			cart.setMain_img(rs.getString("main_img"));
 
 			CartList.add(cart);
 			
@@ -145,7 +145,7 @@ public class CartDAO extends Exception {
 			
 		if(rs.next()) {
 			num = rs.getInt("max(num)") + 1;			
-			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode,main_img)VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,main_img,product_basicCode,opt_productCode)VALUES(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			System.out.println(num);
@@ -155,9 +155,9 @@ public class CartDAO extends Exception {
 			pstmt.setString(5, ca.getColor());
 			pstmt.setString(6, ca.getSize());
 			pstmt.setString(7, ca.getMember_id());
-			pstmt.setString(8, ca.getProduct_basicCode());
-			pstmt.setString(9, ca.getOpt_productCode());
-			pstmt.setString(10, ca.getMain_img());
+			pstmt.setString(8, ca.getMain_img());
+			pstmt.setString(9, ca.getProduct_basicCode());
+			pstmt.setString(10, ca.getOpt_productCode());
 
 			upCount = pstmt.executeUpdate();
 			System.out.println("DAO upCount : " + upCount);
