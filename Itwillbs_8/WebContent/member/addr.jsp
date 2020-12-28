@@ -165,7 +165,6 @@ String member_id = (String) session.getAttribute("member_id");
 				
 				var postcode = td.eq(2).text().trim();
 				jQuery.ajaxSettings.traditional = true;
-				alert(postcode);
 				$.ajax({
 					url:"RemoveDestination.ad",
 					type:'POST',
@@ -173,10 +172,10 @@ String member_id = (String) session.getAttribute("member_id");
 						postcode:postcode
 					},
 					success:function(data){
-						alert("successsssssssssss!!");
+						alert("배송지가 성공적으로 삭제되었습니다.");
 					},
 					error:function(error){
-						alert(error);
+						alert("배송지 삭제에 실패하였습니다.");
 					}
 				});
 						history.go(0);
