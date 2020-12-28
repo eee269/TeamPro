@@ -2,6 +2,7 @@ package svc.community;
 import static db.JdbcUtil.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import dao.community.CommDAO;
 
@@ -16,6 +17,16 @@ public class CommBookCountService {
 		close(con);
 		
 		return count;
+	}
+
+	public ArrayList<Integer> hasBook(String member_id) {
+		Connection con = getConnection();
+		CommDAO commDAO = CommDAO.getInstance();
+		commDAO.setConnection(con);
+		ArrayList<Integer> bookList = commDAO.hasBook(member_id);
+		close(con);
+		
+		return bookList;
 	}
 
 }

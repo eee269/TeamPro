@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 
@@ -21,6 +22,8 @@ public class ProdReviewListAction implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String basicCode = request.getParameter("basicCode");
+		HttpSession session = request.getSession();
+		String member_id = (String)session.getAttribute("member_id");
 		int	page = Integer.parseInt(request.getParameter("page"));
 		int limit = 10;
 		int loop = Integer.parseInt(request.getParameter("loop"));

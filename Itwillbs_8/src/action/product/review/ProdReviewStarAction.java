@@ -17,18 +17,20 @@ public class ProdReviewStarAction implements Action {
 		// 상품에 대한 별점들 계산
 		String basicCode = request.getParameter("basicCode");
 		ProdReviewListService prodReviewListService = new ProdReviewListService();
-		
-		// 별점 1~5점 별 갯수 가져오기
-		ArrayList<Integer> starScore = prodReviewListService.getStarScoreCount(basicCode);
+		ArrayList<Integer> starScore = new ArrayList<Integer>();
 		
 		String json = "{\"star\":[{";
-		int num = 1;
+//		int num = 1;
 		int total = 0;
-		for(int i : starScore) {
-			total += i;
-			json += "\""+num+"\":\""+i+"\"";
+		// 별점 1~5점 별 갯수 가져오기
+		for(int i = 1; i < 6; i++) {
+			int num = prodReviewListService.getStarScoreCount(basicCode, i);
+//		}
+//		for(int i : starScore) {
+			total += num;
+			json += "\""+i+"\":\""+num+"\"";
 			num++;
-			if(num != 6) {
+			if(i != 5) {
 				json += ",";
 			}
 		}

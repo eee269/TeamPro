@@ -78,8 +78,7 @@
 	                                            <th><div>비밀번호 확인</div></th>
 	                                            <td>
                                                 	<div>
-                                                    	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style"  />                                                    
-                                                    	<font color="red">자동 잠금 기능</font>                                                                                                    
+                                                    	<input id='bw_input_passwd' type='password' name='qna_pass'  class="MS_input_txt input_style" required="required"/>                                                    
                                                    	</div>
                                             	</td>
                                         	</tr>
@@ -87,7 +86,7 @@
                                             	<th><div>제목</div></th>
                                             	<td colspan="3">
                                                 <div class="title">
-													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_subject' value='<%=prodQnaBean.getQna_subject() %>' />
+													<input id='bw_input_subject'   class="MS_input_txt input_style2" type='text' name='qna_subject' value='<%=prodQnaBean.getQna_subject() %>' required="required"/>
 													<div class="title_select"></div>
                                                 </div>
 												</td>
@@ -96,7 +95,7 @@
 	                                            <th><div>내용</div></th>
 	                                            <td colspan="3" class="text_content">
                                                 <div>
-                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' ><%=prodQnaBean.getQna_content() %>
+                                                	<textarea id='MS_text_content' name='qna_content'  onfocus='clear_content()'  class="MS_input_txt" style='font-family:굴림체;' required="required" ><%=prodQnaBean.getQna_content() %>
                                                 	</textarea>
  												</div>
 	                                            </td>
@@ -116,10 +115,8 @@
                             	<!-- 하단 버튼 -->
                             	<div class="flex-w flex-c-m m-tb-10 float-r" >
 									<a href="javascript:submit">
-										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-											수정완료
-										</div>
+									<input type="submit" value="수정" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
 									</a>
 									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
 										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
