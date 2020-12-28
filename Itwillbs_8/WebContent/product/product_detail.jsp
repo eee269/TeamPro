@@ -81,6 +81,17 @@
    border-bottom: 1px solid #263238;
 }
 
+#show-option>li {
+    margin: 10px 0px 20px 0px;
+}
+a:hover{
+    text-decoration: none;
+}
+#show-option>li:last-child {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
 /*====================옵션 css====================*/
 .wrap-num-product {
 	width: auto;
@@ -203,11 +214,12 @@ var productCode = "";
 //       alert(mixopt);
       var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
       "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
-      // productCode, id="productCode숫자"
+      // 옵션 이름
           "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
-      // 옵션 이름, ( BK/M )
+      // 옵션 삭제 아이콘
           "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
           "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
+          // 옵션 수량 선택
           "<div class='size-204 flex-w flex-m respon6-next'>" + 
           "<div class='wrap-num-product flex-w' id='itemcnt" + resultcount + "'>" +
           "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
