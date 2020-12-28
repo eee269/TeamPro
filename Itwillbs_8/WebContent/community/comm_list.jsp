@@ -80,7 +80,8 @@
 
 <!-- ---------------------------Content page--------------------------- -->
 			<div class="row isotope-grid">
-				<%for(int i  = 0 ; i < articleList.size(); i++) { %>
+				<%for(int i  = 0 ; i < articleList.size(); i++) { 
+					int c = articleList.get(i).getCommentCount(); %>
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
 						<!-- Block2 -->
 						<div class="block2">
@@ -96,7 +97,7 @@
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										<%=articleList.get(i).getSubject() %>
+										<%=articleList.get(i).getSubject() %> <span><%=(c > 0 ? "("+c+")" : "")%></span>
 									</a>
 									<div class="stext-105 cl3 w-full">
 										<span>
@@ -199,6 +200,7 @@
 			})
 		};
 		bookmarkCount();
+		
 </script>
 <script type="text/javascript">
 	// 비회원 글쓰기 클릭 시 로그인 유도 
