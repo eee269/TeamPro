@@ -81,6 +81,54 @@
    border-bottom: 1px solid #263238;
 }
 
+#show-option>li {
+    margin: 10px 0px 20px 0px;
+}
+a:hover{
+    text-decoration: none;
+}
+#show-option>li:last-child {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/*====================옵션 css====================*/
+.wrap-num-product {
+	width: auto;
+	height: 25px;
+	border: 1px solid #e6e6e6;
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.btn-num-product-up, .btn-num-product-down {
+	width: 25px;
+	height: auto;
+	cursor: pointer;
+}
+
+.btn-num-product-up, .btn-num-product-down {
+	width: 25px;
+	height: auto;
+	cursor: pointer;
+}
+.num-product {
+	width: 30px;
+	height: 100%;
+	border-left: 1px solid #e6e6e6;
+	border-right: 1px solid #e6e6e6;
+	background-color: #f7f7f7;
+}
+#show-option{
+	width: 100%;
+}
+#show-option>li{
+	margin:10px 0px 20px 0px;
+}
+#show-option>li:last-child{
+	padding-bottom :10px;
+	border-bottom : 1px solid #ccc;
+}
 </style>
 
 <!-- 끝 -->
@@ -117,22 +165,33 @@ var productCode = "";
    // 선택된 옵션체크
    function optcheck(mixopt) {
        productCode = <%=basicCode%> + mixopt[0] + mixopt[1];
-    // 20.12.19. yj 바뀜!
+    
        $("#slick-slide03").attr('value', mixopt[0]); 	// 사이즈
        $("#slick-slide04").attr('value', mixopt[1]);	// 컬러
-      console.log(productCode);
-       
-      var oldopt = $('ul#show-option li span.show-value').html();
+      
+      var oldopt = [];
+      // 이미 선택된 옵션인지 확인 
+      var isEquals = false;
       var newopt = mixopt[0] + "/" + mixopt[1];
       
-      if(oldopt != newopt) {
-         showlist(newopt, productCode); 
+      $('ul#show-option li p.show-value').each(function() {
+			oldopt = $(this).text();
+	        console.log(oldopt);
+	        if(oldopt == newopt) {
+		         isEquals = true;
+		    }
+	  });
+     
+      if(isEquals) {
+	    	$('#opt1 option:eq(0)').prop('selected', true);
+			$('#opt2 option:eq(0)').prop('selected', true);
+		    alert('이미 선택된 옵션입니다.');
+		    isEquals = false;
+			return;
       } else {
-         $('#opt1 option:eq(0)').prop('selected', true);
-		 $('#opt2 option:eq(0)').prop('selected', true);
-         alert('이미 선택된 옵션입니다.');
-		 return;
+    	    showlist(newopt, productCode);
       }
+      
    }
    
    // option 2개 다 선택됐으면 값 전달받고 화면에 출력
@@ -150,25 +209,28 @@ var productCode = "";
       var id = "optcol"+resultcount;
       optcol.id = id; 
 
-      // body에서 id가 show-option인 ul을 찾아서 li추가 
+   // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
-    var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
+      var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
       "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
-      // 옵션 이름, ( BK/M )
-          "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
-          "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +
+      // 옵션 이름
+          "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
+      // 옵션 삭제 아이콘
+          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
+          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
+          // 옵션 수량 선택
+          "<div class='size-204 flex-w flex-m respon6-next'>" + 
+          "<div class='wrap-num-product flex-w' id='itemcnt" + resultcount + "'>" +
           "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
           "<i class='fs-16 zmdi zmdi-minus'></i></span>" + 
           "<input class='mtext-104 cl3 txt-center num-product' type='number' id='optnum" + resultcount + "' name='num-product'  value='1'>" + 
           "<span class='btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m' id='optplus" + resultcount + "' onclick='cntPlus(this.id)'>" + 
-          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>" + 
-          "<div><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
-          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div>";
+          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>";
+
       $('#'+id).append(html);
       
       // cnt 값 보내기
-      // 20.12.19. yj 바뀜!
       $("#slick-slide06").attr('value', 1);
       calculatePrice('optnum'+resultcount);
       
@@ -177,21 +239,34 @@ var productCode = "";
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
    // 수량의 id를 넘겨 받고
    function calculatePrice(id) {
-      var totalprice = 0;
+      var totalprice = 0, itcnt = [];
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
-      $('ul#show-option li').each(function() {
-//          var itcnt = parseInt($(this).find('#'+id).val());
-		var itcnt = parseInt($('#'+id).val());
-         totalprice += itemprice * itcnt;
-      });
-      
       var resultcount = $('ul#show-option li').length;
+      
+      console.log(resultcount);
+      
       if(resultcount < 1) {
-         $('#total').css('display', 'none');
+         	$('#total').css('display', 'none');
       } else {
-         $('#total').css('display', 'block');
+         	$('#total').css('display', 'inline');
       }
-
+      
+      for(var s = 1; s <= resultcount; s++) {
+    	  console.log(id.charAt(id.length-1));
+    	  id = id.replace(id.charAt(id.length-1), s);
+    	  
+    	  console.log(id);
+		  itcnt[s-1] = parseInt($('#'+id).val());
+		  console.log(itcnt[s-1]);
+		  console.log(totalprice);
+		  console.log(itemprice);
+      }
+		  
+      for(var i=0; i<resultcount; i++) {
+	       totalprice += itemprice * itcnt[i];
+      }
+      
+      console.log(totalprice);
       $('#total span').text(totalprice + '원');
    }
 
@@ -203,8 +278,6 @@ var productCode = "";
      
       $('#'+numid).attr('value', cnt);
       // cnt 값 보내기 
-      // 20.12.19. yj 바뀜!
-//          var ca_cnt = $("#slick-slide05").val(cnt);
       $("#slick-slide06").attr('value', cnt);
       calculatePrice(numid);
    }
@@ -220,9 +293,7 @@ var productCode = "";
          cnt -= 1;
          $('#'+numid).attr('value', cnt);
          // cnt 값 보내기
-         // 20.12.19. yj 바뀜!
          $("#slick-slide06").attr('value', cnt);
-//          var ca_cnt = $("#slick-slide05").val(cnt);
        
 
       }
@@ -232,16 +303,14 @@ var productCode = "";
    }
 
    // 선택옵션삭제
-   function optDelete(id) {
-      $(id).remove();
-      calculatePrice();
+	function optDelete(li) {
+	  console.log(li);
+//       var id = document.this.getElementsByName('num-product').id;
+	  console.log(id);
+      $(li).remove();
+      calculatePrice(id);
    }
    
-//    var input = document.getElementById("optnum").value
-//    var a = $('#mtext-104 cl3 txt-center num-product').val();
-//    alert(input);
-	
-
    // 옵션 관련 스크립트 끝
 </script>
 
@@ -312,15 +381,6 @@ var productCode = "";
                      </div>
                   <%}%>
                   
-						             	<!-- ----수정하기 --- -->
-<!-- 						             	 20.12.19. yj 바뀜! -->
-						             	<!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
-<!-- 							<input type="hidden" name="size" value=""> -->
-<!-- 							<input type="hidden" name="color" value=""> -->
-<%-- 							<input type="hidden" name="product_basicCode" value="<%=basicCode%>"> --%>
-<!-- 							<input type="hidden" name="cnt" value="0"> -->
-							
-
                   </div>
                </div>
             </div>
@@ -377,26 +437,26 @@ var productCode = "";
 
 
                   <div class="flex-w flex-r-m p-b-10"
-                     style="text-align: right; width: 570px; padding: 10px 30px;">
+                     style="text-align: right; width: 500px; padding: 10px 30px;">
 
                      <%-- 선택한 옵션 블럭 --%>
-                     <ul id="show-option" style="width: 500px;">
-                        <%-- 한 옵션이 들어가는 li--%>
-                        <%-- 한 옵션이 들어가는 li 끝 --%>
-                     </ul>
+							<ul id="show-option">
+								<%-- 한 옵션이 들어가는 li--%>
+								<%-- 한 옵션이 들어가는 li 끝 --%>
+							</ul>
 
+							<div class="price" class="size-203 flex-c-m respon6 " id="total" style="text-align: right; font-size: 18px; font-weight: bold;">
+								<span></span>
+							</div>
 
-
-                     <div class="size-204 flex-w flex-m respon6-next">
-                        <div class="price" class="size-203 flex-c-m respon6 " id="total">
-                           <span></span>
-                        </div>
-                        <br>
-                        <input type="submit" value="Add to cart"
-                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="cartSubmit">
-                     </div>
-                     
-                  </div>
+							<div class="flex-w flex-r-m p-b-10"
+								style="text-align: right; width: 500px; padding: 10px 30px;">
+								<div class="size-204 flex-w flex-m respon6-next">
+									<br><input type="submit" value="Add to cart"
+										class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+										name="cartSubmit">
+								</div>
+							</div>
                </div>
 
                <%-- 좋아요 + 각종 공유 / yj --%>
