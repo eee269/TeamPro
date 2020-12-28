@@ -18,6 +18,9 @@ ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("
 DecimalFormat priceFormat = new DecimalFormat("###,###");
 
 //==============댓글시작==============//
+// 댓글 총갯수 가져오기
+int reListCount = (int)request.getAttribute("reListCount");
+
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
 
@@ -160,6 +163,7 @@ $(document).ready(function() {
 							</div>
 					<!-- -----------------------------Comment----------------------------- -->
 					<h2 class="comment_title">COMMENT</h2>
+					<p style="padding-top: 20px;">댓글 총갯수 : <%=reListCount %></p>
 					<div id="productDetail" style="padding-top: 20px;">
 						<div class="page-body">
 							<div class="cboth">
