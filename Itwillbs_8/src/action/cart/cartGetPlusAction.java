@@ -53,7 +53,7 @@ public class cartGetPlusAction implements Action {
 			color[i] = mixopt[i].split("/")[1];
 		}
 		
-		String main_img = request.getParameter("ma_img");
+		String main_img = request.getParameter("img_main");
 		System.out.println("main_imgs : " + main_img);
 
 		String product_basicCode = request.getParameter("basicCode");  // basicCode코드

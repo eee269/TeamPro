@@ -13,6 +13,13 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
+<style>
+img:hover {
+	cursor: pointer;
+}
+</style>
+
+
 
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -101,12 +108,14 @@ if(articleList.size() == 0) {
 			%><tr style="height: 350px"><%
 		}
 		String[] img = article.getImg().split("/");
-		%><td onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'">
+		%><td>
 			<img alt="productImg" src="communityUpload/<%=img[0]%>" width="250px" height="250px"
-				onerror="src='loading.png'"><br>
+				onerror="src='loading.png'" onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'"><br>
 			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=article.getSubject()%></span>&nbsp;&nbsp;&nbsp;
 			<span class="stext-105 cl3"><%=article.getUsername() %></span><br>
-			<span class="stext-105 cl3"><%=article.getDate() %></span>
+			<span class="stext-105 cl3"><%=article.getDate() %></span>&nbsp;&nbsp;&nbsp;
+<!-- 			북마크 -->
+			<img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon--v1.png" onclick="delBook(<%=article.getNum()%>)"/>
 		</td><%
 		if(i%j == j-1) {
 			%></tr><%
@@ -115,10 +124,7 @@ if(articleList.size() == 0) {
 	}
 	
 }
-%>
-
-
-					</table>
+%></table>
 					</div>
 <!-- 하단 여백 -->
 <div style="height: 150px"></div>
@@ -134,7 +140,22 @@ if(articleList.size() == 0) {
 </div>
 
 
-<!-- 주문상세 끝 -->
+<script type="text/javascript">
+function delBook(num) {
+	$.ajax({
+		url: "CommBook.co",
+		type: "POST",
+		data: {
+			num:num
+		},
+		success: function(data) {
+			location.reload();
+		}
+	})
+}
+</script>
+
+
 
 
 <jsp:include page="/inc/footer.jsp" />

@@ -81,6 +81,54 @@
    border-bottom: 1px solid #263238;
 }
 
+#show-option>li {
+    margin: 10px 0px 20px 0px;
+}
+a:hover{
+    text-decoration: none;
+}
+#show-option>li:last-child {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+/*====================옵션 css====================*/
+.wrap-num-product {
+   width: auto;
+   height: 25px;
+   border: 1px solid #e6e6e6;
+   border-radius: 3px;
+   overflow: hidden;
+}
+
+.btn-num-product-up, .btn-num-product-down {
+   width: 25px;
+   height: auto;
+   cursor: pointer;
+}
+
+.btn-num-product-up, .btn-num-product-down {
+   width: 25px;
+   height: auto;
+   cursor: pointer;
+}
+.num-product {
+   width: 30px;
+   height: 100%;
+   border-left: 1px solid #e6e6e6;
+   border-right: 1px solid #e6e6e6;
+   background-color: #f7f7f7;
+}
+#show-option{
+   width: 100%;
+}
+#show-option>li{
+   margin:10px 0px 20px 0px;
+}
+#show-option>li:last-child{
+   padding-bottom :10px;
+   border-bottom : 1px solid #ccc;
+}
 </style>
 
 <!-- 끝 -->
@@ -117,22 +165,33 @@ var productCode = "";
    // 선택된 옵션체크
    function optcheck(mixopt) {
        productCode = <%=basicCode%> + mixopt[0] + mixopt[1];
-    // 20.12.19. yj 바뀜!
+    
        $("#slick-slide03").attr('value', mixopt[0]);    // 사이즈
        $("#slick-slide04").attr('value', mixopt[1]);   // 컬러
-      console.log(productCode);
-       
-      var oldopt = $('ul#show-option li span.show-value').html();
+      
+      var oldopt = [];
+      // 이미 선택된 옵션인지 확인 
+      var isEquals = false;
       var newopt = mixopt[0] + "/" + mixopt[1];
       
-      if(oldopt != newopt) {
-         showlist(newopt, productCode); 
+      $('ul#show-option li p.show-value').each(function() {
+         oldopt = $(this).text();
+           console.log(oldopt);
+           if(oldopt == newopt) {
+               isEquals = true;
+          }
+     });
+     
+      if(isEquals) {
+          $('#opt1 option:eq(0)').prop('selected', true);
+         $('#opt2 option:eq(0)').prop('selected', true);
+          alert('이미 선택된 옵션입니다.');
+          isEquals = false;
+         return;
       } else {
-         $('#opt1 option:eq(0)').prop('selected', true);
-       $('#opt2 option:eq(0)').prop('selected', true);
-         alert('이미 선택된 옵션입니다.');
-       return;
+           showlist(newopt, productCode);
       }
+      
    }
    
    // option 2개 다 선택됐으면 값 전달받고 화면에 출력
@@ -148,29 +207,30 @@ var productCode = "";
       var optcol=document.createElement('li');
       // optcol id 설정 -> 이런모양( <li id="optcol1"> )
       var id = "optcol"+resultcount;
-      optcol.id = id;
+      optcol.id = id; 
 
-      // body에서 id가 show-option인 ul을 찾아서 li추가 
+   // body에서 id가 show-option인 ul을 찾아서 li추가 
       $('ul#show-option').append(optcol);
 //       alert(mixopt);
       var html = "<input type='hidden' value= '<%=basicCode%>' id = 'basicCode' name='basicCode'>" +
       "<input type='hidden' value='"+mixopt+"' name = 'mixopt'>"+
-      // productCode, id="productCode숫자"
-          "<span class='size-203 flex-c-m respon6 show-value' name='optname'>" + mixopt + 
-      // 옵션 이름, ( BK/M )
-          "</span><div class='size-204 flex-w flex-m respon6-next'>" + 
-          "<div class='wrap-num-product flex-w m-r-20 m-tb-10' id='itemcnt" + resultcount + "'>" +
+      // 옵션 이름
+          "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
+      // 옵션 삭제 아이콘
+          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
+          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
+          // 옵션 수량 선택
+          "<div class='size-204 flex-w flex-m respon6-next'>" + 
+          "<div class='wrap-num-product flex-w' id='itemcnt" + resultcount + "'>" +
           "<span class='btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m' id='optminus" + resultcount + "' onclick='cntMinus(this.id)'>" + 
           "<i class='fs-16 zmdi zmdi-minus'></i></span>" + 
           "<input class='mtext-104 cl3 txt-center num-product' type='number' id='optnum" + resultcount + "' name='num-product'  value='1'>" + 
           "<span class='btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m' id='optplus" + resultcount + "' onclick='cntPlus(this.id)'>" + 
-          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>" + 
-          "<div><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
-          "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div>";
+          "<i class='fs-16 zmdi zmdi-plus'></i></span></div></div>";
+
       $('#'+id).append(html);
       
       // cnt 값 보내기
-      // 20.12.19. yj 바뀜!
       $("#slick-slide06").attr('value', 1);
       calculatePrice('optnum'+resultcount);
       
@@ -179,21 +239,34 @@ var productCode = "";
    // 선택된 옵션 수량에 따른 가격 계산후 출력, 가격: '.price', '#total'
    // 수량의 id를 넘겨 받고
    function calculatePrice(id) {
-      var totalprice = 0;
+      var totalprice = 0, itcnt = [];
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
-      $('ul#show-option li').each(function() {
-//          var itcnt = parseInt($(this).find('#'+id).val());
-      var itcnt = parseInt($('#'+id).val());
-         totalprice += itemprice * itcnt;
-      });
-      
       var resultcount = $('ul#show-option li').length;
+      
+      console.log(resultcount);
+      
       if(resultcount < 1) {
-         $('#total').css('display', 'none');
+            $('#total').css('display', 'none');
       } else {
-         $('#total').css('display', 'block');
+            $('#total').css('display', 'inline');
       }
-
+      
+      for(var s = 1; s <= resultcount; s++) {
+         console.log(id.charAt(id.length-1));
+         id = id.replace(id.charAt(id.length-1), s);
+         
+         console.log(id);
+        itcnt[s-1] = parseInt($('#'+id).val());
+        console.log(itcnt[s-1]);
+        console.log(totalprice);
+        console.log(itemprice);
+      }
+        
+      for(var i=0; i<resultcount; i++) {
+          totalprice += itemprice * itcnt[i];
+      }
+      
+      console.log(totalprice);
       $('#total span').text(totalprice + '원');
    }
 
@@ -205,8 +278,6 @@ var productCode = "";
      
       $('#'+numid).attr('value', cnt);
       // cnt 값 보내기 
-      // 20.12.19. yj 바뀜!
-//          var ca_cnt = $("#slick-slide05").val(cnt);
       $("#slick-slide06").attr('value', cnt);
       calculatePrice(numid);
    }
@@ -222,9 +293,7 @@ var productCode = "";
          cnt -= 1;
          $('#'+numid).attr('value', cnt);
          // cnt 값 보내기
-         // 20.12.19. yj 바뀜!
          $("#slick-slide06").attr('value', cnt);
-//          var ca_cnt = $("#slick-slide05").val(cnt);
        
 
       }
@@ -234,16 +303,14 @@ var productCode = "";
    }
 
    // 선택옵션삭제
-   function optDelete(id) {
-      $(id).remove();
-      calculatePrice();
+   function optDelete(li) {
+     console.log(li);
+//       var id = document.this.getElementsByName('num-product').id;
+     console.log(id);
+      $(li).remove();
+      calculatePrice(id);
    }
    
-//    var input = document.getElementById("optnum").value
-//    var a = $('#mtext-104 cl3 txt-center num-product').val();
-//    alert(input);
-   
-
    // 옵션 관련 스크립트 끝
 </script>
 
@@ -281,7 +348,6 @@ var productCode = "";
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
       <!-- 폼 -->
-   <form action="cartGetPlusAction.ca" method="post" name="cartUp">
       <!-- 폼 -->
       <div class="row">
          <div class="col-md-6 col-lg-7 p-b-30">
@@ -304,7 +370,6 @@ var productCode = "";
                         data-thumb="upload/productUploadImg/<%=main[i] %>">
                         <div class="wrap-pic-w pos-relative">
                            <img src="upload/productUploadImg/<%=main[i] %>" alt="IMG-PRODUCT">
-                    	    <input type="hidden" name="ma_img" value="<%=main[0]%>">
 
                            <a
                               class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
@@ -314,21 +379,20 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
-                  
-                                  <!-- ----수정하기 --- -->
-<!--                                    20.12.19. yj 바뀜! -->
-                                  <!-- get(i)할 필요 없어서 for문 밖으로 빼놨고, cnt만 id새로 만들었어!! -->
-                     <input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
-                     <input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
+                   <input type="hidden" name = "img_main" value="upload/productUploadImg/<%=main[0] %>">
+                  <%=main[0] %>
                   </div>
                </div>
             </div>
          </div>
 
          <div class="col-md-6 col-lg-5 p-b-30">
+            <form action="cartGetPlusAction.ca" method="post" name="cartUp">
             <div class="p-r-50 p-t-5 p-lr-0-lg">
             <!-- 상품코드 -->
             <input type="hidden" id="item-code" value="code,,">
+            <input type="hidden" name="name" value="<%=productDetailList.get(0).getName() %>">
+         <input type="hidden" name="price" value="<%=productDetailList.get(0).getPrice()%>">
             <!-- 상품명 -->
                <h4 class="mtext-105 cl2 js-name-detail p-b-14" id="item-name"><%=productDetailList.get(0).getName() %>
                   </h4>
@@ -373,26 +437,26 @@ var productCode = "";
 
 
                   <div class="flex-w flex-r-m p-b-10"
-                     style="text-align: right; width: 570px; padding: 10px 30px;">
+                     style="text-align: right; width: 500px; padding: 10px 30px;">
 
                      <%-- 선택한 옵션 블럭 --%>
-                     <ul id="show-option" style="width: 500px;">
+                     <ul id="show-option">
                         <%-- 한 옵션이 들어가는 li--%>
                         <%-- 한 옵션이 들어가는 li 끝 --%>
                      </ul>
 
-
-
-                     <div class="size-204 flex-w flex-m respon6-next">
-                        <div class="price" class="size-203 flex-c-m respon6 " id="total">
-                           <span></span>
-                        </div>
-                        <br>
-                        <input type="submit" value="Add to cart"
-                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail" name="cartSubmit">
+                     <div class="price" class="size-203 flex-c-m respon6 " id="total" style="text-align: right; font-size: 18px; font-weight: bold;">
+                        <span></span>
                      </div>
-                     
-                  </div>
+
+                     <div class="flex-w flex-r-m p-b-10"
+                        style="text-align: right; width: 500px; padding: 10px 30px;">
+                        <div class="size-204 flex-w flex-m respon6-next">
+                           <br><input type="submit" value="Add to cart"
+                              class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
+                              name="cartSubmit">
+                        </div>
+                     </div>
                </div>
 
                <%-- 좋아요 + 각종 공유 / yj --%>
@@ -433,11 +497,11 @@ var productCode = "";
                   </a>
                </div>
             </div>
+      </form>
          </div>
       </div>
 
 <!--    폼 끝 -->
-      </form>
       
       <!-- 상세정보 시작 -->
       <div id="productDetail">
@@ -597,7 +661,7 @@ var productCode = "";
                         <td>
                            <div class="tb-left reply_depth0">
                               <span><a href="javascript:void(0)" onclick = "show_hide(this); return false;"><%=qnaList.get(i).getQna_subject()%></a></span>
-                              <span style="font-size: 8pt;">(1)</span>
+                              <span style="font-size: 8pt;"></span>
                            </div>
                         </td>
                         <td>
@@ -612,7 +676,7 @@ var productCode = "";
                         </td>
                         <td>
                            <div class="tb-center">
-                              <span id="qna_board_showhits1"><%=qnaList.get(i).getQna_readcount()%></span>
+                              <span id="qna_board_showhits1" class="qnahit"><%=qnaList.get(i).getQna_readcount()%></span>
                            </div>
                         </td>
                      </tr>
@@ -620,16 +684,42 @@ var productCode = "";
                         <td colspan="6">
                            <div class="tb-left">
                               <div class="qna_board_content">
+                                 <img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 50px; max-width: 50px;">
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
                                    <%if(member_id != null){if(qnaList.get(i).getMember_id().equals(member_id)){ %>
-                                    <div class="pr_r_button">
-                                    <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-                                    <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">답글</a>
-                                    <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+                                       <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+                                          <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                             <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                       <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                          수정
                                     </div>
-                                    <%} %>
+                                          </a>
+                                          <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                             <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                       <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                          삭제
+                                    </div>
+                                          </a>
+                                         </div>
+                                          <%} else if(member_id.equals("admin")){ %>
+                                          <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+                                          <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                             <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                       <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                          삭제
+                                    </div>
+                                          </a>
+                                             <a href="ProdQnaReplyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                             <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                       <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                          답글
+                                    </div>
+                                          </a>
+                              </div>
+                                          <%}
+                                      }%>
                                  <%}else if(qnaList.get(i).getQna_re_seq()>0){ %>
                                  <div class="MS_cmt_list_box">
                                     <div class="comment_depth1">
@@ -637,13 +727,6 @@ var productCode = "";
                                           <tbody>
                                              <tr>
                                                 <td class="MS_cmt_detail">
-<!--                                                    <span class="MS_cmt_date">답글란입니다</span> <br> -->
-<%--                                                    <span class="MS_cmt_hname MS_cmt_depth MS_cmt_depth01"><%=qnaList.get(i).getUsername() %></span> --%>
-<%--                                                    <span class="MS_cmt_date"><%=qnaList.get(i).getQna_date() %></span> --%>
-<!--                                                    <div class="MS_cmt_content MS_cmt_depth01"> -->
-<%--                                                       <%=qnaList.get(i).getQna_content() %> --%>
-<!--                                                    </div> -->
-
                                           <div class="comments">
                                              <div class="comments__arrow_top"></div>
                                              <div class="comment__inner">
@@ -653,12 +736,22 @@ var productCode = "";
                                                 <div class="comment__message">
                                                    <span class="comment__message_text"><%= qnaList.get(i).getQna_content() %></span>
                                                 </div>
-                                                     <div class="pr_r_button">
-                                                     <%if(member_id.equals("admin")){ %>
-                                                         <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">수정</a>
-                                                           <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">삭제</a>
+                                                     <%if(member_id != null && member_id.equals("admin")){ %>
+                                                     <div class="flex-w flex-r m-t-10 m-r-40 p-b-0" >
+                                                         <a href="ProdQnaModifyForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                                               <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                                         <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                         수정
+                                                      </div>
+                                                         </a>
+                                                           <a href="ProdQnaDeleteForm.po?basicCode=<%=basicCode%>&qna_num=<%=qnaList.get(i).getQna_num()%>">
+                                                               <div class="flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
+                                                         <i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+                                                         삭제
+                                                      </div>
+                                                           </a>
+                                                </div>
                                                       <%} %>
-                                                     </div>
                                                   </div>
                                                </div>
                                             </div>
@@ -675,57 +768,33 @@ var productCode = "";
                         </td>
                      </tr>
                   </tbody>
-                     <%}}
+                     <%}
                   }%>
                   </table>
-                  <!-- qna pagin -->
-                  <div class="list-btm">
-                     <div class="paging-wrap">
-                        <div class="paging">
-                           <%
-                              if (nowPage <= 1) {
-                           %>
-                              <input type="button" value="이전">&nbsp;
-                           <%
-                              } else {
-                           %>
-                              <input type="button" value="이전" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>'">&nbsp;
-                           <%
-                              }
-                           %>
-                              <%
-                                 for (int i = startPage; i <= endPage; i++) {
-                                 if (i == nowPage) {
-                              %>
-                                    [<%=i%>]&nbsp;
-                                 <%
-                                    } else {
-                                 %>
-                                    <a href="ProductDetail.po?basicCode=<%=basicCode%>"  class="now">[<%=i%>]</a>&nbsp;
-                                 <%
-                                    }
-                                 %>
-                           <%
-                              }
-                           %>
-                           <%
-                              if (nowPage >= maxPage) {
-                           %>
-                              <input type="button" value="다음">
-                           <%
-                              } else {
-                           %>
-                              <input type="button" value="다음" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>'">
-                           <%
-                              }
-                           %>
-                        </div>
-                     </div>
-                     <div class="btm_write">
-                        <a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
-                     </div>
-                  </div>
+                 <div class="flex-w w-full p-t-10 m-lr--7 flex-c">
+            <%if(nowPage <= 1) {%>
+               <a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt; <!-- '<' 의 코드--></a>
+            <%}else {%>
+               <a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage - 1%>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&lt;</a>
+            <%} %>
+            <%for(int i = startPage; i <= endPage; i++) { 
+               if(i == nowPage) { %>
+                  <a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1"><%=i %></a>
+               <%}else { %>
+                  <a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=i %>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2"><%=i %></a>
+               <%} %>
+            <%} %>
+            <%if(nowPage >= maxPage) { %>
+               <a href="javascript:void(0);" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt; <!-- '>' 의 코드 --></a>
+            <%}else { %>
+               <a href="ProductDetail.po?basicCode=<%=basicCode%>&page=<%=nowPage + 1%>" class="flex-c-m how-pagination1 trans-04 m-all-7 active-pagination">&gt;</a>
+            <%}%>
+         </div>
+         <!-- Pagination -->
+               <div class="btm_write">
+                  <a href="ProdQnaWriteForm.po?basicCode=<%=basicCode%>">WRITE</a>
                </div>
+            </div>
                <!-- qna pagin -->
                <!-- qna 리스트 끝 -BIN- -->
 
@@ -995,13 +1064,23 @@ var productCode = "";
                                              +"<span class='comment__message_text'>"+reply.content+"</span>"
                                              +"</div>";
                                    }else if(j == 5){
-                                      output +=      "<button class='pr_r_button'>";
-                                       output +=         "<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-                                       output +=         "<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
-                                       output +=         "<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-                                      output +=      "</button>";
-                                   }
-                                // 상품 리뷰
+                                       output +=      "<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >";
+                                                      +"<a href='javascript:prm_modify("+reply.num+")'>"
+                                                         +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                      +"수정"
+                                                +"</div>"
+                                                      +"</a>"
+                                                      +"<a href='javascript:prd_review("+reply.num+")'>"
+                                                         +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                      +"삭제"
+                                                +"</div>"
+                                                      +"</a>"
+                                                      +"<input type='hidden' id='prm_submit' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' "
+                                                      +"value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>"
+                                          +"</div>";
+                                            }
                                 }else{
                                    if(j == 0){
                                     output += "<li id='power_review_block"+reply.num+"' class='power-review-list-box'>"
@@ -1010,9 +1089,9 @@ var productCode = "";
                                              +"<div id='PR15N01-modify'>"
                                                 +"<dl class='desc'>"
                                                 +"<dt class='first'>작성자</dt>"
-                                                   +"<dd>"+reply.id+"</dd>";
+                                                   +"<dd class='re_name'>"+reply.id+"</dd>";
                                     }else if(j == 1){
-                                       output +=      "<dt>작성일</dt><dd>"+reply.date+"</dd>"
+                                       output +=      "<dt>작성일</dt><dd class='re_date'>"+reply.date+"</dd>"
                                                    +"</dl>";
                                     }else if(j == 2){
                                        output +=      "<div class='hd-box'>"
@@ -1027,7 +1106,7 @@ var productCode = "";
                                                  +"<div class='content'>"
                                                     +"<p class='content_p'>"
                                                        +"<a href='javascript:power_review_more("+reply.num+", '00000');' class='more-options' id='review_content'>"
-                                                       +"<textarea name='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
+                                                       +"<textarea name='content'class='content' disabled style='border:none;resize:none;'>"+reply.content+"</textarea></a>"
                                                        +"<a class='pr-close' href='javascript:power_review_more_close("+reply.num+");'>... <span>닫기</span></a>"
                                                     +"</p><div class='ctr'>"
                                                   +"</div>";
@@ -1076,20 +1155,42 @@ var productCode = "";
                                                  +"</div>";
                                          if(reply.id == member_id){
                                           output +=      "<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
-                                          output +=      "<button class='pr_button'>";
-                                          output +=         "<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-                                          output +=         "<a href='javascript:prm_modify("+reply.num+")'>수정</a>&nbsp;&nbsp;";
-                                          output +=         "<input type='hidden' id='prm_submit' value='수정완료' onclick='javascript:prm_modifySub("+reply.num+")'>";
-                                          output +=      "</button>";
+                                           output +=      "<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
+                                                         +"<a href='javascript:prm_modify("+reply.num+")'>"
+                                                            +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                      +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                         +"수정"
+                                                   +"</div>"
+                                                         +"</a>"
+                                                         +"<a href='javascript:prd_review("+reply.num+")'>"
+                                                            +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                      +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                         +"삭제"
+                                                   +"</div>"
+                                                         +"</a>"
+                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                           +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
+                                             +"</div>";
                                        }   
                                          if(member_id == 'admin'){
-                                          output +=      "<button class='pr_button'>";
-                                          output +=         "<a href='javascript:prd_review("+reply.num+")'>삭제</a>&nbsp;&nbsp;";
-                                          output +=         "<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>답글</a>";
-                                          output +=      "</button>";
+                                           output +=      "<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
+                                                         +"<a href='javascript:prr_reply("+reply.num+","+reply.re_ref+","+isImg+");'>"
+                                                            +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                      +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                         +"답글"
+                                                   +"</div>"
+                                                         +"</a>"
+                                                         +"<a href='javascript:prd_review("+reply.num+")'>"
+                                                            +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
+                                                      +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                         +"삭제"
+                                                   +"</div>"
+                                                         +"</a>"
+                                             +"</div>";
+                                            }
                                          }
                                   }
-                            }
+                            
                             }// 리뷰 하나에 대한 for 문 => reveiwDetail
                                     output +=      "</div>";
                                   output +=    "<input type='hidden' name='basicCode'  value='"+basicCode+"'>";
@@ -1105,23 +1206,23 @@ var productCode = "";
                      // review paging
                      var pageInfo = paging(newJson.listCount, page, limit);
                      
-                     output+="<div class='paging'>";
+                     output+="<div class='flex-w w-full p-t-10 m-lr--7 flex-c'>";
                                if(page <= 1){
-                      output+=         "<input type='button' value='이전'> &nbsp;";
+                      output+=         "<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'>&lt;</a>";
                                }else{
-                      output+=         "<input type='button' value='이전' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&nbsp";
+                      output+=         "<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination' onclick='location.href='javascript:getReplyCall('"+(page-1)+"');''>&lt;</a>";
                                }
                               for(var i = pageInfo.startPage; i <= pageInfo.endPage; i++){
                                  if(i == page){
-                      output+=         "<a href='javascript:void(0);' class='now'>["+i+"]</a>&nbsp;";
+                      output+=         "<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination1'>"+i+"</a>";
                                  }else{
-                      output+=         "<a href='#powerReview' onclick='javascript:getReplyCall("+i+");'>["+i+"]</a>&nbsp;";
+                      output+=         "<a href='#powerReview' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination2' onclick='javascript:getReplyCall("+i+");'>"+i+"</a>";
                                  }
                               }   
                                if(page >= pageInfo.maxPage){
-                      output+=         "<input type='button' value='다음'> &nbsp;";
+                      output+=         "<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'>&gt;</a>";
                                }else{
-                      output+=         "<input type='button' value='다음' onclick='location.href='javascript:getReplyCall('"+page+1+"');''>&nbsp";
+                      output+=         "<a href='javascript:void(0);' class='flex-c-m how-pagination1 trans-04 m-all-7 active-pagination'onclick='location.href='javascript:getReplyCall('"+(page+1)+"');''>&gt;</a>";
                                }
                            +"</div>";
                            
@@ -1204,14 +1305,19 @@ var productCode = "";
                starChart += "<li>"
                              +"<span class='tit'>star"+key+"</span>"
                                 +"<span class='bar'>"
-                              +"<span class='abs' style='width: "+100 / total * star[key] * 1+"%'></span>"
+                              +"<span class='abs' style='width: "+(total != 0 ? (100 / total * star[key] * 1) : 0)+"%'></span>"
                            +"</span>"
                            +"<span class='num'>"+star[key]+"</span>"
                      +"</li>";
                   
                }
-                 var like = "<strong>"+(starLike / total * 100).toFixed(1)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
-                  result = (score / total *1).toFixed(1);
+                 var like = "<strong>"+ (total != 0 ? (starLike / total * 100).toFixed(1):0)+"%</strong>의 구매자들이 이 상품을 좋아합니다. ("+total+"명 중 "+starLike+"명)";
+                  if(total == 0){
+                  result = 0;                     
+                  }else{
+                       result = (score / total *1).toFixed(1);
+                  }
+                  
                   $('.like').html(like);
                   $('.chart ul').html(starChart);
                   $('.score dt').html(result);
@@ -1246,6 +1352,27 @@ var productCode = "";
          $(this).addClass('now');
       }
    }); // tabs click function end
+   
+    //==================== 상세 이미지 보기  ====================//
+//       $(document).on("click", ".photo-list", function () {
+      function power_review_view_show(){
+         
+             var a = $(this).parents('li'); 
+             var content = a.find('.content').text();
+             var img = a.find('#img').val();
+             var name = a.find('.re_name').text();
+             var date = a.find('.re_date').text();
+             
+             var output = ""; 
+             output += "<div id='inline' style='max-width:600px; display: none;'>"
+                     +"<div class='popup-img'><img src='upload/prodReviewUpload/"+img+"' width='100%' height='auto'></div>"
+                     +"<div class='popup-txt' style='margin-top:20px;'>"+content+"</div>"
+                     +"<div class='popup-name-date' style='padding-top:10px; margin-top:30px; border-top:1px solid #ccc;'><b>작성자</b> : "+name+" | <b>작성일</b> : "+date+"</div></div>"
+             
+             $("#image_view_load").html(output); 
+             $(".fancybox").trigger("click");
+      }
+//       });
 
 });
 
@@ -1386,140 +1513,194 @@ function prd_review(num){
                      }
                  ProdReviewRecCount(num,recommand);
                   },
+                  error: function(request,status,error){
+                       alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                      }
          })
       }
    }
    // 리뷰 추천 수
-    function ProdReviewRecCount(num,rec) {
-        var rec = rec; // good, bad 판별 변수
-        if(rec == null){
-        }
-      $.ajax({
-         url: "ProdReviewRecCount.po",
-               type: "POST",
-               data: {
-                   num: num,
-                   recommand : rec
-               },
-               success: function (count) {
-                  if(rec == 0){
-                     $(".good"+num+" .recCount").html(count);
-                  }else{
-                     $(".bad"+num+" .recCount").html(count);
+   function ProdReviewRecCount(num,rec) {
+       var rec = rec; // good, bad 판별 변수
+       if(rec == null){
+       }
+     $.ajax({
+        url: "ProdReviewRecCount.po",
+              type: "POST",
+              data: {
+                  num: num,
+                  recommand : rec
+              },
+              success: function (count) {
+                 if(rec == 0){
+                    $(".good"+num+" .recCount").html(count);
+                 }else{
+                    $(".bad"+num+" .recCount").html(count);
+                 }
+              },
+              error: function(request,status,error){
+                   alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
                   }
-               },
-      })
-    };
-//     setInterval(function(){
-//        $('.rating-input').toggle();
-//     },100);
+     })
+   };
+//    setInterval(function(){
+//       $('.rating-input').toggle();
+//    },100);
+</script>
+<script>
+$(function(){
+  // qna 제목 클릭 시 내용 보여주기
+  $('.nbg').click(function(){
+     
+     if($(this).next().css('display')=='none'){
+        var num = $(this).find('.qnanum').text();
+           var hit = $(this).find('#qna_board_showhits1');
+        // 조회수 증가
+        $.ajax({
+           url: "ProdQnaUpReadcount.po",
+                 type: "POST",
+                 data: {
+                     num: num
+                 },
+                 success: function (count) {
+                    $(hit).html(count);
+                 },
+                 error: function(request,status,error){
+                      alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                  }
+        })
+     }
+     $(this).next().toggle();
+     
+  });
+  
+});
 </script>
 <script type="text/javascript">
-// qna 제목 클릭 시 내용 보여주기
-function show_hide(){
-   $(function(){
-      var content = $('.MS_qna_content_box').css('display');
-      if(content == 'table-row' || content == 'block'){
-         $('.MS_qna_content_box').css('display','none');
-      }else {
-         $('.MS_qna_content_box').css('display','table-row').focus();
-      }
-   });
-};
-// qna 비회원이 글 쓰려고 할 시 로그인 유도
+//qna 비회원이 글 쓰려고 할 시 로그인 유도
 $(function(){
-   $('.btm_write').click(function(){
-      var member_id = '<%=member_id%>';
-      if(member_id == 'null'){
-         if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
-            return false;
-         }else{
-            location.href="MemberLoginForm.mo";
-            return false;
-         }
-      }
-   });
+  $('.btm_write').click(function(){
+     var member_id = '<%=member_id%>';
+     if(member_id == 'null'){
+        if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+           return false;
+        }else{
+           location.href="MemberLoginForm.mo";
+           return false;
+        }
+     }
+  });
 });
 
 //review 답글 클릭 시 보여주기
 function showReply(num){
-   $(function(){
-      var form = $('#prm_form'+num).css('display');
-      if(form == 'table-row' || form == 'inline' || form == 'block'){
-         $('#prm_form'+num).css('display','none');
-      }else {
-         $('#prm_form'+num).css('display','inline').focus();
-      }
-   });
+  $(function(){
+     var form = $('#prm_form'+num).css('display');
+     if(form == 'table-row' || form == 'inline' || form == 'block'){
+        $('#prm_form'+num).css('display','none');
+     }else {
+        $('#prm_form'+num).css('display','inline').focus();
+     }
+  });
 }
 </script>
+<script>
+  // tabmenu 수량 호출
+  function getCount(){
+     var basicCode = "<%=basicCode%>";
+     $.ajax({
+        url: "ProdGetCount.po",
+              type: "POST",
+              data: {
+                  basicCode: basicCode
+              },
+              success: function (json) {
+                 var count = JSON.parse(json);
+                 for(key in count){
+                 $(".count"+key).html(count[key]);
+                 }
+                 
+              },
+     })
+  };
+  getCount();
+</script>
 <script type="text/javascript">
-   var _gaq = _gaq || [];
-   _gaq.push(['_setAccount', 'UA-36251023-1']);
-   _gaq.push(['_setDomainName', 'jqueryscript.net']);
-   _gaq.push(['_trackPageview']);
-   (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-   })();
-//    try {
-//       fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
-//          return true;
-//       }).catch(function(e) {
-//          var carbonScript = document.createElement("script");
-//          carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
-//          carbonScript.id = "_carbonads_js";
-//          document.getElementById("carbon-block").appendChild(carbonScript);
-//       });
-//    } catch (error) {
-//       console.log(error);
-//    }
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+//   try {
+//      fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+//         return true;
+//      }).catch(function(e) {
+//         var carbonScript = document.createElement("script");
+//         carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+//         carbonScript.id = "_carbonads_js";
+//         document.getElementById("carbon-block").appendChild(carbonScript);
+//      });
+//   } catch (error) {
+//      console.log(error);
+//   }
 
 
-   /* detail_tabmenu 클릭한 #page01에 스크롤 on */
-   $('.detail_tabmenu ul li').click(function(){
-      $('.detail_tabmenu ul li').removeClass('on');
-      $(this).addClass('on');
-   });
+  /* detail_tabmenu 클릭한 #page01에 스크롤 on */
+  $('.detail_tabmenu ul li').click(function(){
+     $('.detail_tabmenu ul li').removeClass('on');
+     $(this).addClass('on');
+  });
 
-//    카카오톡으로 공유하기 
+//   카카오톡으로 공유하기 
 
-   Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
-   function sendLink() {
-       Kakao.Link.createDefaultButton({
-          container: '#kakao-link-btn',
-         objectType: 'feed',
-         content: {
-           title: '<%=productDetailList.get(0).getName() %>',
-           description: '상품 공유',
-           imageUrl:
-             'upload/productUploadImg/<%=main[0] %>',
-           link: {
-             mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
-             webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
-           },
-         },
-         social: {
-           likeCount: 286,
-           commentCount: 45,
-           sharedCount: 845,
-         },
-         buttons: [
-           {
-             title: '웹으로 보기',
-             link: {
-               mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
-               webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
-             }
-           }]
-       })
-     }
-      
-         
+  Kakao.init('b62680a32c7f417cd4c5fd9d43ddd2e0');
+  function sendLink() {
+      Kakao.Link.createDefaultButton({
+         container: '#kakao-link-btn',
+        objectType: 'feed',
+        content: {
+          title: '<%=productDetailList.get(0).getName() %>',
+          description: '상품 공유',
+          imageUrl:
+            'upload/productUploadImg/<%=main[0] %>',
+          link: {
+            mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+            webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+          },
+        },
+        social: {
+          likeCount: 286,
+          commentCount: 45,
+          sharedCount: 845,
+        },
+        buttons: [
+          {
+            title: '웹으로 보기',
+            link: {
+              mobileWebUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+              webUrl: 'http://localhost:8090/Itwillbs_8/ProductDetail.po?basicCode=<%=basicCode%>',
+            }
+          }]
+      })
+    }
+     
+        
+</script>
+<script type="text/javascript"
+  src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
+<link rel="stylesheet" type="text/css"
+  href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
+<script type="text/javascript">
+$(document).ready(function() {
+   $('.fancybox').fancybox();
+});
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!-- 스크립트파일끝 -->
 
- <jsp:include page="/inc/footer.jsp" />
+<jsp:include page="/inc/footer.jsp" />

@@ -11,6 +11,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
+import svc.member.MemberLoginProService;
 import svc.product.qna.ProdQnaService;
 import vo.ActionForward;
 import vo.ProdQnaBean;
@@ -40,10 +41,13 @@ public class ProdQnaModifyProAction implements Action {
 				);
 		
 		int qna_num = Integer.parseInt(multi.getParameter("qna_num"));
+		String pass = multi.getParameter("qna_pass");
 		
 		// qna 비밀번호 맞는 지 검증
+		MemberLoginProService memberLoginProService = new MemberLoginProService();
+		boolean isRightUser = memberLoginProService.isLoginMember(member_id, pass);
+		
 		ProdQnaService ProdQnaService = new ProdQnaService();
-		boolean isRightUser = ProdQnaService.checkQna(qna_num, multi.getParameter("qna_pass"), member_id);
 		
 		// 적합한 사용자 판별에 따른 처리
 		if(!isRightUser) {
