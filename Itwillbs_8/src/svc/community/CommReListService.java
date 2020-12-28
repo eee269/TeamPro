@@ -10,7 +10,6 @@ import vo.CommReBean;
 import static db.JdbcUtil.*;
 
 
-
 public class CommReListService {
 
 	public int getCommCount(int community_num) throws Exception {

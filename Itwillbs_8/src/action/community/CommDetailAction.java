@@ -46,9 +46,9 @@ public class CommDetailAction implements Action {
 		request.setAttribute("articleList",articleList);
 		
 		// 댓글 총갯수 가져오기
-		CommReListService commReListService = new CommReListService();
-		int reListCount = commReListService.getCommAllCount(num);
-		request.setAttribute("reListCount",reListCount);
+//		CommReListService commReListService = new CommReListService();
+//		int reListCount = commReListService.getCommAllCount(num);
+//		request.setAttribute("reListCount",reListCount);
 				
 		// => request 객체를 유지하고, 서블릿 주소가 유지되어야 하므로
 		//    Dispatcher 방식으로 포워딩
