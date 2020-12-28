@@ -44,7 +44,7 @@
 					</button>
 					
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="bookmark" onclick="javascript:commSort('bookmark');">
-						추천순
+						북마크순
 					</button>
 
 				</div>
