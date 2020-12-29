@@ -168,7 +168,9 @@ public class ProdQnaService {
 		return list;
 	}
 	// qna 조회수 업데이트
-	public int qnaUpReadcount(int num) {
+	public ProdQnaBean qnaUpReadcount(int num) {
+		ProdQnaBean prodQnaBean = new ProdQnaBean();
+		
 		Connection con = getConnection();
 		ProdQnaDAO prodQnaDAO = ProdQnaDAO.getInstance();
 		prodQnaDAO.setConnection(con);
@@ -178,7 +180,7 @@ public class ProdQnaService {
 		
 		// 업데이트 성공 시 조회수 가져오기
 		if(updateCount > 0) {
-			count = prodQnaDAO.qnaGetReadcount(num);
+			prodQnaBean = prodQnaDAO.qnaGetReadcount(num);
 			commit(con);
 		}else {
 			rollback(con);
@@ -186,7 +188,7 @@ public class ProdQnaService {
 		
 		close(con);
 		
-		return count;
+		return prodQnaBean;
 	}
 
 	

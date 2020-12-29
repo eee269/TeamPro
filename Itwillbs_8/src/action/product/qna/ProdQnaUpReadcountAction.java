@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import action.Action;
 import svc.product.qna.ProdQnaService;
 import vo.ActionForward;
+import vo.ProdQnaBean;
 
 public class ProdQnaUpReadcountAction implements Action {
 
@@ -18,7 +19,9 @@ public class ProdQnaUpReadcountAction implements Action {
 		int num = Integer.parseInt(request.getParameter("num"));
 		
 		ProdQnaService prodQnaService = new ProdQnaService();
-		int count = prodQnaService.qnaUpReadcount(num);
+		ProdQnaBean prodQnaBean = prodQnaService.qnaUpReadcount(num);
+		int count = prodQnaBean.getQna_readcount();
+		
 		
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
