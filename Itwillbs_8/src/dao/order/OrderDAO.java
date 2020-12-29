@@ -42,7 +42,7 @@ public class OrderDAO {
 		PreparedStatement p = null;
 		
 		try {
-			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setString(1, ob.getCode());
 			p.setString(2, ob.getName());
@@ -54,6 +54,9 @@ public class OrderDAO {
 			p.setString(8, ob.getMember_id());
 			p.setInt(9, ob.getTotal_price());
 			p.setString(10, ob.getPostcode());
+			p.setString(11, ob.getSender());
+			p.setString(12, ob.getSenderPhone());
+			p.setString(13, ob.getSenderEmail());
 			
 			insertCount = p.executeUpdate();
 			System.out.println("insertCount : " +insertCount);
@@ -96,6 +99,9 @@ public class OrderDAO {
 				order.setPayment(rs.getString(7));
 				order.setMember_id(rs.getString(8));
 				order.setTotal_price(rs.getInt("total_price"));
+				order.setSender(rs.getString("sender"));
+				order.setSenderPhone(rs.getString("senderphone"));
+				order.setSenderEmail(rs.getString("senderemail"));
 				
 				orderList.add(order);
 			}
@@ -295,6 +301,9 @@ public class OrderDAO {
 				mainorder.setPhone(rs.getString("phone"));
 				mainorder.setStatus(rs.getString("status"));
 				mainorder.setTotal_price(rs.getInt("total_price"));
+				mainorder.setSender(rs.getString("sender"));
+				mainorder.setSenderPhone(rs.getString("senderphone"));
+				mainorder.setSenderEmail(rs.getString("senderemail"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
