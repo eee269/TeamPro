@@ -82,7 +82,7 @@ public class ProdQnaDAO {
 			PreparedStatement ps = null;
 			
 			try {
-				String sql = "DELETE FROM product_qna WHERE qna_num=?";
+				String sql = "DELETE FROM product_qna WHERE qna_re_ref=?";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, qna_num);
 				deleteCount = ps.executeUpdate();
