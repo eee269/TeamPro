@@ -4,6 +4,7 @@ import static db.JdbcUtil.*;
 import java.sql.Connection;
 
 import dao.product.ProdReviewDAO;
+import vo.ProdReviewBean;
 public class ProdReviewDeleteService {
 
 	public boolean removeArticle(int num) {
@@ -23,6 +24,18 @@ public class ProdReviewDeleteService {
 		
 		close(con);
 		return isDeleteSuccess;
+	}
+
+	public ProdReviewBean getReview(int num) {
+		
+		Connection con = getConnection();
+		ProdReviewDAO prodReviewDAO = ProdReviewDAO.getInstance();
+		prodReviewDAO.setConnection(con);
+		
+		ProdReviewBean prodReviewBean = prodReviewDAO.getReview(num);
+		
+		close(con);
+		return prodReviewBean;
 	}
 	
 }

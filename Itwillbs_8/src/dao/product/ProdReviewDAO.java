@@ -162,16 +162,18 @@ public class ProdReviewDAO {
 			if(pic == 0) {
 				switch (sort) {
 					case 0:
-						sql ="SELECT * "
-							+ "FROM product_review "
-							+ "WHERE product_basicCode=? AND product_img IS NOT NULL "
-							+ "ORDER BY re_ref desc, re_lev limit ?,?";
+						sql ="SELECT r.*, m.username "
+							+ "FROM product_review r JOIN member m "
+							+ "ON r.member_id = m.id "
+							+ "WHERE r.product_basicCode=? AND r.product_img IS NOT NULL "
+							+ "ORDER BY r.re_ref desc, r.re_lev limit ?,?";
 						break;
 					case 1:
-						sql ="SELECT * "
-							+ "FROM product_review "
-							+ "WHERE product_basicCode=? AND product_img IS NOT NULL "
-							+ "ORDER BY starScore desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT r.*, m.username "
+							+ "FROM product_review r JOIN member m "
+							+ "ON r.member_id = m.id "
+							+ "WHERE r.product_basicCode=? AND r.product_img IS NOT NULL "
+							+ "ORDER BY r.starScore desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 					default:
 						sql ="SELECT r.*, count(g.review_num) AS 'good' "
@@ -184,16 +186,18 @@ public class ProdReviewDAO {
 			}else if(pic == 1) {
 				switch (sort) {
 					case 0:
-						sql ="SELECT * "
-							+ "FROM product_review "
-							+ "WHERE product_basicCode=? AND product_img IS NULL "
-							+ "ORDER BY re_ref desc, re_lev limit ?,?";
+						sql ="SELECT r.*, m.username "
+							+ "FROM product_review r JOIN member m "
+							+ "ON r.member_id = m.id "
+							+ "WHERE r.product_basicCode=? AND r.product_img IS NULL "
+							+ "ORDER BY r.re_ref desc, r.re_lev limit ?,?";
 						break;
 					case 1:
-						sql ="SELECT * "
-							+ "FROM product_review "
-							+ "WHERE product_basicCode=? AND product_img IS NULL "
-							+ "ORDER BY starScore desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT r.*, m.username "
+							+ "FROM product_review r JOIN member m "
+							+ "ON r.member_id = m.id "
+							+ "WHERE r.product_basicCode=? AND r.product_img IS NULL "
+							+ "ORDER BY r.starScore desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 					default:
 						sql ="SELECT r.*, count(g.review_num) AS 'good' "
@@ -221,6 +225,7 @@ public class ProdReviewDAO {
 				review.setNum(rs.getInt("num"));
 				review.setRe_ref(rs.getInt("re_ref"));
 				review.setRe_lev(rs.getInt("re_lev"));
+				review.setR_username(rs.getString("username"));
 				
 				reviewList.add(review);
 			}
@@ -497,6 +502,34 @@ public class ProdReviewDAO {
 	}
 
 
+	public ProdReviewBean getReview(int num) {
+		// num 값으로 review 정보 가져오기
+		ProdReviewBean prodReviewBean = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT product_img FROM product_review WHERE num = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, num);
+			rs = ps.executeQuery();
+			
+			prodReviewBean = new ProdReviewBean();
+			if(rs.next()) {
+				prodReviewBean.setProduct_img(rs.getString(1));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ProdReviewDAO - getReview : "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(ps);
+		}
+	
+		return prodReviewBean;
+	}
+
+	
 	
 
 

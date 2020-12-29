@@ -46,7 +46,7 @@ public class ProdReviewWriteAction implements Action{
 		prodReviewBean.setStarScore(Integer.parseInt(multi.getParameter("starScore")));
 		prodReviewBean.setProduct_basicCode(multi.getParameter("basicCode"));
 		prodReviewBean.setMember_id(id);
-		prodReviewBean.setProduct_img(multi.getOriginalFileName("prw_file"));
+		prodReviewBean.setProduct_img(multi.getFilesystemName("prw_file"));
 		prodReviewBean.setContent(multi.getParameter("content"));
 		
 		ProdReviewWriteService prodReviewService = new ProdReviewWriteService();

@@ -74,7 +74,7 @@ $(document).ready(function() {
 		<div class="row">
 			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="size-301" id="how-pos7">
-				<div class="bookimg" id="bookmark" onclick="checkBook()">
+				<div class="bookimg" id="bookmark">
 					<img src="images/icons/bookmark_beforeG.png" onerror="this.style.display='none'"/>
 					<span class ="cl12 m-l-4 m-r-6 bookmark_count"></span>
 				</div>
@@ -156,7 +156,7 @@ $(document).ready(function() {
 								</a>
 					<%	}
 					}%>
-								<a href="CommList.co?page=<%=nowPage %>">
+								<a href="CommList.co">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									글목록
@@ -300,20 +300,18 @@ $(document).ready(function() {
 							<ul>
 								<%for(CommBean cb : articleList){ %>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
 										</a>
-	
-										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-												<%=cb.getSubject() %>
-											</a>
-	
-											<span class="stext-116 cl6 p-t-20">
-												<%=cb.getUsername() %>
-											</span>
-										</div>
-									</li>
+											<div class="size-215 flex-col-t p-t-8">
+												<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="stext-116 cl8 hov-cl1 trans-04">
+													<%=cb.getSubject() %>
+												</a>
+												<span class="stext-116 cl6 p-t-20">
+													<%=cb.getUsername() %>
+												</span>
+											</div>
+										</li>
 								<%} %>
 							</ul>
 						</div>
@@ -328,12 +326,12 @@ $(document).ready(function() {
 								
 								%>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/productUploadImg/<%=main[0]%>" alt="PRODUCT">
 										</a>
 	
 										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="stext-116 cl8 hov-cl1 trans-04">
 												<%=bestList.get(i).getName() %>
 											</a>
 											<span class="stext-116 cl6 p-t-20">
@@ -1005,22 +1003,11 @@ $(function(){
 		$("#bookmark").click(function(){
 			var id = '<%=id%>';
 			if(id=='null'){
-// 				swal({title:"٩(๑`^´๑)۶",
-// 					  text : "로그인이 필요한 서비스입니다!",
-// 					  type : "warning",
-// 					  showCancelButton : true,
-// 					  confirmButtonClass : "btn-danger",
-// 					  confirmButtonText : "로그인!",
-// 					  cancelButtonText : "아니오!",
-// 					  closeOnConfirm : false,
-// 					  closeOnCancel : true
-// 					},function(isConfirm){
-						if(!isConfirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
-							return;
-						}else{
-							location.href='MemberLoginForm.mo';
-						}
-// 					});
+				if(!confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
+					return;
+				}else{
+					location.href='MemberLoginForm.mo';
+				}
 			}else{
 				$.ajax({
 					url: "CommBook.co",
@@ -1043,7 +1030,7 @@ $(function(){
 	                },
 				})
 			}
-		})
+		});
 		
 		// 게시글 북마크 수
 	    function bookmarkCount() {

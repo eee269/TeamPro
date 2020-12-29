@@ -1091,7 +1091,7 @@ var productCode = "";
                                              +"<div id='PR15N01-modify'>"
                                                 +"<dl class='desc'>"
                                                 +"<dt class='first'>작성자</dt>"
-                                                   +"<dd class='re_name'>"+reply.id+"</dd>";
+                                                   +"<dd class='re_name'>"+reply.username+"</dd>";
                                     }else if(j == 1){
                                        output +=      "<dt>작성일</dt><dd class='re_date'>"+reply.date+"</dd>"
                                                    +"</dl>";
