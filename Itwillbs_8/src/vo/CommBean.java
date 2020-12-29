@@ -13,8 +13,14 @@ public class CommBean extends MemberBean{
 	private String img;
 	private int bookCount; // 북마크 갯수 체크 용으로 임시로 쓸 변수
 	private String m_img; // 유저 이미지 담을 임시 객체
+	private int commentCount; // 댓글 수 담을 객체
 	
-	
+	public int getCommentCount() {
+		return commentCount;
+	}
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
 	public String getM_img() {
 		return m_img;
 	}

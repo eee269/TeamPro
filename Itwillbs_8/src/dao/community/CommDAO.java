@@ -158,6 +158,7 @@ public class CommDAO {
 				article.setDate(rs.getTimestamp(6));
 				article.setImg(rs.getString(7));
 				article.setBookCount(rs.getInt("bookmark"));
+				article.setCommentCount(selectCommCount(rs.getInt(1)));
 				// 1개 게시물을 전체 게시물 저장 객체에 추가
 				articleList.add(article);
 				
@@ -173,6 +174,41 @@ public class CommDAO {
 		return articleList;
 	}
 	// --------------selectArticleList()---------------
+	// --------------selectCommCount()---------------
+	public int selectCommCount(int community_num) {
+		System.out.println("CommentDAO - selectCommCount()");
+		int listCount = 0;
+		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+			
+		try {
+			String sql = "SELECT COUNT(*) FROM community_reply where community_num=? and re_lev=0";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, community_num);
+			rs=pstmt.executeQuery();
+			
+			// 조회 결과가 있을 경우 (= 게시물이 하나라도 존재하는 경우)
+			// => 게시물 수를 listCount 에 저장
+			
+			if(rs.next()) {
+				listCount=rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("selectCommCount() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		} finally {
+			// 자원 반환
+			// 주의! DAO 클래스 내에서 Connection 객체 반환 금지!
+			close(rs);
+			close(pstmt);
+			
+		}		
+		
+		return listCount;
+	}
+	// --------------selectCommCount(username)---------------
 	// --------------selectArticleList(username)---------------
 		// 회원별 게시물 목록 조회
 		public ArrayList<CommBean> selectArticleList(String member_id){
