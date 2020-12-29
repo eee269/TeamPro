@@ -201,7 +201,12 @@ var productCode = "";
    function showlist(mixopt, productCode) {
       // 선택된 opt 수 가져와서 다음 번호 만들기
       // 선택된 옵션이 0개 -> resultcount = 1
-      var resultcount = $('ul#show-option li').length+1+'';
+      var resultcount;
+      if($('ul#show-option li').length == 0) {
+      	  resultcount = $('ul#show-option li').length+1+'';    	  
+      } else {
+    	  resultcount = Number($('ul#show-option li:last-child').attr('id').charAt(6))+1+'';
+      }
       
       // ul 뒤에 붙일 거라 li태그 들어가게 만들기
       var optcol=document.createElement('li');
@@ -217,7 +222,7 @@ var productCode = "";
       // 옵션 이름
           "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
       // 옵션 삭제 아이콘
-          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
+          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete(this.id)'>" + 
           "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
           // 옵션 수량 선택
           "<div class='size-204 flex-w flex-m respon6-next'>" + 
@@ -241,7 +246,7 @@ var productCode = "";
    function calculatePrice(id) {
       var totalprice = 0, itcnt = [];
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
-      var resultcount = $('ul#show-option li').length;
+      var resultcount = $('ul#show-option li:last-child').attr('id').charAt(id.length-1);
       
       console.log(resultcount);
       
@@ -257,8 +262,11 @@ var productCode = "";
          
          console.log(id);
         itcnt[s-1] = parseInt($('#'+id).val());
+//         if(itcnt[s-1] == null) {
+		if(isNaN(itcnt[s-1])){
+        	itcnt[s-1] = 0;
+        }
         console.log(itcnt[s-1]);
-        console.log(totalprice);
         console.log(itemprice);
       }
         
@@ -303,12 +311,32 @@ var productCode = "";
    }
 
    // 선택옵션삭제
-   function optDelete(li) {
-     console.log(li);
-//       var id = document.this.getElementsByName('num-product').id;
+   function optDelete(delId) {
+     console.log(delId);
+      var id = delId.replace('del', 'col');
      console.log(id);
-      $(li).remove();
-      calculatePrice(id);
+      $('li#' + id).remove();
+      
+//       var resultcount = $('ul#show-option li').length;
+   	  var numId = id.replace('col', 'num');
+   	  
+// 	  var liId = $('ul#show-option li:nth-child(1)').attr('id');
+// 	  if(resultcount == 1) {
+// 		  liId.replace(liId.charAt(liId.length-1), 1);
+// 		  $('ul#show-option li:nth-child(' + i + ')').attr('id', liId);
+// 	  } else if(resultcount > 1) {
+//    		  for(var i=liId.charAt(liId.length-1); i<=resultcount; i++) {   			  
+// 			  liId = $('ul#show-option li:nth-child(' + i + ')').attr('id');
+// 	   		  liId.replace(liId.charAt(liId.length-1), i);
+	   		  
+// 	   		  console.log(liId);
+	   		  
+// 	   		  $('ul#show-option li:nth-child(' + i + ')').attr('id', liId);
+	   		  
+// 	   		  console.log($('ul#show-option li:nth-child(' + i + ')').attr('id'));
+//    		  }
+//    	  }
+	  calculatePrice(numId);
    }
    
    // 옵션 관련 스크립트 끝
@@ -379,7 +407,6 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
-                  <%=main[0] %>
                   </div>
                </div>
             </div>
