@@ -65,8 +65,7 @@
 						<!-- //비밀번호 입력 -->
 						<div class="bbs-link pwd-link">
 							<a href="javascript:document.form1.submit();" class="CSSbuttonBlack">확인</a>
-							<a href="javascript:history.go(-1);" class="CSSbuttonWhite">취소하기</a>
-							<a href="/board/board.html?code=nasign&page=1&board_cate=" class="CSSbuttonWhite">목록보기</a>
+							<a href="javascript:history.go(-1);" class="CSSbuttonWhite">뒤로가기</a>
 						</div>
 						</form>          
 					</div>

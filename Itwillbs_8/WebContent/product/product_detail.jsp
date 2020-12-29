@@ -599,8 +599,8 @@ var productCode = "";
                         </h2>
                         <ul class="sort">
                            <li class="now" value="date"><a href="javascript:getReplyCall();">최신 순</a></li>
-                           <li value="score"><a href="javascript:getReplyCall('','1');">평점 순</a></li>
-                           <li value="good"><a href="javascript:getReplyCall();">추천 순</a></li>
+                           <li value="score"><a href="javascript:getReplyCall('','1');">별점 순</a></li>
+                           <li value="good"><a href="javascript:getReplyCall('','2');">좋아요 순</a></li>
                         </ul>
                      </div>
                <div class="tabs">
@@ -684,8 +684,8 @@ var productCode = "";
                      <tr class="MS_qna_content_box cnt2" id="qna_board_block1" style="display: none;">
                         <td colspan="6">
                            <div class="tb-left">
-                              <div class="qna_board_content">
-                                 <img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 50px; max-width: 50px;">
+                              <div class="qna_board_content" >
+                                 <img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 100px; max-width: 800px; object-fit:cover;" >
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
@@ -1347,7 +1347,7 @@ var productCode = "";
       }
    }); // tabs click function end
    
-   // 최신순, 호감순, 추천순 정렬 기능 탭
+   // 최신순, 호감순, 추천순 탭 css
     $('.sort li').click(function(){
       if (!$(this).hasClass(this)) {
          $('.sort li').removeClass('now');

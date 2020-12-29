@@ -176,11 +176,13 @@ public class ProdReviewDAO {
 							+ "ORDER BY r.starScore desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 					default:
-						sql ="SELECT r.*, count(g.review_num) AS 'good' "
-							+ "FROM product_review r JOIN review_good g "
-							+ "ON r.num = g.review_num "
-							+ "WHERE r.product_basicCode=? AND r.product_img IS NOT NULL "
-							+ "ORDER BY good desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT r.*, count(g.review_num) AS 'good', m.username "
+							+ "FROM product_review r LEFT JOIN review_good g "
+							+ "ON r.num = g.review_num LEFT JOIN member m "
+							+ "ON r.member_id = m.id "
+							+ "GROUP BY r.num "
+							+ "HAVING r.product_basicCode=? AND r.product_img IS NOT NULL "
+							+ "ORDER BY good desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 				}
 			}else if(pic == 1) {
@@ -200,11 +202,13 @@ public class ProdReviewDAO {
 							+ "ORDER BY r.starScore desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 					default:
-						sql ="SELECT r.*, count(g.review_num) AS 'good' "
-								+ "FROM product_review r JOIN review_good g "
-								+ "ON r.num = g.review_num "
-								+ "WHERE r.product_basicCode=? AND r.product_img IS NULL "
-								+ "ORDER BY good desc, re_ref, re_lev desc limit ?,?";
+						sql ="SELECT r.*, count(g.review_num) AS 'good', m.username "
+								+ "FROM product_review r LEFT JOIN review_good g "
+								+ "ON r.num = g.review_num LEFT JOIN member m "
+								+ "ON r.member_id = m.id "
+								+ "GROUP BY r.num "
+								+ "HAVING r.product_basicCode=? AND r.product_img IS NULL "
+								+ "ORDER BY good desc, r.re_ref, r.re_lev desc limit ?,?";
 						break;
 				}
 			}
