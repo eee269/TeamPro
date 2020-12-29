@@ -45,6 +45,7 @@ public class MemberNaverLoginAction implements Action {
 		
 		if(isMember) {
 			session.setAttribute("member_id", id);	
+			forward.setPath("Main.go");
 		} else {
 			MemberBean member = new MemberBean();
 			member.setId(id);
