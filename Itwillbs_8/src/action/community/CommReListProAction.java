@@ -40,7 +40,7 @@ public class CommReListProAction implements Action {
 
 			
 		String json="";
-		// 리뷰 총 갯수 카운트
+		// 리뷰 원글 갯수 카운트
 		int listCount = commReListService.getCommCount(community_num);
 		System.out.println("listCount??"+listCount);	
 //		// i값(포토 유무)에 따른 리뷰 목록 호출

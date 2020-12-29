@@ -190,7 +190,7 @@ public class ProdQnaDAO {
 				
 				if(rs.next()) {
 					productBean.setName(rs.getString(1));
-					productBean.setMain_img(rs.getString(2));
+					productBean.setMain_img(rs.getString(2).substring(0, rs.getString(2).indexOf("/")));
 					productBean.setPrice(rs.getInt(3));
 				}
 				

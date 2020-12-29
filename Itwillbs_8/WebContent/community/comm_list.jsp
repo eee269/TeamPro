@@ -44,7 +44,7 @@
 					</button>
 					
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="bookmark" onclick="javascript:commSort('bookmark');">
-						추천순
+						북마크순
 					</button>
 
 				</div>
@@ -80,7 +80,8 @@
 
 <!-- ---------------------------Content page--------------------------- -->
 			<div class="row isotope-grid">
-				<%for(int i  = 0 ; i < articleList.size(); i++) { %>
+				<%for(int i  = 0 ; i < articleList.size(); i++) { 
+					int c = articleList.get(i).getCommentCount(); %>
 					<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
 						<!-- Block2 -->
 						<div class="block2">
@@ -96,7 +97,7 @@
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="CommDetail.co?num=<%=articleList.get(i).getNum() %>&page=<%=nowPage %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										<%=articleList.get(i).getSubject() %>
+										<%=articleList.get(i).getSubject() %> <span><%=(c > 0 ? "("+c+")" : "")%></span>
 									</a>
 									<div class="stext-105 cl3 w-full">
 										<span>
@@ -163,8 +164,10 @@
 	                	var path = $('.bookimg'+num).children("img");
 	                	path.attr("src",function(index,attr){
 	                		if(attr.match('before')){
+	                			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
 	                			return attr.replace("before","after");
 	                		}else{
+	                			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
 	                			return attr.replace("after","before");
 	                		}
 	                	});
@@ -197,6 +200,7 @@
 			})
 		};
 		bookmarkCount();
+		
 </script>
 <script type="text/javascript">
 	// 비회원 글쓰기 클릭 시 로그인 유도 
