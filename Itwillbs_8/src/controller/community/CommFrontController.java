@@ -17,6 +17,7 @@ import action.community.CommDetailAction;
 import action.community.CommListAction;
 import action.community.CommModifyFormAction;
 import action.community.CommModifyProAction;
+import action.community.CommReCountProAction;
 import action.community.CommReDeleteProAction;
 import action.community.CommReListProAction;
 import action.community.CommReModifyProAction;
@@ -227,6 +228,15 @@ public class CommFrontController extends HttpServlet {
 		}else if (command.equals("/CommReListPro.co")) {
 			// 원댓글 가져오기
 			action = new CommReListProAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if (command.equals("/CommReCountProAction.co")) {
+			// 원댓글 총갯수 카운트
+			action = new CommReCountProAction();
 			try {
 				forward = action.execute(request, response);
 			} catch (Exception e) {

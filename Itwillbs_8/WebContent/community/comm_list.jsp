@@ -44,7 +44,7 @@
 					</button>
 					
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" id="bookmark" onclick="javascript:commSort('bookmark');">
-						추천순
+						북마크순
 					</button>
 
 				</div>
@@ -163,8 +163,10 @@
 	                	var path = $('.bookimg'+num).children("img");
 	                	path.attr("src",function(index,attr){
 	                		if(attr.match('before')){
+	                			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
 	                			return attr.replace("before","after");
 	                		}else{
+	                			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
 	                			return attr.replace("after","before");
 	                		}
 	                	});
