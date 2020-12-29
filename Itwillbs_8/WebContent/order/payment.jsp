@@ -49,7 +49,7 @@ $(function(){
 	    buyer_email : '<%=buyer_email%>',
 	    buyer_name : '<%=buyer_name%>',
 	    buyer_tel : '<%=buyer_tel%>',
-	    buyer_addr : '<%=buyer_addr+" "+detailAddr%>',
+	    buyer_addr : '<%=buyer_addr+"_"+detailAddr%>',
 	    buyer_postcode : '<%=buyer_postcode%>',
 	}, function(rsp) {
 	    if ( rsp.success ) {
@@ -86,7 +86,7 @@ $(function(){
 	    $("#buyer_tel").attr('value','<%=buyer_tel%>');
 	    $("#buyer_email").attr('value','<%=buyer_email%>');
 	    $("#buyer_postcode").attr('value','<%=buyer_postcode%>');
-	    $("#buyer_addr").attr('value','<%=buyer_addr+" "+detailAddr%>');
+	    $("#buyer_addr").attr('value','<%=buyer_addr+"_"+detailAddr%>');
 			$("#paid_amount").attr('value', rsp.paid_amount);
 			$("#status").attr('value', rsp.status);
 			$("#name").attr('value', '<%=name%>');
