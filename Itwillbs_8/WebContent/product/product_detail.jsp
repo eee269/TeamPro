@@ -316,26 +316,7 @@ var productCode = "";
       var id = delId.replace('del', 'col');
      console.log(id);
       $('li#' + id).remove();
-      
-//       var resultcount = $('ul#show-option li').length;
    	  var numId = id.replace('col', 'num');
-   	  
-// 	  var liId = $('ul#show-option li:nth-child(1)').attr('id');
-// 	  if(resultcount == 1) {
-// 		  liId.replace(liId.charAt(liId.length-1), 1);
-// 		  $('ul#show-option li:nth-child(' + i + ')').attr('id', liId);
-// 	  } else if(resultcount > 1) {
-//    		  for(var i=liId.charAt(liId.length-1); i<=resultcount; i++) {   			  
-// 			  liId = $('ul#show-option li:nth-child(' + i + ')').attr('id');
-// 	   		  liId.replace(liId.charAt(liId.length-1), i);
-	   		  
-// 	   		  console.log(liId);
-	   		  
-// 	   		  $('ul#show-option li:nth-child(' + i + ')').attr('id', liId);
-	   		  
-// 	   		  console.log($('ul#show-option li:nth-child(' + i + ')').attr('id'));
-//    		  }
-//    	  }
 	  calculatePrice(numId);
    }
    
@@ -375,6 +356,28 @@ var productCode = "";
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
+	   <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a> 
+				<% switch(productDetailList.get(0).getXcode()) {
+				case "CLOTHES": %>
+					<a href="ProductShop.po?type=X&xcode=CLOTHES" class="stext-109 cl8 hov-cl1 trans-04"> CLOTHES
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+					break;
+				case "BAGS": %>
+					<a href="ProductShop.po?type=X&xcode=BAGS" class="stext-109 cl8 hov-cl1 trans-04"> BAGS
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+					break;
+				default: %>
+					<a href="ProductShop.po?type=X&xcode=SHOES" class="stext-109 cl8 hov-cl1 trans-04"> SHOES
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+				}
+			 %>
+			<span class="stext-109 cl4"> <%=productDetailList.get(0).getName() %> </span>
+		</div><br><br><br>
       <!-- 폼 -->
       <!-- 폼 -->
       <div class="row">
