@@ -13,7 +13,14 @@ public class ProdReviewBean {
 	private String member_id;
 	private Timestamp date;
 	private String product_img;
+	private String r_username; // 유저 닉네임 다음 객체
 	
+	public final String getR_username() {
+		return r_username;
+	}
+	public final void setR_username(String r_username) {
+		this.r_username = r_username;
+	}
 	public int getNum() {
 		return num;
 	}

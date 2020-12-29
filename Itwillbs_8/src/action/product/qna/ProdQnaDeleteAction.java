@@ -1,7 +1,9 @@
 package action.product.qna;
 
+import java.io.File;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -10,6 +12,7 @@ import action.Action;
 import svc.member.MemberLoginProService;
 import svc.product.qna.ProdQnaService;
 import vo.ActionForward;
+import vo.ProdQnaBean;
 
 public class ProdQnaDeleteAction implements Action {
 
@@ -50,6 +53,17 @@ public class ProdQnaDeleteAction implements Action {
 				out.println("history.back()");
 				out.println("</script>");
 			}else {
+				ProdQnaBean prodReviewBean = prodQnaService.getQna(qna_num);
+				
+				ServletContext context = request.getServletContext();
+				
+				//db 데이터 삭제 성공 시 실제 저장된 이미지 삭제
+				String saveFolder = "upload/prodReviewUpload";
+				String realFolder = context.getRealPath(saveFolder);
+				
+				String img = prodReviewBean.getQna_file();
+				File f = new File(realFolder + "/" + img);
+				if(f.exists()) {f.delete();}
 				// 삭제 성공 시
 				forward = new ActionForward();
 				forward.setPath("ProductDetail.po?basicCode="+request.getParameter("basicCode"));
