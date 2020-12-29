@@ -43,15 +43,10 @@ public class OrderProAction implements Action {
 		ob.setMember_id(member_id);
 		ob.setDate(date);
 		ob.setTotal_price(Integer.parseInt(request.getParameter("paid_amount")));
+		ob.setSender(request.getParameter("name"));
+		ob.setSenderPhone(request.getParameter("phone"));
+		ob.setSenderEmail(request.getParameter("buyer_email"));
 
-//		System.out.println(ob.getCode());
-//		System.out.println(ob.getName());
-//		System.out.println(ob.getPhone());
-//		System.out.println(ob.getAddress());
-//		System.out.println(ob.getStatus());
-//		System.out.println(ob.getPayment());
-//		System.out.println(ob.getMember_id());
-//		System.out.println(ob.getDate());
 
 		
 		OrderProService orderService = new OrderProService();

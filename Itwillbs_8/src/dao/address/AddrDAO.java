@@ -158,7 +158,7 @@ public class AddrDAO {
 			String sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setInt(1, 0);
-			p.setString(2, null);
+			p.setString(2, "기본배송지");
 			p.setString(3, postcode);
 			p.setString(4, address);
 			p.setNString(5, detailAddress);

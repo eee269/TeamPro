@@ -124,8 +124,8 @@ if(order.size() == 0) {
 		%>
 					<tr>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getCode() %></div></td>
-									<td scope="row"><div class="tb-center"><%=order.get(i).getName() %></div></td>
-									<td scope="row"><div class="tb-center"><%=order.get(i).getPhone() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getSender() %></div></td>
+									<td scope="row"><div class="tb-center"><%=order.get(i).getSenderPhone() %></div></td>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getAddress() %></div></td>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getDate() %></div></td>
 									<td scope="row"><div class="tb-center"><%=order.get(i).getPayment() %></div></td>
