@@ -132,7 +132,9 @@ public class AddrDAO {
 				JSONObject addr = new JSONObject();
 				
 				addr.put("postcode", rs.getString(1));
-				addr.put("address", rs.getString(2));
+				int index = rs.getString(2).indexOf("_");
+				addr.put("address", rs.getString(2).substring(0,index));
+				addr.put("detailAddress",rs.getString(2).substring(index+1));
 				
 				recentAddr.add(addr);
 			}

@@ -19,6 +19,7 @@ DBCP(DataBase Connection Pool) 설정
   maxActive="최대 동시 대여 가능한 커넥션 갯수"
   maxIdle="최대 보유 가능한 유휴 커넥션 갯수"
  -->
+ 
 	<Resource
 		name="jdbc/MySQL"
       auth="Container"
@@ -30,6 +31,18 @@ DBCP(DataBase Connection Pool) 설정
       url="jdbc:mysql://itwillbs8.cafe24.com:3306/itwillbs8"
       maxActive="500"
       maxIdle="20" />
+      
+<!--       	<Resource -->
+<!-- 		name="jdbc/MySQL" -->
+<!--       auth="Container" -->
+<!--       type="javax.sql.DataSource" -->
+<!--       username="team" -->
+<!--       password="teampro1" -->
+<!--       driverClassName="com.mysql.jdbc.Driver" -->
+<!--       factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" -->
+<!--       url="jdbc:mysql://3.35.82.26:3306/teampro?useSSL=false" -->
+<!--       maxActive="500" -->
+<!--       maxIdle="20" /> -->
       
 <!-- 		username="team" 공유 계정 -->
 <!-- 		url="jdbc:mysql://3.35.82.26:3306/teampro" 공유 url -->
