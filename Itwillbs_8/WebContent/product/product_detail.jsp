@@ -1158,20 +1158,20 @@ var productCode = "";
                                          if(reply.id == member_id){
                                           output +=      "<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
                                            output +=      "<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
-                                                         +"<a href='javascript:prm_modify("+reply.num+")'>"
+                                                         +"<a href='javascript:prm_modify("+reply.num+")' id='btnReModify"+reply.num+"'>"
                                                             +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
                                                       +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
                                                          +"수정"
                                                    +"</div>"
                                                          +"</a>"
+                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                           +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
                                                          +"<a href='javascript:prd_review("+reply.num+")'>"
                                                             +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
                                                       +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
                                                          +"삭제"
                                                    +"</div>"
                                                          +"</a>"
-                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
-                                                           +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
                                              +"</div>";
                                        }   
                                          if(member_id == 'admin'){
@@ -1384,6 +1384,7 @@ var productCode = "";
          $('#prm_form'+num+' textarea').css('border','1px solid black');
          $('#prm_form'+num+' #prm_file').prop('type','file');
          $('#prm_form'+num+' #prm_submit').prop('type','button');
+         $('#btnReModify'+num).css('display','none');
    } // end prm_modify
 
 // 상품 리뷰 수정 처리
