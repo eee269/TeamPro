@@ -40,7 +40,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-
 <!-- TAB기능 스타일 -->
 <style>
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -643,6 +642,8 @@ var productCode = "";
                   <div class="signup-cont"></div>
                   <div class="signin-cont" style="display:none;"></div>
                </div>
+               <div id="image_view_load"></div>
+               <a class="fancybox" href="#inline"></a>
                <!-- ------------------------------상품리뷰---------------------------------------  -->
             </div>
             <!-- #powerReview-->
@@ -676,7 +677,18 @@ var productCode = "";
                      </tr>
                   </thead>
                   <%
-                     for (int i = 0; i < qnaList.size(); i++) {
+                  if(qnaList.size()==0){
+                  %>
+              	  <tbody>
+                     <tr class="nbg">
+                     	<td colspan="6" style="padding: 50px 20px; text-align: center; font-size: 15px;">
+                        	<span>qna 글이 없습니다!</span>
+                        </td>
+                     </tr>
+                     </tbody>
+                  <%}%>
+                  
+                     <%for (int i = 0; i < qnaList.size(); i++) {
                         if(qnaList.get(i).getQna_re_seq()==0){
                   %>
                   <tbody>
@@ -715,7 +727,9 @@ var productCode = "";
                         <td colspan="6">
                            <div class="tb-left">
                               <div class="qna_board_content" >
+                              <%if(qnaList.get(i).getQna_file() !=null){ %>
                                  <img src="upload/prodQnaUpload/<%=qnaList.get(i).getQna_file() %>" alt="<%=qnaList.get(i).getQna_file() %>" onerror="this.style.display='none'" style="max-height: 100px; max-width: 800px; object-fit:cover;" >
+                                 <%} %>
                                  <div style="padding-bottom: 15px; padding-left: 80px; padding-right: 15px; padding-top: 15px">
                                     <%=qnaList.get(i).getQna_content() %>
                                  </div>
@@ -1072,6 +1086,25 @@ var productCode = "";
                          var replyList = newJson.replyList;
                          var output = "";
                          output += "<ul class='PR15N01-review-wrap'>";
+                         
+                         if(!replyList.length){
+                       	 	output += 	"<div style='padding: 50px 20px; text-align: center; font-size: 15px; border-bottom: 1px solid #d7d7d7;' >"
+                       	 		 			+"<li class='power-review-list-box' >"
+                        	 					+"상품 리뷰가 없습니다!"
+                        	 				+"</li>"
+                       	 				+"</div>"
+                        	 			+"</ul>";
+                        	 
+                       		 if(key == 0){
+		                         $(".signup-cont").html(output);
+		                         $(".photoReview_count").html(0);
+                       		 }
+                        	 if(key ==1){
+		                         $(".signin-cont").html(output);
+		                         $(".review_count").html(0);
+                        	 }
+                         totalReview_count = (0);
+                         }else{
                          // 포토 또는 일반 전체 리뷰에 대한 반복문
                          for (var i = 0; i < replyList.length; i++) {
                             var isImg = false;
@@ -1130,6 +1163,8 @@ var productCode = "";
                                                        +"<div class='star-icon'>"
                                                          +"<input type='number' name='starScore' class='rating' id='rating-readonly' data-clearable='remove' value='"+reply.starScore+"' data-readonly/>"
                                                       +"</div>"
+                                                       +"<div id='starScoreTest"+reply.num+"'>"
+                                                      +"</div>"
                                                     +"</div>";
                                     }else if(j == 3){
                                        output +=    "<div class='pr-options' style='display: none;'>"
@@ -1146,9 +1181,9 @@ var productCode = "";
                                        output +=    "<div class='photo-list'>"
                                                    +"<ul>"
                                                       +"<li>"
-                                                         +"<a href='javascript:power_review_view_show("+reply.num+", '00000', '0', 'detail');''>"
-                                                            +"<img src='upload/prodReviewUpload/"+reply.product_img +"'>"
-                                                         +"</a>"
+                                                         +"<div id='viewDetail'>"
+                                                            +"<img src='upload/prodReviewUpload/"+reply.product_img +"' id='re_img'>"
+                                                         +"</div>"
                                                          +"<div class='attach-preview'></div>"
                                                       +"</li>"
                                                    +"</ul>"
@@ -1188,20 +1223,20 @@ var productCode = "";
                                          if(reply.id == member_id){
                                           output +=      "<input type='hidden' name='prm_file' class='trick file-attach' id='prm_file'>";
                                            output +=      "<div class='flex-w flex-r m-t-10 m-r-40 p-b-0' >"
-                                                         +"<a href='javascript:prm_modify("+reply.num+")'>"
+                                                         +"<a href='javascript:prm_modify("+reply.num+")' id='btnReModify"+reply.num+"'>"
                                                             +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
                                                       +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
                                                          +"수정"
                                                    +"</div>"
                                                          +"</a>"
+                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
+                                                           +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
                                                          +"<a href='javascript:prd_review("+reply.num+")'>"
                                                             +"<div class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn'>"
                                                       +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
                                                          +"삭제"
                                                    +"</div>"
                                                          +"</a>"
-                                                   +"<i class='cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none'></i>"
-                                                           +"<input type='hidden' id='prm_submit' value='완료' class='flex-c-m stext-109 cl6 size-126 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none' onclick='javascript:prm_modifySub("+reply.num+")'>"
                                              +"</div>";
                                        }   
                                          if(member_id == 'admin'){
@@ -1281,6 +1316,7 @@ var productCode = "";
                      }
                   } // if replyList != null end
                  } // 첫 번째 key in for문
+                } // if(!reviewList) => else{} end
                $(".totalReview_count").html(totalReview_count);
             }, // success end
            error: function(request,status,error){
@@ -1330,7 +1366,7 @@ var productCode = "";
                  var starChart = "";
                  
                for(key in star){
-               if(key > 2){
+               if(key > 3){
                   starLike += star[key]*1;
                }
                  score += key*star[key]*1;
@@ -1414,8 +1450,10 @@ var productCode = "";
          $('#prm_form'+num+' textarea').css('border','1px solid black');
          $('#prm_form'+num+' #prm_file').prop('type','file');
          $('#prm_form'+num+' #prm_submit').prop('type','button');
+         $('#btnReModify'+num).css('display','none');
+//          Plugin();
    } // end prm_modify
-
+   
 // 상품 리뷰 수정 처리
 function prm_modifySub(num){
    var form = $('#prm_form'+num)[0];
@@ -1721,15 +1759,6 @@ function showReply(num){
     }
      
         
-</script>
-<script type="text/javascript"
-  src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
-<link rel="stylesheet" type="text/css"
-  href="fancybox/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-<script type="text/javascript">
-$(document).ready(function() {
-   $('.fancybox').fancybox();
-});
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="vendor/jquery/jquery-3.2.1.min.js"></script>

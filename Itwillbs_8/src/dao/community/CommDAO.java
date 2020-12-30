@@ -519,6 +519,7 @@ public class CommDAO {
 		
 		// -------------------------- 마이페이지 > 내 북마크 > 북마크된 게시글 리스트 --------------------------------
 		public ArrayList<CommBean> selectMybookArticleList(String member_id) {
+			System.out.println("selectMybookArticleList");
 			ArrayList<CommBean> list = new ArrayList<CommBean>();
 			
 			PreparedStatement ps = null;
@@ -532,7 +533,11 @@ public class CommDAO {
 				rs = ps.executeQuery();
 				
 				while(rs.next()) {
-					sql = "SELECT * FROM community WHERE num = ?";
+					sql = "SELECT c.*, m.username "
+							+ "FROM community c JOIN member m "
+							+ "ON c.member_id = m.id "
+							+ "WHERE num = ?";
+					
 					ps = con.prepareStatement(sql);
 					ps.setInt(1, rs.getInt(1));
 					rs2 = ps.executeQuery();
@@ -548,7 +553,8 @@ public class CommDAO {
 						article.setDate(rs2.getTimestamp("date"));
 						article.setImg(rs2.getString("img"));
 						article.setReadCount(rs2.getInt("readcount"));
-						
+						article.setUsername(rs2.getString("username"));
+
 						list.add(article);
 					}
 				}

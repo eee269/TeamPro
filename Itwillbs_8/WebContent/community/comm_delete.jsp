@@ -12,6 +12,9 @@
 		</script>
 		<%
 	}
+	
+	String nowPage = request.getParameter("page");
+	if(nowPage!=null){nowPage="1";} // 마이페이지 통해 들어올 경우 null 대신 1 값 줌
 %>
     <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
@@ -61,7 +64,7 @@
 		<div class="bbs-link pwd-link">
 			<a href="javascript:document.form1.submit();" class="CSSbuttonBlack">확인</a>
 			<a href="javascript:history.go(-1);" class="CSSbuttonWhite">취소하기</a>
-			<a href="CommList.co" class="CSSbuttonWhite">목록보기</a>
+			<a href="CommList.co?page<%=nowPage %>" class="CSSbuttonWhite">목록보기</a>
 		</div>
 		</form>          
 	</div>	

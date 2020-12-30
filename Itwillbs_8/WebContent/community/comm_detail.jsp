@@ -13,6 +13,7 @@
 CommBean article = (CommBean) request.getAttribute("article");
 ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 String nowPage = request.getParameter("page");
+if(nowPage==null){nowPage="1";} // 마이페이지 통해 들어올 경우 null 대신 1 값 줌
 
 ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
 DecimalFormat priceFormat = new DecimalFormat("###,###");
@@ -156,7 +157,7 @@ $(document).ready(function() {
 								</a>
 					<%	}
 					}%>
-								<a href="CommList.co">
+								<a href="CommList.co?page=<%=nowPage%>">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									글목록

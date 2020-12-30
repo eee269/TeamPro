@@ -72,7 +72,6 @@ public class ProdReviewListAction implements Action {
 				String product_img = reviewList.get(j).getProduct_img();
 				int re_ref = reviewList.get(j).getRe_ref();
 				String username = reviewList.get(j).getR_username();
-				System.out.println(id+":"+username);
 				
 				// 추천 수 가져오기
 				for(int k =0; k < 2; k++) {

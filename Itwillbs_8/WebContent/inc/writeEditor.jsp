@@ -16,7 +16,7 @@
 	 			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
 	 			    ['color', ['forecolor','color']],
 	 			    ['table', ['table']],
-	 			    ['para', ['ul', 'ol', 'paragraph']],
+	 			    ['para', ['paragraph']],
 	 			    ['height', ['height']],
 	 			    ['insert',['picture','link','video']],
 // 	 			    ['view', ['fullscreen', 'help']]

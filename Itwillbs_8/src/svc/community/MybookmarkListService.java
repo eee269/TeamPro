@@ -12,6 +12,7 @@ import vo.CommBean;
 public class MybookmarkListService {
 
 	public ArrayList<CommBean> getMybookArticleList(String member_id) {
+		System.out.println("MybookmarkListService");
 		ArrayList<CommBean> list = new ArrayList<CommBean>();
 		
 		Connection con = getConnection();
