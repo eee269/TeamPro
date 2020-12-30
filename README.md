@@ -49,7 +49,6 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 # Member
 <img src="https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif" align="right" width="30%">
 
-## Features
 This is an Android Library for multiple snapping of RecyclerView.
 MultiSnapRecyclerView easily provides a snapping feature to your recycler view. 
 What this does are clean, neat, and powerful.
