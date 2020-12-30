@@ -17,6 +17,11 @@
 img:hover {
 	cursor: pointer;
 }
+
+.productImg {
+	width: 250px;
+	max-height: 250px;
+}
 </style>
 
 
@@ -107,9 +112,8 @@ if(articleList.size() == 0) {
 		if(i%j == 0){
 			%><tr style="height: 350px"><%
 		}
-		String[] img = article.getImg().split("/");
-		%><td>
-			<img alt="productImg" src="communityUpload/<%=img[0]%>" width="250px" height="250px"
+		%> <td>
+			<img alt="productImg" src="upload/commUpload/<%=article.getImg()%>" class="productImg"
 				onerror="src='loading.png'" onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'"><br>
 			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=article.getSubject()%></span>&nbsp;&nbsp;&nbsp;
 			<span class="stext-105 cl3"><%=article.getUsername() %></span><br>
