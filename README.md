@@ -2,6 +2,14 @@
 ![indexGIF2](https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif)<br/>
 * #OOTD는 쇼핑몰과 커뮤니티를 결합한 웹애플리케이션 프로젝트입니다. 
 ---
+# 개발 환경
+* JDK 8
+* MVC
+* Tomcat 8.0
+* eclipse EE
+* HTML, CSS, JS
+* MySQL
+---
 # Team Members
 * **정수진**
     * **Github** - (https://github.com/jeongsujin001)
@@ -24,14 +32,6 @@
 * **이세용**
     * **Github** - (https://github.com/xeyong)
     * **Mail** - <recruyong@gmail.com>       
----
-# 개발 환경
-* JDK 8
-* MVC
-* Tomcat 8.0
-* eclipse EE
-* HTML, CSS, JS
-* MySQL
 ---
 # Main
 ## Image
