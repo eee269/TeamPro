@@ -47,20 +47,6 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
     * **Mail** - <recruyong@gmail.com>       
 ---
 # Member
-<img src="https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif" align="right" width="30%">
-
-This is an Android Library for multiple snapping of RecyclerView.
-MultiSnapRecyclerView easily provides a snapping feature to your recycler view. 
-What this does are clean, neat, and powerful.
-<br/>
-- [x] gravitated snapping to `start` `end` and `center`.
-- [x] `snap count` to specify the number of items to scroll over.
-- [x] supports horizontal and vertical scrolling.
-- [x] listener to be called when snapped.
-- [x] sample code.
-- [ ] support reverse layout.
-
-<strong>Make sure to use LinearManger.</strong> Other managers are not supported.
 
 # Product
 
