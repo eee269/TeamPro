@@ -53,6 +53,7 @@ public class OrderAction implements Action {
 			System.out.println("Action List : "+cartList.get(i).getOpt_productCode());
 		}
 		
+
 		forward = new ActionForward();
 		forward.setPath("/order/order.jsp");
 		request.setAttribute("cartList", cartList);

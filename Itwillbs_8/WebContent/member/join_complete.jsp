@@ -75,7 +75,7 @@ function pValue(){
 							
 							<div class="btnArea join-footer">
 								<div class="center">									
-									<a href="Main.go" class="cbtn form">메인화면</a>
+									<a href="MemberLoginForm.mo" class="cbtn form">로그인</a>
 								</div>
 							</div>
 						</div>

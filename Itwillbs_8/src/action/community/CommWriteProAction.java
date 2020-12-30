@@ -50,7 +50,7 @@ public class CommWriteProAction implements Action {
 		commBean.setMember_id(member_id);
 		commBean.setSubject(multi.getParameter("subject"));
 		commBean.setContent(multi.getParameter("content"));
-		commBean.setImg(multi.getOriginalFileName("img"));
+		commBean.setImg(multi.getFilesystemName("img"));
 		// -------------------------------------------------------------------------------------
 		// 서비스 클래스를 통해 실제 글 등록 작업 수행을 위한 요청
 		CommWriteProService commWriteProService = new CommWriteProService();

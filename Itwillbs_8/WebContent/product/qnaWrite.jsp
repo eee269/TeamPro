@@ -42,7 +42,7 @@
                         </div>
 						<dl class="prd-tinfo">
                             <dt>
-                                <img src="upload/prodQnaUpload/<%=productBean.getMain_img() %>" onerror="this.src='images/icons/angry_face.png'" />
+                                <img src="upload/productUploadImg/<%=productBean.getMain_img() %>" />
                             </dt>
                             <dd>
                                 <ul>

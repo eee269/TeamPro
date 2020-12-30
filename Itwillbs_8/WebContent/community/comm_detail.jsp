@@ -18,6 +18,9 @@ ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("
 DecimalFormat priceFormat = new DecimalFormat("###,###");
 
 //==============댓글시작==============//
+// 댓글 총갯수 가져오기
+// int reListCount = (int)request.getAttribute("reListCount");
+
 // 전달받은 request 객체로부터 데이터 가져오기
 ArrayList<CommReBean> commentList = (ArrayList<CommReBean>) request.getAttribute("commentList");
 
@@ -32,7 +35,11 @@ SimpleDateFormat sdfYMD = new SimpleDateFormat("yy-MM-dd HH:mm");
 
 %>
 <jsp:include page="../inc/header.jsp" />
-
+<style>
+.paging a {
+    padding: 0 2px !important;
+}
+</style>
 <script type="text/javascript"
 	src="fancybox/source/jquery.fancybox.js?v=2.1.5"></script>
 <link rel="stylesheet" type="text/css"
@@ -67,20 +74,22 @@ $(document).ready(function() {
 		<div class="row">
 			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="size-301" id="how-pos7">
-				<div class="bookimg" id="bookmark" onclick="checkBook()">
+				<div class="bookimg" id="bookmark">
 					<img src="images/icons/bookmark_beforeG.png" onerror="this.style.display='none'"/>
 					<span class ="cl12 m-l-4 m-r-6 bookmark_count"></span>
 				</div>
-				<div class="bubbleimg">
-					<img src="images/icons/bubble_before.png" onerror="this.style.display='none'"/>
-					<span class="cl12 m-l-4 m-r-6">0</span>
-				</div>
+<!-- 				<a href="#comment_view"> -->
+					<div class="bubbleimg">
+						<img src="images/icons/bubble_before.png" onerror="this.style.display='none'"/>
+						<span class="cl12 m-l-4 m-r-6 reCount">0</span>
+					</div>
+<!-- 				</a> -->
 			</div>
 			<!-- 좌측 사이드 메뉴(북마크, 댓글) -->
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<!-- 게시물 썸네일 -->
-					<div class="how-pos5-parent">
+					<div class="how-pos6-parent">
 						<img src="upload/commUpload/<%=article.getImg()%>" alt="<%=article.getImg()%>" onerror="this.style.display='none'">
 					</div>
 					<div class="p-t-32">
@@ -90,8 +99,8 @@ $(document).ready(function() {
 						</h4>
 						<span class="flex-w flex-m stext-111 cl2 p-b-19"> 
 							<!-- 게시물 썸네일 -->
-							<span class="m-b-30 m-r-8">
-								<span class="cl4 size-214 mProfile"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
+							<span class="m-b-49 mProfile">
+								<span class="cl4"><img src="upload/commUpload/<%=article.getM_img() %>" alt="<%=article.getM_img()%>"
 								onerror="this.src='images/noProfile.png'"></span> 
 							</span> 
 							<span>
@@ -147,7 +156,7 @@ $(document).ready(function() {
 								</a>
 					<%	}
 					}%>
-								<a href="CommList.co?page=<%=nowPage %>">
+								<a href="CommList.co">
 									<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 									<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									글목록
@@ -159,7 +168,8 @@ $(document).ready(function() {
 <!-- 								</div> -->
 							</div>
 					<!-- -----------------------------Comment----------------------------- -->
-					<h2 class="comment_title">COMMENT</h2>
+					<h2 class="comment_title" id="comment_view">COMMENT</h2>
+					<p style="padding-top: 20px;">댓글 총갯수 : <span class="reCount"></span>개</p>
 					<div id="productDetail" style="padding-top: 20px;">
 						<div class="page-body">
 							<div class="cboth">
@@ -290,20 +300,18 @@ $(document).ready(function() {
 							<ul>
 								<%for(CommBean cb : articleList){ %>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
 										</a>
-	
-										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-												<%=cb.getSubject() %>
-											</a>
-	
-											<span class="stext-116 cl6 p-t-20">
-												<%=cb.getUsername() %>
-											</span>
-										</div>
-									</li>
+											<div class="size-215 flex-col-t p-t-8">
+												<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="stext-116 cl8 hov-cl1 trans-04">
+													<%=cb.getSubject() %>
+												</a>
+												<span class="stext-116 cl6 p-t-20">
+													<%=cb.getUsername() %>
+												</span>
+											</div>
+										</li>
 								<%} %>
 							</ul>
 						</div>
@@ -318,12 +326,12 @@ $(document).ready(function() {
 								
 								%>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/productUploadImg/<%=main[0]%>" alt="PRODUCT">
 										</a>
 	
 										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="stext-116 cl8 hov-cl1 trans-04">
 												<%=bestList.get(i).getName() %>
 											</a>
 											<span class="stext-116 cl6 p-t-20">
@@ -513,6 +521,7 @@ $(function(){
      	
 	              	$(".PR15N01-review-wrap").html(output);
 	                $(".recomment_count").trigger('click');
+	                getReCount();
             },
         	error: function(request,status,error){
 	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -521,8 +530,31 @@ $(function(){
     }
     getReplyCall = getCommReply;
     getCommReply(); // 해당 페이지 실행 시 해당 함수 호출
+   
+
     
 })	
+
+//==================== 총댓글수 가져오기  ====================//
+    function getReCount(){
+	    var num = "<%=community_num%>";
+	    var allData = {"num": num};
+
+    	$.ajax({
+			url: "CommReCountProAction.co", // 요청 url
+            type: "POST", // post 방식
+            data: allData,
+            success: function (reCount) {
+            	$(".reCount").html(reCount);
+            	
+            },
+        error: function(request,status,error){
+	        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+	      	}
+    	})
+    };
+
+
 
 	$(function(){		
 	    //==================== 원댓글 쓰기 버튼 클릭 ====================//    
@@ -547,6 +579,7 @@ $(function(){
 			                	$('.popular').removeClass("active");
 			      			  	$('.newest').addClass('active');
 			                	getReplyCall();
+			                	getReCount();
 			                },
 			    			error: function(request,status,error){
 			    		        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -814,6 +847,7 @@ $(function(){
 	 	}) // 삭제끝
 
 
+ 		
 	 	
 	 	//==================== 대댓글 카운트 구하기  ====================//
  		$(document).on("click", ".recomment_count", function () {	
@@ -969,7 +1003,7 @@ $(function(){
 		$("#bookmark").click(function(){
 			var id = '<%=id%>';
 			if(id=='null'){
-				if(!confirm("로그인을 하셔야 이용 가능합니다. 로그인을 하시겠습니까?")){
+				if(!confirm("로그인이 필요한 서비스입니다. 로그인 하시겠습니까?")){
 					return;
 				}else{
 					location.href='MemberLoginForm.mo';
@@ -985,8 +1019,10 @@ $(function(){
 	                	var path = $('.bookimg').children("img");
 	                	path.attr("src",function(index,attr){
 	                		if(attr.match('beforeG')){
+	                			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
 	                			return attr.replace("beforeG","afterG");
 	                		}else{
+	                			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
 	                			return attr.replace("afterG","beforeG");
 	                		}
 	                	});
@@ -994,7 +1030,7 @@ $(function(){
 	                },
 				})
 			}
-		})
+		});
 		
 		// 게시글 북마크 수
 	    function bookmarkCount() {
@@ -1006,7 +1042,7 @@ $(function(){
                     num: articleNum
 				},
 				success : function(json) {
-					var img = "images/icons/bookmark_after.png";
+					var img = "images/icons/bookmark_afterG.png";
 					var jsonP = JSON.parse(json);
 					var book = jsonP.total;
 					// 이미 북마크 눌렀을 시 이미지 변경
@@ -1021,7 +1057,21 @@ $(function(){
 		bookmarkCount();
 	})
 </script>
-
+<script type="text/javascript">
+	var id = '<%=id%>';
+	$('.bubbleimg').click(function(){
+		if(id=='null'){
+			if(!confirm("로그인을 하셔야 합니다. 로그인 하시겠습니까?")){
+				return false;
+			}else{
+				location.href="MemberLoginForm.mo";
+			}
+		}else{
+			location.href="#comment_view";		
+		}
+	});
+	
+</script>
 <jsp:include page="../inc/footer.jsp" />
 </body>
 </html>

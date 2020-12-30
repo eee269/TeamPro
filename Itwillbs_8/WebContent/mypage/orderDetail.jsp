@@ -102,7 +102,7 @@ System.out.println("orderDetail.jsp - detailorderList.size(): " + detailorderLis
 							String basicCode = detailorder.getOpt_productCode().substring(0, 4);
 						%>
 							<tr height="200px" onclick="location.href='ProductDetail.po?basicCode=<%=basicCode%>'">
-								<td scope="row" width="300px"><div class="tb-center"><img src="<%=detailorder.getMain_img()%>"></div></td>
+								<td scope="row" width="300px"><div class="tb-center"><img src="upload/productUploadImg/<%=detailorder.getMain_img()%>" width="300px"></div></td>
 								<td scope="row"><div class="tb-center">
 										<span><strong  style="font-size: 15px"><%=detailorder.getName()%></strong><br><br>
 											<%=detailorder.getPrice()%> 원 / <%=detailorder.getCnt()%> 개
@@ -113,6 +113,28 @@ System.out.println("orderDetail.jsp - detailorderList.size(): " + detailorderLis
 						</table>
 					</div><br>
 
+					
+					<!-- ---------------주문자 정보-------------- -->
+					<div class="tit-page-2"> <h2>주문자 정보</h2> </div>
+					<div class="table-d2-list">
+						<table>
+							<tr>
+								<td scope="row" width="300px"><div class="tb-center">주문자명</div></td>
+								<td scope="row"><strong><%=mainorder.getSender() %></strong></td>
+							</tr>
+							<tr>
+								<td scope="row" width="300px"><div class="tb-center">연락처</div></td>
+								<td scope="row"><strong><%=mainorder.getSenderPhone() %></strong></td>
+							</tr>
+							<tr>
+								<td scope="row" width="300px"><div class="tb-center">이메일</div></td>
+								<td scope="row"><strong><%=mainorder.getSenderEmail()%></strong></td>
+							</tr>
+						</table>
+					</div><br>
+					
+					<!-- ---------------주문자 정보-------------- -->
+					
 					<!-- ---------------받는사람 정보-------------- -->
 					<div class="tit-page-2"> <h2>받는 사람 정보</h2> </div>
 					<div class="table-d2-list">

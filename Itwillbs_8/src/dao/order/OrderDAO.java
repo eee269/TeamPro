@@ -42,7 +42,7 @@ public class OrderDAO {
 		PreparedStatement p = null;
 		
 		try {
-			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO mainorder VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setString(1, ob.getCode());
 			p.setString(2, ob.getName());
@@ -54,6 +54,9 @@ public class OrderDAO {
 			p.setString(8, ob.getMember_id());
 			p.setInt(9, ob.getTotal_price());
 			p.setString(10, ob.getPostcode());
+			p.setString(11, ob.getSender());
+			p.setString(12, ob.getSenderPhone());
+			p.setString(13, ob.getSenderEmail());
 			
 			insertCount = p.executeUpdate();
 			System.out.println("insertCount : " +insertCount);
@@ -96,6 +99,9 @@ public class OrderDAO {
 				order.setPayment(rs.getString(7));
 				order.setMember_id(rs.getString(8));
 				order.setTotal_price(rs.getInt("total_price"));
+				order.setSender(rs.getString("sender"));
+				order.setSenderPhone(rs.getString("senderphone"));
+				order.setSenderEmail(rs.getString("senderemail"));
 				
 				orderList.add(order);
 			}
@@ -295,6 +301,9 @@ public class OrderDAO {
 				mainorder.setPhone(rs.getString("phone"));
 				mainorder.setStatus(rs.getString("status"));
 				mainorder.setTotal_price(rs.getInt("total_price"));
+				mainorder.setSender(rs.getString("sender"));
+				mainorder.setSenderPhone(rs.getString("senderphone"));
+				mainorder.setSenderEmail(rs.getString("senderemail"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -321,10 +330,8 @@ public class OrderDAO {
 			if(rs.next()) {
 				num1 =  rs.getInt(1)+1;
 			}
-			System.out.println("num1 = " +num1);
 			for(String str : nums) {
 			sql = "select * from cart where num = ?";
-			System.out.println("num : " +Integer.parseInt(str));
 			p = con.prepareStatement(sql);
 			p.setInt(1, Integer.parseInt(str));
 			rs = p.executeQuery();
@@ -401,21 +408,11 @@ public class OrderDAO {
 				cart.setColor(rs.getString(5));
 				cart.setSize(rs.getString(6));
 				cart.setMember_id(rs.getString(7));
-				cart.setProduct_basicCode(rs.getString(8));
-				cart.setOpt_productCode(rs.getString(9));
+				cart.setMain_img(rs.getString(8));
+				cart.setProduct_basicCode(rs.getString(9));
+				cart.setOpt_productCode(rs.getString(10));
 
 			}
-			
-			System.out.println("DAO : "+cart.getNum());
-			System.out.println("DAO : "+cart.getCnt());
-			System.out.println("DAO : "+cart.getProduct_name());
-			System.out.println("DAO : "+cart.getPrice());
-			System.out.println("DAO : "+cart.getColor());
-			System.out.println("DAO : "+cart.getSize());
-			System.out.println("DAO : "+cart.getMember_id());
-			System.out.println("DAO : "+cart.getProduct_basicCode());
-			System.out.println("DAO : "+cart.getOpt_productCode());
-			
 			
 		} catch (Exception e) {
 			System.out.println("selectCart() 오류! - "+e.getMessage());

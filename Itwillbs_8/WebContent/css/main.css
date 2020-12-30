@@ -2107,6 +2107,10 @@ input.num-product::-webkit-inner-spin-button {
   width: 300px;
   height: 300px;
 }
+#block2-pic img{
+  width: 300px;
+  height: 300px;
+}
 
 .block2-btn {
   position: absolute;
@@ -3030,6 +3034,13 @@ input.num-product::-webkit-inner-spin-button {
 .how-pos5-parent {
   position: relative;
 }
+.how-pos6-parent {
+  position: relative;
+}
+.how-pos6-parent img{
+  max-width: 800px;
+  max-height: 800px;
+}
 
 .how-pos5 {
   position: absolute;
@@ -3448,5 +3459,7 @@ input.num-product::-webkit-inner-spin-button {
   .respon3 {
     padding: 20px;
   }
+  
+
 
 }

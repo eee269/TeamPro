@@ -57,7 +57,7 @@
 							<form name='form1' action="ProdQnaModifyPro.po" enctype="multipart/form-data" method='post' style="position:relative;" autocomplete="off">
 								<input type='hidden' name='basicCode' value="<%=basicCode %>" />
 								<input type="hidden" name="page" value="">
-								<input type="text" name="qna_num" value="<%=prodQnaBean.getQna_num()%>">
+								<input type="hidden" name="qna_num" value="<%=prodQnaBean.getQna_num()%>">
 								<fieldset>
                                 	<legend>일반게시판 수정</legend>
                                 	<table summary="">
@@ -118,10 +118,10 @@
 										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 									<input type="submit" value="수정" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
 									</a>
-									<a href="location.href='ProductDetail.po?basicCode=<%=basicCode %>'">
+									<a href="javascript:history.go(-1);">
 										<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 										<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-											글목록
+											뒤로가기
 										</div>
 									</a>
 								</div>

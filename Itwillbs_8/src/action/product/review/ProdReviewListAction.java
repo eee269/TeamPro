@@ -71,16 +71,18 @@ public class ProdReviewListAction implements Action {
 				String content = reviewList.get(j).getContent();
 				String product_img = reviewList.get(j).getProduct_img();
 				int re_ref = reviewList.get(j).getRe_ref();
+				String username = reviewList.get(j).getR_username();
+				System.out.println(id+":"+username);
 				
 				// 추천 수 가져오기
 				for(int k =0; k < 2; k++) {
 					if(k == 0) {
 						// good 전체 개수, 해당 아이디로 추천 했는지 판별
-						recommendG = prodReviewListService.checkReviewRec(num, id, recommendG);
+						recommendG = prodReviewListService.checkReviewRec(num, member_id, recommendG);
 						good = prodReviewListService.CountReviewRec(num, k);
 					}else {
 						// bad 전체 개수, 해당 아이디로 추천 했는지 판별
-						recommendB = prodReviewListService.checkReviewRec(num, id, recommendB);
+						recommendB = prodReviewListService.checkReviewRec(num, member_id, recommendB);
 						bad = prodReviewListService.CountReviewRec(num, k);
 					}
 				}
@@ -90,7 +92,7 @@ public class ProdReviewListAction implements Action {
 				}
 				
 				
-				json += "[{\"num\":\""+num+"\",\"id\":\"" + id + "\"},";
+				json += "[{\"num\":\""+num+"\",\"username\":\"" + username + "\"},";
 				json += "{\"num\":\""+num+"\",\"date\":\"" + df.format(date) + "\"},";
 				json += "{\"num\":\""+num+"\",\"starScore\":\"" + starScore + "\"},";
 				json += "{\"num\":\""+num+"\",\"content\":\"" + content + "\"},";

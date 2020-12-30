@@ -228,6 +228,42 @@ public class CartDAO extends Exception {
 		
 		return plusCount;
 	}
+
+
+	public int cartDelete(String[] nums) {
+		System.out.println("CartDAO - cartDelete");
+		int deleteCount = 0;
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		try {
+			for(String str : nums) {
+
+				String sql = "select * from cart where num=?";
+				p = con.prepareStatement(sql);
+				p.setInt(1, Integer.parseInt(str));
+				rs = p.executeQuery();
+				
+				if(rs.next()) {
+
+					sql = "delete from cart where num = ?";
+					p = con.prepareStatement(sql);
+					p.setInt(1, Integer.parseInt(str));
+					
+					deleteCount = p.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("cartDAO - cartDelete() 오류! - "+getLocalizedMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(p);
+		}
+		
+		return deleteCount;
+	}
 	
 
 	

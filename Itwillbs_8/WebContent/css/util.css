@@ -57,7 +57,11 @@ iframe {border: none;}
 /*//////////////////////////////////////////////////////////////////
 [ mProfile ]*/
 .mProfile{
-	background-image: url(/images/noProfile.png) no-repeat center
+	background-image: url(/images/noProfile.png) no-repeat center;
+}
+.mProfile img{
+	width:70%;
+	border-radius: 10px;
 }
 
 /*//////////////////////////////////////////////////////////////////
