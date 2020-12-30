@@ -2,7 +2,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/eee269/TeamPro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/eee269/TeamPro/context:javascript)<br>
 ![indexGIF2](https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif)<br/>
 * **#OOTD는 쇼핑몰과 커뮤니티를 결합한 웹애플리케이션 프로젝트입니다.**
-* **기본적으로 회원과 관련된 기능들이 서로 연관되어 CRUD기능이 동작하도록 DB를 설계하였습니다.** 
+* **기본적으로 회원과 관련된 기능들이 서로 연관되어 CRUD기능이 동작하도록 DB를 설계하였습니다.(EX.회원탈퇴시 작성글/주문목록/작성글/장바구니 등등도 같이삭제)** 
 * **세부구현기능**
    * **[회원관리](#member)**
    * **[상품관리](#product)**
@@ -54,7 +54,7 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 ![member1](https://user-images.githubusercontent.com/73917786/103348338-0d854e00-4add-11eb-870e-e3a2abf92cdf.gif)
 - [x] Oauth2.0 을활용한 구글/네이버/카카오계정 로그인/회원가입 기능.
 - [x] 회원가입시 입력정보 조건에 알맞도록 제어.
-- [x] 회원정보 변경/탈퇴.
+- [x] 회원페이지 정보조회 및  회원정보 수정/회원 탈퇴.
 - [x] 관리자계정으로 로그인시 회원/상품/주문 제어권한 부여.
 
 # Product
