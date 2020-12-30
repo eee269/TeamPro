@@ -155,9 +155,25 @@ public class AddrDAO {
 		int insertCount = 0;
 		
 		PreparedStatement p = null;
-
+		ResultSet rs = null;
 		try {
-			String sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
+			String sql = "select count(addrType),member_id from memberaddress where member_id=? and addrType=?";
+			p = con.prepareStatement(sql);
+			p.setString(1, member_id);
+			p.setString(2, "defaultAddr");
+			rs = p.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getInt(1)>0) {
+					sql = "update memberaddress set addrType = '', location='' where member_id = ? and addrType=?";
+					p = con.prepareStatement(sql);
+					p.setString(1, member_id);
+					p.setString(2, "defaultAddr");
+					p.executeUpdate();
+				}
+			}
+			
+			sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setInt(1, 0);
 			p.setString(2, "기본배송지");
@@ -173,6 +189,7 @@ public class AddrDAO {
 			System.out.println("insertDefaultAddr() 오류! - "+e.getMessage());
 			e.printStackTrace();
 		} finally {
+			close(rs);
 			close(p);
 		}
 		
