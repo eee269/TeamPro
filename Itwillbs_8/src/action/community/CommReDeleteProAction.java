@@ -1,5 +1,6 @@
 package action.community;
 
+import java.io.File;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
@@ -10,6 +11,7 @@ import action.Action;
 import svc.community.CommReDeleteProService;
 import vo.ActionForward;
 import vo.CommReBean;
+import vo.ProdReviewBean;
 
 public class CommReDeleteProAction implements Action {
 
@@ -31,6 +33,8 @@ public class CommReDeleteProAction implements Action {
 		
 		boolean isDeleteSuccess = commDeleteProService.removeComment(num,community_num);
 		
+		CommReBean commReBean = commDeleteProService.getComment(num,community_num);
+		
 		// 수정 결과에 따른 처리
 		// 수정 실패(isDeleteSuccess 가 false)일 경우 자바스크립트를 사용하여
 		// "글 삭제 실패!" 출력 후 이전페이지로 이동
@@ -44,10 +48,18 @@ public class CommReDeleteProAction implements Action {
 			out.println("alert('글 삭제 실패!')");
 			out.println("history.back()");
 			out.println("</script>");
-		}else {
-			forward = new ActionForward();
-			forward.setPath("CommDetail.co?num="+community_num+"&rePage="+request.getParameter("rePage"));
-			forward.setRedirect(true);
+		}else {		
+			//db 데이터 삭제 성공 시 실제 저장된 이미지 삭제			
+			String saveFolder = "upload/commReUpload";
+			String realFolder = context.getRealPath(saveFolder);			
+		
+			String img = commReBean.getImg();		
+			File f = new File(realFolder + "/" + img);
+			if(f.exists()) {f.delete();}
+			
+//			forward = new ActionForward();
+//			forward.setPath("CommDetail.co?num="+community_num);
+//			forward.setRedirect(true);
 		}
 		
 		return forward;
