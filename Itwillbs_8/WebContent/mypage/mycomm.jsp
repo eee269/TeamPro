@@ -11,7 +11,16 @@
 <!-- QuickMenu -->
 <jsp:include page="/quickMenu.jsp" />
 
+<style>
+img:hover {
+	cursor: pointer;
+}
 
+.productImg {
+	width: 250px;
+	max-height: 250px;
+}
+</style>
 <div class="container">
 	<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
 		<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
