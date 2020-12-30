@@ -240,15 +240,13 @@ public class ProdQnaDAO {
 			try {
 				int num = 1; 
 				
-				String sql = "SELECT MAX(qna_num) FROM product_qna WHERE product_basicCode=?";
+				String sql = "SELECT MAX(qna_num) FROM product_qna";
 				ps = con.prepareStatement(sql);
-				ps.setString(1, qna.getProduct_basicCode());
 				rs = ps.executeQuery();
 				
 				if(rs.next()) { 
 					num = rs.getInt(1) + 1;
 				}
-
 				int qna_re_ref = qna.getQna_re_ref(); 
 				int qna_re_lev = qna.getQna_re_lev(); 
 				int qna_re_seq = qna.getQna_re_seq(); 
