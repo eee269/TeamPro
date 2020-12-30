@@ -6,6 +6,12 @@
 * **정수진**
     * **Github** - (https://github.com/jeongsujin001)
     * **Mail** - <studyforit001@gmail.com>
+* **이정하**
+    * **Github** - (https://github.com/pumkin-ha)
+    * **Mail** - <pumkin-ha@naver.com>
+* **한상빈**
+    * **Github** - (https://github.com/SangBinKR)
+    * **Mail** - <sk8er001@naver.com>
 ---
 # 개발 환경
 * JDK 8
