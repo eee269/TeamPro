@@ -232,7 +232,10 @@
 						<h3>최근 등록 게시글</h3>
 						<a class="view fe" href="MycommList.co">+ MORE</a>
 					</div>
-					<div class="tbl">
+					<div class="lst">
+						<div class="item-wrap">
+							<div class="item-cont"></div>
+														
 					<table>
 							<%
 if(articleList.size() == 0) {
