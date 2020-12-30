@@ -10,6 +10,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="css/control.css" />
+<style type="text/css">
+.ftr th {
+text-align: center;
+}
+</style>
 <script type="text/javascript">
 
 // Java 시간에 했던 HTML Object 참고해서 다시 짜기
@@ -22,6 +27,7 @@ function changeStatus(code, id) {
 // 	alert(selectId + val + code);
 	location.href="UpdateOrderStatus.or?code="+code+"&status="+val;
 }
+
 </script>
 
 </head>
@@ -37,7 +43,7 @@ function changeStatus(code, id) {
 	<h1 style="margin: 50px 100px">Admin - Order</h1>
 	<table
 		style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 90%; min-height: 500px;">
-		<tr>
+		<tr class="ftr">
 			<th>순서</th>
 			<th>주문번호</th>
 			<th>주문날짜</th>

@@ -8,13 +8,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="css/control.css" />
+<style type="text/css">
+.ftr th {
+text-align: center;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp" />
 	<h1 style="margin: 50px 100px">Admin - Member</h1>
 	<table
 		style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
-		<tr>
+		<tr class="ftr">
 			<th>행번호</th>
 			<th>id</th>
 			<th>email</th>

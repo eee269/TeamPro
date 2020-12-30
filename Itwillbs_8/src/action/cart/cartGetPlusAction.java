@@ -37,7 +37,7 @@ public class cartGetPlusAction implements Action {
 			forward.setPath("MemberLoginForm.mo");
 			
 			
-		} //else { // 아이디가 있으면
+		} else { // 아이디가 있으면
 		
 		String product_name = request.getParameter("name");	// 상품이름
 		int price = Integer.parseInt(request.getParameter("price"));  //가격
@@ -118,8 +118,9 @@ public class cartGetPlusAction implements Action {
 		forward.setRedirect(true);
 		
 		
-		return forward;
 		}
-//	}
+		return forward;
+	}
+
 
 }

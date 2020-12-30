@@ -10,6 +10,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="css/control.css" />
+<style type="text/css">
+.ftr th {
+text-align: center;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="../inc/header.jsp" />
@@ -17,7 +22,7 @@
 	<input type="button" value="상품 업로드" onclick="location.href='ProductUpload.po'">
 	<table
 		style="border: 0.3px solid lightgray; text-align: center; margin: 100px 50px; width: 80%; min-height: 500px;">
-		<tr>
+		<tr class = "ftr">
 			<th>기본코드</th>
 			<th>상품명</th>
 			<th>대분류 카테고리</th>

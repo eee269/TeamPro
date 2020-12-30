@@ -28,7 +28,7 @@ public class cartUpdateAction implements Action {
 			out.println("</script>");
 			forward = new ActionForward();
 			forward.setPath("MemberLoginForm.mo");
-		}
+		} else {
 		
 		int cnt = Integer.parseInt(request.getParameter("cnt"));
 		int num = Integer.parseInt(request.getParameter("num"));
@@ -55,7 +55,7 @@ public class cartUpdateAction implements Action {
 			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 		}
-		
+		}
 		return forward;
 	}
 	
