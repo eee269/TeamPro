@@ -3,9 +3,9 @@
 ![indexGIF2](https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif)<br/>
 * **#OOTD는 쇼핑몰과 커뮤니티를 결합한 웹애플리케이션 프로젝트입니다.** 
 * **구현기능**
-   * **회원관리**
-   * **상품관리**
-   * **게시판응용 커뮤니티**
+   * **[회원관리](#member)**
+   * **[상품관리](#product)**
+   * **[커뮤니티](#community)**
    
 ---
 # 개발 환경
@@ -46,66 +46,9 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
     * **Github** - (https://github.com/xeyong)
     * **Mail** - <recruyong@gmail.com>       
 ---
-# Main
-## Image
+#Member
 
+#Product
 
+#Community
 
-# Product Page
-## Main Category
-### Image
-
-## Sub Category
-### Image
-
-## Product Detail
-###Image
-
-## Cart
-### Image
-
-
-## Order
-### Image
-
-
-# Community Page Image
-## List
-### Image
-
-
-## Content
-### Image
-
-
-## Content Input / Update / Delete
-### Image
-
-
-# Member Page Image
-## Join
-### Image
-
-
-## Update / Delete
-### Image
-
-
-## Mypage
-### Image
-
-
-## Order Detail
-### Image
-
-# Admin Page Image
-## Product
-### Image
-
-
-## Member
-### Image
-
-
-## Order
-### Image
