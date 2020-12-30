@@ -23,7 +23,7 @@
     * **Mail** - <skfkd3123@gmail.com>
 * **이세용**
     * **Github** - (https://github.com/xeyong)
-    * **Mail** - <recruyong@naver.com>       
+    * **Mail** - <recruyong@gmail.com>       
 ---
 # 개발 환경
 * JDK 8
