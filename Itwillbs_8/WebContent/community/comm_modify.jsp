@@ -23,7 +23,10 @@
 	String nowPage = request.getParameter("page");
 	if(nowPage==null){nowPage="1";} // 마이페이지 통해 들어올 경우 null 대신 1 값 줌
 %>
-
+<style>
+.wrap-menu-desktop{z-index: 1050;}
+.container-menu-desktop{z-index: 1000;}
+</style>
 <jsp:include page="../inc/header.jsp"/>
 <!-- QuickMenu -->
 <jsp:include page="../quickMenu.jsp" />
