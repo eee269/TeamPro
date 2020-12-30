@@ -55,7 +55,7 @@ a {text-decoration:none;}
 body, h1, h2, h3, h4, h5, h6, table, input, select, textarea, a {font-family:'Roboto', 'Nanum Gothic',Dotum, AppleGothic, Helvetica, sans-serif;}
 
 
-#content img {max-width:1260px; height:auto;}
+#content img {max-width:1300px; height:auto;}
 
 /* 롤오버 */
 a img.menuon {display:none;}

@@ -2,6 +2,7 @@ package svc.order;
 
 import java.sql.Connection;
 
+import dao.cart.CartDAO;
 import dao.order.OrderDAO;
 import vo.OrderBean;
 
@@ -43,13 +44,20 @@ public class OrderProService {
 			orderDAO.setConnection(con);
 			
 			for(String str : nums) {
-				System.out.println("orderPRo : "+str);
+				System.out.println("orderPro : "+str);
 			}
 			int insertCount = orderDAO.insertDetailOrder(nums,code);
 			
 			if(insertCount > 0) {
 				commit(con);
-				isInsertSuccess = true;
+				int deleteCount = 0;
+				CartDAO cartDAO = CartDAO.getInstance();
+				cartDAO.setConnection(con);
+				deleteCount = cartDAO.cartDelete(nums);
+				if(deleteCount > 0) {
+					commit(con);
+					isInsertSuccess = true;
+				}
 			} else {
 				rollback(con);
 			}

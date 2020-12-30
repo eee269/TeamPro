@@ -10,12 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONArray;
 
 import action.Action;
+import svc.community.CommListService;
 import svc.product.BestSelectService;
 import svc.product.NcodeSelectService;
 import svc.product.ProductAjaxService;
 import svc.product.ProductCountService;
 import svc.product.ProductSelectService;
 import vo.ActionForward;
+import vo.CommBean;
 import vo.PageInfo;
 import vo.ProductBean;
 import vo.ProductLikeBean;
@@ -38,6 +40,12 @@ public class ProductSearchAction implements Action {
 		
 		searchProductList=productSelectService.getSearchProductList(search);
 		request.setAttribute("productList", searchProductList);
+		
+		// 게시물 page ~ limit 갯수만큼 가져오기 (search 검색 결과 최신 순 최대 10개)
+		CommListService commListService = new CommListService();
+		ArrayList<CommBean> articleList = new ArrayList<CommBean>();
+		articleList = commListService.getArticleList(1, 10, search, "new");
+		request.setAttribute("articleList", articleList);
 
 		
 		if(id !=null) {

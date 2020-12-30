@@ -119,9 +119,9 @@
 					if(like1 == like2){
 						return 0;
 					}else if(like1>like2){
-						return 1;
-					}else{
 						return -1;
+					}else{
+						return 1;
 					}
 				}
 			

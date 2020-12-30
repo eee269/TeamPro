@@ -46,8 +46,8 @@ public class CommReWriteProAction implements Action {
 		crb.setCommunity_num(community_num);
 		crb.setContents(multi.getParameter("reply_contents"));	
 		crb.setDate(date);
-		crb.setImg(multi.getOriginalFileName("reply_file"));
-		
+//		crb.setImg(multi.getOriginalFileName("reply_file"));
+		crb.setImg(multi.getFilesystemName("reply_file"));
 
 
 //		// 서비스 클래스를 통해 실제 글 등록 작업 수행을 위한 요청
@@ -71,12 +71,9 @@ public class CommReWriteProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
-			// 1.ActionForward 객체 생성
-			forward = new ActionForward();
-			// 2.포워딩 경로(URL) 지정
-			forward.setPath("CommDetail.co?num="+community_num);
-			// 3.포워딩 방식(Redirect 방식) 지정
-			forward.setRedirect(true);
+//			forward = new ActionForward();
+//			forward.setPath("CommDetail.co?num="+community_num);
+//			forward.setRedirect(true);
 		}
 
 		return forward;

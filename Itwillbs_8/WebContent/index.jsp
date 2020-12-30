@@ -13,6 +13,23 @@
 <link type="text/css" rel="stylesheet" href="css/menu_1.css" />
 <link type="text/css" rel="stylesheet" href="css/team.css" />
 
+
+<style>
+.event_ban_area > ul {
+	position: flex;
+}
+.event_ban_area ul > li {
+	display: inline-block;
+  	align-items: center;
+  	width: 20%;
+  	height: 200px;
+  	margin: 50px 20px;
+}
+.event_ban_area ul > li img {
+	padding: 50px 0;
+}
+</style>
+
 <%
 	String member_id =(String)session.getAttribute("member_id");
 	ArrayList<ProductBean> newList =(ArrayList<ProductBean>)request.getAttribute("newList");
@@ -48,6 +65,7 @@
 			<%
 		for(int i=0; i<commList.size(); i++){
 			CommBean article = commList.get(i);
+			int c = article.getCommentCount();
 			%>
 			<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item">
 						<!-- Block2 -->
@@ -64,7 +82,7 @@
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
 									<a href="CommDetail.co?num=<%=article.getNum() %>"  class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-										<%=article.getSubject() %>
+										<%=article.getSubject() %><span><%=(c > 0 ? "("+c+")" : "")%></span>
 									</a>
 									<div class="stext-105 cl3 w-full">
 										<span>
@@ -89,10 +107,34 @@
 </section>
 
 
+<div class="event_ban_area">
+	<ul>
+		<li><a href="ProductShop.po?type=X&xcode=CLOTHES">
+			<img src="https://img.icons8.com/cotton/64/000000/hanger--v1.png"/><br>
+			<b>CLOTHES</b>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=BAGS">
+			<img src="https://img.icons8.com/ios/64/000000/bag-back-view.png"/><br>
+			<b>BAGS</b>
+		</a></li>
+		
+		<li><a href="ProductShop.po?type=X&xcode=SHOES">
+			<img src="https://img.icons8.com/ios/64/000000/sneakers.png"/><br>
+			<b>SHOES</b>
+		</a></li>
+		
+		<li><a href="CommList.co">
+			<img src="https://img.icons8.com/ios/64/000000/clipboard.png"/><br>
+			<b>COMMUNITY</b>
+		</a></li>
+	</ul>
+</div>
+<div class="cboth"></div>
 
 
 
-<!-- 베스트 -->
+
 <section class="bg0 p-t-23">
 	<div class="container">
 		<div class="main_pro_title_area cboth ">
@@ -154,31 +196,7 @@
 	
 </section>
 
-<!-- 이벤트 배너 2개 -->
-<div class="event_ban_area">
-	<ul>
-		<li><a href="ProductShop.po?type=X&xcode=CLOTHES">
-			<img src="https://img.icons8.com/cotton/64/000000/hanger--v1.png"/><br>
-			<span>CLOTHES</span>
-		</a></li>
-		
-		<li><a href="ProductShop.po?type=X&xcode=BAGS">
-			<img src="https://img.icons8.com/ios/64/000000/bag-back-view.png"/><br>
-			<span>BAGS</span>
-		</a></li>
-		
-		<li><a href="ProductShop.po?type=X&xcode=SHOES">
-			<img src="https://img.icons8.com/ios/64/000000/sneakers.png"/><br>
-			<span>SHOES</span>
-		</a></li>
-		
-		<li><a href="CommList.co">
-			<img src="https://img.icons8.com/ios/64/000000/clipboard.png"/><br>
-			<span>COMMUNITY</span>
-		</a></li>
-	</ul>
-</div>
-<div class="cboth"></div>
+
 
 <section class="bg0 p-t-23">
 	<div class="container">
@@ -303,8 +321,10 @@ function checkBook(num){
             	var path = $('.bookimg'+num).children("img");
             	path.attr("src",function(index,attr){
             		if(attr.match('before')){
+            			swal("٩(ˊᗜˋ*)و" ,"게시글이 북마크에 추가됬습니다!", "success");
             			return attr.replace("before","after");
             		}else{
+            			swal("(｡•́︿•̀｡)","게시글이 북마크에서 삭제됬습니다!", "success");
             			return attr.replace("after","before");
             		}
             	});

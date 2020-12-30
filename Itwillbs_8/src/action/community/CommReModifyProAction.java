@@ -58,9 +58,9 @@ public class CommReModifyProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
-			forward = new ActionForward();
-			forward.setPath("CommDetail.co?num="+community_num+"&rePage="+request.getParameter("rePage"));
-			forward.setRedirect(true);		
+//			forward = new ActionForward();
+//			forward.setPath("CommDetail.co?num="+community_num);
+//			forward.setRedirect(true);		
 		}
 			
 		return forward;

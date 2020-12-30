@@ -28,8 +28,6 @@ public class OrderDetailProAction implements Action {
 			
 			forward.setPath("MemberLoginForm.mo");
 		}else {
-//		int num =  Integer.parseInt(request.getParameter("num"));
-//		System.out.println("num : "+num);
 		String[] nums = request.getParameterValues("num");
 		String code = request.getParameter("imp_uid");
 

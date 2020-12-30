@@ -1,5 +1,6 @@
 package action.product.qna;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import javax.servlet.ServletContext;
@@ -11,6 +12,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import action.Action;
+import exception.member.LoginException;
 import svc.member.MemberLoginProService;
 import svc.product.qna.ProdQnaService;
 import vo.ActionForward;
@@ -19,7 +21,7 @@ import vo.ProdQnaBean;
 public class ProdQnaModifyProAction implements Action {
 
 	@Override
-	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("ProdQnaModifyProAction");
 		ActionForward forward = new ActionForward();
 		
@@ -45,42 +47,45 @@ public class ProdQnaModifyProAction implements Action {
 		
 		// qna 비밀번호 맞는 지 검증
 		MemberLoginProService memberLoginProService = new MemberLoginProService();
-		boolean isRightUser = memberLoginProService.isLoginMember(member_id, pass);
-		
-		ProdQnaService ProdQnaService = new ProdQnaService();
-		
-		// 적합한 사용자 판별에 따른 처리
-		if(!isRightUser) {
+		try {
+			boolean isRightUser = memberLoginProService.isLoginMember(member_id, pass);
+			
+			ProdQnaService ProdQnaService = new ProdQnaService();
+			
+			// 적합한 사용자 판별에 따른 처리
+			if(isRightUser) {
+				
+				ProdQnaBean qna = new ProdQnaBean();
+				qna.setQna_num(qna_num);
+				qna.setQna_subject(multi.getParameter("qna_subject"));
+				qna.setQna_content(multi.getParameter("qna_content"));
+				qna.setQna_file(multi.getOriginalFileName("qna_file"));
+				// 글 수정 작업 요청
+				boolean isModifySuccess = ProdQnaService.modifyQna(qna);
+				
+				// 수정 결과에 따른 처리
+				if(!isModifySuccess) {
+					response.setContentType("text/html; charset=UTF-8");
+					PrintWriter out = response.getWriter();
+					out.println("<script>");
+					out.println("alert('QnA 수정 실패!!')");
+					out.println("history.back()");
+					out.println("</script>");
+				}else {
+					forward = new ActionForward();
+					forward.setPath("ProductDetail.po?basicCode="+multi.getParameter("basicCode"));
+					forward.setRedirect(true);
+				}
+			}
+		} catch (LoginException e) {
+			e.printStackTrace();
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
 			out.println("<script>");
-			out.println("alert('수정 권한이 없습니다!')");
+			out.println("alert('"+e.getMessage()+"')");
 			out.println("history.back()");
 			out.println("</script>");
-		}else {
-			
-			ProdQnaBean qna = new ProdQnaBean();
-			qna.setQna_num(qna_num);
-			qna.setQna_subject(multi.getParameter("qna_subject"));
-			qna.setQna_content(multi.getParameter("qna_content"));
-			qna.setQna_file(multi.getOriginalFileName("qna_file"));
-			// 글 수정 작업 요청
-			boolean isModifySuccess = ProdQnaService.modifyQna(qna);
-			
-			// 수정 결과에 따른 처리
-			if(!isModifySuccess) {
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out = response.getWriter();
-				out.println("<script>");
-				out.println("alert('QnA 수정 실패!!')");
-				out.println("history.back()");
-				out.println("</script>");
-			}else {
-				forward = new ActionForward();
-				forward.setPath("ProductDetail.po?basicCode="+multi.getParameter("basicCode"));
-				forward.setRedirect(true);
-			}
-		}
+		} 
 		return forward;
 	}
 

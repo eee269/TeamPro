@@ -57,9 +57,9 @@ public class CartDAO extends Exception {
 			cart.setColor(rs.getString("color"));
 			cart.setSize(rs.getString("size"));
 			cart.setMember_id(rs.getString("member_id"));
+			cart.setMain_img(rs.getString("main_img"));
 			cart.setProduct_basicCode(rs.getString("product_basicCode"));
 			cart.setOpt_productCode(rs.getString("opt_productCode"));
-//			cart.setMain_img(rs.getString("main_img"));
 
 			CartList.add(cart);
 			
@@ -145,7 +145,7 @@ public class CartDAO extends Exception {
 			
 		if(rs.next()) {
 			num = rs.getInt("max(num)") + 1;			
-			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,product_basicCode,opt_productCode,main_img)VALUES(?,?,?,?,?,?,?,?,?,?)";
+			String sql = "INSERT INTO cart(num,cnt,product_name,price,color,size,member_id,main_img,product_basicCode,opt_productCode)VALUES(?,?,?,?,?,?,?,?,?,?)";
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			System.out.println(num);
@@ -155,9 +155,9 @@ public class CartDAO extends Exception {
 			pstmt.setString(5, ca.getColor());
 			pstmt.setString(6, ca.getSize());
 			pstmt.setString(7, ca.getMember_id());
-			pstmt.setString(8, ca.getProduct_basicCode());
-			pstmt.setString(9, ca.getOpt_productCode());
-			pstmt.setString(10, ca.getMain_img());
+			pstmt.setString(8, ca.getMain_img());
+			pstmt.setString(9, ca.getProduct_basicCode());
+			pstmt.setString(10, ca.getOpt_productCode());
 
 			upCount = pstmt.executeUpdate();
 			System.out.println("DAO upCount : " + upCount);
@@ -227,6 +227,42 @@ public class CartDAO extends Exception {
 		
 		
 		return plusCount;
+	}
+
+
+	public int cartDelete(String[] nums) {
+		System.out.println("CartDAO - cartDelete");
+		int deleteCount = 0;
+		
+		PreparedStatement p = null;
+		ResultSet rs = null;
+		
+		try {
+			for(String str : nums) {
+
+				String sql = "select * from cart where num=?";
+				p = con.prepareStatement(sql);
+				p.setInt(1, Integer.parseInt(str));
+				rs = p.executeQuery();
+				
+				if(rs.next()) {
+
+					sql = "delete from cart where num = ?";
+					p = con.prepareStatement(sql);
+					p.setInt(1, Integer.parseInt(str));
+					
+					deleteCount = p.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			System.out.println("cartDAO - cartDelete() 오류! - "+getLocalizedMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(p);
+		}
+		
+		return deleteCount;
 	}
 	
 

@@ -39,7 +39,6 @@ public class CommReReWriteProAction implements Action {
 //		// 서비스 클래스를 통해 실제 글 등록 작업 수행을 위한 요청
 		CommReReWriteProService commReReWriteProService = new CommReReWriteProService();
 		boolean isWriteSuccess = commReReWriteProService.registReComment(crb);
-
 				
 		// 대댓글쓰기 작업 수행 후 리턴받은 결과값을 사용하여
 		// 대댓글쓰기 성공/실패 여부를 판단
@@ -57,12 +56,9 @@ public class CommReReWriteProAction implements Action {
 			out.println("history.back()");
 			out.println("</script>");
 		}else {
-			// 1.ActionForward 객체 생성
-			forward = new ActionForward();
-			// 2.포워딩 경로(URL) 지정
-			forward.setPath("CommDetail.co?num="+community_num+"&rePage="+request.getParameter("rePage"));
-			// 3.포워딩 방식(Redirect 방식) 지정
-			forward.setRedirect(true);
+//			forward = new ActionForward();
+//			forward.setPath("CommDetail.co?num="+community_num);
+//			forward.setRedirect(true);
 		}
 
 		return forward;

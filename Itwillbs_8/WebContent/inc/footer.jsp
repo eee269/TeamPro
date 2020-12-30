@@ -249,8 +249,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <!--===============================================================================================-->	
 <!-- 	<script src="vendor/jquery/jquery-3.2.1.min.js"></script> -->
 <!--===============================================================================================-->
-	<script src="community/summernote-ko-KR.min.js"></script>
-	<script src="community/summernote-ko-KR.js"></script>
+<!-- 	<script src="community/summernote-ko-KR.min.js"></script> -->
+<!-- 	<script src="community/summernote-ko-KR.js"></script> -->
 <!--===============================================================================================-->
 	<script src="vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->

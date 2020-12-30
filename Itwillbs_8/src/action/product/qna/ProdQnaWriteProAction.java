@@ -42,7 +42,7 @@ public class ProdQnaWriteProAction implements Action {
 		String qna_pass = "1234";
 		String qna_subject = multi.getParameter("qna_subject");
 		String qna_content = multi.getParameter("qna_content");
-		String qna_file = multi.getOriginalFileName("qna_file");
+		String qna_file = multi.getFilesystemName("qna_file");
 		String product_basicCode = multi.getParameter("basicCode");
 		ProdQnaBean prodQnaBean = 
 				new ProdQnaBean(0, qna_pass, qna_subject, qna_content, 0, qna_file, 0, 0, null, product_basicCode, member_id,0);

@@ -2,12 +2,18 @@
 	pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding("utf-8");
+// -----------주문자 정보-----------------------------------
+String name = request.getParameter("sender");
+String phone =request.getParameter("emergency11") + "-" + request.getParameter("emergency12") + "-"
+		+ request.getParameter("emergency13");
+// -----------주문자 정보 끝---------------------------------
 String buyer_name = request.getParameter("receiver");
 String buyer_email = request.getParameter("email");
 String pay_method = request.getParameter("pay_method");
-String buyer_tel = request.getParameter("emergency11") + "-" + request.getParameter("emergency12") + "-"
-		+ request.getParameter("emergency13");
+String buyer_tel = request.getParameter("emergency21") + "-" + request.getParameter("emergency22") + "-"
+		+ request.getParameter("emergency23");
 String buyer_addr = request.getParameter("address");
+String detailAddr = request.getParameter("detailAddress");
 String buyer_postcode = request.getParameter("postcode");
 String imp_uid = request.getParameter("imp_uid");
 String merchant_uid = request.getParameter("merchant_uid");
@@ -43,7 +49,7 @@ $(function(){
 	    buyer_email : '<%=buyer_email%>',
 	    buyer_name : '<%=buyer_name%>',
 	    buyer_tel : '<%=buyer_tel%>',
-	    buyer_addr : '<%=buyer_addr%>',
+	    buyer_addr : '<%=buyer_addr+"_"+detailAddr%>',
 	    buyer_postcode : '<%=buyer_postcode%>',
 	}, function(rsp) {
 	    if ( rsp.success ) {
@@ -80,9 +86,11 @@ $(function(){
 	    $("#buyer_tel").attr('value','<%=buyer_tel%>');
 	    $("#buyer_email").attr('value','<%=buyer_email%>');
 	    $("#buyer_postcode").attr('value','<%=buyer_postcode%>');
-	    $("#buyer_addr").attr('value','<%=buyer_addr%>');
+	    $("#buyer_addr").attr('value','<%=buyer_addr+"_"+detailAddr%>');
 			$("#paid_amount").attr('value', rsp.paid_amount);
 			$("#status").attr('value', rsp.status);
+			$("#name").attr('value', '<%=name%>');
+			$("#phone").attr('value', '<%=phone%>');
 			$(".imp_uid").text($("#imp_uid").val());
 			$(".buyer_name").text($("#buyer_name").val());
 			$(".buyer_tel").text($("#buyer_tel").val());
@@ -151,6 +159,8 @@ $(function(){
 									id="buyer_postcode" name="buyer_postcode"> <input
 									type="hidden" value="" id="buyer_addr" name="buyer_addr">
 								<input type="hidden" value="" id="status" name="status">
+								<input type="hidden" value="" id="name" name="name">
+								<input type="hidden" value="" id="phone" name="phone">
 								<%
 								for(int i = 0 ; i < nums.length ; i ++){
 								%>

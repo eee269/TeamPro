@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vo.CommReBean;
-import vo.MemberBean;
 
 import static db.JdbcUtil.*;
 
@@ -96,9 +95,12 @@ public class CommReDAO {
 
 		try {			
 			if(arraymode == 0) {
-				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id=m.id INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as y on c.num = y.re_ref where community_num=? and re_lev=0 Order by y.ct desc limit ?,?";				
+				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id=m.id"
+					+" INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as y on c.num = y.re_ref"
+					+" where community_num=? and re_lev=0 Order by y.ct desc limit ?,?";			
 			}else if(arraymode == 1) {
-				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
+				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id"
+					+" WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
 				
 			}
 			
@@ -417,6 +419,33 @@ public class CommReDAO {
 			close(pstmt);
 		}				
 		return listCount;
+	}
+
+	
+	public CommReBean getComment(int num, int community_num) {
+		CommReBean commReBean = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			String sql = "SELECT img FROM community_reply WHERE num=? and community_num=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, community_num);
+			rs = pstmt.executeQuery();
+			
+			commReBean = new CommReBean();
+			if(rs.next()) {
+				commReBean.setImg(rs.getString(1));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("getComment() 오류! - "+e.getMessage());
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return commReBean;
 	}
 	
 	

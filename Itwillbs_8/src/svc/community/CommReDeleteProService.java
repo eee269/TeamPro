@@ -3,7 +3,9 @@ package svc.community;
 import java.sql.Connection;
 
 import dao.community.CommReDAO;
+import dao.product.ProdReviewDAO;
 import vo.CommReBean;
+import vo.ProdReviewBean;
 
 import static db.JdbcUtil.*;
 
@@ -40,5 +42,17 @@ public class CommReDeleteProService {
 		// 6. 결과 리턴
 		return isDeleteSuccess;
 	}
-
+	
+	public CommReBean getComment(int num, int community_num) {
+		
+		Connection con = getConnection();
+		CommReDAO commReDAO = CommReDAO.getInstance();
+		commReDAO.setConnection(con);
+		
+		CommReBean commReBean = commReDAO.getComment(num,community_num);
+		
+		close(con);
+		return commReBean;
+	}
+	
 }

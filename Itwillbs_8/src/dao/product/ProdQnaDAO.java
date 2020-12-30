@@ -82,7 +82,7 @@ public class ProdQnaDAO {
 			PreparedStatement ps = null;
 			
 			try {
-				String sql = "DELETE FROM product_qna WHERE qna_num=?";
+				String sql = "DELETE FROM product_qna WHERE qna_re_ref=?";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, qna_num);
 				deleteCount = ps.executeUpdate();
@@ -190,7 +190,7 @@ public class ProdQnaDAO {
 				
 				if(rs.next()) {
 					productBean.setName(rs.getString(1));
-					productBean.setMain_img(rs.getString(2));
+					productBean.setMain_img(rs.getString(2).substring(0, rs.getString(2).indexOf("/")));
 					productBean.setPrice(rs.getInt(3));
 				}
 				
@@ -420,19 +420,22 @@ public class ProdQnaDAO {
 		}
 		// -------------------qnaUpReadcount()-----------------------
 		// -------------------qnaGetReadcount()-----------------------
-		public int qnaGetReadcount(int num) {
+		public ProdQnaBean qnaGetReadcount(int num) {
 			// qna 조회수 가져오기
-			int count = 0;
+			ProdQnaBean prodQnaBean = null;
 			PreparedStatement ps = null;
 			ResultSet rs = null;
 			try {
-				String sql = "SELECT qna_readcount FROM product_qna WHERE qna_num = ?";
+				String sql = "SELECT * FROM product_qna WHERE qna_num = ?";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, num);
 				rs = ps.executeQuery();
-						
+					
+				prodQnaBean = new ProdQnaBean();
+				
 				if(rs.next()) {
-					count = rs.getInt(1);
+					prodQnaBean.setQna_readcount(rs.getInt("qna_readcount"));
+					prodQnaBean.setQna_file(rs.getString("qna_file"));
 				}
 			} catch (SQLException e) {
 				System.out.println("ProdQnaDAO - qnaUpReadcount : "+e.getMessage());
@@ -442,7 +445,7 @@ public class ProdQnaDAO {
 				close(ps);
 			}
 			
-			return count;
+			return prodQnaBean;
 		}
 		// -------------------qnaGetReadcount()-----------------------
 }

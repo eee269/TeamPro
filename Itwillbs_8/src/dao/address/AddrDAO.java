@@ -132,7 +132,9 @@ public class AddrDAO {
 				JSONObject addr = new JSONObject();
 				
 				addr.put("postcode", rs.getString(1));
-				addr.put("address", rs.getString(2));
+				int index = rs.getString(2).indexOf("_");
+				addr.put("address", rs.getString(2).substring(0,index));
+				addr.put("detailAddress",rs.getString(2).substring(index+1));
 				
 				recentAddr.add(addr);
 			}
@@ -158,7 +160,7 @@ public class AddrDAO {
 			String sql = "insert into memberaddress values(?,?,?,?,?,?,?)";
 			p = con.prepareStatement(sql);
 			p.setInt(1, 0);
-			p.setString(2, null);
+			p.setString(2, "기본배송지");
 			p.setString(3, postcode);
 			p.setString(4, address);
 			p.setNString(5, detailAddress);
