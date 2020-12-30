@@ -449,5 +449,44 @@ public class CommReDAO {
 	}
 	
 	
-	
+
+
+	public ArrayList<CommReBean> selectMyreplyList(String member_id) {
+		ArrayList<CommReBean> list = new ArrayList<CommReBean>();
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql = "select * from community_reply where member_id = ?";
+			ps = con.prepareStatement(sql);
+			ps.setString(1, member_id);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				CommReBean reply = new CommReBean();
+				
+				reply.setCommunity_num(rs.getInt("community_num"));
+				reply.setContents(rs.getString("contents"));
+				reply.setDate(rs.getTimestamp("date"));
+				reply.setDel(rs.getString("del"));
+				reply.setImg(rs.getString("img"));
+				reply.setNum(rs.getInt("num"));
+				reply.setRe_lev(rs.getInt("re_lev"));
+				reply.setRe_ref(rs.getInt("re_ref"));
+				reply.setId(member_id);
+				
+				list.add(reply);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+			close(rs);
+		}
+		
+		return list;
+	}
 }
