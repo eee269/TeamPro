@@ -40,7 +40,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://use.fontawesome.com/5ac93d4ca8.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-
 <!-- TAB기능 스타일 -->
 <style>
 @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
@@ -1164,6 +1163,8 @@ var productCode = "";
                                                        +"<div class='star-icon'>"
                                                          +"<input type='number' name='starScore' class='rating' id='rating-readonly' data-clearable='remove' value='"+reply.starScore+"' data-readonly/>"
                                                       +"</div>"
+                                                       +"<div id='starScoreTest"+reply.num+"'>"
+                                                      +"</div>"
                                                     +"</div>";
                                     }else if(j == 3){
                                        output +=    "<div class='pr-options' style='display: none;'>"
@@ -1365,7 +1366,7 @@ var productCode = "";
                  var starChart = "";
                  
                for(key in star){
-               if(key > 2){
+               if(key > 3){
                   starLike += star[key]*1;
                }
                  score += key*star[key]*1;
@@ -1450,9 +1451,9 @@ var productCode = "";
          $('#prm_form'+num+' #prm_file').prop('type','file');
          $('#prm_form'+num+' #prm_submit').prop('type','button');
          $('#btnReModify'+num).css('display','none');
-         Plugin();
+//          Plugin();
    } // end prm_modify
-
+   
 // 상품 리뷰 수정 처리
 function prm_modifySub(num){
    var form = $('#prm_form'+num)[0];
