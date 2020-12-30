@@ -7,7 +7,6 @@
 <%
 	ArrayList<CommBean> articleList = (ArrayList<CommBean>)request.getAttribute("articleList");
 	CommBean article = (CommBean)request.getAttribute("article");
-	String nowPage = request.getParameter("page");
 	String member_id = (String)session.getAttribute("member_id");
 	ArrayList<ProductBean> bestList = (ArrayList<ProductBean>)request.getAttribute("bestList");
 	DecimalFormat priceFormat = new DecimalFormat("###,###");
@@ -20,6 +19,9 @@
 		</script>
 		<%
 	}
+	
+	String nowPage = request.getParameter("page");
+	if(nowPage==null){nowPage="1";} // 마이페이지 통해 들어올 경우 null 대신 1 값 줌
 %>
 
 <jsp:include page="../inc/header.jsp"/>
@@ -70,7 +72,7 @@
 						<div class="flex-w flex-c-m m-tb-10 float-r" >
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 							<input type="submit" value="수정" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
-							<a href="CommList.co">
+							<a href="CommList.co?page=<%=nowPage%>">
 								<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn">
 								<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 								글목록
@@ -91,20 +93,18 @@
 							<ul>
 								<%for(CommBean cb : articleList){ %>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/commUpload/<%=cb.getImg() %>" alt="PRODUCT">
 										</a>
-	
-										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
-												<%=cb.getSubject() %>
-											</a>
-	
-											<span class="stext-116 cl6 p-t-20">
-												<%=cb.getUsername() %>
-											</span>
-										</div>
-									</li>
+											<div class="size-215 flex-col-t p-t-8">
+												<a href="CommDetail.co?num=<%=cb.getNum() %>&page=<%=nowPage %>" class="stext-116 cl8 hov-cl1 trans-04">
+													<%=cb.getSubject() %>
+												</a>
+												<span class="stext-116 cl6 p-t-20">
+													<%=cb.getUsername() %>
+												</span>
+											</div>
+										</li>
 								<%} %>
 							</ul>
 						</div>
@@ -119,12 +119,12 @@
 								
 								%>
 									<li class="flex-w flex-t p-b-30">
-										<a href="#" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
+										<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="wrao-pic-w size-214 hov-ovelay1 m-r-20">
 											<img src="upload/productUploadImg/<%=main[0]%>" alt="PRODUCT">
 										</a>
 	
 										<div class="size-215 flex-col-t p-t-8">
-											<a href="#" class="stext-116 cl8 hov-cl1 trans-04">
+											<a href="ProductDetail.po?basicCode=<%=bestList.get(i).getBasicCode() %>" class="stext-116 cl8 hov-cl1 trans-04">
 												<%=bestList.get(i).getName() %>
 											</a>
 											<span class="stext-116 cl6 p-t-20">
@@ -134,33 +134,6 @@
 									</li>
 								<%} %>
 							</ul>
-						</div>
-						<div class="p-t-50">
-							<h4 class="mtext-112 cl2 p-b-27">
-								Tags
-							</h4>
-
-							<div class="flex-w m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>

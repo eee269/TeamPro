@@ -1415,6 +1415,7 @@ var productCode = "";
          $('#prm_form'+num+' #prm_file').prop('type','file');
          $('#prm_form'+num+' #prm_submit').prop('type','button');
          $('#btnReModify'+num).css('display','none');
+         Plugin();
    } // end prm_modify
 
 // 상품 리뷰 수정 처리
