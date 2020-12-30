@@ -52,13 +52,10 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 # Member
 ![member1](https://user-images.githubusercontent.com/73917786/103348338-0d854e00-4add-11eb-870e-e3a2abf92cdf.gif)
 - [x] Oauth2.0 을활용한 구글/네이버/카카오계정 로그인/회원가입 기능.
-- [x] `snap count` to specify the number of items to scroll over.
-- [x] supports horizontal and vertical scrolling.
-- [x] listener to be called when snapped.
-- [x] sample code.
-- [ ] support reverse layout.
+- [x] 회원가입시 입력정보 조건에 알맞도록 제어.
+- [x] 회원정보 변경/탈퇴.
+- [x] 관리자계정으로 로그인시 회원/상품/주문 제어권한 부여.
 
-<strong>Make sure to use LinearManger.</strong> Other managers are not supported.
 # Product
 
 # Community
