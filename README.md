@@ -12,6 +12,18 @@
 * **한상빈**
     * **Github** - (https://github.com/SangBinKR)
     * **Mail** - <sk8er001@naver.com>
+* **이병훈**
+    * **Github** - (https://github.com/lbhlucky)
+    * **Mail** - <lbhlucky@gmail.com>
+* **고유나**
+    * **Github** - (https://github.com/GoUNaa)
+    * **Mail** - <zzaaqqqaz@naver.com>    
+* **김예진**
+    * **Github** - (https://github.com/eee269)
+    * **Mail** - <skfkd3123@gmail.com>
+* **이세용**
+    * **Github** - (https://github.com/xeyong)
+    * **Mail** - <recruyong@naver.com>       
 ---
 # 개발 환경
 * JDK 8
