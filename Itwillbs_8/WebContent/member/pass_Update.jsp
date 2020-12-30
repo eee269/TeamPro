@@ -32,16 +32,13 @@
 			} else if(count == 3) {
 				element.innerHTML = "사용 가능(보통)";
 				checkPasswdResult = true; // 전역변수 true 로 변경
-			} else if(count == 2) {
-				element.innerHTML = "사용 가능(위험)";
-				checkPasswdResult = true; // 전역변수 true 로 변경
 			} else {
-				element.innerHTML = "사용 불가(두 가지 이상 조합)";
+				element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 				checkPasswdResult = false; // 전역변수 false 로 변경
 			}
 
 		} else {
-			element.innerHTML = "사용 불가";
+			element.innerHTML = "사용 불가(영문자,숫자,특수문자(!@#$%)를 혼용하여 3~8글자 입력하세요)";
 			checkPasswdResult = false; // 전역변수 false 로 변경
 		}
 		
