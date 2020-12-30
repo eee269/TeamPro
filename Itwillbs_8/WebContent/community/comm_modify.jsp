@@ -50,25 +50,57 @@
 			<div class="col-md-8 col-lg-9 p-b-80">
 				<div class="p-r-45 p-r-0-lg">
 					<!-- 글쓰기 폼 -->
+					<div class="bbs-table-write">
 					<form action="CommModifyPro.co" method="post" enctype="multipart/form-data">
 	                	<input type="hidden" id="num" name="num" value="<%=article.getNum()%>">
-	                	<div style="width: 100%; height:300px; border: 1px solid; text-align: center;">
-		               	 	<img id="blah" src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" style="height:300px;" onerror="this.style.visibility='hidden'"/>
-						</div>
-						<br>
-						<input type="file" name="img" id="imgInput" value="<%=article.getImg() %>" required="required">
-						<br>
-						<br>
-						<input id='bw_input_subject' class="MS_input_txt input_style2" type='text' name='subject' value='<%=article.getSubject() %>' required="required"
-						style="width:100%; height:40px; border-bottom: 1px solid;" placeholder="제목"/>
-						<br>
-						<br>
-						<input id='bw_input_subject' class="MS_input_txt input_style2" type='password' name='pass' value='' required="required"
-						style="width:100%; height:40px; border-bottom: 1px solid;" placeholder="비밀번호"/>
-						<br>
-						<br>
-						<textarea id ="summernote" name="content" class="MS_input_txt" style='font-family:굴림체;' required="required"><%=article.getContent() %></textarea><br>
-						<br>
+	                	<input type="hidden" name="page" value="<%=request.getParameter("page") %>" />
+	                	<table summary="">
+                                    	<colgroup>
+	                                        <col width="135" />
+	                                        <col width="395" />
+	                                        <col width="155" />
+	                                        <col width="*" />
+                                    	</colgroup>
+                                    	<tbody>
+                                        	<tr>
+												<th><div>미리보기</div></th>
+                                            	<td colspan="3">
+                                                	<div style="text-align: center;">
+                                                    	<img id="blah" src="upload/commUpload/<%=article.getImg() %>" alt="<%=article.getImg() %>" style="width: 300px; height:300px;" onerror="this.style.visibility='hidden'"/><br>
+                                                	</div>
+                                                    	<input type="file" name="img" id="imgInput" value="<%=article.getImg() %>" onchange="readURL(this);" required="required">
+                                            	</td>
+                                        	</tr>
+                                            <tr>
+                                            	<th><div>제목</div></th>
+                                            	<td colspan="3">
+                                                <div class="title">
+													<input id='bw_input_subject' class="MS_input_txt input_style2" type='text' name='subject' value='<%=article.getSubject() %>' required="required"
+													style="width:100%; height:100%;"/>
+													<div class="title_select"></div>
+                                                </div>
+												</td>
+                                        	</tr>
+                                            <tr>
+                                            	<th><div>비밀번호</div></th>
+                                            	<td colspan="3">
+                                                <div class="title">
+													<input id='bw_input_subject' class="MS_input_txt input_style2" type="password" name='pass' value='' required="required"
+													style="width:100%; height:100%;"/>
+													<div class="title_select"></div>
+                                                </div>
+												</td>
+                                        	</tr>
+                                        	<tr>
+	                                            <th><div>내용</div></th>
+	                                            <td colspan="3" class="text_content">
+                                                <div>
+                                                	<textarea id ="summernote" name='content'  class="MS_input_txt" style='font-family:굴림체;' required="required"><%=article.getContent() %></textarea>
+ 												</div>
+	                                            </td>
+    	                                    </tr>
+										</tbody>
+									</table>
 						<div class="flex-w flex-c-m m-tb-10 float-r" >
 							<i class="cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 							<input type="submit" value="수정" class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-btn bg-none">
@@ -80,6 +112,7 @@
 							</a>
 						</div>
 					</form>
+					</div>
 					<!-- 글쓰기 폼 -->
 				</div>
 			</div>
@@ -141,22 +174,17 @@
 	</div>
 </section>
 <script>
-	function setThumbnail(event) {
-			document.getElementById("file").select();
-			document.selection.clear();
-	};
-	function setThumbnail(event) {
-		var reader = new FileReader();
-		reader.onload = function(event) {
-			var img = document.createElement("img");
-			img.setAttribute("src", event.target.result);
-			img.setAttribute("style", "width:50px;");
-			img.setAttribute("style", "height:50px;");
-			document.querySelector("div#image_container").appendChild(img);
-			
-		};
-		reader.readAsDataURL(event.target.files[0]);
-	}
+function readURL(input) {
+	var i3 = document.getElementById("blah").style.visibility="visible";
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 </script>
 	<jsp:include page="../inc/footer.jsp" />
 	<!-- WriteEditor -->
