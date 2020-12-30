@@ -6,6 +6,7 @@
 > 김예진, 한상빈, 고유나, 이병훈, 이세용, 이정하, 정수진<br>
 Itwill Team Project<br>
 쇼핑몰 + 커뮤니티<br>
+* "J. Jesus. P. Aguinaga" <admin@naver.com>
 ---
 # 개발 환경
 * JDK 8
