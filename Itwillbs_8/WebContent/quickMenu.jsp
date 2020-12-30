@@ -1134,8 +1134,8 @@ keyframes swiper-preloader-spin { 100%{
     "pluginKey": "659424b7-7d06-4adb-85f3-3bfde8a3938d", //please fill with your plugin key
     "memberId": "YOUR_USER_ID", //fill with user id
     "profile": {
-      "name": "YOUR_USER_NAME", //fill with user name
-      "mobileNumber": "YOUR_USER_MOBILE_NUMBER", //fill with user phone number
+      "name": "", //fill with user name
+      "mobileNumber": "", //fill with user phone number
       "CUSTOM_VALUE_1": "VALUE_1", //any other custom meta data
       "CUSTOM_VALUE_2": "VALUE_2"
     }
