@@ -14,6 +14,9 @@ public class OrderBean {
 	private String payment;
 	private String member_id;
 	private int total_price;
+	private String sender;
+	private String senderPhone;
+	private String senderEmail;
 	
 	public int getTotal_price() {
 		return total_price;
@@ -74,6 +77,24 @@ public class OrderBean {
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
+	}
+	public String getSender() {
+		return sender;
+	}
+	public String getSenderPhone() {
+		return senderPhone;
+	}
+	public void setSender(String sender) {
+		this.sender = sender;
+	}
+	public void setSenderPhone(String senderPhone) {
+		this.senderPhone = senderPhone;
+	}
+	public String getSenderEmail() {
+		return senderEmail;
+	}
+	public void setSenderEmail(String senderEmail) {
+		this.senderEmail = senderEmail;
 	}
 	
 	

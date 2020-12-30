@@ -201,7 +201,12 @@ var productCode = "";
    function showlist(mixopt, productCode) {
       // 선택된 opt 수 가져와서 다음 번호 만들기
       // 선택된 옵션이 0개 -> resultcount = 1
-      var resultcount = $('ul#show-option li').length+1+'';
+      var resultcount;
+      if($('ul#show-option li').length == 0) {
+      	  resultcount = $('ul#show-option li').length+1+'';    	  
+      } else {
+    	  resultcount = Number($('ul#show-option li:last-child').attr('id').charAt(6))+1+'';
+      }
       
       // ul 뒤에 붙일 거라 li태그 들어가게 만들기
       var optcol=document.createElement('li');
@@ -217,7 +222,7 @@ var productCode = "";
       // 옵션 이름
           "<p class='respon6 show-value p-b-10' name='optname' style='float: left; display:inline-block;'>" + mixopt + "</p>"+
       // 옵션 삭제 아이콘
-          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete("+ id + ")'>" + 
+          "<div style='display:inline-block; float:right;'><span style='cursor: pointer' id='optdel" + resultcount + "' onclick='optDelete(this.id)'>" + 
           "<img src='https://img.icons8.com/fluent-systems-regular/24/000000/cancel.png'/></span></div><br><br>"+
           // 옵션 수량 선택
           "<div class='size-204 flex-w flex-m respon6-next'>" + 
@@ -241,7 +246,7 @@ var productCode = "";
    function calculatePrice(id) {
       var totalprice = 0, itcnt = [];
       var itemprice = parseInt($('span#item-price').text().replace(/[^0-9]/g, ''));
-      var resultcount = $('ul#show-option li').length;
+      var resultcount = $('ul#show-option li:last-child').attr('id').charAt(id.length-1);
       
       console.log(resultcount);
       
@@ -257,8 +262,11 @@ var productCode = "";
          
          console.log(id);
         itcnt[s-1] = parseInt($('#'+id).val());
+//         if(itcnt[s-1] == null) {
+		if(isNaN(itcnt[s-1])){
+        	itcnt[s-1] = 0;
+        }
         console.log(itcnt[s-1]);
-        console.log(totalprice);
         console.log(itemprice);
       }
         
@@ -303,12 +311,13 @@ var productCode = "";
    }
 
    // 선택옵션삭제
-   function optDelete(li) {
-     console.log(li);
-//       var id = document.this.getElementsByName('num-product').id;
+   function optDelete(delId) {
+     console.log(delId);
+      var id = delId.replace('del', 'col');
      console.log(id);
-      $(li).remove();
-      calculatePrice(id);
+      $('li#' + id).remove();
+   	  var numId = id.replace('col', 'num');
+	  calculatePrice(numId);
    }
    
    // 옵션 관련 스크립트 끝
@@ -347,6 +356,28 @@ var productCode = "";
 <!-- Product Detail -->
 <section class="sec-product-detail bg0 p-t-65 p-b-60">
    <div class="container">
+	   <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+			<a href="Main.go" class="stext-109 cl8 hov-cl1 trans-04"> Home
+				<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a> 
+				<% switch(productDetailList.get(0).getXcode()) {
+				case "CLOTHES": %>
+					<a href="ProductShop.po?type=X&xcode=CLOTHES" class="stext-109 cl8 hov-cl1 trans-04"> CLOTHES
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+					break;
+				case "BAGS": %>
+					<a href="ProductShop.po?type=X&xcode=BAGS" class="stext-109 cl8 hov-cl1 trans-04"> BAGS
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+					break;
+				default: %>
+					<a href="ProductShop.po?type=X&xcode=SHOES" class="stext-109 cl8 hov-cl1 trans-04"> SHOES
+					<i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i> </a>
+					<%
+				}
+			 %>
+			<span class="stext-109 cl4"> <%=productDetailList.get(0).getName() %> </span>
+		</div><br><br><br>
       <!-- 폼 -->
       <!-- 폼 -->
       <div class="row">
@@ -379,7 +410,6 @@ var productCode = "";
                         </div>
                      </div>
                   <%}%>
-                  <%=main[0] %>
                   </div>
                </div>
             </div>
