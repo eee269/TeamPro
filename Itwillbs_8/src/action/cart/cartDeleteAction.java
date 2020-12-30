@@ -32,8 +32,8 @@ public class cartDeleteAction implements Action {
 			out.println("</script>");
 			
 			forward.setPath("MemberLoginForm.mo");
-		}
-		
+			
+		} else {
 		boolean isDeleteSucess = cartDeleteService.isCartDelete(num);
 		
 		if(!isDeleteSucess) {
@@ -50,7 +50,7 @@ public class cartDeleteAction implements Action {
 			forward.setPath("Cart.ca");
 			forward.setRedirect(true);
 		}
-		
+		}	
 		return forward;
 	}
 
