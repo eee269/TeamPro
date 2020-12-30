@@ -45,6 +45,7 @@ public class MemberGoogleKakaoLoginAction implements Action {
 			
 			if(isMember) {
 				session.setAttribute("member_id", id);	
+				forward.setPath("Main.go");
 			} else {
 				MemberBean member = new MemberBean();
 				member.setId(id);
@@ -54,19 +55,24 @@ public class MemberGoogleKakaoLoginAction implements Action {
 				member.setUsername(username);
 				
 				boolean isSuccess = service.insertMember(member);
-				if(isSuccess)	session.setAttribute("member_id", id);
-				else {
+				if(isSuccess) {
+					session.setAttribute("member_id", id);
+
+					out.println("<script>");
+					out.println("alert('비밀번호를 설정해주세요')");
+					out.println("</script>");
+					
+					forward.setPath("MemberPassForm.mo");
+				} else {
 					out.println("<script>");
 					out.println("alert('로그인할 수 없습니다. 관리자에게 문의하세요.')");
 					out.println("</script>");
 					
 					forward.setPath("Main.go");
-					forward.setRedirect(true);
 				}
 			}
 		}
-
-		forward.setPath("Main.go");
+		
 		forward.setRedirect(true);
 		return forward;
 	}

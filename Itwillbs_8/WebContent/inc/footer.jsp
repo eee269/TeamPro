@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+ <%  String id= (String)session.getAttribute("member_id");  %>	
+ 
+<script>
+	function mail(){
+		var popupX = (document.body.offsetWidth / 2) - (200 / 2);
+		//&nbsp;만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
+
+		var popupY= (window.screen.height / 2) - (300 / 2);
+		//&nbsp;만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
+
+		window.open("mail/mailForm.jsp","",'status=no, height=500, width=500, left='+ popupX + ', top='+ popupY);
+		
+	}
+</Script>
+	
+ 
+	
 	<!-- Footer -->
 	<footer class="bg3 p-t-75 p-b-32">
 		<div class="container">
@@ -70,16 +88,22 @@
 				</div>
 				<div class="col-sm-6 col-lg-3 p-b-50">
 					<h4 class="stext-301 cl0 p-b-30">
-						Our Domain
+						 service
 					</h4>
-					<form>
 						<div class="wrap-input1 w-full p-b-4">
-							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="Main.go">
+							<input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email" placeholder="#OOTD" >
 							<div class="focus-input1 trans-04"></div>
 						</div>
 						<div class="p-t-18">
+						<%
+							if(id != null){
+							%><button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04" onclick="mail()">
+								send a mail						
+								</button>
+								<%
+							}
+						%>
 						</div>
-					</form>
 				</div>
 			</div>
 			<div class="p-t-40">
@@ -110,11 +134,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		</div>
 	</footer>
 	<!-- Back to top -->
-	<div class="btn-back-to-top" id="myBtn">
-		<span class="symbol-btn-back-to-top">
-			<i class="zmdi zmdi-chevron-up"></i>
-		</span>
-	</div>
+<!-- 	<div class="btn-back-to-top" id="myBtn"> -->
+<!-- 		<span class="symbol-btn-back-to-top"> -->
+<!-- 			<i class="zmdi zmdi-chevron-up"></i> -->
+<!-- 		</span> -->
+<!-- 	</div> -->
 	<!-- Modal1 -->
 	<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
 		<div class="overlay-modal1 js-hide-modal1"></div>
