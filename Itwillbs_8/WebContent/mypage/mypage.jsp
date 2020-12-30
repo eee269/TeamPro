@@ -233,41 +233,34 @@
 						<a class="view fe" href="MycommList.co">+ MORE</a>
 					</div>
 					<div class="tbl">
-						<table summary="등록일자, 제목, 게시판">
-							<caption>최근 등록 게시물 목록</caption>
-							<colgroup>
-								<col width="150">
-								<col width="*">
-								<col width="200">
-							</colgroup>
-							<thead>
-								<tr>
-									<th><div class="tb-center">DATE</div></th>
-									<th><div class="tb-center">SUBJECT</div></th>
-									<th><div class="tb-center">READCOUNT</div></th>
-								</tr>
-							</thead>
-							<tbody>
+					<table>
 							<%
-							if(articleList.size() == 0) {
-								%>
-									<tr><td colspan="3" style="padding:50px 20px; text-align:center; font-size: 15px;">
-            	   						<span> 작성한 게시글이 없습니다 <br><br>
-            	   							<a href='CommList.co'>게시글을 작성해 보세요!</a></span></td></tr>							
-								<%
-							} else {
-								CommBean article = articleList.get(articleList.size()-1);
-								%>
-								<tr onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'" style="cursor: pointer;">
-								<td><div class="tb-center"><%=article.getDate() %></div></td>
-								<td><div class="tb-center"><%=article.getSubject() %></div></td>
-								<td><div class="tb-center"><%=article.getReadCount() %></div></td>
-								</tr>
-								<%
-									
-							}
-							%>
-							</tbody>
+if(articleList.size() == 0) {
+	%>
+	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
+		<span> 작성한 게시글이 없습니다 <br><br>
+		<a href='CommList.co'>게시글을 작성해 보세요!</a></span>
+		
+	</td></tr>
+	<%
+} else {
+	%><tr style="height: 400px"><%
+	
+	for(int i=articleList.size()-1;i > articleList.size()-5; i--) {
+		if(i < 0) break;
+		CommBean article = articleList.get(i);
+		
+		%><td onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'">
+			<img alt="productImg" src="upload/commUpload/<%=article.getImg()%>" width="250px" height="250px"
+				onerror="src='loading.png'"><br>
+			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=article.getSubject() %></span>
+			<span class="stext-105 cl3"><%=article.getReadCount() %></span><br>
+			<span class="tb-center"><%=article.getDate() %></span>
+		</td><%
+	}
+	%></tr><%
+}
+%>
 						</table>
 					</div>
 					<!-- //최근 등록 게시글 -->
@@ -299,7 +292,7 @@ if(productList.size() == 0) {
 		
 		String[] img = product.getMain_img().split("/");
 		%><td onclick="location.href='ProductDetail.po?basicCode=<%=product.getBasicCode()%>'">
-			<img alt="productImg" src="product/uploadImg/<%=img[0]%>" width="250px" height="250px"
+			<img alt="productImg" src="upload/productUploadImg/<%=img[0]%>" width="250px" height="250px"
 				onerror="src='loading.png'"><br>
 			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=product.getName() %></span>&nbsp;&nbsp;&nbsp;
 			<span class="stext-105 cl3"><%=product.getPrice() %></span>

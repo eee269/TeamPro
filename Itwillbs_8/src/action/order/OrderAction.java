@@ -40,6 +40,19 @@ public class OrderAction implements Action {
 		
 		ArrayList<Cart> cartList = new ArrayList<Cart>();
 		cartList = orderService.getSelectCart(nums);
+//		cartList = orderService.getSelectCart(Integer.parseInt(str));
+		for(int i = 0 ; i <cartList.size() ; i++) {
+			System.out.println("Action List : "+cartList.get(i).getNum());
+			System.out.println("Action List : "+cartList.get(i).getCnt());
+			System.out.println("Action List : "+cartList.get(i).getProduct_name());
+			System.out.println("Action List : "+cartList.get(i).getPrice());
+			System.out.println("Action List : "+cartList.get(i).getColor());
+			System.out.println("Action List : "+cartList.get(i).getSize());
+			System.out.println("Action List : "+cartList.get(i).getMember_id());
+			System.out.println("Action List : "+cartList.get(i).getProduct_basicCode());
+			System.out.println("Action List : "+cartList.get(i).getOpt_productCode());
+		}
+		
 
 		forward = new ActionForward();
 		forward.setPath("/order/order.jsp");
