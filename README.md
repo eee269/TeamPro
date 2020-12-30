@@ -47,26 +47,7 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
     * **Mail** - <recruyong@gmail.com>       
 ---
 # Member
-<img src="https://github.com/TakuSemba/MultiSnapRecyclerView/blob/master/arts/gravity.gif" align="right" width="30%">
 
-## Features
-![Build Status](https://app.bitrise.io/app/a27c356998242bdf/status.svg?token=13Mi9qAas0Zm81ono5VWRw&branch=master)
-![Download](https://api.bintray.com/packages/takusemba/maven/multisnaprecyclerview/images/download.svg)
-![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)
-![API](https://img.shields.io/badge/API-13%2B-brightgreen.svg?style=flat)
-
-This is an Android Library for multiple snapping of RecyclerView.
-MultiSnapRecyclerView easily provides a snapping feature to your recycler view. 
-What this does are clean, neat, and powerful.
-<br/>
-- [x] gravitated snapping to `start` `end` and `center`.
-- [x] `snap count` to specify the number of items to scroll over.
-- [x] supports horizontal and vertical scrolling.
-- [x] listener to be called when snapped.
-- [x] sample code.
-- [ ] support reverse layout.
-
-<strong>Make sure to use LinearManger.</strong> Other managers are not supported.
 # Product
 
 # Community
