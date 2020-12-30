@@ -96,8 +96,8 @@ public class CommReDAO {
 		try {			
 			if(arraymode == 0) {
 				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id=m.id"
-					+" INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as y on c.num = y.re_ref"
-					+" where community_num=? and re_lev=0 Order by y.ct desc limit ?,?";			
+						+" INNER JOIN (SELECT re_ref, count(re_ref) AS ct FROM community_reply GROUP BY re_ref) as y on c.num = y.re_ref"
+						+" where community_num=? and re_lev=0 Order by y.ct desc,c.num limit ?,?";			
 			}else if(arraymode == 1) {
 				sql="SELECT c.*,m.username FROM community_reply c JOIN member m ON c.member_id = m.id"
 					+" WHERE community_num=? and re_lev=0 ORDER BY num desc limit ?,?";
