@@ -2,6 +2,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/eee269/TeamPro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/eee269/TeamPro/context:javascript)<br>
 ![indexGIF2](https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif)<br/>
 * #OOTD는 쇼핑몰과 커뮤니티를 결합한 웹애플리케이션 프로젝트입니다. 
+[![Contributors](https://badges.pufler.dev/contributors/puf17640/git-badges?bots=false)](https://badges.pufler.dev)
 ---
 # 개발 환경
 * JDK 8
