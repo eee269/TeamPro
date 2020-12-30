@@ -34,18 +34,6 @@
 <link type="text/css" rel="stylesheet" href="css/menu_2.css" />
 <!-- 주문상세 시작 -->
 
-<script type="text/javascript">
-	function addtag() {
-		var html = 
-			"<tr>" + 
-			"<td scope='row'></td>" + 
-			"<td scope='row'><div class='tb-center'></div></td>" +
-			"<td scope='row'><div class='tb-center'></div></td>" +
-			"<td scope='row'><div class='tb-center'></div></td>" +
-			"</tr>";
-	}
-</script>
-
 
 <div id="contentWrapper">
 	<div id="contentWrap">
@@ -98,7 +86,7 @@
 					<div class="table-d2-list">
 						<table>
 							<colgroup>
-								<col width="50">
+								<col width="150">
 								<col width="*">
 								<col width="200">
 							</colgroup>
