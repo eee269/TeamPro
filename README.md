@@ -49,10 +49,9 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
     * **Github** - (https://github.com/xeyong)
     * **Mail** - <recruyong@gmail.com>       
 ---
-<img src="https://user-images.githubusercontent.com/73917786/103348338-0d854e00-4add-11eb-870e-e3a2abf92cdf.gif" align="right" width="100%">
 # Member
-
-- [V] Oauth2.0 을활용한 구글/네이버/카카오계정 로그인/회원가입 기능.
+![member1](https://user-images.githubusercontent.com/73917786/103348338-0d854e00-4add-11eb-870e-e3a2abf92cdf.gif)
+- [] Oauth2.0 을활용한 구글/네이버/카카오계정 로그인/회원가입 기능.
 - [x] `snap count` to specify the number of items to scroll over.
 - [x] supports horizontal and vertical scrolling.
 - [x] listener to be called when snapped.
