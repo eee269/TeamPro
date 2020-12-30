@@ -2,7 +2,7 @@
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/eee269/TeamPro.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/eee269/TeamPro/context:javascript)<br>
 ![indexGIF2](https://user-images.githubusercontent.com/73917786/103332993-8c639200-4aaf-11eb-8dc8-ef9579837237.gif)<br/>
 * **#OOTD는 쇼핑몰과 커뮤니티를 결합한 웹애플리케이션 프로젝트입니다.**
-* **기본적으로 회원과 관련된 기능들이 서로 연관되어 CRUD기능이 동작하도록 DB를 설계하였습니다.(EX.회원탈퇴시 작성글/주문목록/작성글/장바구니 등등도 같이삭제)** 
+* **기본적으로 회원과 관련된 기능들이 서로 연관되어 CRUD기능이 동작하도록 DB를 설계하였습니다.<br>(EX.회원탈퇴시 작성글/주문목록/작성글/장바구니 등등도 같이삭제)** 
 * **세부구현기능**
    * **[회원관리](#member)**
    * **[상품관리](#product)**
