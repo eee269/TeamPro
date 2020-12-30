@@ -58,14 +58,20 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 
 # Product
 ![product1](https://user-images.githubusercontent.com/73917786/103349243-af0d9f00-4adf-11eb-932a-c1384d398afd.gif)
-- [x] 각 상품을 대분류/소분류에 알맞게 나눠서 상품분류 DB 설계.
+- [x] 각 상품을 대분류/소분류 상품옵션(색상/사이즈) 알맞게 나눠서 상품분류 DB 설계.
 - [x] 상품 위시리스트/장바구니 추가/삭제 기능.
 - [x] 상품 검색 기능.
 - [x] 원하는 상태별 상품 정렬기능.
+- [x] 상품별 리뷰등록 및 상품별 별점분석 기능.
 
 # Order
-
+![order1](https://user-images.githubusercontent.com/73917786/103349828-47585380-4ae1-11eb-889f-ccab05c7b5bf.gif)
+- [x] 회원별 배송지관련(최근배송지/기본배송지/신규배송지) 관리 기능.
+- [x] 결제 API활용 결제 기능.
+- [x] 회원별 주문정보/상세정보 조회기능.
 
 # Community
+
+
 
 
