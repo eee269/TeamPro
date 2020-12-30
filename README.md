@@ -79,5 +79,7 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 - [x] 원하는 조건별 게시글 정렬 기능.
 
 # Etc
-
+![ETC1](https://user-images.githubusercontent.com/73917786/103350773-62789280-4ae4-11eb-918a-5640a2ddd1fe.gif)
+- [x] 문의사항 Email 전송 기능.
+- [x] 챗봇활용 문의사항 문의 기능.
 
