@@ -58,7 +58,7 @@ Latest ✔ | Latest ✔ | 10+ ✔ |
 
 # Product
 ![product1](https://user-images.githubusercontent.com/73917786/103349243-af0d9f00-4adf-11eb-932a-c1384d398afd.gif)
-- [x] 대분류/소분류에 나눠서 상품분류 DB 설계.
+- [x] 각 상품을 대분류/소분류에 알맞게 나눠서 상품분류 DB 설계.
 - [x] 상품 위시리스트/장바구니 추가/삭제 기능.
 - [x] 상품 검색 기능.
 - [x] 원하는 상태별 상품 정렬기능.
