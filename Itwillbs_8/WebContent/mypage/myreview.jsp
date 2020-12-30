@@ -82,41 +82,43 @@
 				</div>
 				<div class="page-body">
 					<div class="table-d2-list">
-						<table>
-<%
-int i=0, j=4;
+					<table>
+							<colgroup>
+								<col width="100">
+								<col width="*">
+								<col width="200">
+								<col width="100">
+							</colgroup>
+							<tbody>
+								<%
+									if (proReviewList.size() == 0) {
+								%>
+								<tr>
+									<td colspan="4" style="padding: 50px 20px; text-align: center; font-size: 15px;">
+										<span>작성하신 리뷰가 없습니다.</span>
 
-if(proReviewList.size() == 0) {
-	%>
-	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
-		<span>작성하신 리뷰가 없습니다.</span>
-		
-	</td></tr>
-	<%
-} else {
-	
-	for(ProdReviewBean review: proReviewList) {
-		if(i%j == 0){
-			%><tr style="height: 400px"><%
-		}
-		%><td onclick="location.href='ProductDetail.po?basicCode=<%=review.getProduct_basicCode()%>#page02'">
-			<img alt="productImg" src="product/uploadImg/<%=review.getProduct_img()%>" width="250px" height="250px"
-				onerror="src='loading.png'"><br>
-			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=review.getStarScore() %></span>&nbsp;&nbsp;&nbsp;
-			<span class="stext-105 cl3"><%=review.getDate() %></span>
-		</td><%
-		if(i%j == j-1) {
-			%></tr><%
-		}
-		i++;
-	}
-	
-}
+									</td>
+								</tr>
+								<%
+									} else {
+									for(ProdReviewBean review: proReviewList) {
+										if(review.getRe_lev() == 0) {
+											%>
+											<tr onclick="location.href='ProductDetail.po?basicCode=<%=review.getProduct_basicCode()%>#page02'">
+												<td scope="row"><div class="tb-center"><%=review.getRe_lev() %></div></td>
+												<td scope="row"><div class="tb-center"><%=review.getNum()%></div></td>
+												<td scope="row"><div class="tb-center"><%=review.getContent()%></div></td>
+												<td scope="row"><div class="tb-center"><%=review.getDate() %></div></td>
+											</tr>
+											<%
+										}
+									}
+								}
+								%>
 
-%>
-
-
-					</table>
+							</tbody>
+						</table>
+						
 					</div>
 <!-- 하단 여백 -->
 <div style="height: 150px"></div>
