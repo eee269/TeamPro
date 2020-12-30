@@ -682,10 +682,10 @@ margin-left:0px;}
 		}
 		
 		// 네이버 로그인 API
-		  var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://localhost:8080/Itwillbs_8/member/naver_callback.jsp");
+		  var naver_id_login = new naver_id_login("jjXgPjWf7pqDUU6YqA_B", "http://ec2-3-35-82-26.ap-northeast-2.compute.amazonaws.com:8080/Itwillbs_8/member/naver_callback.jsp");
           var state = naver_id_login.getUniqState();
           naver_id_login.setButton("white", 2,40);
-          naver_id_login.setDomain("http://localhost:8090/Itwillbs_8/MemberLoginForm.mo#");
+          naver_id_login.setDomain("http://ec2-3-35-82-26.ap-northeast-2.compute.amazonaws.com:8080/Itwillbs_8/MemberLoginForm.mo#");
           naver_id_login.setState(state);
           naver_id_login.init_naver_id_login();
     
