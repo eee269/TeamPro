@@ -1,4 +1,5 @@
-# 쇼핑몰 이름 넣기
+# #OOTD(쇼핑몰 구현 프로젝트)
+![indexGIF](https://user-images.githubusercontent.com/73917786/103332561-c6cc2f80-4aad-11eb-81cc-e08ea65cf932.gif)  
 ---
 # About Team
 > 김예진, 한상빈, 고유나, 이병훈, 이세용, 이정하, 정수진<br>

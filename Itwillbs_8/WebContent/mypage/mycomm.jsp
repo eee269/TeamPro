@@ -82,57 +82,42 @@
 					<!-- 글 리스트 -->
 					<div class="table-d2-list">
 						<table>
-							<colgroup>
-								<col width="100">
-								<col width="*">
-								<col width="200">
-								<col width="150">
-<!-- 								<col width="100"> -->
-							</colgroup>
-							<thead>
-								<tr>
-									<th scope="row"><div class="tb-center">번호</div></th>
-									<th scope="row"><div class="tb-center">제목</div></th>
-									<th scope="row"><div class="tb-center">작성 날짜</div></th>
-									<th scope="row"><div class="tb-center">조회수</div></th>
-<!-- 									<th scope="row"><div class="tb-center">댓글 수</div></th> -->
-								</tr>
-							</thead>
-							<tbody>
-<!-- 								<tr> -->
-<!-- 									<td colspan="6"><div class="tb-center">주문내역이 없습니다.</div></td> -->
-<!-- 								</tr> -->
 <%
+int i=0, j=4;
+
 if(articleList.size() == 0) {
 	%>
-	<tr><td colspan="9" style="padding:50px 20px; text-align:center; font-size: 15px;">
+	<tr><td colspan="4" style="padding:50px 20px; text-align:center; font-size: 15px;">
 		<span>아직 작성한 게시글이 없습니다.</span>
+		<br><br><br>
+		<a href="CommList.co">게시글을 작성해 보세요!</a>
 		
 	</td></tr>
 	<%
 } else {
-	for(int i = 0 ; i < articleList.size() ; i++) {
-		CommBean article = articleList.get(i);
-		%>
-					<tr onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'" style="cursor: pointer;">
-									<td scope="row"><div class="tb-center"><%=i+1%></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getSubject() %></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getDate() %></div></td>
-									<td scope="row"><div class="tb-center"><%=article.getReadCount() %></div></td>
-									<!-- 댓글 수 -->
-<%-- 									<td scope="row"><div class="tb-center"><%=article.getNum() %></div></td> --%>
-									
-								</tr>
-										<%
+	
+	for(CommBean article: articleList) {
+		if(i%j == 0){
+			%><tr style="height: 350px"><%
+		}
+		%> <td>
+			<img alt="productImg" src="upload/commUpload/<%=article.getImg()%>" class="productImg"
+				onerror="src='loading.png'" onclick="location.href='CommDetail.co?num=<%=article.getNum()%>'"><br>
+			<span class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6"><%=article.getSubject()%></span>&nbsp;&nbsp;&nbsp;
+			<span class="stext-105 cl3"><%=article.getUsername() %></span><br>
+			<span class="stext-105 cl3"><%=article.getDate() %></span>&nbsp;&nbsp;&nbsp;
+<!-- 			북마크 -->
+			<img src="https://img.icons8.com/material-rounded/24/000000/bookmark-ribbon--v1.png" onclick="delBook(<%=article.getNum()%>)"/>
+		</td><%
+		if(i%j == j-1) {
+			%></tr><%
+		}
+		i++;
 	}
+	
 }
-%>
-			
-							</tbody>
-						</table>
+%></table>
 					</div>
-					<!-- //주문 내역 리스트 -->
-
 					<!-- 주문 내역 페이징 -->
 					<div class="paging"></div>
 					<!-- //주문 내역 페이징 -->
