@@ -279,7 +279,7 @@
 				<div class="team-single wow zoomIn" data-wow-delay=".3s">
 					<div class="team-thumb">
 						<img
-							src="https://www.tolmatol.com/uploads-images/bootrap-snippets-our-team/3.jpg"
+							src="upload/developers/<%=i%>.png"
 							alt="" />
 						<div class="social-icons style-2">
 							<a href="https://github.com/<%=github[i]%>" target="blank" class="fa fa-github"></a>
